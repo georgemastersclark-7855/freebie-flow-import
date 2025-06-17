@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -252,11 +251,7 @@ const Index = () => {
               />
             </div>
             
-            {/* Floating elements for visual interest - moved outside overflow container */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-white rounded-full flex items-center justify-center animate-pulse">
-              <Download className="w-8 h-8 text-black" />
-            </div>
-            
+            {/* Floating element for visual interest - bottom left only */}
             <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-white rounded-full flex items-center justify-center">
               <Download className="w-6 h-6 text-black" />
             </div>
