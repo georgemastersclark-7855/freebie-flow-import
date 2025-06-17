@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -276,30 +275,6 @@ const Index = () => {
                 : "Enter your name and email below and I'll fire the download link straight to your inbox."
               }
             </p>
-
-            {/* Zapier Configuration (only show if not submitted) */}
-            {!isSubmitted && !zapierWebhook && (
-              <div className="max-w-md mx-auto lg:mx-0 mb-6 p-4 bg-gray-800/30 rounded-lg border border-gray-700">
-                <label className="block text-sm font-medium mb-2">
-                  Klaviyo Integration (Optional)
-                </label>
-                <Input
-                  type="url"
-                  placeholder="Zapier webhook URL for Klaviyo"
-                  value={zapierWebhook}
-                  onChange={(e) => {
-                    setZapierWebhook(e.target.value);
-                    if (e.target.value) {
-                      localStorage.setItem('klaviyo_zapier_webhook', e.target.value);
-                    }
-                  }}
-                  className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-sm"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Add your Zapier webhook to send leads to Klaviyo
-                </p>
-              </div>
-            )}
 
             {/* Form or Download Box */}
             <div className="max-w-md mx-auto lg:mx-0 animate-fade-in">
