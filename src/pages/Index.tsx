@@ -1,8 +1,9 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Download, Mail, User } from "lucide-react";
+import { Download, User } from "lucide-react";
 
 const Index = () => {
   const [formData, setFormData] = useState({ name: "", email: "" });
@@ -202,7 +203,7 @@ const Index = () => {
             </div>
             
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Download className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
                 type="email"
                 placeholder="Your email address"
@@ -242,8 +243,8 @@ const Index = () => {
               />
             </div>
             
-            {/* Rob's Signature Overlay - Moved up much further */}
-            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 z-20">
+            {/* Rob's Signature Overlay - Adjusted position */}
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
               <img
                 src="/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png"
                 alt="Rob's Signature"
@@ -257,7 +258,7 @@ const Index = () => {
             </div>
             
             <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-white rounded-full flex items-center justify-center">
-              <Mail className="w-6 h-6 text-black" />
+              <Download className="w-6 h-6 text-black" />
             </div>
           </div>
         </div>
