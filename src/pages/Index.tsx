@@ -145,7 +145,7 @@ const Index = () => {
       <div className="container mx-auto px-6 md:px-4 flex flex-col lg:flex-row items-center min-h-[80vh]">
         {/* Left Column - Content */}
         <div className="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0 text-center lg:text-left">
-          <h1 className="text-4xl md:text-6xl font-neutronic mb-6 leading-tight animate-fade-in" style={{
+          <h1 className="text-3xl md:text-6xl font-neutronic mb-6 leading-tight animate-fade-in" style={{
           fontWeight: 700
         }}>
             Get Your
