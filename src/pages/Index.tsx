@@ -100,7 +100,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <header className="flex justify-center mb-12">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent">
               YourBrand
             </div>
           </header>
@@ -108,7 +108,7 @@ const Index = () => {
           {/* Download Page Content */}
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8 animate-fade-in">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent">
                 Welcome, {formData.name}!
               </h1>
               <p className="text-xl text-gray-300 mb-8">
@@ -123,14 +123,14 @@ const Index = () => {
                   key={magnet.id}
                   className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105"
                 >
-                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg mx-auto mb-4">
-                    <Download className="w-8 h-8 text-white" />
+                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
+                    <Download className="w-8 h-8 text-black" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{magnet.title}</h3>
                   <p className="text-gray-400 mb-4 text-sm">{magnet.description}</p>
                   <Button
                     onClick={() => handleDownload(magnet)}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                    className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     Download {magnet.fileName}
@@ -163,7 +163,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-hidden">
       {/* Header */}
       <header className="relative z-10 flex justify-center pt-8 mb-12">
-        <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div className="text-2xl font-bold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent">
           YourBrand
         </div>
       </header>
@@ -174,7 +174,7 @@ const Index = () => {
         <div className="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0 text-center lg:text-left">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in">
             Get Your
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent block">
+            <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
               Free Downloads
             </span>
           </h1>
@@ -193,7 +193,7 @@ const Index = () => {
                 placeholder="Your full name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-purple-500 transition-colors"
+                className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
                 required
               />
             </div>
@@ -205,7 +205,7 @@ const Index = () => {
                 placeholder="Your email address"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-purple-500 transition-colors"
+                className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
                 required
               />
             </div>
@@ -213,7 +213,7 @@ const Index = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-purple-500/25"
+              className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black"
             >
               {isLoading ? "Processing..." : "Get My Free Downloads"}
             </Button>
@@ -228,7 +228,7 @@ const Index = () => {
         <div className="lg:w-1/2 relative">
           <div className="relative mx-auto max-w-lg">
             {/* Gradient overlay for visual appeal */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur-xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 to-[#B8CC00]/20 rounded-2xl blur-xl"></div>
             
             {/* Main hero image container */}
             <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:scale-105 transition-transform duration-500">
@@ -239,12 +239,12 @@ const Index = () => {
               />
               
               {/* Floating elements for visual interest */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center animate-pulse">
-                <Download className="w-8 h-8 text-white" />
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-full flex items-center justify-center animate-pulse">
+                <Download className="w-8 h-8 text-black" />
               </div>
               
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
-                <Mail className="w-6 h-6 text-white" />
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-[#B8CC00] to-[#DEFF00] rounded-full flex items-center justify-center">
+                <Mail className="w-6 h-6 text-black" />
               </div>
             </div>
           </div>
