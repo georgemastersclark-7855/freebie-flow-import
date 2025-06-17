@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -233,7 +234,7 @@ const Index = () => {
             {/* Gradient overlay for visual appeal */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 to-[#B8CC00]/20 rounded-2xl blur-xl"></div>
             
-            {/* Main hero image container - no padding so image touches border */}
+            {/* Main hero image container */}
             <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl hover:scale-105 transition-transform duration-500 inline-block overflow-hidden">
               <img
                 src="/lovable-uploads/3f8daf99-6f60-45d7-b57e-e340c42d6a8e.png"
@@ -244,11 +245,11 @@ const Index = () => {
             
             {/* Floating elements for visual interest - moved outside overflow container */}
             <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-full flex items-center justify-center animate-pulse">
-              <Download className="w-8 h-8 text-black" />
+              <Download className="w-8 h-8 text-white" />
             </div>
             
             <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-[#B8CC00] to-[#DEFF00] rounded-full flex items-center justify-center">
-              <Mail className="w-6 h-6 text-black" />
+              <Mail className="w-6 h-6 text-white" />
             </div>
           </div>
         </div>
