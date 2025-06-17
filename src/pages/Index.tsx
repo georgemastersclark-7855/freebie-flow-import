@@ -91,7 +91,7 @@ const Index = () => {
   };
   if (isSubmitted) {
     return <div className="min-h-screen bg-black text-white">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-6 md:px-4 py-8">
           {/* Header */}
           <header className="flex justify-center mb-12">
             <img src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png" alt="YourBrand Logo" className="h-12 w-auto" />
@@ -142,7 +142,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center min-h-[80vh]">
+      <div className="container mx-auto px-6 md:px-4 flex flex-col lg:flex-row items-center min-h-[80vh]">
         {/* Left Column - Content */}
         <div className="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0 text-center lg:text-left">
           <h1 className="text-4xl md:text-6xl font-neutronic mb-6 leading-tight animate-fade-in" style={{
@@ -209,7 +209,7 @@ const Index = () => {
       </div>
 
       {/* Zapier Configuration Section */}
-      <div className="container mx-auto px-4 pb-12">
+      <div className="container mx-auto px-6 md:px-4 pb-12">
         <div className="max-w-md mx-auto bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-4 text-center">Admin: Zapier Integration</h3>
           <Input type="url" placeholder="Enter your Zapier webhook URL for Klaviyo" value={webhookUrl} onChange={e => setWebhookUrl(e.target.value)} className="bg-gray-700 border-gray-600 text-white placeholder-gray-400" />
