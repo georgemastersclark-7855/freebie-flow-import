@@ -100,9 +100,11 @@ const Index = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <header className="flex justify-center mb-12">
-            <div className="text-2xl font-bold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent">
-              YourBrand
-            </div>
+            <img 
+              src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png" 
+              alt="YourBrand Logo" 
+              className="h-12 w-auto"
+            />
           </header>
 
           {/* Download Page Content */}
@@ -163,9 +165,11 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-hidden">
       {/* Header */}
       <header className="relative z-10 flex justify-center pt-8 mb-12">
-        <div className="text-2xl font-bold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent">
-          YourBrand
-        </div>
+        <img 
+          src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png" 
+          alt="YourBrand Logo" 
+          className="h-12 w-auto"
+        />
       </header>
 
       {/* Hero Section */}
