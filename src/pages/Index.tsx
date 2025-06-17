@@ -153,8 +153,7 @@ const Index = () => {
           </h1>
           
           <p className="text-xl text-gray-300 mb-8 animate-fade-in">
-            Unlock exclusive marketing resources, templates, and guides that will transform your business. 
-            Join thousands of entrepreneurs who are already winning.
+            Enter your name and email below and I'll fire the download link straight to your inbox.
           </p>
 
           {/* Form */}
