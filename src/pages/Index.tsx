@@ -175,7 +175,7 @@ const Index = () => {
       <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center min-h-[80vh]">
         {/* Left Column - Content */}
         <div className="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0 text-center lg:text-left">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in">
+          <h1 className="text-4xl md:text-6xl font-neutronic font-black mb-6 leading-tight animate-fade-in" style={{ fontWeight: 900 }}>
             Get Your
             <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
               Free Downloads
