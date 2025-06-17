@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -243,8 +242,8 @@ const Index = () => {
               />
             </div>
             
-            {/* Rob's Signature Overlay - Bigger and overlapping */}
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-20">
+            {/* Rob's Signature Overlay - Moved up much further */}
+            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 z-20">
               <img
                 src="/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png"
                 alt="Rob's Signature"
