@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,30 +14,14 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Sample lead magnets - in a real app, these would come from a CMS or database
-  const leadMagnets = [
-    {
-      id: 1,
-      title: "Ultimate Marketing Guide",
-      description: "Complete guide to digital marketing strategies",
-      fileUrl: "#", // Replace with actual file URLs
-      fileName: "marketing-guide.pdf"
-    },
-    {
-      id: 2,
-      title: "Social Media Templates",
-      description: "20 ready-to-use social media post templates",
-      fileUrl: "#",
-      fileName: "social-templates.zip"
-    },
-    {
-      id: 3,
-      title: "Email Sequence Pack",
-      description: "7-day email sequence templates",
-      fileUrl: "#",
-      fileName: "email-sequences.pdf"
-    }
-  ];
+  // Single lead magnet for download
+  const leadMagnet = {
+    id: 1,
+    title: "Ultimate Marketing Guide",
+    description: "Complete guide to digital marketing strategies",
+    fileUrl: "#", // Replace with actual file URL
+    fileName: "marketing-guide.pdf"
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,90 +43,19 @@ const Index = () => {
       setIsLoading(false);
       toast({
         title: "Success!",
-        description: "Welcome! Your downloads are ready below.",
+        description: "Your download is ready below.",
       });
     }, 1000);
   };
 
-  const handleDownload = (magnet: typeof leadMagnets[0]) => {
+  const handleDownload = () => {
     // In a real app, this would trigger actual file downloads
     toast({
       title: "Download Started",
-      description: `Downloading ${magnet.fileName}`,
+      description: `Downloading ${leadMagnet.fileName}`,
     });
-    console.log("Downloading:", magnet.fileName);
+    console.log("Downloading:", leadMagnet.fileName);
   };
-
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-black text-white flex flex-col">
-        <div className="flex-grow">
-          <div className="container mx-auto px-6 md:px-4 py-8">
-            {/* Header */}
-            <header className="flex justify-center mb-12">
-              <img
-                src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png"
-                alt="YourBrand Logo"
-                className="h-12 w-auto"
-              />
-            </header>
-
-            {/* Download Page Content */}
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="mb-8 animate-fade-in">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent">
-                  Welcome, {formData.name}!
-                </h1>
-                <p className="text-lg md:text-xl text-gray-300 mb-8">
-                  Your free downloads are ready. Get instant access to all resources below.
-                </p>
-              </div>
-
-              {/* Downloads Grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                {leadMagnets.map((magnet) => (
-                  <div
-                    key={magnet.id}
-                    className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105"
-                  >
-                    <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
-                      <Download className="w-8 h-8 text-black" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">{magnet.title}</h3>
-                    <p className="text-gray-400 mb-4 text-sm">{magnet.description}</p>
-                    <Button
-                      onClick={() => handleDownload(magnet)}
-                      className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download {magnet.fileName}
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Footer */}
-        <footer className="bg-gray-900/50 border-t border-gray-700 py-6">
-          <div className="container mx-auto px-6 md:px-4 text-center">
-            <p className="text-gray-400">
-              Sample Packs & Presets Available at{" "}
-              <a
-                href="https://roblate.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#DEFF00] hover:text-[#B8CC00] transition-colors underline"
-              >
-                roblate.com
-              </a>
-            </p>
-          </div>
-        </footer>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden flex flex-col">
@@ -163,53 +77,91 @@ const Index = () => {
               className="text-3xl md:text-6xl font-neutronic mb-6 leading-tight animate-fade-in"
               style={{ fontWeight: 700 }}
             >
-              Get Your
-              <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
-                FREE DOWNLOADS
-              </span>
+              {isSubmitted ? (
+                <>
+                  Your Download
+                  <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
+                    IS READY
+                  </span>
+                </>
+              ) : (
+                <>
+                  Get Your
+                  <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
+                    FREE DOWNLOADS
+                  </span>
+                </>
+              )}
             </h1>
 
             <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in">
-              Enter your name and email below and I'll fire the download link straight to your inbox.
+              {isSubmitted 
+                ? "Get instant access to your free resource below."
+                : "Enter your name and email below and I'll fire the download link straight to your inbox."
+              }
             </p>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto lg:mx-0 animate-fade-in">
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <Input
-                  type="text"
-                  placeholder="Your full name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
-                  required
-                />
-              </div>
+            {/* Form or Download Box */}
+            <div className="max-w-md mx-auto lg:mx-0 animate-fade-in">
+              {isSubmitted ? (
+                // Download Box
+                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
+                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
+                    <Download className="w-8 h-8 text-black" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-center">{leadMagnet.title}</h3>
+                  <p className="text-gray-400 mb-4 text-sm text-center">{leadMagnet.description}</p>
+                  <Button
+                    onClick={handleDownload}
+                    className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Download {leadMagnet.fileName}
+                  </Button>
+                </div>
+              ) : (
+                // Form
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Input
+                      type="text"
+                      placeholder="Your full name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
+                      required
+                    />
+                  </div>
 
-              <div className="relative">
-                <Download className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <Input
-                  type="email"
-                  placeholder="Your email address"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
-                  required
-                />
-              </div>
+                  <div className="relative">
+                    <Download className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Input
+                      type="email"
+                      placeholder="Your email address"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
+                      required
+                    />
+                  </div>
 
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black"
-              >
-                {isLoading ? "Processing..." : "Get My Free Downloads"}
-              </Button>
-            </form>
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black"
+                  >
+                    {isLoading ? "Processing..." : "Get My Free Downloads"}
+                  </Button>
+                </form>
+              )}
+            </div>
 
             <p className="text-sm text-gray-400 mt-4 animate-fade-in">
-              No spam. Unsubscribe at any time. Your data is secure.
+              {isSubmitted 
+                ? "All files are ready for instant download. Enjoy your free resources!"
+                : "No spam. Unsubscribe at any time. Your data is secure."
+              }
             </p>
           </div>
 
