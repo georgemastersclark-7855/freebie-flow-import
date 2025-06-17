@@ -96,7 +96,7 @@ const Index = () => {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+      <div className="min-h-screen bg-black text-white">
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <header className="flex justify-center mb-12">
@@ -162,7 +162,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-hidden">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Header */}
       <header className="relative z-10 flex justify-center pt-8 mb-12">
         <img 
@@ -239,7 +239,7 @@ const Index = () => {
               <img
                 src="/lovable-uploads/3f8daf99-6f60-45d7-b57e-e340c42d6a8e.png"
                 alt="Pro Drums Music Production"
-                className="w-full h-80 object-cover rounded-lg shadow-2xl"
+                className="w-full rounded-lg shadow-2xl"
               />
               
               {/* Floating elements for visual interest */}
