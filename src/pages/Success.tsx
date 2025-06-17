@@ -137,7 +137,7 @@ const Success = () => {
       <footer className="bg-gray-900/50 border-t border-gray-700 py-6">
         <div className="container mx-auto px-6 md:px-4 text-center">
           <p className="text-gray-400">
-            Powered by{" "}
+            Sample Packs & Presets Available at{" "}
             <a
               href="https://roblate.com"
               target="_blank"
