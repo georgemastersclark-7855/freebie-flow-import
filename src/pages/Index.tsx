@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -241,15 +240,15 @@ const Index = () => {
                 alt="Pro Drums Music Production"
                 className="rounded-2xl shadow-2xl"
               />
-              
-              {/* Floating elements for visual interest */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-full flex items-center justify-center animate-pulse">
-                <Download className="w-8 h-8 text-black" />
-              </div>
-              
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-[#B8CC00] to-[#DEFF00] rounded-full flex items-center justify-center">
-                <Mail className="w-6 h-6 text-black" />
-              </div>
+            </div>
+            
+            {/* Floating elements for visual interest - moved outside overflow container */}
+            <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-full flex items-center justify-center animate-pulse">
+              <Download className="w-8 h-8 text-black" />
+            </div>
+            
+            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-[#B8CC00] to-[#DEFF00] rounded-full flex items-center justify-center">
+              <Mail className="w-6 h-6 text-black" />
             </div>
           </div>
         </div>
