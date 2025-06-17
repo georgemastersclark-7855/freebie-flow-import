@@ -1,5 +1,4 @@
 
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -242,6 +241,15 @@ const Index = () => {
                 alt="Pro Drums Music Production"
                 className="rounded-2xl shadow-2xl"
               />
+              
+              {/* Rob's Signature Overlay */}
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+                <img
+                  src="/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png"
+                  alt="Rob's Signature"
+                  className="h-12 w-auto opacity-90"
+                />
+              </div>
             </div>
             
             {/* Floating elements for visual interest - moved outside overflow container */}
@@ -277,4 +285,3 @@ const Index = () => {
 };
 
 export default Index;
-
