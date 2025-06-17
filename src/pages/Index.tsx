@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Download, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useUTMTracking } from "@/hooks/useUTMTracking";
 
 interface LeadMagnet {
   id: string;
@@ -23,7 +24,18 @@ const Index = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [leadMagnets, setLeadMagnets] = useState<LeadMagnet[]>([]);
+  const [leadId, setLeadId] = useState<string | null>(null);
+  const [zapierWebhook, setZapierWebhook] = useState("");
   const { toast } = useToast();
+  const utmParams = useUTMTracking();
+
+  // Load Zapier webhook from localStorage
+  useEffect(() => {
+    const savedWebhook = localStorage.getItem('klaviyo_zapier_webhook');
+    if (savedWebhook) {
+      setZapierWebhook(savedWebhook);
+    }
+  }, []);
 
   // Fetch lead magnets from Supabase
   useEffect(() => {
@@ -49,6 +61,33 @@ const Index = () => {
     fetchLeadMagnets();
   }, []);
 
+  const sendToZapier = async (leadData: any) => {
+    if (!zapierWebhook) {
+      console.log('No Zapier webhook configured');
+      return;
+    }
+
+    try {
+      await fetch(zapierWebhook, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify({
+          ...leadData,
+          event_type: "lead_magnet_download",
+          source: "rob_late_website",
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      console.log('Data sent to Zapier/Klaviyo:', leadData);
+    } catch (error) {
+      console.error('Error sending to Zapier:', error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -63,15 +102,61 @@ const Index = () => {
 
     setIsLoading(true);
 
-    // Simulate form processing
-    setTimeout(() => {
+    try {
+      // Create lead record with UTM tracking
+      const { data: leadData, error: leadError } = await supabase
+        .from('leads')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          utm_source: utmParams.utm_source,
+          utm_medium: utmParams.utm_medium,
+          utm_campaign: utmParams.utm_campaign,
+          utm_term: utmParams.utm_term,
+          utm_content: utmParams.utm_content,
+          referrer: utmParams.referrer,
+          ip_address: null, // Could be captured server-side
+          user_agent: navigator.userAgent
+        })
+        .select()
+        .single();
+
+      if (leadError) {
+        console.error('Error creating lead:', leadError);
+        toast({
+          title: "Error",
+          description: "Failed to save lead information",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setLeadId(leadData.id);
       setIsSubmitted(true);
-      setIsLoading(false);
+      
+      // Send to Zapier/Klaviyo
+      await sendToZapier({
+        leadId: leadData.id,
+        name: formData.name,
+        email: formData.email,
+        utmParams: utmParams,
+        event: 'lead_captured'
+      });
+
       toast({
         title: "Success!",
         description: "Your download is ready below.",
       });
-    }, 1000);
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleDownload = async (leadMagnet: LeadMagnet) => {
@@ -89,6 +174,35 @@ const Index = () => {
           variant: "destructive",
         });
         return;
+      }
+
+      // Track download event
+      if (leadId) {
+        const { error: downloadError } = await supabase
+          .from('lead_downloads')
+          .insert({
+            lead_id: leadId,
+            lead_magnet_id: leadMagnet.id,
+            utm_source: utmParams.utm_source,
+            utm_medium: utmParams.utm_medium,
+            utm_campaign: utmParams.utm_campaign,
+            utm_term: utmParams.utm_term,
+            utm_content: utmParams.utm_content
+          });
+
+        if (downloadError) {
+          console.error('Error tracking download:', downloadError);
+        }
+
+        // Send download event to Zapier/Klaviyo
+        await sendToZapier({
+          leadId: leadId,
+          name: formData.name,
+          email: formData.email,
+          downloadedFile: leadMagnet.file_name,
+          utmParams: utmParams,
+          event: 'file_downloaded'
+        });
       }
 
       // Increment download count
@@ -162,6 +276,30 @@ const Index = () => {
                 : "Enter your name and email below and I'll fire the download link straight to your inbox."
               }
             </p>
+
+            {/* Zapier Configuration (only show if not submitted) */}
+            {!isSubmitted && !zapierWebhook && (
+              <div className="max-w-md mx-auto lg:mx-0 mb-6 p-4 bg-gray-800/30 rounded-lg border border-gray-700">
+                <label className="block text-sm font-medium mb-2">
+                  Klaviyo Integration (Optional)
+                </label>
+                <Input
+                  type="url"
+                  placeholder="Zapier webhook URL for Klaviyo"
+                  value={zapierWebhook}
+                  onChange={(e) => {
+                    setZapierWebhook(e.target.value);
+                    if (e.target.value) {
+                      localStorage.setItem('klaviyo_zapier_webhook', e.target.value);
+                    }
+                  }}
+                  className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-sm"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Add your Zapier webhook to send leads to Klaviyo
+                </p>
+              </div>
+            )}
 
             {/* Form or Download Box */}
             <div className="max-w-md mx-auto lg:mx-0 animate-fade-in">
