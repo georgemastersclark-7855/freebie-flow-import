@@ -237,8 +237,8 @@ const Index = () => {
             {/* Main hero image container */}
             <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:scale-105 transition-transform duration-500">
               <img
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80"
-                alt="Digital Marketing Success"
+                src="/lovable-uploads/3f8daf99-6f60-45d7-b57e-e340c42d6a8e.png"
+                alt="Pro Drums Music Production"
                 className="w-full h-80 object-cover rounded-lg shadow-2xl"
               />
               
