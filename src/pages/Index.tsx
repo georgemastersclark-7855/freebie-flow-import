@@ -152,7 +152,7 @@ const Index = () => {
             <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">FREE DOWNLOADS</span>
           </h1>
           
-          <p className="text-xl text-gray-300 mb-8 animate-fade-in">
+          <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in">
             Enter your name and email below and I'll fire the download link straight to your inbox.
           </p>
 
