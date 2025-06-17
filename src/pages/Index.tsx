@@ -1,9 +1,19 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Download, User } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface LeadMagnet {
+  id: string;
+  title: string;
+  description: string;
+  file_name: string;
+  file_path: string;
+  download_count: number;
+}
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -12,16 +22,32 @@ const Index = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [leadMagnets, setLeadMagnets] = useState<LeadMagnet[]>([]);
   const { toast } = useToast();
 
-  // Single lead magnet for download
-  const leadMagnet = {
-    id: 1,
-    title: "Ultimate Marketing Guide",
-    description: "Complete guide to digital marketing strategies",
-    fileUrl: "#", // Replace with actual file URL
-    fileName: "marketing-guide.pdf"
-  };
+  // Fetch lead magnets from Supabase
+  useEffect(() => {
+    const fetchLeadMagnets = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('lead_magnets')
+          .select('*')
+          .eq('is_active', true)
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching lead magnets:', error);
+          return;
+        }
+
+        setLeadMagnets(data || []);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchLeadMagnets();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,13 +74,49 @@ const Index = () => {
     }, 1000);
   };
 
-  const handleDownload = () => {
-    // In a real app, this would trigger actual file downloads
-    toast({
-      title: "Download Started",
-      description: `Downloading ${leadMagnet.fileName}`,
-    });
-    console.log("Downloading:", leadMagnet.fileName);
+  const handleDownload = async (leadMagnet: LeadMagnet) => {
+    try {
+      // Get the signed URL for download
+      const { data, error } = await supabase.storage
+        .from('lead-magnets')
+        .createSignedUrl(leadMagnet.file_path, 3600); // 1 hour expiry
+
+      if (error) {
+        console.error('Error creating signed URL:', error);
+        toast({
+          title: "Download Error",
+          description: "Failed to prepare download. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Increment download count
+      await supabase
+        .from('lead_magnets')
+        .update({ download_count: leadMagnet.download_count + 1 })
+        .eq('id', leadMagnet.id);
+
+      // Trigger download
+      const link = document.createElement('a');
+      link.href = data.signedUrl;
+      link.download = leadMagnet.file_name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast({
+        title: "Download Started",
+        description: `Downloading ${leadMagnet.file_name}`,
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+      toast({
+        title: "Download Error",
+        description: "Failed to download file. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -104,20 +166,30 @@ const Index = () => {
             {/* Form or Download Box */}
             <div className="max-w-md mx-auto lg:mx-0 animate-fade-in">
               {isSubmitted ? (
-                // Download Box
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
-                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
-                    <Download className="w-8 h-8 text-black" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 text-center">{leadMagnet.title}</h3>
-                  <p className="text-gray-400 mb-4 text-sm text-center">{leadMagnet.description}</p>
-                  <Button
-                    onClick={handleDownload}
-                    className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
-                  >
-                    <Download className="w-4 h-4 mr-2" />
-                    Download {leadMagnet.fileName}
-                  </Button>
+                // Download Boxes
+                <div className="space-y-4">
+                  {leadMagnets.length > 0 ? (
+                    leadMagnets.map((leadMagnet) => (
+                      <div key={leadMagnet.id} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
+                        <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
+                          <Download className="w-8 h-8 text-black" />
+                        </div>
+                        <h3 className="text-xl font-semibold mb-2 text-center">{leadMagnet.title}</h3>
+                        <p className="text-gray-400 mb-4 text-sm text-center">{leadMagnet.description}</p>
+                        <Button
+                          onClick={() => handleDownload(leadMagnet)}
+                          className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
+                        >
+                          <Download className="w-4 h-4 mr-2" />
+                          Download {leadMagnet.file_name}
+                        </Button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
+                      <p className="text-center text-gray-400">No downloads available at the moment.</p>
+                    </div>
+                  )}
                 </div>
               ) : (
                 // Form
