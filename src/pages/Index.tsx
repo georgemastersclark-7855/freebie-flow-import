@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Download, User } from "lucide-react";
+
 const Index = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -144,8 +145,8 @@ const Index = () => {
       <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center min-h-[80vh]">
         {/* Left Column - Content */}
         <div className="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0 text-center lg:text-left">
-          <h1 className="text-4xl md:text-6xl font-neutronic font-black mb-6 leading-tight animate-fade-in" style={{
-          fontWeight: 900
+          <h1 className="text-4xl md:text-6xl font-neutronic mb-6 leading-tight animate-fade-in" style={{
+          fontWeight: 700
         }}>
             Get Your
             <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">FREE DOWNLOADS</span>
@@ -220,4 +221,5 @@ const Index = () => {
       </div>
     </div>;
 };
+
 export default Index;
