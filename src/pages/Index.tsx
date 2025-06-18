@@ -231,7 +231,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-black text-white overflow-hidden flex flex-col font-zurich">
       <div className="flex-grow">
         {/* Header */}
         <header className="relative z-10 flex justify-center pt-8 mb-12">
@@ -268,7 +268,7 @@ const Index = () => {
               )}
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in">
+            <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in font-zurich">
               {isSubmitted 
                 ? "Get instant access to your free resource below."
                 : "Enter your name and email below and I'll fire the download link straight to your inbox."
@@ -286,11 +286,11 @@ const Index = () => {
                         <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
                           <Download className="w-8 h-8 text-black" />
                         </div>
-                        <h3 className="text-xl font-semibold mb-2 text-center">{leadMagnet.title}</h3>
-                        <p className="text-gray-400 mb-4 text-sm text-center">{leadMagnet.description}</p>
+                        <h3 className="text-xl font-semibold mb-2 text-center font-zurich">{leadMagnet.title}</h3>
+                        <p className="text-gray-400 mb-4 text-sm text-center font-zurich">{leadMagnet.description}</p>
                         <Button
                           onClick={() => handleDownload(leadMagnet)}
-                          className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
+                          className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich"
                         >
                           <Download className="w-4 h-4 mr-2" />
                           Download {leadMagnet.file_name}
@@ -299,7 +299,7 @@ const Index = () => {
                     ))
                   ) : (
                     <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
-                      <p className="text-center text-gray-400">No downloads available at the moment.</p>
+                      <p className="text-center text-gray-400 font-zurich">No downloads available at the moment.</p>
                     </div>
                   )}
                 </div>
@@ -313,7 +313,7 @@ const Index = () => {
                       placeholder="Your full name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
+                      className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors font-zurich"
                       required
                     />
                   </div>
@@ -325,7 +325,7 @@ const Index = () => {
                       placeholder="Your email address"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors"
+                      className="pl-12 py-6 bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 text-lg backdrop-blur-sm focus:border-[#DEFF00] transition-colors font-zurich"
                       required
                     />
                   </div>
@@ -333,7 +333,7 @@ const Index = () => {
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black"
+                    className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black font-zurich"
                   >
                     {isLoading ? "Processing..." : "Get My Free Downloads"}
                   </Button>
@@ -341,7 +341,7 @@ const Index = () => {
               )}
             </div>
 
-            <p className="text-sm text-gray-400 mt-4 animate-fade-in">
+            <p className="text-sm text-gray-400 mt-4 animate-fade-in font-zurich">
               {isSubmitted 
                 ? "All files are ready for instant download. Enjoy your free resources!"
                 : "No spam. Unsubscribe at any time. Your data is secure."
@@ -385,7 +385,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-gray-900/50 border-t border-gray-700 py-6">
         <div className="container mx-auto px-6 md:px-4 text-center">
-          <p className="text-gray-400">
+          <p className="text-gray-400 font-zurich">
             Sample Packs & Presets Available at{" "}
             <a
               href="https://roblate.com"
