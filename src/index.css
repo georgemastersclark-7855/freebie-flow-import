@@ -1,6 +1,16 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom font import */
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('https://budvnuggykvqydjmkyfx.supabase.co/storage/v1/object/public/siteassets/Akira%20Expanded%20Demo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
