@@ -332,7 +332,10 @@ const Index = () => {
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black font-zurich shadow-[0_0_20px_rgba(222,255,0,0.3)] hover:shadow-[0_0_30px_rgba(222,255,0,0.5)]"
+                    className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black font-zurich"
+                    style={{
+                      boxShadow: '0 0 20px rgba(222, 255, 0, 0.4), 0 0 40px rgba(222, 255, 0, 0.2), 0 0 60px rgba(222, 255, 0, 0.1)'
+                    }}
                   >
                     {isLoading ? "Processing..." : "Get My Free Downloads"}
                   </Button>
