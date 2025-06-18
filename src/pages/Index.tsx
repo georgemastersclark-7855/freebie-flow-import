@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -346,7 +347,7 @@ const Index = () => {
             <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-0 lg:px-0">
               {isSubmitted 
                 ? "All files are ready for instant download. Enjoy your free resources!"
-                : "No spam. Unsubscribe at any time. Your data is secure."
+                : "No spam. Unsubscribe at any time."
               }
             </p>
           </div>
@@ -375,9 +376,9 @@ const Index = () => {
                 />
               </div>
 
-              {/* Floating element for visual interest - bottom left only */}
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                <Download className="w-6 h-6 text-black" />
+              {/* Floating element for visual interest - bottom left only, smaller on mobile */}
+              <div className="absolute -bottom-4 -left-4 w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center">
+                <Download className="w-4 h-4 md:w-6 md:h-6 text-black" />
               </div>
             </div>
           </div>
