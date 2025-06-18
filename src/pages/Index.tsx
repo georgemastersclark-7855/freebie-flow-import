@@ -261,9 +261,10 @@ const Index = () => {
                 </>
               ) : (
                 <>
-                  Get Your
+                  <span className="block sm:inline">Get Your </span>
+                  <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block sm:inline">FREE</span>
                   <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
-                    FREE DOWNLOADS
+                    DOWNLOADS
                   </span>
                 </>
               )}
