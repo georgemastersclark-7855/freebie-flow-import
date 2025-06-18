@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -248,7 +247,7 @@ const Index = () => {
           {/* Left Column - Content */}
           <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
             <h1
-              className="text-3xl md:text-5xl lg:text-6xl font-akira mb-6 leading-none animate-fade-in"
+              className="text-2xl md:text-5xl lg:text-6xl font-akira mb-6 leading-none animate-fade-in"
               style={{ fontWeight: 700 }}
             >
               {isSubmitted ? (
@@ -260,8 +259,7 @@ const Index = () => {
                 </>
               ) : (
                 <>
-                  <span className="block sm:inline">Get Your </span>
-                  <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block sm:inline">FREE</span>
+                  <span className="block">Get Your FREE</span>
                   <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
                     DOWNLOADS
                   </span>
