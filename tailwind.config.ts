@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,6 +23,7 @@ export default {
 				'neutronic': ['neutronic', 'sans-serif'],
 				'akira': ['Akira Expanded', 'sans-serif'],
 				'zurich': ['Zurich Extended', 'sans-serif'],
+				'zurich-condensed': ['Zurich Condensed', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
