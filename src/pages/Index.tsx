@@ -243,9 +243,9 @@ const Index = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="container mx-auto px-8 md:px-4 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
+        <div className="container mx-auto px-6 md:px-4 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
           {/* Left Column - Content */}
-          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-4 lg:px-0">
+          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-2 lg:px-0">
             <h1
               className="text-3xl md:text-5xl lg:text-6xl font-akira mb-8 lg:mb-6 leading-none animate-fade-in"
               style={{ fontWeight: 700 }}
@@ -267,7 +267,7 @@ const Index = () => {
               )}
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-2 lg:px-0">
+            <p className="text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-1 lg:px-0">
               {isSubmitted 
                 ? "Get instant access to your free resource below."
                 : "Enter your name and email below and I'll fire the download link straight to your inbox."
@@ -275,7 +275,7 @@ const Index = () => {
             </p>
 
             {/* Form or Download Box */}
-            <div className="max-w-md mx-auto lg:mx-0 animate-fade-in px-4 lg:px-0">
+            <div className="max-w-md mx-auto lg:mx-0 animate-fade-in px-2 lg:px-0">
               {isSubmitted ? (
                 // Download Boxes
                 <div className="space-y-4">
@@ -340,7 +340,7 @@ const Index = () => {
               )}
             </div>
 
-            <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-2 lg:px-0">
+            <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-1 lg:px-0">
               {isSubmitted 
                 ? "All files are ready for instant download. Enjoy your free resources!"
                 : "No spam. Unsubscribe at any time. Your data is secure."
