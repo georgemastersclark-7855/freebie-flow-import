@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -247,7 +248,7 @@ const Index = () => {
           {/* Left Column - Content */}
           <div className="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0 text-center lg:text-left">
             <h1
-              className="text-3xl md:text-6xl font-neutronic mb-6 leading-tight animate-fade-in"
+              className="text-3xl md:text-6xl font-akira mb-6 leading-tight animate-fade-in"
               style={{ fontWeight: 700 }}
             >
               {isSubmitted ? (
