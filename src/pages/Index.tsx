@@ -24,16 +24,14 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [leadMagnets, setLeadMagnets] = useState<LeadMagnet[]>([]);
   const [leadId, setLeadId] = useState<string | null>(null);
-  const [zapierWebhook, setZapierWebhook] = useState("");
+  // Set the Zapier webhook URL directly
+  const zapierWebhook = "https://hooks.zapier.com/hooks/catch/14759876/uotfoui/";
   const { toast } = useToast();
   const utmParams = useUTMTracking();
 
-  // Load Zapier webhook from localStorage
+  // Save the webhook to localStorage on component mount
   useEffect(() => {
-    const savedWebhook = localStorage.getItem('klaviyo_zapier_webhook');
-    if (savedWebhook) {
-      setZapierWebhook(savedWebhook);
-    }
+    localStorage.setItem('klaviyo_zapier_webhook', zapierWebhook);
   }, []);
 
   // Fetch lead magnets from Supabase
