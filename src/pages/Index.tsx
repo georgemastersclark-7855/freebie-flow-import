@@ -243,9 +243,9 @@ const Index = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="container mx-auto px-6 md:px-4 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
+        <div className="container mx-auto px-4 md:px-4 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
           {/* Left Column - Content */}
-          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-2 lg:px-0">
+          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-1 lg:px-0">
             <h1
               className="text-2xl md:text-5xl lg:text-6xl font-akira mb-8 lg:mb-6 leading-none animate-fade-in"
               style={{ fontWeight: 700 }}
@@ -260,14 +260,14 @@ const Index = () => {
               ) : (
                 <>
                   <span className="block">Get Your FREE</span>
-                  <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
+                  <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent block">
                     DOWNLOADS
                   </span>
                 </>
               )}
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-1 lg:px-0">
+            <p className="text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-0 lg:px-0">
               {isSubmitted 
                 ? "Get instant access to your free resource below."
                 : "Enter your name and email below and I'll fire the download link straight to your inbox."
@@ -275,7 +275,7 @@ const Index = () => {
             </p>
 
             {/* Form or Download Box */}
-            <div className="max-w-md mx-auto lg:mx-0 animate-fade-in px-2 lg:px-0">
+            <div className="max-w-md mx-auto lg:mx-0 animate-fade-in px-1 lg:px-0">
               {isSubmitted ? (
                 // Download Boxes
                 <div className="space-y-4">
@@ -332,7 +332,7 @@ const Index = () => {
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black font-zurich"
+                    className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-[#DEFF00]/25 text-black font-zurich shadow-[0_0_20px_rgba(222,255,0,0.3)] hover:shadow-[0_0_30px_rgba(222,255,0,0.5)]"
                   >
                     {isLoading ? "Processing..." : "Get My Free Downloads"}
                   </Button>
@@ -340,7 +340,7 @@ const Index = () => {
               )}
             </div>
 
-            <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-1 lg:px-0">
+            <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-0 lg:px-0">
               {isSubmitted 
                 ? "All files are ready for instant download. Enjoy your free resources!"
                 : "No spam. Unsubscribe at any time. Your data is secure."
