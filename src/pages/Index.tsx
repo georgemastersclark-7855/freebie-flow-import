@@ -247,7 +247,7 @@ const Index = () => {
           {/* Left Column - Content */}
           <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-2 lg:px-0">
             <h1
-              className="text-3xl md:text-5xl lg:text-6xl font-akira mb-8 lg:mb-6 leading-none animate-fade-in"
+              className="text-2xl md:text-5xl lg:text-6xl font-akira mb-8 lg:mb-6 leading-none animate-fade-in"
               style={{ fontWeight: 700 }}
             >
               {isSubmitted ? (
