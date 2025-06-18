@@ -66,21 +66,45 @@ const Index = () => {
     }
 
     try {
+      // Flatten UTM parameters for better Klaviyo integration
+      const zapierPayload = {
+        // Lead information
+        leadId: leadData.leadId,
+        name: leadData.name,
+        email: leadData.email,
+        
+        // Event information
+        event_type: "lead_magnet_download",
+        event: leadData.event,
+        source: "rob_late_website",
+        timestamp: new Date().toISOString(),
+        
+        // UTM parameters flattened (this is what Klaviyo expects)
+        utm_source: leadData.utmParams?.utm_source || null,
+        utm_medium: leadData.utmParams?.utm_medium || null,
+        utm_campaign: leadData.utmParams?.utm_campaign || null,
+        utm_term: leadData.utmParams?.utm_term || null,
+        utm_content: leadData.utmParams?.utm_content || null,
+        referrer: leadData.utmParams?.referrer || null,
+        
+        // Additional context
+        downloadedFile: leadData.downloadedFile || null,
+        page_url: window.location.href,
+        user_agent: navigator.userAgent
+      };
+
+      console.log('Sending to Zapier/Klaviyo:', zapierPayload);
+
       await fetch(zapierWebhook, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         mode: "no-cors",
-        body: JSON.stringify({
-          ...leadData,
-          event_type: "lead_magnet_download",
-          source: "rob_late_website",
-          timestamp: new Date().toISOString()
-        }),
+        body: JSON.stringify(zapierPayload),
       });
 
-      console.log('Data sent to Zapier/Klaviyo:', leadData);
+      console.log('Data successfully sent to Zapier/Klaviyo');
     } catch (error) {
       console.error('Error sending to Zapier:', error);
     }
@@ -132,14 +156,17 @@ const Index = () => {
       setLeadId(leadData.id);
       setIsSubmitted(true);
       
-      // Send to Zapier/Klaviyo
-      await sendToZapier({
-        leadId: leadData.id,
-        name: formData.name,
-        email: formData.email,
-        utmParams: utmParams,
-        event: 'lead_captured'
-      });
+      // Add a small delay to ensure UTM params are fully captured
+      setTimeout(async () => {
+        // Send to Zapier/Klaviyo with enhanced data structure
+        await sendToZapier({
+          leadId: leadData.id,
+          name: formData.name,
+          email: formData.email,
+          utmParams: utmParams,
+          event: 'lead_captured'
+        });
+      }, 500);
 
       toast({
         title: "Success!",

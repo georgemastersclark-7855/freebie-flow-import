@@ -27,16 +27,16 @@ export const useUTMTracking = () => {
       }
     }
 
-    // Get UTM parameters from current URL
+    // Get UTM parameters from current URL with proper decoding
     const urlParams = new URLSearchParams(window.location.search);
     const referrer = document.referrer;
     
     const currentParams: UTMParams = {
-      utm_source: urlParams.get('utm_source') || undefined,
-      utm_medium: urlParams.get('utm_medium') || undefined,
-      utm_campaign: urlParams.get('utm_campaign') || undefined,
-      utm_term: urlParams.get('utm_term') || undefined,
-      utm_content: urlParams.get('utm_content') || undefined,
+      utm_source: urlParams.get('utm_source') ? decodeURIComponent(urlParams.get('utm_source')!) : undefined,
+      utm_medium: urlParams.get('utm_medium') ? decodeURIComponent(urlParams.get('utm_medium')!) : undefined,
+      utm_campaign: urlParams.get('utm_campaign') ? decodeURIComponent(urlParams.get('utm_campaign')!) : undefined,
+      utm_term: urlParams.get('utm_term') ? decodeURIComponent(urlParams.get('utm_term')!) : undefined,
+      utm_content: urlParams.get('utm_content') ? decodeURIComponent(urlParams.get('utm_content')!) : undefined,
       referrer: referrer || undefined,
     };
 
@@ -48,9 +48,11 @@ export const useUTMTracking = () => {
     // Merge saved params with current params (current params take priority)
     const mergedParams = { ...params, ...filteredCurrentParams };
 
-    // If we have new UTM params from URL, save them to localStorage
+    // If we have new UTM params from URL, save them to localStorage with longer persistence
     if (Object.keys(filteredCurrentParams).length > 0) {
       localStorage.setItem('utm_params', JSON.stringify(mergedParams));
+      // Also save with a timestamp for debugging
+      localStorage.setItem('utm_params_timestamp', new Date().toISOString());
       console.log('New UTM parameters captured and saved:', filteredCurrentParams);
     }
 
