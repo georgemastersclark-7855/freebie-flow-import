@@ -14,11 +14,24 @@ export const useUTMTracking = () => {
   const [utmParams, setUtmParams] = useState<UTMParams>({});
 
   useEffect(() => {
-    // Get UTM parameters from URL
+    // First, try to get UTM parameters from localStorage (in case they were captured earlier)
+    const savedParams = localStorage.getItem('utm_params');
+    let params: UTMParams = {};
+    
+    if (savedParams) {
+      try {
+        params = JSON.parse(savedParams);
+        console.log('Loaded UTM parameters from localStorage:', params);
+      } catch (error) {
+        console.error('Error parsing saved UTM params:', error);
+      }
+    }
+
+    // Get UTM parameters from current URL
     const urlParams = new URLSearchParams(window.location.search);
     const referrer = document.referrer;
     
-    const params: UTMParams = {
+    const currentParams: UTMParams = {
       utm_source: urlParams.get('utm_source') || undefined,
       utm_medium: urlParams.get('utm_medium') || undefined,
       utm_campaign: urlParams.get('utm_campaign') || undefined,
@@ -27,14 +40,23 @@ export const useUTMTracking = () => {
       referrer: referrer || undefined,
     };
 
-    // Filter out undefined values
-    const filteredParams = Object.fromEntries(
-      Object.entries(params).filter(([_, value]) => value !== undefined)
+    // Filter out undefined values from current params
+    const filteredCurrentParams = Object.fromEntries(
+      Object.entries(currentParams).filter(([_, value]) => value !== undefined)
     );
 
-    setUtmParams(filteredParams);
+    // Merge saved params with current params (current params take priority)
+    const mergedParams = { ...params, ...filteredCurrentParams };
+
+    // If we have new UTM params from URL, save them to localStorage
+    if (Object.keys(filteredCurrentParams).length > 0) {
+      localStorage.setItem('utm_params', JSON.stringify(mergedParams));
+      console.log('New UTM parameters captured and saved:', filteredCurrentParams);
+    }
+
+    setUtmParams(mergedParams);
     
-    console.log('UTM Parameters captured:', filteredParams);
+    console.log('Final UTM Parameters:', mergedParams);
   }, []);
 
   return utmParams;

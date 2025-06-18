@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Download, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUTMTracking } from "@/hooks/useUTMTracking";
+import { UTMDebugger } from "@/components/UTMDebugger";
 
 interface LeadMagnet {
   id: string;
@@ -233,6 +233,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden flex flex-col font-zurich">
+      {/* Add UTM Debugger - remove this in production */}
+      <UTMDebugger />
+      
       <div className="flex-grow mb-16 md:mb-0">
         {/* Header */}
         <header className="relative z-10 flex justify-center pt-8 mb-12">
