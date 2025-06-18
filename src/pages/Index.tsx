@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -233,7 +232,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden flex flex-col font-zurich">
-      <div className="flex-grow">
+      <div className="flex-grow mb-16 md:mb-0">
         {/* Header */}
         <header className="relative z-10 flex justify-center pt-8 mb-12">
           <img
