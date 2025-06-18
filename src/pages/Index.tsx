@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -244,11 +245,11 @@ const Index = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="container mx-auto px-6 md:px-4 flex flex-col lg:flex-row items-center min-h-[80vh]">
+        <div className="container mx-auto px-6 md:px-4 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
           {/* Left Column - Content */}
-          <div className="lg:w-1/2 lg:pr-12 mb-12 lg:mb-0 text-center lg:text-left">
+          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
             <h1
-              className="text-3xl md:text-6xl font-akira mb-6 leading-tight animate-fade-in"
+              className="text-3xl md:text-5xl lg:text-6xl font-akira mb-6 leading-tight animate-fade-in"
               style={{ fontWeight: 700 }}
             >
               {isSubmitted ? (
@@ -350,8 +351,8 @@ const Index = () => {
           </div>
 
           {/* Right Column - Hero Image */}
-          <div className="lg:w-1/2 relative">
-            <div className="relative mx-auto max-w-lg">
+          <div className="lg:w-1/2 relative flex justify-center lg:justify-end">
+            <div className="relative mx-auto max-w-lg lg:max-w-md xl:max-w-lg">
               {/* Gradient overlay for visual appeal */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 to-[#B8CC00]/20 rounded-2xl blur-xl"></div>
 
@@ -403,3 +404,4 @@ const Index = () => {
 };
 
 export default Index;
+
