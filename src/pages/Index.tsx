@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -268,7 +269,7 @@ const Index = () => {
               )}
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in font-zurich">
+            <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in font-zurich-condensed">
               {isSubmitted 
                 ? "Get instant access to your free resource below."
                 : "Enter your name and email below and I'll fire the download link straight to your inbox."
@@ -341,7 +342,7 @@ const Index = () => {
               )}
             </div>
 
-            <p className="text-sm text-gray-400 mt-4 animate-fade-in font-zurich">
+            <p className="text-sm text-gray-400 mt-4 animate-fade-in font-zurich-condensed">
               {isSubmitted 
                 ? "All files are ready for instant download. Enjoy your free resources!"
                 : "No spam. Unsubscribe at any time. Your data is secure."
@@ -385,7 +386,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-gray-900/50 border-t border-gray-700 py-6">
         <div className="container mx-auto px-6 md:px-4 text-center">
-          <p className="text-gray-400 font-zurich">
+          <p className="text-gray-400 font-zurich-condensed">
             Sample Packs & Presets Available at{" "}
             <a
               href="https://roblate.com"
