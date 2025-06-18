@@ -4,8 +4,17 @@ import { useUTMTracking } from "@/hooks/useUTMTracking";
 export const UTMDebugger = () => {
   const utmParams = useUTMTracking();
 
-  // Only show in development or when there are UTM params
-  if (Object.keys(utmParams).length === 0) {
+  // Only show in development or when debug=true is in URL
+  const isDevelopment = import.meta.env.DEV;
+  const urlParams = new URLSearchParams(window.location.search);
+  const isDebugMode = urlParams.get('debug') === 'true';
+  
+  if (!isDevelopment && !isDebugMode) {
+    return null;
+  }
+
+  // Only show when there are UTM params or in debug mode
+  if (Object.keys(utmParams).length === 0 && !isDebugMode) {
     return null;
   }
 
@@ -69,6 +78,9 @@ export const UTMDebugger = () => {
       </div>
       <div className="mt-2 text-xs text-gray-400">
         Timestamp: {localStorage.getItem('utm_params_timestamp')}
+      </div>
+      <div className="mt-1 text-xs text-yellow-400">
+        {isDevelopment ? 'DEV MODE' : 'DEBUG MODE'}
       </div>
     </div>
   );
