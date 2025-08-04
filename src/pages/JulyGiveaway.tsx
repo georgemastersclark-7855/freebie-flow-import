@@ -245,35 +245,26 @@ const JulyGiveaway = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading July Giveaway...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-300">Loading July Giveaway...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-40">
+      <header className="border-b border-gray-800 bg-black/80 backdrop-blur-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <img 
-                src="/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png" 
-                alt="Rob Late" 
-                className="h-12 w-12 rounded-full object-cover border-2 border-primary/20"
-              />
-              <div>
-                <h1 className="text-xl font-bold text-foreground">Rob Late</h1>
-                <p className="text-sm text-muted-foreground">July 2025 IG Stems Giveaway</p>
-              </div>
-            </div>
-            <Badge variant="secondary" className="hidden sm:flex">
-              Exclusive Giveaway
-            </Badge>
+          <div className="flex items-center justify-center">
+            <img 
+              src="/lovable-uploads/14fb5cdf-e9b9-4e7c-ad49-54799f4ee049.png" 
+              alt="Rob Late Audio Logo" 
+              className="h-16 w-auto"
+            />
           </div>
         </div>
       </header>
@@ -283,100 +274,103 @@ const JulyGiveaway = () => {
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center px-4 py-2 rounded-full border bg-background/50 backdrop-blur-sm mb-6">
-              <span className="text-sm font-medium text-primary">🎵 July 2025 Exclusive</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               Rob Late IG Stems
               <br />
               <span className="text-3xl md:text-5xl">July Giveaway</span>
             </h1>
             
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
               Get exclusive Instagram-ready stems from Rob Late's latest production vault. Perfect for content creators and music producers.
             </p>
-
-            <div className="relative max-w-md mx-auto mb-8">
-              <img 
-                src="/lovable-uploads/c3977c47-ba35-48ce-ab95-c20b978cf4f8.png" 
-                alt="Rob Late in his studio - July Giveaway" 
-                className="w-full rounded-2xl shadow-2xl border border-border/20"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
-            </div>
           </div>
 
           {/* Form or Download Section */}
           {!isSubmitted ? (
-            <Card className="max-w-md mx-auto bg-background/80 backdrop-blur-sm border-border/50">
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-center mb-6 text-foreground">
-                  Get Your Free July Stems
-                </h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Input
-                      type="text"
-                      placeholder="Your Name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                      className="bg-background/50"
-                    />
-                  </div>
+            <div>
+              <Card className="max-w-md mx-auto bg-gray-900/80 backdrop-blur-sm border-gray-700">
+                <CardContent className="p-8">
+                  <h2 className="text-2xl font-bold text-center mb-6 text-white">
+                    Get Your Free July Stems
+                  </h2>
                   
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder="Your Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="bg-background/50"
-                    />
-                  </div>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <Input
+                        type="text"
+                        placeholder="Your Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                    
+                    <div>
+                      <Input
+                        type="email"
+                        placeholder="Your Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white" 
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Getting Your Stems...' : 'Get Free July Stems'}
+                    </Button>
+                  </form>
                   
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? 'Getting Your Stems...' : 'Get Free July Stems'}
-                  </Button>
-                </form>
-                
-                <p className="text-xs text-center text-muted-foreground mt-4">
-                  Free download • No spam • Instant access
-                </p>
-              </CardContent>
-            </Card>
+                  <p className="text-xs text-center text-gray-400 mt-4">
+                    Free download • No spam • Instant access
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Hero Image - Moved below form */}
+              <div className="relative max-w-md mx-auto mt-12">
+                <img 
+                  src="/lovable-uploads/c3977c47-ba35-48ce-ab95-c20b978cf4f8.png" 
+                  alt="Rob Late in his studio - July Giveaway" 
+                  className="w-full rounded-2xl shadow-2xl border border-gray-700"
+                  style={{
+                    filter: 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))',
+                    boxShadow: '0 0 40px rgba(59, 130, 246, 0.2)'
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
           ) : (
             <div className="max-w-2xl mx-auto">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-4">
-                  <span className="text-sm font-medium text-green-600 dark:text-green-400">✨ Welcome to the July Giveaway!</span>
+                  <span className="text-sm font-medium text-green-400">✨ Welcome to the July Giveaway!</span>
                 </div>
-                <h2 className="text-3xl font-bold mb-4 text-foreground">Your Downloads Are Ready</h2>
-                <p className="text-muted-foreground">
+                <h2 className="text-3xl font-bold mb-4 text-white">Your Downloads Are Ready</h2>
+                <p className="text-gray-300">
                   Click below to download your exclusive July 2025 IG stems pack
                 </p>
               </div>
 
               <div className="grid gap-6">
                 {leadMagnets.map((leadMagnet) => (
-                  <Card key={leadMagnet.id} className="bg-background/80 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-colors">
+                  <Card key={leadMagnet.id} className="bg-gray-900/80 backdrop-blur-sm border-gray-700 hover:border-blue-500/50 transition-colors">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
-                          <h3 className="text-xl font-semibold mb-2 text-foreground">
+                          <h3 className="text-xl font-semibold mb-2 text-white">
                             {leadMagnet.title}
                           </h3>
-                          <p className="text-muted-foreground mb-3">
+                          <p className="text-gray-300 mb-3">
                             {leadMagnet.description}
                           </p>
-                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-4 text-sm text-gray-400">
                             <span>📁 {leadMagnet.file_name}</span>
                             <span>⬇️ {leadMagnet.download_count} downloads</span>
                           </div>
@@ -385,7 +379,7 @@ const JulyGiveaway = () => {
                       
                       <Button 
                         onClick={() => handleDownload(leadMagnet)}
-                        className="w-full"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                         size="lg"
                       >
                         Download July Stems Pack
@@ -397,7 +391,7 @@ const JulyGiveaway = () => {
 
               {leadMagnets.length === 0 && (
                 <div className="text-center py-12">
-                  <p className="text-muted-foreground">No downloads available at the moment.</p>
+                  <p className="text-gray-400">No downloads available at the moment.</p>
                 </div>
               )}
             </div>
@@ -406,10 +400,10 @@ const JulyGiveaway = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-background/80 backdrop-blur-sm mt-16">
+      <footer className="border-t border-gray-800 bg-black/80 backdrop-blur-sm mt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-400">
               © 2025 Rob Late • July IG Stems Giveaway
             </p>
           </div>
