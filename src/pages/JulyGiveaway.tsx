@@ -243,7 +243,7 @@ const JulyGiveaway = () => {
 
           {/* Form or Download Section */}
           {!isSubmitted ? <div>
-              <Card className="max-w-md mx-auto bg-gray-900/80 backdrop-blur-sm border-gray-700">
+              <Card className="max-w-md mx-auto bg-gray-800/90 backdrop-blur-sm border-gray-700">
                 <CardContent className="p-8">
                   <h2 className="text-2xl font-bold text-center mb-6 text-white font-zurich-condensed">
                     Get Your Free IG Stems
@@ -289,7 +289,7 @@ const JulyGiveaway = () => {
               </div>
 
               <div className="grid gap-6">
-                {leadMagnets.map(leadMagnet => <Card key={leadMagnet.id} className="bg-gray-900/80 backdrop-blur-sm border-gray-700 hover:border-blue-500/50 transition-colors">
+                {leadMagnets.map(leadMagnet => <Card key={leadMagnet.id} className="bg-gray-800/90 backdrop-blur-sm border-gray-700 hover:border-blue-500/50 transition-colors">
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
