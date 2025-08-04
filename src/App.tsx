@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import JulyGiveaway from "./pages/JulyGiveaway";
 import Redirect from "./components/Redirect";
 
 const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Redirect to="https://roblate.com" />} />
           <Route path="/drumsthatslapfreedownload" element={<Index />} />
+          <Route path="/julygiveaway" element={<JulyGiveaway />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
