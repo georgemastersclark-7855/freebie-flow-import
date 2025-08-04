@@ -82,7 +82,7 @@ const JulyGiveaway = () => {
     }
 
     setIsSubmitting(true);
-    console.log('Submitting form for July Giveaway with:', { name, email, utmParams });
+    console.log('Submitting form for IG Stems Giveaway with:', { name, email, utmParams });
 
     try {
       // Insert lead into Supabase
@@ -126,13 +126,13 @@ const JulyGiveaway = () => {
         email: leadData.email,
         utmParams,
         timestamp: new Date().toISOString(),
-        campaign: 'July Giveaway 2025'
+        campaign: 'IG Stems Giveaway 2025'
       });
 
       setIsSubmitted(true);
       toast({
         title: "Success!",
-        description: "Welcome to the July Giveaway! Your download links are now available below.",
+        description: "Welcome to the IG Stems Giveaway! Your download links are now available below.",
       });
 
     } catch (error) {
@@ -176,7 +176,7 @@ const JulyGiveaway = () => {
   };
 
   const handleDownload = async (leadMagnet: LeadMagnet) => {
-    console.log('Starting download for July Giveaway:', leadMagnet);
+    console.log('Starting download for IG Stems Giveaway:', leadMagnet);
 
     try {
       // For Dropbox links, open directly in new tab to trigger download
@@ -230,7 +230,7 @@ const JulyGiveaway = () => {
 
       toast({
         title: "Download Started!",
-        description: "Your July Giveaway download should start automatically.",
+        description: "Your IG stems download should start automatically.",
       });
 
     } catch (error) {
@@ -248,7 +248,7 @@ const JulyGiveaway = () => {
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-300">Loading July Giveaway...</p>
+          <p className="text-gray-300">Loading IG Stems Giveaway...</p>
         </div>
       </div>
     );
@@ -277,10 +277,10 @@ const JulyGiveaway = () => {
             <h1 className="text-4xl md:text-6xl font-bold font-akira mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Rob Late IG Stems
               <br />
-              <span className="text-3xl md:text-5xl">July Giveaway</span>
+              <span className="text-3xl md:text-5xl">Giveaway</span>
             </h1>
             
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+            <p className="text-base text-gray-300 max-w-2xl mx-auto mb-8 font-zurich-condensed">
               Get exclusive Instagram-ready stems from Rob Late's latest production vault. Perfect for content creators and music producers.
             </p>
           </div>
@@ -291,7 +291,7 @@ const JulyGiveaway = () => {
               <Card className="max-w-md mx-auto bg-gray-900/80 backdrop-blur-sm border-gray-700">
                 <CardContent className="p-8">
                   <h2 className="text-2xl font-bold text-center mb-6 text-white">
-                    Get Your Free July Stems
+                    Get Your Free IG Stems
                   </h2>
                   
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -322,7 +322,7 @@ const JulyGiveaway = () => {
                       className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold" 
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? 'Getting Your Stems...' : 'Get Free July Stems'}
+                      {isSubmitting ? 'Getting Your Stems...' : 'Get Free IG Stems'}
                     </Button>
                   </form>
                   
@@ -350,11 +350,11 @@ const JulyGiveaway = () => {
             <div className="max-w-2xl mx-auto">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-4">
-                  <span className="text-sm font-medium text-green-400">✨ Welcome to the July Giveaway!</span>
+                  <span className="text-sm font-medium text-green-400">✨ Welcome to the IG Stems Giveaway!</span>
                 </div>
                 <h2 className="text-3xl font-bold mb-4 text-white">Your Downloads Are Ready</h2>
                 <p className="text-gray-300">
-                  Click below to download your exclusive July 2025 IG stems pack
+                  Click below to download your exclusive IG stems pack
                 </p>
               </div>
 
@@ -382,7 +382,7 @@ const JulyGiveaway = () => {
                         className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
                         size="lg"
                       >
-                        Download July Stems Pack
+                        Download IG Stems Pack
                       </Button>
                     </CardContent>
                   </Card>
@@ -404,7 +404,7 @@ const JulyGiveaway = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="text-sm text-gray-400">
-              © 2025 Rob Late • July IG Stems Giveaway
+              © 2025 Rob Late • IG Stems Giveaway
             </p>
           </div>
         </div>
