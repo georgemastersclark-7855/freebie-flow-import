@@ -263,7 +263,11 @@ const JulyGiveaway = () => {
             <img 
               src="/lovable-uploads/14fb5cdf-e9b9-4e7c-ad49-54799f4ee049.png" 
               alt="Rob Late Audio Logo" 
-              className="h-16 w-auto"
+              className="h-16 w-auto object-contain"
+              onError={(e) => {
+                console.log('Logo failed to load, using fallback');
+                e.currentTarget.src = '/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png';
+              }}
             />
           </div>
         </div>
@@ -274,7 +278,7 @@ const JulyGiveaway = () => {
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent">
               Rob Late IG Stems
               <br />
               <span className="text-3xl md:text-5xl">July Giveaway</span>
@@ -319,7 +323,7 @@ const JulyGiveaway = () => {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white" 
+                      className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold" 
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? 'Getting Your Stems...' : 'Get Free July Stems'}
@@ -379,7 +383,7 @@ const JulyGiveaway = () => {
                       
                       <Button 
                         onClick={() => handleDownload(leadMagnet)}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
                         size="lg"
                       >
                         Download July Stems Pack
