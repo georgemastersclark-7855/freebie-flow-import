@@ -290,7 +290,7 @@ const JulyGiveaway = () => {
             <div>
               <Card className="max-w-md mx-auto bg-gray-900/80 backdrop-blur-sm border-gray-700">
                 <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold text-center mb-6 text-white">
+                  <h2 className="text-2xl font-bold text-center mb-6 text-white font-zurich-condensed">
                     Get Your Free IG Stems
                   </h2>
                   
@@ -319,7 +319,7 @@ const JulyGiveaway = () => {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold" 
+                      className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed" 
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? 'Getting Your Stems...' : 'Get Free IG Stems'}
@@ -379,7 +379,7 @@ const JulyGiveaway = () => {
                       
                       <Button 
                         onClick={() => handleDownload(leadMagnet)}
-                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold"
+                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
                         size="lg"
                       >
                         Download IG Stems Pack
