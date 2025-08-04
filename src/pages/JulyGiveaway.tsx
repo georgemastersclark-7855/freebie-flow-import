@@ -299,8 +299,8 @@ const JulyGiveaway = () => {
 
             <div className="relative max-w-md mx-auto mb-8">
               <img 
-                src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png" 
-                alt="July Giveaway Preview" 
+                src="/lovable-uploads/c3977c47-ba35-48ce-ab95-c20b978cf4f8.png" 
+                alt="Rob Late in his studio - July Giveaway" 
                 className="w-full rounded-2xl shadow-2xl border border-border/20"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
