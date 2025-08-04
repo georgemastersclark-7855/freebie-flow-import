@@ -255,19 +255,15 @@ const JulyGiveaway = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black font-zurich">
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/80 backdrop-blur-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-center">
             <img 
-              src="/lovable-uploads/14fb5cdf-e9b9-4e7c-ad49-54799f4ee049.png" 
+              src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png" 
               alt="Rob Late Audio Logo" 
               className="h-16 w-auto object-contain"
-              onError={(e) => {
-                console.log('Logo failed to load, using fallback');
-                e.currentTarget.src = '/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png';
-              }}
             />
           </div>
         </div>
@@ -278,7 +274,7 @@ const JulyGiveaway = () => {
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold font-akira mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Rob Late IG Stems
               <br />
               <span className="text-3xl md:text-5xl">July Giveaway</span>
