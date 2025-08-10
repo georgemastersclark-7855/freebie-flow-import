@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Download, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUTMTracking } from "@/hooks/useUTMTracking";
-
+import { useLocation } from "react-router-dom";
 interface LeadMagnet {
   id: string;
   title: string;
@@ -28,6 +28,8 @@ const Index = () => {
   const zapierWebhook = "https://hooks.zapier.com/hooks/catch/14759876/uotfoui/";
   const { toast } = useToast();
   const utmParams = useUTMTracking();
+  const location = useLocation();
+  const isResamplePage = location.pathname.toLowerCase() === "/howtoresamplelikeapro";
 
   // Save the webhook to localStorage on component mount
   useEffect(() => {
@@ -257,6 +259,55 @@ const Index = () => {
     }
   };
 
+  const handleExternalDownload = async (url: string, filename: string) => {
+    try {
+      if (leadId) {
+        const { error: downloadError } = await supabase
+          .from('lead_downloads')
+          .insert({
+            lead_id: leadId,
+            utm_source: utmParams.utm_source,
+            utm_medium: utmParams.utm_medium,
+            utm_campaign: utmParams.utm_campaign,
+            utm_term: utmParams.utm_term,
+            utm_content: utmParams.utm_content
+          });
+        if (downloadError) {
+          console.error('Error tracking external download:', downloadError);
+        }
+        await sendToZapier({
+          leadId,
+          name: formData.name,
+          email: formData.email,
+          downloadedFile: filename,
+          utmParams,
+          event: 'file_downloaded'
+        });
+      }
+
+      const link = document.createElement('a');
+      // Force direct download if Dropbox link has dl=0
+      const directUrl = url.replace(/([?&])dl=0/, '$1dl=1');
+      link.href = directUrl;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast({
+        title: "Download Started",
+        description: `Opening ${filename}`,
+      });
+    } catch (error) {
+      console.error('External download error:', error);
+      toast({
+        title: "Download Error",
+        description: "Failed to open download link. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden flex flex-col font-zurich">
       
@@ -307,27 +358,46 @@ const Index = () => {
               {isSubmitted ? (
                 // Download Boxes
                 <div className="space-y-4">
-                  {leadMagnets.length > 0 ? (
-                    leadMagnets.map((leadMagnet) => (
-                      <div key={leadMagnet.id} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
-                        <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
-                          <Download className="w-8 h-8 text-black" />
-                        </div>
-                        <h3 className="text-xl font-semibold mb-2 text-center font-zurich">{leadMagnet.title}</h3>
-                        <p className="text-gray-400 mb-4 text-sm text-center font-zurich">{leadMagnet.description}</p>
-                        <Button
-                          onClick={() => handleDownload(leadMagnet)}
-                          className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
-                        >
-                          <Download className="w-4 h-4 mr-2" />
-                          Download {leadMagnet.file_name}
-                        </Button>
+                  {isResamplePage ? (
+                    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
+                      <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
+                        <Download className="w-8 h-8 text-black" />
                       </div>
-                    ))
-                  ) : (
-                    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
-                      <p className="text-center text-gray-400 font-zurich">No downloads available at the moment.</p>
+                      <h3 className="text-xl font-semibold mb-2 text-center font-zurich">Resample Project - Stems (120 BPM)</h3>
+                      <p className="text-gray-400 mb-4 text-sm text-center font-zurich">Rob Late Resample Project - August 2025</p>
+                      <Button
+                        onClick={() => handleExternalDownload("https://www.dropbox.com/scl/fi/lpnb9a98ifmkm82zcsnq6/Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip?rlkey=9croq4l6m9az06wictgtkwlvz&st=f7x1y5jc&dl=0", "Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip")}
+                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip
+                      </Button>
                     </div>
+                  ) : (
+                    <> 
+                      {leadMagnets.length > 0 ? (
+                        leadMagnets.map((leadMagnet) => (
+                          <div key={leadMagnet.id} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
+                            <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
+                              <Download className="w-8 h-8 text-black" />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-2 text-center font-zurich">{leadMagnet.title}</h3>
+                            <p className="text-gray-400 mb-4 text-sm text-center font-zurich">{leadMagnet.description}</p>
+                            <Button
+                              onClick={() => handleDownload(leadMagnet)}
+                              className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
+                            >
+                              <Download className="w-4 h-4 mr-2" />
+                              Download {leadMagnet.file_name}
+                            </Button>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
+                          <p className="text-center text-gray-400 font-zurich">No downloads available at the moment.</p>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               ) : (
