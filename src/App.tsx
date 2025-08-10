@@ -21,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Redirect to="https://roblate.com" />} />
           <Route path="/drumsthatslapfreedownload" element={<Index />} />
           <Route path="/julygiveaway" element={<JulyGiveaway />} />
+          <Route path="/HowToResampleLikeaPro" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
