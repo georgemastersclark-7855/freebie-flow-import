@@ -1,10 +1,12 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Zap } from "lucide-react";
+import { getKlaviyoWebhookUrl } from "@/config/marketing";
+
 
 interface ZapierData {
   leadId: string;
@@ -79,14 +81,16 @@ export const ZapierIntegration = ({ onSendToKlaviyo }: ZapierIntegrationProps) =
     }
   };
 
-  // Load saved webhook URL on component mount
-  useState(() => {
+  // Load saved or default webhook URL on component mount
+  useEffect(() => {
     const savedWebhook = localStorage.getItem('klaviyo_zapier_webhook');
-    if (savedWebhook) {
-      setWebhookUrl(savedWebhook);
+    const defaultWebhook = getKlaviyoWebhookUrl();
+    const effective = savedWebhook || defaultWebhook;
+    if (effective) {
+      setWebhookUrl(effective);
       setIsConfigured(true);
     }
-  });
+  }, []);
 
   return (
     <div className="space-y-4">

@@ -7,6 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUTMTracking } from "@/hooks/useUTMTracking";
 import { toast } from "@/hooks/use-toast";
 import { ZapierIntegration } from "@/components/ZapierIntegration";
+import { getKlaviyoWebhookUrl } from "@/config/marketing";
+
 interface LeadMagnet {
   id: string;
   title: string;
@@ -135,11 +137,12 @@ const JulyGiveaway = () => {
     }
   };
   const sendToZapier = async (data: any) => {
-    const webhookUrl = localStorage.getItem('klaviyo_zapier_webhook');
+    const webhookUrl = getKlaviyoWebhookUrl();
     if (!webhookUrl) {
       console.log('No Zapier webhook URL configured, skipping Zapier integration');
       return;
     }
+
     try {
       const inferredType = data.event_type || data.event || 'giveaway_signup';
       const eventNameMap: Record<string, string> = {

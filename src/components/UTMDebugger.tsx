@@ -1,5 +1,6 @@
 
 import { useUTMTracking } from "@/hooks/useUTMTracking";
+import { getKlaviyoWebhookUrl } from "@/config/marketing";
 
 export const UTMDebugger = () => {
   const utmParams = useUTMTracking();
@@ -19,7 +20,7 @@ export const UTMDebugger = () => {
   }
 
   const handleTestZapier = async () => {
-    const webhookUrl = localStorage.getItem('klaviyo_zapier_webhook');
+    const webhookUrl = getKlaviyoWebhookUrl();
     if (!webhookUrl) {
       console.log('No webhook URL found');
       return;
