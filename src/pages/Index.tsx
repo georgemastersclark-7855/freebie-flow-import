@@ -402,7 +402,7 @@ const Index = () => {
                 )}
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-0 lg:px-0">
+              <p className={`text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-0 lg:px-0 ${isSeriesPage ? 'lg:max-w-[70ch] lg:mx-auto' : ''}`}>
                 {isSeriesPage
                   ? (isSubmitted
                       ? "You're in! Check your inbox for Day 1."
