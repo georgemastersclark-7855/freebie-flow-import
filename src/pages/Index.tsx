@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUTMTracking } from "@/hooks/useUTMTracking";
 import { useLocation } from "react-router-dom";
 import { ZapierIntegration } from "@/components/ZapierIntegration";
-import { getKlaviyoWebhookUrl } from "@/config/marketing";
+import { sendZapierEvent, flushZapierQueue } from "@/lib/zapier";
 
 interface LeadMagnet {
   id: string;
@@ -55,6 +55,13 @@ const Index = () => {
 
   // Debug flag to enable integration UI
   const isDebugMode = new URLSearchParams(window.location.search).get('debug') === 'true';
+
+  useEffect(() => {
+    flushZapierQueue();
+    const onOnline = () => flushZapierQueue();
+    window.addEventListener('online', onOnline);
+    return () => window.removeEventListener('online', onOnline);
+  }, []);
 
   // SEO for the series page
   useEffect(() => {
@@ -105,66 +112,6 @@ const Index = () => {
     fetchLeadMagnets();
   }, []);
 
-  const sendToZapier = async (leadData: any) => {
-    const webhookUrl = getKlaviyoWebhookUrl();
-    if (!webhookUrl) {
-      console.log('No Zapier webhook configured');
-      return;
-    }
-
-    try {
-      // Determine event type/name consistently
-      const inferredType = leadData.event_type || leadData.event || 'lead_event';
-      const eventNameMap: Record<string, string> = {
-        series_signup: 'Series Signup',
-        file_downloaded: 'Lead Magnet Downloaded',
-        lead_magnet_lead: 'Lead Magnet Lead',
-      };
-      const event_name = leadData.event_name || eventNameMap[inferredType] || 'Lead Event';
-
-      // Flatten UTM parameters for better Klaviyo integration
-      const zapierPayload = {
-        // Lead information
-        leadId: leadData.leadId || null,
-        name: leadData.name || null,
-        email: leadData.email || null,
-
-        // Event information
-        event_type: inferredType,
-        event_name,
-        series_name: leadData.series_name || null,
-        list_key: leadData.list_key || null,
-        source: 'rob_late_website',
-        timestamp: new Date().toISOString(),
-
-        // UTM parameters flattened
-        utm_source: leadData.utmParams?.utm_source || null,
-        utm_medium: leadData.utmParams?.utm_medium || null,
-        utm_campaign: leadData.utmParams?.utm_campaign || null,
-        utm_term: leadData.utmParams?.utm_term || null,
-        utm_content: leadData.utmParams?.utm_content || null,
-        referrer: leadData.utmParams?.referrer || null,
-
-        // Additional context
-        downloadedFile: leadData.downloadedFile || null,
-        page_url: window.location.href,
-        user_agent: navigator.userAgent,
-      };
-
-      console.log('Sending to Zapier/Klaviyo:', zapierPayload);
-
-      await fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        mode: 'no-cors',
-        body: JSON.stringify(zapierPayload),
-      });
-
-      console.log('Data successfully sent to Zapier/Klaviyo');
-    } catch (error) {
-      console.error('Error sending to Zapier:', error);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -215,7 +162,7 @@ const Index = () => {
       // Add a small delay to ensure UTM params are fully captured
       setTimeout(async () => {
         // Send to Zapier/Klaviyo with enhanced data structure
-        await sendToZapier({
+        await sendZapierEvent({
           leadId: leadData.id,
           name: formData.name,
           email: formData.email,
@@ -280,7 +227,7 @@ const Index = () => {
         }
 
         // Send download event to Zapier/Klaviyo
-        await sendToZapier({
+        await sendZapierEvent({
           leadId: leadId,
           name: formData.name,
           email: formData.email,
@@ -335,7 +282,7 @@ const Index = () => {
         if (downloadError) {
           console.error('Error tracking external download:', downloadError);
         }
-        await sendToZapier({
+        await sendZapierEvent({
           leadId,
           name: formData.name,
           email: formData.email,

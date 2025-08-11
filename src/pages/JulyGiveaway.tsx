@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUTMTracking } from "@/hooks/useUTMTracking";
 import { toast } from "@/hooks/use-toast";
 import { ZapierIntegration } from "@/components/ZapierIntegration";
-import { getKlaviyoWebhookUrl } from "@/config/marketing";
+import { sendZapierEvent, flushZapierQueue } from "@/lib/zapier";
 
 interface LeadMagnet {
   id: string;
@@ -33,6 +33,12 @@ const JulyGiveaway = () => {
       console.log('Loaded saved Zapier webhook URL:', savedWebhookUrl);
     }
     fetchLeadMagnets();
+  }, []);
+  useEffect(() => {
+    flushZapierQueue();
+    const onOnline = () => flushZapierQueue();
+    window.addEventListener('online', onOnline);
+    return () => window.removeEventListener('online', onOnline);
   }, []);
   const fetchLeadMagnets = async () => {
     try {
@@ -112,7 +118,7 @@ const JulyGiveaway = () => {
       console.log('Lead inserted successfully:', insertedLead);
 
       // Send to Zapier/Klaviyo
-      await sendToZapier({
+      await sendZapierEvent({
         leadId: insertedLead.id,
         name: leadData.name,
         email: leadData.email,
@@ -134,53 +140,6 @@ const JulyGiveaway = () => {
       });
     } finally {
       setIsSubmitting(false);
-    }
-  };
-  const sendToZapier = async (data: any) => {
-    const webhookUrl = getKlaviyoWebhookUrl();
-    if (!webhookUrl) {
-      console.log('No Zapier webhook URL configured, skipping Zapier integration');
-      return;
-    }
-
-    try {
-      const inferredType = data.event_type || data.event || 'giveaway_signup';
-      const eventNameMap: Record<string, string> = {
-        giveaway_signup: 'Giveaway Signup',
-        file_downloaded: 'Lead Magnet Downloaded',
-      };
-      const event_name = data.event_name || eventNameMap[inferredType] || 'Lead Event';
-
-      const payload = {
-        leadId: data.leadId || null,
-        name: data.name || null,
-        email: data.email || null,
-        event_type: inferredType,
-        event_name,
-        source: 'rob_late_website',
-        campaign: data.campaign || null,
-        timestamp: new Date().toISOString(),
-        utm_source: data.utmParams?.utm_source || null,
-        utm_medium: data.utmParams?.utm_medium || null,
-        utm_campaign: data.utmParams?.utm_campaign || null,
-        utm_term: data.utmParams?.utm_term || null,
-        utm_content: data.utmParams?.utm_content || null,
-        referrer: data.utmParams?.referrer || null,
-        page_url: window.location.href,
-        user_agent: navigator.userAgent,
-      };
-
-      console.log('Sending data to Zapier:', payload);
-      await fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        mode: 'no-cors',
-        body: JSON.stringify(payload),
-      });
-      console.log('Data sent to Zapier successfully');
-    } catch (error) {
-      console.error('Error sending to Zapier:', error);
-      // Don't show error to user as this is optional functionality
     }
   };
   const handleDownload = async (leadMagnet: LeadMagnet) => {

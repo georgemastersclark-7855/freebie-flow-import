@@ -1,6 +1,7 @@
 
 import { useUTMTracking } from "@/hooks/useUTMTracking";
 import { getKlaviyoWebhookUrl } from "@/config/marketing";
+import { sendZapierEvent } from "@/lib/zapier";
 
 export const UTMDebugger = () => {
   const utmParams = useUTMTracking();
@@ -19,7 +20,7 @@ export const UTMDebugger = () => {
     return null;
   }
 
-  const handleTestZapier = async () => {
+  const handleTestZapier = async (method?: 'fetch' | 'beacon' | 'get') => {
     const webhookUrl = getKlaviyoWebhookUrl();
     if (!webhookUrl) {
       console.log('No webhook URL found');
@@ -35,19 +36,13 @@ export const UTMDebugger = () => {
       utm_term: utmParams.utm_term,
       utm_content: utmParams.utm_content,
       referrer: utmParams.referrer,
-      test_data: true
-    };
+      test_data: true,
+      from_debugger: true
+    } as const;
 
     try {
-      await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "no-cors",
-        body: JSON.stringify(testPayload),
-      });
-      console.log('Test payload sent to Zapier:', testPayload);
+      await sendZapierEvent(testPayload as any, method as any);
+      console.log('Test payload sent to Zapier:', testPayload, 'method:', method || 'auto');
     } catch (error) {
       console.error('Error sending test data:', error);
     }
@@ -71,17 +66,28 @@ export const UTMDebugger = () => {
           Clear UTM Data
         </button>
         <button 
-          onClick={handleTestZapier}
+          onClick={() => handleTestZapier()}
           className="w-full text-xs bg-blue-600 px-2 py-1 rounded hover:bg-blue-700"
         >
-          Test Zapier Webhook
+          Test Zapier (auto)
         </button>
+        <div className="grid grid-cols-3 gap-2">
+          <button onClick={() => handleTestZapier('fetch')} className="text-xs bg-gray-700 px-2 py-1 rounded hover:bg-gray-600">POST</button>
+          <button onClick={() => handleTestZapier('beacon')} className="text-xs bg-gray-700 px-2 py-1 rounded hover:bg-gray-600">Beacon</button>
+          <button onClick={() => handleTestZapier('get')} className="text-xs bg-gray-700 px-2 py-1 rounded hover:bg-gray-600">GET</button>
+        </div>
       </div>
       <div className="mt-2 text-xs text-gray-400">
         Timestamp: {localStorage.getItem('utm_params_timestamp')}
       </div>
       <div className="mt-1 text-xs text-yellow-400">
         {isDevelopment ? 'DEV MODE' : 'DEBUG MODE'}
+      </div>
+      <div className="mt-1 text-[10px] text-gray-400 break-all">
+        Webhook: {getKlaviyoWebhookUrl() || 'not set'}
+      </div>
+      <div className="mt-1 text-[10px] text-gray-400">
+        Last sent: {(() => { try { const o = JSON.parse(localStorage.getItem('zapier_last_sent')||'{}'); return o.method ? `${o.method} at ${o.timestamp}` : 'n/a'; } catch { return 'n/a'; } })()}
       </div>
     </div>
   );
