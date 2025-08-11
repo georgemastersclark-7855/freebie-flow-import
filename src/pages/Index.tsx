@@ -373,7 +373,7 @@ const Index = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="container mx-auto px-4 md:px-4 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
+        <div className="container mx-auto px-4 md:px-4 flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 min-h-[80vh]">
           {/* Left Column - Content */}
           <div className={isSeriesPage ? "w-full lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-1 lg:px-0" : "lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-1 lg:px-0"}>
               {isSeriesPage && !isSubmitted && (
@@ -416,7 +416,7 @@ const Index = () => {
               </p>
 
             {/* Form or Download Box */}
-            <div className={`max-w-md ${isSeriesPage ? 'mx-auto' : 'mx-auto lg:mx-0'} animate-fade-in px-1 lg:px-0`}>
+            <div className="max-w-md mx-auto lg:mx-0 animate-fade-in px-1 lg:px-0">
               {isSubmitted ? (
                 isSeriesPage ? (
                   <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 transition-all duration-300 text-center">
@@ -510,8 +510,29 @@ const Index = () => {
               )}
             </div>
 
+            <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-0 lg:px-0">
+              {isSubmitted 
+                ? "All files are ready for instant download. Enjoy your free resources!"
+                : "No spam. Unsubscribe at any time."
+              }
+            </p>
+
             {isSeriesPage && (
-              <div className="mt-8 w-full lg:hidden">
+              <div className="mt-4 w-full lg:hidden">
+                <img
+                  src="/lovable-uploads/616b1376-9a21-4f57-8bcd-a84464c1a260.png"
+                  alt="Music studio session – 30 Days Of Producer Sauce"
+                  className="w-full max-w-sm sm:max-w-md md:max-w-md mx-auto rounded-2xl border border-gray-700/50 shadow-2xl"
+                  loading="lazy"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Right Column - Hero Image */}
+          {isSeriesPage && (
+            <div className="hidden lg:flex lg:w-1/2 justify-center lg:justify-end">
+              <div className="relative mx-auto max-w-md xl:max-w-lg">
                 <img
                   src="/lovable-uploads/616b1376-9a21-4f57-8bcd-a84464c1a260.png"
                   alt="Music studio session – 30 Days Of Producer Sauce"
@@ -519,20 +540,11 @@ const Index = () => {
                   loading="lazy"
                 />
               </div>
-            )}
-
-            <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-0 lg:px-0">
-              {isSubmitted 
-                ? "All files are ready for instant download. Enjoy your free resources!"
-                : "No spam. Unsubscribe at any time."
-              }
-            </p>
-          </div>
-
-          {/* Right Column - Hero Image */}
+            </div>
+          )}
           {!isSeriesPage && (
-            <div className="lg:w-1/2 relative flex justify-center lg:justify-end">
-              <div className="relative mx-auto max-w-lg lg:max-w-md xl:max-w-lg">
+              <div className="lg:w-1/2 relative flex justify-center lg:justify-end">
+                <div className="relative mx-auto max-w-lg lg:max-w-md xl:max-w-lg">
                 {/* Gradient overlay for visual appeal */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 to-[#B8CC00]/20 rounded-2xl blur-xl"></div>
 
