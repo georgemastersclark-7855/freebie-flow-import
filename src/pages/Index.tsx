@@ -29,13 +29,59 @@ const Index = () => {
   const { toast } = useToast();
   const utmParams = useUTMTracking();
   const location = useLocation();
-  const isResamplePage = ["/howtoresamplelikeapro", "/30daysofproducersauce"].includes(location.pathname.toLowerCase());
+  const path = location.pathname.toLowerCase();
+  const isSeriesPage = path === "/30daysofproducersauce";
+  const isResamplePage = path === "/howtoresamplelikeapro";
+
+  // Default UTMs for the Bitly link if none are present (series page only)
+  const defaultSeriesUTM = {
+    utm_source: "Youtube",
+    utm_medium: "Link In Description",
+    utm_campaign: "How To Resample Like A Pro",
+    utm_content: "How To Resample Like A Pro",
+  };
+
+  const effectiveUTM = isSeriesPage
+    ? {
+        utm_source: utmParams.utm_source || defaultSeriesUTM.utm_source,
+        utm_medium: utmParams.utm_medium || defaultSeriesUTM.utm_medium,
+        utm_campaign: utmParams.utm_campaign || defaultSeriesUTM.utm_campaign,
+        utm_term: utmParams.utm_term || undefined,
+        utm_content: utmParams.utm_content || defaultSeriesUTM.utm_content,
+        referrer: utmParams.referrer,
+      }
+    : utmParams;
 
   // Save the webhook to localStorage on component mount
   useEffect(() => {
     localStorage.setItem('klaviyo_zapier_webhook', zapierWebhook);
   }, []);
 
+  // SEO for the series page
+  useEffect(() => {
+    if (!isSeriesPage) return;
+    document.title = "30 Days Of Producer Sauce | free 30-Day Email Series";
+
+    // Meta description
+    const description =
+      "Join a free 30-day email series with daily lessons to improve your production workflows and sound quality.";
+    let metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!metaDesc) {
+      metaDesc = document.createElement("meta");
+      metaDesc.name = "description";
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = description;
+
+    // Canonical
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = window.location.href;
+  }, [isSeriesPage]);
   // Fetch lead magnets from Supabase
   useEffect(() => {
     const fetchLeadMagnets = async () => {
@@ -75,7 +121,9 @@ const Index = () => {
         email: leadData.email,
         
         // Event information
-        event_type: "lead_magnet_download",
+        event_type: leadData.event_type || "lead_magnet_download",
+        series_name: leadData.series_name || null,
+        list_key: leadData.list_key || null,
         event: leadData.event,
         source: "rob_late_website",
         timestamp: new Date().toISOString(),
@@ -132,12 +180,12 @@ const Index = () => {
         .insert({
           name: formData.name,
           email: formData.email,
-          utm_source: utmParams.utm_source,
-          utm_medium: utmParams.utm_medium,
-          utm_campaign: utmParams.utm_campaign,
-          utm_term: utmParams.utm_term,
-          utm_content: utmParams.utm_content,
-          referrer: utmParams.referrer,
+          utm_source: effectiveUTM.utm_source,
+          utm_medium: effectiveUTM.utm_medium,
+          utm_campaign: effectiveUTM.utm_campaign,
+          utm_term: effectiveUTM.utm_term,
+          utm_content: effectiveUTM.utm_content,
+          referrer: effectiveUTM.referrer,
           ip_address: null, // Could be captured server-side
           user_agent: navigator.userAgent
         })
@@ -164,8 +212,11 @@ const Index = () => {
           leadId: leadData.id,
           name: formData.name,
           email: formData.email,
-          utmParams: utmParams,
-          event: 'lead_captured'
+          utmParams: effectiveUTM,
+          event: 'lead_captured',
+          event_type: isSeriesPage ? 'series_signup' : 'lead_magnet_lead',
+          series_name: isSeriesPage ? '30_days_of_producer_sauce' : undefined,
+          list_key: isSeriesPage ? '30_days_of_producer_sauce' : undefined,
         });
       }, 500);
 
@@ -322,84 +373,102 @@ const Index = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="container mx-auto px-4 md:px-4 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
+        <div className={`container mx-auto px-4 md:px-4 flex flex-col ${isSeriesPage ? 'items-center' : 'lg:flex-row items-center'} gap-8 lg:gap-12 min-h-[80vh]`}>
           {/* Left Column - Content */}
-          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-1 lg:px-0">
-            <h1
-              className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-akira mb-6 lg:mb-4 leading-none animate-fade-in"
-              style={{ fontWeight: 700 }}
-            >
-              {isSubmitted ? (
-                <>
-                  Your Download
-                  <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
-                    IS READY
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span className="block">Get Your FREE</span>
-                  <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent block">
-                    DOWNLOADS
-                  </span>
-                </>
+          <div className={isSeriesPage ? "w-full mb-12 lg:mb-0 text-center px-1 lg:px-0" : "lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-1 lg:px-0"}>
+              {isSeriesPage && !isSubmitted && (
+                <div className="text-sm uppercase tracking-widest text-gray-400 mb-2">free 30-Day Email Series</div>
               )}
-            </h1>
+              <h1
+                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-akira mb-6 lg:mb-4 leading-none animate-fade-in"
+                style={{ fontWeight: 700 }}
+              >
+                {isSeriesPage ? (
+                  <>30 Days Of Producer Sauce</>
+                ) : isSubmitted ? (
+                  <>
+                    Your Download
+                    <span className="bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] bg-clip-text text-transparent block">
+                      IS READY
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="block">Get Your FREE</span>
+                    <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent block">
+                      DOWNLOADS
+                    </span>
+                  </>
+                )}
+              </h1>
 
-            <p className="text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-0 lg:px-0">
-              {isSubmitted 
-                ? "Get instant access to your free resource below."
-                : "Enter your name and email below and I'll fire the download link straight to your inbox."
-              }
-            </p>
+              <p className="text-lg md:text-xl text-gray-300 mb-10 lg:mb-8 animate-fade-in font-zurich-condensed px-0 lg:px-0">
+                {isSeriesPage
+                  ? (isSubmitted
+                      ? "You're in! Check your inbox for Day 1."
+                      : "Sign up below and I'll send you an email every day for the next 30 days with lessons to help you improve your production workflows and sound quality"
+                    )
+                  : (isSubmitted 
+                      ? "Get instant access to your free resource below."
+                      : "Enter your name and email below and I'll fire the download link straight to your inbox."
+                    )
+                }
+              </p>
 
             {/* Form or Download Box */}
             <div className="max-w-md mx-auto lg:mx-0 animate-fade-in px-1 lg:px-0">
               {isSubmitted ? (
-                // Download Boxes
-                <div className="space-y-4">
-                  {isResamplePage ? (
-                    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
-                      <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
-                        <Download className="w-8 h-8 text-black" />
-                      </div>
-                      <h3 className="text-xl font-semibold mb-2 text-center font-zurich">Resample Project - Stems (120 BPM)</h3>
-                      <p className="text-gray-400 mb-4 text-sm text-center font-zurich">Rob Late Resample Project - August 2025</p>
-                      <Button
-                        onClick={() => handleExternalDownload("https://www.dropbox.com/scl/fi/lpnb9a98ifmkm82zcsnq6/Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip?rlkey=9croq4l6m9az06wictgtkwlvz&st=f7x1y5jc&dl=0", "Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip")}
-                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
-                      >
-                        <Download className="w-4 h-4 mr-2" />
-                        Download Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip
-                      </Button>
-                    </div>
-                  ) : (
-                    <> 
-                      {leadMagnets.length > 0 ? (
-                        leadMagnets.map((leadMagnet) => (
-                          <div key={leadMagnet.id} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
-                            <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
-                              <Download className="w-8 h-8 text-black" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-2 text-center font-zurich">{leadMagnet.title}</h3>
-                            <p className="text-gray-400 mb-4 text-sm text-center font-zurich">{leadMagnet.description}</p>
-                            <Button
-                              onClick={() => handleDownload(leadMagnet)}
-                              className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
-                            >
-                              <Download className="w-4 h-4 mr-2" />
-                              Download {leadMagnet.file_name}
-                            </Button>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
-                          <p className="text-center text-gray-400 font-zurich">No downloads available at the moment.</p>
+                isSeriesPage ? (
+                  <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 transition-all duration-300 text-center">
+                    <h3 className="text-xl font-semibold mb-2 font-zurich">You’re in!</h3>
+                    <p className="text-gray-400 font-zurich">Check your inbox for Day 1 and add me to your contacts to avoid spam.</p>
+                  </div>
+                ) : (
+                  // Download Boxes
+                  <div className="space-y-4">
+                    {isResamplePage ? (
+                      <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
+                        <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
+                          <Download className="w-8 h-8 text-black" />
                         </div>
-                      )}
-                    </>
-                  )}
-                </div>
+                        <h3 className="text-xl font-semibold mb-2 text-center font-zurich">Resample Project - Stems (120 BPM)</h3>
+                        <p className="text-gray-400 mb-4 text-sm text-center font-zurich">Rob Late Resample Project - August 2025</p>
+                        <Button
+                          onClick={() => handleExternalDownload("https://www.dropbox.com/scl/fi/lpnb9a98ifmkm82zcsnq6/Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip?rlkey=9croq4l6m9az06wictgtkwlvz&st=f7x1y5jc&dl=0", "Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip")}
+                          className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
+                        >
+                          <Download className="w-4 h-4 mr-2" />
+                          Download Rob-Late-Resample-Project-Aug-2025-Stems-120BPM.zip
+                        </Button>
+                      </div>
+                    ) : (
+                      <> 
+                        {leadMagnets.length > 0 ? (
+                          leadMagnets.map((leadMagnet) => (
+                            <div key={leadMagnet.id} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
+                              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] rounded-lg mx-auto mb-4">
+                                <Download className="w-8 h-8 text-black" />
+                              </div>
+                              <h3 className="text-xl font-semibold mb-2 text-center font-zurich">{leadMagnet.title}</h3>
+                              <p className="text-gray-400 mb-4 text-sm text-center font-zurich">{leadMagnet.description}</p>
+                              <Button
+                                onClick={() => handleDownload(leadMagnet)}
+                                className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
+                              >
+                                <Download className="w-4 h-4 mr-2" />
+                                Download {leadMagnet.file_name}
+                              </Button>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
+                            <p className="text-center text-gray-400 font-zurich">No downloads available at the moment.</p>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )
               ) : (
                 // Form
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -435,7 +504,7 @@ const Index = () => {
                       boxShadow: '0 0 20px rgba(222, 255, 0, 0.4), 0 0 40px rgba(222, 255, 0, 0.2), 0 0 60px rgba(222, 255, 0, 0.1)'
                     }}
                   >
-                    {isLoading ? "Processing..." : "Get My Free Downloads"}
+                    {isLoading ? "Processing..." : (isSeriesPage ? "Sign Me Up!" : "Get My Free Downloads")}
                   </Button>
                 </form>
               )}
@@ -450,36 +519,38 @@ const Index = () => {
           </div>
 
           {/* Right Column - Hero Image */}
-          <div className="lg:w-1/2 relative flex justify-center lg:justify-end">
-            <div className="relative mx-auto max-w-lg lg:max-w-md xl:max-w-lg">
-              {/* Gradient overlay for visual appeal */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 to-[#B8CC00]/20 rounded-2xl blur-xl"></div>
+          {!isSeriesPage && (
+            <div className="lg:w-1/2 relative flex justify-center lg:justify-end">
+              <div className="relative mx-auto max-w-lg lg:max-w-md xl:max-w-lg">
+                {/* Gradient overlay for visual appeal */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 to-[#B8CC00]/20 rounded-2xl blur-xl"></div>
 
-              {/* Main hero image container */}
-              <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl hover:scale-105 transition-transform duration-500 inline-block overflow-hidden">
-                <img
-                  src={isResamplePage ? "/lovable-uploads/545ec22c-6d73-449b-b6aa-a59885df6c82.png" : "/lovable-uploads/3f8daf99-6f60-45d7-b57e-e340c42d6a8e.png"}
-                  alt={isResamplePage ? "Resampling tutorial thumbnail by Rob Late" : "Pro Drums Music Production"}
-                  className="rounded-2xl shadow-2xl"
-                  loading="lazy"
-                />
-              </div>
+                {/* Main hero image container */}
+                <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl hover:scale-105 transition-transform duration-500 inline-block overflow-hidden">
+                  <img
+                    src={isResamplePage ? "/lovable-uploads/545ec22c-6d73-449b-b6aa-a59885df6c82.png" : "/lovable-uploads/3f8daf99-6f60-45d7-b57e-e340c42d6a8e.png"}
+                    alt={isResamplePage ? "Resampling tutorial thumbnail by Rob Late" : "Pro Drums Music Production"}
+                    className="rounded-2xl shadow-2xl"
+                    loading="lazy"
+                  />
+                </div>
 
-              {/* Rob's Signature Overlay - Adjusted position */}
-              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
-                <img
-                  src="/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png"
-                  alt="Rob's Signature"
-                  className="h-20 w-auto opacity-95 drop-shadow-lg"
-                />
-              </div>
+                {/* Rob's Signature Overlay - Adjusted position */}
+                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
+                  <img
+                    src="/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png"
+                    alt="Rob's Signature"
+                    className="h-20 w-auto opacity-95 drop-shadow-lg"
+                  />
+                </div>
 
-              {/* Floating element for visual interest - bottom left only, smaller on mobile */}
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center">
-                <Download className="w-4 h-4 md:w-6 md:h-6 text-black" />
+                {/* Floating element for visual interest - bottom left only, smaller on mobile */}
+                <div className="absolute -bottom-4 -left-4 w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center">
+                  <Download className="w-4 h-4 md:w-6 md:h-6 text-black" />
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
