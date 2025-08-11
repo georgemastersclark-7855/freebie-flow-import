@@ -3,7 +3,7 @@ import { getKlaviyoWebhookUrl } from "@/config/marketing";
 import { supabase } from "@/integrations/supabase/client";
 
 export type Transport = "edge" | "fetch" | "beacon" | "get";
-
+export type SendResult = { ok: boolean; method?: Transport; error?: string };
 // Keys for localStorage
 const QUEUE_KEY = "zapier_queue";
 const LAST_SENT_KEY = "zapier_last_sent";
@@ -120,11 +120,14 @@ function tryImgGet(url: string, payload: any): Promise<boolean> {
   });
 }
 
-export async function sendZapierEvent(payload: Record<string, any>, preferred?: Transport) {
+export async function sendZapierEvent(
+  payload: Record<string, any>,
+  preferred?: Transport
+): Promise<SendResult> {
   const url = getKlaviyoWebhookUrl();
   if (!url) {
     console.log("Zapier: No webhook URL configured");
-    return;
+    return { ok: false, error: 'no_webhook' };
   }
 
   // Enrich payload with metadata
@@ -143,16 +146,16 @@ export async function sendZapierEvent(payload: Record<string, any>, preferred?: 
   for (const method of order) {
     if (method === "edge") {
       const ok = await tryEdge(url, enriched);
-      if (ok) return;
+      if (ok) return { ok: true, method };
     } else if (method === "fetch") {
       const ok = await tryFetch(url, enriched);
-      if (ok) return;
+      if (ok) return { ok: true, method };
     } else if (method === "beacon") {
       const ok = tryBeacon(url, enriched);
-      if (ok) return;
+      if (ok) return { ok: true, method };
     } else if (method === "get") {
       const ok = await tryImgGet(url, enriched);
-      if (ok) return;
+      if (ok) return { ok: true, method };
     }
   }
 
@@ -161,6 +164,7 @@ export async function sendZapierEvent(payload: Record<string, any>, preferred?: 
   q.push(enriched);
   setQueue(q);
   console.warn("Zapier: queued event for later retry");
+  return { ok: false, error: 'queued' };
 }
 
 export async function flushZapierQueue() {

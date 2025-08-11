@@ -38,27 +38,37 @@ serve(async (req: Request) => {
 
     let ok = false;
     let err: any = null;
+    let status = 0;
+    let statusText = '';
+    let bodyText = '';
     try {
       const resp = await fetch(webhook, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(enriched),
       });
-      // Zapier webhooks accept POST without CORS; we don't rely on status here.
-      ok = true;
+      status = resp.status;
+      statusText = resp.statusText;
+      try {
+        bodyText = await resp.text();
+      } catch {}
+      ok = resp.ok;
     } catch (e) {
       err = String(e);
     }
 
     if (!ok) {
-      return new Response(JSON.stringify({ ok: false, error: err || 'relay_failed' }), {
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+      return new Response(
+        JSON.stringify({ ok: false, error: err || 'relay_failed', status, statusText, body: bodyText?.slice(0, 500) }),
+        {
+          status: 502,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        }
+      );
     }
 
     return new Response(
-      JSON.stringify({ ok: true, method: 'edge', ts: new Date().toISOString() }),
+      JSON.stringify({ ok: true, method: 'edge', ts: new Date().toISOString(), forwarded_status: status }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (e) {
