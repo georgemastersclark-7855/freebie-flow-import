@@ -11,15 +11,9 @@ export const UTMDebugger = () => {
   const [lastResult, setLastResult] = useState<{ ok: boolean; method?: string; error?: string } | null>(null);
 
   // Only show in development or when debug=true is in URL
-  const isDevelopment = import.meta.env.DEV;
   const urlParams = new URLSearchParams(window.location.search);
   const isDebugMode = urlParams.get('debug') === 'true';
-  if (!isDevelopment && !isDebugMode) {
-    return null;
-  }
-
-  // Only show when there are UTM params or in debug mode
-  if (Object.keys(utmParams).length === 0 && !isDebugMode) {
+  if (!isDebugMode) {
     return null;
   }
 
@@ -105,9 +99,7 @@ export const UTMDebugger = () => {
       <div className="mt-2 text-xs text-gray-400">
         Timestamp: {localStorage.getItem('utm_params_timestamp')}
       </div>
-      <div className="mt-1 text-xs text-yellow-400">
-        {isDevelopment ? 'DEV MODE' : 'DEBUG MODE'}
-      </div>
+      <div className="mt-1 text-xs text-yellow-400">DEBUG MODE</div>
       <div className="mt-1 text-[10px] text-gray-400 break-all">
         Effective Webhook: {getKlaviyoWebhookUrl() || 'not set'}
       </div>
