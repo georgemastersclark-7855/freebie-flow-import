@@ -416,7 +416,7 @@ const Index = () => {
               </p>
 
             {/* Form or Download Box */}
-            <div className="max-w-md mx-auto lg:mx-0 animate-fade-in px-1 lg:px-0">
+            <div className={`max-w-md ${isSeriesPage ? 'mx-auto' : 'mx-auto lg:mx-0'} animate-fade-in px-1 lg:px-0`}>
               {isSubmitted ? (
                 isSeriesPage ? (
                   <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 transition-all duration-300 text-center">
