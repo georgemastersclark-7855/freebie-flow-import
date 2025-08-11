@@ -29,7 +29,7 @@ const Index = () => {
   const { toast } = useToast();
   const utmParams = useUTMTracking();
   const location = useLocation();
-  const isResamplePage = location.pathname.toLowerCase() === "/howtoresamplelikeapro";
+  const isResamplePage = ["/howtoresamplelikeapro", "/30daysofproducersauce"].includes(location.pathname.toLowerCase());
 
   // Save the webhook to localStorage on component mount
   useEffect(() => {
