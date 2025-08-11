@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import JulyGiveaway from "./pages/JulyGiveaway";
 import Redirect from "./components/Redirect";
+import { UTMDebugger } from "@/components/UTMDebugger";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <UTMDebugger />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Redirect to="https://roblate.com" />} />

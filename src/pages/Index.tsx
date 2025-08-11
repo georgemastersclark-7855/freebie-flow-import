@@ -6,6 +6,7 @@ import { Download, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUTMTracking } from "@/hooks/useUTMTracking";
 import { useLocation } from "react-router-dom";
+import { ZapierIntegration } from "@/components/ZapierIntegration";
 interface LeadMagnet {
   id: string;
   title: string;
@@ -24,8 +25,6 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [leadMagnets, setLeadMagnets] = useState<LeadMagnet[]>([]);
   const [leadId, setLeadId] = useState<string | null>(null);
-  // Set the Zapier webhook URL directly
-  const zapierWebhook = "https://hooks.zapier.com/hooks/catch/14759876/uotfoui/";
   const { toast } = useToast();
   const utmParams = useUTMTracking();
   const location = useLocation();
@@ -52,10 +51,8 @@ const Index = () => {
       }
     : utmParams;
 
-  // Save the webhook to localStorage on component mount
-  useEffect(() => {
-    localStorage.setItem('klaviyo_zapier_webhook', zapierWebhook);
-  }, []);
+  // Debug flag to enable integration UI
+  const isDebugMode = new URLSearchParams(window.location.search).get('debug') === 'true';
 
   // SEO for the series page
   useEffect(() => {
@@ -107,49 +104,57 @@ const Index = () => {
   }, []);
 
   const sendToZapier = async (leadData: any) => {
-    if (!zapierWebhook) {
+    const webhookUrl = localStorage.getItem('klaviyo_zapier_webhook');
+    if (!webhookUrl) {
       console.log('No Zapier webhook configured');
       return;
     }
 
     try {
+      // Determine event type/name consistently
+      const inferredType = leadData.event_type || leadData.event || 'lead_event';
+      const eventNameMap: Record<string, string> = {
+        series_signup: 'Series Signup',
+        file_downloaded: 'Lead Magnet Downloaded',
+        lead_magnet_lead: 'Lead Magnet Lead',
+      };
+      const event_name = leadData.event_name || eventNameMap[inferredType] || 'Lead Event';
+
       // Flatten UTM parameters for better Klaviyo integration
       const zapierPayload = {
         // Lead information
-        leadId: leadData.leadId,
-        name: leadData.name,
-        email: leadData.email,
-        
+        leadId: leadData.leadId || null,
+        name: leadData.name || null,
+        email: leadData.email || null,
+
         // Event information
-        event_type: leadData.event_type || "lead_magnet_download",
+        event_type: inferredType,
+        event_name,
         series_name: leadData.series_name || null,
         list_key: leadData.list_key || null,
-        event: leadData.event,
-        source: "rob_late_website",
+        source: 'rob_late_website',
         timestamp: new Date().toISOString(),
-        
-        // UTM parameters flattened (this is what Klaviyo expects)
+
+        // UTM parameters flattened
         utm_source: leadData.utmParams?.utm_source || null,
         utm_medium: leadData.utmParams?.utm_medium || null,
         utm_campaign: leadData.utmParams?.utm_campaign || null,
         utm_term: leadData.utmParams?.utm_term || null,
         utm_content: leadData.utmParams?.utm_content || null,
         referrer: leadData.utmParams?.referrer || null,
-        
+
         // Additional context
         downloadedFile: leadData.downloadedFile || null,
         page_url: window.location.href,
-        user_agent: navigator.userAgent
+        user_agent: navigator.userAgent,
       };
 
       console.log('Sending to Zapier/Klaviyo:', zapierPayload);
 
-      await fetch(zapierWebhook, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "no-cors",
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
         body: JSON.stringify(zapierPayload),
       });
 
@@ -217,6 +222,7 @@ const Index = () => {
           event_type: isSeriesPage ? 'series_signup' : 'lead_magnet_lead',
           series_name: isSeriesPage ? '30_days_of_producer_sauce' : undefined,
           list_key: isSeriesPage ? '30_days_of_producer_sauce' : undefined,
+          event_name: isSeriesPage ? 'Series Signup' : 'Lead Magnet Lead',
         });
       }, 500);
 
@@ -278,7 +284,8 @@ const Index = () => {
           email: formData.email,
           downloadedFile: leadMagnet.file_name,
           utmParams: utmParams,
-          event: 'file_downloaded'
+          event: 'file_downloaded',
+          event_name: 'Lead Magnet Downloaded',
         });
       }
 
@@ -332,7 +339,8 @@ const Index = () => {
           email: formData.email,
           downloadedFile: filename,
           utmParams,
-          event: 'file_downloaded'
+          event: 'file_downloaded',
+          event_name: 'Lead Magnet Downloaded',
         });
       }
 
@@ -588,6 +596,12 @@ const Index = () => {
         )}
 
       </div>
+
+      {isDebugMode && (
+        <div className="container mx-auto px-4 md:px-4 my-4">
+          <ZapierIntegration onSendToKlaviyo={async () => {}} />
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-gray-900/50 border-t border-gray-700 py-6">
