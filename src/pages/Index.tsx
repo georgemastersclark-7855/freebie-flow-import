@@ -458,9 +458,10 @@ const Index = () => {
               {/* Main hero image container */}
               <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl hover:scale-105 transition-transform duration-500 inline-block overflow-hidden">
                 <img
-                  src="/lovable-uploads/3f8daf99-6f60-45d7-b57e-e340c42d6a8e.png"
-                  alt="Pro Drums Music Production"
+                  src={isResamplePage ? "/lovable-uploads/545ec22c-6d73-449b-b6aa-a59885df6c82.png" : "/lovable-uploads/3f8daf99-6f60-45d7-b57e-e340c42d6a8e.png"}
+                  alt={isResamplePage ? "Resampling tutorial thumbnail by Rob Late" : "Pro Drums Music Production"}
                   className="rounded-2xl shadow-2xl"
+                  loading="lazy"
                 />
               </div>
 
