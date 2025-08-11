@@ -373,7 +373,7 @@ const Index = () => {
         </header>
 
         {/* Hero Section */}
-        <div className="container mx-auto px-4 md:px-4 flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 min-h-[80vh]">
+        <div className="container mx-auto px-4 md:px-4 flex flex-col lg:flex-row items-start lg:items-stretch gap-8 lg:gap-12 min-h-[80vh]">
           {/* Left Column - Content */}
           <div className={isSeriesPage ? "w-full lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-1 lg:px-0" : "lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left px-1 lg:px-0"}>
               {isSeriesPage && !isSubmitted && (
@@ -510,7 +510,7 @@ const Index = () => {
               )}
             </div>
 
-            <p className="text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-0 lg:px-0">
+            <p className={`text-sm text-gray-400 mt-6 lg:mt-4 animate-fade-in font-zurich-condensed px-0 lg:px-0 ${isSeriesPage ? 'lg:hidden' : ''}`}>
               {isSubmitted 
                 ? "All files are ready for instant download. Enjoy your free resources!"
                 : "No spam. Unsubscribe at any time."
@@ -531,12 +531,12 @@ const Index = () => {
 
           {/* Right Column - Hero Image */}
           {isSeriesPage && (
-            <div className="hidden lg:flex lg:w-1/2 justify-center lg:justify-end">
-              <div className="relative mx-auto max-w-md xl:max-w-lg">
+            <div className="hidden lg:flex lg:w-1/2 lg:self-stretch justify-center lg:justify-end">
+              <div className="relative mx-auto h-full w-full max-w-md xl:max-w-lg">
                 <img
                   src="/lovable-uploads/616b1376-9a21-4f57-8bcd-a84464c1a260.png"
                   alt="Music studio session – 30 Days Of Producer Sauce"
-                  className="w-full rounded-2xl border border-gray-700/50 shadow-2xl"
+                  className="h-full w-full object-cover rounded-2xl border border-gray-700/50 shadow-2xl"
                   loading="lazy"
                 />
               </div>
@@ -575,6 +575,18 @@ const Index = () => {
             </div>
           )}
         </div>
+
+        {isSeriesPage && (
+          <div className="container mx-auto px-4 md:px-4 hidden lg:block mt-2">
+            <p className="text-sm text-gray-400 font-zurich-condensed">
+              {isSubmitted 
+                ? "All files are ready for instant download. Enjoy your free resources!"
+                : "No spam. Unsubscribe at any time."
+              }
+            </p>
+          </div>
+        )}
+
       </div>
 
       {/* Footer */}
