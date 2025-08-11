@@ -1,7 +1,8 @@
 // Robust Zapier/Klaviyo webhook sender with fallbacks
 import { getKlaviyoWebhookUrl } from "@/config/marketing";
+import { supabase } from "@/integrations/supabase/client";
 
-export type Transport = "fetch" | "beacon" | "get";
+export type Transport = "edge" | "fetch" | "beacon" | "get";
 
 // Keys for localStorage
 const QUEUE_KEY = "zapier_queue";
@@ -39,6 +40,21 @@ function toQuery(obj: Record<string, any>): string {
     params.append(k, val);
   });
   return params.toString();
+}
+
+async function tryEdge(url: string, payload: any) {
+  try {
+    const { data, error } = await supabase.functions.invoke('zapier-relay', {
+      body: { webhook: url, payload },
+    });
+    if (error) throw error;
+    saveLastSent("edge");
+    console.log("Zapier: sent via Supabase Edge Function", data);
+    return true;
+  } catch (e) {
+    console.warn("Zapier: edge function failed", e);
+    return false;
+  }
 }
 
 async function tryFetch(url: string, payload: any) {
@@ -121,11 +137,14 @@ export async function sendZapierEvent(payload: Record<string, any>, preferred?: 
   };
 
   const order: Transport[] = preferred
-    ? [preferred, "fetch", "beacon", "get"]
-    : ["fetch", "beacon", "get"];
+    ? [preferred, "edge", "fetch", "beacon", "get"]
+    : ["edge", "fetch", "beacon", "get"];
 
   for (const method of order) {
-    if (method === "fetch") {
+    if (method === "edge") {
+      const ok = await tryEdge(url, enriched);
+      if (ok) return;
+    } else if (method === "fetch") {
       const ok = await tryFetch(url, enriched);
       if (ok) return;
     } else if (method === "beacon") {
@@ -152,7 +171,7 @@ export async function flushZapierQueue() {
 
   const remaining: any[] = [];
   for (const item of q) {
-    const ok = await tryFetch(url, item).catch(() => false);
+    const ok = await tryEdge(url, item).catch(() => false);
     if (!ok) remaining.push(item);
   }
   setQueue(remaining);
