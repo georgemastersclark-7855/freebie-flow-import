@@ -169,7 +169,7 @@ const AlphaDrums3VipList = () => {
                       <Button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-lg py-3 h-auto mt-6"
+                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto mt-6"
                       >
                         {isLoading ? "Joining..." : "Join VIP List"}
                       </Button>
@@ -217,7 +217,7 @@ const AlphaDrums3VipList = () => {
             <div className="pt-8">
               <Button 
                 onClick={scrollToForm}
-                className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-lg py-3 h-auto"
+                className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto"
                 size="lg"
               >
                 Join the VIP List
