@@ -15,7 +15,9 @@ const AlphaDrums3VipList = () => {
 
     return () => {
       // Cleanup script on unmount
-      document.head.removeChild(script);
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
     };
   }, []);
 
