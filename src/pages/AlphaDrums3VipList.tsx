@@ -228,7 +228,7 @@ const AlphaDrums3VipList = () => {
           {/* Hero Image */}
           <div className="relative max-w-2xl mx-auto">
             <img 
-              src="/lovable-uploads/f063fe65-97a9-4d24-8254-db32f8ef3401.png" 
+              src="/lovable-uploads/c3977c47-ba35-48ce-ab95-c20b978cf4f8.png" 
               alt="Alpha Drums 3 - Studio Production" 
               className="w-full rounded-2xl shadow-2xl border border-gray-700" 
               style={{
