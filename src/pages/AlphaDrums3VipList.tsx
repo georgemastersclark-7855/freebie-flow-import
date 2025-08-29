@@ -122,19 +122,6 @@ const AlphaDrums3VipList = () => {
               </span>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-2xl md:text-6xl font-bold font-akira mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent leading-tight">
-              Alpha Drums 3
-              <br />
-              VIP List
-            </h1>
-            
-            {/* Subheadline */}
-            <p className="text-lg md:text-2xl font-semibold text-[#DEFF00] mb-6 font-zurich-condensed">
-              1hr Early Access
-            </p>
-            
-            {/* Subheadline */}
             {/* Banner Image */}
             <div className="max-w-2xl mx-auto mb-8">
               <img 
