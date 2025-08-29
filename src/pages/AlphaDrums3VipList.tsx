@@ -132,7 +132,7 @@ const AlphaDrums3VipList = () => {
             </div>
 
             <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
-              Get <span className="text-[#DEFF00]">Fractals FREE</span> (worth $59) when you order Alpha Drums 3. 
+              Get <span className="text-[#DEFF00]">Fractals FREE</span> (worth $35) when you order Alpha Drums 3. 
               Limited to the first 250 producers.
             </p>
 
