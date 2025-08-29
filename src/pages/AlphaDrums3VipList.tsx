@@ -135,19 +135,19 @@ const AlphaDrums3VipList = () => {
             </p>
             
             {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-semibold">
-              Get <span className="text-[#DEFF00]">Fractals FREE</span> (worth $59) when you order Alpha Drums 3. 
-              Limited to the first 250 producers.
-            </p>
-
             {/* Banner Image */}
-            <div className="max-w-2xl mx-auto mb-12">
+            <div className="max-w-2xl mx-auto mb-8">
               <img 
                 src="/lovable-uploads/6ad6593f-5d1f-44a1-a0a0-d2f742e57195.png" 
                 alt="Alpha Drums 3 VIP List - Get 1hr Early Access" 
                 className="w-full rounded-2xl shadow-2xl" 
               />
             </div>
+
+            <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-12 font-zurich-condensed">
+              Get <span className="text-[#DEFF00]">Fractals FREE</span> (worth $59) when you order Alpha Drums 3. 
+              Limited to the first 250 producers.
+            </p>
 
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
