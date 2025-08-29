@@ -148,7 +148,7 @@ const AlphaDrums3VipList = () => {
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-[#DEFF00] focus:ring-[#DEFF00]"
+                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]"
                           placeholder="Enter your name"
                           required
                         />
@@ -160,7 +160,7 @@ const AlphaDrums3VipList = () => {
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-[#DEFF00] focus:ring-[#DEFF00]"
+                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]"
                           placeholder="Enter your email"
                           required
                         />
