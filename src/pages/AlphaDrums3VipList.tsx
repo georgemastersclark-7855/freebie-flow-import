@@ -140,6 +140,15 @@ const AlphaDrums3VipList = () => {
               Limited to the first 250 producers.
             </p>
 
+            {/* Banner Image */}
+            <div className="max-w-2xl mx-auto mb-12">
+              <img 
+                src="/lovable-uploads/6ad6593f-5d1f-44a1-a0a0-d2f742e57195.png" 
+                alt="Alpha Drums 3 VIP List - Get 1hr Early Access" 
+                className="w-full rounded-2xl shadow-2xl" 
+              />
+            </div>
+
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
               {!isSubmitted ? (
