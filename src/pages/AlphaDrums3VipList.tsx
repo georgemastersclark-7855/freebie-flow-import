@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,26 @@ const AlphaDrums3VipList = () => {
   const [name, setName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Configure Alpha Drums 3 specific Zapier webhook
+  useEffect(() => {
+    const originalWebhook = localStorage.getItem('klaviyo_zapier_webhook');
+    const alphaDrums3Webhook = 'https://hooks.zapier.com/hooks/catch/14759876/uhinw2k/';
+    
+    // Set Alpha Drums 3 webhook for this page
+    localStorage.setItem('klaviyo_zapier_webhook', alphaDrums3Webhook);
+    console.log('Alpha Drums 3: Configured Zapier webhook:', alphaDrums3Webhook);
+    
+    // Cleanup: restore original webhook when component unmounts
+    return () => {
+      if (originalWebhook) {
+        localStorage.setItem('klaviyo_zapier_webhook', originalWebhook);
+      } else {
+        localStorage.removeItem('klaviyo_zapier_webhook');
+      }
+      console.log('Alpha Drums 3: Restored original webhook configuration');
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
