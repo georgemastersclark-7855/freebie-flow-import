@@ -143,9 +143,6 @@ const AlphaDrums3VipList = () => {
                   <CardContent className="p-6">
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-2">
-                        <Label htmlFor="name" className="text-white font-zurich-condensed">
-                          Name
-                        </Label>
                         <Input
                           id="name"
                           type="text"
@@ -158,9 +155,6 @@ const AlphaDrums3VipList = () => {
                       </div>
                       
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-white font-zurich-condensed">
-                          Email
-                        </Label>
                         <Input
                           id="email"
                           type="email"
