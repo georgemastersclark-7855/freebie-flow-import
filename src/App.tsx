@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import JulyGiveaway from "./pages/JulyGiveaway";
 import AlphaDrums3VipList from "./pages/AlphaDrums3VipList";
+import TestKlaviyo from "./pages/TestKlaviyo";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/drumsthatslapfreedownload" element={<Index />} />
           <Route path="/julygiveaway" element={<JulyGiveaway />} />
           <Route path="/alphadrums3viplist" element={<AlphaDrums3VipList />} />
+          <Route path="/test-klaviyo" element={<TestKlaviyo />} />
           <Route path="/HowToResampleLikeaPro" element={<Index />} />
           <Route path="/30daysofproducersauce" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
