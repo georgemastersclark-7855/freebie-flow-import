@@ -74,16 +74,8 @@ const AlphaDrums3VipList = () => {
           <div className="max-w-md mx-auto mb-16">
             <Card className="bg-gray-950/90 backdrop-blur-sm border-gray-700">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-center mb-6 text-white font-zurich-condensed">
-                  Join the VIP List
-                </h2>
-                
                 {/* Klaviyo Form Embed */}
                 <div className="klaviyo-form-WrvxHn"></div>
-                
-                <p className="text-xs text-center text-gray-400 mt-4">
-                  1-hour early access • Free $59 bonus • No spam
-                </p>
               </CardContent>
             </Card>
           </div>
