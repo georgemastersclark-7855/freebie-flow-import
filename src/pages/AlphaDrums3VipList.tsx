@@ -11,7 +11,17 @@ const AlphaDrums3VipList = () => {
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WrvxHn';
+    
+    script.onload = () => {
+      console.log('Klaviyo script loaded successfully');
+    };
+    
+    script.onerror = () => {
+      console.error('Failed to load Klaviyo script');
+    };
+    
     document.head.appendChild(script);
+    console.log('Klaviyo script added to head');
 
     return () => {
       // Cleanup script on unmount
