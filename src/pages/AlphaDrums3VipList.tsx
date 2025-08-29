@@ -1,44 +1,74 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useUTMTracking } from "@/hooks/useUTMTracking";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
+import { sendZapierEvent } from "@/lib/zapier";
+import { toast } from "sonner";
 
 const AlphaDrums3VipList = () => {
-  const utmParams = useUTMTracking();
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    // Load Klaviyo form script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WrvxHn';
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     
-    script.onload = () => {
-      console.log('Klaviyo script loaded successfully');
-      // Try to trigger any initialization that might be needed
-      setTimeout(() => {
-        console.log('Checking if form rendered after delay');
-        const form = document.querySelector('.klaviyo-form-WrvxHn');
-        console.log('Form element found:', form);
-      }, 2000);
-    };
-    
-    script.onerror = () => {
-      console.error('Failed to load Klaviyo script');
-    };
-    
-    document.head.appendChild(script);
-    console.log('Klaviyo script added to head');
+    if (!email || !name) {
+      toast.error("Please fill in all fields");
+      return;
+    }
 
-    return () => {
-      // Cleanup script on unmount
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
+    setIsLoading(true);
+
+    try {
+      // Insert lead into Supabase
+      const { error: leadError } = await supabase
+        .from('leads')
+        .insert([
+          {
+            name: name.trim(),
+            email: email.trim(),
+            utm_campaign: 'Alpha Drums 3 VIP List',
+            user_agent: navigator.userAgent,
+            referrer: document.referrer || null,
+          }
+        ]);
+
+      if (leadError) {
+        console.error('Error inserting lead:', leadError);
+        toast.error("Failed to save your information. Please try again.");
+        return;
       }
-    };
-  }, []);
+
+      // Send to Zapier/Klaviyo
+      const zapierResult = await sendZapierEvent({
+        email: email.trim(),
+        name: name.trim(),
+        campaign: 'Alpha Drums 3 VIP List',
+        timestamp: new Date().toISOString(),
+        source: 'vip-signup'
+      });
+
+      if (zapierResult.ok) {
+        setIsSubmitted(true);
+        toast.success("Welcome to the VIP list! You'll get early access to Alpha Drums 3.");
+      } else {
+        toast.error("Sign up successful, but there was an issue with our notification system.");
+      }
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const scrollToForm = () => {
-    const formElement = document.querySelector('.klaviyo-form-WrvxHn');
+    const formElement = document.getElementById('vip-signup-form');
     if (formElement) {
       formElement.scrollIntoView({ behavior: 'smooth' });
     }
@@ -85,9 +115,65 @@ const AlphaDrums3VipList = () => {
               Limited to the first 250 producers.
             </p>
 
-            {/* Klaviyo Form Embed */}
-            <div className="max-w-md mx-auto mb-16">
-              <div className="klaviyo-form-WrvxHn"></div>
+            {/* VIP Signup Form */}
+            <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
+              {!isSubmitted ? (
+                <Card className="bg-gray-900/50 border-gray-700">
+                  <CardContent className="p-6">
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name" className="text-white font-zurich-condensed">
+                          Name
+                        </Label>
+                        <Input
+                          id="name"
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-[#DEFF00] focus:ring-[#DEFF00]"
+                          placeholder="Enter your name"
+                          required
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="email" className="text-white font-zurich-condensed">
+                          Email
+                        </Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-[#DEFF00] focus:ring-[#DEFF00]"
+                          placeholder="Enter your email"
+                          required
+                        />
+                      </div>
+                      
+                      <Button
+                        type="submit"
+                        disabled={isLoading}
+                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-lg py-3 h-auto mt-6"
+                      >
+                        {isLoading ? "Joining..." : "Join VIP List"}
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Card className="bg-green-900/20 border-green-500/30">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-4">🎉</div>
+                    <h3 className="text-xl font-bold text-white mb-2 font-zurich-condensed">
+                      You're In!
+                    </h3>
+                    <p className="text-green-300 font-zurich-condensed">
+                      Welcome to the Alpha Drums 3 VIP list. You'll get early access when it drops!
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </div>
 
