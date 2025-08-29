@@ -23,7 +23,7 @@ export default {
 				'neutronic': ['neutronic', 'sans-serif'],
 				'akira': ['Akira Expanded', 'sans-serif'],
 				'zurich': ['Zurich Extended', 'sans-serif'],
-				'zurich-condensed': ['Zurich Condensed', 'sans-serif'],
+				'zurich-condensed': ['Zurich BT Condensed', 'Zurich Condensed', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
