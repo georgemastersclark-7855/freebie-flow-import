@@ -68,16 +68,11 @@ const AlphaDrums3VipList = () => {
               Get <span className="text-[#DEFF00]">Fractals FREE</span> (worth $59) when you order Alpha Drums 3. 
               Limited to the first 250 producers.
             </p>
-          </div>
 
-          {/* Klaviyo Form */}
-          <div className="max-w-md mx-auto mb-16">
-            <Card className="bg-gray-950/90 backdrop-blur-sm border-gray-700">
-              <CardContent className="p-8">
-                {/* Klaviyo Form Embed */}
-                <div className="klaviyo-form-WrvxHn"></div>
-              </CardContent>
-            </Card>
+            {/* Klaviyo Form Embed */}
+            <div className="max-w-md mx-auto mb-16">
+              <div className="klaviyo-form-WrvxHn"></div>
+            </div>
           </div>
 
           {/* Body Content */}
