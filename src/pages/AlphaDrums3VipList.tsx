@@ -14,6 +14,12 @@ const AlphaDrums3VipList = () => {
     
     script.onload = () => {
       console.log('Klaviyo script loaded successfully');
+      // Try to trigger any initialization that might be needed
+      setTimeout(() => {
+        console.log('Checking if form rendered after delay');
+        const form = document.querySelector('.klaviyo-form-WrvxHn');
+        console.log('Form element found:', form);
+      }, 2000);
     };
     
     script.onerror = () => {
