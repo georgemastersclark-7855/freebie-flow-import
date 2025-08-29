@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import JulyGiveaway from "./pages/JulyGiveaway";
+import AlphaDrums3VipList from "./pages/AlphaDrums3VipList";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Redirect to="https://roblate.com" />} />
           <Route path="/drumsthatslapfreedownload" element={<Index />} />
           <Route path="/julygiveaway" element={<JulyGiveaway />} />
+          <Route path="/alphadrums3viplist" element={<AlphaDrums3VipList />} />
           <Route path="/HowToResampleLikeaPro" element={<Index />} />
           <Route path="/30daysofproducersauce" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
