@@ -97,7 +97,7 @@ const AlphaDrums3VipList = () => {
   return (
     <div className="min-h-screen bg-black font-zurich">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-black/80 backdrop-blur-sm sticky top-0 z-40">
+      <header className="border-b border-gray-800 bg-black/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-center">
             <img 
@@ -213,30 +213,6 @@ const AlphaDrums3VipList = () => {
               👉 <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access.
             </p>
 
-            {/* CTA Button */}
-            <div className="pt-8">
-              <Button 
-                onClick={scrollToForm}
-                className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto"
-                size="lg"
-              >
-                Join the VIP List
-              </Button>
-            </div>
-          </div>
-
-          {/* Hero Image */}
-          <div className="relative max-w-2xl mx-auto">
-            <img 
-              src="/lovable-uploads/c3977c47-ba35-48ce-ab95-c20b978cf4f8.png" 
-              alt="Alpha Drums 3 - Studio Production" 
-              className="w-full rounded-2xl shadow-2xl border border-gray-700" 
-              style={{
-                filter: 'drop-shadow(0 0 20px rgba(222, 255, 0, 0.3))',
-                boxShadow: '0 0 40px rgba(222, 255, 0, 0.2)'
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl"></div>
           </div>
 
         </div>
