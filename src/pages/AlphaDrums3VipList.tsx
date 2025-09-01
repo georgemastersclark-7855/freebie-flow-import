@@ -165,11 +165,11 @@ const AlphaDrums3VipList = () => {
                 </h3>
               </div>
               
-              <div className="space-y-6 text-left max-w-2xl mx-auto">
-                <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
-                  <div className="flex items-start gap-3">
+              <div className="space-y-6 text-center max-w-2xl mx-auto">
+                <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30 text-center">
+                  <div className="text-center">
                     <span className="text-[#DEFF00] font-bold text-xl">⚡</span>
-                    <p className="text-gray-300 font-zurich-condensed text-base">
+                    <p className="text-gray-300 font-zurich-condensed text-base mt-2">
                       <span className="text-white font-semibold">First 250 orders:</span> Get the Fractals FX Pack FREE ($35 value)
                     </p>
                   </div>
@@ -181,16 +181,16 @@ const AlphaDrums3VipList = () => {
                   </h4>
                 </div>
                 
-                <div className="flex items-start gap-3">
+                <div className="text-center">
                   <span className="text-[#DEFF00] font-bold">🎵</span>
-                  <p className="text-gray-300 font-zurich-condensed">
+                  <p className="text-gray-300 font-zurich-condensed mt-2">
                     <span className="text-white font-semibold">25 x Music Feedbacks:</span> I'll personally review your track and send you detailed feedback
                   </p>
                 </div>
                 
-                <div className="flex items-start gap-3">
+                <div className="text-center">
                   <span className="text-[#DEFF00] font-bold">🔥</span>
-                  <p className="text-gray-300 font-zurich-condensed">
+                  <p className="text-gray-300 font-zurich-condensed mt-2">
                     <span className="text-white font-semibold">3 x 1-to-1 Zoom Calls:</span> Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
                   </p>
                 </div>
