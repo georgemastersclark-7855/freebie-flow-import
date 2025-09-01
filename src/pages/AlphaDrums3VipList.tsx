@@ -159,14 +159,20 @@ const AlphaDrums3VipList = () => {
             </p>
 
             <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-700">
-              <h3 className="text-xl font-bold text-[#DEFF00] font-zurich-condensed mb-4">🎯 VIP Early Access Rewards:</h3>
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-[#DEFF00] font-zurich-condensed mb-2">
+                  🎯 VIP Early Access Rewards
+                </h3>
+              </div>
               
-              <div className="space-y-3 text-left max-w-2xl mx-auto">
-                <div className="flex items-start gap-3">
-                  <span className="text-[#DEFF00] font-bold">⚡</span>
-                  <p className="text-gray-300 font-zurich-condensed">
-                    <span className="text-white font-semibold">First 250 orders:</span> Get the Fractals FX Pack FREE ($35 value)
-                  </p>
+              <div className="space-y-6 text-left max-w-2xl mx-auto">
+                <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
+                  <div className="flex items-start gap-3">
+                    <span className="text-[#DEFF00] font-bold text-xl">⚡</span>
+                    <p className="text-gray-300 font-zurich-condensed text-base">
+                      <span className="text-white font-semibold">First 250 orders:</span> Get the Fractals FX Pack FREE ($35 value)
+                    </p>
+                  </div>
                 </div>
                 
                 <div className="text-center my-6 py-4 border-t border-b border-gray-600/30">
