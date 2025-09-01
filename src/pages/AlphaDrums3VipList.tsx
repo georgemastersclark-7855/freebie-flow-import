@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { sendZapierEvent } from "@/lib/zapier";
 import { toast } from "sonner";
-import { Target, Zap, Music, Flame, ChevronRight, PartyPopper } from "lucide-react";
+import { Diamond, Music, Flame, ChevronRight, PartyPopper } from "lucide-react";
 const AlphaDrums3VipList = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -162,8 +162,13 @@ const AlphaDrums3VipList = () => {
 
             <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-700">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-[#DEFF00] font-zurich-condensed mb-2 flex items-center justify-center gap-2">
-                  <Target size={24} className="text-[#DEFF00]" />
+                <h3 className="text-2xl font-bold bg-gradient-to-b from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-zurich-condensed mb-2 flex items-center justify-center gap-2">
+                  <Diamond size={24} className="text-white drop-shadow-sm" style={{
+                    background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
+                  }} />
                   VIP Early Access Rewards
                 </h3>
               </div>
@@ -193,7 +198,12 @@ const AlphaDrums3VipList = () => {
                 
                 <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
                   <div className="flex flex-col items-center gap-3">
-                    <Music size={32} className="text-[#DEFF00]" />
+                    <Music size={32} className="text-white drop-shadow-sm" style={{
+                      background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
+                    }} />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">25 x Music Feedbacks</h5>
                       <p className="text-gray-300 font-zurich-condensed text-base">
@@ -205,7 +215,12 @@ const AlphaDrums3VipList = () => {
                 
                 <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
                   <div className="flex flex-col items-center gap-3">
-                    <Flame size={32} className="text-[#DEFF00]" />
+                    <Flame size={32} className="text-white drop-shadow-sm" style={{
+                      background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
+                    }} />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">3 x 1-to-1 Zoom Calls</h5>
                       <p className="text-gray-300 font-zurich-condensed text-base">
