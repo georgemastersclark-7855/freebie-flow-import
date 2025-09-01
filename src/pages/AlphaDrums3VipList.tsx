@@ -249,8 +249,8 @@ const AlphaDrums3VipList = () => {
 
             {/* Social Share Section */}
             <div className="mt-12 pt-8 border-t border-gray-700">
-              <h3 className="text-lg font-bold text-white font-zurich-condensed mb-4">Share with Fellow Producers</h3>
-              <div className="flex items-center justify-center gap-4">
+              <h3 className="text-lg font-bold text-white font-zurich-condensed mb-4 text-center">Share with Fellow Producers</h3>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Button
                   onClick={() => {
                     const url = window.location.href;
@@ -259,7 +259,7 @@ const AlphaDrums3VipList = () => {
                   }}
                   variant="outline"
                   size="sm"
-                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white"
+                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto"
                 >
                   <Twitter size={16} className="mr-2" />
                   Share on X
@@ -271,7 +271,7 @@ const AlphaDrums3VipList = () => {
                   }}
                   variant="outline"
                   size="sm"
-                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white"
+                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto"
                 >
                   <Facebook size={16} className="mr-2" />
                   Share on Facebook
@@ -291,7 +291,7 @@ const AlphaDrums3VipList = () => {
                   }}
                   variant="outline"
                   size="sm"
-                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white"
+                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto"
                 >
                   <Share2 size={16} className="mr-2" />
                   Share Link
