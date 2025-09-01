@@ -126,24 +126,31 @@ const AlphaDrums3VipList = () => {
 
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
-              {!isSubmitted ? <Card className="bg-gray-900/50 border-gray-700">
-                  <CardContent className="p-6">
+              {!isSubmitted ? <Card className="bg-gray-900/50 border-gray-700 relative overflow-hidden">
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 via-transparent to-[#DEFF00]/20 blur-xl animate-pulse"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#DEFF00]/10 via-transparent to-[#DEFF00]/10"></div>
+                  
+                  <CardContent className="p-6 relative z-10">
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-2">
-                        <Input id="name" type="text" value={name} onChange={e => setName(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]" placeholder="Enter your name" required />
+                        <Input id="name" type="text" value={name} onChange={e => setName(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00] focus:shadow-[0_0_20px_rgba(222,255,0,0.3)]" placeholder="Enter your name" required />
                       </div>
                       
                       <div className="space-y-2">
-                        <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]" placeholder="Enter your email" required />
+                        <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00] focus:shadow-[0_0_20px_rgba(222,255,0,0.3)]" placeholder="Enter your email" required />
                       </div>
                       
-                      <Button type="submit" disabled={isLoading} className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto mt-6">
+                      <Button type="submit" disabled={isLoading} className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto mt-6 shadow-[0_0_30px_rgba(222,255,0,0.4)] hover:shadow-[0_0_40px_rgba(222,255,0,0.6)] transition-all duration-300">
                         {isLoading ? "Joining..." : "Join VIP List"}
                       </Button>
                     </form>
                   </CardContent>
-                </Card> : <Card className="bg-green-900/20 border-green-500/30">
-                  <CardContent className="p-6 text-center">
+                </Card> : <Card className="bg-green-900/20 border-green-500/30 relative overflow-hidden">
+                  {/* Success glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 via-transparent to-green-400/20 blur-xl"></div>
+                  
+                  <CardContent className="p-6 text-center relative z-10">
                     <PartyPopper size={32} className="text-green-400 mb-4" />
                     <h3 className="text-xl font-bold text-white mb-2 font-zurich-condensed">
                       You're In!
