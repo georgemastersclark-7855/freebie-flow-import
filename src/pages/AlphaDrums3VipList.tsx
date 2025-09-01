@@ -169,9 +169,11 @@ const AlphaDrums3VipList = () => {
                   </p>
                 </div>
                 
-                <p className="text-gray-300 font-zurich-condensed text-center mb-4">
-                  Everyone in the first 250 gets entered in to win:
-                </p>
+                <div className="text-center my-6 py-4 border-t border-b border-gray-600/30">
+                  <h4 className="text-lg font-bold text-white font-zurich-condensed mb-1">
+                    Everyone in the first 250 gets entered to win:
+                  </h4>
+                </div>
                 
                 <div className="flex items-start gap-3">
                   <span className="text-[#DEFF00] font-bold">🎵</span>
