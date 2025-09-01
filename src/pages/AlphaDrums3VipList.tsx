@@ -119,6 +119,11 @@ const AlphaDrums3VipList = () => {
               Limited to the first 250 producers.
             </p>
 
+            <p className="text-lg text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
+              Be the first to unlock <span className="font-semibold">Alpha Drums 3</span> - my biggest drum library yet, 
+              with over <span className="text-[#DEFF00]">700 battle-tested sounds</span> straight from real sessions.
+            </p>
+
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
               {!isSubmitted ? <Card className="bg-gray-900/50 border-gray-700">
@@ -155,11 +160,6 @@ const AlphaDrums3VipList = () => {
           <div className="max-w-3xl mx-auto text-center space-y-8 mb-16">
             <h2 className="text-2xl font-bold text-white font-zurich-condensed mb-6">Join VIP List</h2>
             
-            <p className="text-lg text-gray-300 font-zurich-condensed">
-              Be the first to unlock <span className="text-white font-semibold">Alpha Drums 3</span> - my biggest drum library yet, 
-              with over <span className="text-[#DEFF00]">700 battle-tested sounds</span> straight from real sessions.
-            </p>
-
             <p className="text-lg text-gray-300 font-zurich-condensed">
               The VIP list gets a <span className="text-[#DEFF00] font-semibold">2.5-hour head start</span> before the public notification. 
               Based on past launches, these bonuses will be gone in under 2 hours.
