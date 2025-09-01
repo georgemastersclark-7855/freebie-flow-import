@@ -165,7 +165,7 @@ const AlphaDrums3VipList = () => {
                 </h3>
               </div>
               
-              <div className="space-y-6 text-center max-w-2xl mx-auto">
+              <div className="space-y-6 text-left max-w-2xl mx-auto">
                 <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
                   <div className="flex items-start gap-3">
                     <span className="text-[#DEFF00] font-bold text-xl">⚡</span>
