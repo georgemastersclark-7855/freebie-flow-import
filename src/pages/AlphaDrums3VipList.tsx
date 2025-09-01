@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { sendZapierEvent } from "@/lib/zapier";
 import { toast } from "sonner";
-import { Diamond, Music, Flame, ChevronRight, PartyPopper } from "lucide-react";
+import { Gem, Music, Flame, ChevronRight, PartyPopper } from "lucide-react";
 const AlphaDrums3VipList = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -163,7 +163,7 @@ const AlphaDrums3VipList = () => {
             <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-700">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold bg-gradient-to-b from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-zurich-condensed mb-2 flex items-center justify-center gap-2">
-                  <Diamond size={24} className="text-white drop-shadow-sm" style={{
+                  <Gem size={24} className="text-white drop-shadow-sm" style={{
                     background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
