@@ -194,14 +194,43 @@ const AlphaDrums3VipList = () => {
 
           {/* Body Content */}
           <div className="max-w-3xl mx-auto text-center space-y-8 mb-16">
+            <h2 className="text-2xl font-bold text-white font-zurich-condensed mb-6">Join VIP List</h2>
+            
             <p className="text-lg text-gray-300 font-zurich-condensed">
               Be the first to unlock <span className="text-white font-semibold">Alpha Drums 3</span> - my biggest drum library yet, 
               with over <span className="text-[#DEFF00]">700 battle-tested sounds</span> straight from real sessions.
             </p>
 
+            <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-700">
+              <h3 className="text-xl font-bold text-[#DEFF00] font-zurich-condensed mb-4">🎯 VIP Early Access Rewards:</h3>
+              
+              <div className="space-y-3 text-left max-w-2xl mx-auto">
+                <div className="flex items-start gap-3">
+                  <span className="text-[#DEFF00] font-bold">⚡</span>
+                  <p className="text-gray-300 font-zurich-condensed">
+                    <span className="text-white font-semibold">First 250 orders:</span> Get the Fractals FX Pack FREE ($35 value)
+                  </p>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <span className="text-[#DEFF00] font-bold">🎵</span>
+                  <p className="text-gray-300 font-zurich-condensed">
+                    <span className="text-white font-semibold">25 lucky producers:</span> I'll personally review your track and send you detailed feedback
+                  </p>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <span className="text-[#DEFF00] font-bold">🔥</span>
+                  <p className="text-gray-300 font-zurich-condensed">
+                    <span className="text-white font-semibold">3 VIP winners:</span> Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <p className="text-lg text-gray-300 font-zurich-condensed">
-              ⚡ The first 250 orders will get the <span className="text-white font-semibold">Fractals FX Pack FREE</span> ($35 value) - 
-              and the VIP list gets a <span className="text-[#DEFF00]">1-hour head start</span> before the public notification.
+              The VIP list gets a <span className="text-[#DEFF00] font-semibold">2.5-hour head start</span> before the public notification. 
+              Based on past launches, these bonuses will be gone in under 2 hours.
             </p>
 
             <p className="text-lg text-gray-300 font-zurich-condensed">
@@ -210,7 +239,7 @@ const AlphaDrums3VipList = () => {
             </p>
 
             <p className="text-lg text-gray-300 font-zurich-condensed">
-              👉 <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access.
+              👉 <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access + your shot at these exclusive bonuses.
             </p>
 
           </div>
