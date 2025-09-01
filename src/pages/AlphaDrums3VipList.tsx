@@ -163,12 +163,7 @@ const AlphaDrums3VipList = () => {
             <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-700">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold bg-gradient-to-b from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-zurich-condensed mb-2 flex items-center justify-center gap-2">
-                  <Gem size={24} className="text-white drop-shadow-sm" style={{
-                    background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
-                  }} />
+                  <Gem size={24} className="bg-gradient-to-b from-white via-gray-300 to-gray-500 bg-clip-text text-transparent drop-shadow-sm" />
                   VIP Early Access Rewards
                 </h3>
               </div>
