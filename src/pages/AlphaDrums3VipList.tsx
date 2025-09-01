@@ -111,7 +111,7 @@ const AlphaDrums3VipList = () => {
 
             {/* Banner Image */}
             <div className="max-w-2xl mx-auto mb-8">
-              <img src="/lovable-uploads/bc88d671-3cfe-46c6-bfb2-2c42e6820982.png" alt="Alpha Drums 3 VIP List - Get 1hr Early Access" className="w-full rounded-2xl shadow-2xl" />
+              <img src="/lovable-uploads/a4ac1d92-9ce0-4d0e-bb2a-bf824beaedaf.png" alt="Alpha Drums 3 VIP List - Rob Late" className="w-full rounded-2xl shadow-2xl" />
             </div>
 
             <p className="text-base text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
