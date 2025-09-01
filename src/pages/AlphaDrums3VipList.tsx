@@ -174,7 +174,7 @@ const AlphaDrums3VipList = () => {
                     <img 
                       src="/lovable-uploads/c70a01f4-97bc-4fb1-90e7-5262f590a25b.png" 
                       alt="Fractals FX Pack" 
-                      className="w-16 h-16 object-contain drop-shadow-lg"
+                      className="w-24 h-24 object-contain drop-shadow-lg"
                     />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">First 250 Orders</h5>
