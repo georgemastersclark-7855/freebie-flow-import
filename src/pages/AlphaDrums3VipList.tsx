@@ -168,34 +168,47 @@ const AlphaDrums3VipList = () => {
                 </h3>
               </div>
               
-              <div className="space-y-6 text-center max-w-2xl mx-auto">
-                <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30 text-center">
-                  <div className="text-center">
-                    <Zap size={24} className="text-[#DEFF00]" />
-                    <p className="text-gray-300 font-zurich-condensed text-base mt-2">
-                      <span className="text-white font-semibold">First 250 orders:</span> Get the Fractals FX Pack FREE ($35 value)
-                    </p>
+              <div className="space-y-4 max-w-2xl mx-auto">
+                <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
+                  <div className="flex flex-col items-center gap-3">
+                    <Zap size={32} className="text-[#DEFF00]" />
+                    <div>
+                      <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">First 250 Orders</h5>
+                      <p className="text-gray-300 font-zurich-condensed text-base">
+                        Get the Fractals FX Pack FREE ($35 value)
+                      </p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="text-center my-6 py-4 border-t border-b border-gray-600/30">
-                  <h4 className="text-lg font-bold text-white font-zurich-condensed mb-1">
+                <div className="text-center my-8 py-4 border-t border-b border-gray-600/30">
+                  <h4 className="text-xl font-bold text-white font-zurich-condensed mb-1">
                     Everyone in the first 250 gets entered to win:
                   </h4>
                 </div>
                 
-                <div className="text-center">
-                  <Music size={24} className="text-[#DEFF00]" />
-                  <p className="text-gray-300 font-zurich-condensed mt-2">
-                    <span className="text-white font-semibold">25 x Music Feedbacks:</span> I'll personally review your track and send you detailed feedback
-                  </p>
+                <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
+                  <div className="flex flex-col items-center gap-3">
+                    <Music size={32} className="text-[#DEFF00]" />
+                    <div>
+                      <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">25 x Music Feedbacks</h5>
+                      <p className="text-gray-300 font-zurich-condensed text-base">
+                        I'll personally review your track and send you detailed feedback
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="text-center">
-                  <Flame size={24} className="text-[#DEFF00]" />
-                  <p className="text-gray-300 font-zurich-condensed mt-2">
-                    <span className="text-white font-semibold">3 x 1-to-1 Zoom Calls:</span> Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
-                  </p>
+                <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
+                  <div className="flex flex-col items-center gap-3">
+                    <Flame size={32} className="text-[#DEFF00]" />
+                    <div>
+                      <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">3 x 1-to-1 Zoom Calls</h5>
+                      <p className="text-gray-300 font-zurich-condensed text-base">
+                        Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
