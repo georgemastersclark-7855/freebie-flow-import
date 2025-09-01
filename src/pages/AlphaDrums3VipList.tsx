@@ -242,10 +242,14 @@ const AlphaDrums3VipList = () => {
               </div>
             </div>
 
-            <p className="text-base text-gray-300 font-zurich-condensed flex items-center justify-center gap-2">
-              <ChevronRight size={20} className="text-[#DEFF00]" />
-              <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access + your shot at these exclusive bonuses.
-            </p>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2 text-base text-gray-300 font-zurich-condensed">
+                <ChevronRight size={20} className="text-[#DEFF00] flex-shrink-0" />
+                <span>
+                  <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access + your shot at these exclusive bonuses.
+                </span>
+              </div>
+            </div>
 
             {/* Social Share Section */}
             <div className="mt-12 pt-8 border-t border-gray-700">
