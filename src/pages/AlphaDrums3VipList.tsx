@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { sendZapierEvent } from "@/lib/zapier";
 import { toast } from "sonner";
-
 const AlphaDrums3VipList = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -17,11 +16,11 @@ const AlphaDrums3VipList = () => {
   useEffect(() => {
     const originalWebhook = localStorage.getItem('klaviyo_zapier_webhook');
     const alphaDrums3Webhook = 'https://hooks.zapier.com/hooks/catch/14759876/uhinw2k/';
-    
+
     // Set Alpha Drums 3 webhook for this page
     localStorage.setItem('klaviyo_zapier_webhook', alphaDrums3Webhook);
     console.log('Alpha Drums 3: Configured Zapier webhook:', alphaDrums3Webhook);
-    
+
     // Cleanup: restore original webhook when component unmounts
     return () => {
       if (originalWebhook) {
@@ -32,31 +31,24 @@ const AlphaDrums3VipList = () => {
       console.log('Alpha Drums 3: Restored original webhook configuration');
     };
   }, []);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!email || !name) {
       toast.error("Please fill in all fields");
       return;
     }
-
     setIsLoading(true);
-
     try {
       // Insert lead into Supabase
-      const { error: leadError } = await supabase
-        .from('leads')
-        .insert([
-          {
-            name: name.trim(),
-            email: email.trim(),
-            utm_campaign: 'Alpha Drums 3 VIP List',
-            user_agent: navigator.userAgent,
-            referrer: document.referrer || null,
-          }
-        ]);
-
+      const {
+        error: leadError
+      } = await supabase.from('leads').insert([{
+        name: name.trim(),
+        email: email.trim(),
+        utm_campaign: 'Alpha Drums 3 VIP List',
+        user_agent: navigator.userAgent,
+        referrer: document.referrer || null
+      }]);
       if (leadError) {
         console.error('Error inserting lead:', leadError);
         toast.error("Failed to save your information. Please try again.");
@@ -71,14 +63,12 @@ const AlphaDrums3VipList = () => {
         timestamp: new Date().toISOString(),
         source: 'vip-signup'
       });
-
       if (zapierResult.ok) {
         setIsSubmitted(true);
         toast.success("Welcome to the VIP list! You'll get early access to Alpha Drums 3.");
       } else {
         toast.error("Sign up successful, but there was an issue with our notification system.");
       }
-
     } catch (error) {
       console.error('Submission error:', error);
       toast.error("Something went wrong. Please try again.");
@@ -86,25 +76,20 @@ const AlphaDrums3VipList = () => {
       setIsLoading(false);
     }
   };
-
   const scrollToForm = () => {
     const formElement = document.getElementById('vip-signup-form');
     if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' });
+      formElement.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <div className="min-h-screen bg-black font-zurich">
+  return <div className="min-h-screen bg-black font-zurich">
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-center">
-            <img 
-              src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png" 
-              alt="Rob Late Audio Logo" 
-              className="h-16 w-auto object-contain" 
-            />
+            <img src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png" alt="Rob Late Audio Logo" className="h-16 w-auto object-contain" />
           </div>
         </div>
       </header>
@@ -124,11 +109,7 @@ const AlphaDrums3VipList = () => {
 
             {/* Banner Image */}
             <div className="max-w-2xl mx-auto mb-8">
-              <img 
-                src="/lovable-uploads/bc88d671-3cfe-46c6-bfb2-2c42e6820982.png" 
-                alt="Alpha Drums 3 VIP List - Get 1hr Early Access" 
-                className="w-full rounded-2xl shadow-2xl" 
-              />
+              <img src="/lovable-uploads/bc88d671-3cfe-46c6-bfb2-2c42e6820982.png" alt="Alpha Drums 3 VIP List - Get 1hr Early Access" className="w-full rounded-2xl shadow-2xl" />
             </div>
 
             <p className="text-lg text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
@@ -138,46 +119,23 @@ const AlphaDrums3VipList = () => {
 
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
-              {!isSubmitted ? (
-                <Card className="bg-gray-900/50 border-gray-700">
+              {!isSubmitted ? <Card className="bg-gray-900/50 border-gray-700">
                   <CardContent className="p-6">
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-2">
-                        <Input
-                          id="name"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]"
-                          placeholder="Enter your name"
-                          required
-                        />
+                        <Input id="name" type="text" value={name} onChange={e => setName(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]" placeholder="Enter your name" required />
                       </div>
                       
                       <div className="space-y-2">
-                        <Input
-                          id="email"
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]"
-                          placeholder="Enter your email"
-                          required
-                        />
+                        <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]" placeholder="Enter your email" required />
                       </div>
                       
-                      <Button
-                        type="submit"
-                        disabled={isLoading}
-                        className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto mt-6"
-                      >
+                      <Button type="submit" disabled={isLoading} className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto mt-6">
                         {isLoading ? "Joining..." : "Join VIP List"}
                       </Button>
                     </form>
                   </CardContent>
-                </Card>
-              ) : (
-                <Card className="bg-green-900/20 border-green-500/30">
+                </Card> : <Card className="bg-green-900/20 border-green-500/30">
                   <CardContent className="p-6 text-center">
                     <div className="text-4xl mb-4">🎉</div>
                     <h3 className="text-xl font-bold text-white mb-2 font-zurich-condensed">
@@ -187,8 +145,7 @@ const AlphaDrums3VipList = () => {
                       Welcome to the Alpha Drums 3 VIP list. You'll get early access when it drops!
                     </p>
                   </CardContent>
-                </Card>
-              )}
+                </Card>}
             </div>
           </div>
 
@@ -215,14 +172,14 @@ const AlphaDrums3VipList = () => {
                 <div className="flex items-start gap-3">
                   <span className="text-[#DEFF00] font-bold">🎵</span>
                   <p className="text-gray-300 font-zurich-condensed">
-                    <span className="text-white font-semibold">25 lucky producers:</span> I'll personally review your track and send you detailed feedback
+                    <span className="text-white font-semibold">25 x Music Feedbacks:</span> I'll personally review your track and send you detailed feedback
                   </p>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <span className="text-[#DEFF00] font-bold">🔥</span>
                   <p className="text-gray-300 font-zurich-condensed">
-                    <span className="text-white font-semibold">3 VIP winners:</span> Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
+                    <span className="text-white font-semibold">3 x 1-to-1 Zoom Calls:</span> Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
                   </p>
                 </div>
               </div>
@@ -257,8 +214,6 @@ const AlphaDrums3VipList = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default AlphaDrums3VipList;
