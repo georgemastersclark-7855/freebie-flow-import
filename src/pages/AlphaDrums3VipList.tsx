@@ -171,7 +171,11 @@ const AlphaDrums3VipList = () => {
               <div className="space-y-4 max-w-2xl mx-auto">
                 <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
                   <div className="flex flex-col items-center gap-3">
-                    <Zap size={32} className="text-[#DEFF00]" />
+                    <img 
+                      src="/lovable-uploads/c70a01f4-97bc-4fb1-90e7-5262f590a25b.png" 
+                      alt="Fractals FX Pack" 
+                      className="w-16 h-16 object-contain drop-shadow-lg"
+                    />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">First 250 Orders</h5>
                       <p className="text-gray-300 font-zurich-condensed text-base">
