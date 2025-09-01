@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { sendZapierEvent } from "@/lib/zapier";
 import { toast } from "sonner";
-import { Gem, Music, Flame, ChevronRight, PartyPopper } from "lucide-react";
+import { Gem, Music, Flame, ChevronRight, PartyPopper, Share2, Twitter, Facebook } from "lucide-react";
 const AlphaDrums3VipList = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -241,6 +241,58 @@ const AlphaDrums3VipList = () => {
               <ChevronRight size={20} className="text-[#DEFF00]" />
               <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access + your shot at these exclusive bonuses.
             </p>
+
+            {/* Social Share Section */}
+            <div className="mt-12 pt-8 border-t border-gray-700">
+              <h3 className="text-lg font-bold text-white font-zurich-condensed mb-4">Share with Fellow Producers</h3>
+              <div className="flex items-center justify-center gap-4">
+                <Button
+                  onClick={() => {
+                    const url = window.location.href;
+                    const text = "Join the Alpha Drums 3 VIP list and get Fractals FREE ($35 value) + early access!";
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+                  }}
+                  variant="outline"
+                  size="sm"
+                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white"
+                >
+                  <Twitter size={16} className="mr-2" />
+                  Share on X
+                </Button>
+                <Button
+                  onClick={() => {
+                    const url = window.location.href;
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+                  }}
+                  variant="outline"
+                  size="sm"
+                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white"
+                >
+                  <Facebook size={16} className="mr-2" />
+                  Share on Facebook
+                </Button>
+                <Button
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: 'Alpha Drums 3 VIP List',
+                        text: 'Join the Alpha Drums 3 VIP list and get Fractals FREE ($35 value) + early access!',
+                        url: window.location.href,
+                      });
+                    } else {
+                      navigator.clipboard.writeText(window.location.href);
+                      toast.success("Link copied to clipboard!");
+                    }
+                  }}
+                  variant="outline"
+                  size="sm"
+                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white"
+                >
+                  <Share2 size={16} className="mr-2" />
+                  Share Link
+                </Button>
+              </div>
+            </div>
 
           </div>
 
