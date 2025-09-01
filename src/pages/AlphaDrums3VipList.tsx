@@ -114,12 +114,12 @@ const AlphaDrums3VipList = () => {
               <img src="/lovable-uploads/bc88d671-3cfe-46c6-bfb2-2c42e6820982.png" alt="Alpha Drums 3 VIP List - Get 1hr Early Access" className="w-full rounded-2xl shadow-2xl" />
             </div>
 
-            <p className="text-lg text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
+            <p className="text-base text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
               Get <span className="text-[#DEFF00]">Fractals FREE</span> (worth $35) when you order Alpha Drums 3. 
               Limited to the first 250 producers.
             </p>
 
-            <p className="text-lg text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
+            <p className="text-base text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
               Be the first to unlock <span className="font-semibold">Alpha Drums 3</span> - my biggest drum library yet, 
               with over <span className="text-[#DEFF00]">700 battle-tested sounds</span> straight from real sessions.
             </p>
@@ -165,12 +165,12 @@ const AlphaDrums3VipList = () => {
           <div className="max-w-3xl mx-auto text-center space-y-8 mb-16">
             <h2 className="text-2xl font-bold text-white font-zurich-condensed mb-6">Join VIP List</h2>
             
-            <p className="text-lg text-gray-300 font-zurich-condensed">
+            <p className="text-base text-gray-300 font-zurich-condensed">
               The VIP list gets a <span className="text-[#DEFF00] font-semibold">2.5-hour head start</span> before the public notification. 
               Based on past launches, these bonuses will be gone in under 2 hours.
             </p>
 
-            <p className="text-lg text-gray-300 font-zurich-condensed">
+            <p className="text-base text-gray-300 font-zurich-condensed">
               Thousands of producers grabbed Alpha Drums 1 & 2 on launch day. 
               <span className="text-white font-semibold"> This one will go even faster.</span>
             </p>
@@ -193,7 +193,7 @@ const AlphaDrums3VipList = () => {
                     />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">First 250 Orders</h5>
-                      <p className="text-gray-300 font-zurich-condensed text-base">
+                      <p className="text-gray-300 font-zurich-condensed text-sm">
                         Get the Fractals FX Pack FREE ($35 value)
                       </p>
                     </div>
@@ -216,7 +216,7 @@ const AlphaDrums3VipList = () => {
                     }} />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">25 x Music Feedbacks</h5>
-                      <p className="text-gray-300 font-zurich-condensed text-base">
+                      <p className="text-gray-300 font-zurich-condensed text-sm">
                         I'll personally review your track and send you detailed feedback
                       </p>
                     </div>
@@ -233,7 +233,7 @@ const AlphaDrums3VipList = () => {
                     }} />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">3 x 1-to-1 Zoom Calls</h5>
-                      <p className="text-gray-300 font-zurich-condensed text-base">
+                      <p className="text-gray-300 font-zurich-condensed text-sm">
                         Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
                       </p>
                     </div>
@@ -242,7 +242,7 @@ const AlphaDrums3VipList = () => {
               </div>
             </div>
 
-            <p className="text-lg text-gray-300 font-zurich-condensed flex items-center justify-center gap-2">
+            <p className="text-base text-gray-300 font-zurich-condensed flex items-center justify-center gap-2">
               <ChevronRight size={20} className="text-[#DEFF00]" />
               <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access + your shot at these exclusive bonuses.
             </p>
