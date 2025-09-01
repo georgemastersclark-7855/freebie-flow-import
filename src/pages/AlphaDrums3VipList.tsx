@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { sendZapierEvent } from "@/lib/zapier";
 import { toast } from "sonner";
+import { Target, Zap, Music, Flame, ChevronRight, PartyPopper } from "lucide-react";
 const AlphaDrums3VipList = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -102,8 +103,9 @@ const AlphaDrums3VipList = () => {
           <div className="text-center mb-12">
             {/* Eyebrow */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 mb-6">
-              <span className="text-sm font-medium text-red-400 font-zurich-condensed">
-                🔥 Exclusive: Only 250 Launch Bonuses Available
+              <span className="text-sm font-medium text-red-400 font-zurich-condensed flex items-center gap-1">
+                <Flame size={16} className="text-red-400" />
+                Exclusive: Only 250 Launch Bonuses Available
               </span>
             </div>
 
@@ -137,7 +139,7 @@ const AlphaDrums3VipList = () => {
                   </CardContent>
                 </Card> : <Card className="bg-green-900/20 border-green-500/30">
                   <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-4">🎉</div>
+                    <PartyPopper size={32} className="text-green-400 mb-4" />
                     <h3 className="text-xl font-bold text-white mb-2 font-zurich-condensed">
                       You're In!
                     </h3>
@@ -160,15 +162,16 @@ const AlphaDrums3VipList = () => {
 
             <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-700">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-[#DEFF00] font-zurich-condensed mb-2">
-                  🎯 VIP Early Access Rewards
+                <h3 className="text-2xl font-bold text-[#DEFF00] font-zurich-condensed mb-2 flex items-center justify-center gap-2">
+                  <Target size={24} className="text-[#DEFF00]" />
+                  VIP Early Access Rewards
                 </h3>
               </div>
               
               <div className="space-y-6 text-center max-w-2xl mx-auto">
                 <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30 text-center">
                   <div className="text-center">
-                    <span className="text-[#DEFF00] font-bold text-xl">⚡</span>
+                    <Zap size={24} className="text-[#DEFF00]" />
                     <p className="text-gray-300 font-zurich-condensed text-base mt-2">
                       <span className="text-white font-semibold">First 250 orders:</span> Get the Fractals FX Pack FREE ($35 value)
                     </p>
@@ -182,14 +185,14 @@ const AlphaDrums3VipList = () => {
                 </div>
                 
                 <div className="text-center">
-                  <span className="text-[#DEFF00] font-bold">🎵</span>
+                  <Music size={24} className="text-[#DEFF00]" />
                   <p className="text-gray-300 font-zurich-condensed mt-2">
                     <span className="text-white font-semibold">25 x Music Feedbacks:</span> I'll personally review your track and send you detailed feedback
                   </p>
                 </div>
                 
                 <div className="text-center">
-                  <span className="text-[#DEFF00] font-bold">🔥</span>
+                  <Flame size={24} className="text-[#DEFF00]" />
                   <p className="text-gray-300 font-zurich-condensed mt-2">
                     <span className="text-white font-semibold">3 x 1-to-1 Zoom Calls:</span> Score a 30-minute 1-on-1 Zoom call with me to talk production, mixing, or whatever you need
                   </p>
@@ -207,8 +210,9 @@ const AlphaDrums3VipList = () => {
               <span className="text-white font-semibold"> This one will go even faster.</span>
             </p>
 
-            <p className="text-lg text-gray-300 font-zurich-condensed">
-              👉 <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access + your shot at these exclusive bonuses.
+            <p className="text-lg text-gray-300 font-zurich-condensed flex items-center justify-center gap-2">
+              <ChevronRight size={20} className="text-[#DEFF00]" />
+              <span className="text-white font-semibold">Join the VIP list now</span> and secure your early access + your shot at these exclusive bonuses.
             </p>
 
           </div>
