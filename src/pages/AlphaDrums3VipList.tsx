@@ -160,6 +160,16 @@ const AlphaDrums3VipList = () => {
               with over <span className="text-[#DEFF00]">700 battle-tested sounds</span> straight from real sessions.
             </p>
 
+            <p className="text-lg text-gray-300 font-zurich-condensed">
+              The VIP list gets a <span className="text-[#DEFF00] font-semibold">2.5-hour head start</span> before the public notification. 
+              Based on past launches, these bonuses will be gone in under 2 hours.
+            </p>
+
+            <p className="text-lg text-gray-300 font-zurich-condensed">
+              Thousands of producers grabbed Alpha Drums 1 & 2 on launch day. 
+              <span className="text-white font-semibold"> This one will go even faster.</span>
+            </p>
+
             <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-700">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold bg-gradient-to-b from-white via-gray-300 to-gray-500 bg-clip-text text-transparent font-zurich-condensed mb-2 flex items-center justify-center gap-2">
@@ -226,16 +236,6 @@ const AlphaDrums3VipList = () => {
                 </div>
               </div>
             </div>
-
-            <p className="text-lg text-gray-300 font-zurich-condensed">
-              The VIP list gets a <span className="text-[#DEFF00] font-semibold">2.5-hour head start</span> before the public notification. 
-              Based on past launches, these bonuses will be gone in under 2 hours.
-            </p>
-
-            <p className="text-lg text-gray-300 font-zurich-condensed">
-              Thousands of producers grabbed Alpha Drums 1 & 2 on launch day. 
-              <span className="text-white font-semibold"> This one will go even faster.</span>
-            </p>
 
             <p className="text-lg text-gray-300 font-zurich-condensed flex items-center justify-center gap-2">
               <ChevronRight size={20} className="text-[#DEFF00]" />
