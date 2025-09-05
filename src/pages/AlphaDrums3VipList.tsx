@@ -12,6 +12,7 @@ const AlphaDrums3VipList = () => {
   const [name, setName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isVipClosed] = useState(true); // VIP list is now closed
 
   // Configure Alpha Drums 3 specific Zapier webhook
   useEffect(() => {
@@ -124,7 +125,18 @@ const AlphaDrums3VipList = () => {
 
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
-              {!isSubmitted ? <div className="relative">
+              {isVipClosed ? (
+                <Card className="bg-red-900/20 border-red-500/30">
+                  <CardContent className="p-6 text-center">
+                    <h3 className="text-2xl font-bold text-white mb-3 font-zurich-condensed">
+                      VIP List has now closed
+                    </h3>
+                    <p className="text-red-200 font-zurich-condensed text-lg">
+                      Alpha Drums 3 will be launching Saturday 6th September
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : !isSubmitted ? <div className="relative">
                   {/* External glow effect */}
                   <div className="absolute inset-0 bg-white/20 blur-2xl rounded-lg"></div>
                   
