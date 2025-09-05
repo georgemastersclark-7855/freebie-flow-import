@@ -125,18 +125,16 @@ const AlphaDrums3VipList = () => {
 
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
-              {isVipClosed ? (
-                <Card className="bg-red-900/20 border-red-500/30">
+              {isVipClosed ? <Card className="bg-red-900/20 border-red-500/30">
                   <CardContent className="p-6 text-center">
                     <h3 className="text-2xl font-bold text-white mb-3 font-zurich-condensed">
                       VIP List has now closed
                     </h3>
-                    <p className="text-red-200 font-zurich-condensed text-lg">
-                      Alpha Drums 3 will be launching Saturday 6th September
-                    </p>
+                    <p className="text-red-200 font-zurich-condensed text-lg">Alpha Drums 3 will be launching Saturday 6th September. If you're in, you're in. Check your inbox tomorrow morning for early access.
+ 
+If you missed it, don't worry - you'll still get the launch email with everyone else. Just be ready to move fast for those 250 Fractals bonuses.</p>
                   </CardContent>
-                </Card>
-              ) : !isSubmitted ? <div className="relative">
+                </Card> : !isSubmitted ? <div className="relative">
                   {/* External glow effect */}
                   <div className="absolute inset-0 bg-white/20 blur-2xl rounded-lg"></div>
                   
@@ -196,11 +194,7 @@ const AlphaDrums3VipList = () => {
               <div className="space-y-4 max-w-2xl mx-auto">
                 <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
                   <div className="flex flex-col items-center gap-3">
-                    <img 
-                      src="/lovable-uploads/c70a01f4-97bc-4fb1-90e7-5262f590a25b.png" 
-                      alt="Fractals FX Pack" 
-                      className="w-24 h-24 object-contain drop-shadow-lg"
-                    />
+                    <img src="/lovable-uploads/c70a01f4-97bc-4fb1-90e7-5262f590a25b.png" alt="Fractals FX Pack" className="w-24 h-24 object-contain drop-shadow-lg" />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">First 250 Orders</h5>
                       <p className="text-gray-300 font-zurich-condensed text-sm">
@@ -219,11 +213,11 @@ const AlphaDrums3VipList = () => {
                 <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
                   <div className="flex flex-col items-center gap-3">
                     <Music size={32} className="text-white drop-shadow-sm" style={{
-                      background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
-                    }} />
+                    background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
+                  }} />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">25 x Music Feedbacks</h5>
                       <p className="text-gray-300 font-zurich-condensed text-sm">
@@ -236,11 +230,11 @@ const AlphaDrums3VipList = () => {
                 <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/30 text-center">
                   <div className="flex flex-col items-center gap-3">
                     <Flame size={32} className="text-white drop-shadow-sm" style={{
-                      background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
-                    }} />
+                    background: 'linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
+                  }} />
                     <div>
                       <h5 className="text-white font-bold font-zurich-condensed text-lg mb-1">3 x 1-to-1 Zoom Calls</h5>
                       <p className="text-gray-300 font-zurich-condensed text-sm">
@@ -265,48 +259,33 @@ const AlphaDrums3VipList = () => {
             <div className="mt-12 pt-8 border-t border-gray-700">
               <h3 className="text-lg font-bold text-white font-zurich-condensed mb-4 text-center">Share with Fellow Producers</h3>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <Button
-                  onClick={() => {
-                    const url = window.location.href;
-                    const text = "Join the Alpha Drums 3 VIP list and get Fractals FREE ($35 value) + early access!";
-                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
-                  }}
-                  variant="outline"
-                  size="sm"
-                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto"
-                >
+                <Button onClick={() => {
+                const url = window.location.href;
+                const text = "Join the Alpha Drums 3 VIP list and get Fractals FREE ($35 value) + early access!";
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+              }} variant="outline" size="sm" className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto">
                   <Twitter size={16} className="mr-2" />
                   Share on X
                 </Button>
-                <Button
-                  onClick={() => {
-                    const url = window.location.href;
-                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-                  }}
-                  variant="outline"
-                  size="sm"
-                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto"
-                >
+                <Button onClick={() => {
+                const url = window.location.href;
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+              }} variant="outline" size="sm" className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto">
                   <Facebook size={16} className="mr-2" />
                   Share on Facebook
                 </Button>
-                <Button
-                  onClick={() => {
-                    if (navigator.share) {
-                      navigator.share({
-                        title: 'Alpha Drums 3 VIP List',
-                        text: 'Join the Alpha Drums 3 VIP list and get Fractals FREE ($35 value) + early access!',
-                        url: window.location.href,
-                      });
-                    } else {
-                      navigator.clipboard.writeText(window.location.href);
-                      toast.success("Link copied to clipboard!");
-                    }
-                  }}
-                  variant="outline"
-                  size="sm"
-                  className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto"
-                >
+                <Button onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: 'Alpha Drums 3 VIP List',
+                    text: 'Join the Alpha Drums 3 VIP list and get Fractals FREE ($35 value) + early access!',
+                    url: window.location.href
+                  });
+                } else {
+                  navigator.clipboard.writeText(window.location.href);
+                  toast.success("Link copied to clipboard!");
+                }
+              }} variant="outline" size="sm" className="bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 text-white w-full sm:w-auto">
                   <Share2 size={16} className="mr-2" />
                   Share Link
                 </Button>
