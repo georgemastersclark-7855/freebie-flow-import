@@ -130,8 +130,9 @@ const AlphaDrums3VipList = () => {
                     <h3 className="text-2xl font-bold text-white mb-3 font-zurich-condensed">
                       VIP List has now closed
                     </h3>
-                    <p className="text-red-200 font-zurich-condensed text-lg">Alpha Drums 3 will be launching Saturday 6th September. If you're in, you're in. Check your inbox tomorrow morning for early access.
- 
+                    <p className="text-red-200 font-zurich-condensed text-lg">Alpha Drums 3 will be launching Saturday 6th September. If you're in, you're in. Check your inbox tomorrow morning for early access. 
+
+
 If you missed it, don't worry - you'll still get the launch email with everyone else. Just be ready to move fast for those 250 Fractals bonuses.</p>
                   </CardContent>
                 </Card> : !isSubmitted ? <div className="relative">
