@@ -117,9 +117,7 @@ const AlphaDrums3VipList = () => {
 
             <p className="text-base text-white max-w-3xl mx-auto mb-12 font-zurich-condensed font-normal">
               Get <span className="text-[#DEFF00]">Fractals FREE</span> (worth $35) when you order Alpha Drums 3. 
-              Limited to the first 250 producers.
-              <br /><br />
-              Be the first to unlock <span className="font-semibold">Alpha Drums 3</span> - my biggest drum library yet, 
+              Limited to the first 250 producers. Be the first to unlock <span className="font-semibold">Alpha Drums 3</span> - my biggest drum library yet, 
               with over <span className="text-[#DEFF00]">700 battle-tested sounds</span> straight from real sessions.
             </p>
 
@@ -130,10 +128,8 @@ const AlphaDrums3VipList = () => {
                     <h3 className="text-2xl font-bold text-white mb-3 font-zurich-condensed">
                       VIP List has now closed
                     </h3>
-                    <p className="text-red-200 font-zurich-condensed text-lg">Alpha Drums 3 will be launching Saturday 6th September. If you're in, you're in. Check your inbox tomorrow morning for early access. 
-
-
-If you missed it, don't worry - you'll still get the launch email with everyone else. Just be ready to move fast for those 250 Fractals bonuses.</p>
+                    <p className="text-red-200 font-zurich-condensed text-lg">Alpha Drums 3 will be launching Saturday 6th September. If you're in, you're in. Check your inbox tomorrow morning for early access.</p>
+                    <p className="text-red-200 font-zurich-condensed text-lg mt-4">If you missed it, don't worry - you'll still get the launch email with everyone else. Just be ready to move fast for those 250 Fractals bonuses.</p>
                   </CardContent>
                 </Card> : !isSubmitted ? <div className="relative">
                   {/* External glow effect */}
