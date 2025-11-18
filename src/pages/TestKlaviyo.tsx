@@ -1,28 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const TestKlaviyo = () => {
-  useEffect(() => {
-    // Load Klaviyo form script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WrvxHn';
-    
-    script.onload = () => {
-      console.log('Klaviyo script loaded successfully on test page');
-    };
-    
-    script.onerror = () => {
-      console.error('Failed to load Klaviyo script on test page');
-    };
-    
-    document.head.appendChild(script);
-
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
 
   return (
     <div className="min-h-screen bg-white p-8">
