@@ -1,33 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Gem, Music, Flame, ChevronRight, Share2, Twitter, Facebook } from "lucide-react";
+import { Gem, Music, Flame, ChevronRight, Share2, Twitter, Facebook, PartyPopper } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { sendZapierEvent } from "@/lib/zapier";
 const AlphaDrums3VipList = () => {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isVipClosed] = useState(true); // VIP list is now closed
 
-  // Load Klaviyo script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WrvxHn';
-    
-    script.onload = () => {
-      console.log('Klaviyo script loaded successfully');
-    };
-    
-    script.onerror = () => {
-      console.error('Failed to load Klaviyo script');
-    };
-    
-    document.head.appendChild(script);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
+    try {
+      // Store in Supabase
+      const { error } = await supabase
+        .from('leads')
+        .insert([
+          {
+            name: name,
+            email: email,
+            utm_source: 'alphadrums3',
+            utm_campaign: 'vip-list'
+          }
+        ]);
+
+      if (error) throw error;
+
+      // Send to Zapier
+      await sendZapierEvent({
+        name: name,
+        email: email,
+        source: 'Alpha Drums 3 VIP List',
+        timestamp: new Date().toISOString()
+      });
+
+      setIsSubmitted(true);
+      toast.success('Success! Check your email for confirmation.');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
   const scrollToForm = () => {
     const formElement = document.getElementById('vip-signup-form');
     if (formElement) {
@@ -83,6 +105,18 @@ const AlphaDrums3VipList = () => {
                     <p className="text-red-200 font-zurich-condensed text-lg mt-4">If you missed it, don't worry - you'll still get the launch email with everyone else. Just be ready to move fast for those 250 Fractals bonuses.</p>
                   </CardContent>
                 </Card>
+              ) : isSubmitted ? (
+                <Card className="bg-green-900/20 border-green-500/30">
+                  <CardContent className="p-6 text-center">
+                    <PartyPopper className="w-12 h-12 text-green-400 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold text-white mb-3 font-zurich-condensed">
+                      You're on the VIP list!
+                    </h3>
+                    <p className="text-green-200 font-zurich-condensed">
+                      Check your email for confirmation. You'll get early access 2.5 hours before everyone else.
+                    </p>
+                  </CardContent>
+                </Card>
               ) : (
                 <div className="relative">
                   {/* External glow effect */}
@@ -90,12 +124,41 @@ const AlphaDrums3VipList = () => {
                   
                   <Card className="bg-gray-900/50 border-gray-700 relative z-10">
                     <CardContent className="p-6">
-                      {/* Klaviyo Form Embed */}
-                      <div 
-                        dangerouslySetInnerHTML={{ 
-                          __html: '<div class="klaviyo-form-WYyeyp"></div>' 
-                        }} 
-                      />
+                      <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="name" className="text-white font-zurich-condensed">Name</Label>
+                          <Input
+                            id="name"
+                            type="text"
+                            placeholder="Your name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 font-zurich-condensed"
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="email" className="text-white font-zurich-condensed">Email</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="your@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 font-zurich-condensed"
+                          />
+                        </div>
+                        
+                        <Button
+                          type="submit"
+                          disabled={isLoading}
+                          className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed"
+                        >
+                          {isLoading ? 'Joining...' : 'Join VIP List'}
+                        </Button>
+                      </form>
                     </CardContent>
                   </Card>
                 </div>
