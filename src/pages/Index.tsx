@@ -63,28 +63,40 @@ const Index = () => {
     return () => window.removeEventListener("online", onOnline);
   }, []);
 
-  // --- START KLAVIYO INTEGRATION ---
+  // --- START KLAVIYO INTEGRATION FIX ---
   useEffect(() => {
-    // Only run this logic if we are on the series page where the form exists
+    // Only run this logic if we are on the series page
     if (!isSeriesPage) return;
 
-    // REPLACE 'YOUR_PUBLIC_API_KEY' WITH YOUR ACTUAL KLAVIYO PUBLIC KEY (e.g., 'Xy7ZqP')
     const KLAVIYO_PUBLIC_KEY = "Uagw3z";
-
     const scriptId = "klaviyo-onsite-script";
 
-    // Check if script is already there to prevent duplicates
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.type = "text/javascript";
-      script.async = true;
-      script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${KLAVIYO_PUBLIC_KEY}`;
-
-      document.head.appendChild(script);
+    // 1. If the script exists from a previous page load, remove it.
+    // This forces the browser to re-fetch and re-execute the script,
+    // which makes it scan the DOM for the form div again.
+    const existingScript = document.getElementById(scriptId);
+    if (existingScript) {
+      existingScript.remove();
     }
+
+    // 2. Create and append the script fresh
+    const script = document.createElement("script");
+    script.id = scriptId;
+    script.type = "text/javascript";
+    script.async = true;
+    script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${KLAVIYO_PUBLIC_KEY}`;
+
+    document.head.appendChild(script);
+
+    // 3. Cleanup: When leaving the page, remove the script so it can reload next time
+    return () => {
+      const scriptToRemove = document.getElementById(scriptId);
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
   }, [isSeriesPage]);
-  // --- END KLAVIYO INTEGRATION ---
+  // --- END KLAVIYO INTEGRATION FIX ---
 
   // SEO for the series page
   useEffect(() => {
