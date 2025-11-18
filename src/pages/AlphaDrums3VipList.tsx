@@ -1,83 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
-import { sendZapierEvent } from "@/lib/zapier";
 import { toast } from "sonner";
-import { Gem, Music, Flame, ChevronRight, PartyPopper, Share2, Twitter, Facebook } from "lucide-react";
+import { Gem, Music, Flame, ChevronRight, Share2, Twitter, Facebook } from "lucide-react";
 const AlphaDrums3VipList = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isVipClosed] = useState(true); // VIP list is now closed
 
-  // Configure Alpha Drums 3 specific Zapier webhook
+  // Load Klaviyo script
   useEffect(() => {
-    const originalWebhook = localStorage.getItem('klaviyo_zapier_webhook');
-    const alphaDrums3Webhook = 'https://hooks.zapier.com/hooks/catch/14759876/uhinw2k/';
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WrvxHn';
+    
+    script.onload = () => {
+      console.log('Klaviyo script loaded successfully');
+    };
+    
+    script.onerror = () => {
+      console.error('Failed to load Klaviyo script');
+    };
+    
+    document.head.appendChild(script);
 
-    // Set Alpha Drums 3 webhook for this page
-    localStorage.setItem('klaviyo_zapier_webhook', alphaDrums3Webhook);
-    console.log('Alpha Drums 3: Configured Zapier webhook:', alphaDrums3Webhook);
-
-    // Cleanup: restore original webhook when component unmounts
     return () => {
-      if (originalWebhook) {
-        localStorage.setItem('klaviyo_zapier_webhook', originalWebhook);
-      } else {
-        localStorage.removeItem('klaviyo_zapier_webhook');
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
       }
-      console.log('Alpha Drums 3: Restored original webhook configuration');
     };
   }, []);
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !name) {
-      toast.error("Please fill in all fields");
-      return;
-    }
-    setIsLoading(true);
-    try {
-      // Insert lead into Supabase
-      const {
-        error: leadError
-      } = await supabase.from('leads').insert([{
-        name: name.trim(),
-        email: email.trim(),
-        utm_campaign: 'Alpha Drums 3 VIP List',
-        user_agent: navigator.userAgent,
-        referrer: document.referrer || null
-      }]);
-      if (leadError) {
-        console.error('Error inserting lead:', leadError);
-        toast.error("Failed to save your information. Please try again.");
-        return;
-      }
-
-      // Send to Zapier/Klaviyo
-      const zapierResult = await sendZapierEvent({
-        email: email.trim(),
-        name: name.trim(),
-        campaign: 'Alpha Drums 3 VIP List',
-        timestamp: new Date().toISOString(),
-        source: 'vip-signup'
-      });
-      if (zapierResult.ok) {
-        setIsSubmitted(true);
-        toast.success("Welcome to the VIP list! You'll get early access to Alpha Drums 3.");
-      } else {
-        toast.error("Sign up successful, but there was an issue with our notification system.");
-      }
-    } catch (error) {
-      console.error('Submission error:', error);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
   const scrollToForm = () => {
     const formElement = document.getElementById('vip-signup-form');
     if (formElement) {
@@ -123,7 +73,8 @@ const AlphaDrums3VipList = () => {
 
             {/* VIP Signup Form */}
             <div className="max-w-md mx-auto mb-16" id="vip-signup-form">
-              {isVipClosed ? <Card className="bg-red-900/20 border-red-500/30">
+              {isVipClosed ? (
+                <Card className="bg-red-900/20 border-red-500/30">
                   <CardContent className="p-6 text-center">
                     <h3 className="text-2xl font-bold text-white mb-3 font-zurich-condensed">
                       VIP List has now closed
@@ -131,38 +82,24 @@ const AlphaDrums3VipList = () => {
                     <p className="text-red-200 font-zurich-condensed text-lg">Alpha Drums 3 will be launching Saturday 6th September. If you're in, you're in. Check your inbox tomorrow morning for early access.</p>
                     <p className="text-red-200 font-zurich-condensed text-lg mt-4">If you missed it, don't worry - you'll still get the launch email with everyone else. Just be ready to move fast for those 250 Fractals bonuses.</p>
                   </CardContent>
-                </Card> : !isSubmitted ? <div className="relative">
+                </Card>
+              ) : (
+                <div className="relative">
                   {/* External glow effect */}
                   <div className="absolute inset-0 bg-white/20 blur-2xl rounded-lg"></div>
                   
                   <Card className="bg-gray-900/50 border-gray-700 relative z-10">
                     <CardContent className="p-6">
-                      <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="space-y-2">
-                          <Input id="name" type="text" value={name} onChange={e => setName(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]" placeholder="Enter your name" required />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 placeholder:text-sm focus:border-[#DEFF00] focus:ring-[#DEFF00]" placeholder="Enter your email" required />
-                        </div>
-                        
-                        <Button type="submit" disabled={isLoading} className="w-full bg-gradient-to-r from-[#DEFF00] to-[#B8CC00] hover:from-[#B8CC00] hover:to-[#9BAA00] text-black font-semibold font-zurich-condensed text-base py-3 h-auto mt-6">
-                          {isLoading ? "Joining..." : "Join VIP List"}
-                        </Button>
-                      </form>
+                      {/* Klaviyo Form Embed */}
+                      <div 
+                        dangerouslySetInnerHTML={{ 
+                          __html: '<div class="klaviyo-form-WYyeyp"></div>' 
+                        }} 
+                      />
                     </CardContent>
                   </Card>
-                </div> : <Card className="bg-green-900/20 border-green-500/30">
-                  <CardContent className="p-6 text-center">
-                    <PartyPopper size={32} className="text-green-400 mb-4" />
-                    <h3 className="text-xl font-bold text-white mb-2 font-zurich-condensed">
-                      You're In!
-                    </h3>
-                    <p className="text-green-300 font-zurich-condensed">
-                      Welcome to the Alpha Drums 3 VIP list. You'll get early access when it drops!
-                    </p>
-                  </CardContent>
-                </Card>}
+                </div>
+              )}
             </div>
           </div>
 
