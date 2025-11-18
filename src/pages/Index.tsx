@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -8,6 +8,63 @@ import { useUTMTracking } from "@/hooks/useUTMTracking";
 import { useLocation } from "react-router-dom";
 import { ZapierIntegration } from "@/components/ZapierIntegration";
 import { sendZapierEvent, flushZapierQueue } from "@/lib/zapier";
+
+// --- KLAVIYO FORM COMPONENT ---
+// This isolated component handles the complex script loading logic
+const KlaviyoForm = () => {
+  const formContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const KLAVIYO_PUBLIC_KEY = "Uagw3z"; // Your key
+    const scriptId = "klaviyo-onsite-script";
+
+    // Function to clean up existing scripts to force a reload
+    const cleanupKlaviyo = () => {
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) {
+        existingScript.remove();
+      }
+      // Nuke the global object so Klaviyo re-initializes
+      if ((window as any)._klOnsite) {
+        delete (window as any)._klOnsite;
+      }
+    };
+
+    // 1. Clean up anything from previous renders
+    cleanupKlaviyo();
+
+    // 2. Wait a moment to ensure the div is truly mounted in the DOM
+    const timer = setTimeout(() => {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "text/javascript";
+      script.async = true;
+      script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${KLAVIYO_PUBLIC_KEY}`;
+
+      // Add script to body to ensure it executes after DOM content
+      document.body.appendChild(script);
+    }, 1000); // 1 second delay
+
+    return () => {
+      clearTimeout(timer);
+      cleanupKlaviyo();
+    };
+  }, []);
+
+  return (
+    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 min-h-[200px] flex flex-col justify-center">
+      {/* 
+        We attach a ref to ensure React tracks this specific element.
+        The className MUST match exactly what is in your Klaviyo dashboard.
+      */}
+      <div ref={formContainerRef} className="klaviyo-form-WYyeyp">
+        {/* Fallback text that shows while loading */}
+        <p className="text-center text-gray-500 text-sm animate-pulse">Loading form...</p>
+      </div>
+    </div>
+  );
+};
+// --- END KLAVIYO FORM COMPONENT ---
 
 interface LeadMagnet {
   id: string;
@@ -34,7 +91,7 @@ const Index = () => {
   const isSeriesPage = path === "/30daysofproducersauce";
   const isResamplePage = path === "/howtoresamplelikeapro";
 
-  // Default UTMs for the Bitly link if none are present (series page only)
+  // Default UTMs
   const defaultSeriesUTM = {
     utm_source: "Youtube",
     utm_medium: "Link In Description",
@@ -53,7 +110,6 @@ const Index = () => {
       }
     : utmParams;
 
-  // Debug flag to enable integration UI
   const isDebugMode = new URLSearchParams(window.location.search).get("debug") === "true";
 
   useEffect(() => {
@@ -63,47 +119,11 @@ const Index = () => {
     return () => window.removeEventListener("online", onOnline);
   }, []);
 
-  // --- START KLAVIYO INTEGRATION FIX ---
-  useEffect(() => {
-    // Only run this logic if we are on the series page
-    if (!isSeriesPage) return;
-
-    const KLAVIYO_PUBLIC_KEY = "Uagw3z";
-    const scriptId = "klaviyo-onsite-script";
-
-    // 1. If the script exists from a previous page load, remove it.
-    // This forces the browser to re-fetch and re-execute the script,
-    // which makes it scan the DOM for the form div again.
-    const existingScript = document.getElementById(scriptId);
-    if (existingScript) {
-      existingScript.remove();
-    }
-
-    // 2. Create and append the script fresh
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.type = "text/javascript";
-    script.async = true;
-    script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${KLAVIYO_PUBLIC_KEY}`;
-
-    document.head.appendChild(script);
-
-    // 3. Cleanup: When leaving the page, remove the script so it can reload next time
-    return () => {
-      const scriptToRemove = document.getElementById(scriptId);
-      if (scriptToRemove) {
-        scriptToRemove.remove();
-      }
-    };
-  }, [isSeriesPage]);
-  // --- END KLAVIYO INTEGRATION FIX ---
-
-  // SEO for the series page
+  // SEO
   useEffect(() => {
     if (!isSeriesPage) return;
     document.title = "30 Days Of Producer Sauce | free 30-Day Email Series";
 
-    // Meta description
     const description =
       "Join a free 30-day email series with daily lessons to improve your production workflows and sound quality.";
     let metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
@@ -114,7 +134,6 @@ const Index = () => {
     }
     metaDesc.content = description;
 
-    // Canonical
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonical) {
       canonical = document.createElement("link");
@@ -124,7 +143,7 @@ const Index = () => {
     canonical.href = window.location.href;
   }, [isSeriesPage]);
 
-  // Fetch lead magnets from Supabase
+  // Fetch lead magnets
   useEffect(() => {
     const fetchLeadMagnets = async () => {
       try {
@@ -163,7 +182,6 @@ const Index = () => {
     setIsLoading(true);
 
     try {
-      // Create lead record with UTM tracking
       const { data: leadData, error: leadError } = await supabase
         .from("leads")
         .insert({
@@ -175,7 +193,7 @@ const Index = () => {
           utm_term: effectiveUTM.utm_term,
           utm_content: effectiveUTM.utm_content,
           referrer: effectiveUTM.referrer,
-          ip_address: null, // Could be captured server-side
+          ip_address: null,
           user_agent: navigator.userAgent,
         })
         .select()
@@ -194,9 +212,7 @@ const Index = () => {
       setLeadId(leadData.id);
       setIsSubmitted(true);
 
-      // Add a small delay to ensure UTM params are fully captured
       setTimeout(async () => {
-        // Send to Zapier/Klaviyo with enhanced data structure
         await sendZapierEvent({
           leadId: leadData.id,
           name: formData.name,
@@ -228,8 +244,7 @@ const Index = () => {
 
   const handleDownload = async (leadMagnet: LeadMagnet) => {
     try {
-      // Get the signed URL for download
-      const { data, error } = await supabase.storage.from("lead-magnets").createSignedUrl(leadMagnet.file_path, 3600); // 1 hour expiry
+      const { data, error } = await supabase.storage.from("lead-magnets").createSignedUrl(leadMagnet.file_path, 3600);
 
       if (error) {
         console.error("Error creating signed URL:", error);
@@ -241,9 +256,8 @@ const Index = () => {
         return;
       }
 
-      // Track download event
       if (leadId) {
-        const { error: downloadError } = await supabase.from("lead_downloads").insert({
+        await supabase.from("lead_downloads").insert({
           lead_id: leadId,
           lead_magnet_id: leadMagnet.id,
           utm_source: utmParams.utm_source,
@@ -253,11 +267,6 @@ const Index = () => {
           utm_content: utmParams.utm_content,
         });
 
-        if (downloadError) {
-          console.error("Error tracking download:", downloadError);
-        }
-
-        // Send download event to Zapier/Klaviyo
         await sendZapierEvent({
           leadId: leadId,
           name: formData.name,
@@ -269,13 +278,11 @@ const Index = () => {
         });
       }
 
-      // Increment download count
       await supabase
         .from("lead_magnets")
         .update({ download_count: leadMagnet.download_count + 1 })
         .eq("id", leadMagnet.id);
 
-      // Trigger download
       const link = document.createElement("a");
       link.href = data.signedUrl;
       link.download = leadMagnet.file_name;
@@ -300,7 +307,7 @@ const Index = () => {
   const handleExternalDownload = async (url: string, filename: string) => {
     try {
       if (leadId) {
-        const { error: downloadError } = await supabase.from("lead_downloads").insert({
+        await supabase.from("lead_downloads").insert({
           lead_id: leadId,
           utm_source: utmParams.utm_source,
           utm_medium: utmParams.utm_medium,
@@ -308,9 +315,7 @@ const Index = () => {
           utm_term: utmParams.utm_term,
           utm_content: utmParams.utm_content,
         });
-        if (downloadError) {
-          console.error("Error tracking external download:", downloadError);
-        }
+
         await sendZapierEvent({
           leadId,
           name: formData.name,
@@ -323,7 +328,6 @@ const Index = () => {
       }
 
       const link = document.createElement("a");
-      // Force direct download if Dropbox link has dl=0
       const directUrl = url.replace(/([?&])dl=0/, "$1dl=1");
       link.href = directUrl;
       link.target = "_blank";
@@ -348,7 +352,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden flex flex-col font-zurich">
       <div className="flex-grow mb-16 md:mb-0">
-        {/* Header */}
         <header className="relative z-10 flex justify-center pt-8 mb-12">
           <img
             src="/lovable-uploads/ae79f8b9-bd73-4786-ad60-2fe1bd5c27af.png"
@@ -357,9 +360,7 @@ const Index = () => {
           />
         </header>
 
-        {/* Hero Section */}
         <div className="container mx-auto px-4 md:px-4 flex flex-col lg:flex-row items-start lg:items-stretch gap-8 lg:gap-12 min-h-[80vh]">
-          {/* Left Column - Content */}
           <div
             className={
               isSeriesPage
@@ -416,7 +417,6 @@ const Index = () => {
                     </p>
                   </div>
                 ) : (
-                  // Download Boxes
                   <div className="space-y-4">
                     {isResamplePage ? (
                       <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6 hover:bg-gray-800/70 transition-all duration-300">
@@ -478,10 +478,8 @@ const Index = () => {
                   </div>
                 )
               ) : isSeriesPage ? (
-                // Klaviyo Form for Series Page
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
-                  <div className="klaviyo-form-WYyeyp"></div>
-                </div>
+                // USE THE NEW COMPONENT HERE
+                <KlaviyoForm />
               ) : (
                 // Custom Form for Other Pages
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -560,10 +558,7 @@ const Index = () => {
           {!isSeriesPage && (
             <div className="lg:w-1/2 relative flex justify-center lg:justify-end">
               <div className="relative mx-auto max-w-lg lg:max-w-md xl:max-w-lg">
-                {/* Gradient overlay for visual appeal */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#DEFF00]/20 to-[#B8CC00]/20 rounded-2xl blur-xl"></div>
-
-                {/* Main hero image container */}
                 <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl hover:scale-105 transition-transform duration-500 inline-block overflow-hidden">
                   <img
                     src={
@@ -576,8 +571,6 @@ const Index = () => {
                     loading="lazy"
                   />
                 </div>
-
-                {/* Rob's Signature Overlay - Adjusted position */}
                 <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-20">
                   <img
                     src="/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png"
@@ -585,8 +578,6 @@ const Index = () => {
                     className="h-20 w-auto opacity-95 drop-shadow-lg"
                   />
                 </div>
-
-                {/* Floating element for visual interest - bottom left only, smaller on mobile */}
                 <div className="absolute -bottom-4 -left-4 w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center">
                   <Download className="w-4 h-4 md:w-6 md:h-6 text-black" />
                 </div>
@@ -612,7 +603,6 @@ const Index = () => {
         </div>
       )}
 
-      {/* Footer */}
       <footer className="bg-gray-900/50 border-t border-gray-700 py-6">
         <div className="container mx-auto px-6 md:px-4 text-center">
           <p className="text-gray-400 font-zurich-condensed">
