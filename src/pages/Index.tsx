@@ -88,6 +88,31 @@ const Index = () => {
     }
     canonical.href = window.location.href;
   }, [isSeriesPage]);
+
+  // Load Klaviyo script for series page
+  useEffect(() => {
+    if (!isSeriesPage) return;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WrvxHn';
+    
+    script.onload = () => {
+      console.log('Klaviyo script loaded successfully');
+    };
+    
+    script.onerror = () => {
+      console.error('Failed to load Klaviyo script');
+    };
+    
+    document.head.appendChild(script);
+
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, [isSeriesPage]);
   // Fetch lead magnets from Supabase
   useEffect(() => {
     const fetchLeadMagnets = async () => {
@@ -426,8 +451,15 @@ const Index = () => {
                     )}
                   </div>
                 )
+              ) : isSeriesPage ? (
+                // Klaviyo Form for Series Page
+                <div 
+                  dangerouslySetInnerHTML={{ 
+                    __html: '<div class="klaviyo-form-WYyeyp"></div>' 
+                  }} 
+                />
               ) : (
-                // Form
+                // Custom Form for Other Pages
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -461,7 +493,7 @@ const Index = () => {
                       boxShadow: '0 0 20px rgba(222, 255, 0, 0.4), 0 0 40px rgba(222, 255, 0, 0.2), 0 0 60px rgba(222, 255, 0, 0.1)'
                     }}
                   >
-                    {isLoading ? "Processing..." : (isSeriesPage ? "Sign Me Up!" : "Get My Free Downloads")}
+                    {isLoading ? "Processing..." : "Get My Free Downloads"}
                   </Button>
                 </form>
               )}
