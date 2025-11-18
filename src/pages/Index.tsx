@@ -453,11 +453,13 @@ const Index = () => {
                 )
               ) : isSeriesPage ? (
                 // Klaviyo Form for Series Page
-                <div 
-                  dangerouslySetInnerHTML={{ 
-                    __html: '<div class="klaviyo-form-WYyeyp"></div>' 
-                  }} 
-                />
+                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-6">
+                  <div 
+                    dangerouslySetInnerHTML={{ 
+                      __html: '<div class="klaviyo-form-WYyeyp"></div>' 
+                    }} 
+                  />
+                </div>
               ) : (
                 // Custom Form for Other Pages
                 <form onSubmit={handleSubmit} className="space-y-4">
