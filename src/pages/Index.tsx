@@ -89,30 +89,6 @@ const Index = () => {
     canonical.href = window.location.href;
   }, [isSeriesPage]);
 
-  // Load Klaviyo script for series page
-  useEffect(() => {
-    if (!isSeriesPage) return;
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WrvxHn';
-    
-    script.onload = () => {
-      console.log('Klaviyo script loaded successfully');
-    };
-    
-    script.onerror = () => {
-      console.error('Failed to load Klaviyo script');
-    };
-    
-    document.head.appendChild(script);
-
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
-  }, [isSeriesPage]);
   // Fetch lead magnets from Supabase
   useEffect(() => {
     const fetchLeadMagnets = async () => {
