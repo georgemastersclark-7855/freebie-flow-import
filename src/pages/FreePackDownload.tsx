@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import robStudio from "@/assets/rob-studio.png";
 
 const FreePackDownload = () => {
   const handleDownload = () => {
@@ -21,8 +22,8 @@ const FreePackDownload = () => {
 
         <div className="flex justify-center">
           <img
-            src="/lovable-uploads/c70a01f4-97bc-4fb1-90e7-5262f590a25b.png"
-            alt="Rob Late"
+            src={robStudio}
+            alt="Rob Late in studio"
             className="w-48 h-48 rounded-full object-cover border-4 border-primary shadow-lg"
           />
         </div>
