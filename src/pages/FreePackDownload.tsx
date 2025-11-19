@@ -4,8 +4,7 @@ import robStudio from "@/assets/rob-studio.png";
 
 const FreePackDownload = () => {
   const handleDownload = () => {
-    // Replace with your actual download link
-    window.open("YOUR_DOWNLOAD_LINK_HERE", "_blank");
+    window.open("https://drive.google.com/uc?export=download&id=18XjzF-HLTpI72HltTmYlDnigveuSMkR9", "_blank");
   };
 
   return (
