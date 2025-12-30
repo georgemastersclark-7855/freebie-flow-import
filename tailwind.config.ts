@@ -20,6 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				'sans': ['Inter', 'system-ui', 'sans-serif'],
+				'serif': ['Playfair Display', 'Georgia', 'serif'],
 				'neutronic': ['neutronic', 'sans-serif'],
 				'akira': ['Akira Expanded', 'sans-serif'],
 				'zurich': ['Zurich Extended', 'sans-serif'],
