@@ -3,6 +3,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
 import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
+import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 
 const TheProducerBlueprint001 = () => {
   // Testimonial images
@@ -17,7 +18,7 @@ const TheProducerBlueprint001 = () => {
 
   // Album art for the marquee with artist names
   const albumArt = [
-    { img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop", artist: "The Chainsmokers" },
+    { img: chainsomokersFriday, artist: "The Chainsmokers ft Fridayy" },
     { img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200&h=200&fit=crop", artist: "Marshmello" },
     { img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200&h=200&fit=crop", artist: "Clean Bandit" },
     { img: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&h=200&fit=crop", artist: "Spinnin' Records" },
