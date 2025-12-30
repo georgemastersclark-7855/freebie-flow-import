@@ -116,7 +116,7 @@ const TheProducerBlueprint001 = () => {
 
         {/* Subheadline */}
         <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Watch <span className="text-white font-semibold">Rob Late</span> (The Chainsmokers, Marshmello) demonstrate the end-to-end process he uses to write, produce, and mix professional records from a home studio.
+          Watch <span className="text-white font-semibold">Rob Late</span> (The Chainsmokers, Marshmello, Clean Bandit) demonstrate the end-to-end process he uses to write, produce, and mix professional records from a home studio.
         </p>
 
         {/* CTA Area */}
@@ -242,14 +242,12 @@ const TheProducerBlueprint001 = () => {
                 key={index}
                 className="text-center"
               >
-                <div className="rounded-2xl border border-white/10 bg-zinc-900/50 shadow-2xl hover:scale-105 transition-transform duration-300 overflow-hidden cursor-pointer mb-3">
-                  <div className="aspect-square overflow-hidden">
-                    <img 
-                      src={testimonial.image} 
-                      alt={`${testimonial.username} screenshot`}
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
+                <div className="aspect-[4/5] rounded-2xl border border-white/10 bg-[#121212] shadow-2xl hover:scale-[1.02] hover:border-white/20 transition-all duration-300 overflow-hidden cursor-pointer mb-3">
+                  <img 
+                    src={testimonial.image} 
+                    alt={`${testimonial.username} screenshot`}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 <p className="text-zinc-500 text-sm">{testimonial.username} screenshot</p>
               </div>
