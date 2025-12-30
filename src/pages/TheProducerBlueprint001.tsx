@@ -1,7 +1,13 @@
 import { ArrowRight, Check, Play, Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
+import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
+import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
 
 const TheProducerBlueprint001 = () => {
+  // Testimonial images
+  const testimonials = [testimonial1, testimonial2, testimonial3];
+
   // Album art placeholders for the marquee
   const albumArt = [
     { id: 1, alt: "Album 1" },
@@ -211,22 +217,20 @@ const TheProducerBlueprint001 = () => {
           </p>
         </div>
 
-        {/* Row 1: Wall of Love (Image Placeholders) */}
+        {/* Row 1: Wall of Love */}
         <div className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
+            {testimonials.map((testimonial, index) => (
               <div 
-                key={item}
-                className="aspect-[4/5] rounded-2xl border border-white/10 bg-zinc-900/50 shadow-2xl hover:scale-105 transition-transform duration-300 overflow-hidden group cursor-pointer"
+                key={index}
+                className="rounded-2xl border border-white/10 bg-zinc-900/50 shadow-2xl hover:scale-105 transition-transform duration-300 overflow-hidden group cursor-pointer"
               >
-                {/* Placeholder Content */}
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-800/50 to-zinc-900/50">
-                  <div className="text-center">
-                    <div className="w-12 h-12 rounded-full bg-zinc-700/50 mx-auto mb-3 flex items-center justify-center">
-                      <span className="text-zinc-500 text-lg">📸</span>
-                    </div>
-                    <p className="text-zinc-600 text-sm">Screenshot {item}</p>
-                  </div>
+                <div className="aspect-square overflow-hidden">
+                  <img 
+                    src={testimonial} 
+                    alt={`Producer testimonial ${index + 1}`}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
               </div>
             ))}
