@@ -246,7 +246,7 @@ const TheProducerBlueprint001 = () => {
                   <img 
                     src={testimonial.image} 
                     alt={`${testimonial.username} screenshot`}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <p className="text-zinc-500 text-sm">{testimonial.username} screenshot</p>
