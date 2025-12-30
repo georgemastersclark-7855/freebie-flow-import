@@ -8,34 +8,42 @@ const TheProducerBlueprint001 = () => {
   // Testimonial images
   const testimonials = [testimonial1, testimonial2, testimonial3];
 
-  // Album art placeholders for the marquee
+  // Testimonial data with usernames
+  const testimonialData = [
+    { image: testimonial1, username: "@aaronly0ns" },
+    { image: testimonial2, username: "@rsmyth111" },
+    { image: testimonial3, username: "@levin_music" },
+  ];
+
+  // Album art for the marquee with artist names
   const albumArt = [
-    { id: 1, alt: "Album 1" },
-    { id: 2, alt: "Album 2" },
-    { id: 3, alt: "Album 3" },
-    { id: 4, alt: "Album 4" },
-    { id: 5, alt: "Album 5" },
-    { id: 6, alt: "Album 6" },
-    { id: 7, alt: "Album 7" },
-    { id: 8, alt: "Album 8" },
+    { img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop", artist: "The Chainsmokers" },
+    { img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200&h=200&fit=crop", artist: "Marshmello" },
+    { img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200&h=200&fit=crop", artist: "Clean Bandit" },
+    { img: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&h=200&fit=crop", artist: "Spinnin' Records" },
+    { img: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=200&h=200&fit=crop", artist: "Tiesto" },
+    { img: "https://images.unsplash.com/photo-1504898770365-14faca6a7320?w=200&h=200&fit=crop", artist: "Kygo" },
   ];
 
   // Video case studies data
   const caseStudies = [
     {
-      name: "Alex M.",
-      role: "EDM Producer",
-      quote: "Finally understood the full workflow from start to finish.",
+      name: "ALEX M.",
+      role: "Music Producer",
+      location: "United Kingdom",
+      quote: "My mixes used to sound muddy and thin. Following Module 6 completely changed how I EQ and compress drums.",
     },
     {
-      name: "Sarah J.",
-      role: "Pop Producer",
-      quote: "The mixing section alone was worth 10x the price.",
+      name: "SARAH J.",
+      role: "Artist / Songwriter",
+      location: "United States",
+      quote: "The workflow templates alone are worth the price. I finished 3 tracks in the first month after being stuck for a year.",
     },
     {
-      name: "David R.",
-      role: "Hip-Hop Producer",
-      quote: "My tracks sound professional now. No more guessing.",
+      name: "DAVID R.",
+      role: "Bedroom Producer",
+      location: "Canada",
+      quote: "Rob explains the 'why', not just the 'how'. It's the first time I actually understood compression properly.",
     },
   ];
 
@@ -69,7 +77,7 @@ const TheProducerBlueprint001 = () => {
         
         {/* Social Proof Eyebrow */}
         <div className="flex items-center justify-center gap-4 mb-10">
-          <div className="flex -space-x-3">
+          <div className="flex -space-x-3 relative">
             <Avatar className="w-10 h-10 border-2 border-[#050505]">
               <AvatarImage src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" />
               <AvatarFallback>U1</AvatarFallback>
@@ -82,6 +90,10 @@ const TheProducerBlueprint001 = () => {
               <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" />
               <AvatarFallback>U3</AvatarFallback>
             </Avatar>
+            {/* +500 Badge */}
+            <div className="w-10 h-10 rounded-full bg-[#FF4F33] border-2 border-[#050505] flex items-center justify-center text-white text-xs font-bold">
+              +500
+            </div>
           </div>
           <div className="text-left">
             <div className="flex gap-0.5">
@@ -183,11 +195,16 @@ const TheProducerBlueprint001 = () => {
               {[...albumArt, ...albumArt].map((album, index) => (
                 <div 
                   key={index}
-                  className="flex-shrink-0 w-24 h-24 mx-3 rounded-lg bg-zinc-800 grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer hover:scale-105"
+                  className="flex-shrink-0 mx-3 text-center group cursor-pointer"
                 >
-                  <div className="w-full h-full rounded-lg bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center text-zinc-600 text-xs">
-                    {album.alt}
+                  <div className="w-24 h-24 rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-105">
+                    <img 
+                      src={album.img} 
+                      alt={album.artist}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
+                  <p className="text-zinc-600 text-xs mt-2 group-hover:text-zinc-400 transition-colors">{album.artist}</p>
                 </div>
               ))}
             </div>
@@ -220,18 +237,21 @@ const TheProducerBlueprint001 = () => {
         {/* Row 1: Wall of Love */}
         <div className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
+            {testimonialData.map((testimonial, index) => (
               <div 
                 key={index}
-                className="rounded-2xl border border-white/10 bg-zinc-900/50 shadow-2xl hover:scale-105 transition-transform duration-300 overflow-hidden group cursor-pointer"
+                className="text-center"
               >
-                <div className="aspect-square overflow-hidden">
-                  <img 
-                    src={testimonial} 
-                    alt={`Producer testimonial ${index + 1}`}
-                    className="w-full h-full object-cover object-top"
-                  />
+                <div className="rounded-2xl border border-white/10 bg-zinc-900/50 shadow-2xl hover:scale-105 transition-transform duration-300 overflow-hidden cursor-pointer mb-3">
+                  <div className="aspect-square overflow-hidden">
+                    <img 
+                      src={testimonial.image} 
+                      alt={`${testimonial.username} screenshot`}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
                 </div>
+                <p className="text-zinc-500 text-sm">{testimonial.username} screenshot</p>
               </div>
             ))}
           </div>
@@ -256,17 +276,14 @@ const TheProducerBlueprint001 = () => {
               
               {/* Text Info */}
               <div className="space-y-3">
-                <p className="text-zinc-300 text-base leading-relaxed">
+                <p className="text-white font-semibold text-sm tracking-wide">{study.name}</p>
+                <p className="text-zinc-400 text-base leading-relaxed">
                   "{study.quote}"
                 </p>
-                <div className="flex items-center gap-3 pt-2">
-                  <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-sm font-medium">
-                    {study.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-white font-medium text-sm">{study.name}</p>
-                    <p className="text-zinc-500 text-xs">{study.role}</p>
-                  </div>
+                <div className="flex items-center gap-2 text-xs text-zinc-500">
+                  <span>{study.role}</span>
+                  <span className="text-zinc-700">•</span>
+                  <span>{study.location}</span>
                 </div>
               </div>
             </div>
