@@ -91,7 +91,7 @@ const TheProducerBlueprint001 = () => {
               <AvatarFallback>U3</AvatarFallback>
             </Avatar>
             {/* +500 Badge */}
-            <div className="w-10 h-10 rounded-full bg-[#FF4F33] border-2 border-[#050505] flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-10 h-10 rounded-full bg-[#FF4F33] border-2 border-[#050505] flex items-center justify-center text-white text-[10px] font-bold">
               +500
             </div>
           </div>
