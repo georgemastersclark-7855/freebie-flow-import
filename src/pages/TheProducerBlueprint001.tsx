@@ -8,6 +8,7 @@ import aaronly0nsTestimonial from "@/assets/testimonials/aaronly0ns-testimonial.
 import rsmyth111Testimonial from "@/assets/testimonials/rsmyth111-testimonial.jpeg";
 import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial.jpeg";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
+import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 
 const TheProducerBlueprint001 = () => {
@@ -247,9 +248,9 @@ const TheProducerBlueprint001 = () => {
             </div>
             {/* Credit Item 2 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img src="https://placehold.co/200x200/18181b/ffffff?text=Marshmello" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Marshmello" />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Marshmello</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Production Credit</p>
+              <img src={chainsmokersNoShade} className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers - No Shade At Pitti" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
             </div>
             {/* Credit Item 3 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
@@ -283,9 +284,9 @@ const TheProducerBlueprint001 = () => {
               <p className="text-zinc-500 text-[10px] text-center mt-1">Friday ft. Fridayy</p>
             </div>
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img src="https://placehold.co/200x200/18181b/ffffff?text=Marshmello" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Marshmello" />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Marshmello</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Production Credit</p>
+              <img src={chainsmokersNoShade} className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers - No Shade At Pitti" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
             </div>
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
               <img src="https://placehold.co/200x200/18181b/ffffff?text=Clean+Bandit" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Clean Bandit" />
