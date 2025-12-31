@@ -566,12 +566,12 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* SECTION: OFFER STACK */}
+      {/* SECTION: OFFER STACK (REDESIGNED) */}
       <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30">
         <div className="max-w-7xl mx-auto">
           
           {/* Headline Area */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 leading-[1.1]">
               <span className="font-serif italic font-normal text-zinc-400 lowercase tracking-normal">Introducing</span> <br />
               The Producer Blueprint.
@@ -582,89 +582,112 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* Product Mockup Placeholder */}
-          <div className="w-full max-w-4xl mx-auto aspect-[16/9] bg-zinc-900 border border-white/10 rounded-2xl mb-24 flex items-center justify-center relative overflow-hidden shadow-2xl group">
+          <div className="w-full max-w-5xl mx-auto aspect-[16/9] bg-zinc-900 border border-white/10 rounded-2xl mb-24 flex items-center justify-center relative overflow-hidden shadow-2xl group">
             <p className="text-zinc-600 font-mono text-sm uppercase tracking-widest z-10">[ Insert Product Mockup Image ]</p>
-            {/* subtle grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-            {/* glow */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50"></div>
           </div>
 
-          {/* Offer Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Layout Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             
-            {/* LEFT COLUMN: The Deliverables */}
-            <div className="lg:col-span-7 space-y-12">
+            {/* LEFT COLUMN: The Value Manifest (Clean List Style) */}
+            <div className="lg:col-span-7">
+              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-8 border-b border-white/10 pb-4">Core Curriculum</h3>
               
-              {/* Core Course Items */}
-              <div>
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                  <span className="text-[#FF4F33]">WHAT YOU GET:</span>
-                </h3>
-                <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-8 flex gap-6 hover:border-white/10 transition-colors">
-                  <div className="w-8 h-8 bg-[#FF4F33] rounded-full flex-shrink-0 flex items-center justify-center text-white mt-1">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              {/* Core Items List */}
+              <div className="space-y-8 mb-12">
+                {/* Item 1 */}
+                <div className="flex gap-6 items-start group">
+                  <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
-                  <div>
+                  <div className="flex-1 pb-8 border-b border-white/5">
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-xl font-bold text-white">The Producer Blueprint Course</h4>
-                      <span className="text-zinc-500 font-mono text-sm border border-white/10 px-2 py-1 rounded bg-zinc-900">$497 Value</span>
+                      <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">The Producer Blueprint Course</h4>
+                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$497</span>
                     </div>
-                    <p className="text-zinc-400 text-base leading-relaxed">
-                      7 modules, 70+ lessons. The complete production workflow Rob uses to produce release-ready music from a home studio. Includes Ableton project files and templates.
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      7 modules, 70+ lessons. The complete production workflow Rob uses to produce release-ready music from a home studio.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 2 */}
+                <div className="flex gap-6 items-start group">
+                  <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div className="flex-1 pb-8 border-b border-white/5">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">"Chain Reaction" Workflow System</h4>
+                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$297</span>
+                    </div>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      The exact step-by-step process for finishing tracks fast, used on major label releases.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 3 */}
+                <div className="flex gap-6 items-start group">
+                  <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div className="flex-1 pb-8 border-b border-white/5">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">Sample & Preset Vault</h4>
+                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$197</span>
+                    </div>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      Rob's personal collection of kick drums, snares, and Serum patches.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Bonuses Container */}
-              <div className="space-y-6">
-                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                  <span className="text-[#FF4F33]">FREE BONUSES INCLUDED:</span>
+              {/* Bonuses Section (Highlighted) */}
+              <div className="bg-zinc-900/30 border border-[#FF4F33]/20 rounded-2xl p-6 md:p-8">
+                <h3 className="text-xs font-bold text-[#FF4F33] uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#FF4F33] animate-pulse"></span>
+                  Free Bonuses Included
                 </h3>
                 
-                {/* Bonus 1 */}
-                <div className="bg-zinc-900/50 border border-[#FF4F33]/30 rounded-2xl p-8 flex gap-6 relative overflow-hidden group">
-                  {/* Orange Glow Effect */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none group-hover:bg-[#FF4F33]/10 transition-all"></div>
-                  
-                  <div className="w-8 h-8 border-2 border-[#FF4F33] rounded-full flex-shrink-0 flex items-center justify-center text-[#FF4F33] font-bold mt-1 text-lg">+</div>
-                  <div>
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-lg font-bold text-white">Bonus 1: Music Business Mastery</h4>
-                      <span className="text-zinc-500 font-mono text-sm border border-white/10 px-2 py-1 rounded bg-zinc-900">$97 Value</span>
+                <div className="space-y-8">
+                  {/* Bonus 1 */}
+                  <div className="flex gap-5">
+                    <div className="w-12 h-12 bg-black border border-white/10 rounded flex-shrink-0 flex items-center justify-center text-white text-lg font-serif italic">01</div>
+                    <div>
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="text-lg font-bold text-white">Music Business Mastery</h4>
+                        <span className="text-zinc-500 font-mono text-xs line-through decoration-zinc-600">$97</span>
+                      </div>
+                      <p className="text-zinc-400 text-sm leading-relaxed">Turn production into income. Growing a following and building real customers.</p>
                     </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      Turn production into income. Learn how to grow a following, make content that converts, and build a real customer base.
-                    </p>
                   </div>
-                </div>
-
-                {/* Bonus 2 */}
-                <div className="bg-zinc-900/50 border border-[#FF4F33]/30 rounded-2xl p-8 flex gap-6 relative overflow-hidden group">
-                  {/* Orange Glow Effect */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none group-hover:bg-[#FF4F33]/10 transition-all"></div>
-                  <div className="w-8 h-8 border-2 border-[#FF4F33] rounded-full flex-shrink-0 flex items-center justify-center text-[#FF4F33] font-bold mt-1 text-lg">+</div>
-                  <div>
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-lg font-bold text-white">Bonus 2: The Breakdown Vault</h4>
-                      <span className="text-zinc-500 font-mono text-sm border border-white/10 px-2 py-1 rounded bg-zinc-900">$147 Value</span>
+                  
+                  {/* Bonus 2 */}
+                  <div className="flex gap-5">
+                    <div className="w-12 h-12 bg-black border border-white/10 rounded flex-shrink-0 flex items-center justify-center text-white text-lg font-serif italic">02</div>
+                    <div>
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="text-lg font-bold text-white">The Breakdown Vault</h4>
+                        <span className="text-zinc-500 font-mono text-xs line-through decoration-zinc-600">$147</span>
+                      </div>
+                      <p className="text-zinc-400 text-sm leading-relaxed">Exclusive walkthroughs of Rob's most viral social media beats.</p>
                     </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      Project walkthroughs from Rob's viral content, plus downloadable project files and presets. Updated regularly with new breakdowns.
-                    </p>
                   </div>
                 </div>
               </div>
-
-              {/* Mobile Total Value (Hidden on Desktop) */}
-              <div className="lg:hidden border-t border-white/10 pt-6 flex justify-between items-center">
-                <span className="text-zinc-500 font-bold uppercase tracking-widest text-sm">Total Value</span>
+              
+              {/* Mobile Total (Hidden on Desktop) */}
+              <div className="lg:hidden mt-8 flex justify-between items-center border-t border-white/10 pt-6">
+                <span className="text-zinc-500 text-sm font-bold uppercase tracking-widest">Total Value</span>
                 <span className="text-zinc-400 line-through text-xl decoration-red-500 decoration-2">$741</span>
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Sticky Pricing Card */}
+            {/* RIGHT COLUMN: Sticky Pricing Card (Unchanged) */}
             <div className="lg:col-span-5 relative">
               <div className="sticky top-8 bg-[#0F0F0F] border-2 border-[#FF4F33] rounded-3xl p-8 shadow-[0_0_60px_-15px_rgba(255,79,51,0.2)]">
                 
@@ -673,7 +696,6 @@ const TheProducerBlueprint001 = () => {
                   <p className="text-zinc-500 text-xs font-bold tracking-[0.2em] uppercase">Secure Instant Access</p>
                 </div>
 
-                {/* Price Stack */}
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-zinc-400 font-medium">Total Value</span>
                   <span className="text-zinc-500 line-through decoration-zinc-500 decoration-1 text-lg">$741</span>
@@ -684,13 +706,11 @@ const TheProducerBlueprint001 = () => {
                   <span className="text-6xl font-black text-[#FF4F33] tracking-tighter">$297</span>
                 </div>
 
-                {/* CTA */}
                 <button className="w-full bg-white hover:bg-zinc-200 text-black text-lg font-black uppercase tracking-wide py-5 rounded-xl mb-6 transition-transform hover:scale-[1.02] shadow-xl flex items-center justify-center gap-2 group">
                   Start The Blueprint
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </button>
 
-                {/* Trust Elements */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-center gap-2 text-zinc-500 text-xs font-medium">
                     <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
