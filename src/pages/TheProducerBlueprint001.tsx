@@ -9,6 +9,7 @@ import rsmyth111Testimonial from "@/assets/testimonials/rsmyth111-testimonial.jp
 import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial.jpeg";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
+import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 
 const TheProducerBlueprint001 = () => {
@@ -254,9 +255,9 @@ const TheProducerBlueprint001 = () => {
             </div>
             {/* Credit Item 3 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img src="https://placehold.co/200x200/18181b/ffffff?text=Clean+Bandit" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Clean Bandit" />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Clean Bandit</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Writing / Prod</p>
+              <img src={chainsmokersSeeYouAgain} className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers - See You Again" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
             </div>
             {/* Credit Item 4 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
@@ -289,9 +290,9 @@ const TheProducerBlueprint001 = () => {
               <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
             </div>
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img src="https://placehold.co/200x200/18181b/ffffff?text=Clean+Bandit" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Clean Bandit" />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Clean Bandit</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Writing / Prod</p>
+              <img src={chainsmokersSeeYouAgain} className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers - See You Again" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
             </div>
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
               <img src="https://placehold.co/200x200/18181b/ffffff?text=Gary+Barlow" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Gary Barlow" />
