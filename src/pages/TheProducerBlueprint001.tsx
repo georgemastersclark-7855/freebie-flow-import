@@ -763,7 +763,7 @@ const TheProducerBlueprint001 = () => {
               <div className="relative aspect-[9/16] bg-zinc-800 rounded-2xl overflow-hidden">
                 <video 
                   src={djkieraTestimonial} 
-                  className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" 
                   muted 
                   loop 
                   playsInline
