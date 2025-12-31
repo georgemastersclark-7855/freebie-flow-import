@@ -733,6 +733,138 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
+      {/* ================= RESULTS REEL & PROOF SECTION ================= */}
+      <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Headline */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
+              Student Wins
+            </div>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6">
+              Real Results. <span className="font-serif italic text-[#FF4F33]">Real Releases.</span>
+            </h2>
+            <p className="text-zinc-500 text-xl max-w-2xl mx-auto">
+              From "bedroom producer" to signed artist. Here is what happens when you have a professional workflow.
+            </p>
+          </div>
+
+          {/* ROW 1: VERTICAL VIDEO TRIO (9:16 Aspect) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+            
+            {/* Video Card 1 */}
+            <div className="bg-[#121212] border border-white/10 rounded-3xl p-3 shadow-2xl group cursor-pointer hover:border-white/20 transition-all">
+              <div className="relative aspect-[9/16] bg-zinc-800 rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?auto=format&fit=crop&w=600&q=80" className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" alt="Alex M testimonial" />
+                <div className="absolute inset-0 bg-black/20"></div>
+                
+                {/* Play Button */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg">
+                    <Play className="w-5 h-5 text-white fill-white" />
+                  </div>
+                </div>
+                
+                {/* Result Badge */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-black/60 backdrop-blur border border-white/10 p-3 rounded-xl">
+                    <p className="text-white font-bold text-sm">"Signed to Spinnin' Records"</p>
+                    <p className="text-zinc-400 text-xs">Alex M. • UK</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Video Card 2 */}
+            <div className="bg-[#121212] border border-white/10 rounded-3xl p-3 shadow-2xl group cursor-pointer hover:border-white/20 transition-all">
+              <div className="relative aspect-[9/16] bg-zinc-800 rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80" className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" alt="Sarah J testimonial" />
+                <div className="absolute inset-0 bg-black/20"></div>
+                
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg">
+                    <Play className="w-5 h-5 text-white fill-white" />
+                  </div>
+                </div>
+                
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-black/60 backdrop-blur border border-white/10 p-3 rounded-xl">
+                    <p className="text-white font-bold text-sm">"100k Streams in 1 Month"</p>
+                    <p className="text-zinc-400 text-xs">Sarah J. • USA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Video Card 3 */}
+            <div className="bg-[#121212] border border-white/10 rounded-3xl p-3 shadow-2xl group cursor-pointer hover:border-white/20 transition-all">
+              <div className="relative aspect-[9/16] bg-zinc-800 rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1478737270239-2f63b8625881?auto=format&fit=crop&w=600&q=80" className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" alt="David R testimonial" />
+                <div className="absolute inset-0 bg-black/20"></div>
+                
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg">
+                    <Play className="w-5 h-5 text-white fill-white" />
+                  </div>
+                </div>
+                
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-black/60 backdrop-blur border border-white/10 p-3 rounded-xl">
+                    <p className="text-white font-bold text-sm">"Quit my job to produce"</p>
+                    <p className="text-zinc-400 text-xs">David R. • Canada</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ROW 2: EXTRA SCREENSHOTS (Masonry) */}
+          <div className="w-full">
+            <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest text-center mb-10">More feedback from the community</p>
+            
+            <div className="columns-1 md:columns-3 gap-6 space-y-6">
+              {/* Screenshot 4 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src="https://placehold.co/600x400/121212/ffffff?text=Feedback+Screenshot+4" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 4" />
+                </div>
+              </div>
+              {/* Screenshot 5 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src="https://placehold.co/600x550/121212/ffffff?text=Feedback+Screenshot+5" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 5" />
+                </div>
+              </div>
+              {/* Screenshot 6 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src="https://placehold.co/600x300/121212/ffffff?text=Feedback+Screenshot+6" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 6" />
+                </div>
+              </div>
+              {/* Screenshot 7 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src="https://placehold.co/600x450/121212/ffffff?text=Feedback+Screenshot+7" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 7" />
+                </div>
+              </div>
+              {/* Screenshot 8 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src="https://placehold.co/600x350/121212/ffffff?text=Feedback+Screenshot+8" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 8" />
+                </div>
+              </div>
+              {/* Screenshot 9 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src="https://placehold.co/600x500/121212/ffffff?text=Feedback+Screenshot+9" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 9" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ================= CHECKOUT SECTION ================= */}
       <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30">
         <div className="max-w-xl mx-auto">
