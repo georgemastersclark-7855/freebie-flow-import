@@ -231,35 +231,80 @@ const TheProducerBlueprint001 = () => {
           </div>
         </div>
 
-        {/* Credits Marquee */}
-        <div className="mt-20 pt-10 border-t border-zinc-800/50">
-          <p className="text-xs uppercase tracking-widest text-zinc-600 mb-8">
-            Rob Late Credits
-          </p>
+        {/* Footer: Scrolling Credits (Updated) */}
+        <div className="w-full max-w-7xl mx-auto overflow-hidden marquee-mask animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
+          <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-10 text-center">ROB LATE CREDITS</p>
           
           {/* Marquee Container */}
-          <div className="relative overflow-hidden">
-            {/* Fade Masks */}
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+          <div className="flex gap-12 w-max animate-marquee hover:[animation-play-state:paused] items-start" style={{ animationDuration: '60s' }}>
             
-            {/* Scrolling Content */}
-            <div className="flex animate-marquee" style={{ animationDuration: '60s' }}>
-              {[...albumArt, ...albumArt].map((album, index) => (
-                <div 
-                  key={index}
-                  className="flex-shrink-0 mx-3 text-center group cursor-pointer"
-                >
-                  <div className="w-24 h-24 rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-105">
-                    <img 
-                      src={album.img} 
-                      alt={album.artist}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-zinc-600 text-xs mt-2 group-hover:text-zinc-400 transition-colors">{album.artist}</p>
-                </div>
-              ))}
+            {/* Credit Item 1 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Fridayy" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Fridayy (Remix)</p>
+            </div>
+            {/* Credit Item 2 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Marshmello" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Marshmello" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Marshmello</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Production Credit</p>
+            </div>
+            {/* Credit Item 3 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Clean+Bandit" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Clean Bandit" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Clean Bandit</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Writing / Prod</p>
+            </div>
+            {/* Credit Item 4 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Gary+Barlow" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Gary Barlow" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Gary Barlow</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
+            </div>
+            {/* Credit Item 5 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Spinnin" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Spinnin' Records" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Spinnin' Records</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Official Remix</p>
+            </div>
+            {/* Credit Item 6 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Kygo" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Kygo" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Kygo</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Vocal Production</p>
+            </div>
+            
+            {/* DUPLICATE SET FOR INFINITE LOOP */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Fridayy" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Fridayy (Remix)</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Marshmello" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Marshmello" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Marshmello</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Production Credit</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Clean+Bandit" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Clean Bandit" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Clean Bandit</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Writing / Prod</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Gary+Barlow" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Gary Barlow" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Gary Barlow</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Spinnin" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Spinnin' Records" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Spinnin' Records</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Official Remix</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img src="https://placehold.co/200x200/18181b/ffffff?text=Kygo" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Kygo" />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Kygo</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Vocal Production</p>
             </div>
           </div>
         </div>
