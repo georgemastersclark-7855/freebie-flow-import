@@ -7,6 +7,7 @@ import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
 import aaronly0nsTestimonial from "@/assets/testimonials/aaronly0ns-testimonial.jpeg";
 import rsmyth111Testimonial from "@/assets/testimonials/rsmyth111-testimonial.jpeg";
 import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial.jpeg";
+import deepintheforestTestimonial from "@/assets/testimonials/deepintheforest-testimonial.jpg";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
@@ -353,10 +354,10 @@ const TheProducerBlueprint001 = () => {
                 </div>
               </div>
 
-              {/* Placeholder 4 */}
+              {/* Screenshot 4 - deepintheforest */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src="https://placehold.co/600x550/121212/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="More Feedback" />
+                  <img src={deepintheforestTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="@deepintheforest testimonial" />
                 </div>
               </div>
 
