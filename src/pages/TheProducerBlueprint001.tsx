@@ -4,7 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
 import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
-import aaronly0nsTestimonial from "@/assets/testimonials/aaronly0ns-testimonial.jpeg";
+import austriaTestimonial from "@/assets/testimonials/austria-testimonial.jpg";
 import rsmyth111Testimonial from "@/assets/testimonials/rsmyth111-testimonial.jpeg";
 import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial.jpeg";
 import deepintheforestTestimonial from "@/assets/testimonials/deepintheforest-testimonial.jpg";
@@ -335,10 +335,10 @@ const TheProducerBlueprint001 = () => {
           <div className="w-full relative z-0">
             <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-96">
               
-              {/* Screenshot 1 - aaronly0ns */}
+              {/* Screenshot 1 - Austria */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src={aaronly0nsTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="@aaronly0ns testimonial" />
+                  <img src={austriaTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="Austria testimonial" />
                 </div>
               </div>
 
