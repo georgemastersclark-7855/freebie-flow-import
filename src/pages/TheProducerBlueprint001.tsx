@@ -231,8 +231,9 @@ const TheProducerBlueprint001 = () => {
           </div>
         </div>
 
-        {/* Footer: Scrolling Credits (Updated) */}
-        <div className="w-full max-w-7xl mx-auto overflow-hidden marquee-mask animate-fade-in opacity-0" style={{ animationDelay: '0.6s' }}>
+        {/* Footer: Scrolling Credits (FIXED VISIBILITY) */}
+        {/* Removed opacity-0 to prevent disappearing issues */}
+        <div className="w-full max-w-7xl mx-auto overflow-hidden marquee-mask relative z-20 mt-12">
           <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-10 text-center">ROB LATE CREDITS</p>
           
           {/* Marquee Container */}
