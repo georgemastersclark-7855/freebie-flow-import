@@ -12,6 +12,10 @@ import nateSawyerTestimonial from "@/assets/testimonials/nate-sawyer-testimonial
 import completePackageTestimonial from "@/assets/testimonials/complete-package-testimonial.jpg";
 import djkieraTestimonial from "@/assets/testimonials/djkiera-testimonial.mp4";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
+import streamingNumbersTestimonial from "@/assets/testimonials/streaming-numbers-testimonial.jpg";
+import drewAdieuTestimonial from "@/assets/testimonials/drew-adieu-testimonial.jpg";
+import headroomRecordsTestimonial from "@/assets/testimonials/headroom-records-testimonial.jpg";
+import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtube-testimonial.jpg";
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
@@ -833,40 +837,40 @@ const TheProducerBlueprint001 = () => {
             <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest text-center mb-10">More feedback from the community</p>
             
             <div className="columns-1 md:columns-3 gap-6 space-y-6">
-              {/* Screenshot 4 */}
+              {/* Screenshot 1 - Streaming Numbers (NEW) */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
-                  <img src="https://placehold.co/600x400/121212/ffffff?text=Feedback+Screenshot+4" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 4" />
+                  <img src={streamingNumbersTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="Streaming numbers testimonial" />
                 </div>
               </div>
-              {/* Screenshot 5 */}
+              {/* Screenshot 2 - Drew Adieu (NEW) */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
-                  <img src="https://placehold.co/600x550/121212/ffffff?text=Feedback+Screenshot+5" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 5" />
+                  <img src={drewAdieuTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="Drew Adieu testimonial" />
                 </div>
               </div>
-              {/* Screenshot 6 */}
+              {/* Screenshot 3 - Headroom Records (NEW) */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
-                  <img src="https://placehold.co/600x300/121212/ffffff?text=Feedback+Screenshot+6" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 6" />
+                  <img src={headroomRecordsTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="Headroom Records testimonial" />
                 </div>
               </div>
-              {/* Screenshot 7 */}
+              {/* Screenshot 4 - aaronly0ns YouTube (NEW) */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
-                  <img src="https://placehold.co/600x450/121212/ffffff?text=Feedback+Screenshot+7" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 7" />
+                  <img src={aaronly0nsYoutubeTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="aaronly0ns YouTube testimonial" />
                 </div>
               </div>
-              {/* Screenshot 8 */}
+              {/* Screenshot 5 - Austria (reused) */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
-                  <img src="https://placehold.co/600x350/121212/ffffff?text=Feedback+Screenshot+8" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 8" />
+                  <img src={austriaTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="Austria testimonial" />
                 </div>
               </div>
-              {/* Screenshot 9 */}
+              {/* Screenshot 6 - Complete Package (reused) */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
-                  <img src="https://placehold.co/600x500/121212/ffffff?text=Feedback+Screenshot+9" className="w-full h-auto block opacity-90 object-contain" alt="Feedback screenshot 9" />
+                  <img src={completePackageTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="Complete package testimonial" />
                 </div>
               </div>
             </div>
