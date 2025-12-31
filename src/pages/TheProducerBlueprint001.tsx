@@ -266,7 +266,7 @@ const TheProducerBlueprint001 = () => {
       </main>
 
       {/* ================= SOCIAL PROOF SECTION (MASONRY FADE - NO VIDEOS) ================= */}
-      <section className="py-32 px-6 bg-[#050505] overflow-hidden relative z-10">
+      <section className="pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
@@ -334,7 +334,7 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* ================= TUTORIAL HELL / COMPARISON SECTION (BLEED EFFECT) ================= */}
-      <section className="py-32 px-6 bg-transparent relative z-20 -mt-96">
+      <section className="py-32 px-6 bg-transparent relative z-20 -mt-[500px]">
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center mb-20">
@@ -350,7 +350,7 @@ const TheProducerBlueprint001 = () => {
             </h2>
 
             {/* SUBHEADLINE */}
-            <p className="text-zinc-500 text-xl max-w-2xl mx-auto drop-shadow-lg">
+            <p className="text-zinc-400 text-xl max-w-2xl mx-auto drop-shadow-lg font-medium">
               You've collected enough "tips" to last a lifetime, but you still can't finish a track.
             </p>
           </div>
