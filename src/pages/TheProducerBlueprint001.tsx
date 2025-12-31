@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowRight, Check, Play, Star, X, Youtube } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
@@ -7,6 +8,27 @@ import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 
 const TheProducerBlueprint001 = () => {
+  // Load Vidalytics script on mount
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.innerHTML = `
+      (function (v, i, d, a, l, y, t, c, s) {
+        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
+        if (!vsl){vsl=function(u,cb){
+          if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
+          if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
+          i.getElementsByTagName("head")[0].appendChild(s);
+        };}
+        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
+      })(window, document, 'Vidalytics', 'vidalytics_embed_V5HrhyRBNAeDtppA', 'https://fast.vidalytics.com/embeds/TEaBLdFh/V5HrhyRBNAeDtppA/');
+    `;
+    document.body.appendChild(script);
+    
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   // Testimonial images
   const testimonials = [testimonial1, testimonial2, testimonial3];
 
@@ -191,36 +213,18 @@ const TheProducerBlueprint001 = () => {
           </div>
         </div>
 
-        {/* Hero VSL Container */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Video Glow */}
-          <div 
-            className="absolute inset-0 -z-10 blur-3xl opacity-30"
-            style={{
-              background: 'radial-gradient(ellipse at center, rgba(255,79,51,0.3) 0%, transparent 70%)',
-            }}
-          />
+        {/* Hero VSL Container with Vidalytics */}
+        <div className="w-full max-w-6xl mx-auto relative group cursor-pointer mb-24 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          {/* Glow Effect */}
+          <div className="absolute -inset-1 bg-[#FF4F33]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
           
-          <div className="relative aspect-video bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden group cursor-pointer">
-            {/* Video Placeholder */}
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900" />
-            
-            {/* Play Button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 bg-[#FF4F33] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,79,51,0.5)] group-hover:scale-110 transition-transform">
-                <Play className="w-8 h-8 text-white fill-white ml-1" />
-              </div>
-            </div>
-
-            {/* Overlay Text */}
-            <div className="absolute bottom-6 left-6 text-left">
-              <p className="text-xs uppercase tracking-widest text-zinc-400 mb-1">
-                Watch The Overview
-              </p>
-              <p className="text-xl font-serif italic text-white">
-                See How It Works
-              </p>
-            </div>
+          {/* Video Container */}
+          <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
+            {/* Vidalytics Embed */}
+            <div 
+              id="vidalytics_embed_V5HrhyRBNAeDtppA" 
+              style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }} 
+            />
           </div>
         </div>
 
