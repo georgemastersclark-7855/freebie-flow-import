@@ -572,22 +572,22 @@ const TheProducerBlueprint001 = () => {
           
           {/* Headline Area */}
           <div className="text-center mb-12">
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase mb-6 leading-[0.9]">
-              Introducing <br /> 
-              <span className="font-serif italic font-normal text-white">The Producer Blueprint.</span>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 leading-[1.1]">
+              <span className="font-serif italic font-normal text-zinc-400 lowercase tracking-normal">Introducing</span> <br />
+              The Producer Blueprint.
             </h2>
             <div className="inline-block bg-zinc-900 border border-white/10 px-6 py-2 rounded-full">
               <span className="text-zinc-300 font-medium">Join today and get <span className="text-white underline decoration-[#FF4F33] underline-offset-4 font-bold">2 FREE Bonuses</span> included.</span>
             </div>
           </div>
 
-          {/* Product Mockup */}
-          <div className="w-full max-w-4xl mx-auto mb-24">
-            <img 
-              src={productStackMockup} 
-              alt="The Producer Blueprint Course Bundle" 
-              className="w-full"
-            />
+          {/* Product Mockup Placeholder */}
+          <div className="w-full max-w-4xl mx-auto aspect-[16/9] bg-zinc-900 border border-white/10 rounded-2xl mb-24 flex items-center justify-center relative overflow-hidden shadow-2xl group">
+            <p className="text-zinc-600 font-mono text-sm uppercase tracking-widest z-10">[ Insert Product Mockup Image ]</p>
+            {/* subtle grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            {/* glow */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50"></div>
           </div>
 
           {/* Offer Grid */}
@@ -596,14 +596,14 @@ const TheProducerBlueprint001 = () => {
             {/* LEFT COLUMN: The Deliverables */}
             <div className="lg:col-span-7 space-y-12">
               
-              {/* Core Course */}
+              {/* Core Course Items */}
               <div>
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                   <span className="text-[#FF4F33]">WHAT YOU GET:</span>
                 </h3>
                 <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-8 flex gap-6 hover:border-white/10 transition-colors">
                   <div className="w-8 h-8 bg-[#FF4F33] rounded-full flex-shrink-0 flex items-center justify-center text-white mt-1">
-                    <Check className="w-4 h-4" strokeWidth={3} />
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
                   <div>
                     <div className="flex justify-between items-start mb-2">
@@ -687,7 +687,7 @@ const TheProducerBlueprint001 = () => {
                 {/* CTA */}
                 <button className="w-full bg-white hover:bg-zinc-200 text-black text-lg font-black uppercase tracking-wide py-5 rounded-xl mb-6 transition-transform hover:scale-[1.02] shadow-xl flex items-center justify-center gap-2 group">
                   Start The Blueprint
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </button>
 
                 {/* Trust Elements */}
