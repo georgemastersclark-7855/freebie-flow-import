@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Play, Star, X, Youtube, Lightbulb } from "lucide-react";
+import { ArrowRight, Check, Play, Star, X, Youtube } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
@@ -76,20 +76,20 @@ const TheProducerBlueprint001 = () => {
 
   // Comparison data - The YouTube Trap
   const youtubeProblems = [
+    { text: "Hard drive full of unfinished songs" },
     { text: "Collecting \"tricks\" like trading cards" },
-    { text: "Conflicting advice from dozens of creators" },
+    { text: "Trying to assemble a professional workflow using random advice" },
     { text: "Disconnected tips with no context" },
-    { text: "Hard drive full of 8-bar loops" },
-    { text: "Teachers who teach, but don't produce" },
+    { text: "Learning from Youtubers, not working producers" },
   ];
 
   // Comparison data - The Blueprint Method
   const blueprintBenefits = [
     { text: "One complete workflow from a working pro" },
-    { text: "Seeing the \"why\" behind 10,000 micro-decisions" },
-    { text: "Logical progression: Blank project to Master" },
-    { text: "A real reference point (not just theory)" },
-    { text: "From a producer still landing placements" },
+    { text: "Open up your creative approach" },
+    { text: "A real reference point for what \"pro\" sounds like" },
+    { text: "Seeing the \"why\" behind 1,000 micro-decisions" },
+    { text: "Get consistent results on a minimal setup" },
   ];
 
   return (
@@ -350,6 +350,101 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
+      {/* SECTION 3: COMPARISON - Why You're Still Stuck */}
+      <section className="relative z-10 px-6 md:px-12 py-24 bg-gradient-to-b from-transparent via-zinc-900/30 to-transparent">
+        <div className="max-w-5xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-8">
+              <span className="text-sm font-medium text-zinc-300">For The Self-Taught Producer</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
+              Why You're Still Stuck in{' '}
+              <br className="hidden md:block" />
+              <span className="font-serif italic font-normal text-zinc-200">Tutorial Hell.</span>
+            </h2>
+            
+            <p className="text-zinc-400 text-lg max-w-xl mx-auto">
+              You've collected enough "tips" to last a lifetime, but you still can't finish a track.
+            </p>
+          </div>
+
+          {/* Comparison Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+            {/* VS Badge (center on desktop) */}
+            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+              <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
+                <span className="text-zinc-400 font-bold text-lg">VS</span>
+              </div>
+            </div>
+
+            {/* YouTube Side */}
+            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-zinc-800/50">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
+                  <Youtube className="w-5 h-5 text-red-500" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">The YouTube Trap</h3>
+              </div>
+              
+              <div className="space-y-4">
+                {youtubeProblems.map((item, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <X className="w-5 h-5 text-red-500/70 shrink-0 mt-0.5" />
+                    <span className="text-zinc-400 text-sm">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile VS */}
+            <div className="flex md:hidden items-center justify-center py-4">
+              <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
+                <span className="text-zinc-400 font-bold text-sm">VS</span>
+              </div>
+            </div>
+
+            {/* Blueprint Side */}
+            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-[#FF4F33]/30 relative overflow-hidden">
+              {/* Subtle glow */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF4F33]/10 blur-3xl pointer-events-none" />
+              
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF4F33] flex items-center justify-center">
+                    <span className="text-white font-bold text-xs">PB</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">The Producer Blueprint</h3>
+                </div>
+                
+                <div className="space-y-4">
+                  {blueprintBenefits.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-[#FF4F33] shrink-0 mt-0.5" />
+                      <span className="text-zinc-300 text-sm">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Quote and CTA */}
+          <div className="text-center mt-16">
+            <blockquote className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-8">
+              The problem isn't you or your talent. You simply lack the workflow to join it all together.
+            </blockquote>
+            
+            <button 
+              className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-200 transition-all"
+            >
+              Meet the Producer
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* SECTION 4: WHAT'S INSIDE */}
       <section className="relative z-10 px-6 md:px-12 py-24 max-w-5xl mx-auto">
@@ -413,102 +508,6 @@ const TheProducerBlueprint001 = () => {
             Start The Blueprint Today
             <ArrowRight className="w-5 h-5" />
           </button>
-        </div>
-      </section>
-
-      {/* SECTION 5: COMPARISON */}
-      <section className="relative z-10 px-6 md:px-12 py-24 bg-gradient-to-b from-transparent via-zinc-900/30 to-transparent">
-        <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-8">
-              <span className="text-sm font-medium text-zinc-300">Why This</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
-              Why You're Still Stuck in{' '}
-              <br className="hidden md:block" />
-              <span className="font-serif italic font-normal text-zinc-200">Tutorial Hell.</span>
-            </h2>
-            
-            <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-              It's not a lack of talent. It's a lack of context.
-            </p>
-          </div>
-
-          {/* Comparison Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-            {/* VS Badge (center on desktop) */}
-            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-              <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
-                <span className="text-zinc-400 font-bold text-lg">VS</span>
-              </div>
-            </div>
-
-            {/* YouTube Side */}
-            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-zinc-800/50">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
-                  <Youtube className="w-5 h-5 text-red-500" />
-                </div>
-                <h3 className="text-lg font-semibold text-white">The YouTube Trap</h3>
-              </div>
-              
-              <div className="space-y-4">
-                {youtubeProblems.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <X className="w-5 h-5 text-red-500/70 shrink-0 mt-0.5" />
-                    <span className="text-zinc-400 text-sm">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile VS */}
-            <div className="flex md:hidden items-center justify-center py-4">
-              <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
-                <span className="text-zinc-400 font-bold text-sm">VS</span>
-              </div>
-            </div>
-
-            {/* Blueprint Side */}
-            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-[#FF4F33]/30 relative overflow-hidden">
-              {/* Subtle glow */}
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF4F33]/10 blur-3xl pointer-events-none" />
-              
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-xl bg-[#FF4F33] flex items-center justify-center">
-                    <span className="text-white font-bold text-xs">PB</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">The Blueprint Method</h3>
-                </div>
-                
-                <div className="space-y-4">
-                  {blueprintBenefits.map((item, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FF4F33] shrink-0 mt-0.5" />
-                      <span className="text-zinc-300 text-sm">{item.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Quote and CTA */}
-          <div className="text-center mt-16">
-            <blockquote className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-8">
-              You don't need more "content". You need a professional reference point.
-            </blockquote>
-            
-            <button 
-              className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-200 transition-all"
-            >
-              Meet the Producer
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
         </div>
       </section>
     </div>
