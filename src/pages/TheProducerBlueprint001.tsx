@@ -327,7 +327,7 @@ const TheProducerBlueprint001 = () => {
 
           {/* MASONRY WALL (Fading out) */}
           <div className="w-full relative z-0">
-            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-48">
+            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-96">
               
               {/* Screenshot 1 - aaronly0ns */}
               <div className="break-inside-avoid">
@@ -373,7 +373,7 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* MASSIVE FADE OVERLAY */}
-            <div className="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-[#050505] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-full h-[800px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-10 pointer-events-none"></div>
           </div>
         </div>
       </section>
