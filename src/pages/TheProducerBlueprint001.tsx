@@ -265,16 +265,14 @@ const TheProducerBlueprint001 = () => {
         </div>
       </main>
 
-      {/* ================= SOCIAL PROOF SECTION (FIXED) ================= */}
+      {/* ================= SOCIAL PROOF SECTION (MASONRY FADE - NO VIDEOS) ================= */}
       <section className="py-32 px-6 bg-[#050505] overflow-hidden relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           
-          {/* Eyebrow */}
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
             Unfiltered Feedback
           </div>
 
-          {/* Headline */}
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
               Hear it directly from <span className="font-serif italic text-white">the producers.</span>
@@ -282,211 +280,158 @@ const TheProducerBlueprint001 = () => {
             <p className="text-zinc-400 text-lg">Join 500+ producers who have upgraded their workflow.</p>
           </div>
 
-          {/* MASONRY WALL OF LOVE */}
-          <div className="w-full relative z-0 mb-12">
-            
-            {/* CSS Columns for True Masonry (No fixed heights) */}
-            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-48">
+          {/* MASONRY WALL (Fading out) */}
+          <div className="w-full relative z-0">
+            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-96">
               
               {/* Screenshot 1 - aaronly0ns */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src={aaronly0nsTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="@aaronly0ns testimonial" />
+                  <img src={aaronly0nsTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="@aaronly0ns testimonial" />
                 </div>
               </div>
 
               {/* Screenshot 2 - rsmyth111 */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src={rsmyth111Testimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="@rsmyth111 testimonial" />
+                  <img src={rsmyth111Testimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="@rsmyth111 testimonial" />
                 </div>
               </div>
 
               {/* Screenshot 3 - levin_music */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src={levinMusicTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="@levin_music testimonial" />
+                  <img src={levinMusicTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="@levin_music testimonial" />
                 </div>
               </div>
 
               {/* Placeholder 4 */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src="https://placehold.co/600x550/18181b/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="More Feedback" />
+                  <img src="https://placehold.co/600x550/121212/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="More Feedback" />
                 </div>
               </div>
 
               {/* Placeholder 5 */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src="https://placehold.co/600x300/18181b/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="More Feedback" />
+                  <img src="https://placehold.co/600x300/121212/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="More Feedback" />
                 </div>
               </div>
-              
+
               {/* Placeholder 6 */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src="https://placehold.co/600x450/18181b/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="More Feedback" />
+                  <img src="https://placehold.co/600x450/121212/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain" alt="More Feedback" />
                 </div>
               </div>
             </div>
 
-            {/* GRADIENT FADE OVERLAY */}
-            <div className="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-10 pointer-events-none"></div>
-          </div>
-
-          {/* ROW 2: VIDEO CASE STUDIES */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full relative z-20 -mt-32">
-            
-            {/* Video 1 */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-[30px] p-2 hover:border-white/20 transition-all shadow-2xl shadow-black">
-              <div className="relative aspect-video rounded-[24px] overflow-hidden bg-zinc-800 mb-6 group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" alt="Alex M. studio" />
-                <div className="absolute inset-0 bg-black/10"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg group-hover:scale-110 transition-transform">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M5 3l14 9-14 9V3z"/></svg>
-                </div>
-              </div>
-              <div className="px-4 pb-6">
-                <h3 className="text-white font-black text-xl uppercase mb-3 tracking-tight">ALEX M.</h3>
-                <p className="text-zinc-400 text-sm mb-6 leading-relaxed border-l-2 border-white/10 pl-4">"My mixes used to sound muddy and thin. Following Module 6 completely changed how I EQ and compress drums."</p>
-                <div className="text-xs flex flex-col gap-1">
-                  <span className="text-white font-bold tracking-wide">Music Producer</span>
-                  <span className="text-zinc-600">United Kingdom</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Video 2 */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-[30px] p-2 hover:border-white/20 transition-all shadow-2xl shadow-black">
-              <div className="relative aspect-video rounded-[24px] overflow-hidden bg-zinc-800 mb-6 group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" alt="Sarah J. studio" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg group-hover:scale-110 transition-transform">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M5 3l14 9-14 9V3z"/></svg>
-                </div>
-              </div>
-              <div className="px-4 pb-6">
-                <h3 className="text-white font-black text-xl uppercase mb-3 tracking-tight">SARAH J.</h3>
-                <p className="text-zinc-400 text-sm mb-6 leading-relaxed border-l-2 border-white/10 pl-4">"The workflow templates alone are worth the price. I finished 3 tracks in the first month after being stuck for a year."</p>
-                <div className="text-xs flex flex-col gap-1">
-                  <span className="text-white font-bold tracking-wide">Artist / Songwriter</span>
-                  <span className="text-zinc-600">United States</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Video 3 */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-[30px] p-2 hover:border-white/20 transition-all shadow-2xl shadow-black">
-              <div className="relative aspect-video rounded-[24px] overflow-hidden bg-zinc-800 mb-6 group cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1478737270239-2f63b8625881?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" alt="David R. studio" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg group-hover:scale-110 transition-transform">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M5 3l14 9-14 9V3z"/></svg>
-                </div>
-              </div>
-              <div className="px-4 pb-6">
-                <h3 className="text-white font-black text-xl uppercase mb-3 tracking-tight">DAVID R.</h3>
-                <p className="text-zinc-400 text-sm mb-6 leading-relaxed border-l-2 border-white/10 pl-4">"Rob explains the 'why', not just the 'how'. It's the first time I actually understood compression properly."</p>
-                <div className="text-xs flex flex-col gap-1">
-                  <span className="text-white font-bold tracking-wide">Bedroom Producer</span>
-                  <span className="text-zinc-600">Canada</span>
-                </div>
-              </div>
-            </div>
+            {/* MASSIVE FADE OVERLAY */}
+            <div className="absolute bottom-0 left-0 w-full h-[800px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-10 pointer-events-none"></div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: COMPARISON - Why You're Still Stuck */}
-      <section className="relative z-10 px-6 md:px-12 py-24 bg-gradient-to-b from-transparent via-zinc-900/30 to-transparent">
-        <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-8">
-              <span className="text-sm font-medium text-zinc-300">For The Self-Taught Producer</span>
+      {/* ================= TUTORIAL HELL / COMPARISON SECTION (BLEED EFFECT) ================= */}
+      <section className="py-32 px-6 bg-transparent relative z-20 -mt-96">
+        <div className="max-w-7xl mx-auto">
+          
+          <div className="text-center mb-20">
+            {/* PILL BADGE */}
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-6 backdrop-blur-md shadow-xl">
+              For The Self-Taught Producer
             </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
-              Why You're Still Stuck in{' '}
-              <br className="hidden md:block" />
-              <span className="font-serif italic font-normal text-zinc-200">Tutorial Hell.</span>
+
+            {/* HEADLINE */}
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-white drop-shadow-2xl">
+              Why You're Still Stuck in <br className="hidden md:block" />
+              <span className="font-serif italic text-white">Tutorial Hell.</span>
             </h2>
-            
-            <p className="text-zinc-400 text-lg max-w-xl mx-auto">
+
+            {/* SUBHEADLINE */}
+            <p className="text-zinc-500 text-xl max-w-2xl mx-auto drop-shadow-lg">
               You've collected enough "tips" to last a lifetime, but you still can't finish a track.
             </p>
           </div>
 
           {/* Comparison Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-            {/* VS Badge (center on desktop) */}
-            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-              <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
-                <span className="text-zinc-400 font-bold text-lg">VS</span>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+            
+            {/* Floating VS Badge */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 bg-zinc-900 border border-white/10 rounded-full w-14 h-14 items-center justify-center font-black text-zinc-500 text-sm shadow-xl hidden md:flex">VS</div>
+
+            {/* LEFT: YouTube */}
+            <div className="bg-[#0A0A0A] border border-white/5 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-2xl">
+              <h3 className="text-2xl font-bold text-zinc-400 mb-8 flex items-center gap-3">
+                <svg className="w-6 h-6 text-red-500/80" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                The YouTube Trap
+              </h3>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-4 text-zinc-500">
+                  <svg className="w-6 h-6 text-red-500/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <span>Hard drive full of unfinished songs</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-500">
+                  <svg className="w-6 h-6 text-red-500/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <span>Collecting "tricks" like trading cards</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-500">
+                  <svg className="w-6 h-6 text-red-500/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <span>Trying to assemble a professional workflow using random advice</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-500">
+                  <svg className="w-6 h-6 text-red-500/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <span>Disconnected tips with no context</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-500">
+                  <svg className="w-6 h-6 text-red-500/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  <span>Learning from Youtubers, not working producers</span>
+                </li>
+              </ul>
             </div>
 
-            {/* YouTube Side */}
-            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-zinc-800/50">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
-                  <Youtube className="w-5 h-5 text-red-500" />
-                </div>
-                <h3 className="text-lg font-semibold text-white">The YouTube Trap</h3>
-              </div>
-              
-              <div className="space-y-4">
-                {youtubeProblems.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <X className="w-5 h-5 text-red-500/70 shrink-0 mt-0.5" />
-                    <span className="text-zinc-400 text-sm">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile VS */}
-            <div className="flex md:hidden items-center justify-center py-4">
-              <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
-                <span className="text-zinc-400 font-bold text-sm">VS</span>
-              </div>
-            </div>
-
-            {/* Blueprint Side */}
-            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-[#FF4F33]/30 relative overflow-hidden">
-              {/* Subtle glow */}
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF4F33]/10 blur-3xl pointer-events-none" />
-              
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-xl bg-[#FF4F33] flex items-center justify-center">
-                    <span className="text-white font-bold text-xs">PB</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">The Producer Blueprint</h3>
-                </div>
-                
-                <div className="space-y-4">
-                  {blueprintBenefits.map((item, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#FF4F33] shrink-0 mt-0.5" />
-                      <span className="text-zinc-300 text-sm">{item.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/* RIGHT: Blueprint */}
+            <div className="bg-[#0F0F0F] border border-[#FF4F33]/30 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_0_50px_-20px_rgba(255,79,51,0.15)]">
+              <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <div className="w-6 h-6 bg-[#FF4F33] rounded flex items-center justify-center text-xs text-white font-bold">PB</div>
+                The Producer Blueprint
+              </h3>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-4 text-zinc-300 font-medium">
+                  <svg className="w-6 h-6 text-[#FF4F33] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>One complete workflow from a working pro</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-300 font-medium">
+                  <svg className="w-6 h-6 text-[#FF4F33] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Open up your creative approach</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-300 font-medium">
+                  <svg className="w-6 h-6 text-[#FF4F33] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>A real reference point for what "pro" sounds like</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-300 font-medium">
+                  <svg className="w-6 h-6 text-[#FF4F33] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Seeing the "why" behind 1,000 micro-decisions</span>
+                </li>
+                <li className="flex items-start gap-4 text-zinc-300 font-medium">
+                  <svg className="w-6 h-6 text-[#FF4F33] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Get consistent results on a minimal setup</span>
+                </li>
+              </ul>
+              {/* Orange Glow */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
             </div>
           </div>
 
-          {/* Quote and CTA */}
-          <div className="text-center mt-16">
-            <blockquote className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-8">
+          {/* Footer / Bridge */}
+          <div className="text-center mt-20">
+            <p className="text-xl md:text-2xl font-bold text-white mb-8">
               The problem isn't you or your talent. You simply lack the workflow to join it all together.
-            </blockquote>
-            
-            <button 
-              className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-200 transition-all"
-            >
+            </p>
+            <button className="bg-transparent border border-zinc-700 text-zinc-300 hover:text-white hover:border-white transition-colors px-6 py-3 rounded-full text-sm font-medium flex items-center gap-2 mx-auto">
               Meet the Producer
-              <ArrowRight className="w-5 h-5" />
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
           </div>
         </div>
