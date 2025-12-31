@@ -566,11 +566,11 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* SECTION: OFFER STACK (REDESIGNED) */}
+      {/* ================= OFFER STACK / INTRODUCING SECTION ================= */}
       <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30">
         <div className="max-w-7xl mx-auto">
           
-          {/* Headline Area */}
+          {/* Headline Area (Corrected Styling) */}
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 leading-[1.1]">
               <span className="font-serif italic font-normal text-zinc-400 lowercase tracking-normal">Introducing</span> <br />
@@ -597,7 +597,7 @@ const TheProducerBlueprint001 = () => {
               
               {/* Core Items List */}
               <div className="space-y-8 mb-12">
-                {/* Item 1 */}
+                {/* Item 1: Course */}
                 <div className="flex gap-6 items-start group">
                   <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -613,7 +613,7 @@ const TheProducerBlueprint001 = () => {
                   </div>
                 </div>
 
-                {/* Item 2 */}
+                {/* Item 2: Workflow */}
                 <div className="flex gap-6 items-start group">
                   <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -629,7 +629,7 @@ const TheProducerBlueprint001 = () => {
                   </div>
                 </div>
 
-                {/* Item 3 */}
+                {/* Item 3: Samples */}
                 <div className="flex gap-6 items-start group">
                   <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -644,16 +644,34 @@ const TheProducerBlueprint001 = () => {
                     </p>
                   </div>
                 </div>
+
+                {/* Item 4: Templates */}
+                <div className="flex gap-6 items-start group">
+                  <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div className="flex-1 pb-8 border-b border-white/5">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">Project Files & Templates</h4>
+                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$147</span>
+                    </div>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      Downloadable Ableton project files to deconstruct and templates to speed up your workflow.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              {/* Bonuses Section (Highlighted) */}
-              <div className="bg-zinc-900/30 border border-[#FF4F33]/20 rounded-2xl p-6 md:p-8">
-                <h3 className="text-xs font-bold text-[#FF4F33] uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#FF4F33] animate-pulse"></span>
-                  Free Bonuses Included
-                </h3>
+              {/* Bonuses Section (Highlighted Box) */}
+              <div className="bg-zinc-900/30 border border-[#FF4F33]/20 rounded-2xl p-6 md:p-8 relative">
+                <div className="absolute -top-3 left-6 bg-[#050505] px-2">
+                  <span className="text-xs font-bold text-[#FF4F33] uppercase tracking-[0.2em] flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#FF4F33] animate-pulse"></span>
+                    Free Bonuses Included
+                  </span>
+                </div>
                 
-                <div className="space-y-8">
+                <div className="space-y-8 mt-2">
                   {/* Bonus 1 */}
                   <div className="flex gap-5">
                     <div className="w-12 h-12 bg-black border border-white/10 rounded flex-shrink-0 flex items-center justify-center text-white text-lg font-serif italic">01</div>
@@ -687,7 +705,7 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Sticky Pricing Card (Unchanged) */}
+            {/* RIGHT COLUMN: Sticky Pricing Card */}
             <div className="lg:col-span-5 relative">
               <div className="sticky top-8 bg-[#0F0F0F] border-2 border-[#FF4F33] rounded-3xl p-8 shadow-[0_0_60px_-15px_rgba(255,79,51,0.2)]">
                 
