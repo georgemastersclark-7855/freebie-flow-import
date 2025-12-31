@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Play, Star } from "lucide-react";
+import { ArrowRight, Check, Play, Star, X, Youtube, Lightbulb, MessageSquare, Shuffle, UserX, Eye, Users, Target, Layers, Zap, UserCheck, Home } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
@@ -26,6 +26,16 @@ const TheProducerBlueprint001 = () => {
     { img: "https://images.unsplash.com/photo-1504898770365-14faca6a7320?w=200&h=200&fit=crop", artist: "Kygo" },
   ];
 
+  // Avatar images for scrolling row
+  const avatarImages = [
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
+  ];
+
   // Video case studies data
   const caseStudies = [
     {
@@ -46,6 +56,41 @@ const TheProducerBlueprint001 = () => {
       location: "Canada",
       quote: "Rob explains the 'why', not just the 'how'. It's the first time I actually understood compression properly.",
     },
+  ];
+
+  // Course modules data
+  const modules = [
+    { number: "01", title: "Ableton Basics", description: "Layout, preferences, shortcuts, and project setup. The foundation everything else builds on." },
+    { number: "02", title: "Sound Design", description: "Synthesis fundamentals, Serum deep-dives, resampling techniques. Create your own sounds from scratch." },
+    { number: "03", title: "Drum Production", description: "Punchy drums that cut through. Sample selection, stereo width, sidechain compression, custom percussion." },
+    { number: "04", title: "Arrangement & Energy", description: "Turn ideas into full tracks. Song structure, transitions, ear candy, and maintaining energy throughout." },
+    { number: "05", title: "Vocal Production", description: "Recording setup, clean vocals, tuning, reverb, harmonies, and Rob's personal vocal chain." },
+    { number: "06", title: "Mixing & Mastering", description: "Clean, polished mixes that compete. EQ, compression, frequency carving, and Rob's mastering chain." },
+    { number: "07", title: "Artist Sounds", description: "Modern production techniques. Finding your sound, melody loops, vocal effects, and genre-specific percussion." },
+  ];
+
+  const bonusModules = [
+    { title: "Music Business", description: "Turn production into income. Growing a following, making content, and building real customers." },
+    { title: "Breakdown Vault", description: "Project walkthroughs from Rob's viral content. See the thinking behind every decision. Updated regularly." },
+  ];
+
+  // Comparison data
+  const youtubeProblems = [
+    { icon: Shuffle, text: "Disconnected tips from dozens of creators" },
+    { icon: MessageSquare, text: "Conflicting advice on every topic" },
+    { icon: Layers, text: "No structure - you decide what to learn next" },
+    { icon: UserX, text: "Teachers who teach, not produce" },
+    { icon: Eye, text: "Shows you \"what\" but never \"why\"" },
+    { icon: Users, text: "Generic techniques for no one in particular" },
+  ];
+
+  const blueprintBenefits = [
+    { icon: Target, text: "One complete workflow from a working producer" },
+    { icon: Layers, text: "One approach that actually works together" },
+    { icon: Zap, text: "Logical progression from foundations to finish" },
+    { icon: UserCheck, text: "From a producer still landing placements" },
+    { icon: Lightbulb, text: "The reasoning behind every decision" },
+    { icon: Home, text: "Built for home studio producers" },
   ];
 
   return (
@@ -235,6 +280,22 @@ const TheProducerBlueprint001 = () => {
           </p>
         </div>
 
+        {/* Avatar Scrolling Row */}
+        <div className="relative overflow-hidden mb-16">
+          {/* Fade Masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+          
+          <div className="flex animate-marquee gap-4" style={{ animationDuration: '30s' }}>
+            {[...avatarImages, ...avatarImages, ...avatarImages].map((src, index) => (
+              <Avatar key={index} className="w-16 h-16 flex-shrink-0 border-2 border-zinc-800">
+                <AvatarImage src={src} />
+                <AvatarFallback>U{index + 1}</AvatarFallback>
+              </Avatar>
+            ))}
+          </div>
+        </div>
+
         {/* Row 1: Wall of Love */}
         <div className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -287,6 +348,232 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* SECTION 3: REALITY CHECK */}
+      <section className="relative z-10 px-6 md:px-12 py-24 bg-gradient-to-b from-transparent via-zinc-900/30 to-transparent">
+        <div className="max-w-4xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-8">
+              <span className="text-sm font-medium text-zinc-300">The Reality Check</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
+              Why you're still stuck in{' '}
+              <span className="font-serif italic font-normal text-zinc-200">Tutorial Hell</span>.
+            </h2>
+            
+            <p className="text-zinc-400 text-lg max-w-xl mx-auto">
+              It's not a lack of talent. It's a lack of context.
+            </p>
+          </div>
+
+          {/* Two Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* The YouTube Trap */}
+            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-zinc-800/50">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
+                  <Youtube className="w-5 h-5 text-red-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white">The YouTube Trap</h3>
+              </div>
+              
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                You watch a tutorial on compression. Then one on EQ. Then one on chords. You collect "tricks" like trading cards, but you have no idea how they fit together.
+              </p>
+              
+              <p className="text-zinc-500 text-sm border-t border-zinc-800 pt-6">
+                <span className="text-white font-medium">The Result?</span> A hard drive full of 8-bar loops that never become finished songs.
+              </p>
+            </div>
+
+            {/* The Blueprint Method */}
+            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-[#FF4F33]/30 relative overflow-hidden">
+              {/* Subtle glow */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/10 blur-3xl pointer-events-none" />
+              
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF4F33]/20 flex items-center justify-center">
+                    <Lightbulb className="w-5 h-5 text-[#FF4F33]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">The Blueprint Method</h3>
+                </div>
+                
+                <p className="text-zinc-400 leading-relaxed mb-6">
+                  You don't need more tips. You need a reference point. You need to watch a pro make 10,000 micro-decisions in real-time.
+                </p>
+                
+                <p className="text-zinc-500 text-sm border-t border-zinc-800 pt-6">
+                  <span className="text-[#FF4F33] font-medium">From a blank project file</span> to a Spotify-ready master. No skipping steps. No secrets. Just the work.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Quote */}
+          <div className="text-center mt-16">
+            <blockquote className="text-xl md:text-2xl text-zinc-400 font-serif italic max-w-2xl mx-auto">
+              "You can't learn to paint a masterpiece by only looking at the brush strokes. You need to watch the painter."
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: WHAT'S INSIDE */}
+      <section className="relative z-10 px-6 md:px-12 py-24 max-w-5xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-8">
+            <span className="text-sm font-medium text-zinc-300">What's Inside</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
+            7 modules. 70+ lessons.
+            <br />
+            <span className="font-serif italic font-normal text-zinc-200">The Producer Blueprint.</span>
+          </h2>
+          
+          <p className="text-zinc-400 text-lg max-w-xl mx-auto">
+            Every workflow Rob uses to produce release-ready music from a home studio.
+          </p>
+        </div>
+
+        {/* Modules Grid */}
+        <div className="space-y-4 mb-8">
+          {modules.map((module, index) => (
+            <div 
+              key={index}
+              className="bg-[#0A0A0A] rounded-2xl p-6 border border-zinc-800/50 hover:border-zinc-700/50 transition-colors flex items-start gap-6"
+            >
+              <span className="text-[#FF4F33] font-bold text-lg shrink-0">{module.number}</span>
+              <div>
+                <h3 className="text-white font-semibold text-lg mb-2">{module.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{module.description}</p>
+              </div>
+            </div>
+          ))}
+          
+          {/* Bonus Modules */}
+          {bonusModules.map((module, index) => (
+            <div 
+              key={index}
+              className="bg-[#0A0A0A] rounded-2xl p-6 border border-[#FF4F33]/20 hover:border-[#FF4F33]/30 transition-colors flex items-start gap-6"
+            >
+              <span className="text-[#FF4F33] font-bold text-sm shrink-0 px-2 py-1 bg-[#FF4F33]/10 rounded-lg">Bonus</span>
+              <div>
+                <h3 className="text-white font-semibold text-lg mb-2">{module.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{module.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-12 pt-8 border-t border-zinc-800/50">
+          <p className="text-zinc-400 text-sm mb-6 flex items-center justify-center gap-2">
+            <Check className="w-4 h-4 text-[#FF4F33]" />
+            Plus downloadable project files, templates, and presets.
+          </p>
+          
+          <button 
+            className="inline-flex items-center gap-2 bg-[#FF4F33] text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#e64530] transition-all shadow-[0_0_40px_rgba(255,79,51,0.4)] hover:shadow-[0_0_50px_rgba(255,79,51,0.5)]"
+          >
+            Start The Blueprint Today
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </section>
+
+      {/* SECTION 5: COMPARISON */}
+      <section className="relative z-10 px-6 md:px-12 py-24 bg-gradient-to-b from-transparent via-zinc-900/30 to-transparent">
+        <div className="max-w-5xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-8">
+              <span className="text-sm font-medium text-zinc-300">Why This</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
+              YouTube tutorials vs{' '}
+              <br className="hidden md:block" />
+              <span className="font-serif italic font-normal text-zinc-200">The Producer Blueprint.</span>
+            </h2>
+            
+            <p className="text-zinc-400 text-lg max-w-xl mx-auto">
+              You've tried the free route. Here's why it's not working.
+            </p>
+          </div>
+
+          {/* Comparison Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+            {/* VS Badge (center on desktop) */}
+            <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+              <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
+                <span className="text-zinc-400 font-bold text-lg">VS</span>
+              </div>
+            </div>
+
+            {/* YouTube Side */}
+            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-zinc-800/50">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
+                  <Youtube className="w-5 h-5 text-red-500" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">YouTube Tutorials</h3>
+              </div>
+              
+              <div className="space-y-4">
+                {youtubeProblems.map((item, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <X className="w-5 h-5 text-red-500/70 shrink-0 mt-0.5" />
+                    <span className="text-zinc-400 text-sm">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile VS */}
+            <div className="flex md:hidden items-center justify-center py-4">
+              <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center">
+                <span className="text-zinc-400 font-bold text-sm">VS</span>
+              </div>
+            </div>
+
+            {/* Blueprint Side */}
+            <div className="bg-[#0A0A0A] rounded-3xl p-8 border border-[#FF4F33]/30 relative overflow-hidden">
+              {/* Subtle glow */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF4F33]/10 blur-3xl pointer-events-none" />
+              
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF4F33] flex items-center justify-center">
+                    <span className="text-white font-bold text-xs">PB</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">The Producer Blueprint</h3>
+                </div>
+                
+                <div className="space-y-4">
+                  {blueprintBenefits.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-[#FF4F33] shrink-0 mt-0.5" />
+                      <span className="text-zinc-300 text-sm">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Quote */}
+          <div className="text-center mt-16">
+            <blockquote className="text-xl md:text-2xl text-zinc-400 font-serif italic max-w-2xl mx-auto">
+              "You don't need more tutorials. You need to see how it all fits together."
+            </blockquote>
+          </div>
         </div>
       </section>
     </div>
