@@ -566,11 +566,11 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= OFFER STACK / INTRODUCING SECTION ================= */}
+      {/* ================= OFFER STACK SECTION (FIXED COPY) ================= */}
       <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30">
         <div className="max-w-7xl mx-auto">
           
-          {/* Headline Area (Corrected Styling) */}
+          {/* Headline Area */}
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 leading-[1.1]">
               <span className="font-serif italic font-normal text-zinc-400 lowercase tracking-normal">Introducing</span> <br />
@@ -591,13 +591,12 @@ const TheProducerBlueprint001 = () => {
           {/* Layout Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             
-            {/* LEFT COLUMN: The Value Manifest (Clean List Style) */}
+            {/* LEFT COLUMN: The Clean Stack */}
             <div className="lg:col-span-7">
-              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-8 border-b border-white/10 pb-4">Core Curriculum</h3>
+              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-8 border-b border-white/10 pb-4">What You Get</h3>
               
-              {/* Core Items List */}
+              {/* Core Item (ONLY ONE) */}
               <div className="space-y-8 mb-12">
-                {/* Item 1: Course */}
                 <div className="flex gap-6 items-start group">
                   <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -605,64 +604,16 @@ const TheProducerBlueprint001 = () => {
                   <div className="flex-1 pb-8 border-b border-white/5">
                     <div className="flex justify-between items-start mb-2">
                       <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">The Producer Blueprint Course</h4>
-                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$497</span>
+                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$497 Value</span>
                     </div>
                     <p className="text-zinc-400 text-sm leading-relaxed">
-                      7 modules, 70+ lessons. The complete production workflow Rob uses to produce release-ready music from a home studio.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Item 2: Workflow */}
-                <div className="flex gap-6 items-start group">
-                  <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </div>
-                  <div className="flex-1 pb-8 border-b border-white/5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">"Chain Reaction" Workflow System</h4>
-                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$297</span>
-                    </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      The exact step-by-step process for finishing tracks fast, used on major label releases.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Item 3: Samples */}
-                <div className="flex gap-6 items-start group">
-                  <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </div>
-                  <div className="flex-1 pb-8 border-b border-white/5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">Sample & Preset Vault</h4>
-                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$197</span>
-                    </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      Rob's personal collection of kick drums, snares, and Serum patches.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Item 4: Templates */}
-                <div className="flex gap-6 items-start group">
-                  <div className="w-6 h-6 rounded-full bg-[#FF4F33] flex-shrink-0 flex items-center justify-center text-white mt-1">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </div>
-                  <div className="flex-1 pb-8 border-b border-white/5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-xl font-bold text-white group-hover:text-[#FF4F33] transition-colors">Project Files & Templates</h4>
-                      <span className="text-zinc-500 font-mono text-xs bg-zinc-900 px-2 py-1 rounded border border-white/5">$147</span>
-                    </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      Downloadable Ableton project files to deconstruct and templates to speed up your workflow.
+                      7 modules, 70+ lessons. The complete production workflow Rob uses to produce release-ready music from a home studio. Includes Ableton project files and templates.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Bonuses Section (Highlighted Box) */}
+              {/* Bonuses Section */}
               <div className="bg-zinc-900/30 border border-[#FF4F33]/20 rounded-2xl p-6 md:p-8 relative">
                 <div className="absolute -top-3 left-6 bg-[#050505] px-2">
                   <span className="text-xs font-bold text-[#FF4F33] uppercase tracking-[0.2em] flex items-center gap-2">
@@ -677,10 +628,10 @@ const TheProducerBlueprint001 = () => {
                     <div className="w-12 h-12 bg-black border border-white/10 rounded flex-shrink-0 flex items-center justify-center text-white text-lg font-serif italic">01</div>
                     <div>
                       <div className="flex justify-between items-start mb-1">
-                        <h4 className="text-lg font-bold text-white">Music Business Mastery</h4>
-                        <span className="text-zinc-500 font-mono text-xs line-through decoration-zinc-600">$97</span>
+                        <h4 className="text-lg font-bold text-white">Social Media, Business & Music Industry Module</h4>
+                        <span className="text-zinc-500 font-mono text-xs line-through decoration-zinc-600">$97 Value</span>
                       </div>
-                      <p className="text-zinc-400 text-sm leading-relaxed">Turn production into income. Growing a following and building real customers.</p>
+                      <p className="text-zinc-400 text-sm leading-relaxed">Turn production into income. Growing a following, making content, and building real customers.</p>
                     </div>
                   </div>
                   
@@ -689,16 +640,16 @@ const TheProducerBlueprint001 = () => {
                     <div className="w-12 h-12 bg-black border border-white/10 rounded flex-shrink-0 flex items-center justify-center text-white text-lg font-serif italic">02</div>
                     <div>
                       <div className="flex justify-between items-start mb-1">
-                        <h4 className="text-lg font-bold text-white">The Breakdown Vault</h4>
-                        <span className="text-zinc-500 font-mono text-xs line-through decoration-zinc-600">$147</span>
+                        <h4 className="text-lg font-bold text-white">Rob's TikTok/IG Breakdown Vault</h4>
+                        <span className="text-zinc-500 font-mono text-xs line-through decoration-zinc-600">$147 Value</span>
                       </div>
-                      <p className="text-zinc-400 text-sm leading-relaxed">Exclusive walkthroughs of Rob's most viral social media beats.</p>
+                      <p className="text-zinc-400 text-sm leading-relaxed">Project walkthroughs from Rob's viral content, plus downloadable project files and presets. Updated regularly with new breakdowns.</p>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Mobile Total (Hidden on Desktop) */}
+              {/* Mobile Total */}
               <div className="lg:hidden mt-8 flex justify-between items-center border-t border-white/10 pt-6">
                 <span className="text-zinc-500 text-sm font-bold uppercase tracking-widest">Total Value</span>
                 <span className="text-zinc-400 line-through text-xl decoration-red-500 decoration-2">$741</span>
