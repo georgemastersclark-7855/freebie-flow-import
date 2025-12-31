@@ -241,9 +241,9 @@ const TheProducerBlueprint001 = () => {
             
             {/* Credit Item 1 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img src="https://placehold.co/200x200/18181b/ffffff?text=Fridayy" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers" />
+              <img src={chainsomokersFriday} className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers - Friday" />
               <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Fridayy (Remix)</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Friday</p>
             </div>
             {/* Credit Item 2 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
@@ -278,9 +278,9 @@ const TheProducerBlueprint001 = () => {
             
             {/* DUPLICATE SET FOR INFINITE LOOP */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img src="https://placehold.co/200x200/18181b/ffffff?text=Fridayy" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers" />
+              <img src={chainsomokersFriday} className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="The Chainsmokers - Friday" />
               <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Fridayy (Remix)</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Friday</p>
             </div>
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
               <img src="https://placehold.co/200x200/18181b/ffffff?text=Marshmello" className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300" alt="Marshmello" />
