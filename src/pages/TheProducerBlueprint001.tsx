@@ -262,96 +262,134 @@ const TheProducerBlueprint001 = () => {
         </div>
       </main>
 
-      {/* SECTION 2: SOCIAL PROOF */}
-      <section className="relative z-10 px-6 md:px-12 py-24 max-w-6xl mx-auto">
-        
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          {/* Pill Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-8">
-            <span className="text-sm font-medium text-zinc-300">Unfiltered Feedback</span>
-          </div>
+      {/* ================= SOCIAL PROOF SECTION (FIXED) ================= */}
+      <section className="py-32 px-6 bg-[#050505] overflow-hidden relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col items-center">
           
+          {/* Eyebrow */}
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
+            Unfiltered Feedback
+          </div>
+
           {/* Headline */}
-          <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
-            Hear it directly from{' '}
-            <span className="font-serif italic font-normal text-zinc-200">the producers</span>.
-          </h2>
-          
-          {/* Subheadline */}
-          <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-            Join <span className="text-white font-semibold">500+ producers</span> who have upgraded their workflow.
-          </p>
-        </div>
-
-        {/* Avatar Scrolling Row */}
-        <div className="relative overflow-hidden mb-16">
-          {/* Fade Masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
-          
-          <div className="flex animate-marquee gap-4" style={{ animationDuration: '30s' }}>
-            {[...avatarImages, ...avatarImages, ...avatarImages].map((src, index) => (
-              <Avatar key={index} className="w-16 h-16 flex-shrink-0 border-2 border-zinc-800">
-                <AvatarImage src={src} />
-                <AvatarFallback>U{index + 1}</AvatarFallback>
-              </Avatar>
-            ))}
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+              Hear it directly from <span className="font-serif italic text-white">the producers.</span>
+            </h2>
+            <p className="text-zinc-400 text-lg">Join 500+ producers who have upgraded their workflow.</p>
           </div>
-        </div>
 
-        {/* Row 1: Wall of Love */}
-        <div className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonialData.map((testimonial, index) => (
-              <div 
-                key={index}
-                className="text-center"
-              >
-                <div className="aspect-[4/5] rounded-2xl border border-white/10 bg-[#121212] shadow-2xl hover:scale-[1.02] hover:border-white/20 transition-all duration-300 overflow-hidden cursor-pointer mb-3">
-                  <img 
-                    src={testimonial.image} 
-                    alt={`${testimonial.username} screenshot`}
-                    className="w-full h-full object-contain"
-                  />
+          {/* MASONRY WALL OF LOVE */}
+          <div className="w-full relative z-0 mb-12">
+            
+            {/* CSS Columns for True Masonry (No fixed heights) */}
+            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-48">
+              
+              {/* Screenshot 1 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img src="https://placehold.co/600x500/18181b/ffffff?text=Aaron+Screenshot" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="Aaron Screenshot" />
                 </div>
-                <p className="text-zinc-500 text-sm">{testimonial.username} screenshot</p>
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Row 2: Video Case Studies */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {caseStudies.map((study, index) => (
-            <div 
-              key={index}
-              className="bg-[#0A0A0A] rounded-[30px] p-6 border border-zinc-800/50 hover:border-zinc-700/50 transition-colors"
-            >
-              {/* Video Thumbnail */}
-              <div className="aspect-video rounded-2xl bg-zinc-900 mb-5 overflow-hidden relative group cursor-pointer">
-                <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-14 h-14 bg-[#FF4F33]/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                    <Play className="w-6 h-6 text-white fill-white ml-0.5" />
-                  </div>
+              {/* Screenshot 2 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img src="https://placehold.co/600x650/18181b/ffffff?text=Rsmyth+Screenshot" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="Rsmyth Screenshot" />
+                </div>
+              </div>
+
+              {/* Screenshot 3 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img src="https://placehold.co/600x400/18181b/ffffff?text=Levin+Screenshot" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="Levin Screenshot" />
+                </div>
+              </div>
+
+              {/* Placeholder 4 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img src="https://placehold.co/600x550/18181b/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="More Feedback" />
+                </div>
+              </div>
+
+              {/* Placeholder 5 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img src="https://placehold.co/600x300/18181b/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="More Feedback" />
                 </div>
               </div>
               
-              {/* Text Info */}
-              <div className="space-y-3">
-                <p className="text-white font-semibold text-sm tracking-wide">{study.name}</p>
-                <p className="text-zinc-400 text-base leading-relaxed">
-                  "{study.quote}"
-                </p>
-                <div className="flex items-center gap-2 text-xs text-zinc-500">
-                  <span>{study.role}</span>
-                  <span className="text-zinc-700">•</span>
-                  <span>{study.location}</span>
+              {/* Placeholder 6 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img src="https://placehold.co/600x450/18181b/ffffff?text=More+Feedback" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="More Feedback" />
                 </div>
               </div>
             </div>
-          ))}
+
+            {/* GRADIENT FADE OVERLAY */}
+            <div className="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-10 pointer-events-none"></div>
+          </div>
+
+          {/* ROW 2: VIDEO CASE STUDIES */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full relative z-20 -mt-32">
+            
+            {/* Video 1 */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-[30px] p-2 hover:border-white/20 transition-all shadow-2xl shadow-black">
+              <div className="relative aspect-video rounded-[24px] overflow-hidden bg-zinc-800 mb-6 group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" alt="Alex M. studio" />
+                <div className="absolute inset-0 bg-black/10"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg group-hover:scale-110 transition-transform">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M5 3l14 9-14 9V3z"/></svg>
+                </div>
+              </div>
+              <div className="px-4 pb-6">
+                <h3 className="text-white font-black text-xl uppercase mb-3 tracking-tight">ALEX M.</h3>
+                <p className="text-zinc-400 text-sm mb-6 leading-relaxed border-l-2 border-white/10 pl-4">"My mixes used to sound muddy and thin. Following Module 6 completely changed how I EQ and compress drums."</p>
+                <div className="text-xs flex flex-col gap-1">
+                  <span className="text-white font-bold tracking-wide">Music Producer</span>
+                  <span className="text-zinc-600">United Kingdom</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Video 2 */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-[30px] p-2 hover:border-white/20 transition-all shadow-2xl shadow-black">
+              <div className="relative aspect-video rounded-[24px] overflow-hidden bg-zinc-800 mb-6 group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" alt="Sarah J. studio" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg group-hover:scale-110 transition-transform">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M5 3l14 9-14 9V3z"/></svg>
+                </div>
+              </div>
+              <div className="px-4 pb-6">
+                <h3 className="text-white font-black text-xl uppercase mb-3 tracking-tight">SARAH J.</h3>
+                <p className="text-zinc-400 text-sm mb-6 leading-relaxed border-l-2 border-white/10 pl-4">"The workflow templates alone are worth the price. I finished 3 tracks in the first month after being stuck for a year."</p>
+                <div className="text-xs flex flex-col gap-1">
+                  <span className="text-white font-bold tracking-wide">Artist / Songwriter</span>
+                  <span className="text-zinc-600">United States</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Video 3 */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-[30px] p-2 hover:border-white/20 transition-all shadow-2xl shadow-black">
+              <div className="relative aspect-video rounded-[24px] overflow-hidden bg-zinc-800 mb-6 group cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1478737270239-2f63b8625881?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" alt="David R. studio" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg group-hover:scale-110 transition-transform">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M5 3l14 9-14 9V3z"/></svg>
+                </div>
+              </div>
+              <div className="px-4 pb-6">
+                <h3 className="text-white font-black text-xl uppercase mb-3 tracking-tight">DAVID R.</h3>
+                <p className="text-zinc-400 text-sm mb-6 leading-relaxed border-l-2 border-white/10 pl-4">"Rob explains the 'why', not just the 'how'. It's the first time I actually understood compression properly."</p>
+                <div className="text-xs flex flex-col gap-1">
+                  <span className="text-white font-bold tracking-wide">Bedroom Producer</span>
+                  <span className="text-zinc-600">Canada</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
