@@ -10,6 +10,7 @@ import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial
 import deepintheforestTestimonial from "@/assets/testimonials/deepintheforest-testimonial.jpg";
 import nateSawyerTestimonial from "@/assets/testimonials/nate-sawyer-testimonial.jpg";
 import completePackageTestimonial from "@/assets/testimonials/complete-package-testimonial.jpg";
+import djkieraTestimonial from "@/assets/testimonials/djkiera-testimonial.mp4";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
@@ -753,24 +754,32 @@ const TheProducerBlueprint001 = () => {
           {/* ROW 1: VERTICAL VIDEO TRIO (9:16 Aspect) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
             
-            {/* Video Card 1 */}
+            {/* Video Card 1 - @djkiera */}
             <div className="bg-[#121212] border border-white/10 rounded-3xl p-3 shadow-2xl group cursor-pointer hover:border-white/20 transition-all">
               <div className="relative aspect-[9/16] bg-zinc-800 rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?auto=format&fit=crop&w=600&q=80" className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" alt="Alex M testimonial" />
-                <div className="absolute inset-0 bg-black/20"></div>
+                <video 
+                  src={djkieraTestimonial} 
+                  className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" 
+                  muted 
+                  loop 
+                  playsInline
+                  onMouseEnter={(e) => e.currentTarget.play()}
+                  onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                />
+                <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
                 
                 {/* Play Button */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 group-hover:opacity-0 transition-all pointer-events-none">
                   <div className="w-12 h-12 bg-[#FF4F33] rounded-full flex items-center justify-center pl-1 shadow-lg">
                     <Play className="w-5 h-5 text-white fill-white" />
                   </div>
                 </div>
                 
                 {/* Result Badge */}
-                <div className="absolute bottom-4 left-4 right-4">
+                <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
                   <div className="bg-black/60 backdrop-blur border border-white/10 p-3 rounded-xl">
-                    <p className="text-white font-bold text-sm">"Signed to Spinnin' Records"</p>
-                    <p className="text-zinc-400 text-xs">Alex M. • UK</p>
+                    <p className="text-white font-bold text-sm">@djkiera</p>
+                    <p className="text-zinc-400 text-xs">Kiera • UK</p>
                   </div>
                 </div>
               </div>
