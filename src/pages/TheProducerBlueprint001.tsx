@@ -4,6 +4,9 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
 import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
+import aaronly0nsTestimonial from "@/assets/testimonials/aaronly0ns-testimonial.jpeg";
+import rsmyth111Testimonial from "@/assets/testimonials/rsmyth111-testimonial.jpeg";
+import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial.jpeg";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 
@@ -285,24 +288,24 @@ const TheProducerBlueprint001 = () => {
             {/* CSS Columns for True Masonry (No fixed heights) */}
             <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-48">
               
-              {/* Screenshot 1 */}
+              {/* Screenshot 1 - aaronly0ns */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src="https://placehold.co/600x500/18181b/ffffff?text=Aaron+Screenshot" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="Aaron Screenshot" />
+                  <img src={aaronly0nsTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="@aaronly0ns testimonial" />
                 </div>
               </div>
 
-              {/* Screenshot 2 */}
+              {/* Screenshot 2 - rsmyth111 */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src="https://placehold.co/600x650/18181b/ffffff?text=Rsmyth+Screenshot" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="Rsmyth Screenshot" />
+                  <img src={rsmyth111Testimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="@rsmyth111 testimonial" />
                 </div>
               </div>
 
-              {/* Screenshot 3 */}
+              {/* Screenshot 3 - levin_music */}
               <div className="break-inside-avoid">
                 <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img src="https://placehold.co/600x400/18181b/ffffff?text=Levin+Screenshot" className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="Levin Screenshot" />
+                  <img src={levinMusicTestimonial} className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity" alt="@levin_music testimonial" />
                 </div>
               </div>
 
