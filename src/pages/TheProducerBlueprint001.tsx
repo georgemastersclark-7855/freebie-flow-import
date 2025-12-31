@@ -4,6 +4,7 @@ import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
 import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
+import productStackMockup from "@/assets/product-stack-mockup.png";
 
 const TheProducerBlueprint001 = () => {
   // Testimonial images
@@ -558,6 +559,119 @@ const TheProducerBlueprint001 = () => {
             Start The Blueprint Today
             <ArrowRight className="w-5 h-5" />
           </button>
+        </div>
+      </section>
+
+      {/* SECTION: OFFER STACK */}
+      <section className="relative z-10 px-6 md:px-12 py-24 max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
+            Introducing{' '}
+            <span className="font-serif italic font-normal text-zinc-200">The Producer Blueprint.</span>
+          </h2>
+          <p className="text-zinc-400 text-lg">
+            Join today and get 2 free bonuses included.
+          </p>
+        </div>
+
+        {/* Product Mockup */}
+        <div className="mb-16">
+          <img 
+            src={productStackMockup} 
+            alt="The Producer Blueprint Course Bundle" 
+            className="w-full max-w-4xl mx-auto"
+          />
+        </div>
+
+        {/* 2-Column Layout */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Left Column - What You Get */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold mb-6">What You Get</h3>
+            
+            {/* Main Course */}
+            <div className="border border-zinc-800 rounded-2xl p-6 bg-zinc-900/50">
+              <div className="flex justify-between items-start mb-3">
+                <div>
+                  <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">Core Program</span>
+                  <h4 className="text-xl font-semibold mt-1">The Producer Blueprint 2.0</h4>
+                </div>
+                <span className="text-zinc-400 font-medium">$497</span>
+              </div>
+              <p className="text-zinc-400 text-sm">
+                7 modules, 70+ lessons. The complete production workflow from a working pro.
+              </p>
+            </div>
+
+            {/* Bonuses Box */}
+            <div className="border border-[#FF4F33]/30 rounded-2xl p-6 bg-[#FF4F33]/5">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="bg-[#FF4F33] text-white text-xs font-bold px-2 py-1 rounded">FREE BONUS</span>
+                <span className="text-zinc-400 text-sm">Included when you join today</span>
+              </div>
+              
+              <div className="space-y-4">
+                {/* Bonus 1 */}
+                <div className="flex justify-between items-start pb-4 border-b border-zinc-800">
+                  <div>
+                    <h4 className="font-semibold">Music Business Module</h4>
+                    <p className="text-zinc-400 text-sm">Turn production into income. Growing a following, making content, and building real customers.</p>
+                  </div>
+                  <span className="text-zinc-500 line-through text-sm">$97</span>
+                </div>
+                
+                {/* Bonus 2 */}
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-semibold">Breakdown Vault Access</h4>
+                    <p className="text-zinc-400 text-sm">Project walkthroughs from Rob's viral content. Updated regularly with new breakdowns.</p>
+                  </div>
+                  <span className="text-zinc-500 line-through text-sm">$147</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Sticky Pricing Card */}
+          <div className="lg:sticky lg:top-8">
+            <div className="border border-zinc-700 rounded-3xl p-8 bg-zinc-900/80 backdrop-blur-sm">
+              <div className="text-center mb-6">
+                <p className="text-zinc-400 text-sm mb-2">Total Value</p>
+                <p className="text-3xl text-zinc-500 line-through mb-1">$741</p>
+              </div>
+              
+              <div className="text-center mb-8">
+                <p className="text-zinc-400 text-sm mb-2">Today's Price</p>
+                <p className="text-5xl font-bold text-white">$297</p>
+                <p className="text-zinc-500 text-sm mt-2">One-time payment. Lifetime access.</p>
+              </div>
+
+              <button 
+                className="w-full bg-[#FF4F33] hover:bg-[#FF4F33]/90 text-white px-8 py-4 rounded-2xl text-lg font-semibold transition-all flex items-center justify-center gap-2"
+              >
+                Start The Blueprint Today
+                <ArrowRight className="w-5 h-5" />
+              </button>
+
+              <div className="mt-6 pt-6 border-t border-zinc-800">
+                <ul className="space-y-3 text-sm text-zinc-400">
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#FF4F33]" />
+                    Instant access to all 7 modules
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#FF4F33]" />
+                    Downloadable project files & presets
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#FF4F33]" />
+                    Lifetime updates included
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
