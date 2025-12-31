@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Play, Star, X, Youtube, Lightbulb, MessageSquare, Shuffle, UserX, Eye, Users, Target, Layers, Zap, UserCheck, Home } from "lucide-react";
+import { ArrowRight, Check, Play, Star, X, Youtube, Lightbulb } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
@@ -74,23 +74,22 @@ const TheProducerBlueprint001 = () => {
     { title: "Breakdown Vault", description: "Project walkthroughs from Rob's viral content. See the thinking behind every decision. Updated regularly." },
   ];
 
-  // Comparison data
+  // Comparison data - The YouTube Trap
   const youtubeProblems = [
-    { icon: Shuffle, text: "Disconnected tips from dozens of creators" },
-    { icon: MessageSquare, text: "Conflicting advice on every topic" },
-    { icon: Layers, text: "No structure - you decide what to learn next" },
-    { icon: UserX, text: "Teachers who teach, not produce" },
-    { icon: Eye, text: "Shows you \"what\" but never \"why\"" },
-    { icon: Users, text: "Generic techniques for no one in particular" },
+    { text: "Collecting \"tricks\" like trading cards" },
+    { text: "Conflicting advice from dozens of creators" },
+    { text: "Disconnected tips with no context" },
+    { text: "Hard drive full of 8-bar loops" },
+    { text: "Teachers who teach, but don't produce" },
   ];
 
+  // Comparison data - The Blueprint Method
   const blueprintBenefits = [
-    { icon: Target, text: "One complete workflow from a working producer" },
-    { icon: Layers, text: "One approach that actually works together" },
-    { icon: Zap, text: "Logical progression from foundations to finish" },
-    { icon: UserCheck, text: "From a producer still landing placements" },
-    { icon: Lightbulb, text: "The reasoning behind every decision" },
-    { icon: Home, text: "Built for home studio producers" },
+    { text: "One complete workflow from a working pro" },
+    { text: "Seeing the \"why\" behind 10,000 micro-decisions" },
+    { text: "Logical progression: Blank project to Master" },
+    { text: "A real reference point (not just theory)" },
+    { text: "From a producer still landing placements" },
   ];
 
   return (
@@ -498,13 +497,13 @@ const TheProducerBlueprint001 = () => {
             </div>
             
             <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-4">
-              YouTube tutorials vs{' '}
+              Why You're Still Stuck in{' '}
               <br className="hidden md:block" />
-              <span className="font-serif italic font-normal text-zinc-200">The Producer Blueprint.</span>
+              <span className="font-serif italic font-normal text-zinc-200">Tutorial Hell.</span>
             </h2>
             
             <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-              You've tried the free route. Here's why it's not working.
+              It's not a lack of talent. It's a lack of context.
             </p>
           </div>
 
@@ -523,7 +522,7 @@ const TheProducerBlueprint001 = () => {
                 <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
                   <Youtube className="w-5 h-5 text-red-500" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">YouTube Tutorials</h3>
+                <h3 className="text-lg font-semibold text-white">The YouTube Trap</h3>
               </div>
               
               <div className="space-y-4">
@@ -553,7 +552,7 @@ const TheProducerBlueprint001 = () => {
                   <div className="w-10 h-10 rounded-xl bg-[#FF4F33] flex items-center justify-center">
                     <span className="text-white font-bold text-xs">PB</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-white">The Producer Blueprint</h3>
+                  <h3 className="text-lg font-semibold text-white">The Blueprint Method</h3>
                 </div>
                 
                 <div className="space-y-4">
@@ -568,11 +567,18 @@ const TheProducerBlueprint001 = () => {
             </div>
           </div>
 
-          {/* Quote */}
+          {/* Quote and CTA */}
           <div className="text-center mt-16">
-            <blockquote className="text-xl md:text-2xl text-zinc-400 font-serif italic max-w-2xl mx-auto">
-              "You don't need more tutorials. You need to see how it all fits together."
+            <blockquote className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-8">
+              You don't need more "content". You need a professional reference point.
             </blockquote>
+            
+            <button 
+              className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-200 transition-all"
+            >
+              Meet the Producer
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </section>
