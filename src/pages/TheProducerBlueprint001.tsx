@@ -726,6 +726,145 @@ const TheProducerBlueprint001 = () => {
           </div>
         </div>
       </section>
+
+      {/* ================= CHECKOUT SECTION ================= */}
+      <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30">
+        <div className="max-w-xl mx-auto">
+          
+          {/* Headline */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">
+              Get Instant<br />Access
+            </h2>
+            <p className="text-zinc-400 text-lg">
+              Join 500+ producers building their career from a home studio.
+            </p>
+          </div>
+
+          {/* Checkout Card */}
+          <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+            
+            {/* SSL Badge */}
+            <div className="bg-zinc-900 px-6 py-3 flex items-center justify-center gap-2 border-b border-white/5">
+              <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span className="text-zinc-400 text-xs font-medium uppercase tracking-widest">256-Bit SSL Secure</span>
+            </div>
+
+            <div className="p-8">
+              
+              {/* Product Info */}
+              <div className="flex justify-between items-start mb-6 pb-6 border-b border-white/10">
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-1">The Producer Blueprint™</h3>
+                  <p className="text-zinc-500 text-sm">Complete System + 7 Modules + Templates</p>
+                </div>
+                <div className="text-right">
+                  <span className="text-zinc-500 line-through text-sm block">$741</span>
+                  <span className="text-2xl font-black text-white">$297</span>
+                </div>
+              </div>
+
+              {/* Bonuses */}
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <polyline points="20 6 9 17 4 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-zinc-300 text-sm">BONUS: Music Business Mastery</span>
+                  </div>
+                  <span className="text-green-500 text-sm font-medium">Free</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <polyline points="20 6 9 17 4 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-zinc-300 text-sm">BONUS: The Breakdown Vault</span>
+                  </div>
+                  <span className="text-green-500 text-sm font-medium">Free</span>
+                </div>
+              </div>
+
+              {/* Form Fields */}
+              <div className="space-y-4 mb-8">
+                <div>
+                  <label className="block text-zinc-400 text-xs font-medium uppercase tracking-widest mb-2">Full Name</label>
+                  <input 
+                    type="text" 
+                    placeholder="John Smith" 
+                    className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#FF4F33]/50 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-zinc-400 text-xs font-medium uppercase tracking-widest mb-2">Email Address</label>
+                  <input 
+                    type="email" 
+                    placeholder="you@example.com" 
+                    className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#FF4F33]/50 transition-colors"
+                  />
+                </div>
+              </div>
+
+              {/* Order Bump */}
+              <div className="mb-8">
+                <div className="bg-[#FF4F33] text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-t-xl inline-block">
+                  One-Time Offer
+                </div>
+                <div className="border-2 border-[#FF4F33] rounded-xl rounded-tl-none p-5 bg-[#FF4F33]/5">
+                  <label className="flex gap-4 cursor-pointer group">
+                    <input type="checkbox" className="w-5 h-5 rounded border-white/20 bg-transparent accent-[#FF4F33] mt-1 flex-shrink-0" />
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-white font-bold">YES, ADD: Alpha Drums 3 Sample Pack</span>
+                        <span className="text-zinc-500 line-through text-sm">$97</span>
+                        <span className="text-[#FF4F33] font-bold">+$37</span>
+                      </div>
+                      <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                        Rob's premium drum library with over 700 curated sounds from sessions with A-list artists. Kicks, snares, and percussion that cut through any mix.
+                      </p>
+                      <p className="text-[#FF4F33] text-xs font-medium">&gt;&gt; Click box to add this deal</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Total & CTA */}
+              <div className="space-y-4">
+                <div className="flex justify-between items-center py-4 border-t border-white/10">
+                  <span className="text-white font-bold text-lg">Total Due Today:</span>
+                  <span className="text-3xl font-black text-white">$297.00</span>
+                </div>
+
+                <button className="w-full bg-[#FF4F33] hover:bg-[#FF4F33]/90 text-white text-lg font-black uppercase tracking-wide py-5 rounded-xl transition-all hover:scale-[1.02] shadow-xl flex items-center justify-center gap-2 group">
+                  Get Instant Access
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+
+                {/* Trust Badges */}
+                <div className="flex items-center justify-center gap-6 pt-4">
+                  <div className="flex items-center gap-2 text-zinc-500 text-xs">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Secure Payment
+                  </div>
+                  <div className="flex items-center gap-2 text-zinc-500 text-xs">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    30-Day Guarantee
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
