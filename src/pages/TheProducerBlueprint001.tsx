@@ -873,6 +873,30 @@ const TheProducerBlueprint001 = () => {
                   <img src={completePackageTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="Complete package testimonial" />
                 </div>
               </div>
+              {/* Screenshot 7 - Nate Sawyer (reused) */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src={nateSawyerTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="Nate Sawyer testimonial" />
+                </div>
+              </div>
+              {/* Screenshot 8 - deepintheforest (reused) */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src={deepintheforestTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="deepintheforest testimonial" />
+                </div>
+              </div>
+              {/* Screenshot 9 - rsmyth111 (reused) */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src={rsmyth111Testimonial} className="w-full h-auto block opacity-90 object-contain" alt="rsmyth111 testimonial" />
+                </div>
+              </div>
+              {/* Screenshot 10 - levin_music (reused) */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl bg-[#121212]">
+                  <img src={levinMusicTestimonial} className="w-full h-auto block opacity-90 object-contain" alt="levin_music testimonial" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
