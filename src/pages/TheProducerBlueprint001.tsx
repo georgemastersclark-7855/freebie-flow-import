@@ -26,6 +26,7 @@ import tiandaNothingButLove from "@/assets/album-art/tianda-nothing-but-love.jpe
 import chainsmokersTennisCourt from "@/assets/album-art/chainsmokers-tennis-court.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
+import solutionVideo from "@/assets/solution-video.mp4";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -625,8 +626,7 @@ const TheProducerBlueprint001 = () => {
             playsInline
             className="w-full h-full object-cover opacity-80"
           >
-              {/* Fallback src - Lovable will replace this with your upload */}
-              <source src="/lovable-uploads/solution-video.mp4" type="video/mp4" />
+            <source src={solutionVideo} type="video/mp4" />
           </video>
           
           {/* Top Vignette (Subtle) */}
