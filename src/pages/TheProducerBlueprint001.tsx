@@ -27,8 +27,8 @@ import chainsmokersTennisCourt from "@/assets/album-art/chainsmokers-tennis-cour
 import productStackMockup from "@/assets/product-stack-mockup.png";
 import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 
-// Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
+
 
 const TheProducerBlueprint001 = () => {
   // Load Vidalytics script on mount
