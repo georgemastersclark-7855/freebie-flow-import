@@ -12,6 +12,19 @@ import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 
+// Testimonial imports
+import djkieraTestimonial from "@/assets/testimonials/djkiera-testimonial.mp4";
+import streamingNumbersTestimonial from "@/assets/testimonials/streaming-numbers-testimonial.jpg";
+import drewAdieuTestimonial from "@/assets/testimonials/drew-adieu-testimonial.jpg";
+import headroomRecordsTestimonial from "@/assets/testimonials/headroom-records-testimonial.jpg";
+import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtube-testimonial.jpg";
+import austriaTestimonial from "@/assets/testimonials/austria-testimonial.jpg";
+import completePackageTestimonial from "@/assets/testimonials/complete-package-testimonial.jpg";
+import nateSawyerTestimonial from "@/assets/testimonials/nate-sawyer-testimonial.jpg";
+import deepintheforestTestimonial from "@/assets/testimonials/deepintheforest-testimonial.jpg";
+import rsmyth111Testimonial from "@/assets/testimonials/rsmyth111-testimonial.jpeg";
+import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial.jpeg";
+
 // Signature Placeholder (Use this URL until you upload your png)
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
 
