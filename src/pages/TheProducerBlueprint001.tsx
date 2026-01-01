@@ -20,6 +20,8 @@ import headroomRecordsTestimonial from "@/assets/testimonials/headroom-records-t
 import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtube-testimonial.jpg";
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
+import flawesDontBlameMe from "@/assets/album-art/flawes-dont-blame-me.jpg";
+import januaryAllMyFriends from "@/assets/album-art/january-all-my-friends.jpg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 
@@ -298,6 +300,26 @@ const TheProducerBlueprint001 = () => {
               <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Kygo</p>
               <p className="text-zinc-500 text-[10px] text-center mt-1">Vocal Production</p>
             </div>
+            {/* Credit Item 7 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img
+                src={flawesDontBlameMe}
+                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                alt="Flawes - Don't Blame Me"
+              />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Flawes</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Don't Blame Me</p>
+            </div>
+            {/* Credit Item 8 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img
+                src={januaryAllMyFriends}
+                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                alt="January - All My Friends Are Famous"
+              />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
+            </div>
 
             {/* DUPLICATE SET FOR INFINITE LOOP */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
@@ -353,6 +375,24 @@ const TheProducerBlueprint001 = () => {
               />
               <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Kygo</p>
               <p className="text-zinc-500 text-[10px] text-center mt-1">Vocal Production</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img
+                src={flawesDontBlameMe}
+                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                alt="Flawes - Don't Blame Me"
+              />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Flawes</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Don't Blame Me</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img
+                src={januaryAllMyFriends}
+                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                alt="January - All My Friends Are Famous"
+              />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
             </div>
           </div>
         </div>
