@@ -420,16 +420,19 @@ const TheProducerBlueprint001 = () => {
             
             {/* LEFT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-12 text-center md:text-right order-2 md:order-1 relative z-10">
+              {/* Item 1: Wrong Mentors (Moved to Top Left as requested) */}
+              <div className="space-y-2">
+                <h4 className="text-white font-medium text-lg">Wrong Mentors</h4>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  Learning from "content creators" who optimize for views, not working producers who optimize for results.
+                </p>
+              </div>
+              
+              {/* Item 2: Fragmented Knowledge */}
               <div className="space-y-2">
                 <h4 className="text-white font-medium text-lg">Fragmented Knowledge</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You're watching a mixing tip from one YouTuber and an arrangement hack from another. Nothing connects.
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h4 className="text-white font-medium text-lg">The "Highlight Reel"</h4>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  You only see the polished result on YouTube, never the messy problem-solving required to actually finish music.
                 </p>
               </div>
             </div>
@@ -437,9 +440,9 @@ const TheProducerBlueprint001 = () => {
             {/* CENTER VIDEO (THE VIGNETTE) */}
             <div className="md:w-1/2 order-1 md:order-2 relative flex justify-center">
               {/* Glow Effect behind video */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#FF4F33]/5 blur-[80px] rounded-full pointer-events-none"></div>
               
-              <div className="relative w-full max-w-md aspect-square md:aspect-[4/3] overflow-hidden flex items-center justify-center">
+              <div className="relative w-full max-w-md aspect-square overflow-hidden flex items-center justify-center">
                 <video 
                   autoPlay 
                   muted 
@@ -447,8 +450,8 @@ const TheProducerBlueprint001 = () => {
                   playsInline
                   className="w-full h-full object-cover opacity-90"
                   style={{
-                    maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
-                    WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)'
+                    maskImage: 'radial-gradient(circle, black 20%, transparent 60%)',
+                    WebkitMaskImage: 'radial-gradient(circle, black 20%, transparent 60%)'
                   }}
                   src={tutorialHellVideo}
                 />
@@ -457,16 +460,19 @@ const TheProducerBlueprint001 = () => {
 
             {/* RIGHT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-12 text-center md:text-left order-3 relative z-10">
+              {/* Item 3: Frankenstein Workflow */}
               <div className="space-y-2">
                 <h4 className="text-white font-medium text-lg">Frankenstein Workflow</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   Trying to build a pro sound by stitching together random advice. It falls apart the moment you try to finish a track.
                 </p>
               </div>
+              
+              {/* Item 4: The "Highlight Reel" */}
               <div className="space-y-2">
-                <h4 className="text-white font-medium text-lg">Wrong Mentors</h4>
+                <h4 className="text-white font-medium text-lg">The "Highlight Reel"</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  Learning from "content creators" who optimize for views, not working producers who optimize for results.
+                  You only see the polished result on YouTube, never the messy problem-solving required to actually finish music.
                 </p>
               </div>
             </div>
