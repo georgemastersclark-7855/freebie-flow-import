@@ -22,6 +22,7 @@ import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import flawesDontBlameMe from "@/assets/album-art/flawes-dont-blame-me.jpg";
 import januaryAllMyFriends from "@/assets/album-art/january-all-my-friends.jpg";
+import tiandaNothingButLove from "@/assets/album-art/tianda-nothing-but-love.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 
@@ -320,6 +321,16 @@ const TheProducerBlueprint001 = () => {
               <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
               <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
             </div>
+            {/* Credit Item 9 */}
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img
+                src={tiandaNothingButLove}
+                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                alt="Tianda - Nothing But Love"
+              />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Tianda</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
+            </div>
 
             {/* DUPLICATE SET FOR INFINITE LOOP */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
@@ -393,6 +404,15 @@ const TheProducerBlueprint001 = () => {
               />
               <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
               <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
+            </div>
+            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+              <img
+                src={tiandaNothingButLove}
+                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                alt="Tianda - Nothing But Love"
+              />
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Tianda</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
             </div>
           </div>
         </div>
