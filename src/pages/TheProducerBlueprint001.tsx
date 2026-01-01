@@ -23,6 +23,7 @@ import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-aga
 import flawesDontBlameMe from "@/assets/album-art/flawes-dont-blame-me.jpg";
 import januaryAllMyFriends from "@/assets/album-art/january-all-my-friends.jpg";
 import tiandaNothingButLove from "@/assets/album-art/tianda-nothing-but-love.jpeg";
+import chainsmokersTennisCourt from "@/assets/album-art/chainsmokers-tennis-court.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
 import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 
@@ -294,12 +295,12 @@ const TheProducerBlueprint001 = () => {
             {/* Credit Item 6 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
               <img
-                src="https://placehold.co/200x200/18181b/ffffff?text=Kygo"
+                src={chainsmokersTennisCourt}
                 className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Kygo"
+                alt="The Chainsmokers - Tennis Court"
               />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Kygo</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Vocal Production</p>
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Tennis Court</p>
             </div>
             {/* Credit Item 7 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
@@ -380,12 +381,12 @@ const TheProducerBlueprint001 = () => {
             </div>
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
               <img
-                src="https://placehold.co/200x200/18181b/ffffff?text=Kygo"
+                src={chainsmokersTennisCourt}
                 className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Kygo"
+                alt="The Chainsmokers - Tennis Court"
               />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Kygo</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Vocal Production</p>
+              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+              <p className="text-zinc-500 text-[10px] text-center mt-1">Tennis Court</p>
             </div>
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
               <img
