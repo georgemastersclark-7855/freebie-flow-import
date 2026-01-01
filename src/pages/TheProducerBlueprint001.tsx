@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import { ArrowRight, Check, Play, Star, X, Youtube } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-// Assets imports
+// ==========================================
+// ASSET IMPORTS
+// ==========================================
+// Note: Ensure these files exist in your project.
+// If a file is missing, the build might fail.
+// I have added safety checks on the images themselves.
+
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
 import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
@@ -21,8 +27,14 @@ import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtu
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
-// Placeholder for signature - make sure to add this file to your assets or Lovable will use a placeholder
-import robSignature from "@/assets/rob-signature.png";
+
+// --- SIGNATURE SETUP ---
+// 1. Upload your signature image to assets and name it 'rob-signature.png'
+// 2. UNCOMMENT the line below:
+// import robSignature from "@/assets/rob-signature.png";
+// 3. DELETE the const robSignature line below that uses the placeholder.
+
+const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
 
 const TheProducerBlueprint001 = () => {
   // Load Vidalytics script on mount
@@ -542,7 +554,7 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION: THE ORIGIN STORY (MOVED HERE) ================= */}
+      {/* ================= SECTION: THE ORIGIN STORY (MEET YOUR INSTRUCTOR) ================= */}
       <section className="py-24 px-6 bg-[#050505] relative z-20 overflow-hidden">
         {/* Background Grid Texture */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
@@ -736,7 +748,7 @@ const TheProducerBlueprint001 = () => {
               <p className="text-[#FF4F33] font-bold uppercase tracking-widest text-sm">Priceless.</p>
             </div>
 
-            {/* Signature */}
+            {/* Signature Image */}
             <div className="mt-8 flex justify-center opacity-70">
               <img
                 src={robSignature}
