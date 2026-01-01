@@ -903,8 +903,15 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* ================= CHECKOUT SECTION ================= */}
-      <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30">
-        <div className="max-w-xl mx-auto">
+      <section className="py-32 px-6 bg-[#050505] border-t border-white/5 relative z-30 overflow-hidden">
+        {/* Aurora Glow Background */}
+        <div 
+          className="absolute inset-0 opacity-40 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 200, 150, 0.15) 0%, rgba(255, 100, 50, 0.08) 40%, transparent 70%)'
+          }}
+        />
+        <div className="max-w-xl mx-auto relative z-10">
           
           {/* Headline */}
           <div className="text-center mb-12">
