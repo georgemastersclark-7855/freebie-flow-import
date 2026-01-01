@@ -625,9 +625,8 @@ const TheProducerBlueprint001 = () => {
             loop 
             playsInline
             className="w-full h-full object-cover opacity-80"
-          >
-            <source src={solutionVideo} type="video/mp4" />
-          </video>
+            src={solutionVideo}
+          />
           
           {/* Top Vignette (Subtle) */}
           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent opacity-80"></div>
