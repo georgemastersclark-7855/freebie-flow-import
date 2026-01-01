@@ -146,6 +146,9 @@ const TheProducerBlueprint001 = () => {
 
       {/* Hero Content */}
       <main className="relative z-10 px-6 md:px-12 pt-16 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
+        {/* HERO AMBIENT GLOW */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF4F33]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+        
         {/* Social Proof Eyebrow */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex -space-x-3 relative">
