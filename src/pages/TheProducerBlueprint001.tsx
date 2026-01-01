@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ArrowRight, Check, Play, Star, X, Youtube } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-// Assets imports - keeping your original paths
+// Assets imports
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
 import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
@@ -21,6 +21,8 @@ import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtu
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
+// Placeholder for signature - make sure to add this file to your assets or Lovable will use a placeholder
+import robSignature from "@/assets/rob-signature.png";
 
 const TheProducerBlueprint001 = () => {
   // Load Vidalytics script on mount
@@ -344,96 +346,6 @@ const TheProducerBlueprint001 = () => {
         </div>
       </main>
 
-      {/* ================= SOCIAL PROOF SECTION (MASONRY FADE) ================= */}
-      <section className="pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
-            Unfiltered Feedback
-          </div>
-
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
-              Hear it directly from <span className="font-serif italic text-white">the producers.</span>
-            </h2>
-            <p className="text-zinc-400 text-lg">Join 500+ producers who have upgraded their workflow.</p>
-          </div>
-
-          {/* MASONRY WALL (Fading out) */}
-          <div className="w-full relative z-0">
-            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-96">
-              {/* Screenshot 1 - Austria */}
-              <div className="break-inside-avoid">
-                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img
-                    src={austriaTestimonial}
-                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
-                    alt="Austria testimonial"
-                  />
-                </div>
-              </div>
-
-              {/* Screenshot 2 - rsmyth111 */}
-              <div className="break-inside-avoid">
-                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img
-                    src={rsmyth111Testimonial}
-                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
-                    alt="@rsmyth111 testimonial"
-                  />
-                </div>
-              </div>
-
-              {/* Screenshot 3 - levin_music */}
-              <div className="break-inside-avoid">
-                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img
-                    src={levinMusicTestimonial}
-                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
-                    alt="@levin_music testimonial"
-                  />
-                </div>
-              </div>
-
-              {/* Screenshot 4 - deepintheforest */}
-              <div className="break-inside-avoid">
-                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img
-                    src={deepintheforestTestimonial}
-                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
-                    alt="@deepintheforest testimonial"
-                  />
-                </div>
-              </div>
-
-              {/* Screenshot 5 - Nate Sawyer */}
-              <div className="break-inside-avoid">
-                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img
-                    src={nateSawyerTestimonial}
-                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
-                    alt="Nate Sawyer testimonial"
-                  />
-                </div>
-              </div>
-
-              {/* Screenshot 6 - Complete Package */}
-              <div className="break-inside-avoid">
-                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
-                  <img
-                    src={completePackageTestimonial}
-                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
-                    alt="Complete package testimonial"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* MASSIVE FADE OVERLAY */}
-            <div className="absolute bottom-0 left-0 w-full h-[800px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-10 pointer-events-none"></div>
-          </div>
-        </div>
-      </section>
-
       {/* ================= SECTION 2: PAIN AGITATION (REFINED) ================= */}
       <section className="py-32 px-6 bg-transparent relative z-20 -mt-[500px]">
         <div className="max-w-4xl mx-auto text-center">
@@ -643,7 +555,7 @@ const TheProducerBlueprint001 = () => {
             </div>
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">Rob Late.</h2>
             <div className="inline-block relative">
-              <p className="text-xl md:text-2xl text-zinc-400 font-serif italic">
+              <p className="text-xl md:text-2xl text-zinc-400 font-medium tracking-tight">
                 Credits: The Chainsmokers, Marshmello, Clean Bandit, Gary Barlow.
               </p>
               <p className="text-sm text-[#FF4F33] font-bold uppercase tracking-widest mt-2">
@@ -684,8 +596,9 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      I was working a sales job for a phone mount company, producing music as a "hobby". Got told to
-                      ‘get a proper job’ countless times. First setup: classic Focusrite interface.
+                      I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings.
+                      I got told to ‘get a proper job’ more times than I can count. This was my first setup - classic
+                      Focusrite interface, but it worked.
                     </p>
                   </div>
                 </div>
@@ -714,8 +627,9 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-white font-bold text-lg mb-2">The Lockdown Era</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Stuck in a spare room in London. I posted Reels sampling random objects. A few got views. I didn't
-                      know it yet, but everything changed right here.
+                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I
+                      posted some Reels sampling random objects in my studio. A few started getting views. I didn't know
+                      it yet, but everything changed right here (post more content, kids).
                     </p>
                   </div>
                 </div>
@@ -739,8 +653,10 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-white font-bold text-lg mb-2">The Breakthrough</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Drew from <span className="text-white">The Chainsmokers</span> DM’d me after seeing a video. We
-                      started working. No management, no label connections - just content reach.
+                      My content was going viral, followers growing. Drew from{" "}
+                      <span className="text-white">The Chainsmokers</span> DM’d me after seeing a video and we started
+                      working on music together. No management, no label connections at this point - just making cool
+                      music & getting reach with content.
                     </p>
                   </div>
                 </div>
@@ -768,8 +684,9 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-white font-bold text-lg mb-2">The A-List Sessions</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Marshmello, Clean Bandit, Gary Barlow. The crazy part is I was still doing it all from a home
-                      setup, proving you don't need a million-dollar facility.
+                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy
+                      part is I was still doing it all from a home setup, proving you don't need a million-dollar
+                      facility to play at the top level.
                     </p>
                   </div>
                 </div>
@@ -797,8 +714,8 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
                     <p className="text-zinc-400 text-xs leading-relaxed">
-                      100 Million+ streams later. I moved house and built a space in my garage. It’s still a home
-                      studio. It’s basically the same gear. I just have fancier lights now.
+                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It’s still a
+                      home studio. It’s basically the same gear. I just have fancier lights now.
                     </p>
                   </div>
                 </div>
@@ -810,7 +727,7 @@ const TheProducerBlueprint001 = () => {
           <div className="mt-24 max-w-2xl mx-auto text-center">
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 md:p-10 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
-              <h4 className="text-white font-serif italic text-2xl md:text-3xl mb-4">
+              <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl mb-4">
                 "What is The Producer Blueprint?"
               </h4>
               <p className="text-zinc-400 text-lg leading-relaxed mb-2">
@@ -821,11 +738,14 @@ const TheProducerBlueprint001 = () => {
 
             {/* Signature */}
             <div className="mt-8 flex justify-center opacity-70">
-              <svg width="150" height="60" viewBox="0 0 200 100" className="text-white fill-current">
-                <text x="10" y="60" fontFamily="cursive" fontSize="40" fontStyle="italic">
-                  Rob Late
-                </text>
-              </svg>
+              <img
+                src={robSignature}
+                alt="Rob Late Signature"
+                className="h-16 w-auto object-contain invert"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
             </div>
           </div>
         </div>
