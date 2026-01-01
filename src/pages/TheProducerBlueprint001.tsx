@@ -2,13 +2,7 @@ import { useEffect } from "react";
 import { ArrowRight, Check, Play, Star, X, Youtube } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-// ==========================================
-// ASSET IMPORTS
-// ==========================================
-// Note: Ensure these files exist in your project.
-// If a file is missing, the build might fail.
-// I have added safety checks on the images themselves.
-
+// Note to Lovable: If these local assets are missing, please replace with placeholders
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
 import testimonial3 from "@/assets/testimonials/testimonial-3.jpeg";
@@ -27,14 +21,6 @@ import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtu
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
-
-// --- SIGNATURE SETUP ---
-// 1. Upload your signature image to assets and name it 'rob-signature.png'
-// 2. UNCOMMENT the line below:
-// import robSignature from "@/assets/rob-signature.png";
-// 3. DELETE the const robSignature line below that uses the placeholder.
-
-const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
 
 const TheProducerBlueprint001 = () => {
   // Load Vidalytics script on mount
@@ -55,6 +41,7 @@ const TheProducerBlueprint001 = () => {
     document.body.appendChild(script);
 
     return () => {
+      // Cleanup script if needed
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
@@ -140,8 +127,8 @@ const TheProducerBlueprint001 = () => {
         </div>
       </nav>
 
-      {/* ================= HERO SECTION ================= */}
-      <main className="relative z-10 px-6 md:px-12 pt-16 md:pt-24 pb-12 max-w-5xl mx-auto text-center">
+      {/* Hero Content */}
+      <main className="relative z-10 px-6 md:px-12 pt-16 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
         {/* Social Proof Eyebrow */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex -space-x-3 relative">
@@ -227,8 +214,8 @@ const TheProducerBlueprint001 = () => {
           </div>
         </div>
 
-        {/* SCROLLING MARQUEE (CREDITS) */}
-        <div className="w-full max-w-7xl mx-auto overflow-hidden marquee-mask relative z-20 mt-12 mb-20">
+        {/* Footer: Scrolling Credits */}
+        <div className="w-full max-w-7xl mx-auto overflow-hidden marquee-mask relative z-20 mt-12">
           <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-10 text-center">
             ROB LATE CREDITS
           </p>
@@ -358,6 +345,96 @@ const TheProducerBlueprint001 = () => {
         </div>
       </main>
 
+      {/* ================= SOCIAL PROOF SECTION (MASONRY FADE) ================= */}
+      <section className="pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col items-center">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
+            Unfiltered Feedback
+          </div>
+
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+              Hear it directly from <span className="font-serif italic text-white">the producers.</span>
+            </h2>
+            <p className="text-zinc-400 text-lg">Join 500+ producers who have upgraded their workflow.</p>
+          </div>
+
+          {/* MASONRY WALL (Fading out) */}
+          <div className="w-full relative z-0">
+            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-96">
+              {/* Screenshot 1 - Austria */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img
+                    src={austriaTestimonial}
+                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
+                    alt="Austria testimonial"
+                  />
+                </div>
+              </div>
+
+              {/* Screenshot 2 - rsmyth111 */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img
+                    src={rsmyth111Testimonial}
+                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
+                    alt="@rsmyth111 testimonial"
+                  />
+                </div>
+              </div>
+
+              {/* Screenshot 3 - levin_music */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img
+                    src={levinMusicTestimonial}
+                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
+                    alt="@levin_music testimonial"
+                  />
+                </div>
+              </div>
+
+              {/* Screenshot 4 - deepintheforest */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img
+                    src={deepintheforestTestimonial}
+                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
+                    alt="@deepintheforest testimonial"
+                  />
+                </div>
+              </div>
+
+              {/* Screenshot 5 - Nate Sawyer */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img
+                    src={nateSawyerTestimonial}
+                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
+                    alt="Nate Sawyer testimonial"
+                  />
+                </div>
+              </div>
+
+              {/* Screenshot 6 - Complete Package */}
+              <div className="break-inside-avoid">
+                <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <img
+                    src={completePackageTestimonial}
+                    className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
+                    alt="Complete package testimonial"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* MASSIVE FADE OVERLAY */}
+            <div className="absolute bottom-0 left-0 w-full h-[800px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-10 pointer-events-none"></div>
+          </div>
+        </div>
+      </section>
+
       {/* ================= SECTION 2: PAIN AGITATION (REFINED) ================= */}
       <section className="py-32 px-6 bg-transparent relative z-20 -mt-[500px]">
         <div className="max-w-4xl mx-auto text-center">
@@ -413,13 +490,13 @@ const TheProducerBlueprint001 = () => {
       <section className="py-24 px-6 bg-[#050505] relative z-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            {/* HEADER - UPDATED TO GREY */}
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
+            {/* HEADER */}
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-[#FF4F33]/30 bg-[#FF4F33]/10 text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-6">
               The Producer Blueprint 2.0
             </div>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-white">
               See How "A-List" Records Are <br className="hidden md:block" />
-              Actually Made <span className="font-serif italic text-zinc-400">In A Home Studio.</span>
+              Actually Made <span className="font-serif italic text-[#FF4F33]">In A Home Studio.</span>
             </h2>
             <p className="text-zinc-400 text-lg max-w-3xl mx-auto">
               Most producers plateau because they have never actually sat in the room with a pro. They simply don't know
@@ -550,215 +627,6 @@ const TheProducerBlueprint001 = () => {
               See How The Blueprint Works
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= SECTION: THE ORIGIN STORY (MEET YOUR INSTRUCTOR) ================= */}
-      <section className="py-24 px-6 bg-[#050505] relative z-20 overflow-hidden">
-        {/* Background Grid Texture */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-24">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
-              Meet Your Instructor
-            </div>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">Rob Late.</h2>
-            <div className="inline-block relative">
-              <p className="text-xl md:text-2xl text-zinc-400 font-medium tracking-tight">
-                Credits: The Chainsmokers, Marshmello, Clean Bandit, Gary Barlow.
-              </p>
-              <p className="text-sm text-[#FF4F33] font-bold uppercase tracking-widest mt-2">
-                (All produced from a home studio)
-              </p>
-            </div>
-          </div>
-
-          {/* TIMELINE CONTAINER */}
-          <div className="relative">
-            {/* DESKTOP CENTRAL LINE (Hidden on Mobile) */}
-            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#FF4F33]/50 to-transparent -translate-y-1/2 z-0"></div>
-
-            {/* MOBILE VERTICAL LINE (Hidden on Desktop) */}
-            <div className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-[#FF4F33]/10 via-[#FF4F33]/50 to-[#FF4F33]/10 z-0"></div>
-
-            {/* Timeline Items Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
-              {/* ITEM 1: 2019 (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card (Shifted UP on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-                      <img
-                        src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&h=500&fit=crop"
-                        className="w-full h-full object-cover"
-                        alt="2019 Setup"
-                      />
-                    </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2019: The Grind
-                    </div>
-                  </div>
-                  <div className="text-left lg:text-center">
-                    <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
-                    <p className="text-zinc-500 text-xs leading-relaxed">
-                      I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings.
-                      I got told to ‘get a proper job’ more times than I can count. This was my first setup - classic
-                      Focusrite interface, but it worked.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* ITEM 2: 2020 (BOTTOM on Desktop) */}
-              <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card (Shifted DOWN on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-                  {/* Text First on Mobile, but visually we keep consistent. For the 'Bottom' cards, we push them down. */}
-                  <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-                      <img
-                        src="https://images.unsplash.com/photo-1621618721996-2244a04d9c79?w=500&h=500&fit=crop"
-                        className="w-full h-full object-cover"
-                        alt="2020 Lockdown"
-                      />
-                    </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2020: Lockdown
-                    </div>
-                  </div>
-                  <div className="text-left lg:text-center">
-                    <h3 className="text-white font-bold text-lg mb-2">The Lockdown Era</h3>
-                    <p className="text-zinc-500 text-xs leading-relaxed">
-                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I
-                      posted some Reels sampling random objects in my studio. A few started getting views. I didn't know
-                      it yet, but everything changed right here (post more content, kids).
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* ITEM 3: 2021 (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-                      <img src={chainsomokersFriday} className="w-full h-full object-cover" alt="The Chainsmokers" />
-                    </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2021: Breakthrough
-                    </div>
-                  </div>
-                  <div className="text-left lg:text-center">
-                    <h3 className="text-white font-bold text-lg mb-2">The Breakthrough</h3>
-                    <p className="text-zinc-500 text-xs leading-relaxed">
-                      My content was going viral, followers growing. Drew from{" "}
-                      <span className="text-white">The Chainsmokers</span> DM’d me after seeing a video and we started
-                      working on music together. No management, no label connections at this point - just making cool
-                      music & getting reach with content.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* ITEM 4: 2022-23 (BOTTOM on Desktop) */}
-              <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-                      <img
-                        src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=500&h=500&fit=crop"
-                        className="w-full h-full object-cover"
-                        alt="Sessions"
-                      />
-                    </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2022: A-List
-                    </div>
-                  </div>
-                  <div className="text-left lg:text-center">
-                    <h3 className="text-white font-bold text-lg mb-2">The A-List Sessions</h3>
-                    <p className="text-zinc-500 text-xs leading-relaxed">
-                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy
-                      part is I was still doing it all from a home setup, proving you don't need a million-dollar
-                      facility to play at the top level.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* ITEM 5: TODAY (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
-
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-transform duration-700">
-                      <img
-                        src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=500&h=500&fit=crop"
-                        className="w-full h-full object-cover"
-                        alt="Current Studio"
-                      />
-                    </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      TODAY: The Blueprint
-                    </div>
-                  </div>
-                  <div className="text-left lg:text-center">
-                    <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
-                    <p className="text-zinc-400 text-xs leading-relaxed">
-                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It’s still a
-                      home studio. It’s basically the same gear. I just have fancier lights now.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* TIMELINE FOOTER */}
-          <div className="mt-24 max-w-2xl mx-auto text-center">
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 md:p-10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
-              <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl mb-4">
-                "What is The Producer Blueprint?"
-              </h4>
-              <p className="text-zinc-400 text-lg leading-relaxed mb-2">
-                A solid income from ‘making music’, doing what we all love. Control over your time. No boss.
-              </p>
-              <p className="text-[#FF4F33] font-bold uppercase tracking-widest text-sm">Priceless.</p>
-            </div>
-
-            {/* Signature Image */}
-            <div className="mt-8 flex justify-center opacity-70">
-              <img
-                src={robSignature}
-                alt="Rob Late Signature"
-                className="h-16 w-auto object-contain invert"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
-              />
-            </div>
           </div>
         </div>
       </section>
@@ -909,7 +777,7 @@ const TheProducerBlueprint001 = () => {
               alt="Product Stack"
               className="relative z-20 object-contain w-3/4 h-3/4"
               onError={(e) => {
-                e.currentTarget.style.display = "none";
+                e.target.style.display = "none";
               }}
             />
             <p className="text-zinc-600 font-mono text-sm uppercase tracking-widest z-10 absolute">
