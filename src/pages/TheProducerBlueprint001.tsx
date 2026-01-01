@@ -542,328 +542,213 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION: THE ORIGIN STORY ================= */}
-
+      {/* ================= SECTION: THE ORIGIN STORY (MOVED HERE) ================= */}
       <section className="py-24 px-6 bg-[#050505] relative z-20 overflow-hidden">
-
         {/* Background Grid Texture */}
-
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
-        
-
         <div className="max-w-7xl mx-auto relative z-10">
-
-          
-
           {/* Section Header */}
-
           <div className="text-center mb-24">
-
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
-
               Meet Your Instructor
-
             </div>
-
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">
-
-              Rob Late.
-
-            </h2>
-
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">Rob Late.</h2>
             <div className="inline-block relative">
-
-              {/* REMOVED ITALICS: Now clean sans-serif */}
-
               <p className="text-xl md:text-2xl text-zinc-400 font-medium tracking-tight">
-
                 Credits: The Chainsmokers, Marshmello, Clean Bandit, Gary Barlow.
-
               </p>
-
               <p className="text-sm text-[#FF4F33] font-bold uppercase tracking-widest mt-2">
-
                 (All produced from a home studio)
-
               </p>
-
             </div>
-
           </div>
 
           {/* TIMELINE CONTAINER */}
-
           <div className="relative">
-
-            
-
             {/* DESKTOP CENTRAL LINE (Hidden on Mobile) */}
-
             <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#FF4F33]/50 to-transparent -translate-y-1/2 z-0"></div>
 
-            
-
             {/* MOBILE VERTICAL LINE (Hidden on Desktop) */}
-
             <div className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-[#FF4F33]/10 via-[#FF4F33]/50 to-[#FF4F33]/10 z-0"></div>
 
             {/* Timeline Items Grid */}
-
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
-
-              
-
               {/* ITEM 1: 2019 (TOP on Desktop) */}
-
               <div className="relative flex flex-col lg:items-center">
-
                 {/* Dot */}
-
                 <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
-                
-
                 {/* Content Card (Shifted UP on Desktop) */}
-
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-
-                      <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&h=500&fit=crop" className="w-full h-full object-cover" alt="2019 Setup" />
-
+                      <img
+                        src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="2019 Setup"
+                      />
                     </div>
-
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2019: The Grind</div>
-
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
+                      2019: The Grind
+                    </div>
                   </div>
-
                   <div className="text-left lg:text-center">
-
                     <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
-
                     <p className="text-zinc-500 text-xs leading-relaxed">
-
-                      I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings. I got told to 'get a proper job' more times than I can count. This was my first setup - classic Focusrite interface, but it worked.
-
+                      I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings.
+                      I got told to ‘get a proper job’ more times than I can count. This was my first setup - classic
+                      Focusrite interface, but it worked.
                     </p>
-
                   </div>
-
                 </div>
-
               </div>
 
               {/* ITEM 2: 2020 (BOTTOM on Desktop) */}
-
               <div className="relative flex flex-col lg:items-center lg:justify-end">
-
                 {/* Dot */}
-
                 <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
-                
-
                 {/* Content Card (Shifted DOWN on Desktop) */}
-
                 <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-
+                  {/* Text First on Mobile, but visually we keep consistent. For the 'Bottom' cards, we push them down. */}
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-
-                      <img src="https://images.unsplash.com/photo-1621618721996-2244a04d9c79?w=500&h=500&fit=crop" className="w-full h-full object-cover" alt="2020 Lockdown" />
-
+                      <img
+                        src="https://images.unsplash.com/photo-1621618721996-2244a04d9c79?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="2020 Lockdown"
+                      />
                     </div>
-
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2020: Lockdown</div>
-
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
+                      2020: Lockdown
+                    </div>
                   </div>
-
                   <div className="text-left lg:text-center">
-
                     <h3 className="text-white font-bold text-lg mb-2">The Lockdown Era</h3>
-
                     <p className="text-zinc-500 text-xs leading-relaxed">
-
-                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I posted some Reels sampling random objects in my studio. A few started getting views. I didn't know it yet, but everything changed right here (post more content, kids).
-
+                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I
+                      posted some Reels sampling random objects in my studio. A few started getting views. I didn't know
+                      it yet, but everything changed right here (post more content, kids).
                     </p>
-
                   </div>
-
                 </div>
-
               </div>
 
               {/* ITEM 3: 2021 (TOP on Desktop) */}
-
               <div className="relative flex flex-col lg:items-center">
-
                 {/* Dot */}
-
                 <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
-                
-
                 {/* Content Card */}
-
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-
                       <img src={chainsomokersFriday} className="w-full h-full object-cover" alt="The Chainsmokers" />
-
                     </div>
-
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2021: Breakthrough</div>
-
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
+                      2021: Breakthrough
+                    </div>
                   </div>
-
                   <div className="text-left lg:text-center">
-
                     <h3 className="text-white font-bold text-lg mb-2">The Breakthrough</h3>
-
                     <p className="text-zinc-500 text-xs leading-relaxed">
-
-                      My content was going viral, followers growing. Drew from <span className="text-white">The Chainsmokers</span> DM'd me after seeing a video and we started working on music together. No management, no label connections at this point - just making cool music & getting reach with content.
-
+                      My content was going viral, followers growing. Drew from{" "}
+                      <span className="text-white">The Chainsmokers</span> DM’d me after seeing a video and we started
+                      working on music together. No management, no label connections at this point - just making cool
+                      music & getting reach with content.
                     </p>
-
                   </div>
-
                 </div>
-
               </div>
 
               {/* ITEM 4: 2022-23 (BOTTOM on Desktop) */}
-
               <div className="relative flex flex-col lg:items-center lg:justify-end">
-
                 {/* Dot */}
-
                 <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
-                
-
                 {/* Content Card */}
-
                 <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-
-                      <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=500&h=500&fit=crop" className="w-full h-full object-cover" alt="Sessions" />
-
+                      <img
+                        src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="Sessions"
+                      />
                     </div>
-
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2022: A-List</div>
-
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
+                      2022: A-List
+                    </div>
                   </div>
-
                   <div className="text-left lg:text-center">
-
                     <h3 className="text-white font-bold text-lg mb-2">The A-List Sessions</h3>
-
                     <p className="text-zinc-500 text-xs leading-relaxed">
-
-                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy part is I was still doing it all from a home setup, proving you don't need a million-dollar facility to play at the top level.
-
+                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy
+                      part is I was still doing it all from a home setup, proving you don't need a million-dollar
+                      facility to play at the top level.
                     </p>
-
                   </div>
-
                 </div>
-
               </div>
 
               {/* ITEM 5: TODAY (TOP on Desktop) */}
-
               <div className="relative flex flex-col lg:items-center">
-
                 {/* Dot */}
-
                 <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
 
-                
-
                 {/* Content Card */}
-
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-transform duration-700">
-
-                      <img src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=500&h=500&fit=crop" className="w-full h-full object-cover" alt="Current Studio" />
-
+                      <img
+                        src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="Current Studio"
+                      />
                     </div>
-
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">TODAY: The Blueprint</div>
-
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
+                      TODAY: The Blueprint
+                    </div>
                   </div>
-
                   <div className="text-left lg:text-center">
-
                     <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
-
                     <p className="text-zinc-400 text-xs leading-relaxed">
-
-                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It's still a home studio. It's basically the same gear. I just have fancier lights now.
-
+                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It’s still a
+                      home studio. It’s basically the same gear. I just have fancier lights now.
                     </p>
-
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
 
           {/* TIMELINE FOOTER */}
-
           <div className="mt-24 max-w-2xl mx-auto text-center">
-
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 md:p-10 relative overflow-hidden">
-
-               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
-
-               {/* REMOVED ITALICS: Now clean sans-serif */}
-
-               <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl mb-4">"What is The Producer Blueprint?"</h4>
-
-               <p className="text-zinc-400 text-lg leading-relaxed mb-2">
-
-                 A solid income from 'making music', doing what we all love. Control over your time. No boss.
-
-               </p>
-
-               <p className="text-[#FF4F33] font-bold uppercase tracking-widest text-sm">Priceless.</p>
-
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
+              <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl mb-4">
+                "What is The Producer Blueprint?"
+              </h4>
+              <p className="text-zinc-400 text-lg leading-relaxed mb-2">
+                A solid income from ‘making music’, doing what we all love. Control over your time. No boss.
+              </p>
+              <p className="text-[#FF4F33] font-bold uppercase tracking-widest text-sm">Priceless.</p>
             </div>
 
-            
-
-             {/* Signature Image */}
-
+            {/* Signature */}
             <div className="mt-8 flex justify-center opacity-70">
-
-              <img src={robSignature} alt="Rob Late Signature" className="h-16 w-auto object-contain invert" onError={(e) => {e.currentTarget.style.display='none'}} />
-
+              <img
+                src={robSignature}
+                alt="Rob Late Signature"
+                className="h-16 w-auto object-contain invert"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
             </div>
-
           </div>
-
         </div>
-
       </section>
 
       {/* SECTION: THE ERA OF HOME STUDIO PRODUCTION */}
