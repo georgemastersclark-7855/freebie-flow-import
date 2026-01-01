@@ -21,6 +21,7 @@ import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtu
 import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
 import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
+import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -394,71 +395,88 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 2: PAIN AGITATION (REDESIGNED & PREMIUM) ================= */}
-      <section className="py-32 px-6 bg-transparent relative z-20 -mt-[500px]">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* PILL BADGE */}
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-md shadow-xl">
-            For Self-Taught Producers
+      {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO) ================= */}
+      <section className="py-32 px-6 bg-[#050505] relative z-20 -mt-[500px]">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* 1. HEADLINE AREA (Minimal & Clean) */}
+          <div className="text-center mb-16 relative z-10">
+            <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#FF4F33] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+              For Self-Taught Producers
+            </div>
+            
+            <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 text-white leading-[1.1]">
+              Why You're Still Stuck In <br />
+              <span className="font-serif italic text-white">Tutorial Hell.</span>
+            </h2>
+            {/* Minimal Subheadline (As requested: Smaller, less bold) */}
+            <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
+              You have the taste. You have the plugins. <span className="text-zinc-400">But your hard drive is a graveyard of unfinished ideas.</span>
+            </p>
           </div>
 
-          {/* HEADLINE */}
-          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-8 text-white drop-shadow-2xl leading-[1.1]">
-            Why You're Still Stuck In <br />
-            <span className="font-serif italic text-white">Tutorial Hell.</span>
-          </h2>
-
-          {/* SUBHEADLINE */}
-          <p className="text-zinc-300 text-xl md:text-2xl font-medium max-w-2xl mx-auto drop-shadow-lg mb-16 leading-relaxed">
-            You have good taste. You have the plugins. You have the work-ethic.{" "}
-            <span className="text-white">So why is your hard drive full of unfinished ideas?</span>
-          </p>
-
-          {/* NEW PREMIUM CARD DESIGN FOR PAIN COPY */}
-          <div className="relative group max-w-3xl mx-auto">
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#FF4F33]/20 to-zinc-800/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <div className="relative bg-[#0F0F0F] border border-white/5 rounded-2xl p-10 md:p-14 shadow-2xl overflow-hidden">
-              <div className="flex flex-col items-center gap-8">
-                {/* Icon */}
-                <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <X className="w-6 h-6 text-red-500" />
-                </div>
-
-                {/* Statement */}
-                <div className="space-y-6 text-center">
-                  <h3 className="text-2xl font-bold text-white tracking-tight">
-                    The problem isn't talent, <span className="text-zinc-400">you’re just fragmented.</span>
-                  </h3>
-
-                  <div className="space-y-4 text-zinc-400 text-lg font-light leading-relaxed">
-                    <p>
-                      Right now, you are watching a mixing tutorial from one YouTuber, a sound design tip from another,
-                      and an arrangement hack from a third.
-                    </p>
-                    <p>
-                      You get a{" "}
-                      <span className="text-[#FF4F33] font-medium border-b border-[#FF4F33]/30">
-                        "Frankenstein" workflow
-                      </span>{" "}
-                      that falls apart the moment you try to finish a track.
-                    </p>
-                    <p className="text-zinc-500 text-base pt-2">
-                      It’s time to stop collecting tips from producers who aren’t in the trenches and start building a
-                      professional workflow.
-                    </p>
-                  </div>
-                </div>
+          {/* 2. CINEMATIC GRID LAYOUT */}
+          <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-4">
+            
+            {/* LEFT COLUMN TEXT */}
+            <div className="md:w-1/4 space-y-12 text-center md:text-right order-2 md:order-1 relative z-10">
+              <div className="space-y-2">
+                <h4 className="text-white font-medium text-lg">Fragmented Knowledge</h4>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  You're watching a mixing tip from one YouTuber and an arrangement hack from another. Nothing connects.
+                </p>
               </div>
-
-              {/* Subtle Grid Background inside card */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+              <div className="space-y-2">
+                <h4 className="text-white font-medium text-lg">The "Highlight Reel"</h4>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  You only see the polished result on YouTube, never the messy problem-solving required to actually finish music.
+                </p>
+              </div>
             </div>
 
-            {/* Downward Arrow to lead into Solution */}
-            <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-              <div className="w-[1px] h-16 bg-gradient-to-b from-white/20 to-transparent"></div>
+            {/* CENTER VIDEO (THE VIGNETTE) */}
+            <div className="md:w-1/2 order-1 md:order-2 relative flex justify-center">
+              {/* Glow Effect behind video */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none"></div>
+              
+              <div className="relative w-full max-w-md aspect-square md:aspect-[4/3] overflow-hidden flex items-center justify-center">
+                <video 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-full object-cover opacity-90"
+                  style={{
+                    maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
+                    WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)'
+                  }}
+                  src={tutorialHellVideo}
+                />
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN TEXT */}
+            <div className="md:w-1/4 space-y-12 text-center md:text-left order-3 relative z-10">
+              <div className="space-y-2">
+                <h4 className="text-white font-medium text-lg">Frankenstein Workflow</h4>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  Trying to build a pro sound by stitching together random advice. It falls apart the moment you try to finish a track.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-white font-medium text-lg">Wrong Mentors</h4>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  Learning from "content creators" who optimize for views, not working producers who optimize for results.
+                </p>
+              </div>
             </div>
           </div>
+
+          {/* Connector Line to Solution */}
+          <div className="mt-24 flex flex-col items-center opacity-20">
+            <div className="w-[1px] h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
+          </div>
+
         </div>
       </section>
 
