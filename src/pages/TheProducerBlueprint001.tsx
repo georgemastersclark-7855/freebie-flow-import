@@ -395,11 +395,11 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO) ================= */}
+      {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO + SCRIBBLES) ================= */}
       <section className="py-32 px-6 bg-[#050505] relative z-20 -mt-[500px]">
         <div className="max-w-7xl mx-auto">
           
-          {/* 1. HEADLINE AREA (Minimal & Clean) */}
+          {/* 1. HEADLINE AREA */}
           <div className="text-center mb-16 relative z-10">
             <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#FF4F33] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
               For Self-Taught Producers
@@ -409,49 +409,67 @@ const TheProducerBlueprint001 = () => {
               Why You're Still Stuck In <br />
               <span className="font-serif italic text-white">Tutorial Hell.</span>
             </h2>
-            {/* Minimal Subheadline (As requested: Smaller, less bold) */}
             <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
               You have the taste. You have the plugins. <span className="text-zinc-400">But your hard drive is a graveyard of unfinished ideas.</span>
             </p>
           </div>
 
           {/* 2. CINEMATIC GRID LAYOUT */}
-          <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-4">
+          <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-12 text-center md:text-right order-2 md:order-1 relative z-10">
-              {/* Item 1: Wrong Mentors (Moved to Top Left as requested) */}
-              <div className="space-y-2">
-                <h4 className="text-white font-medium text-lg">Wrong Mentors</h4>
+            <div className="md:w-1/4 space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
+              
+              {/* Item 1: Wrong Mentors */}
+              <div className="space-y-2 relative group">
+                <h4 className="text-white font-medium text-lg relative inline-block">
+                  Wrong Mentors
+                  {/* Scribble: Underline */}
+                  <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FF4F33]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <path d="M2,5 Q50,8 98,2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   Learning from "content creators" who optimize for views, not working producers who optimize for results.
                 </p>
               </div>
               
               {/* Item 2: Fragmented Knowledge */}
-              <div className="space-y-2">
+              <div className="space-y-2 relative">
                 <h4 className="text-white font-medium text-lg">Fragmented Knowledge</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You're watching a mixing tip from one YouTuber and an arrangement hack from another. Nothing connects.
                 </p>
+                {/* Scribble: Arrow pointing right to video */}
+                <div className="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 opacity-60">
+                   <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform -rotate-12">
+                     <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+                     <defs>
+                       <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                         <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+                       </marker>
+                     </defs>
+                   </svg>
+                </div>
               </div>
             </div>
 
             {/* CENTER VIDEO (THE VIGNETTE) */}
             <div className="md:w-1/2 order-1 md:order-2 relative flex justify-center">
-              {/* Glow Effect behind video */}
+              {/* Glow Effect */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#FF4F33]/5 blur-[80px] rounded-full pointer-events-none"></div>
               
-              <div className="relative w-full max-w-md aspect-square overflow-hidden flex items-center justify-center">
+              <div className="relative w-full max-w-md aspect-square overflow-visible flex items-center justify-center">
                 <video 
                   autoPlay 
                   muted 
                   loop 
                   playsInline
-                  className="w-full h-full object-cover opacity-90"
+                  className="w-full h-full object-cover opacity-90 scale-110"
                   style={{
-                    maskImage: 'radial-gradient(circle, black 20%, transparent 60%)',
-                    WebkitMaskImage: 'radial-gradient(circle, black 20%, transparent 60%)'
+                    objectPosition: '60% center', 
+                    maskImage: 'radial-gradient(circle, black 35%, transparent 65%)',
+                    WebkitMaskImage: 'radial-gradient(circle, black 35%, transparent 65%)'
                   }}
                   src={tutorialHellVideo}
                 />
@@ -459,17 +477,31 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* RIGHT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-12 text-center md:text-left order-3 relative z-10">
+            <div className="md:w-1/4 space-y-16 text-center md:text-left order-3 relative z-10">
+              
               {/* Item 3: Frankenstein Workflow */}
-              <div className="space-y-2">
-                <h4 className="text-white font-medium text-lg">Frankenstein Workflow</h4>
+              <div className="space-y-2 relative">
+                <div className="relative inline-block">
+                  <h4 className="text-white font-medium text-lg relative z-10">Frankenstein Workflow</h4>
+                  {/* Scribble: Circle around title */}
+                  <svg className="absolute -top-3 -left-4 w-[120%] h-[180%] text-[#FF4F33]/40 z-0 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
+                    <path d="M10,20 Q50,5 90,20 T10,20" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                  </svg>
+                </div>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   Trying to build a pro sound by stitching together random advice. It falls apart the moment you try to finish a track.
                 </p>
               </div>
               
-              {/* Item 4: The "Highlight Reel" */}
-              <div className="space-y-2">
+              {/* Item 4: The Highlight Reel */}
+              <div className="space-y-2 relative">
+                {/* Scribble: Arrow pointing left to video */}
+                <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
+                   <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform rotate-12 scale-x-[-1]">
+                     <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+                   </svg>
+                </div>
+                
                 <h4 className="text-white font-medium text-lg">The "Highlight Reel"</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You only see the polished result on YouTube, never the messy problem-solving required to actually finish music.
