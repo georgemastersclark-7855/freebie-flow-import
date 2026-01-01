@@ -218,6 +218,13 @@ const TheProducerBlueprint001 = () => {
           className="w-full max-w-6xl mx-auto relative group cursor-pointer mb-24 animate-fade-in"
           style={{ animationDelay: "0.5s" }}
         >
+          {/* Large Ambient Glow Behind VSL */}
+          <div 
+            className="absolute -inset-32 pointer-events-none z-0"
+            style={{
+              background: 'radial-gradient(ellipse at center, rgba(255,120,50,0.15) 0%, rgba(255,79,51,0.08) 40%, transparent 70%)',
+            }}
+          />
           {/* Glow Effect */}
           <div className="absolute -inset-1 bg-[#FF4F33]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
 
@@ -232,16 +239,24 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Footer: Scrolling Credits */}
-        <div className="w-full max-w-7xl mx-auto overflow-hidden marquee-mask relative z-20 mt-12">
+        <div className="w-full max-w-7xl mx-auto relative z-20 mt-12 mb-20">
           <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-10 text-center">
             ROB LATE CREDITS
           </p>
 
-          {/* Marquee Container */}
-          <div
-            className="flex gap-12 w-max animate-marquee hover:[animation-play-state:paused] items-start"
-            style={{ animationDuration: "60s" }}
+          {/* Added mask-image style for the fade effect */}
+          <div 
+            className="overflow-hidden relative"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+            }}
           >
+            {/* Marquee Container */}
+            <div
+              className="flex gap-12 w-max animate-marquee hover:[animation-play-state:paused] items-start"
+              style={{ animationDuration: "60s" }}
+            >
             {/* Credit Item 1 */}
             <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
               <img
@@ -415,12 +430,20 @@ const TheProducerBlueprint001 = () => {
               <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Tianda</p>
               <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
             </div>
+            </div>
           </div>
         </div>
       </main>
 
       {/* ================= MINI SOCIAL PROOF SECTION (FIXED TO 6) ================= */}
       <section className="pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
+        {/* Ambient Glow Behind Unfiltered Feedback */}
+        <div 
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, transparent 60%)',
+          }}
+        />
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
             Unfiltered Feedback
@@ -458,6 +481,13 @@ const TheProducerBlueprint001 = () => {
 
       {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO + SCRIBBLES) ================= */}
       <section className="py-32 px-6 bg-[#050505] relative z-20 -mt-[500px]">
+        {/* Deep Red Ambient Glow Behind Tutorial Hell */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none z-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(180,30,30,0.08) 0%, rgba(120,20,20,0.04) 40%, transparent 70%)',
+          }}
+        />
         <div className="max-w-7xl mx-auto">
           
           {/* 1. HEADLINE AREA */}
