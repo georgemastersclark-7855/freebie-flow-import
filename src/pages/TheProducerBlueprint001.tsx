@@ -928,22 +928,22 @@ const TheProducerBlueprint001 = () => {
               },
               {
                 id: "02",
-                title: "Sound Design",
-                subtitle: "That Cuts",
+                title: "Sound Design That Cuts",
+                // Merged title for better flow
                 desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch that sit perfectly in the mix without endless tweaking.",
                 image: soundDesignStudio,
               },
               {
                 id: "03",
-                title: "Pro Drum",
-                subtitle: "Production",
+                title: "Pro Drum Production",
+                // Merged title
                 desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.",
                 image: drumProductionGif,
               },
               {
                 id: "04",
-                title: "Arrangement",
-                subtitle: "& Energy",
+                title: "Arrangement & Energy",
+                // Merged title
                 desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
                 image: abletonSession,
               },
@@ -957,14 +957,12 @@ const TheProducerBlueprint001 = () => {
               {
                 id: "06",
                 title: "Mixing & Mastering",
-                // No subtitle here, kept clean
                 desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
                 image: mixingMasteringStudio,
               },
               {
                 id: "07",
-                title: "Artist Sounds",
-                subtitle: "& Identity",
+                title: "Artist Sounds & Identity",
                 desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
                 image: robWritingSession,
               },
@@ -978,7 +976,6 @@ const TheProducerBlueprint001 = () => {
               return (
                 <div 
                   key={index}
-                  // FIXED HEIGHT: h-[500px] ensures every card is exactly the same height
                   className={`group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5 ${spanClass}`}
                 >
                   {/* IMAGE LAYER */}
@@ -989,12 +986,12 @@ const TheProducerBlueprint001 = () => {
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
                     />
                     
-                    {/* GLASS FADE OVERLAY 
+                    {/* GRADIENT FADE OVERLAY (No Blur)
                         - Starts 40% from bottom
-                        - Use backdrop-blur-sm for that 'frosted' legibility
-                        - Gradient goes to pure black at bottom to hold the text
+                        - Pure linear gradient to black
+                        - Removed backdrop-blur for sharpness
                     */}
-                    <div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-[#000] via-[#000]/90 to-transparent backdrop-blur-[2px] opacity-95"></div>
+                    <div className="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-[#000] via-[#000]/95 to-transparent opacity-100"></div>
                   </div>
 
                   {/* CONTENT LAYER */}
@@ -1008,20 +1005,20 @@ const TheProducerBlueprint001 = () => {
                     <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
                       
                       {/* Title Block */}
-                      <div className="mb-3">
-                        <h3 className="text-3xl font-bold text-white leading-none mb-1 drop-shadow-lg">
+                      <div className="mb-4">
+                        <h3 className="text-3xl font-bold text-white leading-tight drop-shadow-lg">
                           {module.title}
                         </h3>
-                        {/* NEW SUBTITLE STYLE: Serif Italic + Zinc */}
+                        {/* Subtitle - Only renders if specifically defined */}
                         {module.subtitle && (
-                            <span className="block font-serif italic text-zinc-400 text-lg tracking-wide drop-shadow-md">
+                            <span className="block font-serif italic text-zinc-400 text-xl mt-1 tracking-wide drop-shadow-md">
                                 {module.subtitle}
                             </span>
                         )}
                       </div>
                       
-                      {/* Description */}
-                      <p className="text-zinc-300 text-sm leading-relaxed font-medium drop-shadow-md pr-4">
+                      {/* Description - Relaxed constraints for better flow */}
+                      <p className="text-zinc-300 text-sm leading-relaxed font-medium drop-shadow-md max-w-xl">
                         {module.desc}
                       </p>
                     </div>
