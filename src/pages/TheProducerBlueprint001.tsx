@@ -32,6 +32,7 @@ import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
 import robStudio from "@/assets/rob-home-studio.jpg";
 import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
 import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
+import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -847,7 +848,7 @@ const TheProducerBlueprint001 = () => {
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-                      <img src={chainsomokersFriday} className="w-full h-full object-cover" alt="The Chainsmokers" />
+                      <img src={robChainsmokers} className="w-full h-full object-cover object-top" alt="Rob with The Chainsmokers" />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
                       2021: Breakthrough
