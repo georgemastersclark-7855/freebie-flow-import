@@ -207,7 +207,7 @@ const CurriculumSection = () => {
           </p>
         </div>
 
-        {/* STACKED LIST LAYOUT (Compact + Expandable) */}
+        {/* STACKED LIST LAYOUT (Slim Compact + Drawer) */}
         <div className="flex flex-col gap-4 mb-24 md:mb-32">
           {modules.map((module) => {
             const isOpen = expandedModule === module.id;
@@ -215,37 +215,37 @@ const CurriculumSection = () => {
             return (
               <div 
                 key={module.id}
-                className={`group relative rounded-2xl border border-zinc-800 bg-[#09090b] overflow-hidden transition-all duration-500 ease-in-out hover:border-zinc-600 ${
-                  isOpen ? 'ring-1 ring-zinc-700' : ''
+                className={`group relative w-full border border-zinc-800 bg-[#09090b] rounded-2xl overflow-hidden transition-all duration-500 ease-in-out ${
+                  isOpen ? 'h-auto ring-1 ring-zinc-700' : 'h-[280px] hover:border-zinc-600'
                 }`}
               >
-                <div className="flex flex-col md:flex-row">
+                <div className="flex flex-col md:flex-row h-full">
                   
-                  {/* LEFT: IMAGE SECTION (320px fixed) */}
-                  <div className="w-full md:w-[320px] shrink-0 relative h-[280px] md:h-auto">
+                  {/* LEFT: IMAGE SECTION (300px) */}
+                  <div className="relative w-full md:w-[300px] shrink-0 h-64 md:h-auto">
                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
                     <img 
                       src={module.image} 
                       alt={module.title} 
-                      className="w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    {/* Mobile gradient overlay */}
+                    {/* Mobile gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent md:hidden"></div>
                   </div>
 
                   {/* RIGHT: CONTENT SECTION */}
                   <div className="flex-1 flex flex-col relative">
                     
-                    {/* MAIN CARD CONTENT (Always Visible) */}
-                    <div className="p-6 md:p-8 flex flex-col justify-center h-[280px] relative z-20">
+                    {/* TOP SECTION: Compact View */}
+                    <div className="flex flex-col justify-center px-6 py-6 md:px-8 h-[280px] shrink-0 relative z-20">
                       
-                      {/* Watermark Number */}
+                      {/* Background Number */}
                       <div className="absolute top-4 right-6 text-6xl font-bold text-[#1a1a1a] select-none pointer-events-none">
                         {module.id}
                       </div>
 
-                      <div className="pr-10">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-2 leading-tight">
+                      <div className="pr-12">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-2 leading-none">
                           {module.title}
                           {module.subtitle && (
                             <span className="font-serif italic font-normal text-zinc-500 ml-2">
@@ -253,7 +253,7 @@ const CurriculumSection = () => {
                             </span>
                           )}
                         </h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed mb-6 max-w-lg font-medium line-clamp-2">
+                        <p className="text-zinc-400 text-sm leading-relaxed mb-5 max-w-lg font-medium line-clamp-2">
                           {module.desc}
                         </p>
                         
@@ -263,31 +263,44 @@ const CurriculumSection = () => {
                           className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
                         >
                           {isOpen ? 'Hide Lessons' : 'View Lessons'}
-                          <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'group-hover:translate-y-1'}`}>
+                          <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180 -translate-y-[1px]' : 'group-hover:translate-y-1'}`}>
                             ↓
                           </span>
                         </button>
                       </div>
                     </div>
 
-                    {/* EXPANDABLE DRAWER */}
+                    {/* BOTTOM SECTION: Drawer */}
                     <div 
-                      className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
-                        isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                      className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                        isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
                       }`}
                     >
-                      <div className="border-t border-zinc-800 bg-zinc-900/30 p-6 md:p-8">
-                        <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">
-                          Module Breakdown
-                        </h4>
+                      <div className="border-t border-zinc-800 bg-zinc-900/30 p-6 md:p-8 pt-4">
+                        <div className="flex items-center gap-3 mb-6">
+                          <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                            Module Breakdown
+                          </h4>
+                          <div className="h-px bg-zinc-800 flex-1"></div>
+                        </div>
                         
-                        {/* Lesson Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-8">
+                        {/* LESSON GRID */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-12">
                           {module.lessons.map((lesson, idx) => (
-                            <div key={idx} className="flex items-center text-zinc-400 text-sm">
-                              <span className="mr-3 text-zinc-600">▶</span> {lesson}
+                            <div key={idx} className="flex items-start group/lesson cursor-default">
+                              <span className="mr-3 text-zinc-600 text-[10px] mt-[5px] group-hover/lesson:text-[#FF4F33] transition-colors">▶</span>
+                              <span className="text-zinc-400 text-sm font-medium group-hover/lesson:text-zinc-300 transition-colors">{lesson}</span>
                             </div>
                           ))}
+                        </div>
+
+                        <div className="mt-6 pt-4 border-t border-zinc-800/50 flex justify-end">
+                          <button 
+                            onClick={() => toggleModule(module.id)}
+                            className="text-[10px] font-bold text-zinc-600 uppercase tracking-wider hover:text-zinc-400 transition-colors flex items-center"
+                          >
+                            Close Module <span className="ml-1 text-lg leading-none">×</span>
+                          </button>
                         </div>
                       </div>
                     </div>
