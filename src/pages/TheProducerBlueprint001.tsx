@@ -615,35 +615,42 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 3: THE SOLUTION (CROPPED IMAGE + SMOOTH FADE) ================= */}
+      {/* ================= SECTION 3: THE SOLUTION (RESPONSIVE IMAGE SWAP) ================= */}
       <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0">
         
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
-          {/* Height set to 600px for good visibility */}
-          <div className="relative w-full max-w-6xl h-[600px] overflow-hidden">
-            {/* IMAGE LAYER - Alignment: object-center (relies on manual crop) */}
+          {/* Height: Mobile 600px, Desktop 800px */}
+          <div className="relative w-full max-w-6xl h-[600px] md:h-[800px] overflow-hidden">
+            
+            {/* MOBILE IMAGE (Visible < md) - Uses tall image for better verticality */}
             <img 
-              src={robMarsmelloCropped}
-              className="w-full h-full object-cover object-center opacity-80"
-              alt="Rob and Marshmello in Studio"
+              src={robMarshmello}
+              className="block md:hidden w-full h-full object-cover object-center opacity-80"
+              alt="Rob and Marshmello Mobile"
             />
             
-            {/* TOP FADE: Strong gradient to hide the hard top edge */}
+            {/* DESKTOP IMAGE (Visible >= md) - Uses cropped wide image */}
+            <img 
+              src={robMarsmelloCropped}
+              className="hidden md:block w-full h-full object-cover object-top opacity-80"
+              alt="Rob and Marshmello Desktop"
+            />
+            
+            {/* Top Vignette (Stronger to mask top hard edge) */}
             <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#050505] via-[#050505] to-transparent opacity-100"></div>
             
-            {/* BOTTOM FADE: Blends image into the text area */}
-            <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
+            {/* Bottom Fade (Deep fade for text overlap) */}
+            <div className="absolute bottom-0 left-0 w-full h-[400px] md:h-[500px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
             
-            {/* Side Fades */}
-            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
-            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#050505] to-transparent"></div>
+            {/* Side Fades (Desktop only) */}
+            <div className="hidden md:block absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
+            <div className="hidden md:block absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#050505] to-transparent"></div>
           </div>
         </div>
 
-        {/* 2. CONTENT CONTAINER */}
-        {/* Adjusted negative margin to pull text up into the taller fade */}
-        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[250px]">
+        {/* 2. CONTENT CONTAINER - Responsive negative margins */}
+        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
           
           {/* Header Content */}
           <div className="text-center mb-24">
