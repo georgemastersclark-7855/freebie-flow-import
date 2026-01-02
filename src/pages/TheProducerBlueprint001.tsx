@@ -39,6 +39,7 @@ import earlyDaysSticker from "@/assets/early-days-sticker.png";
 import nowSticker from "@/assets/now-sticker.png";
 import robLateSignature from "@/assets/rob-late-signature-white.png";
 import robWritingSession from "@/assets/rob-writing-session.jpg";
+import vocalProductionStudio from "@/assets/vocal-production-studio.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -1003,9 +1004,9 @@ const TheProducerBlueprint001 = () => {
             <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80" 
+                  src={vocalProductionStudio} 
                   alt="Vocal Production" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
