@@ -1281,7 +1281,7 @@ const TheProducerBlueprint001 = () => {
               <span className="inline-block bg-[#FF4F33]/10 text-[#FF4F33] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
                 Student Wins
               </span>
-              <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+              <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl text-white tracking-tight mb-6">
                 Real Results. Real Releases.
               </h2>
               <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
@@ -1435,8 +1435,8 @@ const TheProducerBlueprint001 = () => {
             
             {/* Headline */}
             <div className="text-center mb-10">
-              <h2 className="font-serif italic text-4xl md:text-5xl text-white mb-4">
-                Get Instant<br />Access
+              <h2 className="font-serif italic text-4xl md:text-5xl text-white tracking-tight mb-4">
+                Get Instant Access
               </h2>
               <p className="text-zinc-400">
                 Join 500+ producers building their career from a home studio.
