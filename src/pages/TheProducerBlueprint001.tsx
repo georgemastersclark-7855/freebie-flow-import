@@ -916,60 +916,60 @@ const TheProducerBlueprint001 = () => {
             </p>
           </div>
 
-          {/* ================= CURRICULUM GRID (2-3-2 LAYOUT) ================= */}
+          {/* ================= CURRICULUM GRID (Fixed Heights) ================= */}
           <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-32">
             {[
               {
                 id: "01",
                 title: "The Foundation",
                 subtitle: "(Ableton Basics)",
-                desc: "Stop fighting your DAW. Set up the exact templates & shortcuts I use to stay in a 'flow state' and work 2x faster. (Beginner friendly).",
+                desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Beginner friendly).",
                 image: foundationLaptop,
               },
               {
                 id: "02",
                 title: "Sound Design",
                 subtitle: "That Cuts",
-                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master synthesis fundamentals to build pads & basses.",
+                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.",
                 image: soundDesignStudio,
               },
               {
                 id: "03",
-                title: "Pro Drums",
+                title: "Pro Drum",
                 subtitle: "Production",
-                desc: "The difference between 'demo' and 'pro' is usually in the drums. Learn sample selection, bus processing, and sidechain secrets.",
+                desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets.",
                 image: drumProductionGif,
               },
               {
                 id: "04",
                 title: "Arrangement",
                 subtitle: "& Energy",
-                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked using ear candy and energy management.",
+                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management.",
                 image: abletonSession,
               },
               {
                 id: "05",
                 title: "Vocal Production",
-                subtitle: "Masterclass",
-                desc: "How to get crispy, radio-ready vocals in a home setup. Recording, processing, harmony stacking, and tuning workflows.",
+                subtitle: "(The \"Secret Sauce\")",
+                desc: "How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.",
                 image: vocalProductionStudio,
               },
               {
                 id: "06",
                 title: "Mixing & Mastering",
                 subtitle: "The Finish Line",
-                desc: "How I approach the final steps to get music ready for labels and streaming platforms. Finish the job.",
+                desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or release to streaming platforms.",
                 image: mixingMasteringStudio,
               },
               {
                 id: "07",
-                title: "Artist Identity",
-                subtitle: "& Analysis",
-                desc: "How to analyze trends without copying them. Deconstruct top artists and rebuild them with your own unique sonic fingerprint.",
+                title: "Artist Sounds",
+                subtitle: "& Identity",
+                desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
                 image: robWritingSession,
               },
             ].map((module, index) => {
-              // Logic for 2-3-2 Layout
+              // 2-3-2 Layout Logic
               let spanClass = "";
               if (index < 2) spanClass = "md:col-span-3";
               else if (index < 5) spanClass = "md:col-span-2";
@@ -978,7 +978,8 @@ const TheProducerBlueprint001 = () => {
               return (
                 <div 
                   key={index}
-                  className={`group relative h-[28rem] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5 ${spanClass}`}
+                  // FIXED HEIGHT: h-[500px] ensures strict alignment
+                  className={`group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5 ${spanClass}`}
                 >
                   {/* IMAGE LAYER */}
                   <div className="absolute inset-0 z-0">
@@ -987,29 +988,40 @@ const TheProducerBlueprint001 = () => {
                       alt={module.title} 
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
                     />
-                    {/* SCRIM GRADIENT */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent opacity-90"></div>
+                    
+                    {/* GLASSMORPHISM FADE OVERLAY 
+                        - Starts from 40% height
+                        - backdrop-blur-sm creates the glass effect
+                        - heavy gradient ensures text readability
+                    */}
+                    <div className="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-[#000] via-[#000]/90 to-transparent backdrop-blur-[2px] opacity-95"></div>
                   </div>
 
                   {/* CONTENT LAYER */}
                   <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                     
-                    {/* Module ID */}
-                    <div className="absolute top-8 left-8 font-mono text-6xl font-bold text-white/20 mix-blend-overlay group-hover:text-white/40 transition-all duration-500 select-none">
+                    {/* Module ID (Watermark style) */}
+                    <div className="absolute top-8 left-8 font-mono text-6xl font-bold text-white/10 mix-blend-overlay group-hover:text-white/30 transition-all duration-500 select-none">
                       {module.id}
                     </div>
                     
                     <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                      <h3 className="text-3xl font-bold text-white mb-2 leading-tight drop-shadow-md">
-                        {module.title}
-                      </h3>
-                      {module.subtitle && (
-                        <span className="block text-[#FF4F33] text-xs font-bold uppercase tracking-wider mb-3 drop-shadow-md">
-                          {module.subtitle}
-                        </span>
-                      )}
                       
-                      <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90 pr-2">
+                      {/* Title Block */}
+                      <div className="mb-3">
+                        <h3 className="text-3xl font-bold text-white leading-none mb-1 drop-shadow-lg">
+                          {module.title}
+                        </h3>
+                        {/* NEW SUBTITLE STYLE: Serif Italic + Zinc */}
+                        {module.subtitle && (
+                            <span className="block font-serif italic text-zinc-400 text-lg tracking-wide drop-shadow-md">
+                                {module.subtitle}
+                            </span>
+                        )}
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-zinc-300 text-sm leading-relaxed font-medium drop-shadow-md pr-4">
                         {module.desc}
                       </p>
                     </div>
