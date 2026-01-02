@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 13.5px; /* Scales the site down to approx 85% */
+  scroll-behavior: smooth;
+}
+
 /* Custom font imports */
 @font-face {
   font-family: 'Akira Expanded';
