@@ -28,6 +28,7 @@ import productStackMockup from "@/assets/product-stack-mockup.png";
 import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 import solutionVideo from "@/assets/solution-video.mp4";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
+import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -614,23 +615,24 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 3: THE SOLUTION (TALLER IMAGE + CENTERED) ================= */}
+      {/* ================= SECTION 3: THE SOLUTION (CROPPED IMAGE + SMOOTH FADE) ================= */}
       <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0">
         
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
+          {/* Height set to 600px for good visibility */}
           <div className="relative w-full max-w-6xl h-[600px] overflow-hidden">
-            {/* IMAGE LAYER - Changed to object-top so their heads are never cut off */}
+            {/* IMAGE LAYER - Alignment: object-center (relies on manual crop) */}
             <img 
-              src={robMarshmello}
-              className="w-full h-full object-cover object-top opacity-80"
+              src={robMarsmelloCropped}
+              className="w-full h-full object-cover object-center opacity-80"
               alt="Rob and Marshmello in Studio"
             />
             
-            {/* Top Vignette (Reduced slightly to keep heads clear) */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent opacity-60"></div>
+            {/* TOP FADE: Strong gradient to hide the hard top edge */}
+            <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#050505] via-[#050505] to-transparent opacity-100"></div>
             
-            {/* Bottom Fade (Extended height for smoother text overlap) */}
+            {/* BOTTOM FADE: Blends image into the text area */}
             <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
             
             {/* Side Fades */}
