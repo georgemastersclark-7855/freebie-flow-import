@@ -125,40 +125,47 @@ html {
   }
 }
 
-/* Premium Glassmorphism Card Styles */
+/* Premium Dark Gradient Card Styles */
 @layer components {
   .glass-card {
     background: linear-gradient(
-      165deg, 
-      rgba(255, 255, 255, 0.08) 0%, 
-      rgba(255, 255, 255, 0.02) 100%
+      145deg, 
+      rgba(35, 35, 40, 1) 0%,
+      rgba(15, 15, 15, 1) 100%
     );
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      0 15px 35px rgba(0, 0, 0, 0.3),
-      inset 0 0 20px rgba(255, 255, 255, 0.03);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   }
 
   .glass-card:hover {
     transform: translateY(-4px);
+    background: linear-gradient(
+      145deg, 
+      rgba(45, 45, 50, 1) 0%, 
+      rgba(20, 20, 20, 1) 100%
+    );
     box-shadow: 
-      0 25px 50px rgba(0, 0, 0, 0.4),
-      inset 0 0 30px rgba(255, 255, 255, 0.05);
-    border-top-color: rgba(255, 255, 255, 0.4);
+      0 30px 60px rgba(0, 0, 0, 0.8),
+      inset 0 0 20px rgba(255, 255, 255, 0.02);
+    border-top-color: rgba(255, 255, 255, 0.3);
   }
 
-  /* Premium Serif Headline with Gradient */
+  /* Premium Serif Headline */
   .headline-serif {
     font-family: "Playfair Display", Georgia, serif;
     font-weight: 700;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #ffffff 0%, #d4d4d8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.1;
+    color: #ffffff;
+  }
+
+  /* Serif Italic Subtitle */
+  .headline-serif-subtitle {
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #71717a;
   }
 }
