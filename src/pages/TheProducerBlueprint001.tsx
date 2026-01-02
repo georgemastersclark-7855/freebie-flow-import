@@ -34,6 +34,7 @@ import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
 import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
 import robFirstStudio from "@/assets/rob-first-studio.jpg";
+import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -818,11 +819,11 @@ const TheProducerBlueprint001 = () => {
                 <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
                   {/* Text First on Mobile, but visually we keep consistent. For the 'Bottom' cards, we push them down. */}
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
+                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
                       <img
-                        src="https://images.unsplash.com/photo-1621618721996-2244a04d9c79?w=500&h=500&fit=crop"
-                        className="w-full h-full object-cover"
-                        alt="2020 Lockdown"
+                        src={robLockdownStudio}
+                        className="w-full h-full object-cover object-center"
+                        alt="Rob's Lockdown Era Studio"
                       />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
