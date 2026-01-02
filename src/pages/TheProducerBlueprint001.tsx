@@ -916,53 +916,60 @@ const TheProducerBlueprint001 = () => {
             </p>
           </div>
 
-          {/* ================= STYLE A: THE FROST CARD ================= */}
+          {/* ================= CURRICULUM GRID (2-3-2 LAYOUT) ================= */}
           <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-32">
             {[
               {
                 id: "01",
-                title: "The Foundation (Ableton Basics)",
-                desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
+                title: "The Foundation",
+                subtitle: "(Ableton Basics)",
+                desc: "Stop fighting your DAW. Set up the exact templates & shortcuts I use to stay in a 'flow state' and work 2x faster. (Beginner friendly).",
                 image: foundationLaptop,
               },
               {
                 id: "02",
-                title: "Sound Design That Cuts",
-                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch that sit perfectly in the mix without endless tweaking.",
+                title: "Sound Design",
+                subtitle: "That Cuts",
+                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master synthesis fundamentals to build pads & basses.",
                 image: soundDesignStudio,
               },
               {
                 id: "03",
-                title: "Pro Drum Production",
-                desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.",
+                title: "Pro Drums",
+                subtitle: "Production",
+                desc: "The difference between 'demo' and 'pro' is usually in the drums. Learn sample selection, bus processing, and sidechain secrets.",
                 image: drumProductionGif,
               },
               {
                 id: "04",
-                title: "Arrangement & Energy",
-                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
+                title: "Arrangement",
+                subtitle: "& Energy",
+                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked using ear candy and energy management.",
                 image: abletonSession,
               },
               {
                 id: "05",
                 title: "Vocal Production",
-                desc: "(The \"Secret Sauce\") How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.",
+                subtitle: "Masterclass",
+                desc: "How to get crispy, radio-ready vocals in a home setup. Recording, processing, harmony stacking, and tuning workflows.",
                 image: vocalProductionStudio,
               },
               {
                 id: "06",
                 title: "Mixing & Mastering",
-                desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
+                subtitle: "The Finish Line",
+                desc: "How I approach the final steps to get music ready for labels and streaming platforms. Finish the job.",
                 image: mixingMasteringStudio,
               },
               {
                 id: "07",
-                title: "Artist Sounds & Identity",
-                desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
+                title: "Artist Identity",
+                subtitle: "& Analysis",
+                desc: "How to analyze trends without copying them. Deconstruct top artists and rebuild them with your own unique sonic fingerprint.",
                 image: robWritingSession,
               },
             ].map((module, index) => {
-              // 2-3-2 Layout Logic
+              // Logic for 2-3-2 Layout
               let spanClass = "";
               if (index < 2) spanClass = "md:col-span-3";
               else if (index < 5) spanClass = "md:col-span-2";
@@ -971,33 +978,38 @@ const TheProducerBlueprint001 = () => {
               return (
                 <div 
                   key={index}
-                  className={`group relative h-[450px] rounded-2xl overflow-hidden border border-white/5 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/10 ${spanClass}`}
+                  className={`group relative h-[28rem] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5 ${spanClass}`}
                 >
-                  {/* 1. Full Height Image Background */}
+                  {/* IMAGE LAYER */}
                   <div className="absolute inset-0 z-0">
                     <img 
                       src={module.image} 
                       alt={module.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
                     />
-                    {/* Subtle overlay to ensure general contrast */}
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500"></div>
+                    {/* SCRIM GRADIENT */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent opacity-90"></div>
                   </div>
 
-                  {/* 2. The "Frost" Content Pane */}
-                  <div className="absolute inset-x-0 bottom-0 z-10 p-6 md:p-8 backdrop-blur-xl bg-black/60 border-t border-white/10 transition-all duration-500 group-hover:bg-black/70">
-                    <div className="flex flex-col gap-3">
-                      {/* Header Row: Number + Title */}
-                      <div className="flex items-start justify-between gap-4 mb-2">
-                        <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
-                          {module.title}
-                        </h3>
-                        <span className="font-mono text-3xl font-bold text-white/20 group-hover:text-[#FF4F33] transition-colors duration-300">
-                          {module.id}
+                  {/* CONTENT LAYER */}
+                  <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                    
+                    {/* Module ID */}
+                    <div className="absolute top-8 left-8 font-mono text-6xl font-bold text-white/20 mix-blend-overlay group-hover:text-white/40 transition-all duration-500 select-none">
+                      {module.id}
+                    </div>
+                    
+                    <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                      <h3 className="text-3xl font-bold text-white mb-2 leading-tight drop-shadow-md">
+                        {module.title}
+                      </h3>
+                      {module.subtitle && (
+                        <span className="block text-[#FF4F33] text-xs font-bold uppercase tracking-wider mb-3 drop-shadow-md">
+                          {module.subtitle}
                         </span>
-                      </div>
-                      {/* Description Text */}
-                      <p className="text-zinc-300 text-xs md:text-sm leading-relaxed opacity-90">
+                      )}
+                      
+                      <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90 pr-2">
                         {module.desc}
                       </p>
                     </div>
