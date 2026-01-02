@@ -35,6 +35,8 @@ import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
 import robFirstStudio from "@/assets/rob-first-studio.jpg";
 import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
+import arrowCurveUp from "@/assets/arrow-curve-up.png";
+import arrowCurveDown from "@/assets/arrow-curve-down.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -772,9 +774,6 @@ const TheProducerBlueprint001 = () => {
 
           {/* TIMELINE CONTAINER */}
           <div className="relative">
-            {/* DESKTOP CENTRAL LINE (Hidden on Mobile) */}
-            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#FF4F33]/50 to-transparent -translate-y-1/2 z-0"></div>
-
             {/* MOBILE VERTICAL LINE (Hidden on Desktop) */}
             <div className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-[#FF4F33]/10 via-[#FF4F33]/50 to-[#FF4F33]/10 z-0"></div>
 
@@ -782,8 +781,8 @@ const TheProducerBlueprint001 = () => {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
               {/* ITEM 1: 2019 (TOP on Desktop) */}
               <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+                {/* Mobile Dot */}
+                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
                 {/* Content Card (Shifted UP on Desktop) */}
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
@@ -803,21 +802,25 @@ const TheProducerBlueprint001 = () => {
                     <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
                       I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings.
-                      I got told to ‘get a proper job’ more times than I can count. This was my first setup - classic
+                      I got told to 'get a proper job' more times than I can count. This was my first setup - classic
                       Focusrite interface, but it worked.
                     </p>
                   </div>
+                </div>
+
+                {/* PNG Arrow 1: Curve DOWN (Card 1 -> 2) */}
+                <div className="hidden lg:block absolute top-[60%] -right-8 w-20 z-30 pointer-events-none">
+                  <img src={arrowCurveDown} alt="" className="w-full opacity-70 rotate-12" />
                 </div>
               </div>
 
               {/* ITEM 2: 2020 (BOTTOM on Desktop) */}
               <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+                {/* Mobile Dot */}
+                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
                 {/* Content Card (Shifted DOWN on Desktop) */}
                 <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-                  {/* Text First on Mobile, but visually we keep consistent. For the 'Bottom' cards, we push them down. */}
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
                       <img
@@ -839,12 +842,17 @@ const TheProducerBlueprint001 = () => {
                     </p>
                   </div>
                 </div>
+
+                {/* PNG Arrow 2: Curve UP (Card 2 -> 3) */}
+                <div className="hidden lg:block absolute top-[40%] -right-8 w-20 z-30 pointer-events-none">
+                  <img src={arrowCurveUp} alt="" className="w-full opacity-70 -rotate-12" />
+                </div>
               </div>
 
               {/* ITEM 3: 2021 (TOP on Desktop) */}
               <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+                {/* Mobile Dot */}
+                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
                 {/* Content Card */}
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
@@ -860,18 +868,23 @@ const TheProducerBlueprint001 = () => {
                     <h3 className="text-white font-bold text-lg mb-2">The Breakthrough</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
                       My content was going viral, followers growing. Drew from{" "}
-                      <span className="text-white">The Chainsmokers</span> DM’d me after seeing a video and we started
+                      <span className="text-white">The Chainsmokers</span> DM'd me after seeing a video and we started
                       working on music together. No management, no label connections at this point - just making cool
                       music & getting reach with content.
                     </p>
                   </div>
                 </div>
+
+                {/* PNG Arrow 3: Curve DOWN (Card 3 -> 4) */}
+                <div className="hidden lg:block absolute top-[60%] -right-8 w-20 z-30 pointer-events-none">
+                  <img src={arrowCurveDown} alt="" className="w-full opacity-70 rotate-12" />
+                </div>
               </div>
 
               {/* ITEM 4: 2022-23 (BOTTOM on Desktop) */}
               <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+                {/* Mobile Dot */}
+                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
                 {/* Content Card */}
                 <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
@@ -896,12 +909,17 @@ const TheProducerBlueprint001 = () => {
                     </p>
                   </div>
                 </div>
+
+                {/* PNG Arrow 4: Curve UP (Card 4 -> 5) */}
+                <div className="hidden lg:block absolute top-[40%] -right-8 w-20 z-30 pointer-events-none">
+                  <img src={arrowCurveUp} alt="" className="w-full opacity-70 -rotate-12" />
+                </div>
               </div>
 
               {/* ITEM 5: TODAY (TOP on Desktop) */}
               <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
+                {/* Mobile Dot */}
+                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
 
                 {/* Content Card */}
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
@@ -920,8 +938,8 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
                     <p className="text-zinc-400 text-xs leading-relaxed">
-                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It’s still a
-                      home studio. It’s basically the same gear. I just have fancier lights now.
+                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It's still a
+                      home studio. It's basically the same gear. I just have fancier lights now.
                     </p>
                   </div>
                 </div>
