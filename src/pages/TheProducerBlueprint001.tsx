@@ -918,155 +918,92 @@ const TheProducerBlueprint001 = () => {
 
           {/* ================= CURRICULUM GRID ================= */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
-            {/* Module 01 */}
-            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={foundationLaptop} 
-                  alt="The Foundation" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
-              </div>
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">01</div>
-                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">The Foundation (Ableton Basics)</h3>
-                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
-                    Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a 'flow state' and work 2x faster.
-                  </p>
-                  <p className="text-xs text-[#FF4F33] italic mt-3 font-semibold">
-                    Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.
-                  </p>
+            {[
+              {
+                id: "01",
+                title: "The Foundation (Ableton Basics)",
+                desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a 'flow state' and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
+                image: foundationLaptop,
+              },
+              {
+                id: "02",
+                title: "Sound Design That Cuts",
+                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.",
+                image: soundDesignStudio,
+              },
+              {
+                id: "03",
+                title: "Pro Drum Production",
+                desc: "The difference between 'demo' and 'pro' is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.",
+                image: drumProductionGif,
+              },
+              {
+                id: "04",
+                title: "Arrangement & Energy",
+                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
+                image: abletonSession,
+              },
+              {
+                id: "05",
+                title: "Vocal Production",
+                desc: "How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.",
+                image: vocalProductionStudio,
+              },
+              {
+                id: "06",
+                title: "Mixing & Mastering",
+                desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
+                image: mixingMasteringStudio,
+              },
+              {
+                id: "07",
+                title: "Artist Sounds & Identity",
+                desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
+                image: robWritingSession,
+              },
+            ].map((module, index) => (
+              <div 
+                key={index}
+                className={`group relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5
+                ${index === 0 ? 'md:col-span-2 lg:col-span-3 h-[400px] md:h-[450px]' : 'h-[500px]'}`}
+              >
+                {/* IMAGE LAYER */}
+                <div className="absolute inset-0 z-0">
+                  <img 
+                    src={module.image} 
+                    alt={module.title} 
+                    className={`w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]
+                      ${index === 0 ? 'object-center' : ''}
+                      ${index === 4 ? 'object-[center_25%]' : ''}
+                      ${index === 6 ? 'object-top' : ''}
+                    `}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent opacity-90"></div>
                 </div>
-              </div>
-            </div>
 
-            {/* Module 02 */}
-            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={soundDesignStudio} 
-                  alt="Sound Design" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
-              </div>
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">02</div>
-                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Sound Design That Cuts</h3>
-                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
-                    Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.
-                  </p>
+                {/* CONTENT LAYER */}
+                <div className="absolute inset-0 z-10 p-6 md:p-8 flex flex-col justify-end">
+                  {/* Module ID - Stylized Watermark */}
+                  <div className="absolute top-4 left-6 md:top-8 md:left-8 font-mono text-5xl md:text-6xl font-bold text-white/20 mix-blend-overlay group-hover:text-white/40 transition-all duration-500 select-none">
+                    {module.id}
+                  </div>
+                  
+                  <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                    <h3 className={`font-bold text-white mb-3 leading-tight drop-shadow-md
+                      ${index === 0 ? 'text-3xl md:text-4xl max-w-2xl' : 'text-2xl md:text-3xl'}
+                    `}>
+                      {module.title}
+                    </h3>
+                    
+                    <p className={`text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90
+                       ${index === 0 ? 'max-w-3xl' : ''}
+                    `}>
+                      {module.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Module 03 */}
-            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={drumProductionGif} 
-                  alt="Pro Drums" 
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
-              </div>
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">03</div>
-                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Pro Drum Production</h3>
-                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
-                    The difference between 'demo' and 'pro' is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Module 04 */}
-            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={abletonSession} 
-                  alt="Arrangement" 
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
-              </div>
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">04</div>
-                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Arrangement & Energy</h3>
-                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
-                    Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Module 05 */}
-            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={vocalProductionStudio} 
-                  alt="Vocal Production" 
-                  className="w-full h-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
-              </div>
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">05</div>
-                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Vocal Production</h3>
-                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
-                    How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Module 06 */}
-            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={mixingMasteringStudio} 
-                  alt="Mixing & Mastering" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
-              </div>
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">06</div>
-                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Mixing & Mastering</h3>
-                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
-                    Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Module 07 */}
-            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 md:col-span-2 lg:col-span-1">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src={robWritingSession} 
-                  alt="Artist Sounds" 
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
-              </div>
-              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">07</div>
-                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Artist Sounds & Identity</h3>
-                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
-                    How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* ================= BONUS SECTION ================= */}
