@@ -29,7 +29,7 @@ import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 import solutionVideo from "@/assets/solution-video.mp4";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
 import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
-import robStudio from "@/assets/rob-studio.jpg";
+import robStudio from "@/assets/rob-home-studio.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
