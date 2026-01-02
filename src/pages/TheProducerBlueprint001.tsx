@@ -759,6 +759,7 @@ const TheProducerBlueprint001 = () => {
           
           {/* Header */}
           <div className="text-center mb-24 space-y-4">
+            <p className="text-sm uppercase tracking-[0.2em] text-zinc-500 font-medium">Meet Your Instructor</p>
             <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
               Rob Late. Producer.
             </h2>
