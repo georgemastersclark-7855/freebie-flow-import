@@ -913,138 +913,152 @@ const TheProducerBlueprint001 = () => {
           {/* ================= CURRICULUM GRID ================= */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
             {/* Module 01 */}
-            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
                   src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=800&q=80" 
                   alt="The Foundation" 
-                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">01</div>
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">The Foundation (Ableton Basics)</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
-                  Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a 'flow state' and work 2x faster.
-                </p>
-                <p className="text-xs text-zinc-500 italic border-l-2 border-[#FF4F33] pl-3 mt-3">
-                  Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.
-                </p>
+                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">01</div>
+                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">The Foundation (Ableton Basics)</h3>
+                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
+                    Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a 'flow state' and work 2x faster.
+                  </p>
+                  <p className="text-xs text-[#FF4F33] italic mt-3 font-semibold">
+                    Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Module 02 */}
-            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
                   src="https://images.unsplash.com/photo-1550063573-02810a9c6cbe?w=800&q=80" 
                   alt="Sound Design" 
-                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">02</div>
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Sound Design That Cuts</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
-                  Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.
-                </p>
+                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">02</div>
+                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Sound Design That Cuts</h3>
+                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
+                    Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Module 03 */}
-            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
                   src="https://images.unsplash.com/photo-1519874179352-7440d4155b7c?w=800&q=80" 
                   alt="Pro Drums" 
-                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">03</div>
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Pro Drum Production</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
-                  The difference between 'demo' and 'pro' is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.
-                </p>
+                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">03</div>
+                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Pro Drum Production</h3>
+                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
+                    The difference between 'demo' and 'pro' is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Module 04 */}
-            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
                   src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=800&q=80" 
                   alt="Arrangement" 
-                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">04</div>
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Arrangement & Energy</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
-                  Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.
-                </p>
+                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">04</div>
+                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Arrangement & Energy</h3>
+                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
+                    Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Module 05 */}
-            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
                   src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80" 
                   alt="Vocal Production" 
-                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">05</div>
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Vocal Production</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
-                  How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.
-                </p>
+                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">05</div>
+                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Vocal Production</h3>
+                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
+                    How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Module 06 */}
-            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
                   src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=800&q=80" 
                   alt="Mixing & Mastering" 
-                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">06</div>
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Mixing & Mastering</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
-                  Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.
-                </p>
+                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">06</div>
+                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Mixing & Mastering</h3>
+                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
+                    Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Module 07 */}
-            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600 md:col-span-2 lg:col-span-1">
+            <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 md:col-span-2 lg:col-span-1">
               <div className="absolute inset-0 z-0">
                 <img 
                   src={robWritingSession} 
                   alt="Artist Sounds" 
-                  className="w-full h-full object-cover object-[center_30%] opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                  className="w-full h-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">07</div>
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Artist Sounds & Identity</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
-                  How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.
-                </p>
+                <div className="absolute top-6 left-6 font-mono text-5xl font-bold text-white/30 mix-blend-overlay group-hover:text-white/50 transition-all duration-500 select-none">07</div>
+                <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight drop-shadow-lg">Artist Sounds & Identity</h3>
+                  <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90">
+                    How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
