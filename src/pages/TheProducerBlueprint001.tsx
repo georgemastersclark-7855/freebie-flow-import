@@ -786,7 +786,7 @@ const TheProducerBlueprint001 = () => {
               <div className="mt-8 text-center max-w-[240px]">
                 <h3 className="text-white text-xl font-bold mb-3">The 9-5 Grind</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  I was working a sales job for a phone mount company, producing music as a 'hobby' in the evenings. I got told to 'get a proper job' more times than I can count. This was my first setup - classic Focusrite interface, but it worked.
+                  I was working a sales job for a phone mount company, producing music as a 'hobby' in the evenings. Couple of super cheap production gigs here and there. This was my first setup - simple speakers, mic and interface. All you need!
                 </p>
               </div>
             </div>
@@ -822,7 +822,7 @@ const TheProducerBlueprint001 = () => {
               <div className="mt-8 text-center max-w-[240px]">
                 <h3 className="text-white text-xl font-bold mb-3">The Breakthrough</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  My content was going viral, followers growing. Drew from The Chainsmokers DM'd me after seeing a video and we started working on music together. No management, no label connections at this point - just making cool music & getting reach with content.
+                  My content was going viral, followers growing. Drew from <span className="text-white font-semibold">The Chainsmokers</span> DM'd me after seeing a video and we started working on music together. No management, no label connections at this point - just making cool music & getting reach with content.
                 </p>
               </div>
             </div>
