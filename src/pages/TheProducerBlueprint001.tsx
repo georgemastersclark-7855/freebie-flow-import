@@ -613,39 +613,34 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 3: THE SOLUTION (CINEMATIC FADE LAYOUT) ================= */}
+      {/* ================= SECTION 3: THE SOLUTION (4 PILLARS) ================= */}
       <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0">
-        
+
         {/* 1. CINEMATIC VIDEO STAGE */}
         <div className="relative w-full h-[60vh] min-h-[500px] max-h-[800px] overflow-hidden">
-          {/* Video Layer */}
           <video 
             autoPlay 
             muted 
             loop 
             playsInline
-            className="w-full h-full object-cover opacity-80"
-            src={solutionVideo}
-          />
+            className="w-full h-full object-cover opacity-60"
+          >
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-recording-software-and-hardware-in-a-studio-close-up-22469-large.mp4" type="video/mp4" />
+          </video>
           
-          {/* Top Vignette (Subtle) */}
           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent opacity-80"></div>
-          
-          {/* Bottom Fade (The "Social Proof" style blend) */}
           <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
         </div>
 
-        {/* 2. CONTENT CONTAINER (Pulled up into the fade) */}
+        {/* 2. CONTENT CONTAINER */}
         <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[300px]">
           
           {/* Header Content */}
           <div className="text-center mb-24">
-            {/* Grey Eyebrow Badge */}
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
               The Producer Blueprint 2.0
             </div>
             
-            {/* Headline */}
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl">
               See How "A-List" Records Are <br />
               Actually Made <span className="font-serif italic text-zinc-400">In A Home Studio.</span>
@@ -656,146 +651,75 @@ const TheProducerBlueprint001 = () => {
             </p>
           </div>
 
-          {/* 3. COMPARISON GRID */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
+          {/* 3. THE 4 PILLARS (BENTO GRID) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
             
-            {/* Floating VS Badge */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-zinc-900 border border-white/10 rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center font-black text-zinc-500 text-sm md:text-lg shadow-xl shadow-black ring-4 ring-[#050505] hidden lg:flex">
-              VS
-            </div>
-
-            {/* LEFT: YouTube Trap */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group h-full shadow-2xl">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-900/50 to-transparent opacity-50"></div>
-              <h3 className="text-2xl font-bold text-zinc-400 mb-10 flex items-center gap-3">
-                <X className="w-6 h-6 text-red-500/80" />
-                The YouTube Trap
-              </h3>
-              <ul className="space-y-10">
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-900/60 shrink-0" />
-                  <div>
-                    <span className="block text-zinc-300 font-bold mb-1">Frankenstein Workflows</span>
-                    <span className="text-sm text-zinc-500 leading-relaxed">
-                      Piecing together scattered, conflicting advice that doesn't fit together.
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-900/60 shrink-0" />
-                  <div>
-                    <span className="block text-zinc-300 font-bold mb-1">The "Highlight Reel"</span>
-                    <span className="text-sm text-zinc-500 leading-relaxed">
-                      Seeing the polished result, but never the messy problem-solving or the mistakes.
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-900/60 shrink-0" />
-                  <div>
-                    <span className="block text-zinc-300 font-bold mb-1">Wrong Mentors</span>
-                    <span className="text-sm text-zinc-500 leading-relaxed">
-                      Learning from "content creators" who optimize for views, not working producers who optimize for results.
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-900/60 shrink-0" />
-                  <div>
-                    <span className="block text-zinc-300 font-bold mb-1">The Demo Loop Trap</span>
-                    <span className="text-sm text-zinc-500 leading-relaxed">
-                      Getting stuck in the loop phase because you lack the structure to finish arrangements.
-                    </span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* RIGHT: The Blueprint (Visual Stack) */}
-            <div className="bg-[#0F0F0F] border border-[#FF4F33]/30 rounded-3xl p-8 md:p-10 relative overflow-hidden shadow-[0_0_50px_-20px_rgba(255,79,51,0.15)] h-full">
-              {/* Orange Glow */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FF4F33] to-transparent opacity-80"></div>
-              <h3 className="text-2xl font-bold text-white mb-10 flex items-center gap-3 relative z-10">
-                <div className="w-6 h-6 bg-[#FF4F33] rounded flex items-center justify-center text-xs text-white font-bold shadow-[0_0_15px_rgba(255,79,51,0.5)]">
-                  PB
+            {/* Card 01: Workflow */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">01</div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                 </div>
-                The Producer Blueprint
-              </h3>
-              <div className="space-y-6 relative z-10">
-                {/* Visual Cards */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 group">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Check className="w-4 h-4 text-[#FF4F33]" />
-                      <span className="text-white font-bold">One Cohesive Approach</span>
-                    </div>
-                    <span className="text-xs text-zinc-400 leading-relaxed block pl-6">
-                      A complete start-to-finish workflow. No more guessing.
-                    </span>
-                  </div>
-                  <div className="w-full sm:w-24 h-16 bg-zinc-800 rounded-lg overflow-hidden border border-white/10 shrink-0">
-                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=200&h=150&fit=crop" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt="Timeline" />
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 group">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Check className="w-4 h-4 text-[#FF4F33]" />
-                      <span className="text-white font-bold">Home Studio Focus</span>
-                    </div>
-                    <span className="text-xs text-zinc-400 leading-relaxed block pl-6">
-                      Pro results with basic equipment and a simple setup.
-                    </span>
-                  </div>
-                  <div className="w-full sm:w-24 h-16 bg-zinc-800 rounded-lg overflow-hidden border border-white/10 shrink-0">
-                    <img src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=200&h=150&fit=crop" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt="Studio" />
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 group">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Check className="w-4 h-4 text-[#FF4F33]" />
-                      <span className="text-white font-bold">Decision-Focused Learning</span>
-                    </div>
-                    <span className="text-xs text-zinc-400 leading-relaxed block pl-6">
-                      Understanding the "why" behind every micro-decision.
-                    </span>
-                  </div>
-                  <div className="w-full sm:w-24 h-16 bg-zinc-800 rounded-lg overflow-hidden border border-white/10 shrink-0">
-                    <img src="https://images.unsplash.com/photo-1558593457-37c222ba3d8d?w=200&h=150&fit=crop" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt="Plugins" />
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 group">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Check className="w-4 h-4 text-[#FF4F33]" />
-                      <span className="text-white font-bold">Release-Ready Results</span>
-                    </div>
-                    <span className="text-xs text-zinc-400 leading-relaxed block pl-6">
-                      The confidence to take an idea from 8-bar loop to final master.
-                    </span>
-                  </div>
-                  <div className="w-full sm:w-24 h-16 bg-zinc-800 rounded-lg overflow-hidden border border-white/10 shrink-0">
-                    <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=200&h=150&fit=crop" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt="Waveform" />
-                  </div>
-                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">From "Loop Phase" To Finished Record</h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs.
+                </p>
               </div>
             </div>
+
+            {/* Card 02: Mixing */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">02</div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">The "Bedroom" Mixing Standard</h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 03: Chains */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">03</div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Session-Proven Chains</h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists to get that loud, punchy commercial sound without over-complicating it.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 04: Sound Design */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">04</div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Design Sounds With Intent</h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders.
+                </p>
+              </div>
+            </div>
+
           </div>
 
           {/* BRIDGE / CTA */}
           <div className="text-center mt-20 max-w-2xl mx-auto pb-12">
-            <p className="text-zinc-300 text-lg mb-8 leading-relaxed">
-              <strong className="text-white">The Producer Blueprint 2.0 removes the guesswork.</strong> <br />
-              It is a "fly-on-the-wall" documentation of exactly how I produce, mix, and master records for the world's
-              biggest artists right from a home studio.
-            </p>
-            <button className="inline-flex items-center gap-2 text-white border-b border-[#FF4F33] pb-1 hover:text-[#FF4F33] transition-colors font-medium text-lg group">
-              See How The Blueprint Works
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-[#FF4F33] transition-all">
+              <span className="border-b border-white/30 pb-0.5 group-hover:border-[#FF4F33]">See The Curriculum</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
+
         </div>
       </section>
 
