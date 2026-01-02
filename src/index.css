@@ -155,9 +155,9 @@ html {
   /* Premium Serif Headline */
   .headline-serif {
     font-family: "Playfair Display", Georgia, serif;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.0;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     color: #ffffff;
   }
 
@@ -166,17 +166,6 @@ html {
     font-family: "Playfair Display", Georgia, serif;
     font-style: italic;
     font-weight: 400;
-    letter-spacing: -0.02em;
-    color: #a1a1aa;
-    margin-left: 0.3rem;
-  }
-
-  /* Module Description Body Text */
-  .module-description {
-    font-family: "Inter", sans-serif;
-    font-size: 1rem;
-    color: #d4d4d8;
-    line-height: 1.5;
-    max-width: 90%;
+    color: #71717a;
   }
 }
