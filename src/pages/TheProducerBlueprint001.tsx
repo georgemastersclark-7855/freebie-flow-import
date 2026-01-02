@@ -1047,7 +1047,7 @@ const TheProducerBlueprint001 = () => {
                 <img 
                   src={robWritingSession} 
                   alt="Artist Sounds" 
-                  className="w-full h-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90"></div>
               </div>
