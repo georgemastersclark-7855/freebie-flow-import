@@ -35,6 +35,8 @@ import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
 import robFirstStudio from "@/assets/rob-first-studio.jpg";
 import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
+import earlyDaysSticker from "@/assets/early-days-sticker.png";
+import nowSticker from "@/assets/now-sticker.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -787,8 +789,14 @@ const TheProducerBlueprint001 = () => {
 
                 {/* Content Card (Shifted UP on Desktop) */}
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
+                  <div className="relative bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+                    {/* Early Days Sticker */}
+                    <img 
+                      src={earlyDaysSticker} 
+                      alt="Early Days" 
+                      className="absolute w-32 h-auto z-20 -top-8 -left-10 -rotate-12 drop-shadow-lg"
+                    />
+                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700">
                       <img
                         src={robFirstStudio}
                         className="w-full h-full object-cover object-center"
@@ -905,7 +913,13 @@ const TheProducerBlueprint001 = () => {
 
                 {/* Content Card */}
                 <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+                  <div className="relative bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+                    {/* Now Sticker */}
+                    <img 
+                      src={nowSticker} 
+                      alt="Now" 
+                      className="absolute w-24 h-auto z-20 -top-6 -right-8 rotate-12 drop-shadow-lg"
+                    />
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-transform duration-700">
                       <img
                         src={robMarsmelloCropped}
