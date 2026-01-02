@@ -224,15 +224,17 @@ const CurriculumSection = () => {
                 `}
               >
                 
-                {/* LEFT: IMAGE (35%) */}
-                <div className="w-full md:w-[35%] relative h-48 md:min-h-[280px] md:h-auto flex-shrink-0">
-                  <img 
-                    src={module.image} 
-                    alt={module.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
-                  />
-                  {/* Subtle vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+                {/* LEFT: IMAGE (30%) - Adjusted height logic for compactness */}
+                <div className="w-full md:w-[30%] relative h-48 md:h-auto self-stretch flex-shrink-0">
+                  <div className="absolute inset-0">
+                    <img 
+                      src={module.image} 
+                      alt={module.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
+                    />
+                    {/* Subtle vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+                  </div>
                   
                   {/* Mobile ID Watermark */}
                   <div className="md:hidden absolute bottom-4 left-4 font-mono text-4xl font-bold text-white/90 drop-shadow-md">
@@ -243,16 +245,16 @@ const CurriculumSection = () => {
                 {/* RIGHT: CONTENT (65%) */}
                 <div className="flex-1 flex flex-col relative">
                   
-                  {/* Main Content Area */}
-                  <div className="p-8 md:p-10 flex flex-col justify-center min-h-[240px]">
+                  {/* Main Content Area - Reduced Padding for Compactness */}
+                  <div className="p-6 md:p-8 flex flex-col justify-center">
                     
                     {/* Desktop Background Number (Watermark) */}
                     <div className="hidden md:block absolute right-6 top-6 text-[80px] leading-none font-bold text-zinc-900 group-hover:text-zinc-800 transition-colors select-none z-0">
                       {module.id}
                     </div>
                     <div className="relative z-10">
-                      <div className="flex flex-wrap items-baseline gap-3 mb-3">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
+                      <div className="flex flex-wrap items-baseline gap-3 mb-2">
+                        <h3 className="text-2xl font-bold text-white leading-tight">
                           {module.title}
                         </h3>
                         {module.subtitle && (
@@ -262,13 +264,13 @@ const CurriculumSection = () => {
                         )}
                       </div>
                       
-                      <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-2xl mb-6">
+                      <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl mb-5">
                         {module.desc}
                       </p>
-                      {/* Toggle Button */}
+                      {/* Toggle Button - Updated to Neutral Zinc Style */}
                       <button 
                         onClick={() => toggleModule(module.id)}
-                        className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-[#FF4F33] hover:text-white transition-colors"
+                        className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors duration-300"
                       >
                         {isOpen ? 'Hide Lessons' : 'View Lessons'}
                         {isOpen ? <ChevronUp className="w-4 h-4 ml-2" /> : <ChevronDown className="w-4 h-4 ml-2" />}
@@ -282,12 +284,12 @@ const CurriculumSection = () => {
                       ${isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}
                     `}
                   >
-                    <div className="p-8 md:p-10 pt-4">
+                    <div className="p-6 md:p-8 pt-4">
                       <h4 className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">Module Breakdown</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
                         {module.lessons.map((lesson, idx) => (
                           <div key={idx} className="flex items-start text-sm text-zinc-300 group/lesson">
-                            <PlayCircle className="w-4 h-4 text-zinc-600 mr-3 mt-0.5 flex-shrink-0 group-hover/lesson:text-[#FF4F33] transition-colors" />
+                            <PlayCircle className="w-4 h-4 text-zinc-600 mr-3 mt-0.5 flex-shrink-0 group-hover/lesson:text-white transition-colors" />
                             <span>{lesson}</span>
                           </div>
                         ))}
