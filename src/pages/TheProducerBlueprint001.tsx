@@ -37,6 +37,7 @@ import robFirstStudio from "@/assets/rob-first-studio.jpg";
 import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
 import earlyDaysSticker from "@/assets/early-days-sticker.png";
 import nowSticker from "@/assets/now-sticker.png";
+import robLateSignature from "@/assets/rob-late-signature-white.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -864,6 +865,26 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
 
+          </div>
+
+          {/* TIMELINE FOOTER - Quote & Signature */}
+          <div className="mt-32 max-w-3xl mx-auto text-center">
+            <div className="relative p-8">
+              <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl leading-relaxed mb-6">
+                "For me, the real 'producer blueprint' is a solid income from 'making music', doing what we all love. Having control over your time. No boss."
+              </h4>
+              <p className="text-[#FF4F33] font-bold uppercase tracking-widest text-sm mb-12">
+                Priceless.
+              </p>
+              {/* Signature Image */}
+              <div className="flex justify-center">
+                <img 
+                  src={robLateSignature} 
+                  alt="Rob Late" 
+                  className="h-20 w-auto object-contain opacity-80" 
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
