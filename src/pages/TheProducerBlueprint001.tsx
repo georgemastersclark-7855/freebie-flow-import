@@ -35,8 +35,7 @@ import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
 import robFirstStudio from "@/assets/rob-first-studio.jpg";
 import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
-import arrowCurveUp from "@/assets/arrow-curve-up.png";
-import arrowCurveDown from "@/assets/arrow-curve-down.png";
+// Arrow imports removed - using structural timeline instead
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -749,20 +748,19 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION: THE ORIGIN STORY (MEET YOUR INSTRUCTOR) ================= */}
-      <section className="py-24 px-6 bg-[#050505] relative z-20 overflow-hidden">
-        {/* Background Grid Texture */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+      {/* ================= SECTION: THE ORIGIN STORY (STRUCTURAL TIMELINE) ================= */}
+      <section className="py-32 px-6 bg-[#050505] relative z-20 overflow-hidden">
+        {/* Background Grid Texture (Subtle) */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-24">
+          <div className="text-center mb-32">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
               Meet Your Instructor
             </div>
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">Rob Late.</h2>
             <div className="inline-block relative">
-              {/* Clean sans-serif styling as requested */}
               <p className="text-xl md:text-2xl text-zinc-400 font-medium tracking-tight">
                 Credits: The Chainsmokers, Marshmello, Clean Bandit, Gary Barlow.
               </p>
@@ -774,172 +772,119 @@ const TheProducerBlueprint001 = () => {
 
           {/* TIMELINE CONTAINER */}
           <div className="relative">
-            {/* MOBILE VERTICAL LINE (Hidden on Desktop) */}
-            <div className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-[#FF4F33]/10 via-[#FF4F33]/50 to-[#FF4F33]/10 z-0"></div>
+            {/* CENTRAL SPINE (The Timeline Axis) */}
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent z-0"></div>
+
+            {/* MOBILE VERTICAL SPINE */}
+            <div className="lg:hidden absolute top-0 bottom-0 left-6 w-[1px] bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-800 z-0"></div>
 
             {/* Timeline Items Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
-              {/* ITEM 1: 2019 (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Mobile Dot */}
-                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card (Shifted UP on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:gap-4 relative z-10">
+              {/* ITEM 1: 2019 (TOP) */}
+              <div className="relative flex flex-col lg:items-center justify-end h-full">
+                {/* Connector Stem (Desktop) */}
+                <div className="hidden lg:block absolute bottom-0 left-1/2 w-[1px] h-16 bg-gradient-to-t from-zinc-700 to-transparent -mb-16 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-auto lg:bottom-0 -translate-x-1/2 lg:-mb-[69px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-20"></div>
+                <div className="pl-16 lg:pl-0 lg:mb-10 w-full group">
+                  <div className="bg-white p-2 pb-8 shadow-2xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6 relative z-20">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
-                      <img
-                        src={robFirstStudio}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob's First Studio Setup"
-                      />
+                      <img src={robFirstStudio} className="w-full h-full object-cover object-center" alt="2019 Setup" />
                     </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2019: The Grind
-                    </div>
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2019: The Grind</div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
                       I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings.
-                      I got told to 'get a proper job' more times than I can count. This was my first setup - classic
-                      Focusrite interface, but it worked.
                     </p>
                   </div>
                 </div>
-
-                {/* PNG Arrow 1: Curve DOWN (Card 1 -> 2) */}
-                <div className="hidden lg:block absolute top-[60%] -right-8 w-20 z-30 pointer-events-none">
-                  <img src={arrowCurveDown} alt="" className="w-full opacity-70 rotate-12" />
-                </div>
               </div>
 
-              {/* ITEM 2: 2020 (BOTTOM on Desktop) */}
-              <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Mobile Dot */}
-                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card (Shifted DOWN on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+              {/* ITEM 2: 2020 (BOTTOM) */}
+              <div className="relative flex flex-col lg:items-center justify-start lg:pt-32">
+                {/* Connector Stem (Desktop) */}
+                <div className="hidden lg:block absolute top-0 left-1/2 w-[1px] h-16 bg-gradient-to-b from-zinc-700 to-transparent -mt-16 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-0 -translate-x-1/2 lg:-mt-[69px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-20"></div>
+                <div className="pl-16 lg:pl-0 lg:mt-10 w-full group">
+                  <div className="bg-white p-2 pb-8 shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6 relative z-20">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
-                      <img
-                        src={robLockdownStudio}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob's Lockdown Era Studio"
-                      />
+                      <img src={robLockdownStudio} className="w-full h-full object-cover object-center" alt="2020 Lockdown" />
                     </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2020: Lockdown
-                    </div>
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2020: Lockdown</div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The Lockdown Era</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I
-                      posted some Reels sampling random objects in my studio. A few started getting views. I didn't know
-                      it yet, but everything changed right here (post more content, kids).
+                      Stuck in a spare room in London. I posted Reels sampling random objects. A few got views.
                     </p>
                   </div>
                 </div>
-
-                {/* PNG Arrow 2: Curve UP (Card 2 -> 3) */}
-                <div className="hidden lg:block absolute top-[40%] -right-8 w-20 z-30 pointer-events-none">
-                  <img src={arrowCurveUp} alt="" className="w-full opacity-70 -rotate-12" />
-                </div>
               </div>
 
-              {/* ITEM 3: 2021 (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Mobile Dot */}
-                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+              {/* ITEM 3: 2021 (TOP) */}
+              <div className="relative flex flex-col lg:items-center justify-end h-full">
+                {/* Connector Stem */}
+                <div className="hidden lg:block absolute bottom-0 left-1/2 w-[1px] h-16 bg-gradient-to-t from-zinc-700 to-transparent -mb-16 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-auto lg:bottom-0 -translate-x-1/2 lg:-mb-[69px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-20"></div>
+                <div className="pl-16 lg:pl-0 lg:mb-10 w-full group">
+                  <div className="bg-white p-2 pb-8 shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6 relative z-20">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
-                      <img src={robChainsmokers} className="w-full h-full object-cover object-top" alt="Rob with The Chainsmokers" />
+                      <img src={robChainsmokers} className="w-full h-full object-cover object-top" alt="The Chainsmokers" />
                     </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2021: Breakthrough
-                    </div>
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2021: Breakthrough</div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The Breakthrough</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      My content was going viral, followers growing. Drew from{" "}
-                      <span className="text-white">The Chainsmokers</span> DM'd me after seeing a video and we started
-                      working on music together. No management, no label connections at this point - just making cool
-                      music & getting reach with content.
+                      Drew from <span className="text-white">The Chainsmokers</span> DM'd me. We started working. No management, just content reach.
                     </p>
                   </div>
                 </div>
-
-                {/* PNG Arrow 3: Curve DOWN (Card 3 -> 4) */}
-                <div className="hidden lg:block absolute top-[60%] -right-8 w-20 z-30 pointer-events-none">
-                  <img src={arrowCurveDown} alt="" className="w-full opacity-70 rotate-12" />
-                </div>
               </div>
 
-              {/* ITEM 4: 2022-23 (BOTTOM on Desktop) */}
-              <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Mobile Dot */}
-                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
-                      <img
-                        src={robGaryBarlow}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob and Gary Barlow in Session"
-                      />
+              {/* ITEM 4: 2022-23 (BOTTOM) */}
+              <div className="relative flex flex-col lg:items-center justify-start lg:pt-32">
+                {/* Connector Stem */}
+                <div className="hidden lg:block absolute top-0 left-1/2 w-[1px] h-16 bg-gradient-to-b from-zinc-700 to-transparent -mt-16 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-0 -translate-x-1/2 lg:-mt-[69px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-20"></div>
+                <div className="pl-16 lg:pl-0 lg:mt-10 w-full group">
+                  <div className="bg-white p-2 pb-8 shadow-2xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6 relative z-20">
+                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
+                      <img src={robGaryBarlow} className="w-full h-full object-cover object-center" alt="Sessions" />
                     </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      2022: A-List
-                    </div>
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">2022: A-List</div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The A-List Sessions</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy
-                      part is I was still doing it all from a home setup, proving you don't need a million-dollar
-                      facility to play at the top level.
+                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow.
                     </p>
                   </div>
                 </div>
-
-                {/* PNG Arrow 4: Curve UP (Card 4 -> 5) */}
-                <div className="hidden lg:block absolute top-[40%] -right-8 w-20 z-30 pointer-events-none">
-                  <img src={arrowCurveUp} alt="" className="w-full opacity-70 -rotate-12" />
-                </div>
               </div>
 
-              {/* ITEM 5: TODAY (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Mobile Dot */}
-                <div className="lg:hidden absolute left-8 -translate-x-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
-
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+              {/* ITEM 5: TODAY (TOP) */}
+              <div className="relative flex flex-col lg:items-center justify-end h-full">
+                {/* Connector Stem */}
+                <div className="hidden lg:block absolute bottom-0 left-1/2 w-[1px] h-16 bg-gradient-to-t from-[#FF4F33] to-transparent -mb-16 z-0"></div>
+                {/* Node Dot (Active) */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-auto lg:bottom-0 -translate-x-1/2 lg:-mb-[69px] w-4 h-4 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33]"></div>
+                <div className="pl-16 lg:pl-0 lg:mb-10 w-full group">
+                  <div className="bg-white p-2 pb-8 shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6 relative z-20">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-transform duration-700">
-                      <img
-                        src={robMarsmelloCropped}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob's Current Studio"
-                      />
+                      <img src={robMarsmelloCropped} className="w-full h-full object-cover object-center" alt="Current Studio" />
                     </div>
-                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
-                      TODAY: The Blueprint
-                    </div>
+                    <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">TODAY: The Blueprint</div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
                     <p className="text-zinc-400 text-xs leading-relaxed">
-                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It's still a
-                      home studio. It's basically the same gear. I just have fancier lights now.
+                      100 Million+ streams later. I moved house and built a dedicated space. It's still a home studio. Just fancier lights.
                     </p>
                   </div>
                 </div>
@@ -948,15 +893,14 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* TIMELINE FOOTER */}
-          <div className="mt-24 max-w-2xl mx-auto text-center">
+          <div className="mt-32 max-w-2xl mx-auto text-center relative z-20">
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 md:p-10 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
-              {/* Clean sans-serif styling */}
               <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl mb-4">
                 "What is The Producer Blueprint?"
               </h4>
               <p className="text-zinc-400 text-lg leading-relaxed mb-2">
-                A solid income from ‘making music’, doing what we all love. Control over your time. No boss.
+                A solid income from 'making music', doing what we all love. Control over your time. No boss.
               </p>
               <p className="text-[#FF4F33] font-bold uppercase tracking-widest text-sm">Priceless.</p>
             </div>
