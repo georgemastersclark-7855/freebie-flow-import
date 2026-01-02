@@ -245,7 +245,7 @@ const CurriculumSection = () => {
                       </div>
 
                       <div className="pr-12">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-2 leading-none">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3 leading-none">
                           {module.title}
                           {module.subtitle && (
                             <span className="font-serif italic font-normal text-zinc-500 ml-2">
@@ -253,7 +253,7 @@ const CurriculumSection = () => {
                             </span>
                           )}
                         </h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed mb-5 max-w-lg font-medium line-clamp-2">
+                        <p className="text-zinc-400 text-sm leading-relaxed mb-6 max-w-lg font-medium line-clamp-3">
                           {module.desc}
                         </p>
                         
