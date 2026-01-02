@@ -619,17 +619,16 @@ const TheProducerBlueprint001 = () => {
         
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
-          {/* Increased height to 600px to show more of the photo */}
           <div className="relative w-full max-w-6xl h-[600px] overflow-hidden">
-            {/* IMAGE LAYER - Changed to object-center to keep subjects in frame */}
+            {/* IMAGE LAYER - Changed to object-top so their heads are never cut off */}
             <img 
               src={robMarshmello}
-              className="w-full h-full object-cover object-center opacity-80"
+              className="w-full h-full object-cover object-top opacity-80"
               alt="Rob and Marshmello in Studio"
             />
             
-            {/* Top Vignette */}
-            <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#050505] to-transparent opacity-80"></div>
+            {/* Top Vignette (Reduced slightly to keep heads clear) */}
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent opacity-60"></div>
             
             {/* Bottom Fade (Extended height for smoother text overlap) */}
             <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
@@ -655,8 +654,9 @@ const TheProducerBlueprint001 = () => {
               Actually Made <span className="font-serif italic text-zinc-400">In A Home Studio.</span>
             </h2>
             
+            {/* UPDATED SUBHEADLINE */}
             <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Most producers plateau because they have never actually sat in the room with a pro. They simply don't know what "good" looks like during the messy middle.
+              In 2026, it is possible to make top-streaming music from a home setup. Most producers plateau simply because they don't know what "good" looks like during the messy middle.
             </p>
           </div>
 
