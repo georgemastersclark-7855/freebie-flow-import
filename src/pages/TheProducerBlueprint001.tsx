@@ -30,6 +30,7 @@ import solutionVideo from "@/assets/solution-video.mp4";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
 import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
 import robStudio from "@/assets/rob-home-studio.jpg";
+import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -873,9 +874,9 @@ const TheProducerBlueprint001 = () => {
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
-                        src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=500&h=500&fit=crop"
-                        className="w-full h-full object-cover"
-                        alt="Sessions"
+                        src={robGaryBarlow}
+                        className="w-full h-full object-cover object-top"
+                        alt="Rob and Gary Barlow in Session"
                       />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
