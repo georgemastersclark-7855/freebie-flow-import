@@ -322,10 +322,10 @@ const CurriculumSection = () => {
             {/* HEADER */}
             <div className="text-center mb-16">
               
-              {/* Eyebrow */}
-              <div className="inline-block mb-4">
-                <span className="py-1 px-3 rounded-full border border-[#FF4F33]/30 bg-[#FF4F33]/10 text-[#FF4F33] text-xs font-bold uppercase tracking-widest">
-                  We're Not Done Yet.
+              {/* Eyebrow - Neutral/Premium Zinc style */}
+              <div className="inline-block mb-6">
+                <span className="py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-xs font-bold uppercase tracking-widest">
+                  We're Not Done Yet
                 </span>
               </div>
               
@@ -334,14 +334,15 @@ const CurriculumSection = () => {
                 Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4F33] to-orange-500">FREE</span> bonuses
               </h2>
               
-              {/* Subhead */}
-              <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-                <span className="font-serif italic text-zinc-300">Join today and get 2 exclusive bonuses included.</span>
-                <br className="hidden md:block" />
-                <span className="block mt-2 text-sm font-bold uppercase tracking-widest text-[#FF4F33] animate-pulse">
+              {/* Subhead - Clean Sans-Serif */}
+              <div className="flex flex-col gap-2">
+                <p className="text-lg md:text-xl text-zinc-400 font-medium">
+                  Join today and get 2 exclusive bonuses included.
+                </p>
+                <p className="text-sm font-bold uppercase tracking-widest text-[#FF4F33] animate-pulse">
                   Available for a limited time.
-                </span>
-              </p>
+                </p>
+              </div>
             </div>
 
             {/* BONUS CARDS GRID */}
