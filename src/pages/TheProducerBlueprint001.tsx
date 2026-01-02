@@ -44,6 +44,7 @@ import abletonSession from "@/assets/ableton-session.png";
 import drumProductionGif from "@/assets/drum-production.gif";
 import mixingMasteringStudio from "@/assets/mixing-mastering-studio.jpg";
 import foundationLaptop from "@/assets/foundation-laptop.png";
+import soundDesignStudio from "@/assets/sound-design-studio.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -945,7 +946,7 @@ const TheProducerBlueprint001 = () => {
             <div className="group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500">
               <div className="absolute inset-0 z-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1550063573-02810a9c6cbe?w=800&q=80" 
+                  src={soundDesignStudio} 
                   alt="Sound Design" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
