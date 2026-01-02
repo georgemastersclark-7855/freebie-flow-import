@@ -222,7 +222,7 @@ const CurriculumSection = () => {
                 <div className="flex flex-col md:flex-row h-full">
                   
                   {/* LEFT: IMAGE SECTION (300px) */}
-                  <div className="relative w-full md:w-[300px] shrink-0 h-64 md:h-auto">
+                  <div className="relative z-30 w-full md:w-[300px] shrink-0 h-64 md:h-auto">
                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
                     <img 
                       src={module.image} 
