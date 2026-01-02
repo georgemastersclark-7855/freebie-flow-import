@@ -875,7 +875,7 @@ const TheProducerBlueprint001 = () => {
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
                         src={robGaryBarlow}
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover object-center"
                         alt="Rob and Gary Barlow in Session"
                       />
                     </div>
