@@ -207,86 +207,80 @@ const CurriculumSection = () => {
           </p>
         </div>
 
-        {/* STACKED LIST LAYOUT */}
-        <div className="flex flex-col gap-8 md:gap-6 mb-24 md:mb-32">
+        {/* STACKED VERTICAL CARD LAYOUT */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-24 md:mb-32">
           {modules.map((module) => {
             const isOpen = expandedModule === module.id;
             return (
               <div 
                 key={module.id}
-                className={`group relative flex flex-col md:flex-row glass-card rounded-2xl overflow-hidden
+                className={`group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5
                   ${isOpen ? 'border-zinc-500' : ''}
                 `}
               >
-                
-                {/* LEFT: IMAGE SECTION */}
-                <div className="w-full h-64 md:w-[30%] relative md:h-auto self-stretch flex-shrink-0">
-                  <div className="absolute inset-0">
-                    <img 
-                      src={module.image} 
-                      alt={module.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/70 to-transparent"></div>
-                  </div>
-                  
-                  {/* Mobile ID Watermark */}
-                  <div className="md:hidden absolute bottom-4 left-6 font-mono text-5xl font-bold text-white/90 drop-shadow-lg">
-                    {module.id}
-                  </div>
+                {/* IMAGE LAYER */}
+                <div className="absolute inset-0 z-0">
+                  <img 
+                    src={module.image} 
+                    alt={module.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
+                  />
+                  <div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-[#000] via-[#000]/90 to-transparent backdrop-blur-[2px] opacity-95"></div>
                 </div>
 
-                {/* RIGHT: CONTENT SECTION */}
-                <div className="flex-1 flex flex-col relative">
+                {/* CONTENT LAYER */}
+                <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                   
-                  {/* Main Content Area */}
-                  <div className="p-8 md:p-10 md:pr-24 flex flex-col justify-center min-h-[220px]">
+                  {/* Module ID - Top Right Watermark */}
+                  <div className="absolute top-6 right-8 font-serif italic text-8xl font-bold text-white/5 group-hover:text-white/10 transition-all duration-500 select-none">
+                    {module.id}
+                  </div>
+                  
+                  <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0 relative z-20">
                     
-                    {/* Desktop Background Number (Watermark) */}
-                    <div className="hidden md:block absolute right-6 top-6 text-[80px] leading-none font-bold text-zinc-800/50 group-hover:text-zinc-700/50 transition-colors select-none z-0">
-                      {module.id}
-                    </div>
-                    <div className="relative z-10">
-                      <div className="inline-flex flex-wrap items-baseline gap-x-3 mb-3">
-                        <h3 className="headline-serif text-2xl md:text-3xl leading-tight">
-                          {module.title}
-                        </h3>
+                    {/* Combined Title & Subtitle */}
+                    <div className="mb-4">
+                      <h3 className="headline-serif text-3xl md:text-4xl drop-shadow-lg">
+                        {module.title}
                         {module.subtitle && (
-                          <span className="headline-serif-subtitle text-2xl md:text-3xl">
+                          <span className="headline-serif-subtitle ml-3">
                             {module.subtitle}
                           </span>
                         )}
-                      </div>
-                      
-                      <p className="module-description mb-6">
-                        {module.desc}
-                      </p>
-                      <button 
-                        onClick={() => toggleModule(module.id)}
-                        className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors duration-300"
-                      >
-                        {isOpen ? 'Hide Lessons' : 'View Lessons'}
-                        {isOpen ? <ChevronUp className="w-4 h-4 ml-2" /> : <ChevronDown className="w-4 h-4 ml-2" />}
-                      </button>
+                      </h3>
                     </div>
+                    
+                    {/* Description */}
+                    <p className="module-description drop-shadow-md pr-4 max-w-md mb-4">
+                      {module.desc}
+                    </p>
+                    
+                    {/* View Lessons Button */}
+                    <button 
+                      onClick={() => toggleModule(module.id)}
+                      className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors duration-300"
+                    >
+                      {isOpen ? 'Hide Lessons' : 'View Lessons'}
+                      {isOpen ? <ChevronUp className="w-4 h-4 ml-2" /> : <ChevronDown className="w-4 h-4 ml-2" />}
+                    </button>
                   </div>
+                </div>
 
-                  {/* Dropdown Content (Lessons) */}
-                  <div 
-                    className={`overflow-hidden transition-all duration-500 ease-in-out bg-zinc-900/30 border-t border-zinc-800/50
-                      ${isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}
-                    `}
-                  >
-                    <div className="p-6 md:p-8 pt-4">
-                      <h4 className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">Module Breakdown</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                        {module.lessons.map((lesson, idx) => (
-                          <div key={idx} className="flex items-start text-sm text-zinc-300 group/lesson">
-                            <PlayCircle className="w-4 h-4 text-zinc-600 mr-3 mt-0.5 flex-shrink-0 group-hover/lesson:text-white transition-colors" />
-                            <span>{lesson}</span>
-                          </div>
-                        ))}
-                      </div>
+                {/* Dropdown Content (Lessons) - Slides up from bottom */}
+                <div 
+                  className={`absolute bottom-0 left-0 right-0 z-30 overflow-hidden transition-all duration-500 ease-in-out bg-zinc-900/95 backdrop-blur-sm border-t border-zinc-800/50
+                    ${isOpen ? 'max-h-[350px] opacity-100' : 'max-h-0 opacity-0'}
+                  `}
+                >
+                  <div className="p-6 pt-4">
+                    <h4 className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">Module Breakdown</h4>
+                    <div className="grid grid-cols-1 gap-y-2 max-h-[250px] overflow-y-auto">
+                      {module.lessons.map((lesson, idx) => (
+                        <div key={idx} className="flex items-start text-sm text-zinc-300 group/lesson">
+                          <PlayCircle className="w-4 h-4 text-zinc-600 mr-3 mt-0.5 flex-shrink-0 group-hover/lesson:text-white transition-colors" />
+                          <span>{lesson}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
