@@ -245,29 +245,30 @@ const CurriculumSection = () => {
                 {/* RIGHT: CONTENT (65%) */}
                 <div className="flex-1 flex flex-col relative">
                   
-                  {/* Main Content Area - Reduced Padding for Compactness */}
-                  <div className="p-6 md:p-8 flex flex-col justify-center">
+                  {/* Main Content Area */}
+                  {/* Added 'pr-20' to create a 'No Fly Zone' for text so it doesn't overlap the number */}
+                  <div className="p-6 md:p-8 md:pr-24 flex flex-col justify-center min-h-[220px]">
                     
                     {/* Desktop Background Number (Watermark) */}
                     <div className="hidden md:block absolute right-6 top-6 text-[80px] leading-none font-bold text-zinc-900 group-hover:text-zinc-800 transition-colors select-none z-0">
                       {module.id}
                     </div>
                     <div className="relative z-10">
-                      <div className="flex flex-wrap items-baseline gap-3 mb-2">
-                        <h3 className="text-2xl font-bold text-white leading-tight">
+                      <div className="flex flex-wrap items-baseline gap-2 mb-2">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
                           {module.title}
                         </h3>
+                        {/* Subtitle Sized Up to Match Title */}
                         {module.subtitle && (
-                          <span className="font-serif italic text-zinc-500 text-lg">
+                          <span className="font-serif italic text-zinc-500 text-2xl md:text-3xl">
                             {module.subtitle}
                           </span>
                         )}
                       </div>
                       
-                      <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl mb-5">
+                      <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-5">
                         {module.desc}
                       </p>
-                      {/* Toggle Button - Updated to Neutral Zinc Style */}
                       <button 
                         onClick={() => toggleModule(module.id)}
                         className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors duration-300"
