@@ -1272,263 +1272,299 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-        {/* ============================================ */}
-        {/* SECTION: FULL CHECKOUT SECTION */}
-        {/* ============================================ */}
-        <section id="checkout" className="relative py-24 md:py-32">
-          <div className="max-w-xl mx-auto px-6">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <h2 className="font-serif italic text-3xl md:text-4xl text-white mb-3">
-                Get Instant Access
+        {/* ================= RESULTS REEL & PROOF SECTION ================= */}
+        <section className="relative py-24 md:py-32 overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6">
+            
+            {/* Headline */}
+            <div className="text-center mb-16">
+              <span className="inline-block bg-[#FF4F33]/10 text-[#FF4F33] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+                Student Wins
+              </span>
+              <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+                Real Results. Real Releases.
               </h2>
-              <p className="text-zinc-400 text-sm">
-                Join <span className="text-white font-medium">2,847</span> producers already inside
+              <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                From "bedroom producer" to signed artist. Here is what happens when you have a professional workflow.
               </p>
             </div>
 
-            {/* Secure Card Container */}
-            <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 md:p-8">
+            {/* ROW 1: VERTICAL VIDEO TRIO (9:16 Aspect) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+              
+              {/* Video Card 1 - @djkiera */}
+              <div className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 cursor-pointer">
+                <div className="absolute inset-0">
+                  <video
+                    src={djkieraTestimonial}
+                    className="w-full h-full object-cover"
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  
+                  {/* Play Button */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Play className="w-8 h-8 text-white fill-white ml-1" />
+                    </div>
+                  </div>
+                  
+                  {/* Result Badge */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 pt-16">
+                    <div className="text-left">
+                      <p className="text-white font-semibold text-lg">@djkiera</p>
+                      <p className="text-zinc-400 text-sm">Kiera • UK</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Video Card 2 */}
+              <div className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 cursor-pointer">
+                <div className="absolute inset-0">
+                  <img
+                    src={streamingNumbersTestimonial}
+                    alt="100k Streams testimonial"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  
+                  {/* Play Button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Play className="w-8 h-8 text-white fill-white ml-1" />
+                    </div>
+                  </div>
+                  
+                  {/* Result Badge */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 pt-16">
+                    <div className="text-left">
+                      <p className="text-white font-semibold text-lg">"100k Streams in 1 Month"</p>
+                      <p className="text-zinc-400 text-sm">Sarah J. • USA</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Video Card 3 */}
+              <div className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 cursor-pointer">
+                <div className="absolute inset-0">
+                  <img
+                    src={headroomRecordsTestimonial}
+                    alt="Quit my job testimonial"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  
+                  {/* Play Button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Play className="w-8 h-8 text-white fill-white ml-1" />
+                    </div>
+                  </div>
+                  
+                  {/* Result Badge */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 pt-16">
+                    <div className="text-left">
+                      <p className="text-white font-semibold text-lg">"Quit my job to produce"</p>
+                      <p className="text-zinc-400 text-sm">David R. • Canada</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ROW 2: EXTRA SCREENSHOTS (Masonry) */}
+            <div className="mt-20">
+              <p className="text-center text-zinc-500 text-sm uppercase tracking-widest mb-8">More feedback from the community</p>
+              
+              <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={drewAdieuTestimonial} alt="Drew testimonial" className="w-full" />
+                  </div>
+                </div>
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={aaronly0nsYoutubeTestimonial} alt="Aaron testimonial" className="w-full" />
+                  </div>
+                </div>
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={austriaTestimonial} alt="Austria testimonial" className="w-full" />
+                  </div>
+                </div>
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={completePackageTestimonial} alt="Complete package testimonial" className="w-full" />
+                  </div>
+                </div>
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={nateSawyerTestimonial} alt="Nate Sawyer testimonial" className="w-full" />
+                  </div>
+                </div>
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={deepintheforestTestimonial} alt="Deep in the forest testimonial" className="w-full" />
+                  </div>
+                </div>
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={rsmyth111Testimonial} alt="Rsmyth testimonial" className="w-full" />
+                  </div>
+                </div>
+                <div className="break-inside-avoid">
+                  <div className="rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    <img src={levinMusicTestimonial} alt="Levin Music testimonial" className="w-full" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= CHECKOUT SECTION ================= */}
+        <section id="checkout" className="relative py-24 md:py-32">
+          <div className="max-w-xl mx-auto px-6">
+            
+            {/* Headline */}
+            <div className="text-center mb-10">
+              <h2 className="font-serif italic text-4xl md:text-5xl text-white mb-4">
+                Get Instant<br />Access
+              </h2>
+              <p className="text-zinc-400">
+                Join 500+ producers building their career from a home studio.
+              </p>
+            </div>
+
+            {/* Checkout Card */}
+            <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+              
               {/* SSL Badge */}
               <div className="flex items-center justify-center gap-2 mb-6 pb-6 border-b border-zinc-800">
                 <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-zinc-400 text-xs uppercase tracking-wider">256-bit SSL Secure</span>
+                <span className="text-zinc-400 text-xs uppercase tracking-wider font-medium">256-Bit SSL Secure</span>
               </div>
 
-              {/* Product Breakdown */}
-              <div className="space-y-3 mb-6 pb-6 border-b border-zinc-800">
-                <div className="flex justify-between items-center">
-                  <span className="text-white">The Producer Blueprint 2.0</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-zinc-500 line-through text-sm">$741</span>
-                    <span className="text-white font-semibold">$297</span>
+              <div className="space-y-6">
+                
+                {/* Product Info */}
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-white font-semibold text-lg">The Producer Blueprint™</p>
+                    <p className="text-zinc-500 text-sm">Complete System + 7 Modules + Templates</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-zinc-500 line-through text-sm block">$741</span>
+                    <span className="text-white font-bold text-xl">$297</span>
                   </div>
                 </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-zinc-400">+ Bonus: Private Discord Community</span>
-                  <span className="text-green-500">Free</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-zinc-400">+ Bonus: Monthly Live Q&A Calls</span>
-                  <span className="text-green-500">Free</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-zinc-400">+ Bonus: Session Stem Breakdowns</span>
-                  <span className="text-green-500">Free</span>
-                </div>
-              </div>
 
-              {/* Form Fields */}
-              <div className="space-y-4 mb-6">
-                <div>
-                  <label className="block text-zinc-400 text-sm mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    placeholder="Enter your full name"
-                    className="w-full bg-zinc-800/50 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF4F33] transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-zinc-400 text-sm mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    placeholder="Enter your email address"
-                    className="w-full bg-zinc-800/50 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF4F33] transition-colors"
-                  />
-                </div>
-              </div>
-
-              {/* Order Bump */}
-              <div className="bg-[#FF4F33]/10 border border-[#FF4F33]/30 rounded-xl p-4 mb-6">
-                <div className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    id="orderBump"
-                    className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#FF4F33] focus:ring-[#FF4F33] focus:ring-offset-0"
-                  />
-                  <label htmlFor="orderBump" className="cursor-pointer">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[#FF4F33] text-xs font-bold uppercase tracking-wider">One-Time Offer</span>
-                    </div>
-                    <p className="text-white font-medium mb-1">Add Alpha Drums 3 Sample Pack</p>
-                    <p className="text-zinc-400 text-sm mb-2">500+ drum one-shots, loops & MIDI patterns used in my productions</p>
+                {/* Bonuses */}
+                <div className="space-y-2 py-4 border-y border-zinc-800">
+                  <div className="flex justify-between items-center text-sm">
                     <div className="flex items-center gap-2">
-                      <span className="text-zinc-500 line-through text-sm">$97</span>
-                      <span className="text-[#FF4F33] font-bold">+$37</span>
+                      <Check className="w-4 h-4 text-green-500" />
+                      <span className="text-zinc-300">BONUS: Music Business Mastery</span>
                     </div>
-                  </label>
+                    <span className="text-green-500 font-medium">Free</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-green-500" />
+                      <span className="text-zinc-300">BONUS: The Breakdown Vault</span>
+                    </div>
+                    <span className="text-green-500 font-medium">Free</span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Total */}
-              <div className="flex justify-between items-center mb-6 pb-6 border-b border-zinc-800">
-                <span className="text-white font-medium">Total Due Today</span>
-                <span className="text-2xl font-bold text-white">$297</span>
-              </div>
-
-              {/* CTA Button */}
-              <button className="w-full bg-[#FF4F33] hover:bg-[#FF4F33]/90 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#FF4F33]/25">
-                GET INSTANT ACCESS →
-              </button>
-
-              {/* Trust Badges */}
-              <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-zinc-800">
-                <div className="flex items-center gap-2 text-zinc-400 text-sm">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Secure Payment</span>
+                {/* Form Fields */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2">Full Name</label>
+                    <input
+                      type="text"
+                      placeholder="Your full name"
+                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#FF4F33]/50 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2">Email Address</label>
+                    <input
+                      type="email"
+                      placeholder="you@example.com"
+                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#FF4F33]/50 transition-colors"
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-zinc-400 text-sm">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>30-Day Guarantee</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* ============================================ */}
-        {/* SECTION: REAL RESULTS - VERTICAL UGV VIDEOS */}
-        {/* ============================================ */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
-          <div className="max-w-6xl mx-auto px-6">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <p className="text-[#FF4F33] text-sm uppercase tracking-widest mb-4">From The Community</p>
-              <h2 className="font-serif italic text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-                Real Results. Real Releases.
-              </h2>
-              <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-                Hear directly from producers who've transformed their sound with The Blueprint.
-              </p>
-            </div>
+                {/* Order Bump */}
+                <div className="bg-[#FF4F33]/5 border-2 border-dashed border-[#FF4F33]/30 rounded-xl p-4">
+                  <div className="text-center mb-3">
+                    <span className="inline-block bg-[#FF4F33] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                      One-Time Offer
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      id="orderBump"
+                      className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#FF4F33] focus:ring-[#FF4F33] focus:ring-offset-0 cursor-pointer"
+                    />
+                    <label htmlFor="orderBump" className="cursor-pointer flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-white font-semibold">YES, ADD: Alpha Drums 3 Sample Pack</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-zinc-500 line-through text-sm">$97</span>
+                          <span className="text-[#FF4F33] font-bold">+$37</span>
+                        </div>
+                      </div>
+                      <p className="text-zinc-400 text-sm mb-2">
+                        Rob's premium drum library with over 700 curated sounds from sessions with A-list artists. Kicks, snares, and percussion that cut through any mix.
+                      </p>
+                      <p className="text-[#FF4F33] text-xs font-medium">&gt;&gt; Click box to add this deal</p>
+                    </label>
+                  </div>
+                </div>
 
-            {/* 3-Column Vertical Video Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              {/* Video 1 - Kiera */}
-              <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800">
-                <video
-                  src={djkieraTestimonial}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                  <p className="text-white font-medium">Kiera</p>
-                  <p className="text-zinc-400 text-sm">@djkiera • UK</p>
-                </div>
-              </div>
+                {/* Total & CTA */}
+                <div className="pt-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-zinc-400">Total Due Today:</span>
+                    <span className="text-2xl font-bold text-white">$297.00</span>
+                  </div>
 
-              {/* Video 2 - Aaron */}
-              <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <img
-                    src={aaronly0nsYoutubeTestimonial}
-                    alt="Community testimonial"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                  <p className="text-white font-medium">Aaron</p>
-                  <p className="text-zinc-400 text-sm">@aaronly0ns</p>
-                </div>
-              </div>
+                  <button className="w-full bg-[#FF4F33] hover:bg-[#FF4F33]/90 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#FF4F33]/25 flex items-center justify-center gap-2">
+                    Get Instant Access
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
 
-              {/* Video 3 - Drew */}
-              <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <img
-                    src={drewAdieuTestimonial}
-                    alt="Community testimonial"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                  <p className="text-white font-medium">Drew</p>
-                  <p className="text-zinc-400 text-sm">@drewadieu</p>
+                  {/* Trust Badges */}
+                  <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-zinc-800">
+                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Secure Payment</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>30-Day Guarantee</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION: COMMUNITY FEEDBACK MASONRY GRID */}
-        {/* ============================================ */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
-          <div className="max-w-6xl mx-auto px-6">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <h2 className="font-serif italic text-3xl md:text-4xl text-white mb-4">
-                Unfiltered Feedback
-              </h2>
-              <p className="text-zinc-400">
-                Real messages from real producers in the community.
-              </p>
-            </div>
-
-            {/* Masonry Grid */}
-            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-              <div className="break-inside-avoid">
-                <img src={streamingNumbersTestimonial} alt="Streaming success testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={drewAdieuTestimonial} alt="Drew testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={headroomRecordsTestimonial} alt="Headroom Records testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={aaronly0nsYoutubeTestimonial} alt="Aaron testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={austriaTestimonial} alt="Austria testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={completePackageTestimonial} alt="Complete package testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={nateSawyerTestimonial} alt="Nate Sawyer testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={deepintheforestTestimonial} alt="Deep in the forest testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={rsmyth111Testimonial} alt="Rsmyth testimonial" className="w-full rounded-xl" />
-              </div>
-              <div className="break-inside-avoid">
-                <img src={levinMusicTestimonial} alt="Levin Music testimonial" className="w-full rounded-xl" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* SECTION: FINAL CTA */}
-        {/* ============================================ */}
-        <section className="relative py-24 md:py-32">
-          <div className="max-w-3xl mx-auto px-6 text-center">
-            <h2 className="font-serif italic text-4xl md:text-5xl text-white mb-6">
-              Ready to Transform Your Production?
-            </h2>
-            <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto">
-              Join thousands of producers who've already made the leap from tutorial hell to releasing real music.
-            </p>
-            <a
-              href="#checkout"
-              className="inline-flex items-center gap-2 bg-[#FF4F33] hover:bg-[#FF4F33]/90 text-white font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-[#FF4F33]/25"
-            >
-              GET INSTANT ACCESS →
-            </a>
-            <p className="text-zinc-500 text-sm mt-6">
-              30-day money-back guarantee • Instant access • Lifetime updates
-            </p>
           </div>
         </section>
     </div>
