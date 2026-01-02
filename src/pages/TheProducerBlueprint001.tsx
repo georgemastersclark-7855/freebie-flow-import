@@ -923,28 +923,28 @@ const TheProducerBlueprint001 = () => {
                 id: "01",
                 title: "The Foundation",
                 subtitle: "(Ableton Basics)",
-                desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Beginner friendly).",
+                desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
                 image: foundationLaptop,
               },
               {
                 id: "02",
                 title: "Sound Design",
                 subtitle: "That Cuts",
-                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.",
+                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch that sit perfectly in the mix without endless tweaking.",
                 image: soundDesignStudio,
               },
               {
                 id: "03",
                 title: "Pro Drum",
                 subtitle: "Production",
-                desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets.",
+                desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.",
                 image: drumProductionGif,
               },
               {
                 id: "04",
                 title: "Arrangement",
                 subtitle: "& Energy",
-                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management.",
+                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
                 image: abletonSession,
               },
               {
@@ -957,8 +957,8 @@ const TheProducerBlueprint001 = () => {
               {
                 id: "06",
                 title: "Mixing & Mastering",
-                subtitle: "The Finish Line",
-                desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or release to streaming platforms.",
+                // No subtitle here, kept clean
+                desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
                 image: mixingMasteringStudio,
               },
               {
@@ -978,7 +978,7 @@ const TheProducerBlueprint001 = () => {
               return (
                 <div 
                   key={index}
-                  // FIXED HEIGHT: h-[500px] ensures strict alignment
+                  // FIXED HEIGHT: h-[500px] ensures every card is exactly the same height
                   className={`group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5 ${spanClass}`}
                 >
                   {/* IMAGE LAYER */}
@@ -989,12 +989,12 @@ const TheProducerBlueprint001 = () => {
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
                     />
                     
-                    {/* GLASSMORPHISM FADE OVERLAY 
-                        - Starts from 40% height
-                        - backdrop-blur-sm creates the glass effect
-                        - heavy gradient ensures text readability
+                    {/* GLASS FADE OVERLAY 
+                        - Starts 40% from bottom
+                        - Use backdrop-blur-sm for that 'frosted' legibility
+                        - Gradient goes to pure black at bottom to hold the text
                     */}
-                    <div className="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-[#000] via-[#000]/90 to-transparent backdrop-blur-[2px] opacity-95"></div>
+                    <div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-[#000] via-[#000]/90 to-transparent backdrop-blur-[2px] opacity-95"></div>
                   </div>
 
                   {/* CONTENT LAYER */}
