@@ -155,9 +155,9 @@ html {
   /* Premium Serif Headline */
   .headline-serif {
     font-family: "Playfair Display", Georgia, serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.0;
     color: #ffffff;
   }
 
@@ -166,6 +166,8 @@ html {
     font-family: "Playfair Display", Georgia, serif;
     font-style: italic;
     font-weight: 400;
-    color: #71717a;
+    letter-spacing: -0.02em;
+    color: #a1a1aa;
+    margin-left: 0.3rem;
   }
 }
