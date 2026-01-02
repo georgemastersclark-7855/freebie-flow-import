@@ -897,8 +897,8 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* SECTION: CURRICULUM */}
-      <section className="py-24 px-6 bg-[#050505] relative z-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-24 px-4 md:px-6 bg-[#050505] relative z-20">
+        <div className="max-w-6xl mx-auto">
           
           {/* ================= HEADER ================= */}
           <div className="text-center mb-20 max-w-3xl mx-auto">
@@ -916,102 +916,114 @@ const TheProducerBlueprint001 = () => {
             </p>
           </div>
 
-          {/* ================= CURRICULUM GRID ================= */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
+          {/* ================= CURRICULUM GRID (2-3-2 LAYOUT) ================= */}
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-32">
             {[
               {
                 id: "01",
-                title: "The Foundation (Ableton Basics)",
-                desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a 'flow state' and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
+                title: "The Foundation",
+                subtitle: "(Ableton Basics)",
+                desc: "Stop fighting your DAW. Set up the exact templates & shortcuts I use to stay in a 'flow state' and work 2x faster. (Beginner friendly).",
                 image: foundationLaptop,
               },
               {
                 id: "02",
-                title: "Sound Design That Cuts",
-                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.",
+                title: "Sound Design",
+                subtitle: "That Cuts",
+                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master synthesis fundamentals to build pads & basses.",
                 image: soundDesignStudio,
               },
               {
                 id: "03",
-                title: "Pro Drum Production",
-                desc: "The difference between 'demo' and 'pro' is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.",
+                title: "Pro Drums",
+                subtitle: "Production",
+                desc: "The difference between 'demo' and 'pro' is usually in the drums. Learn sample selection, bus processing, and sidechain secrets.",
                 image: drumProductionGif,
               },
               {
                 id: "04",
-                title: "Arrangement & Energy",
-                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
+                title: "Arrangement",
+                subtitle: "& Energy",
+                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked using ear candy and energy management.",
                 image: abletonSession,
               },
               {
                 id: "05",
                 title: "Vocal Production",
-                desc: "How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.",
+                subtitle: "Masterclass",
+                desc: "How to get crispy, radio-ready vocals in a home setup. Recording, processing, harmony stacking, and tuning workflows.",
                 image: vocalProductionStudio,
               },
               {
                 id: "06",
                 title: "Mixing & Mastering",
-                desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
+                subtitle: "The Finish Line",
+                desc: "How I approach the final steps to get music ready for labels and streaming platforms. Finish the job.",
                 image: mixingMasteringStudio,
               },
               {
                 id: "07",
-                title: "Artist Sounds & Identity",
-                desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
+                title: "Artist Identity",
+                subtitle: "& Analysis",
+                desc: "How to analyze trends without copying them. Deconstruct top artists and rebuild them with your own unique sonic fingerprint.",
                 image: robWritingSession,
               },
-            ].map((module, index) => (
-              <div 
-                key={index}
-                className={`group relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5
-                ${index === 0 ? 'md:col-span-2 lg:col-span-3 h-[400px] md:h-[450px]' : 'h-[500px]'}`}
-              >
-                {/* IMAGE LAYER */}
-                <div className="absolute inset-0 z-0">
-                  <img 
-                    src={module.image} 
-                    alt={module.title} 
-                    className={`w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]
-                      ${index === 0 ? 'object-center' : ''}
-                      ${index === 4 ? 'object-[center_25%]' : ''}
-                      ${index === 6 ? 'object-top' : ''}
-                    `}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent opacity-90"></div>
-                </div>
+            ].map((module, index) => {
+              // Logic for 2-3-2 Layout
+              let spanClass = "";
+              if (index < 2) spanClass = "md:col-span-3";
+              else if (index < 5) spanClass = "md:col-span-2";
+              else spanClass = "md:col-span-3";
 
-                {/* CONTENT LAYER */}
-                <div className="absolute inset-0 z-10 p-6 md:p-8 flex flex-col justify-end">
-                  {/* Module ID - Stylized Watermark */}
-                  <div className="absolute top-4 left-6 md:top-8 md:left-8 font-mono text-5xl md:text-6xl font-bold text-white/20 mix-blend-overlay group-hover:text-white/40 transition-all duration-500 select-none">
-                    {module.id}
+              return (
+                <div 
+                  key={index}
+                  className={`group relative h-[28rem] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5 ${spanClass}`}
+                >
+                  {/* IMAGE LAYER */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src={module.image} 
+                      alt={module.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
+                    />
+                    {/* SCRIM GRADIENT */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent opacity-90"></div>
                   </div>
-                  
-                  <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                    <h3 className={`font-bold text-white mb-3 leading-tight drop-shadow-md
-                      ${index === 0 ? 'text-3xl md:text-4xl max-w-2xl' : 'text-2xl md:text-3xl'}
-                    `}>
-                      {module.title}
-                    </h3>
+
+                  {/* CONTENT LAYER */}
+                  <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                     
-                    <p className={`text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90
-                       ${index === 0 ? 'max-w-3xl' : ''}
-                    `}>
-                      {module.desc}
-                    </p>
+                    {/* Module ID */}
+                    <div className="absolute top-8 left-8 font-mono text-6xl font-bold text-white/20 mix-blend-overlay group-hover:text-white/40 transition-all duration-500 select-none">
+                      {module.id}
+                    </div>
+                    
+                    <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                      <h3 className="text-3xl font-bold text-white mb-2 leading-tight drop-shadow-md">
+                        {module.title}
+                      </h3>
+                      {module.subtitle && (
+                        <span className="block text-[#FF4F33] text-xs font-bold uppercase tracking-wider mb-3 drop-shadow-md">
+                          {module.subtitle}
+                        </span>
+                      )}
+                      
+                      <p className="text-zinc-200 text-sm leading-relaxed mb-2 font-medium drop-shadow-md opacity-90 pr-2">
+                        {module.desc}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* ================= BONUS SECTION ================= */}
           <div className="relative border-t border-zinc-800 pt-24">
-            {/* Glow Effect behind bonuses */}
+            {/* Glow Effect */}
             <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none z-0" />
             <div className="relative z-10">
-              {/* Header */}
               <div className="text-center mb-16">
                 <div className="inline-flex items-center px-3 py-1 rounded text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-4">
                   Free Bonuses Included
@@ -1021,16 +1033,12 @@ const TheProducerBlueprint001 = () => {
                   Join today and get 2 exclusive bonuses included. <span className="text-white underline decoration-[#FF4F33] underline-offset-4">Available for a limited time.</span>
                 </p>
               </div>
-
-              {/* Bonus Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                
                 {/* BONUS 1 */}
                 <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
                   <div className="absolute top-0 right-0 p-4 opacity-50">
                     <TrendingUp className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" />
                   </div>
-                  
                   <div className="relative z-10">
                     <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">
                       VALUE: $97
@@ -1055,7 +1063,6 @@ const TheProducerBlueprint001 = () => {
                   <div className="absolute top-0 right-0 p-4 opacity-50">
                     <Music2 className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" />
                   </div>
-                  
                   <div className="relative z-10">
                     <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">
                       VALUE: $147
