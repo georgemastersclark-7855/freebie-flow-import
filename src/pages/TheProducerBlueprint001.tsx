@@ -214,8 +214,8 @@ const CurriculumSection = () => {
             return (
               <div 
                 key={module.id}
-                className={`group relative flex flex-col md:flex-row glass-card rounded-2xl overflow-hidden
-                  ${isOpen ? 'border-zinc-500' : ''}
+                className={`group relative flex flex-col md:flex-row bg-[#0A0A0A] border rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/5
+                  ${isOpen ? 'border-zinc-600' : 'border-zinc-800/50 hover:border-zinc-600'}
                 `}
               >
                 
@@ -227,7 +227,7 @@ const CurriculumSection = () => {
                       alt={module.title} 
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/70 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/60 to-transparent"></div>
                   </div>
                   
                   {/* Mobile ID Watermark */}
@@ -243,16 +243,16 @@ const CurriculumSection = () => {
                   <div className="p-8 md:p-10 md:pr-24 flex flex-col justify-center min-h-[220px]">
                     
                     {/* Desktop Background Number (Watermark) */}
-                    <div className="hidden md:block absolute right-6 top-6 text-[80px] leading-none font-bold text-zinc-800/50 group-hover:text-zinc-700/50 transition-colors select-none z-0">
+                    <div className="hidden md:block absolute right-6 top-6 text-[80px] leading-none font-bold text-zinc-900 group-hover:text-zinc-800 transition-colors select-none z-0">
                       {module.id}
                     </div>
                     <div className="relative z-10">
-                      <div className="inline-flex flex-wrap items-baseline gap-x-3 mb-3">
-                        <h3 className="headline-serif text-2xl md:text-3xl leading-tight">
+                      <div className="inline-flex flex-wrap items-baseline gap-x-2 mb-3">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
                           {module.title}
                         </h3>
                         {module.subtitle && (
-                          <span className="headline-serif-subtitle text-2xl md:text-3xl">
+                          <span className="text-zinc-400 text-2xl md:text-3xl font-bold">
                             {module.subtitle}
                           </span>
                         )}
