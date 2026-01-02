@@ -29,12 +29,7 @@ import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 import solutionVideo from "@/assets/solution-video.mp4";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
 import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
-import robStudio from "@/assets/rob-home-studio.jpg";
-import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
-import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
-import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
-import robFirstStudio from "@/assets/rob-first-studio.jpg";
-import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
+import robStudio from "@/assets/rob-studio.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -157,7 +152,7 @@ const TheProducerBlueprint001 = () => {
       <main className="relative z-10 px-6 md:px-12 pt-16 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
         {/* HERO AMBIENT GLOW */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF4F33]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
-        
+
         {/* Social Proof Eyebrow */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex -space-x-3 relative">
@@ -231,10 +226,11 @@ const TheProducerBlueprint001 = () => {
           style={{ animationDelay: "0.5s" }}
         >
           {/* Large Ambient Glow Behind VSL */}
-          <div 
+          <div
             className="absolute -inset-32 pointer-events-none z-0"
             style={{
-              background: 'radial-gradient(ellipse at center, rgba(255,120,50,0.15) 0%, rgba(255,79,51,0.08) 40%, transparent 70%)',
+              background:
+                "radial-gradient(ellipse at center, rgba(255,120,50,0.15) 0%, rgba(255,79,51,0.08) 40%, transparent 70%)",
             }}
           />
           {/* Glow Effect */}
@@ -257,11 +253,11 @@ const TheProducerBlueprint001 = () => {
           </p>
 
           {/* Added mask-image style for the fade effect */}
-          <div 
+          <div
             className="overflow-hidden relative"
             style={{
-              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+              maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+              WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
             }}
           >
             {/* Marquee Container */}
@@ -269,179 +265,179 @@ const TheProducerBlueprint001 = () => {
               className="flex gap-12 w-max animate-marquee hover:[animation-play-state:paused] items-start"
               style={{ animationDuration: "60s" }}
             >
-            {/* Credit Item 1 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsomokersFriday}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - Friday"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Friday ft. Fridayy</p>
-            </div>
-            {/* Credit Item 2 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsmokersNoShade}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - No Shade At Pitti"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
-            </div>
-            {/* Credit Item 3 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsmokersSeeYouAgain}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - See You Again"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
-            </div>
-            {/* Credit Item 4 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src="https://placehold.co/200x200/18181b/ffffff?text=Gary+Barlow"
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Gary Barlow"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Gary Barlow</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
-            </div>
-            {/* Credit Item 5 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src="https://placehold.co/200x200/18181b/ffffff?text=Spinnin"
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Spinnin' Records"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Spinnin' Records</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Official Remix</p>
-            </div>
-            {/* Credit Item 6 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsmokersTennisCourt}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - Tennis Court"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Tennis Court</p>
-            </div>
-            {/* Credit Item 7 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={flawesDontBlameMe}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Flawes - Don't Blame Me"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Flawes</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Don't Blame Me</p>
-            </div>
-            {/* Credit Item 8 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={januaryAllMyFriends}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="January - All My Friends Are Famous"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
-            </div>
-            {/* Credit Item 9 */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={tiandaNothingButLove}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Tianda - Nothing But Love"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Tianda</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
-            </div>
+              {/* Credit Item 1 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsomokersFriday}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - Friday"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Friday ft. Fridayy</p>
+              </div>
+              {/* Credit Item 2 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsmokersNoShade}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - No Shade At Pitti"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
+              </div>
+              {/* Credit Item 3 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsmokersSeeYouAgain}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - See You Again"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
+              </div>
+              {/* Credit Item 4 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src="https://placehold.co/200x200/18181b/ffffff?text=Gary+Barlow"
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Gary Barlow"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Gary Barlow</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
+              </div>
+              {/* Credit Item 5 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src="https://placehold.co/200x200/18181b/ffffff?text=Spinnin"
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Spinnin' Records"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Spinnin' Records</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Official Remix</p>
+              </div>
+              {/* Credit Item 6 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsmokersTennisCourt}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - Tennis Court"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Tennis Court</p>
+              </div>
+              {/* Credit Item 7 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={flawesDontBlameMe}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Flawes - Don't Blame Me"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Flawes</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Don't Blame Me</p>
+              </div>
+              {/* Credit Item 8 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={januaryAllMyFriends}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="January - All My Friends Are Famous"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
+              </div>
+              {/* Credit Item 9 */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={tiandaNothingButLove}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Tianda - Nothing But Love"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Tianda</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
+              </div>
 
-            {/* DUPLICATE SET FOR INFINITE LOOP */}
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsomokersFriday}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - Friday"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Friday ft. Fridayy</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsmokersNoShade}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - No Shade At Pitti"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsmokersSeeYouAgain}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - See You Again"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src="https://placehold.co/200x200/18181b/ffffff?text=Gary+Barlow"
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Gary Barlow"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Gary Barlow</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src="https://placehold.co/200x200/18181b/ffffff?text=Spinnin"
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Spinnin' Records"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Spinnin' Records</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Official Remix</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={chainsmokersTennisCourt}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="The Chainsmokers - Tennis Court"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Tennis Court</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={flawesDontBlameMe}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Flawes - Don't Blame Me"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Flawes</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Don't Blame Me</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={januaryAllMyFriends}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="January - All My Friends Are Famous"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
-            </div>
-            <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-              <img
-                src={tiandaNothingButLove}
-                className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                alt="Tianda - Nothing But Love"
-              />
-              <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Tianda</p>
-              <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
-            </div>
+              {/* DUPLICATE SET FOR INFINITE LOOP */}
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsomokersFriday}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - Friday"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Friday ft. Fridayy</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsmokersNoShade}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - No Shade At Pitti"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsmokersSeeYouAgain}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - See You Again"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src="https://placehold.co/200x200/18181b/ffffff?text=Gary+Barlow"
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Gary Barlow"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Gary Barlow</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src="https://placehold.co/200x200/18181b/ffffff?text=Spinnin"
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Spinnin' Records"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Spinnin' Records</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Official Remix</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={chainsmokersTennisCourt}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="The Chainsmokers - Tennis Court"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">The Chainsmokers</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Tennis Court</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={flawesDontBlameMe}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Flawes - Don't Blame Me"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Flawes</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Don't Blame Me</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={januaryAllMyFriends}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="January - All My Friends Are Famous"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">January</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
+              </div>
+              <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
+                <img
+                  src={tiandaNothingButLove}
+                  className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
+                  alt="Tianda - Nothing But Love"
+                />
+                <p className="text-white font-bold text-xs mt-4 text-center leading-tight">Tianda</p>
+                <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
+              </div>
             </div>
           </div>
         </div>
@@ -450,10 +446,10 @@ const TheProducerBlueprint001 = () => {
       {/* ================= MINI SOCIAL PROOF SECTION (FIXED TO 6) ================= */}
       <section className="pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
         {/* Ambient Glow Behind Unfiltered Feedback */}
-        <div 
+        <div
           className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, transparent 60%)',
+            background: "radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, transparent 60%)",
           }}
         />
         <div className="max-w-7xl mx-auto flex flex-col items-center">
@@ -494,49 +490,53 @@ const TheProducerBlueprint001 = () => {
       {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO + SCRIBBLES) ================= */}
       <section className="py-32 px-6 bg-[#050505] relative z-20 -mt-[500px]">
         {/* Deep Red Ambient Glow Behind Tutorial Hell */}
-        <div 
+        <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none z-0"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(180,30,30,0.08) 0%, rgba(120,20,20,0.04) 40%, transparent 70%)',
+            background:
+              "radial-gradient(ellipse at center, rgba(180,30,30,0.08) 0%, rgba(120,20,20,0.04) 40%, transparent 70%)",
           }}
         />
         <div className="max-w-7xl mx-auto">
-          
           {/* 1. HEADLINE AREA */}
           <div className="text-center mb-16 relative z-10">
             <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#FF4F33] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
               For Self-Taught Producers
             </div>
-            
+
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 text-white leading-[1.1]">
               Why You're Still Stuck In <br />
               <span className="font-serif italic text-white">Tutorial Hell.</span>
             </h2>
             <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
-              You have the taste. You have the plugins. <span className="text-zinc-400">But your hard drive is a graveyard of unfinished ideas.</span>
+              You have the taste. You have the plugins.{" "}
+              <span className="text-zinc-400">But your hard drive is a graveyard of unfinished ideas.</span>
             </p>
           </div>
 
           {/* 2. CINEMATIC GRID LAYOUT */}
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
-            
             {/* LEFT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
-              
               {/* Item 1: Wrong Mentors */}
               <div className="space-y-2 relative group">
                 <h4 className="text-white font-medium text-lg relative inline-block">
                   Wrong Mentors
                   {/* Scribble: Underline */}
-                  <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FF4F33]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full h-3 text-[#FF4F33]/60"
+                    viewBox="0 0 100 10"
+                    preserveAspectRatio="none"
+                  >
                     <path d="M2,5 Q50,8 98,2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  Learning from "content creators" who optimize for views, not working producers who optimize for results.
+                  Learning from "content creators" who optimize for views, not working producers who optimize for
+                  results.
                 </p>
               </div>
-              
+
               {/* Item 2: Fragmented Knowledge */}
               <div className="space-y-2 relative">
                 <h4 className="text-white font-medium text-lg">Fragmented Knowledge</h4>
@@ -545,14 +545,20 @@ const TheProducerBlueprint001 = () => {
                 </p>
                 {/* Scribble: Arrow pointing right to video */}
                 <div className="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 opacity-60">
-                   <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform -rotate-12">
-                     <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-                     <defs>
-                       <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                         <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
-                       </marker>
-                     </defs>
-                   </svg>
+                  <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform -rotate-12">
+                    <path
+                      d="M5,25 Q25,10 45,25"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      markerEnd="url(#arrowhead)"
+                    />
+                    <defs>
+                      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+                      </marker>
+                    </defs>
+                  </svg>
                 </div>
               </div>
             </div>
@@ -561,18 +567,18 @@ const TheProducerBlueprint001 = () => {
             <div className="md:w-1/2 order-1 md:order-2 relative flex justify-center">
               {/* Glow Effect */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#FF4F33]/5 blur-[80px] rounded-full pointer-events-none"></div>
-              
+
               <div className="relative w-full max-w-md aspect-square overflow-visible flex items-center justify-center">
-                <video 
-                  autoPlay 
-                  muted 
-                  loop 
+                <video
+                  autoPlay
+                  muted
+                  loop
                   playsInline
                   className="w-full h-full object-cover opacity-90 scale-110"
                   style={{
-                    objectPosition: '60% center', 
-                    maskImage: 'radial-gradient(circle, black 35%, transparent 65%)',
-                    WebkitMaskImage: 'radial-gradient(circle, black 35%, transparent 65%)'
+                    objectPosition: "60% center",
+                    maskImage: "radial-gradient(circle, black 35%, transparent 65%)",
+                    WebkitMaskImage: "radial-gradient(circle, black 35%, transparent 65%)",
                   }}
                   src={tutorialHellVideo}
                 />
@@ -581,33 +587,44 @@ const TheProducerBlueprint001 = () => {
 
             {/* RIGHT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-16 text-center md:text-left order-3 relative z-10">
-              
               {/* Item 3: Frankenstein Workflow */}
               <div className="space-y-2 relative">
                 <div className="relative inline-block">
                   <h4 className="text-white font-medium text-lg relative z-10">Frankenstein Workflow</h4>
                   {/* Scribble: Circle around title */}
-                  <svg className="absolute -top-3 -left-4 w-[120%] h-[180%] text-[#FF4F33]/40 z-0 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
+                  <svg
+                    className="absolute -top-3 -left-4 w-[120%] h-[180%] text-[#FF4F33]/40 z-0 pointer-events-none"
+                    viewBox="0 0 100 50"
+                    preserveAspectRatio="none"
+                  >
                     <path d="M10,20 Q50,5 90,20 T10,20" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   </svg>
                 </div>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  Trying to build a pro sound by stitching together random advice. It falls apart the moment you try to finish a track.
+                  Trying to build a pro sound by stitching together random advice. It falls apart the moment you try to
+                  finish a track.
                 </p>
               </div>
-              
+
               {/* Item 4: The Highlight Reel */}
               <div className="space-y-2 relative">
                 {/* Scribble: Arrow pointing left to video */}
                 <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
-                   <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform rotate-12 scale-x-[-1]">
-                     <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-                   </svg>
+                  <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform rotate-12 scale-x-[-1]">
+                    <path
+                      d="M5,25 Q25,10 45,25"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      markerEnd="url(#arrowhead)"
+                    />
+                  </svg>
                 </div>
-                
+
                 <h4 className="text-white font-medium text-lg">The "Highlight Reel"</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  You only see the polished result on YouTube, never the messy problem-solving required to actually finish music.
+                  You only see the polished result on YouTube, never the messy problem-solving required to actually
+                  finish music.
                 </p>
               </div>
             </div>
@@ -617,38 +634,35 @@ const TheProducerBlueprint001 = () => {
           <div className="mt-24 flex flex-col items-center opacity-20">
             <div className="w-[1px] h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
           </div>
-
         </div>
       </section>
 
       {/* ================= SECTION 3: THE SOLUTION (RESPONSIVE IMAGE SWAP) ================= */}
       <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0">
-        
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
           {/* Height: Mobile 600px, Desktop 800px */}
           <div className="relative w-full max-w-6xl h-[600px] md:h-[800px] overflow-hidden">
-            
             {/* MOBILE IMAGE (Visible < md) - Uses tall image for better verticality */}
-            <img 
+            <img
               src={robMarshmello}
               className="block md:hidden w-full h-full object-cover object-center opacity-80"
               alt="Rob and Marshmello Mobile"
             />
-            
+
             {/* DESKTOP IMAGE (Visible >= md) - Uses cropped wide image */}
-            <img 
-              src={robHomeStudioWide}
-              className="hidden md:block w-full h-full object-cover object-center opacity-80"
-              alt="Rob in Home Studio Desktop"
+            <img
+              src={robMarsmelloCropped}
+              className="hidden md:block w-full h-full object-cover object-top opacity-80"
+              alt="Rob and Marshmello Desktop"
             />
-            
+
             {/* Top Vignette (Stronger to mask top hard edge) */}
             <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#050505] via-[#050505] to-transparent opacity-100"></div>
-            
+
             {/* Bottom Fade (Deep fade for text overlap) */}
             <div className="absolute bottom-0 left-0 w-full h-[400px] md:h-[500px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
-            
+
             {/* Side Fades (Desktop only) */}
             <div className="hidden md:block absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
             <div className="hidden md:block absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#050505] to-transparent"></div>
@@ -657,83 +671,148 @@ const TheProducerBlueprint001 = () => {
 
         {/* 2. CONTENT CONTAINER - Responsive negative margins */}
         <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
-          
           {/* Header Content */}
           <div className="text-center mb-24">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
               The Producer Blueprint 2.0
             </div>
-            
+
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl">
               See How "A-List" Music Is <br />
               Actually Made <span className="font-serif italic text-zinc-400">In A Home Studio.</span>
             </h2>
-            
+
             {/* UPDATED SUBHEADLINE */}
             <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              In 2026, it is possible to make top-streaming music from a home setup. Most producers plateau simply because they don't know what "good" looks like during the messy middle.
+              In 2026, it is possible to make top-streaming music from a home setup. Most producers plateau simply
+              because they don't know what "good" looks like during the messy middle.
             </p>
           </div>
 
           {/* 3. THE 4 PILLARS */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            
             {/* Card 01 */}
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">01</div>
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">
+                01
+              </div>
               <div className="relative z-10">
                 <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                  </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">From "Loop Phase" To Finished Record</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs.
+                  Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to
+                  a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs.
                 </p>
               </div>
             </div>
 
             {/* Card 02 */}
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">02</div>
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">
+                02
+              </div>
               <div className="relative z-10">
                 <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                    <line x1="1" y1="14" x2="7" y2="14"></line>
+                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                  </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">The "Bedroom" Mixing Standard</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road.
+                  You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to
+                  get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road.
                 </p>
               </div>
             </div>
 
             {/* Card 03 */}
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">03</div>
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">
+                03
+              </div>
               <div className="relative z-10">
                 <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Session-Proven Chains</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists to get that loud, punchy commercial sound without over-complicating it.
+                  Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses
+                  in sessions with major artists to get that loud, punchy commercial sound without over-complicating it.
                 </p>
               </div>
             </div>
 
             {/* Card 04 */}
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">04</div>
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">
+                04
+              </div>
               <div className="relative z-10">
                 <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                  </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Design Sounds With Intent</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders.
+                  Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact
+                  808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders.
                 </p>
               </div>
             </div>
-
           </div>
 
           {/* BRIDGE / CTA */}
@@ -743,24 +822,22 @@ const TheProducerBlueprint001 = () => {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
-
         </div>
       </section>
 
-      {/* ================= SECTION: THE ORIGIN STORY (MEET YOUR INSTRUCTOR) ================= */}
+      {/* ================= SECTION: THE ORIGIN STORY (PREMIUM STRUCTURAL TIMELINE) ================= */}
       <section className="py-24 px-6 bg-[#050505] relative z-20 overflow-hidden">
-        {/* Background Grid Texture */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+        {/* Background Grid Texture (Subtle) */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-24">
+          <div className="text-center mb-32">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
               Meet Your Instructor
             </div>
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">Rob Late.</h2>
             <div className="inline-block relative">
-              {/* Clean sans-serif styling as requested */}
               <p className="text-xl md:text-2xl text-zinc-400 font-medium tracking-tight">
                 Credits: The Chainsmokers, Marshmello, Clean Bandit, Gary Barlow.
               </p>
@@ -772,156 +849,153 @@ const TheProducerBlueprint001 = () => {
 
           {/* TIMELINE CONTAINER */}
           <div className="relative">
-            {/* DESKTOP CENTRAL LINE (Hidden on Mobile) */}
-            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#FF4F33]/50 to-transparent -translate-y-1/2 z-0"></div>
+            {/* CENTRAL SPINE (Gradient Fade for 'Clearer Ends') */}
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent z-0"></div>
 
-            {/* MOBILE VERTICAL LINE (Hidden on Desktop) */}
-            <div className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-[#FF4F33]/10 via-[#FF4F33]/50 to-[#FF4F33]/10 z-0"></div>
+            {/* MOBILE SPINE */}
+            <div className="lg:hidden absolute top-0 bottom-0 left-6 w-[1px] bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-800 z-0"></div>
 
             {/* Timeline Items Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
-              {/* ITEM 1: 2019 (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:gap-4 relative z-10">
+              {/* ITEM 1: 2019 (TOP) */}
+              <div className="relative flex flex-col lg:items-center justify-end h-full group">
+                {/* Vertical Stem (Connects Card to Spine) */}
+                <div className="hidden lg:block absolute bottom-0 left-1/2 w-[1px] h-16 bg-zinc-800 -mb-8 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-auto lg:bottom-0 -translate-x-1/2 lg:-mb-[35px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-10"></div>
 
-                {/* Content Card (Shifted UP on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
+                <div className="pl-16 lg:pl-0 lg:mb-8 w-full relative z-20">
+                  <div className="bg-white p-2 pb-8 shadow-2xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6">
+                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
-                        src={robFirstStudio}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob's First Studio Setup"
+                        src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="2019 Setup"
                       />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
                       2019: The Grind
                     </div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
                       I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings.
-                      I got told to ‘get a proper job’ more times than I can count. This was my first setup - classic
-                      Focusrite interface, but it worked.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* ITEM 2: 2020 (BOTTOM on Desktop) */}
-              <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+              {/* ITEM 2: 2020 (BOTTOM) */}
+              <div className="relative flex flex-col lg:items-center justify-start lg:pt-32 group">
+                {/* Vertical Stem */}
+                <div className="hidden lg:block absolute top-0 left-1/2 w-[1px] h-16 bg-zinc-800 -mt-16 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 -translate-x-1/2 lg:-mt-[66px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-10"></div>
 
-                {/* Content Card (Shifted DOWN on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-                  {/* Text First on Mobile, but visually we keep consistent. For the 'Bottom' cards, we push them down. */}
-                  <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
+                <div className="pl-16 lg:pl-0 lg:mt-8 w-full relative z-20">
+                  <div className="bg-white p-2 pb-8 shadow-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6">
+                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
-                        src={robLockdownStudio}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob's Lockdown Era Studio"
+                        src="https://images.unsplash.com/photo-1621618721996-2244a04d9c79?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="2020 Lockdown"
                       />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
                       2020: Lockdown
                     </div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The Lockdown Era</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I
-                      posted some Reels sampling random objects in my studio. A few started getting views. I didn't know
-                      it yet, but everything changed right here (post more content, kids).
+                      Stuck in a spare room in London. I posted Reels sampling random objects. A few got views.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* ITEM 3: 2021 (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+              {/* ITEM 3: 2021 (TOP) */}
+              <div className="relative flex flex-col lg:items-center justify-end h-full group">
+                {/* Vertical Stem */}
+                <div className="hidden lg:block absolute bottom-0 left-1/2 w-[1px] h-16 bg-zinc-800 -mb-8 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-auto lg:bottom-0 -translate-x-1/2 lg:-mb-[35px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-10"></div>
 
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
-                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
-                      <img src={robChainsmokers} className="w-full h-full object-cover object-top" alt="Rob with The Chainsmokers" />
+                <div className="pl-16 lg:pl-0 lg:mb-8 w-full relative z-20">
+                  <div className="bg-white p-2 pb-8 shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6">
+                    <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
+                      <img src={chainsomokersFriday} className="w-full h-full object-cover" alt="The Chainsmokers" />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
                       2021: Breakthrough
                     </div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The Breakthrough</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      My content was going viral, followers growing. Drew from{" "}
-                      <span className="text-white">The Chainsmokers</span> DM’d me after seeing a video and we started
-                      working on music together. No management, no label connections at this point - just making cool
-                      music & getting reach with content.
+                      Drew from <span className="text-white">The Chainsmokers</span> DM’d me. We started working. No
+                      management, just content reach.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* ITEM 4: 2022-23 (BOTTOM on Desktop) */}
-              <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
+              {/* ITEM 4: 2022-23 (BOTTOM) */}
+              <div className="relative flex flex-col lg:items-center justify-start lg:pt-32 group">
+                {/* Vertical Stem */}
+                <div className="hidden lg:block absolute top-0 left-1/2 w-[1px] h-16 bg-zinc-800 -mt-16 z-0"></div>
+                {/* Node Dot */}
+                <div className="absolute left-6 lg:left-1/2 top-0 -translate-x-1/2 lg:-mt-[66px] w-3 h-3 bg-[#050505] border border-zinc-500 rounded-full z-10"></div>
 
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+                <div className="pl-16 lg:pl-0 lg:mt-8 w-full relative z-20">
+                  <div className="bg-white p-2 pb-8 shadow-2xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
-                        src={robGaryBarlow}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob and Gary Barlow in Session"
+                        src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="Sessions"
                       />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
                       2022: A-List
                     </div>
                   </div>
-                  <div className="text-left lg:text-center">
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-white font-bold text-lg mb-2">The A-List Sessions</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy
-                      part is I was still doing it all from a home setup, proving you don't need a million-dollar
-                      facility to play at the top level.
+                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* ITEM 5: TODAY (TOP on Desktop) */}
-              <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
+              {/* ITEM 5: TODAY (TOP) */}
+              <div className="relative flex flex-col lg:items-center justify-end h-full group">
+                {/* Vertical Stem */}
+                <div className="hidden lg:block absolute bottom-0 left-1/2 w-[1px] h-16 bg-zinc-800 -mb-8 z-0"></div>
+                {/* Node Dot (Active) */}
+                <div className="absolute left-6 lg:left-1/2 top-0 lg:top-auto lg:bottom-0 -translate-x-1/2 lg:-mb-[35px] w-4 h-4 bg-[#FF4F33] rounded-full z-10 shadow-[0_0_20px_#FF4F33]"></div>
 
-                {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
-                  <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
+                <div className="pl-16 lg:pl-0 lg:mb-8 w-full relative z-20">
+                  <div className="bg-white p-2 pb-8 shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[260px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-transform duration-700">
                       <img
-                        src={robMarsmelloCropped}
-                        className="w-full h-full object-cover object-center"
-                        alt="Rob's Current Studio"
+                        src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=500&h=500&fit=crop"
+                        className="w-full h-full object-cover"
+                        alt="Current Studio"
                       />
                     </div>
                     <div className="pt-4 px-2 font-mono text-xs text-zinc-500 text-center tracking-widest uppercase">
                       TODAY: The Blueprint
                     </div>
                   </div>
-                  <div className="text-left lg:text-center">
+
+                  <div className="text-left lg:text-center px-2">
                     <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
                     <p className="text-zinc-400 text-xs leading-relaxed">
-                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It’s still a
-                      home studio. It’s basically the same gear. I just have fancier lights now.
+                      100 Million+ streams later. I moved house and built a dedicated space. It’s still a home studio.
+                      Just fancier lights.
                     </p>
                   </div>
                 </div>
@@ -930,10 +1004,9 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* TIMELINE FOOTER */}
-          <div className="mt-24 max-w-2xl mx-auto text-center">
+          <div className="mt-32 max-w-2xl mx-auto text-center relative z-20">
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 md:p-10 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
-              {/* Clean sans-serif styling */}
               <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl mb-4">
                 "What is The Producer Blueprint?"
               </h4>
