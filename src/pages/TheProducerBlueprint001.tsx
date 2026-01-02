@@ -31,6 +31,7 @@ import robMarshmello from "@/assets/rob-marshmello.jpg";
 import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
 import robStudio from "@/assets/rob-home-studio.jpg";
 import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
+import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -634,9 +635,9 @@ const TheProducerBlueprint001 = () => {
             
             {/* DESKTOP IMAGE (Visible >= md) - Uses cropped wide image */}
             <img 
-              src={robMarsmelloCropped}
-              className="hidden md:block w-full h-full object-cover object-top opacity-80"
-              alt="Rob and Marshmello Desktop"
+              src={robHomeStudioWide}
+              className="hidden md:block w-full h-full object-cover object-center opacity-80"
+              alt="Rob in Home Studio Desktop"
             />
             
             {/* Top Vignette (Stronger to mask top hard edge) */}
