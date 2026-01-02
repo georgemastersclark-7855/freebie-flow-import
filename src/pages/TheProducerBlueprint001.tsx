@@ -919,14 +919,11 @@ const TheProducerBlueprint001 = () => {
                   alt="The Foundation" 
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                 <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">01</div>
-                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">The Foundation (Ableton Basics)</h3>
+                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">The Foundation (Ableton Basics)</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-2">
                   Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a 'flow state' and work 2x faster.
                 </p>
@@ -944,14 +941,11 @@ const TheProducerBlueprint001 = () => {
                   alt="Sound Design" 
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                 <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">02</div>
-                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Sound Design That Cuts</h3>
+                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Sound Design That Cuts</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-2">
                   Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.
                 </p>
@@ -966,14 +960,11 @@ const TheProducerBlueprint001 = () => {
                   alt="Pro Drums" 
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                 <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">03</div>
-                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Pro Drum Production</h3>
+                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Pro Drum Production</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-2">
                   The difference between 'demo' and 'pro' is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.
                 </p>
@@ -988,21 +979,18 @@ const TheProducerBlueprint001 = () => {
                   alt="Arrangement" 
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                 <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">04</div>
-                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Arrangement & Energy</h3>
+                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Arrangement & Energy</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-2">
                   Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.
                 </p>
               </div>
             </div>
 
-            {/* Module 05 - Vocal Production (Highlighted) */}
+            {/* Module 05 */}
             <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
               <div className="absolute inset-0 z-0">
                 <img 
@@ -1010,15 +998,11 @@ const TheProducerBlueprint001 = () => {
                   alt="Vocal Production" 
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                 <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">05</div>
-                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Vocal Production</h3>
-                <span className="text-[#FF4F33] text-sm font-bold uppercase tracking-wider mb-3 block">(The "Secret Sauce")</span>
+                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Vocal Production</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-2">
                   How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.
                 </p>
@@ -1033,14 +1017,11 @@ const TheProducerBlueprint001 = () => {
                   alt="Mixing & Mastering" 
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                 <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">06</div>
-                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Mixing & Mastering</h3>
+                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Mixing & Mastering</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-2">
                   Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.
                 </p>
@@ -1055,14 +1036,11 @@ const TheProducerBlueprint001 = () => {
                   alt="Artist Sounds" 
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
               </div>
               <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
                 <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">07</div>
-                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Artist Sounds & Identity</h3>
+                <h3 className="text-2xl font-bold text-white mb-3 leading-tight">Artist Sounds & Identity</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-2">
                   How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.
                 </p>
