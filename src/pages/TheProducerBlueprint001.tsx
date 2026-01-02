@@ -240,10 +240,10 @@ const CurriculumSection = () => {
                     
                     {/* Title Block */}
                     <div className="mb-3">
-                      <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight drop-shadow-lg tracking-tight">
+                      <h3 className="text-3xl font-bold text-white leading-none mb-1 drop-shadow-lg">
                         {module.title}
                         {module.subtitle && (
-                          <span className="font-serif italic font-normal text-zinc-400 ml-2.5">
+                          <span className="font-serif italic font-normal text-zinc-400 ml-2">
                             {module.subtitle}
                           </span>
                         )}
