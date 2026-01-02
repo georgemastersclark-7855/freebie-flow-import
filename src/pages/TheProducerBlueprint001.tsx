@@ -38,6 +38,7 @@ import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
 import earlyDaysSticker from "@/assets/early-days-sticker.png";
 import nowSticker from "@/assets/now-sticker.png";
 import robLateSignature from "@/assets/rob-late-signature-white.png";
+import soundDesignClip from "@/assets/curriculum/sound-design-clip.m4v";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -936,9 +937,12 @@ const TheProducerBlueprint001 = () => {
             {/* Module 02 */}
             <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
               <div className="absolute inset-0 z-0">
-                <img 
-                  src="https://images.unsplash.com/photo-1550063573-02810a9c6cbe?w=800&q=80" 
-                  alt="Sound Design" 
+                <video 
+                  src={soundDesignClip}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
