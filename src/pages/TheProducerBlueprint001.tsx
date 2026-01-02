@@ -613,27 +613,38 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 3: THE SOLUTION (4 PILLARS) ================= */}
+      {/* ================= SECTION 3: THE SOLUTION (CONSTRAINED VIDEO + 4-COL ROW) ================= */}
       <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0">
-
-        {/* 1. CINEMATIC VIDEO STAGE */}
-        <div className="relative w-full h-[60vh] min-h-[500px] max-h-[800px] overflow-hidden">
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="w-full h-full object-cover opacity-60"
-          >
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-recording-software-and-hardware-in-a-studio-close-up-22469-large.mp4" type="video/mp4" />
-          </video>
-          
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent opacity-80"></div>
-          <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
+        
+        {/* 1. CINEMATIC VIDEO STAGE (Constrained Width) */}
+        <div className="relative w-full flex justify-center">
+          <div className="relative w-full max-w-5xl h-[500px] overflow-hidden">
+            {/* Video Layer */}
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              className="w-full h-full object-cover opacity-80"
+            >
+              {/* Fallback src */}
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-recording-software-and-hardware-in-a-studio-close-up-22469-large.mp4" type="video/mp4" />
+            </video>
+            
+            {/* Top Vignette */}
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent opacity-100"></div>
+            
+            {/* Bottom Fade (Seamless blend to black) */}
+            <div className="absolute bottom-0 left-0 w-full h-[300px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
+            
+            {/* Side Fades (To blend edges if screen is wide) */}
+            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
+            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#050505] to-transparent"></div>
+          </div>
         </div>
 
-        {/* 2. CONTENT CONTAINER */}
-        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[300px]">
+        {/* 2. CONTENT CONTAINER (Pulled up into the fade) */}
+        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px]">
           
           {/* Header Content */}
           <div className="text-center mb-24">
@@ -651,61 +662,61 @@ const TheProducerBlueprint001 = () => {
             </p>
           </div>
 
-          {/* 3. THE 4 PILLARS (BENTO GRID) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+          {/* 3. THE 4 PILLARS (4-COLUMN ROW) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
             
-            {/* Card 01: Workflow */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">01</div>
+            {/* Card 01 */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">01</div>
               <div className="relative z-10">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">From "Loop Phase" To Finished Record</h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs.
+                <h3 className="text-xl font-bold text-white mb-3">Finished Records</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement.
                 </p>
               </div>
             </div>
 
-            {/* Card 02: Mixing */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">02</div>
+            {/* Card 02 */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">02</div>
               <div className="relative z-10">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">The "Bedroom" Mixing Standard</h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road.
+                <h3 className="text-xl font-bold text-white mb-3">Bedroom Mixing</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  You don't always need a pro engineer. Learn the functional mixing process to get tracks ready for label demos and streaming releases.
                 </p>
               </div>
             </div>
 
-            {/* Card 03: Chains */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">03</div>
+            {/* Card 03 */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">03</div>
               <div className="relative z-10">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Session-Proven Chains</h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists to get that loud, punchy commercial sound without over-complicating it.
+                <h3 className="text-xl font-bold text-white mb-3">Proven Chains</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists.
                 </p>
               </div>
             </div>
 
-            {/* Card 04: Sound Design */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
-              <div className="absolute top-0 right-0 p-6 opacity-10 font-black text-8xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">04</div>
+            {/* Card 04 */}
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+              <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">04</div>
               <div className="relative z-10">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Design Sounds With Intent</h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders.
+                <h3 className="text-xl font-bold text-white mb-3">Sound Design</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Stop relying on happy accidents. Learn to build the exact 808s, leads, and pads you hear in your head, rather than hunting through Splice.
                 </p>
               </div>
             </div>
