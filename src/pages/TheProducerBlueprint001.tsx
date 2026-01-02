@@ -747,7 +747,7 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION: THE ORIGIN STORY (HAND-DRAWN FLOW) ================= */}
+      {/* ================= SECTION: THE ORIGIN STORY (HAND-DRAWN GREY ARROWS) ================= */}
       <section className="py-24 px-6 bg-[#050505] relative z-20 overflow-hidden">
         {/* Background Grid Texture */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
@@ -775,11 +775,6 @@ const TheProducerBlueprint001 = () => {
           {/* TIMELINE CONTAINER */}
           <div className="relative">
             
-            {/* 
-               NOTE: The straight line is removed. 
-               We now use SVGs inside the grid items to connect them.
-            */}
-
             {/* Timeline Items Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
               
@@ -795,22 +790,25 @@ const TheProducerBlueprint001 = () => {
                   </div>
                   
                   {/* ARROW 1: Down-Right to Item 2 (Desktop Only) */}
-                  <div className="hidden lg:block absolute top-[60%] -right-[50%] w-[100%] h-24 z-0 pointer-events-none opacity-60">
+                  {/* Hand Drawn Style: Grey, Solid, Sketchy */}
+                  <div className="hidden lg:block absolute top-[60%] -right-[55%] w-[110%] h-32 z-0 pointer-events-none text-zinc-600 opacity-80">
                     <svg width="100%" height="100%" viewBox="0 0 200 100" fill="none" preserveAspectRatio="none">
-                      <path d="M10,10 Q100,10 180,80" stroke="#FF4F33" strokeWidth="2" strokeDasharray="8 8" fill="none" />
-                      <path d="M180,80 L170,75 M180,80 L175,70" stroke="#FF4F33" strokeWidth="2" fill="none" />
+                      {/* Main curved line */}
+                      <path d="M10,20 C60,20 80,80 180,80" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+                      {/* Arrowhead */}
+                      <path d="M170,75 L180,80 L172,88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
                   
                   {/* ARROW Mobile: Down */}
-                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-[#FF4F33] opacity-50">
+                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-zinc-600 opacity-80">
                     <ArrowRight className="w-6 h-6 rotate-90" />
                   </div>
 
                   <div className="text-center relative z-20">
                     <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings. First setup: classic Focusrite interface.
+                      I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings. I got told to 'get a proper job' more times than I can count. This was my first setup - classic Focusrite interface, but it worked.
                     </p>
                   </div>
                 </div>
@@ -828,22 +826,22 @@ const TheProducerBlueprint001 = () => {
                   </div>
 
                   {/* ARROW 2: Up-Right to Item 3 (Desktop Only) */}
-                  <div className="hidden lg:block absolute bottom-[100%] -right-[50%] w-[100%] h-32 z-0 pointer-events-none opacity-60">
+                  <div className="hidden lg:block absolute bottom-[100%] -right-[55%] w-[110%] h-32 z-0 pointer-events-none text-zinc-600 opacity-80">
                     <svg width="100%" height="100%" viewBox="0 0 200 100" fill="none" preserveAspectRatio="none">
-                      <path d="M10,90 Q100,90 180,20" stroke="#FF4F33" strokeWidth="2" strokeDasharray="8 8" fill="none" />
-                      <path d="M180,20 L170,25 M180,20 L175,30" stroke="#FF4F33" strokeWidth="2" fill="none" />
+                      <path d="M10,80 C60,80 80,20 180,20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+                      <path d="M170,25 L180,20 L172,12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
 
                   {/* ARROW Mobile: Down */}
-                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-[#FF4F33] opacity-50">
+                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-zinc-600 opacity-80">
                     <ArrowRight className="w-6 h-6 rotate-90" />
                   </div>
 
                   <div className="text-center relative z-20">
                     <h3 className="text-white font-bold text-lg mb-2">The Lockdown Era</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Stuck in a spare room in London. I posted Reels sampling random objects. A few got views. Everything changed right here.
+                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I posted some Reels sampling random objects in my studio. A few started getting views. I didn't know it yet, but everything changed right here (post more content, kids).
                     </p>
                   </div>
                 </div>
@@ -861,22 +859,22 @@ const TheProducerBlueprint001 = () => {
                   </div>
 
                   {/* ARROW 3: Down-Right to Item 4 (Desktop Only) */}
-                  <div className="hidden lg:block absolute top-[60%] -right-[50%] w-[100%] h-24 z-0 pointer-events-none opacity-60">
+                  <div className="hidden lg:block absolute top-[60%] -right-[55%] w-[110%] h-32 z-0 pointer-events-none text-zinc-600 opacity-80">
                     <svg width="100%" height="100%" viewBox="0 0 200 100" fill="none" preserveAspectRatio="none">
-                      <path d="M10,10 Q100,10 180,80" stroke="#FF4F33" strokeWidth="2" strokeDasharray="8 8" fill="none" />
-                      <path d="M180,80 L170,75 M180,80 L175,70" stroke="#FF4F33" strokeWidth="2" fill="none" />
+                      <path d="M10,20 C60,20 80,80 180,80" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+                      <path d="M170,75 L180,80 L172,88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
 
                   {/* ARROW Mobile: Down */}
-                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-[#FF4F33] opacity-50">
+                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-zinc-600 opacity-80">
                     <ArrowRight className="w-6 h-6 rotate-90" />
                   </div>
 
                   <div className="text-center relative z-20">
                     <h3 className="text-white font-bold text-lg mb-2">The Breakthrough</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Drew from <span className="text-white">The Chainsmokers</span> DM'd me. We started working. No management, no label - just content reach.
+                      My content was going viral, followers growing. Drew from <span className="text-white">The Chainsmokers</span> DM'd me after seeing a video and we started working on music together. No management, no label connections at this point - just making cool music & getting reach with content.
                     </p>
                   </div>
                 </div>
@@ -894,22 +892,22 @@ const TheProducerBlueprint001 = () => {
                   </div>
 
                   {/* ARROW 4: Up-Right to Item 5 (Desktop Only) */}
-                  <div className="hidden lg:block absolute bottom-[100%] -right-[50%] w-[100%] h-32 z-0 pointer-events-none opacity-60">
+                  <div className="hidden lg:block absolute bottom-[100%] -right-[55%] w-[110%] h-32 z-0 pointer-events-none text-zinc-600 opacity-80">
                     <svg width="100%" height="100%" viewBox="0 0 200 100" fill="none" preserveAspectRatio="none">
-                      <path d="M10,90 Q100,90 180,20" stroke="#FF4F33" strokeWidth="2" strokeDasharray="8 8" fill="none" />
-                      <path d="M180,20 L170,25 M180,20 L175,30" stroke="#FF4F33" strokeWidth="2" fill="none" />
+                      <path d="M10,80 C60,80 80,20 180,20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+                      <path d="M170,25 L180,20 L172,12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
                     </svg>
                   </div>
 
                   {/* ARROW Mobile: Down */}
-                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-[#FF4F33] opacity-50">
+                  <div className="lg:hidden absolute -bottom-10 left-1/2 -translate-x-1/2 text-zinc-600 opacity-80">
                     <ArrowRight className="w-6 h-6 rotate-90" />
                   </div>
 
                   <div className="text-center relative z-20">
                     <h3 className="text-white font-bold text-lg mb-2">The A-List Sessions</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Marshmello, Clean Bandit, Gary Barlow. The crazy part is I was still doing it all from a home setup.
+                      The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy part is I was still doing it all from a home setup, proving you don't need a million-dollar facility to play at the top level.
                     </p>
                   </div>
                 </div>
@@ -929,7 +927,7 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-center relative z-20">
                     <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
                     <p className="text-zinc-400 text-xs leading-relaxed">
-                      100 Million+ streams later. I moved house and built a dedicated space. It's still a home studio. Just fancier lights.
+                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It's still a home studio. It's basically the same gear. I just have fancier lights now.
                     </p>
                   </div>
                 </div>
@@ -939,7 +937,7 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* TIMELINE FOOTER */}
-          <div className="mt-24 max-w-2xl mx-auto text-center relative z-20">
+          <div className="mt-24 max-w-2xl mx-auto text-center">
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 md:p-10 relative overflow-hidden">
                <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF4F33]/5 blur-3xl rounded-full pointer-events-none"></div>
                <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl mb-4">"What is The Producer Blueprint?"</h4>
