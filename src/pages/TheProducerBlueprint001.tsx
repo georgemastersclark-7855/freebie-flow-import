@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { ArrowRight, Check, CheckCircle2, Play, Star, TrendingUp, Music2, X, Youtube } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, Check, CheckCircle2, Play, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Assets
@@ -48,6 +48,313 @@ import soundDesignStudio from "@/assets/sound-design-studio.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
+
+// ================= CURRICULUM SECTION COMPONENT =================
+const CurriculumSection = () => {
+  const [expandedModule, setExpandedModule] = useState<string | null>(null);
+
+  const toggleModule = (id: string) => {
+    if (expandedModule === id) {
+      setExpandedModule(null);
+    } else {
+      setExpandedModule(id);
+    }
+  };
+
+  const modules = [
+    {
+      id: "01",
+      title: "The Foundation",
+      subtitle: "(Ableton Basics)",
+      desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
+      image: foundationLaptop,
+      lessons: [
+        "Ableton layout & menus",
+        "Preferences & setting up projects",
+        "Loading plugins",
+        "Inputs, outputs & recording audio",
+        "Using audio samples",
+        "Warp & time stretching",
+        "Using MIDI",
+        "Shortcuts & key commands",
+        "Saving & collect all"
+      ]
+    },
+    {
+      id: "02",
+      title: "Sound Design",
+      subtitle: "That Cuts",
+      desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch that sit perfectly in the mix without endless tweaking.",
+      image: soundDesignStudio,
+      lessons: [
+        "ADSR Synthesis: The Building Blocks of Sound Design",
+        "Secret Sauce: My Synth Plugin Toolbox",
+        "Synthesis From Scratch: Designing Smooth Pads",
+        "Synthesis From Scratch: Creating Rhythmic Plucks",
+        "Synthesis From Scratch: Sub Bass Essentials",
+        "Ultimate Serum Deep-Dive",
+        "Serum Sound Design Masterclass",
+        "Producer Hacks Vol. 1: Freezing & Slicing Audio",
+        "Producer Hacks Vol. 2: Slicing & Resampling Audio",
+        "Sidechain Secrets: Pumping FX + Volume Shaping",
+        "Analogue Workflows: Using External FX Pedals"
+      ]
+    },
+    {
+      id: "03",
+      title: "Pro Drum",
+      subtitle: "Production",
+      desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, arrangement, bus processing, and sidechain secrets and more for drums that punch through laptop speakers.",
+      image: drumProductionGif,
+      lessons: [
+        "Secret Sauce: My all time favourite drum plugins",
+        "The Great Debate: audio vs. midi drums",
+        "Rhythm Hacks: Using percussion tops & loops",
+        "Elite Width: The stereo field & panning",
+        "Drum Sauce: Sidechain compression masterclass",
+        "Clean & Fat Drum Mixing",
+        "Producer Hacks Vol.3: Resampling",
+        "Producer Hacks Vol.4: Real beat breakdown",
+        "Creating huge drum fills & transitions",
+        "Producer Hacks Vol.5: Creating custom DIY percussion"
+      ]
+    },
+    {
+      id: "04",
+      title: "Arrangement",
+      subtitle: "& Energy",
+      desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
+      image: abletonSession,
+      lessons: [
+        "Secret Sauce: My all time favourite FX plugins",
+        "Creating Addictive Tracks: Song structure",
+        "Producer Hacks Vol.6: Creating unique transitions",
+        "Secret Sauce: Designing ear candy & custom ad-libs",
+        "Building & Maintaining Huge Energy",
+        "Utilising Epic Soundscapes & FX",
+        "Recording Crispy Acoustic Guitars"
+      ]
+    },
+    {
+      id: "05",
+      title: "Vocal Production",
+      subtitle: "(The \"Secret Sauce\")",
+      desc: "How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.",
+      image: vocalProductionStudio,
+      lessons: [
+        "My personal recording setup & essential studio gear",
+        "How to get clean & crispy vocals",
+        "Secret Sauce: My personal vocal chain",
+        "Using Autotune & Melodyne",
+        "Ultimate Reverb Masterclass Part: 1",
+        "Ultimate Reverb Masterclass Part: 2",
+        "Workflow Hacks: Audio comping & songwriting secrets",
+        "Creating Huge Vocals: Harmonies, placement & mixing",
+        "Secret Sauce: Recording gang vocals",
+        "Producer Hacks Vol.7: Vocal adlibs + my personal FX chain"
+      ]
+    },
+    {
+      id: "06",
+      title: "Mixing & Mastering",
+      subtitle: "The Finish Line",
+      desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
+      image: mixingMasteringStudio,
+      lessons: [
+        "The honest truth about mixing & mastering",
+        "Priority: Fix your monitoring & room acoustics",
+        "EQ 101: Getting insanely clean mixes",
+        "Creating Space: Dynamic EQ",
+        "EQ Life Hack: Custom automation",
+        "Avoiding Muddy Mixes: Advanced frequency carving",
+        "The Truth About Compression",
+        "Producer Hacks Vol.8: Sidechain compression deep dive",
+        "Mastering: The real truth + my personal mastering chain",
+        "Finish Like A Pro: How to export stems"
+      ]
+    },
+    {
+      id: "07",
+      title: "Artist Sounds",
+      subtitle: "& Identity",
+      desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
+      image: robWritingSession,
+      lessons: [
+        "Finding Your Own Sound: Building a reference playlist & capturing ideas",
+        "Workflow & Getting Inspired: Using Splice the right way",
+        "Beat From Scratch: Giving your tracks a unique sonic fingerprint",
+        "Creating Melody Loops: The fastest way to stack credits as a producer",
+        "Artist Sounds: Vocal stutter effects",
+        "Artist Sounds: Huge retro drums",
+        "Artist Sounds: Fat 808's",
+        "Percussion Masterclass: UK Garage, Drum & Bass + Future House"
+      ]
+    },
+  ];
+
+  return (
+    <section className="py-24 px-4 md:px-6 bg-[#050505] relative z-20">
+      <div className="max-w-5xl mx-auto">
+        
+        {/* HEADER */}
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
+            What's Inside The Program
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6">
+            7 Modules. 75+ Lessons. <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
+              The Producer Blueprint.
+            </span>
+          </h2>
+          <p className="text-xl text-zinc-400 font-medium tracking-tight">
+            The complete step-by-step workflow to go from <span className="text-white">"Idea"</span> to <span className="text-[#FF4F33]">"Release Ready Song."</span>
+          </p>
+        </div>
+
+        {/* STACKED LIST LAYOUT */}
+        <div className="flex flex-col gap-6 mb-32">
+          {modules.map((module) => {
+            const isOpen = expandedModule === module.id;
+            return (
+              <div 
+                key={module.id}
+                className={`group relative flex flex-col md:flex-row bg-[#0A0A0A] border rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/5
+                  ${isOpen ? 'border-zinc-600' : 'border-zinc-800/50 hover:border-zinc-600'}
+                `}
+              >
+                
+                {/* LEFT: IMAGE (35%) */}
+                <div className="w-full md:w-[35%] relative h-48 md:min-h-[280px] md:h-auto flex-shrink-0">
+                  <img 
+                    src={module.image} 
+                    alt={module.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
+                  />
+                  {/* Subtle vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+                  
+                  {/* Mobile ID Watermark */}
+                  <div className="md:hidden absolute bottom-4 left-4 font-mono text-4xl font-bold text-white/90 drop-shadow-md">
+                    {module.id}
+                  </div>
+                </div>
+
+                {/* RIGHT: CONTENT (65%) */}
+                <div className="flex-1 flex flex-col relative">
+                  
+                  {/* Main Content Area */}
+                  <div className="p-8 md:p-10 flex flex-col justify-center min-h-[240px]">
+                    
+                    {/* Desktop Background Number (Watermark) */}
+                    <div className="hidden md:block absolute right-6 top-6 text-[80px] leading-none font-bold text-zinc-900 group-hover:text-zinc-800 transition-colors select-none z-0">
+                      {module.id}
+                    </div>
+                    <div className="relative z-10">
+                      <div className="flex flex-wrap items-baseline gap-3 mb-3">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
+                          {module.title}
+                        </h3>
+                        {module.subtitle && (
+                          <span className="font-serif italic text-zinc-500 text-lg">
+                            {module.subtitle}
+                          </span>
+                        )}
+                      </div>
+                      
+                      <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-2xl mb-6">
+                        {module.desc}
+                      </p>
+                      {/* Toggle Button */}
+                      <button 
+                        onClick={() => toggleModule(module.id)}
+                        className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-[#FF4F33] hover:text-white transition-colors"
+                      >
+                        {isOpen ? 'Hide Lessons' : 'View Lessons'}
+                        {isOpen ? <ChevronUp className="w-4 h-4 ml-2" /> : <ChevronDown className="w-4 h-4 ml-2" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Dropdown Content (Lessons) */}
+                  <div 
+                    className={`overflow-hidden transition-all duration-500 ease-in-out bg-zinc-900/30 border-t border-zinc-800/50
+                      ${isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}
+                    `}
+                  >
+                    <div className="p-8 md:p-10 pt-4">
+                      <h4 className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">Module Breakdown</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                        {module.lessons.map((lesson, idx) => (
+                          <div key={idx} className="flex items-start text-sm text-zinc-300 group/lesson">
+                            <PlayCircle className="w-4 h-4 text-zinc-600 mr-3 mt-0.5 flex-shrink-0 group-hover/lesson:text-[#FF4F33] transition-colors" />
+                            <span>{lesson}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* BONUSES */}
+        <div className="relative border-t border-zinc-800 pt-24">
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none z-0" />
+          <div className="relative z-10">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center px-3 py-1 rounded text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-4">
+                Free Bonuses Included
+              </div>
+              <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">We're Not Done Yet.</h3>
+              <p className="text-zinc-400 text-lg">
+                Join today and get 2 exclusive bonuses included. <span className="text-white underline decoration-[#FF4F33] underline-offset-4">Available for a limited time.</span>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Bonus 1 */}
+              <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
+                <div className="absolute top-0 right-0 p-4 opacity-50"><TrendingUp className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" /></div>
+                <div className="relative z-10">
+                  <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">VALUE: $97</div>
+                  <h4 className="text-xl font-bold text-white mb-2">BONUS #1: Social Media, Business & Music Industry Module</h4>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).</p>
+                  <ul className="space-y-2">
+                    <li className="flex items-center text-xs text-zinc-300">
+                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Content Strategy Breakdown
+                    </li>
+                    <li className="flex items-center text-xs text-zinc-300">
+                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Monetization Channels
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* Bonus 2 */}
+              <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
+                <div className="absolute top-0 right-0 p-4 opacity-50"><Music2 className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" /></div>
+                <div className="relative z-10">
+                  <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">VALUE: $147</div>
+                  <h4 className="text-xl font-bold text-white mb-2">BONUS #2: Rob's TikTok/IG Breakdown Vault</h4>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">The ultimate "Cheat Sheet." Get exclusive access to the project files and walkthroughs of some of my most viral content. See the exact layers, processing, and decisions behind the videos that caught the attention of <span className="text-white font-bold">The Chainsmokers</span>.</p>
+                  <ul className="space-y-2">
+                    <li className="flex items-center text-xs text-zinc-300">
+                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Viral Project Files
+                    </li>
+                    <li className="flex items-center text-xs text-zinc-300">
+                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Video Editing Workflow
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const TheProducerBlueprint001 = () => {
   // Load Vidalytics script on mount
@@ -897,204 +1204,7 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* SECTION: CURRICULUM */}
-      <section className="py-24 px-4 md:px-6 bg-[#050505] relative z-20">
-        <div className="max-w-6xl mx-auto">
-          
-          {/* ================= HEADER ================= */}
-          <div className="text-center mb-20 max-w-3xl mx-auto">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
-              What's Inside The Program
-            </div>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6">
-              7 Modules. 75+ Lessons. <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
-                The Producer Blueprint.
-              </span>
-            </h2>
-            <p className="text-xl text-zinc-400 font-medium tracking-tight">
-              The complete step-by-step workflow to go from <span className="text-white">"Idea"</span> to <span className="text-[#FF4F33]">"Release Ready Song."</span>
-            </p>
-          </div>
-
-          {/* ================= CURRICULUM GRID (Fixed Heights) ================= */}
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 mb-32">
-            {[
-              {
-                id: "01",
-                title: "The Foundation",
-                subtitle: "(Ableton Basics)",
-                desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
-                image: foundationLaptop,
-              },
-              {
-                id: "02",
-                title: "Sound Design That Cuts",
-                // Merged title for better flow
-                desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch that sit perfectly in the mix without endless tweaking.",
-                image: soundDesignStudio,
-              },
-              {
-                id: "03",
-                title: "Pro Drum Production",
-                // Merged title
-                desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.",
-                image: drumProductionGif,
-              },
-              {
-                id: "04",
-                title: "Arrangement & Energy",
-                // Merged title
-                desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
-                image: abletonSession,
-              },
-              {
-                id: "05",
-                title: "Vocal Production",
-                subtitle: "(The \"Secret Sauce\")",
-                desc: "How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.",
-                image: vocalProductionStudio,
-              },
-              {
-                id: "06",
-                title: "Mixing & Mastering",
-                desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
-                image: mixingMasteringStudio,
-              },
-              {
-                id: "07",
-                title: "Artist Sounds & Identity",
-                desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
-                image: robWritingSession,
-              },
-            ].map((module, index) => {
-              // 2-3-2 Layout Logic
-              let spanClass = "";
-              if (index < 2) spanClass = "md:col-span-3";
-              else if (index < 5) spanClass = "md:col-span-2";
-              else spanClass = "md:col-span-3";
-
-              return (
-                <div 
-                  key={index}
-                  className={`group relative h-[500px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-500 hover:shadow-2xl hover:shadow-[#FF4F33]/5 ${spanClass}`}
-                >
-                  {/* IMAGE LAYER */}
-                  <div className="absolute inset-0 z-0">
-                    <img 
-                      src={module.image} 
-                      alt={module.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
-                    />
-                    
-                    {/* GRADIENT FADE OVERLAY (No Blur)
-                        - Starts 40% from bottom
-                        - Pure linear gradient to black
-                        - Removed backdrop-blur for sharpness
-                    */}
-                    <div className="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-[#000] via-[#000]/95 to-transparent opacity-100"></div>
-                  </div>
-
-                  {/* CONTENT LAYER */}
-                  <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
-                    
-                    {/* Module ID (Watermark style) */}
-                    <div className="absolute top-8 left-8 font-mono text-6xl font-bold text-white/10 mix-blend-overlay group-hover:text-white/30 transition-all duration-500 select-none">
-                      {module.id}
-                    </div>
-                    
-                    <div className="transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
-                      
-                      {/* Title Block */}
-                      <div className="mb-4">
-                        <h3 className="text-3xl font-bold text-white leading-tight drop-shadow-lg">
-                          {module.title}
-                        </h3>
-                        {/* Subtitle - Only renders if specifically defined */}
-                        {module.subtitle && (
-                            <span className="block font-serif italic text-zinc-400 text-xl mt-1 tracking-wide drop-shadow-md">
-                                {module.subtitle}
-                            </span>
-                        )}
-                      </div>
-                      
-                      {/* Description - Relaxed constraints for better flow */}
-                      <p className="text-zinc-300 text-sm leading-relaxed font-medium drop-shadow-md max-w-xl">
-                        {module.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ================= BONUS SECTION ================= */}
-          <div className="relative border-t border-zinc-800 pt-24">
-            {/* Glow Effect */}
-            <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none z-0" />
-            <div className="relative z-10">
-              <div className="text-center mb-16">
-                <div className="inline-flex items-center px-3 py-1 rounded text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-4">
-                  Free Bonuses Included
-                </div>
-                <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">We're Not Done Yet.</h3>
-                <p className="text-zinc-400 text-lg">
-                  Join today and get 2 exclusive bonuses included. <span className="text-white underline decoration-[#FF4F33] underline-offset-4">Available for a limited time.</span>
-                </p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                {/* BONUS 1 */}
-                <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
-                  <div className="absolute top-0 right-0 p-4 opacity-50">
-                    <TrendingUp className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" />
-                  </div>
-                  <div className="relative z-10">
-                    <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">
-                      VALUE: $97
-                    </div>
-                    <h4 className="text-xl font-bold text-white mb-2">BONUS #1: Social Media, Business & Music Industry Module</h4>
-                    <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                      Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).
-                    </p>
-                    <ul className="space-y-2">
-                      <li className="flex items-center text-xs text-zinc-300">
-                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Content Strategy Breakdown
-                      </li>
-                      <li className="flex items-center text-xs text-zinc-300">
-                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Monetization Channels
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* BONUS 2 */}
-                <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
-                  <div className="absolute top-0 right-0 p-4 opacity-50">
-                    <Music2 className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" />
-                  </div>
-                  <div className="relative z-10">
-                    <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">
-                      VALUE: $147
-                    </div>
-                    <h4 className="text-xl font-bold text-white mb-2">BONUS #2: Rob's TikTok/IG Breakdown Vault</h4>
-                    <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                      The ultimate "Cheat Sheet." Get exclusive access to the project files and walkthroughs of some of my most viral content. See the exact layers, processing, and decisions behind the videos that caught the attention of <span className="text-white font-bold">The Chainsmokers</span>.
-                    </p>
-                    <ul className="space-y-2">
-                      <li className="flex items-center text-xs text-zinc-300">
-                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Viral Project Files
-                      </li>
-                      <li className="flex items-center text-xs text-zinc-300">
-                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Video Editing Workflow
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CurriculumSection />
 
 
       {/* ================= OFFER STACK SECTION ================= */}
