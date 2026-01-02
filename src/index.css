@@ -170,4 +170,13 @@ html {
     color: #a1a1aa;
     margin-left: 0.3rem;
   }
+
+  /* Module Description Body Text */
+  .module-description {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    color: #d4d4d8;
+    line-height: 1.5;
+    max-width: 90%;
+  }
 }

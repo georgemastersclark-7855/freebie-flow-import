@@ -258,7 +258,7 @@ const CurriculumSection = () => {
                         )}
                       </div>
                       
-                      <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-6 max-w-xl">
+                      <p className="module-description mb-6">
                         {module.desc}
                       </p>
                       <button 
