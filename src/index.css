@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 html {
-  font-size: 13.5px; /* Scales the site down to approx 85% */
+  font-size: 12.5px; /* Scales entire site to ~78% */
   scroll-behavior: smooth;
 }
 
