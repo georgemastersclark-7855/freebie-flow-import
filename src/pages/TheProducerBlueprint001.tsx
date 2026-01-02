@@ -311,57 +311,110 @@ const CurriculumSection = () => {
           })}
         </div>
 
-        {/* BONUSES */}
-        <div className="relative border-t border-zinc-800 pt-16 md:pt-24">
-          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[400px] bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none z-0" />
+        {/* ================= BONUS SECTION (Connected Flow) ================= */}
+        <section className="relative pb-32 pt-16 overflow-hidden">
+          
+          {/* Visual Connector: vertical line from curriculum */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
+          
           <div className="relative z-10">
-            <div className="text-center mb-12 md:mb-16">
-              <div className="inline-flex items-center px-3 py-1 rounded text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-4">
-                Free Bonuses Included
+            
+            {/* HEADER */}
+            <div className="text-center mb-16">
+              
+              {/* Eyebrow */}
+              <div className="inline-block mb-4">
+                <span className="py-1 px-3 rounded-full border border-[#FF4F33]/30 bg-[#FF4F33]/10 text-[#FF4F33] text-xs font-bold uppercase tracking-widest">
+                  We're Not Done Yet.
+                </span>
               </div>
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">We're Not Done Yet.</h3>
-              <p className="text-zinc-400 text-lg">
-                Join today and get 2 exclusive bonuses included. <span className="text-white">Available for a limited time.</span>
+              
+              {/* Headline */}
+              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
+                Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4F33] to-orange-500">FREE</span> bonuses
+              </h2>
+              
+              {/* Subhead */}
+              <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+                <span className="font-serif italic text-zinc-300">Join today and get 2 exclusive bonuses included.</span>
+                <br className="hidden md:block" />
+                <span className="block mt-2 text-sm font-bold uppercase tracking-widest text-[#FF4F33] animate-pulse">
+                  Available for a limited time.
+                </span>
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-              {/* Bonus 1 */}
-              <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
-                <div className="absolute top-0 right-0 p-4 opacity-50"><TrendingUp className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" /></div>
-                <div className="relative z-10">
-                  <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">VALUE: $97</div>
-                  <h4 className="text-xl font-bold text-white mb-2">BONUS #1: Social Media, Business & Music Industry Module</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).</p>
-                  <ul className="space-y-2">
-                    <li className="flex items-center text-xs text-zinc-300">
-                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Content Strategy Breakdown
-                    </li>
-                    <li className="flex items-center text-xs text-zinc-300">
-                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Monetization Channels
-                    </li>
-                  </ul>
+
+            {/* BONUS CARDS GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              
+              {/* --- BONUS #1 --- */}
+              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
+                
+                {/* IMAGE AREA */}
+                <div className="h-56 bg-zinc-900 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-[#050505]"></div>
+                  
+                  {/* VALUE BADGE */}
+                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg">
+                    Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#FF4F33]">FREE</span>
+                  </div>
+                </div>
+
+                {/* CONTENT AREA */}
+                <div className="p-8 flex-1 flex flex-col">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF4F33] transition-colors">
+                    BONUS #1: Social Media, Business & Music Industry Module
+                  </h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                    Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).
+                  </p>
+                  
+                  <div className="mt-auto pt-6 border-t border-zinc-800 flex justify-between items-center">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                      Instant Access
+                    </span>
+                    <span className="text-[#FF4F33] text-lg">
+                      +
+                    </span>
+                  </div>
                 </div>
               </div>
-              {/* Bonus 2 */}
-              <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
-                <div className="absolute top-0 right-0 p-4 opacity-50"><Music2 className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" /></div>
-                <div className="relative z-10">
-                  <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">VALUE: $147</div>
-                  <h4 className="text-xl font-bold text-white mb-2">BONUS #2: Rob's TikTok/IG Breakdown Vault</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6">The ultimate "Cheat Sheet." Get exclusive access to the project files and walkthroughs of some of my most viral content. See the exact layers, processing, and decisions behind the videos that caught the attention of <span className="text-white font-bold">The Chainsmokers</span>.</p>
-                  <ul className="space-y-2">
-                    <li className="flex items-center text-xs text-zinc-300">
-                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Viral Project Files
-                    </li>
-                    <li className="flex items-center text-xs text-zinc-300">
-                      <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Video Editing Workflow
-                    </li>
-                  </ul>
+
+              {/* --- BONUS #2 --- */}
+              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
+                
+                {/* IMAGE AREA */}
+                <div className="h-56 bg-zinc-900 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-bl from-zinc-800 to-[#050505]"></div>
+                  
+                  {/* VALUE BADGE */}
+                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg">
+                    Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#FF4F33]">FREE</span>
+                  </div>
+                </div>
+
+                {/* CONTENT AREA */}
+                <div className="p-8 flex-1 flex flex-col">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF4F33] transition-colors">
+                    BONUS #2: Rob's TikTok/IG Breakdown Vault
+                  </h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
+                    The ultimate "Cheat Sheet." Get exclusive access to the project files and walkthroughs of some of my most viral content. See the exact layers, processing, and decisions behind the videos that caught the attention of <strong className="text-white">The Chainsmokers</strong>.
+                  </p>
+                  
+                  <div className="mt-auto pt-6 border-t border-zinc-800 flex justify-between items-center">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                      Instant Access
+                    </span>
+                    <span className="text-[#FF4F33] text-lg">
+                      +
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </section>
   );
