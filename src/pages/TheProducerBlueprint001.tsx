@@ -903,7 +903,7 @@ const TheProducerBlueprint001 = () => {
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-transform duration-700">
                       <img
-                        src={robStudio}
+                        src={robMarsmelloCropped}
                         className="w-full h-full object-cover object-center"
                         alt="Rob's Current Studio"
                       />
