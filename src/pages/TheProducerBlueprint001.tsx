@@ -82,8 +82,7 @@ const CurriculumSection = () => {
     },
     {
       id: "02",
-      title: "Sound Design",
-      subtitle: "That Cuts",
+      title: "Sound Design That Cuts",
       desc: "Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch that sit perfectly in the mix without endless tweaking.",
       image: soundDesignStudio,
       lessons: [
@@ -102,8 +101,7 @@ const CurriculumSection = () => {
     },
     {
       id: "03",
-      title: "Pro Drum",
-      subtitle: "Production",
+      title: "Pro Drum Production",
       desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, arrangement, bus processing, and sidechain secrets and more for drums that punch through laptop speakers.",
       image: drumProductionGif,
       lessons: [
@@ -121,8 +119,7 @@ const CurriculumSection = () => {
     },
     {
       id: "04",
-      title: "Arrangement",
-      subtitle: "& Energy",
+      title: "Arrangement & Energy",
       desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
       image: abletonSession,
       lessons: [
@@ -157,7 +154,6 @@ const CurriculumSection = () => {
     {
       id: "06",
       title: "Mixing & Mastering",
-      subtitle: "The Finish Line",
       desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
       image: mixingMasteringStudio,
       lessons: [
@@ -175,8 +171,7 @@ const CurriculumSection = () => {
     },
     {
       id: "07",
-      title: "Artist Sounds",
-      subtitle: "& Identity",
+      title: "Artist Sounds & Identity",
       desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
       image: robWritingSession,
       lessons: [
@@ -193,27 +188,27 @@ const CurriculumSection = () => {
   ];
 
   return (
-    <section className="py-24 px-4 md:px-6 bg-[#050505] relative z-20">
+    <section className="py-16 md:py-24 px-4 md:px-6 bg-[#050505] relative z-20">
       <div className="max-w-5xl mx-auto">
         
         {/* HEADER */}
-        <div className="text-center mb-20 max-w-3xl mx-auto">
+        <div className="text-center mb-16 md:mb-20 max-w-3xl mx-auto">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
             What's Inside The Program
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6">
+          <h2 className="text-3xl md:text-6xl font-bold tracking-tighter text-white mb-4 md:mb-6">
             7 Modules. 75+ Lessons. <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
               The Producer Blueprint.
             </span>
           </h2>
-          <p className="text-xl text-zinc-400 font-medium tracking-tight">
-            The complete step-by-step workflow to go from <span className="text-white">"Idea"</span> to <span className="text-[#FF4F33]">"Release Ready Song."</span>
+          <p className="text-lg md:text-xl text-zinc-400 font-medium tracking-tight">
+            The complete step-by-step workflow to go from <span className="text-white">"Idea"</span> to <span className="text-white">"Release Ready Song."</span>
           </p>
         </div>
 
         {/* STACKED LIST LAYOUT */}
-        <div className="flex flex-col gap-6 mb-32">
+        <div className="flex flex-col gap-8 md:gap-6 mb-24 md:mb-32">
           {modules.map((module) => {
             const isOpen = expandedModule === module.id;
             return (
@@ -224,49 +219,46 @@ const CurriculumSection = () => {
                 `}
               >
                 
-                {/* LEFT: IMAGE (30%) - Adjusted height logic for compactness */}
-                <div className="w-full md:w-[30%] relative h-48 md:h-auto self-stretch flex-shrink-0">
+                {/* LEFT: IMAGE SECTION */}
+                <div className="w-full h-64 md:w-[30%] relative md:h-auto self-stretch flex-shrink-0">
                   <div className="absolute inset-0">
                     <img 
                       src={module.image} 
                       alt={module.title} 
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:grayscale-[20%]"
                     />
-                    {/* Subtle vignette */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/60 to-transparent"></div>
                   </div>
                   
                   {/* Mobile ID Watermark */}
-                  <div className="md:hidden absolute bottom-4 left-4 font-mono text-4xl font-bold text-white/90 drop-shadow-md">
+                  <div className="md:hidden absolute bottom-4 left-6 font-mono text-5xl font-bold text-white/90 drop-shadow-lg">
                     {module.id}
                   </div>
                 </div>
 
-                {/* RIGHT: CONTENT (65%) */}
+                {/* RIGHT: CONTENT SECTION */}
                 <div className="flex-1 flex flex-col relative">
                   
                   {/* Main Content Area */}
-                  {/* Added 'pr-20' to create a 'No Fly Zone' for text so it doesn't overlap the number */}
-                  <div className="p-6 md:p-8 md:pr-24 flex flex-col justify-center min-h-[220px]">
+                  <div className="p-8 md:p-10 md:pr-24 flex flex-col justify-center min-h-[220px]">
                     
                     {/* Desktop Background Number (Watermark) */}
                     <div className="hidden md:block absolute right-6 top-6 text-[80px] leading-none font-bold text-zinc-900 group-hover:text-zinc-800 transition-colors select-none z-0">
                       {module.id}
                     </div>
                     <div className="relative z-10">
-                      <div className="flex flex-wrap items-baseline gap-2 mb-2">
+                      <div className="inline-flex flex-wrap items-baseline gap-x-2 mb-3">
                         <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
                           {module.title}
                         </h3>
-                        {/* Subtitle Sized Up to Match Title */}
                         {module.subtitle && (
-                          <span className="font-serif italic text-zinc-500 text-2xl md:text-3xl">
+                          <span className="text-zinc-400 text-2xl md:text-3xl font-bold">
                             {module.subtitle}
                           </span>
                         )}
                       </div>
                       
-                      <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-5">
+                      <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-6 max-w-xl">
                         {module.desc}
                       </p>
                       <button 
@@ -304,19 +296,19 @@ const CurriculumSection = () => {
         </div>
 
         {/* BONUSES */}
-        <div className="relative border-t border-zinc-800 pt-24">
-          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none z-0" />
+        <div className="relative border-t border-zinc-800 pt-16 md:pt-24">
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[400px] bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none z-0" />
           <div className="relative z-10">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 md:mb-16">
               <div className="inline-flex items-center px-3 py-1 rounded text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-4">
                 Free Bonuses Included
               </div>
               <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">We're Not Done Yet.</h3>
               <p className="text-zinc-400 text-lg">
-                Join today and get 2 exclusive bonuses included. <span className="text-white underline decoration-[#FF4F33] underline-offset-4">Available for a limited time.</span>
+                Join today and get 2 exclusive bonuses included. <span className="text-white">Available for a limited time.</span>
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
               {/* Bonus 1 */}
               <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
                 <div className="absolute top-0 right-0 p-4 opacity-50"><TrendingUp className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" /></div>
