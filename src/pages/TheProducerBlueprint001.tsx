@@ -754,7 +754,7 @@ const TheProducerBlueprint001 = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-24">
+          <div className="text-center mb-20 lg:mb-0">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
               Meet Your Instructor
             </div>
@@ -770,23 +770,29 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* TIMELINE CONTAINER */}
-          <div className="relative">
-            {/* DESKTOP CENTRAL LINE (Fixed to background, strictly horizontal) */}
+          {/* FIX: 
+              - Added lg:h-[900px] to give the section fixed height on desktop. 
+              - This creates space so top cards don't hit the subtitle.
+          */}
+          <div className="relative lg:h-[900px]">
+            
+            {/* DESKTOP CENTRAL LINE (Fixed to center) */}
             <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#FF4F33]/30 to-transparent -translate-y-1/2 z-0"></div>
 
             {/* MOBILE VERTICAL LINE (Hidden on Desktop) */}
             <div className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-[#FF4F33]/10 via-[#FF4F33]/50 to-[#FF4F33]/10 z-0"></div>
 
             {/* Timeline Items Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10 h-full">
               
               {/* ITEM 1: 2019 (TOP) */}
-              <div className="relative flex flex-col h-full justify-center">
-                {/* 1. The Dot (Anchored to Center Line) */}
+              {/* Desktop: Absolute position relative to center line */}
+              <div className="relative flex flex-col justify-center lg:block">
+                {/* Dot */}
                 <div className="absolute left-8 lg:left-1/2 top-0 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
                 
-                {/* 2. The Content (Shifted UP) */}
-                <div className="pl-20 lg:pl-0 lg:-translate-y-24 w-full group"> 
+                {/* Content - Anchored BOTTOM-1/2 + Margin to sit above line */}
+                <div className="pl-20 lg:pl-0 w-full group lg:absolute lg:bottom-1/2 lg:mb-12 lg:left-0 lg:right-0"> 
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
@@ -811,12 +817,12 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* ITEM 2: 2020 (BOTTOM) */}
-              <div className="relative flex flex-col h-full justify-center">
-                {/* 1. The Dot (Anchored to Center Line) */}
+              <div className="relative flex flex-col justify-center lg:block">
+                {/* Dot */}
                 <div className="absolute left-8 lg:left-1/2 top-0 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
-                {/* 2. The Content (Shifted DOWN) */}
-                <div className="pl-20 lg:pl-0 lg:translate-y-24 w-full group mt-12 lg:mt-0">
+                {/* Content - Anchored TOP-1/2 + Margin to sit below line */}
+                <div className="pl-20 lg:pl-0 w-full group mt-12 lg:mt-0 lg:absolute lg:top-1/2 lg:mt-12 lg:left-0 lg:right-0">
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
@@ -841,12 +847,12 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* ITEM 3: 2021 (TOP) */}
-              <div className="relative flex flex-col h-full justify-center">
+              <div className="relative flex flex-col justify-center lg:block">
                 {/* Dot */}
                 <div className="absolute left-8 lg:left-1/2 top-0 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
-                {/* Content (Shifted UP) */}
-                <div className="pl-20 lg:pl-0 lg:-translate-y-24 w-full group">
+                {/* Content - Anchored BOTTOM-1/2 */}
+                <div className="pl-20 lg:pl-0 w-full group lg:absolute lg:bottom-1/2 lg:mb-12 lg:left-0 lg:right-0">
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img src={robChainsmokers} className="w-full h-full object-cover" alt="The Chainsmokers" />
@@ -868,12 +874,12 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* ITEM 4: 2022-23 (BOTTOM) */}
-              <div className="relative flex flex-col h-full justify-center">
+              <div className="relative flex flex-col justify-center lg:block">
                 {/* Dot */}
                 <div className="absolute left-8 lg:left-1/2 top-0 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
 
-                {/* Content (Shifted DOWN) */}
-                <div className="pl-20 lg:pl-0 lg:translate-y-24 w-full group mt-12 lg:mt-0">
+                {/* Content - Anchored TOP-1/2 */}
+                <div className="pl-20 lg:pl-0 w-full group mt-12 lg:mt-0 lg:absolute lg:top-1/2 lg:mt-12 lg:left-0 lg:right-0">
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
@@ -898,12 +904,12 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* ITEM 5: TODAY (TOP) */}
-              <div className="relative flex flex-col h-full justify-center">
+              <div className="relative flex flex-col justify-center lg:block">
                 {/* Dot */}
                 <div className="absolute left-8 lg:left-1/2 top-0 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
 
-                {/* Content (Shifted UP) */}
-                <div className="pl-20 lg:pl-0 lg:-translate-y-24 w-full group">
+                {/* Content - Anchored BOTTOM-1/2 */}
+                <div className="pl-20 lg:pl-0 w-full group lg:absolute lg:bottom-1/2 lg:mb-12 lg:left-0 lg:right-0">
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-transform duration-700">
                       <img
