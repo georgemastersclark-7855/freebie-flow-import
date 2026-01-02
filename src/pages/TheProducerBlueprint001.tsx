@@ -801,7 +801,7 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-white font-bold text-lg mb-2">The 9-5 Grind</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      I was working a sales job for a phone mount company, <span className="text-white">producing music as a "hobby" in the evenings.</span>
+                      I was working a sales job for a phone mount company, producing music as a "hobby" in the evenings.
                       I got told to ‘get a proper job’ more times than I can count. This was my first setup - classic
                       Focusrite interface, but it worked.
                     </p>
@@ -829,9 +829,9 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-white font-bold text-lg mb-2">The Lockdown Era</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
-                      Stuck in a spare room in my London flat during lockdown, <span className="text-white">I started taking remote sessions.</span> I
+                      Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I
                       posted some Reels sampling random objects in my studio. A few started getting views. I didn't know
-                      it yet, but everything changed right here <span className="text-white">(post more content, kids).</span>
+                      it yet, but everything changed right here (post more content, kids).
                     </p>
                   </div>
                 </div>
@@ -881,7 +881,7 @@ const TheProducerBlueprint001 = () => {
                     <h3 className="text-white font-bold text-lg mb-2">The A-List Sessions</h3>
                     <p className="text-zinc-500 text-xs leading-relaxed">
                       The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy
-                      part is I was still doing it <span className="text-white">all from a home setup,</span> proving you don't need a million-dollar
+                      part is I was still doing it all from a home setup, proving you don't need a million-dollar
                       facility to play at the top level.
                     </p>
                   </div>
@@ -913,8 +913,8 @@ const TheProducerBlueprint001 = () => {
                   <div className="text-left lg:text-center">
                     <h3 className="text-[#FF4F33] font-bold text-lg mb-2">The Producer Blueprint</h3>
                     <p className="text-zinc-400 text-xs leading-relaxed">
-                      100 Million+ streams later, I moved house and <span className="text-white">built a dedicated space in my garage.</span> It's still a
-                      home studio. It's basically the same gear. I just have fancier lights now.
+                      100 Million+ streams later, I moved house and built a dedicated space in my garage. It’s still a
+                      home studio. It’s basically the same gear. I just have fancier lights now.
                     </p>
                   </div>
                 </div>
