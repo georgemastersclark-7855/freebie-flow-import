@@ -774,21 +774,12 @@ const TheProducerBlueprint001 = () => {
 
           {/* TIMELINE CONTAINER */}
           <div className="relative">
-            {/* DESKTOP CENTRAL LINE (Hidden on Mobile) */}
-            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#FF4F33]/50 to-transparent -translate-y-1/2 z-0"></div>
-
-            {/* MOBILE VERTICAL LINE (Hidden on Desktop) */}
-            <div className="lg:hidden absolute top-0 bottom-0 left-8 w-0.5 bg-gradient-to-b from-[#FF4F33]/10 via-[#FF4F33]/50 to-[#FF4F33]/10 z-0"></div>
-
             {/* Timeline Items Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-4 relative z-10">
               {/* ITEM 1: 2019 (TOP on Desktop) */}
               <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
                 {/* Content Card (Shifted UP on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
+                <div className="lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
                   <div className="relative bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     {/* Early Days Sticker */}
                     <img 
@@ -820,11 +811,8 @@ const TheProducerBlueprint001 = () => {
 
               {/* ITEM 2: 2020 (BOTTOM on Desktop) */}
               <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
                 {/* Content Card (Shifted DOWN on Desktop) */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
+                <div className="lg:mt-16 lg:transform lg:translate-y-8 w-full group">
                   {/* Text First on Mobile, but visually we keep consistent. For the 'Bottom' cards, we push them down. */}
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
@@ -851,11 +839,8 @@ const TheProducerBlueprint001 = () => {
 
               {/* ITEM 3: 2021 (TOP on Desktop) */}
               <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
                 {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
+                <div className="lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
                   <div className="bg-white p-2 pb-8 shadow-xl rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 group-hover:scale-105 transition-all duration-700">
                       <img src={robChainsmokers} className="w-full h-full object-cover object-top" alt="Rob with The Chainsmokers" />
@@ -878,11 +863,8 @@ const TheProducerBlueprint001 = () => {
 
               {/* ITEM 4: 2022-23 (BOTTOM on Desktop) */}
               <div className="relative flex flex-col lg:items-center lg:justify-end">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#050505] border-2 border-[#FF4F33] rounded-full z-20 shadow-[0_0_10px_#FF4F33]"></div>
-
                 {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mt-16 lg:transform lg:translate-y-8 w-full group">
+                <div className="lg:mt-16 lg:transform lg:translate-y-8 w-full group">
                   <div className="bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     <div className="aspect-square bg-zinc-200 overflow-hidden mb-0 grayscale group-hover:grayscale-0 transition-all duration-700">
                       <img
@@ -908,11 +890,8 @@ const TheProducerBlueprint001 = () => {
 
               {/* ITEM 5: TODAY (TOP on Desktop) */}
               <div className="relative flex flex-col lg:items-center">
-                {/* Dot */}
-                <div className="absolute left-8 lg:left-1/2 lg:top-[50%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#FF4F33] rounded-full z-20 shadow-[0_0_20px_#FF4F33] animate-pulse"></div>
-
                 {/* Content Card */}
-                <div className="pl-20 lg:pl-0 lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
+                <div className="lg:mb-16 lg:transform lg:-translate-y-8 w-full group">
                   <div className="relative bg-white p-2 pb-8 shadow-xl -rotate-1 group-hover:rotate-0 transition-transform duration-500 ease-out max-w-[280px] mx-auto mb-6">
                     {/* Now Sticker */}
                     <img 
