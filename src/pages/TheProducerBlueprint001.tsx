@@ -614,33 +614,35 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 3: THE SOLUTION (IMAGE HEADER + DETAILED PILLARS) ================= */}
+      {/* ================= SECTION 3: THE SOLUTION (TALLER IMAGE + CENTERED) ================= */}
       <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0">
         
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
-          <div className="relative w-full max-w-6xl h-[450px] overflow-hidden">
-            {/* IMAGE LAYER */}
+          {/* Increased height to 600px to show more of the photo */}
+          <div className="relative w-full max-w-6xl h-[600px] overflow-hidden">
+            {/* IMAGE LAYER - Changed to object-center to keep subjects in frame */}
             <img 
               src={robMarshmello}
-              className="w-full h-full object-cover object-top opacity-80"
+              className="w-full h-full object-cover object-center opacity-80"
               alt="Rob and Marshmello in Studio"
             />
             
-            {/* Top Vignette (Subtle darkness at top) */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] to-transparent opacity-100"></div>
+            {/* Top Vignette */}
+            <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#050505] to-transparent opacity-80"></div>
             
-            {/* Bottom Fade (Seamless blend to black) */}
-            <div className="absolute bottom-0 left-0 w-full h-[250px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
+            {/* Bottom Fade (Extended height for smoother text overlap) */}
+            <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
             
-            {/* Side Fades (Softens edges on wide screens) */}
+            {/* Side Fades */}
             <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
             <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#050505] to-transparent"></div>
           </div>
         </div>
 
         {/* 2. CONTENT CONTAINER */}
-        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[180px]">
+        {/* Adjusted negative margin to pull text up into the taller fade */}
+        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[250px]">
           
           {/* Header Content */}
           <div className="text-center mb-24">
@@ -658,7 +660,7 @@ const TheProducerBlueprint001 = () => {
             </p>
           </div>
 
-          {/* 3. THE 4 PILLARS (Restored Full Copy) */}
+          {/* 3. THE 4 PILLARS */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
             
             {/* Card 01 */}
