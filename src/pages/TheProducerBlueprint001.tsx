@@ -1281,8 +1281,8 @@ const TheProducerBlueprint001 = () => {
               <span className="inline-block bg-[#FF4F33]/10 text-[#FF4F33] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
                 Student Wins
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl text-white tracking-tight mb-6">
-                Real Results. <span className="font-serif italic">Real Producers.</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.04em] leading-[1.05] text-white mb-6">
+                Real Results. <span className="font-serif italic font-normal tracking-normal text-zinc-200">Real Producers.</span>
               </h2>
               <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
                 From "bedroom producer" to signed artist. Here is what happens when you have a professional workflow.
@@ -1435,8 +1435,8 @@ const TheProducerBlueprint001 = () => {
             
             {/* Headline */}
             <div className="text-center mb-10">
-              <h2 className="text-4xl md:text-5xl text-white tracking-tight mb-4">
-                Get Instant <span className="font-serif italic">Access</span>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.05] text-white mb-4">
+                Get Instant Access
               </h2>
               <p className="text-zinc-400">
                 Join 500+ producers building their career from a home studio.
