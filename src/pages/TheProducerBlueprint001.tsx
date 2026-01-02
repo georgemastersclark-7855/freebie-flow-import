@@ -252,7 +252,7 @@ const CurriculumSection = () => {
                           {module.title}
                         </h3>
                         {module.subtitle && (
-                          <span className="font-playfair italic text-zinc-400 text-2xl md:text-3xl">
+                          <span className="headline-serif-subtitle text-2xl md:text-3xl">
                             {module.subtitle}
                           </span>
                         )}
