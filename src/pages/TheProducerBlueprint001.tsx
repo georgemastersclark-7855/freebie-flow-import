@@ -215,60 +215,58 @@ const CurriculumSection = () => {
             return (
               <div 
                 key={module.id}
-                className="group relative rounded-2xl border border-zinc-800 bg-[#09090b] overflow-hidden hover:border-zinc-600 transition-colors duration-300"
+                className="group relative flex flex-col md:flex-row md:h-[340px] rounded-2xl border border-zinc-800 bg-[#09090b] overflow-hidden hover:border-zinc-600 transition-colors duration-300"
               >
-                <div className="flex flex-col md:flex-row items-stretch">
+                
+                {/* LEFT: IMAGE SECTION (40%) */}
+                <div className="w-full h-64 md:h-full md:w-[40%] relative shrink-0">
+                  <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
+                  <img 
+                    src={module.image} 
+                    alt={module.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Mobile gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent md:hidden"></div>
+                </div>
+
+                {/* RIGHT: CONTENT SECTION */}
+                <div className="flex-1 p-6 md:p-8 flex flex-col justify-center relative">
                   
-                  {/* LEFT: IMAGE SECTION (40%) */}
-                  <div className="w-full md:w-2/5 h-64 md:h-auto relative shrink-0">
-                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
-                    <img 
-                      src={module.image} 
-                      alt={module.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    {/* Mobile gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent md:hidden"></div>
+                  {/* Watermark Number */}
+                  <div className="absolute top-4 right-6 text-6xl md:text-7xl font-bold text-[#1a1a1a] select-none pointer-events-none">
+                    {module.id}
                   </div>
 
-                  {/* RIGHT: CONTENT SECTION */}
-                  <div className="flex-1 p-8 md:p-10 flex flex-col justify-center relative">
+                  <div className="relative z-10 pr-10">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tighter mb-2 leading-tight">
+                      {module.title}
+                      {module.subtitle && (
+                        <span className="font-serif italic font-normal text-zinc-500 ml-2">
+                          {module.subtitle}
+                        </span>
+                      )}
+                    </h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed mb-6 max-w-lg font-medium line-clamp-3 md:line-clamp-none">
+                      {module.desc}
+                    </p>
                     
-                    {/* Watermark Number */}
-                    <div className="absolute top-4 right-6 text-6xl md:text-7xl font-bold text-[#1a1a1a] select-none pointer-events-none">
-                      {module.id}
-                    </div>
-
-                    <div className="relative z-10 pr-12">
-                      <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tighter mb-3 leading-tight">
-                        {module.title}
-                        {module.subtitle && (
-                          <span className="font-serif italic font-normal text-zinc-500 ml-2.5">
-                            {module.subtitle}
-                          </span>
-                        )}
-                      </h3>
-                      <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-6 max-w-xl font-medium">
-                        {module.desc}
-                      </p>
-                      
-                      {/* VIEW LESSONS TOGGLE */}
-                      <button 
-                        onClick={() => toggleModule(module.id)}
-                        className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
-                      >
-                        {isOpen ? 'Hide Lessons' : 'View Lessons'}
-                        <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>↓</span>
-                      </button>
-                    </div>
+                    {/* VIEW LESSONS TOGGLE */}
+                    <button 
+                      onClick={() => toggleModule(module.id)}
+                      className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
+                    >
+                      {isOpen ? 'Hide Lessons' : 'View Lessons'}
+                      <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>↓</span>
+                    </button>
                   </div>
                 </div>
 
                 {/* EXPANDABLE LESSONS SECTION */}
-                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <div className="border-t border-zinc-800 bg-zinc-900/50 p-8">
+                <div className={`absolute bottom-0 left-0 right-0 overflow-hidden transition-all duration-500 ease-in-out bg-zinc-900/95 backdrop-blur-sm ${isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="border-t border-zinc-800 p-6 md:p-8">
                     <h4 className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">Module Breakdown</h4>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                       {module.lessons.map((lesson, idx) => (
                         <li key={idx} className="flex items-start text-sm text-zinc-300">
                           <PlayCircle className="w-4 h-4 text-zinc-600 mr-3 mt-0.5 flex-shrink-0" />
