@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ArrowRight, Check, Play, Star, X, Youtube } from "lucide-react";
+import { ArrowRight, Check, CheckCircle2, Play, Star, TrendingUp, Music2, X, Youtube } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Assets
@@ -883,6 +883,261 @@ const TheProducerBlueprint001 = () => {
                   alt="Rob Late" 
                   className="h-20 w-auto object-contain opacity-80" 
                 />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: CURRICULUM */}
+      <section className="py-24 px-6 bg-[#050505] relative z-20">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* ================= HEADER ================= */}
+          <div className="text-center mb-20 max-w-3xl mx-auto">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
+              What's Inside The Program
+            </div>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6">
+              7 Modules. 75+ Lessons. <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
+                The Producer Blueprint.
+              </span>
+            </h2>
+            <p className="text-xl text-zinc-400 font-medium tracking-tight">
+              The complete step-by-step workflow to go from <span className="text-white">"Idea"</span> to <span className="text-[#FF4F33]">"Release Ready Song."</span>
+            </p>
+          </div>
+
+          {/* ================= CURRICULUM GRID ================= */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
+            {/* Module 01 */}
+            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=800&q=80" 
+                  alt="The Foundation" 
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+              </div>
+              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">01</div>
+                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">The Foundation (Ableton Basics)</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                  Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a 'flow state' and work 2x faster.
+                </p>
+                <p className="text-xs text-zinc-500 italic border-l-2 border-[#FF4F33] pl-3 mt-3">
+                  Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.
+                </p>
+              </div>
+            </div>
+
+            {/* Module 02 */}
+            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1550063573-02810a9c6cbe?w=800&q=80" 
+                  alt="Sound Design" 
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+              </div>
+              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">02</div>
+                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Sound Design That Cuts</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                  Learn my DIY sampling techniques to create a sonic fingerprint unique to YOU. Master the synthesis fundamentals to build pads, plucks, and basses from scratch.
+                </p>
+              </div>
+            </div>
+
+            {/* Module 03 */}
+            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1519874179352-7440d4155b7c?w=800&q=80" 
+                  alt="Pro Drums" 
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+              </div>
+              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">03</div>
+                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Pro Drum Production</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                  The difference between 'demo' and 'pro' is usually in the drums. Learn my sample selection process, bus processing, and sidechain secrets for drums that punch through laptop speakers.
+                </p>
+              </div>
+            </div>
+
+            {/* Module 04 */}
+            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=800&q=80" 
+                  alt="Arrangement" 
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+              </div>
+              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">04</div>
+                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Arrangement & Energy</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                  Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.
+                </p>
+              </div>
+            </div>
+
+            {/* Module 05 - Vocal Production (Highlighted) */}
+            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80" 
+                  alt="Vocal Production" 
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+              </div>
+              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">05</div>
+                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Vocal Production</h3>
+                <span className="text-[#FF4F33] text-sm font-bold uppercase tracking-wider mb-3 block">(The "Secret Sauce")</span>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                  How to get crispy, radio-ready vocals in a less-than-perfect home setup. Recording, processing, harmony stacking techniques, and tuning workflows.
+                </p>
+              </div>
+            </div>
+
+            {/* Module 06 */}
+            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=800&q=80" 
+                  alt="Mixing & Mastering" 
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+              </div>
+              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">06</div>
+                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Mixing & Mastering</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                  Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.
+                </p>
+              </div>
+            </div>
+
+            {/* Module 07 */}
+            <div className="group relative h-[420px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 transition-all duration-500 hover:border-zinc-600 md:col-span-2 lg:col-span-1">
+              <div className="absolute inset-0 z-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80" 
+                  alt="Artist Sounds" 
+                  className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+              </div>
+              <div className="absolute inset-0 z-10 p-8 flex flex-col justify-end">
+                <div className="absolute top-6 left-6 font-mono text-4xl font-bold text-white/10 group-hover:text-[#FF4F33]/20 transition-colors duration-300">07</div>
+                <div className="mb-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <Play className="w-4 h-4 text-white fill-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1 leading-tight">Artist Sounds & Identity</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-2">
+                  How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* ================= BONUS SECTION ================= */}
+          <div className="relative border-t border-zinc-800 pt-24">
+            {/* Glow Effect behind bonuses */}
+            <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#FF4F33]/10 blur-[100px] rounded-full pointer-events-none z-0" />
+            <div className="relative z-10">
+              {/* Header */}
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center px-3 py-1 rounded text-[#FF4F33] text-xs font-bold uppercase tracking-wide mb-4">
+                  Free Bonuses Included
+                </div>
+                <h3 className="text-3xl md:text-5xl font-bold text-white mb-4">We're Not Done Yet.</h3>
+                <p className="text-zinc-400 text-lg">
+                  Join today and get 2 exclusive bonuses included. <span className="text-white underline decoration-[#FF4F33] underline-offset-4">Available for a limited time.</span>
+                </p>
+              </div>
+
+              {/* Bonus Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                {/* BONUS 1 */}
+                <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
+                  <div className="absolute top-0 right-0 p-4 opacity-50">
+                    <TrendingUp className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" />
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">
+                      VALUE: $97
+                    </div>
+                    <h4 className="text-xl font-bold text-white mb-2">BONUS #1: Social Media, Business & Music Industry Module</h4>
+                    <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                      Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center text-xs text-zinc-300">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Content Strategy Breakdown
+                      </li>
+                      <li className="flex items-center text-xs text-zinc-300">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Monetization Channels
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* BONUS 2 */}
+                <div className="bg-[#0A0A0A] border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-zinc-600 transition-colors">
+                  <div className="absolute top-0 right-0 p-4 opacity-50">
+                    <Music2 className="w-24 h-24 text-zinc-800 group-hover:text-[#FF4F33]/10 transition-colors" />
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <div className="inline-block bg-[#FF4F33] text-black text-xs font-bold px-2 py-1 rounded mb-4">
+                      VALUE: $147
+                    </div>
+                    <h4 className="text-xl font-bold text-white mb-2">BONUS #2: Rob's TikTok/IG Breakdown Vault</h4>
+                    <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                      The ultimate "Cheat Sheet." Get exclusive access to the project files and walkthroughs of some of my most viral content. See the exact layers, processing, and decisions behind the videos that caught the attention of <span className="text-white font-bold">The Chainsmokers</span>.
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center text-xs text-zinc-300">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Viral Project Files
+                      </li>
+                      <li className="flex items-center text-xs text-zinc-300">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF4F33] mr-2" /> Video Editing Workflow
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
