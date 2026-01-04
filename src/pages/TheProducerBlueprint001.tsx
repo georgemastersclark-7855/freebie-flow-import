@@ -1209,24 +1209,31 @@ const TheProducerBlueprint001 = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
           
         {/* HEADER AREA */}
-        <div className="text-center mb-24 max-w-6xl mx-auto">
+        <div className="text-center mb-24 max-w-5xl mx-auto">
+          
+          {/* EYEBROW */}
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
-            The Producer Blueprint 2.0
+            The Complete Masterclass
           </div>
           
-          {/* HEADLINE: 2 Lines + Grey Accent on Italic */}
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
-            See How "A-List" Records Are <br className="hidden md:block" />
-            Actually Made <span className="font-serif italic text-zinc-500 font-normal">In A Home Studio.</span>
+          {/* HEADLINE: "What Is..." - High Impact, Bold Sans */}
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
+            What Is The Producer Blueprint?
           </h2>
+
+          {/* SUBHEAD: The "Brand Style" Mix (Bold Sans + Grey Serif Accent) */}
+          <h3 className="text-3xl md:text-5xl font-bold text-white mb-10 leading-[1.15] tracking-tight">
+            See How "A-List" Records Are <br className="hidden md:block" />
+            Actually Made <span className="font-serif italic text-zinc-500">In A Home Studio.</span>
+          </h3>
           
-          {/* SUBHEAD: Restored Full Copy + Light Styling */}
-          <div className="space-y-6 text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-4xl mx-auto">
-            <p>
-              <span className="text-white font-medium">It is the era of home studio production.</span> You no longer need a £10k mic to be 'pro'. There are kids making 100-million stream hits on laptops. DJs are producing headline tracks in hotel rooms.
+          {/* BODY: The "Era" Logic + The Bridge */}
+          <div className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
+            <p className="mb-6">
+              It's the era of home studio production. You no longer need a £10k mic to make 'pro' music. DJs are producing headline tracks in hotel rooms or in airports on a laptop and headphones.
             </p>
-            <p>
-              Most producers plateau simply because they don't know what "good" looks like during the messy middle. <span className="text-white font-normal border-b border-white/30 pb-0.5 hover:border-white transition-colors cursor-default">I can show you the blueprint.</span>
+            <p className="text-white font-medium">
+              Here's exactly what The Producer Blueprint will show you:
             </p>
           </div>
         </div>
