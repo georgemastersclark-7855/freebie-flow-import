@@ -520,21 +520,21 @@ const CurriculumSection = () => {
                   {/* DIVIDER */}
                   <li className="h-px bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 w-full my-6"></li>
 
-                  {/* ITEM 3: BONUS 1 */}
+                  {/* ITEM 3: BONUS 1 (Badge at END) */}
                   <li className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between group">
                     <div className="flex gap-6 flex-1">
-                      {/* THUMBNAIL */}
+                      {/* THUMBNAIL (Clean) */}
                       <div className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
                         <img src={socialMediaBonusThumbnail} alt="Bonus 1 Thumbnail" className="w-full h-full object-cover" />
-                        {/* Badge */}
-                        <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold uppercase text-white border border-white/10">
-                          Bonus #1
-                        </div>
                       </div>
                       
                       <div className="flex flex-col justify-center">
-                        <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
+                        <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
                           Social Media & Business Module
+                          {/* INLINE BONUS BADGE */}
+                          <span className="ml-2 inline-block align-middle text-[#FF4F33] text-[10px] border border-[#FF4F33]/30 bg-[#FF4F33]/10 px-2 py-0.5 rounded uppercase tracking-wider">
+                            Bonus
+                          </span>
                         </h3>
                         <p className="text-zinc-400 text-sm mt-2 leading-relaxed max-w-md">
                           Turn production into income. Strategies for growing a following & building real customers.
@@ -553,21 +553,21 @@ const CurriculumSection = () => {
                     </div>
                   </li>
 
-                  {/* ITEM 4: BONUS 2 */}
+                  {/* ITEM 4: BONUS 2 (Badge at END) */}
                   <li className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between group">
                     <div className="flex gap-6 flex-1">
-                      {/* THUMBNAIL */}
+                      {/* THUMBNAIL (Clean) */}
                       <div className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
                         <img src={tiktokVaultThumbnail} alt="Bonus 2 Thumbnail" className="w-full h-full object-cover" />
-                        {/* Badge */}
-                        <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold uppercase text-white border border-white/10">
-                          Bonus #2
-                        </div>
                       </div>
                       
                       <div className="flex flex-col justify-center">
-                        <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
+                        <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
                           Rob's TikTok/IG Breakdown Vault
+                          {/* INLINE BONUS BADGE */}
+                          <span className="ml-2 inline-block align-middle text-[#FF4F33] text-[10px] border border-[#FF4F33]/30 bg-[#FF4F33]/10 px-2 py-0.5 rounded uppercase tracking-wider">
+                            Bonus
+                          </span>
                         </h3>
                         <p className="text-zinc-400 text-sm mt-2 leading-relaxed max-w-md">
                           Exclusive project walkthroughs from Rob's viral content + downloadable presets.
@@ -602,13 +602,18 @@ const CurriculumSection = () => {
                   </p>
                 </div>
 
-                {/* The Price */}
-                <div className="flex flex-col items-center justify-center gap-2 mb-10">
-                  <span className="text-2xl font-medium text-white">One-time payment of only:</span>
+                {/* The Price (12 MONTHS FOCUS) */}
+                <div className="flex flex-col items-center justify-center gap-2 mb-2">
+                  <span className="text-2xl font-medium text-white">12 Months Full Access:</span>
                   <span className="text-6xl md:text-7xl font-black text-[#FF4F33] tracking-tighter drop-shadow-[0_0_25px_rgba(255,79,51,0.2)]">
                     $297
                   </span>
                 </div>
+
+                {/* Clarification Text */}
+                <p className="text-zinc-500 text-sm font-medium mb-10">
+                  One-time payment. No auto-renew.
+                </p>
 
                 {/* PRIMARY CTA BUTTON */}
                 <button className="w-full md:max-w-md group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#FF4F33] hover:text-white hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(255,79,51,0.5)]">
@@ -617,15 +622,15 @@ const CurriculumSection = () => {
                   </span>
                 </button>
 
-                {/* REVISED TRUST BADGES */}
+                {/* TRUST BADGES (Clarified) */}
                 <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-xs text-zinc-500 font-medium uppercase tracking-wider">
                   <span className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-zinc-400" />
-                    Lifetime Access
+                    1 Year Access
                   </span>
                   <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-zinc-400" />
-                    Secure Payment
+                    <X className="w-4 h-4 text-zinc-400" />
+                    No Subscriptions
                   </span>
                   <span className="flex items-center gap-2">
                     <Zap className="w-4 h-4 text-zinc-400" />
