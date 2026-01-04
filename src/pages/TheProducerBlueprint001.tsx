@@ -314,18 +314,17 @@ const CurriculumSection = () => {
           })}
         </div>
 
-        {/* ================= BONUS SECTION (Corrected Header) ================= */}
+        {/* ================= BONUS SECTION (Images Fixed) ================= */}
         <section className="relative pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
-          {/* VISUAL CONNECTOR (Vertical Line) */}
+          {/* VISUAL CONNECTOR */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
           
           <div className="max-w-6xl mx-auto relative z-10 pt-16">
             
             {/* HEADER */}
             <div className="text-center mb-16">
-              
-              {/* [EYEBROW] - Flashing Limited Time Badge (Moved Up) */}
+              {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF4F33]/10 border border-[#FF4F33]/20 mb-6 animate-pulse">
                 <span className="w-2 h-2 rounded-full bg-[#FF4F33]"></span>
                 <span className="text-[#FF4F33] text-xs font-bold uppercase tracking-widest">
@@ -333,12 +332,12 @@ const CurriculumSection = () => {
                 </span>
               </div>
               
-              {/* [HEADLINE] */}
+              {/* Headline */}
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
                 Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4F33] to-orange-500">FREE</span> bonuses
               </h2>
               
-              {/* [SUBHEAD] - Underlined "2 exclusive bonuses" */}
+              {/* Subhead */}
               <p className="text-lg md:text-xl text-zinc-400 font-medium max-w-2xl mx-auto">
                 Join today and get <span className="text-white underline decoration-[#FF4F33] decoration-2 underline-offset-4 font-bold">2 exclusive bonuses</span> included.
               </p>
@@ -350,19 +349,25 @@ const CurriculumSection = () => {
               {/* --- BONUS #1 --- */}
               <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
                 
-                {/* IMAGE AREA */}
+                {/* IMAGE AREA --- FIXED */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-[#050505]"></div>
-                  <img src={robOnLaptop} alt="Rob on laptop" className="w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105" />
+                  {/* 1. THE IMAGE */}
+                  <img 
+                    src={robOnLaptop}
+                    alt="Social Media Module Mockup" 
+                    className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                  />
+                  {/* 2. SUBTLE OVERLAY */}
+                  <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
                   
-                  {/* VALUE BADGE */}
-                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg">
+                  {/* 3. VALUE BADGE */}
+                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
                     Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#FF4F33]">FREE</span>
                   </div>
                 </div>
 
                 {/* CONTENT AREA */}
-                <div className="p-8 flex-1 flex flex-col">
+                <div className="p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
                   <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF4F33] transition-colors">
                     BONUS #1: Social Media, Business & Music Industry Module
                   </h3>
@@ -374,9 +379,7 @@ const CurriculumSection = () => {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
                       Instant Access
                     </span>
-                    <span className="text-[#FF4F33] text-lg">
-                      +
-                    </span>
+                    <span className="text-[#FF4F33] text-lg">+</span>
                   </div>
                 </div>
               </div>
@@ -384,19 +387,25 @@ const CurriculumSection = () => {
               {/* --- BONUS #2 --- */}
               <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
                 
-                {/* IMAGE AREA */}
+                {/* IMAGE AREA --- FIXED */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-bl from-zinc-800 to-[#050505]"></div>
-                  <img src={tiktokBreakdownVault} alt="TikTok/IG Breakdown Vault" className="w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105" />
+                  {/* 1. THE IMAGE */}
+                  <img 
+                    src={tiktokBreakdownVault} 
+                    alt="TikTok Vault Mockup"
+                    className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                  />
+                  {/* 2. SUBTLE OVERLAY */}
+                  <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
                   
-                  {/* VALUE BADGE */}
-                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg">
+                  {/* 3. VALUE BADGE */}
+                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
                     Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#FF4F33]">FREE</span>
                   </div>
                 </div>
 
                 {/* CONTENT AREA */}
-                <div className="p-8 flex-1 flex flex-col">
+                <div className="p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
                   <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF4F33] transition-colors">
                     BONUS #2: Rob's TikTok/IG Breakdown Vault
                   </h3>
@@ -408,12 +417,11 @@ const CurriculumSection = () => {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
                       Instant Access
                     </span>
-                    <span className="text-[#FF4F33] text-lg">
-                      +
-                    </span>
+                    <span className="text-[#FF4F33] text-lg">+</span>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
