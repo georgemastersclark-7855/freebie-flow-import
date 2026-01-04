@@ -51,6 +51,7 @@ import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.
 import robPovStudio from "@/assets/rob-pov-studio-new.png";
 import blueprintLaptopMockup from "@/assets/producer-blueprint-mockup.jpg";
 import producerBlueprintThumbnail from "@/assets/producer-blueprint-thumbnail.jpg";
+import abletonTemplatesThumbnail from "@/assets/ableton-templates-thumbnail.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -491,7 +492,7 @@ const CurriculumSection = () => {
                     <div className="flex gap-6 flex-1">
                       {/* THUMBNAIL */}
                       <div className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
-                        <img src="https://placehold.co/200x200/18181b/ffffff?text=Project+Files" alt="Files Thumbnail" className="w-full h-full object-cover" />
+                        <img src={abletonTemplatesThumbnail} alt="Files Thumbnail" className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
                       </div>
                       
