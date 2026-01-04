@@ -1209,24 +1209,24 @@ const TheProducerBlueprint001 = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
           
           {/* HEADER AREA */}
-          <div className="text-center mb-24 max-w-4xl mx-auto">
+          <div className="text-center mb-24 max-w-5xl mx-auto">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
               The Producer Blueprint 2.0
             </div>
             
-            {/* HEADLINE: Restored to 2 lines exactly */}
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
-              See How "A-List" Music Is <br />
-              Actually Made <span className="font-serif italic text-zinc-400 font-normal">In A Home Studio.</span>
+            {/* HEADLINE: Strictly 2 Lines */}
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.05]">
+              See How "A-List" Music Is Actually Made <br className="hidden md:block" />
+              <span className="font-serif italic text-zinc-400 font-normal">In A Home Studio.</span>
             </h2>
             
-            {/* SUBHEAD: Refined typography (Lighter weight, White highlight) */}
-            <div className="space-y-6 text-lg md:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mx-auto">
+            {/* SUBHEAD: Font-Light for elegance */}
+            <div className="space-y-6 text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
               <p>
-                <span className="text-white">It is the era of home studio production.</span> You no longer need a £10k mic to be 'pro'. There are kids making 100-million stream hits on laptops. DJs are producing headline tracks in hotel rooms.
+                <span className="text-zinc-200 font-normal">It is the era of home studio production.</span> You no longer need a £10k mic to be 'pro'. There are kids making 100-million stream hits on laptops. DJs are producing headline tracks in hotel rooms.
               </p>
               <p>
-                Most producers plateau simply because they don't know what "good" looks like during the messy middle. <span className="text-white border-b border-white/30 pb-0.5">I can show you the blueprint.</span>
+                Most producers plateau simply because they don't know what "good" looks like during the messy middle. <span className="text-white font-normal border-b border-white/30 pb-0.5 hover:border-white transition-colors cursor-default">I can show you the blueprint.</span>
               </p>
             </div>
           </div>
