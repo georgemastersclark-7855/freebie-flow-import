@@ -49,7 +49,7 @@ import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
 import robPovStudio from "@/assets/rob-pov-studio.png";
-import blueprintLaptopMockup from "/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png";
+import blueprintLaptopMockup from "@/assets/producer-blueprint-mockup.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
