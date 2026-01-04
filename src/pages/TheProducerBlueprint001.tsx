@@ -1306,24 +1306,27 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* ================= VISUAL EVIDENCE: STUDIO POV ================= */}
-      <section className="relative z-10 px-6 pb-32 -mt-16 pointer-events-none">
-        <div className="max-w-2xl mx-auto relative flex flex-col items-center justify-center">
+      <section className="relative z-10 px-6 pb-24 -mt-12 pointer-events-none">
+        <div className="max-w-lg mx-auto relative flex flex-col items-center justify-center">
           
           {/* 1. The Backlight Glow 
-              (Matches the blue/purple studio lighting in the photo) 
+              (Purple/Blue ambient light to match the photo) 
           */}
-          <div className="absolute inset-0 bg-indigo-600/20 blur-[90px] rounded-full transform scale-75 z-0"></div>
+          <div className="absolute inset-0 bg-indigo-600/30 blur-[80px] rounded-full transform scale-75 z-0"></div>
 
-          {/* 2. The Vignetted Image Container */}
+          {/* 2. The Vignetted Image Container 
+              - Reduced to max-w-lg to stop it being huge
+              - Mask is tighter to hide the top edge
+          */}
           <div className="relative w-full aspect-video z-10">
             <img 
               src={robPovStudio} 
               alt="Rob Late Studio POV" 
               className="w-full h-full object-cover"
               style={{
-                // Strong radial mask to dissolve edges completely into the black background
-                maskImage: 'radial-gradient(circle at center, black 30%, transparent 70%)',
-                WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 70%)'
+                // Tighter mask: fades to transparent at 60% to ensure edges are invisible
+                maskImage: 'radial-gradient(circle at center, black 25%, transparent 60%)',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 25%, transparent 60%)'
               }}
             />
           </div>
