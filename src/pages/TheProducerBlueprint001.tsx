@@ -48,6 +48,7 @@ import soundDesignStudio from "@/assets/sound-design-studio.png";
 import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
+import robPovStudio from "@/assets/rob-pov-studio.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -70,7 +71,7 @@ const CurriculumSection = () => {
       title: "The Foundation",
       subtitle: "(Ableton Basics)",
       desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
-      image: foundationLaptop,
+      image: robPovStudio,
       lessons: [
         "Ableton layout & menus",
         "Preferences & setting up projects",
