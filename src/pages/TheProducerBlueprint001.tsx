@@ -48,7 +48,7 @@ import soundDesignStudio from "@/assets/sound-design-studio.png";
 import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
-import robPovStudio from "@/assets/rob-pov-studio.png";
+import robPovStudio from "@/assets/rob-pov-studio-new.png";
 import blueprintLaptopMockup from "@/assets/producer-blueprint-mockup.jpg";
 
 // Signature Placeholder
@@ -1306,7 +1306,7 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* ================= VISUAL EVIDENCE: STUDIO POV ================= */}
-      <section className="relative z-10 px-6 pb-24 -mt-12 pointer-events-none">
+      <section className="relative z-10 px-6 pb-8 -mt-12 pointer-events-none">
         <div className="max-w-lg mx-auto relative flex flex-col items-center justify-center">
           
           {/* 1. The Backlight Glow 
@@ -1334,7 +1334,7 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* ================= SECTION: THE ORIGIN STORY (MEET YOUR INSTRUCTOR) ================= */}
-      <section className="relative w-full bg-black py-24 px-4 overflow-hidden">
+      <section className="relative w-full bg-black pt-12 pb-24 px-4 overflow-hidden">
         
         {/* Subtle radial glow behind the content */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-zinc-800/30 blur-[120px] rounded-full pointer-events-none z-0" />
