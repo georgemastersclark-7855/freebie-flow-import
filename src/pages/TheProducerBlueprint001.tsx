@@ -314,7 +314,7 @@ const CurriculumSection = () => {
           })}
         </div>
 
-        {/* ================= BONUS SECTION (Images Fixed) ================= */}
+        {/* ================= BONUS SECTION (No Overlay) ================= */}
         <section className="relative pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
           {/* VISUAL CONNECTOR */}
@@ -349,18 +349,15 @@ const CurriculumSection = () => {
               {/* --- BONUS #1 --- */}
               <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
                 
-                {/* IMAGE AREA --- FIXED */}
+                {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  {/* 1. THE IMAGE */}
+                  {/* 1. THE IMAGE (Directly visible, no overlay) */}
                   <img 
                     src={robOnLaptop}
                     alt="Social Media Module Mockup" 
                     className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
                   />
-                  {/* 2. SUBTLE OVERLAY */}
-                  <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
-                  
-                  {/* 3. VALUE BADGE */}
+                  {/* 2. VALUE BADGE */}
                   <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
                     Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#FF4F33]">FREE</span>
                   </div>
@@ -387,18 +384,16 @@ const CurriculumSection = () => {
               {/* --- BONUS #2 --- */}
               <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
                 
-                {/* IMAGE AREA --- FIXED */}
+                {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  {/* 1. THE IMAGE */}
+                  {/* 1. THE IMAGE (Directly visible, no overlay) */}
                   <img 
                     src={tiktokBreakdownVault} 
                     alt="TikTok Vault Mockup"
                     className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
                   />
-                  {/* 2. SUBTLE OVERLAY */}
-                  <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
                   
-                  {/* 3. VALUE BADGE */}
+                  {/* 2. VALUE BADGE */}
                   <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
                     Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#FF4F33]">FREE</span>
                   </div>
