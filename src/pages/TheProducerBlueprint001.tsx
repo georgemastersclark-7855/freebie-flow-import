@@ -1295,15 +1295,6 @@ const TheProducerBlueprint001 = () => {
               Learn top creative workflows with <span className="text-[#FF4F33]">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
             </p>
 
-            {/* Blueprint Laptop Mockup */}
-            <div className="my-12">
-              <img 
-                src={blueprintLaptopMockup}
-                alt="The Producer Blueprint on laptop"
-                className="w-full max-w-2xl mx-auto"
-              />
-            </div>
-
             {/* CTA Button */}
             <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-[#FF4F33] transition-all">
               <span className="border-b border-white/30 pb-0.5 group-hover:border-[#FF4F33]">See The Curriculum</span>
