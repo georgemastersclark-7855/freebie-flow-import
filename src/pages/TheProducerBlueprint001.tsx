@@ -1214,8 +1214,8 @@ const TheProducerBlueprint001 = () => {
               The Producer Blueprint 2.0
             </div>
             
-            {/* HEADLINE: Strictly 2 Lines */}
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.05]">
+            {/* HEADLINE: Reduced to text-6xl to match other sections. Forces 2 lines. */}
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is Actually Made <br className="hidden md:block" />
               <span className="font-serif italic text-zinc-400 font-normal">In A Home Studio.</span>
             </h2>
