@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Check, CheckCircle2, Play, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle } from "lucide-react";
+import { ArrowRight, Check, CheckCircle2, Play, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Assets
@@ -446,55 +446,55 @@ const CurriculumSection = () => {
               </p>
             </div>
 
-
             {/* THE STACK CARD */}
             <div className="rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden shadow-2xl shadow-black/50 relative animate-fade-in-up">
               
               {/* Subtle top lighting */}
               <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
-
               <div className="p-6 md:p-10">
                 
                 {/* LIST ITEMS */}
                 <ul className="space-y-8">
                   
-                  {/* ITEM 1: MAIN COURSE */}
+                  {/* ITEM 1: MAIN PROGRAM */}
                   <li className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between group">
                     <div className="flex gap-6 flex-1">
-                      {/* THUMBNAIL PLACEHOLDER */}
+                      {/* THUMBNAIL */}
                       <div className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
-                        <img src="https://placehold.co/200x200/18181b/ffffff?text=Course" alt="Course Thumbnail" className="w-full h-full object-cover" />
+                        <img src="https://placehold.co/200x200/18181b/ffffff?text=Program" alt="Program Thumbnail" className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
                       </div>
                       
+                      {/* CONTENT */}
                       <div className="flex flex-col justify-center">
                         <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
-                          The Producer Blueprint Course™
+                          The Producer Blueprint Program™
                         </h3>
                         <p className="text-zinc-400 text-sm mt-2 leading-relaxed max-w-md font-medium">
-                          The complete start-to-finish workflow. 7 modules, 75+ lessons. Lifetime updates included.
+                          The complete 7-module video program. 75+ lessons. Learn to produce top-streaming music.
                         </p>
                       </div>
                     </div>
                     
+                    {/* RETAIL PRICE */}
                     <div className="shrink-0 pl-10 md:pl-0 pt-2 md:pt-0">
                       <span className="inline-block py-1.5 px-3 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-sm font-mono font-bold">
-                        $497 Value
+                        $497
                       </span>
                     </div>
                   </li>
 
-
                   {/* ITEM 2: PROJECT FILES */}
                   <li className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between group">
                     <div className="flex gap-6 flex-1">
-                      {/* THUMBNAIL PLACEHOLDER */}
+                      {/* THUMBNAIL */}
                       <div className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
-                        <img src="https://placehold.co/200x200/18181b/ffffff?text=Files" alt="Files Thumbnail" className="w-full h-full object-cover" />
+                        <img src="https://placehold.co/200x200/18181b/ffffff?text=Project+Files" alt="Files Thumbnail" className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
                       </div>
                       
+                      {/* CONTENT */}
                       <div className="flex flex-col justify-center">
                         <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
                           Ableton Project Files & Templates
@@ -505,22 +505,21 @@ const CurriculumSection = () => {
                       </div>
                     </div>
                     
+                    {/* RETAIL PRICE */}
                     <div className="shrink-0 pl-10 md:pl-0 pt-2 md:pt-0">
                       <span className="inline-block py-1.5 px-3 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-sm font-mono font-bold">
-                        $197 Value
+                        $197
                       </span>
                     </div>
                   </li>
 
-
                   {/* DIVIDER */}
                   <li className="h-px bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 w-full my-6"></li>
 
-
-                  {/* ITEM 3: BONUS 1 (Neutral Colors) */}
+                  {/* ITEM 3: BONUS 1 */}
                   <li className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between group">
                     <div className="flex gap-6 flex-1">
-                      {/* THUMBNAIL PLACEHOLDER */}
+                      {/* THUMBNAIL */}
                       <div className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
                         <img src="https://placehold.co/200x200/18181b/ffffff?text=Bonus+1" alt="Bonus 1 Thumbnail" className="w-full h-full object-cover" />
                         {/* Badge */}
@@ -539,7 +538,7 @@ const CurriculumSection = () => {
                       </div>
                     </div>
                     
-                    {/* VALUE (Neutral) */}
+                    {/* RETAIL + FREE */}
                     <div className="shrink-0 pl-10 md:pl-0 pt-2 md:pt-0 flex items-center gap-3">
                       <span className="text-zinc-500 text-sm font-mono line-through font-medium decoration-zinc-600 decoration-2">
                         $97
@@ -550,11 +549,10 @@ const CurriculumSection = () => {
                     </div>
                   </li>
 
-
-                  {/* ITEM 4: BONUS 2 (Neutral Colors) */}
+                  {/* ITEM 4: BONUS 2 */}
                   <li className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between group">
                     <div className="flex gap-6 flex-1">
-                      {/* THUMBNAIL PLACEHOLDER */}
+                      {/* THUMBNAIL */}
                       <div className="shrink-0 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
                         <img src="https://placehold.co/200x200/18181b/ffffff?text=Bonus+2" alt="Bonus 2 Thumbnail" className="w-full h-full object-cover" />
                         {/* Badge */}
@@ -573,7 +571,7 @@ const CurriculumSection = () => {
                       </div>
                     </div>
                     
-                    {/* VALUE (Neutral) */}
+                    {/* RETAIL + FREE */}
                     <div className="shrink-0 pl-10 md:pl-0 pt-2 md:pt-0 flex items-center gap-3">
                       <span className="text-zinc-500 text-sm font-mono line-through font-medium decoration-zinc-600 decoration-2">
                         $147
@@ -584,10 +582,8 @@ const CurriculumSection = () => {
                     </div>
                   </li>
 
-
                 </ul>
               </div>
-
 
               {/* FOOTER / PRICING AREA */}
               <div className="bg-zinc-900/90 border-t border-zinc-800 p-8 md:p-12 flex flex-col items-center text-center backdrop-blur-xl relative z-10">
@@ -602,15 +598,13 @@ const CurriculumSection = () => {
                   </p>
                 </div>
 
-
-                {/* The Price (ORANGE FOCUS) */}
+                {/* The Price */}
                 <div className="flex flex-col items-center justify-center gap-2 mb-10">
                   <span className="text-2xl font-medium text-white">One-time payment of only:</span>
                   <span className="text-6xl md:text-7xl font-black text-[#FF4F33] tracking-tighter drop-shadow-[0_0_25px_rgba(255,79,51,0.2)]">
                     $297
                   </span>
                 </div>
-
 
                 {/* PRIMARY CTA BUTTON */}
                 <button className="w-full md:max-w-md group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#FF4F33] hover:text-white hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(255,79,51,0.5)]">
@@ -619,8 +613,7 @@ const CurriculumSection = () => {
                   </span>
                 </button>
 
-
-                {/* Guarantee/Secure Text */}
+                {/* REVISED TRUST BADGES */}
                 <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-xs text-zinc-500 font-medium uppercase tracking-wider">
                   <span className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-zinc-400" />
@@ -631,8 +624,8 @@ const CurriculumSection = () => {
                     Secure Payment
                   </span>
                   <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-zinc-400" />
-                    30-Day Guarantee
+                    <Zap className="w-4 h-4 text-zinc-400" />
+                    Instant Digital Delivery
                   </span>
                 </div>
               </div>
