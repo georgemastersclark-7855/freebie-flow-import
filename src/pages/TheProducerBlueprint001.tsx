@@ -387,7 +387,7 @@ const CurriculumSection = () => {
                 
                 {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  <img src={tiktokBreakdownVault} alt="TikTok/IG Breakdown Vault" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src={tiktokBreakdownVault} alt="TikTok/IG Breakdown Vault" className="w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105" />
                   
                   {/* VALUE BADGE */}
                   <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg">
