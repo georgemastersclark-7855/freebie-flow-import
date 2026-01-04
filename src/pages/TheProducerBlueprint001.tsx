@@ -1214,19 +1214,19 @@ const TheProducerBlueprint001 = () => {
               The Producer Blueprint 2.0
             </div>
             
-            {/* HEADLINE: Reduced to text-6xl to match other sections. Forces 2 lines. */}
+            {/* HEADLINE: Reverted to text-6xl. 
+                Line 1: See How "A-List" Records Are
+                Line 2: Actually Made In A Home Studio.
+            */}
             <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
-              See How "A-List" Music Is Actually Made <br className="hidden md:block" />
-              <span className="font-serif italic text-zinc-400 font-normal">In A Home Studio.</span>
+              See How "A-List" Records Are <br className="hidden md:block" />
+              Actually Made <span className="font-serif italic font-normal">In A Home Studio.</span>
             </h2>
             
-            {/* SUBHEAD: Font-Light for elegance */}
-            <div className="space-y-6 text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
+            {/* SUBHEAD: Clean, non-bold, exactly like the screenshot */}
+            <div className="space-y-6 text-lg md:text-xl text-zinc-400 leading-relaxed max-w-3xl mx-auto">
               <p>
-                <span className="text-zinc-200 font-normal">It is the era of home studio production.</span> You no longer need a £10k mic to be 'pro'. There are kids making 100-million stream hits on laptops. DJs are producing headline tracks in hotel rooms.
-              </p>
-              <p>
-                Most producers plateau simply because they don't know what "good" looks like during the messy middle. <span className="text-white font-normal border-b border-white/30 pb-0.5 hover:border-white transition-colors cursor-default">I can show you the blueprint.</span>
+                Most producers plateau because they don't know what "good" looks like during the messy middle. <span className="text-zinc-200">I can show you the blueprint.</span>
               </p>
             </div>
           </div>
