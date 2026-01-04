@@ -1225,7 +1225,9 @@ const TheProducerBlueprint001 = () => {
               It's the era of home studio production. You no longer need expensive gear. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
             </p>
             
-            <p className="text-zinc-300 text-lg font-medium">The Producer Blueprint will show you:</p>
+            <p className="text-xl md:text-2xl font-semibold tracking-tight">
+              <span className="text-zinc-400">The Producer Blueprint</span> <span className="text-white">will show you:</span>
+            </p>
           </div>
 
           {/* 3. THE 4 PILLARS (THE CARDS) */}
