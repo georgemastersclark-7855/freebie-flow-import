@@ -1214,19 +1214,19 @@ const TheProducerBlueprint001 = () => {
               The Producer Blueprint 2.0
             </div>
             
-            {/* HEADLINE: Reverted to the stronger "A-List" Benefit */}
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl">
-              See How "A-List" Records Are <br />
-              Actually Made <span className="font-serif italic text-zinc-400">In A Home Studio.</span>
+            {/* HEADLINE: Restored to 2 lines exactly */}
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
+              See How "A-List" Music Is <br />
+              Actually Made <span className="font-serif italic text-zinc-400 font-normal">In A Home Studio.</span>
             </h2>
             
-            {/* SUBHEAD: Refined typography, integrating the "Era" copy */}
-            <div className="space-y-6 text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
+            {/* SUBHEAD: Refined typography (Lighter weight, White highlight) */}
+            <div className="space-y-6 text-lg md:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mx-auto">
               <p>
-                <span className="text-white font-medium">It is the era of home studio production.</span> You no longer need a £10k mic to be 'pro'. There are kids making 100-million stream hits on laptops. DJs are producing headline tracks in hotel rooms.
+                <span className="text-white">It is the era of home studio production.</span> You no longer need a £10k mic to be 'pro'. There are kids making 100-million stream hits on laptops. DJs are producing headline tracks in hotel rooms.
               </p>
               <p>
-                Most producers plateau simply because they don't know what "good" looks like during the messy middle. <span className="text-white font-medium border-b border-white/20 pb-0.5">I can show you the blueprint.</span>
+                Most producers plateau simply because they don't know what "good" looks like during the messy middle. <span className="text-white border-b border-white/30 pb-0.5">I can show you the blueprint.</span>
               </p>
             </div>
           </div>
