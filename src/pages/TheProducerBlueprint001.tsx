@@ -1218,9 +1218,17 @@ const TheProducerBlueprint001 = () => {
             See How "A-List" Records Are <br />
             Actually Made <span className="font-serif italic text-white">In A Home Studio.</span>
           </h2>
-          <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
-            It's the era of home studio production. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
-          </p>
+          <div className="max-w-xl mx-auto space-y-4">
+            <p className="text-zinc-500 text-base md:text-lg font-light leading-relaxed">
+              It's the era of home studio production. DJs are producing headline tracks in hotel rooms on a laptop and headphones.
+            </p>
+            <p className="text-zinc-400 text-base md:text-lg font-light leading-relaxed">
+              You no longer need expensive gear. You need creative workflows and an over-the-shoulder look at how a working producer goes from idea to finished song.
+            </p>
+            <p className="text-white font-medium text-base md:text-lg">
+              The Producer Blueprint will show you:
+            </p>
+          </div>
         </div>
 
           {/* 3. THE 4 PILLARS */}
