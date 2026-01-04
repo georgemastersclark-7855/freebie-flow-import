@@ -49,6 +49,7 @@ import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
 import robPovStudio from "@/assets/rob-pov-studio.png";
+import blueprintLaptopMockup from "/lovable-uploads/c8da1c3b-55d4-4566-a55a-77a3b6a95f42.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -1293,6 +1294,15 @@ const TheProducerBlueprint001 = () => {
             <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-12">
               Learn top creative workflows with <span className="text-[#FF4F33]">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
             </p>
+
+            {/* Blueprint Laptop Mockup */}
+            <div className="my-12">
+              <img 
+                src={blueprintLaptopMockup}
+                alt="The Producer Blueprint on laptop"
+                className="w-full max-w-2xl mx-auto"
+              />
+            </div>
 
             {/* CTA Button */}
             <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-[#FF4F33] transition-all">
