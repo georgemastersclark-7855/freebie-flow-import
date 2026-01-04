@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Check, CheckCircle2, Play, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import OfferStackSection from "@/components/OfferStackSection";
 
 // Assets
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
@@ -1873,9 +1872,6 @@ const TheProducerBlueprint001 = () => {
             </div>
           </div>
         </section>
-
-      {/* OFFER STACK SECTION */}
-      <OfferStackSection />
 
       {/* SECTION: THE ERA OF HOME STUDIO PRODUCTION */}
       <section className="relative z-10 px-6 md:px-12 py-24 max-w-5xl mx-auto">
