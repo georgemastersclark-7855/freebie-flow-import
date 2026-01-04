@@ -1744,6 +1744,102 @@ const TheProducerBlueprint001 = () => {
           </div>
         </section>
 
+        {/* ================= FAQ SECTION ================= */}
+        <section className="py-24 px-6 bg-[#050505] border-t border-zinc-900">
+          <div className="max-w-3xl mx-auto">
+            
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-zinc-400">
+                Everything you need to know about The Blueprint.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              
+              {/* FAQ ITEM 1 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                    <span>Do I need to use Ableton Live?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    I teach everything in <strong>Ableton Live</strong> and include my personal project files/templates for Ableton. However, the <em>principles</em> of sound design, arrangement, mixing, and vocal production apply to any DAW (FL Studio, Logic, Pro Tools). If you use another DAW, you can still get massive value, but you won't be able to open the project files.
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ ITEM 2 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                    <span>Do I need expensive 3rd party plugins?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    No. While I do show you my favorite paid plugins (like Serum, FabFilter, etc.), I always explain the <strong>fundamental concept</strong> first. I also dedicate entire sections to "Stock Plugin" alternatives. You can achieve professional results with stock tools if you know how to use them.
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ ITEM 3 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                    <span>Is this course for beginners?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    This course is designed for <strong>Intermediate</strong> producers who know the basics but are stuck in the "loop phase" or aren't happy with their mix quality. However, I have included a "Module 1: Foundation" specifically for beginners or those switching to Ableton to get you up to speed fast.
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ ITEM 4 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                    <span>Is this a subscription?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    No. This is a one-time payment for <strong>lifetime access</strong>. You get all future updates to the course for free.
+                  </div>
+                </details>
+              </div>
+              
+              {/* FAQ ITEM 5 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                    <span>When do I get access?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                     Instantly. As soon as you complete your order, you'll receive an email with your login details to the private portal. You can start watching immediately.
+                     <br /><br />
+                     <em>Note: Due to the digital nature of this product (downloadable files/templates), all sales are final.</em>
+                  </div>
+                </details>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
       {/* SECTION: THE ERA OF HOME STUDIO PRODUCTION */}
       <section className="relative z-10 px-6 md:px-12 py-24 max-w-5xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
