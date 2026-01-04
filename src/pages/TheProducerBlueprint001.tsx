@@ -47,6 +47,7 @@ import foundationLaptop from "@/assets/foundation-laptop.png";
 import soundDesignStudio from "@/assets/sound-design-studio.png";
 import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
+import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -123,7 +124,7 @@ const CurriculumSection = () => {
       id: "04",
       title: "Arrangement & Energy",
       desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
-      image: abletonSession,
+      image: arrangementEnergyScreenshot,
       lessons: [
         "Secret Sauce: My all time favourite FX plugins",
         "Creating Addictive Tracks: Song structure",
