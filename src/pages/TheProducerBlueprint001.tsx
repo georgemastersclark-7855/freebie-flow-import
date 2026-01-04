@@ -1221,8 +1221,8 @@ const TheProducerBlueprint001 = () => {
             </h2>
             
             {/* TOP TEXT: The "Why" */}
-            <p className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mx-auto">
-              It's the era of home studio production. You no longer need expensive gear. DJs are producing headline tracks in hotel rooms on a laptop and headphones.
+            <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
+              It's the era of home studio production. You no longer need expensive gear. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
             </p>
           </div>
 
