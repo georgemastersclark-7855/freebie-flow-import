@@ -314,48 +314,45 @@ const CurriculumSection = () => {
           })}
         </div>
 
-        {/* ================= BONUS SECTION (Connected Flow) ================= */}
-        <section className="relative pb-32 pt-16 overflow-hidden">
+        {/* ================= BONUS SECTION (Corrected Header) ================= */}
+        <section className="relative pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
-          {/* Visual Connector: vertical line from curriculum */}
+          {/* VISUAL CONNECTOR (Vertical Line) */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
           
-          <div className="relative z-10">
+          <div className="max-w-6xl mx-auto relative z-10 pt-16">
             
             {/* HEADER */}
             <div className="text-center mb-16">
               
-              {/* Eyebrow - Neutral/Premium Zinc style */}
-              <div className="inline-block mb-6">
-                <span className="py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-xs font-bold uppercase tracking-widest">
-                  We're Not Done Yet
+              {/* [EYEBROW] - Flashing Limited Time Badge (Moved Up) */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF4F33]/10 border border-[#FF4F33]/20 mb-6 animate-pulse">
+                <span className="w-2 h-2 rounded-full bg-[#FF4F33]"></span>
+                <span className="text-[#FF4F33] text-xs font-bold uppercase tracking-widest">
+                  Available for a limited time
                 </span>
               </div>
               
-              {/* Headline */}
+              {/* [HEADLINE] */}
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
                 Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4F33] to-orange-500">FREE</span> bonuses
               </h2>
               
-              {/* Subhead - Clean Sans-Serif */}
-              <div className="flex flex-col gap-2">
-                <p className="text-lg md:text-xl text-zinc-400 font-medium">
-                  Join today and get 2 exclusive bonuses included.
-                </p>
-                <p className="text-sm font-bold uppercase tracking-widest text-[#FF4F33] animate-pulse">
-                  Available for a limited time.
-                </p>
-              </div>
+              {/* [SUBHEAD] - Underlined "2 exclusive bonuses" */}
+              <p className="text-lg md:text-xl text-zinc-400 font-medium max-w-2xl mx-auto">
+                Join today and get <span className="text-white underline decoration-[#FF4F33] decoration-2 underline-offset-4 font-bold">2 exclusive bonuses</span> included.
+              </p>
             </div>
 
             {/* BONUS CARDS GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
               {/* --- BONUS #1 --- */}
               <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
                 
                 {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-[#050505]"></div>
                   <img src={robOnLaptop} alt="Rob on laptop" className="w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105" />
                   
                   {/* VALUE BADGE */}
@@ -389,6 +386,7 @@ const CurriculumSection = () => {
                 
                 {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-bl from-zinc-800 to-[#050505]"></div>
                   <img src={tiktokBreakdownVault} alt="TikTok/IG Breakdown Vault" className="w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105" />
                   
                   {/* VALUE BADGE */}
