@@ -1305,24 +1305,23 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= VISUAL EVIDENCE: STUDIO POV ================= */}
-      <section className="relative z-10 px-6 pb-24 -mt-12">
-        <div className="max-w-5xl mx-auto relative">
+      {/* ================= VISUAL EVIDENCE: STUDIO POV (CORRECTED FADE STYLE) ================= */}
+      <section className="relative z-10 px-6 pb-24 -mt-12 pointer-events-none">
+        <div className="max-w-4xl mx-auto relative">
           
-          {/* Ambient Backlight Glow (Matches the Blue/Purple in photo) */}
-          <div className="absolute inset-0 bg-blue-600/20 blur-[100px] rounded-full transform scale-75 pointer-events-none"></div>
-          
-          {/* The Image Container */}
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-900/20">
-            <img 
-              src={robPovStudio} 
-              alt="Producer Point of View" 
-              className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity duration-700"
-            />
-            
-            {/* Cinematic Bottom Fade */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] to-transparent opacity-80"></div>
-          </div>
+          {/* Subtle ambient glow behind the vignette */}
+          <div className="absolute inset-0 bg-blue-900/20 blur-[120px] rounded-full transform scale-75 z-0"></div>
+
+          {/* The Image with CSS Mask Vignette */}
+          <img 
+            src={robPovStudio} 
+            alt="Producer's point of view in the studio" 
+            className="relative z-10 w-full h-auto object-cover"
+            style={{
+              maskImage: 'radial-gradient(ellipse 80% 70% at center, black 40%, transparent 100%)',
+              WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at center, black 40%, transparent 100%)'
+            }}
+          />
         </div>
       </section>
 
