@@ -124,7 +124,7 @@ const CurriculumSection = () => {
       id: "04",
       title: "Arrangement & Energy",
       desc: "Escaping the 'Loop Phase'. Learn how to structure a song to keep listeners hooked, using ear candy, transitions, and energy management to turn loops into full records.",
-      image: arrangementEnergyScreenshot,
+      image: abletonSession,
       lessons: [
         "Secret Sauce: My all time favourite FX plugins",
         "Creating Addictive Tracks: Song structure",
