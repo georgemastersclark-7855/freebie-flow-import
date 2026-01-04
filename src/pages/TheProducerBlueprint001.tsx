@@ -24,7 +24,7 @@ import flawesDontBlameMe from "@/assets/album-art/flawes-dont-blame-me.jpg";
 import januaryAllMyFriends from "@/assets/album-art/january-all-my-friends.jpg";
 import tiandaNothingButLove from "@/assets/album-art/tianda-nothing-but-love.jpeg";
 import chainsmokersTennisCourt from "@/assets/album-art/chainsmokers-tennis-court.jpeg";
-import productStackMockup from "@/assets/product-stack-mockup.png";
+import productStackMockup from "@/assets/product-stack-mockup-2.jpg";
 import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
 import solutionVideo from "@/assets/solution-video.mp4";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
@@ -457,7 +457,22 @@ const CurriculumSection = () => {
               {/* Subtle Top Lighting */}
               <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
               
-              <div className="p-8 md:p-12">
+              {/* 1. THE BUNDLE IMAGE (Visual Anchor) */}
+              <div className="relative w-full h-64 md:h-80 bg-zinc-900/50 border-b border-zinc-800/50 overflow-hidden">
+                {/* Glow behind image */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#FF4F33]/10 blur-[80px]"></div>
+                
+                <img 
+                  src={productStackMockup} 
+                  alt="The Producer Blueprint Full Stack" 
+                  className="w-full h-full object-contain object-bottom relative z-10 transform scale-110 md:scale-100 mt-4 md:mt-0"
+                />
+                
+                {/* Bottom Fade to blend into list */}
+                <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0A0A0A] to-transparent z-20"></div>
+              </div>
+
+              <div className="p-6 md:p-10">
                 
                 {/* LIST ITEMS */}
                 <ul className="space-y-8">
