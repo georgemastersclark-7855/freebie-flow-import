@@ -46,6 +46,7 @@ import mixingMasteringStudio from "@/assets/mixing-mastering-studio.jpg";
 import foundationLaptop from "@/assets/foundation-laptop.png";
 import soundDesignStudio from "@/assets/sound-design-studio.png";
 import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
+import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -354,7 +355,7 @@ const CurriculumSection = () => {
                 
                 {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-[#050505]"></div>
+                  <img src={robOnLaptop} alt="Rob on laptop" className="w-full h-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105" />
                   
                   {/* VALUE BADGE */}
                   <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg">
