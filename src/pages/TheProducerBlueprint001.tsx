@@ -1210,32 +1210,17 @@ const TheProducerBlueprint001 = () => {
           
         {/* HEADER AREA */}
         <div className="text-center mb-16 relative z-10">
-          
-          {/* EYEBROW */}
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
-            The Complete Masterclass
-          </div>
-          
-          {/* PRE-HEADLINE: Naming the vehicle clearly */}
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">
+          <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#FF4F33] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
             What Is The Producer Blueprint?
-          </h3>
-
-          {/* HEADLINE: STYLING COPIED FROM TUTORIAL HELL (4xl on mobile, 6xl on desktop, semibold) */}
-          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 text-white leading-[1.1]">
-            See How "A-List" Records Are <br className="hidden md:block" />
-            Actually Made <span className="font-serif italic text-zinc-500">In A Home Studio.</span>
-          </h2>
-          
-          {/* BODY: STYLING COPIED FROM TUTORIAL HELL (Zinc-500, Light, Relaxed) */}
-          <div className="text-zinc-500 text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed">
-            <p className="mb-6">
-              It's the era of home studio production. You no longer need a £10k mic to make 'pro' music. DJs are producing headline tracks in hotel rooms or in airports on a laptop and headphones.
-            </p>
-            <p className="text-zinc-300 font-medium">
-              Here's exactly what The Producer Blueprint will show you:
-            </p>
           </div>
+          
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 text-white leading-[1.1]">
+            See How "A-List" Records Are <br />
+            Actually Made <span className="font-serif italic text-white">In A Home Studio.</span>
+          </h2>
+          <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
+            It's the era of home studio production. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
+          </p>
         </div>
 
           {/* 3. THE 4 PILLARS */}
