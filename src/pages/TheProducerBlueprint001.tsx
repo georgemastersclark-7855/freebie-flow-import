@@ -1305,23 +1305,28 @@ const TheProducerBlueprint001 = () => {
         </div>
       </section>
 
-      {/* ================= VISUAL EVIDENCE: STUDIO POV (CORRECTED FADE STYLE) ================= */}
-      <section className="relative z-10 px-6 pb-24 -mt-12 pointer-events-none">
-        <div className="max-w-4xl mx-auto relative">
+      {/* ================= VISUAL EVIDENCE: STUDIO POV ================= */}
+      <section className="relative z-10 px-6 pb-32 -mt-16 pointer-events-none">
+        <div className="max-w-2xl mx-auto relative flex flex-col items-center justify-center">
           
-          {/* Subtle ambient glow behind the vignette */}
-          <div className="absolute inset-0 bg-blue-900/20 blur-[120px] rounded-full transform scale-75 z-0"></div>
+          {/* 1. The Backlight Glow 
+              (Matches the blue/purple studio lighting in the photo) 
+          */}
+          <div className="absolute inset-0 bg-indigo-600/20 blur-[90px] rounded-full transform scale-75 z-0"></div>
 
-          {/* The Image with CSS Mask Vignette */}
-          <img 
-            src={robPovStudio} 
-            alt="Producer's point of view in the studio" 
-            className="relative z-10 w-full h-auto object-cover"
-            style={{
-              maskImage: 'radial-gradient(ellipse 80% 70% at center, black 40%, transparent 100%)',
-              WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at center, black 40%, transparent 100%)'
-            }}
-          />
+          {/* 2. The Vignetted Image Container */}
+          <div className="relative w-full aspect-video z-10">
+            <img 
+              src={robPovStudio} 
+              alt="Rob Late Studio POV" 
+              className="w-full h-full object-cover"
+              style={{
+                // Strong radial mask to dissolve edges completely into the black background
+                maskImage: 'radial-gradient(circle at center, black 30%, transparent 70%)',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 70%)'
+              }}
+            />
+          </div>
         </div>
       </section>
 
