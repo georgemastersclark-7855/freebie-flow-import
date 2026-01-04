@@ -1208,31 +1208,25 @@ const TheProducerBlueprint001 = () => {
         {/* 2. CONTENT CONTAINER - Responsive negative margins */}
         <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
           
-        {/* HEADER AREA */}
-        <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#FF4F33] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
-            What Is The Producer Blueprint?
-          </div>
-          
-          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 text-white leading-[1.1]">
-            See How "A-List" Records Are <br />
-            Actually Made <span className="font-serif italic text-white">In A Home Studio.</span>
-          </h2>
-          <div className="max-w-xl mx-auto space-y-4">
-            <p className="text-zinc-500 text-base md:text-lg font-light leading-relaxed">
-              It's the era of home studio production. DJs are producing headline tracks in hotel rooms on a laptop and headphones.
-            </p>
-            <p className="text-zinc-400 text-base md:text-lg font-light leading-relaxed">
-              You no longer need expensive gear. You need creative workflows and an over-the-shoulder look at how a working producer goes from idea to finished song.
-            </p>
-            <p className="text-white font-medium text-base md:text-lg">
-              The Producer Blueprint will show you:
+          {/* HEADER AREA (CONTEXT) */}
+          <div className="text-center mb-16 md:mb-24 max-w-4xl mx-auto">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
+              The Producer Blueprint 2.0
+            </div>
+            
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
+              See How "A-List" Music Is <br />
+              Actually Made <span className="font-serif italic text-zinc-400 font-normal">In A Home Studio.</span>
+            </h2>
+            
+            {/* TOP TEXT: The "Why" */}
+            <p className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mx-auto">
+              It's the era of home studio production. You no longer need expensive gear. DJs are producing headline tracks in hotel rooms on a laptop and headphones.
             </p>
           </div>
-        </div>
 
-          {/* 3. THE 4 PILLARS */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          {/* 3. THE 4 PILLARS (THE CARDS) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative mb-20">
             
             {/* Card 01 */}
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
@@ -1292,8 +1286,15 @@ const TheProducerBlueprint001 = () => {
 
           </div>
 
-          {/* BRIDGE / CTA */}
-          <div className="text-center mt-20 max-w-2xl mx-auto pb-12">
+          {/* 4. FOOTER / BRIDGE (THE "CLOSER") */}
+          <div className="text-center pb-24 max-w-3xl mx-auto">
+            
+            {/* The "How" - High Contrast Statement */}
+            <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-12">
+              Learn top creative workflows with <span className="text-[#FF4F33]">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
+            </p>
+
+            {/* CTA Button */}
             <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-[#FF4F33] transition-all">
               <span className="border-b border-white/30 pb-0.5 group-hover:border-[#FF4F33]">See The Curriculum</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
