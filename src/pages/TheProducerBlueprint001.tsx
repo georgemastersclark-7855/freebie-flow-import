@@ -1211,23 +1211,18 @@ const TheProducerBlueprint001 = () => {
         {/* HEADER AREA */}
         <div className="text-center mb-24 max-w-5xl mx-auto">
           
-          {/* EYEBROW */}
+          {/* EYEBROW: The Definition */}
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
-            The Complete Masterclass
+            What Is The Producer Blueprint?
           </div>
           
-          {/* HEADLINE: "What Is..." - High Impact, Bold Sans */}
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl leading-[1.1]">
-            What Is The Producer Blueprint?
-          </h2>
-
-          {/* SUBHEAD: The "Brand Style" Mix (Bold Sans + Grey Serif Accent) */}
-          <h3 className="text-3xl md:text-5xl font-bold text-white mb-10 leading-[1.15] tracking-tight">
+          {/* HEADLINE: The Hook (Restored to Main Visual Weight) */}
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-10 text-white drop-shadow-2xl leading-[1.1]">
             See How "A-List" Records Are <br className="hidden md:block" />
-            Actually Made <span className="font-serif italic text-zinc-500">In A Home Studio.</span>
-          </h3>
+            Actually Made <span className="font-serif italic text-zinc-500 font-normal">In A Home Studio.</span>
+          </h2>
           
-          {/* BODY: The "Era" Logic + The Bridge */}
+          {/* BODY: The Logic + The Bridge */}
           <div className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto">
             <p className="mb-6">
               It's the era of home studio production. You no longer need a £10k mic to make 'pro' music. DJs are producing headline tracks in hotel rooms or in airports on a laptop and headphones.
