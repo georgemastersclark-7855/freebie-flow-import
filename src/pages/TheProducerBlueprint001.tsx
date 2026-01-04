@@ -48,7 +48,6 @@ import soundDesignStudio from "@/assets/sound-design-studio.png";
 import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
-import robStudioPov from "@/assets/rob-studio-pov.png";
 import robPovStudio from "@/assets/rob-pov-studio.png";
 import blueprintLaptopMockup from "@/assets/producer-blueprint-mockup.jpg";
 
@@ -1442,24 +1441,6 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Studio POV Image with Fade */}
-      <section className="relative w-full">
-        <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden">
-          <img 
-            src={robStudioPov}
-            alt="Rob Late producing in his home studio"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          {/* Top Fade */}
-          <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black via-black/70 to-transparent"></div>
-          {/* Bottom Fade */}
-          <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent"></div>
-          {/* Side Fades (Desktop) */}
-          <div className="hidden md:block absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black to-transparent"></div>
-          <div className="hidden md:block absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black to-transparent"></div>
         </div>
       </section>
 
