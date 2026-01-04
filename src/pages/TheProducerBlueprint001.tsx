@@ -1208,21 +1208,28 @@ const TheProducerBlueprint001 = () => {
         {/* 2. CONTENT CONTAINER - Responsive negative margins */}
         <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
           
-          {/* Header Content */}
-          <div className="text-center mb-24">
+          {/* MERGED COPY HEADER */}
+          <div className="text-center mb-24 max-w-4xl mx-auto">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
               The Producer Blueprint 2.0
             </div>
             
             <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-white drop-shadow-2xl">
-              See How "A-List" Music Is <br />
-              Actually Made <span className="font-serif italic text-zinc-400">In A Home Studio.</span>
+              It's The Era of <br />
+              <span className="font-serif italic text-zinc-400">Home Studio Production.</span>
             </h2>
             
-            {/* UPDATED SUBHEADLINE */}
-            <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              In 2026, it is possible to make top-streaming music from a home setup. Most producers plateau simply because they don't know what "good" looks like during the messy middle.
-            </p>
+            <div className="space-y-6 text-lg md:text-xl text-zinc-400 font-medium leading-relaxed max-w-3xl mx-auto">
+              <p>
+                <span className="text-white font-bold">You no longer need a £10k mic to be 'pro'.</span> There are kids making 100-million stream hits on laptops. DJs are producing headline tracks in hotel rooms.
+              </p>
+              <p>
+                Most producers plateau simply because they are stuck in the mindset of "I need better gear." But the people who win have efficiency of output and a creative workflow they can rely on.
+              </p>
+              <p className="text-[#FF4F33] font-bold">
+                I can show you the blueprint.
+              </p>
+            </div>
           </div>
 
           {/* 3. THE 4 PILLARS */}
