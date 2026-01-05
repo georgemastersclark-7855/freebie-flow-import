@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
@@ -1646,8 +1647,19 @@ const TheProducerBlueprint001 = () => {
               </p>
             </div>
 
-            {/* ================= CLEAN VERIFIED STUDENT GRID (NO FOLLOWERS) ================= */}
-            <div className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide mb-20">
+            {/* ================= SCROLLABLE GALLERY WITH MOBILE NUDGE ================= */}
+            <motion.div 
+              initial={{ x: 0 }}
+              whileInView={{ x: [0, -20, 0] }}
+              transition={{ 
+                delay: 0.5, 
+                duration: 0.8, 
+                ease: "easeInOut",
+                times: [0, 0.5, 1] 
+              }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide mb-20"
+            >
               {[
                 {
                   id: "kosana",
@@ -1744,7 +1756,7 @@ const TheProducerBlueprint001 = () => {
               
               {/* Spacer for mobile scrolling */}
               <div className="w-2 shrink-0 md:hidden"></div>
-            </div>
+            </motion.div>
 
             {/* WALL OF PROOF (Masonry with 10 Images) */}
             <div className="mt-8">
