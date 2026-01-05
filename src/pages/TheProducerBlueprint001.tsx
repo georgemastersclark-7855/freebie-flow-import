@@ -1353,19 +1353,33 @@ const TheProducerBlueprint001 = () => {
 
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
+          {/* Height: Mobile 600px, Desktop 800px */}
           <div className="relative w-full max-w-6xl h-[600px] md:h-[800px] overflow-hidden">
+            
+            {/* MOBILE IMAGE */}
             <img 
               src={robMarshmello}
               className="block md:hidden w-full h-full object-cover object-top opacity-100 brightness-[1.15]"
               alt="Rob and Marshmello Mobile"
             />
+            
+            {/* DESKTOP IMAGE */}
             <img 
               src={robHomeStudioWide}
               className="hidden md:block w-full h-full object-cover object-center opacity-80"
               alt="Rob in Home Studio Desktop"
             />
-            <div className="absolute top-0 left-0 w-full h-24 md:h-40 bg-gradient-to-b from-[#050505] to-transparent"></div>
-            <div className="absolute bottom-0 left-0 w-full h-48 md:h-[500px] bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent"></div>
+            
+            {/* Top Fade - Smooth transition from previous section */}
+            <div className="absolute top-0 left-0 w-full h-24 md:h-40 bg-gradient-to-b from-[#050505] to-transparent z-10"></div>
+            
+            {/* Bottom Fade - DEEP VIGNETTE for text readability */}
+            {/* Starts solid at bottom and reaches transparency at 60% height */}
+            <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-10"></div>
+            
+            {/* Side Fades - Desktop only for cinematic framing */}
+            <div className="hidden md:block absolute top-0 left-0 w-48 h-full bg-gradient-to-r from-[#050505] to-transparent z-10"></div>
+            <div className="hidden md:block absolute top-0 right-0 w-48 h-full bg-gradient-to-l from-[#050505] to-transparent z-10"></div>
           </div>
         </div>
 
