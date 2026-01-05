@@ -747,13 +747,10 @@ const TheProducerBlueprint001 = () => {
         }}
       />
 
-      {/* Navigation Bar */}
+      {/* Navigation Bar - LOGIN REMOVED */}
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
         <div className="text-xl font-bold tracking-tight">The Producer Blueprint</div>
         <div className="flex items-center gap-6">
-          <a href="#" className="text-zinc-400 hover:text-white transition-colors text-sm">
-            Log In
-          </a>
           <button className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
             Get Instant Access
           </button>
