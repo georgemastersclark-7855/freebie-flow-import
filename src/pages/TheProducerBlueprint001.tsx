@@ -228,22 +228,27 @@ const CurriculumSection = () => {
             return (
               <div 
                 key={module.id}
-                className={`group relative w-full border border-zinc-800 bg-[#09090b] rounded-2xl overflow-hidden transition-all duration-500 ease-in-out ${
-                  isOpen ? 'h-auto ring-1 ring-zinc-700' : 'h-[280px] hover:border-zinc-600'
+                className={`group relative w-full rounded-2xl overflow-hidden transition-all duration-500 ease-in-out border-t border-t-white/10 border-x border-x-white/5 border-b border-b-black ${
+                  isOpen 
+                    ? 'h-auto bg-zinc-900 shadow-[0_0_50px_rgba(0,0,0,0.8)]' 
+                    : 'h-[280px] bg-gradient-to-b from-zinc-900 to-black hover:from-zinc-800 hover:to-zinc-900'
                 }`}
               >
                 <div className="flex flex-col md:flex-row h-full">
                   
                   {/* LEFT: IMAGE SECTION (300px) */}
                   <div className="relative z-30 w-full md:w-[300px] shrink-0 h-64 md:h-auto">
-                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
+                    {/* Inner Bevel Highlight */}
+                    <div className="absolute inset-0 border-r border-white/5 z-20 pointer-events-none hidden md:block"></div>
+                    
+                    <div className="absolute inset-0 bg-blue-500/5 mix-blend-overlay z-10"></div>
                     <img 
                       src={module.image} 
                       alt={module.title} 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                     />
-                    {/* Mobile gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent md:hidden"></div>
+                    {/* Gradient Overlay for Text Readability on Mobile */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent md:hidden"></div>
                   </div>
 
                   {/* RIGHT: CONTENT SECTION */}
@@ -252,28 +257,28 @@ const CurriculumSection = () => {
                     {/* TOP SECTION: Compact View */}
                     <div className="flex flex-col justify-center px-6 py-6 md:px-8 h-[280px] shrink-0 relative z-20">
                       
-                      {/* Background Number */}
-                      <div className="absolute top-4 right-6 text-6xl font-bold text-[#1a1a1a] select-none pointer-events-none">
+                      {/* Background Number (Subtle Watermark) */}
+                      <div className="absolute top-4 right-6 text-7xl font-black text-white/5 select-none pointer-events-none font-serif italic">
                         {module.id}
                       </div>
 
                       <div className="pr-12">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3 leading-none">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3 leading-none group-hover:text-zinc-100 transition-colors">
                           {module.title}
                           {module.subtitle && (
-                            <span className="font-serif italic font-normal text-zinc-500 ml-2">
+                            <span className="font-serif italic font-normal text-zinc-500 ml-2 group-hover:text-zinc-400 transition-colors">
                               {module.subtitle}
                             </span>
                           )}
                         </h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed mb-6 max-w-lg font-medium line-clamp-3">
+                        <p className="text-zinc-400 text-sm leading-relaxed mb-6 max-w-lg font-medium line-clamp-3 group-hover:text-zinc-300 transition-colors">
                           {module.desc}
                         </p>
                         
                         {/* TOGGLE BUTTON */}
                         <button 
                           onClick={() => toggleModule(module.id)}
-                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
+                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-[#FF4F33] uppercase hover:text-white transition-colors"
                         >
                           {isOpen ? 'Hide Lessons' : 'View Lessons'}
                           <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180 -translate-y-[1px]' : 'group-hover:translate-y-1'}`}>
@@ -289,9 +294,9 @@ const CurriculumSection = () => {
                         isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
                       }`}
                     >
-                      <div className="border-t border-zinc-800 bg-zinc-900/30 p-6 md:p-8 pt-4">
+                      <div className="border-t border-white/5 bg-black/20 p-6 md:p-8 pt-4">
                         <div className="flex items-center gap-3 mb-6">
-                          <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                          <h4 className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
                             Module Breakdown
                           </h4>
                           <div className="h-px bg-zinc-800 flex-1"></div>
@@ -301,8 +306,8 @@ const CurriculumSection = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-12">
                           {module.lessons.map((lesson, idx) => (
                             <div key={idx} className="flex items-start group/lesson cursor-default">
-                              <span className="mr-3 text-zinc-600 text-[10px] mt-[5px] group-hover/lesson:text-[#FF4F33] transition-colors">▶</span>
-                              <span className="text-zinc-400 text-sm font-medium group-hover/lesson:text-zinc-300 transition-colors">{lesson}</span>
+                              <span className="mr-3 text-zinc-700 text-[10px] mt-[5px] group-hover/lesson:text-[#FF4F33] transition-colors">▶</span>
+                              <span className="text-zinc-400 text-sm font-medium group-hover/lesson:text-zinc-200 transition-colors">{lesson}</span>
                             </div>
                           ))}
                         </div>
