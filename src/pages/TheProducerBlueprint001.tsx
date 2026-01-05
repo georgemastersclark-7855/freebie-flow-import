@@ -1564,13 +1564,14 @@ const TheProducerBlueprint001 = () => {
               </p>
             </div>
 
-            {/* HERO VIDEO CARDS (Text Underneath) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+            {/* HERO CARDS - CAROUSEL ON MOBILE, GRID ON DESKTOP */}
+            {/* We use -mx-6 on mobile to break out of the parent padding and let the carousel touch the screen edges */}
+            <div className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide mb-20">
               
               {/* CARD 1: Kiera Video Testimonial */}
-              <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors">
-                {/* MEDIA AREA (Clean Video Look) */}
-                <div className="relative aspect-[9/16] overflow-hidden cursor-pointer">
+              <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
+                {/* MEDIA AREA */}
+                <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
                   <video
                     src={djkieraTestimonial}
                     className="absolute inset-0 w-full h-full object-cover"
@@ -1583,112 +1584,96 @@ const TheProducerBlueprint001 = () => {
                   />
                   {/* Play Button Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                    <div className="w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
-                      <Play className="w-7 h-7 text-white fill-white ml-1" />
+                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
+                      <Play className="w-6 h-6 text-white fill-white ml-1" />
                     </div>
                   </div>
                 </div>
-
-                {/* TEXT AREA (Clean Feed Style) */}
-                <div className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
+                {/* TEXT AREA */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
-                        <User className="w-4 h-4 text-zinc-400" />
-                      </div>
-                      <div>
-                        <p className="text-white font-semibold text-sm flex items-center gap-1.5">
-                          Kiera
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02]" />
-                        </p>
-                        <p className="text-zinc-500 text-xs">@djkiera</p>
-                      </div>
+                      <p className="text-white font-bold text-sm flex items-center gap-1">
+                        Kiera
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02] fill-[#D3FF02]/10" />
+                      </p>
+                      <p className="text-zinc-500 text-sm">@djkiera</p>
                     </div>
                   </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
+                  <p className="text-zinc-200 text-base font-medium leading-snug">
                     "The best investment I've made for my music career."
                   </p>
                 </div>
               </div>
 
               {/* CARD 2: Headroom Records */}
-              <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors">
-                {/* MEDIA AREA (Clean Video Look) */}
-                <div className="relative aspect-[9/16] overflow-hidden cursor-pointer">
+              <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
+                {/* MEDIA AREA */}
+                <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
                   <img 
                     src={headroomRecordsTestimonial}
                     alt="Headroom Records testimonial"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                   />
                   {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
-                      <Play className="w-7 h-7 text-white fill-white ml-1" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
+                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
+                      <Play className="w-6 h-6 text-white fill-white ml-1" />
                     </div>
                   </div>
                 </div>
-
-                {/* TEXT AREA (Clean Feed Style) */}
-                <div className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
+                {/* TEXT AREA */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
-                        <User className="w-4 h-4 text-zinc-400" />
-                      </div>
-                      <div>
-                        <p className="text-white font-semibold text-sm flex items-center gap-1.5">
-                          David R.
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02]" />
-                        </p>
-                        <p className="text-zinc-500 text-xs">@david.prod</p>
-                      </div>
+                      <p className="text-white font-bold text-sm flex items-center gap-1">
+                        David R.
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02] fill-[#D3FF02]/10" />
+                      </p>
+                      <p className="text-zinc-500 text-sm">@david.prod</p>
                     </div>
                   </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
+                  <p className="text-zinc-200 text-base font-medium leading-snug">
                     "Headroom Records wants to sign my next single!"
                   </p>
                 </div>
               </div>
 
               {/* CARD 3: Streaming Numbers */}
-              <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors">
-                {/* MEDIA AREA (Clean Video Look) */}
-                <div className="relative aspect-[9/16] overflow-hidden cursor-pointer">
+              <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
+                {/* MEDIA AREA */}
+                <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
                   <img 
                     src={streamingNumbersTestimonial}
                     alt="Streaming numbers testimonial"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                   />
                   {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
-                      <Play className="w-7 h-7 text-white fill-white ml-1" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
+                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
+                      <Play className="w-6 h-6 text-white fill-white ml-1" />
                     </div>
                   </div>
                 </div>
-
-                {/* TEXT AREA (Clean Feed Style) */}
-                <div className="p-5">
-                  <div className="flex items-center gap-3 mb-3">
+                {/* TEXT AREA */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
-                        <User className="w-4 h-4 text-zinc-400" />
-                      </div>
-                      <div>
-                        <p className="text-white font-semibold text-sm flex items-center gap-1.5">
-                          Sarah Jenkins
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02]" />
-                        </p>
-                        <p className="text-zinc-500 text-xs">@sarah.music</p>
-                      </div>
+                      <p className="text-white font-bold text-sm flex items-center gap-1">
+                        Sarah Jenkins
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02] fill-[#D3FF02]/10" />
+                      </p>
+                      <p className="text-zinc-500 text-sm">@sarah.music</p>
                     </div>
                   </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
+                  <p className="text-zinc-200 text-base font-medium leading-snug">
                     "Highest streaming numbers yet. 12k on the latest track."
                   </p>
                 </div>
               </div>
 
+              {/* Spacer for mobile scrolling */}
+              <div className="w-2 shrink-0 md:hidden"></div>
             </div>
 
             {/* WALL OF PROOF (Masonry with 10 Images) */}
