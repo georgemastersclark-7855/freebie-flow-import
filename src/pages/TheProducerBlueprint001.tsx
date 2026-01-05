@@ -262,9 +262,10 @@ const CurriculumSection = () => {
                       alt={module.title} 
                       className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
                     />
-                    {/* Right edge fade for seamless blend */}
-                    <div className="md:absolute md:inset-y-0 md:right-0 md:w-24 md:bg-gradient-to-l md:from-zinc-900/90 md:to-transparent"></div>
                   </div>
+
+                  {/* DESKTOP DIVIDER LINE (hidden md:block) */}
+                  <div className="hidden md:block md:w-[1px] md:self-stretch md:bg-white/10"></div>
 
                   {/* CONTENT SECTION - Flex-1 on mobile, w-2/3 on desktop */}
                   <div className="flex-1 flex flex-col relative min-w-0 md:w-2/3">
