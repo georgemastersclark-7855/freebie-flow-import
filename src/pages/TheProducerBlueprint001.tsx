@@ -327,104 +327,129 @@ const CurriculumSection = () => {
         </div>
 
         {/* ================= BONUS SECTION (No Overlay) ================= */}
-        <section className="relative pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
+        <section className="relative pb-16 md:pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
           {/* VISUAL CONNECTOR */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
           
-          <div className="max-w-6xl mx-auto relative z-10 pt-16">
+          <div className="max-w-6xl mx-auto relative z-10 pt-12 md:pt-16">
             
             {/* HEADER */}
-            <div className="text-center mb-16">
+            <div className="text-center mb-10 md:mb-16">
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D3FF02]/10 border border-[#D3FF02]/20 mb-6 animate-pulse">
-                <span className="w-2 h-2 rounded-full bg-[#D3FF02]"></span>
-                <span className="text-[#D3FF02] text-xs font-bold uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-[#D3FF02]/10 border border-[#D3FF02]/20 mb-4 md:mb-6 animate-pulse">
+                <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#D3FF02]"></span>
+                <span className="text-[#D3FF02] text-[10px] md:text-xs font-bold uppercase tracking-widest">
                   Available for a limited time
                 </span>
               </div>
               
               {/* Headline */}
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
+              <h2 className="text-3xl md:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter">
                 Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D3FF02] to-[#D3FF02]">FREE</span> bonuses
               </h2>
               
               {/* Subhead */}
-              <p className="text-lg md:text-xl text-zinc-400 font-medium max-w-2xl mx-auto">
+              <p className="text-base md:text-xl text-zinc-400 font-medium max-w-2xl mx-auto">
                 Join today and get <span className="text-white underline decoration-[#D3FF02] decoration-2 underline-offset-4 font-bold">2 exclusive bonuses</span> included.
               </p>
             </div>
 
             {/* BONUS CARDS GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-8">
               
               {/* --- BONUS #1 --- */}
-              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 flex flex-col">
+              <div className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10">
                 
-                {/* IMAGE AREA */}
-                <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  {/* 1. THE IMAGE (Directly visible, no overlay) */}
-                  <img 
-                    src={robOnLaptop}
-                    alt="Social Media Module Mockup" 
-                    className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
-                  />
-                  {/* 2. VALUE BADGE */}
-                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
-                    Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#D3FF02]">FREE</span>
-                  </div>
-                </div>
-
-                {/* CONTENT AREA */}
-                <div className="p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D3FF02] transition-colors">
-                    BONUS #1: Social Media, Business & Music Industry Module
-                  </h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                    Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).
-                  </p>
+                {/* MOBILE: Row layout | DESKTOP: Column layout */}
+                <div className="flex flex-row md:flex-col">
                   
-                  <div className="mt-auto pt-6 border-t border-zinc-800 flex justify-between items-center">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
-                      Instant Access
-                    </span>
-                    <span className="text-[#D3FF02] text-lg">+</span>
+                  {/* IMAGE AREA */}
+                  <div className="w-28 h-28 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
+                    <img 
+                      src={robOnLaptop}
+                      alt="Social Media Module Mockup" 
+                      className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                    />
+                    {/* Desktop-only Value Badge on Image */}
+                    <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
+                      Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#D3FF02]">FREE</span>
+                    </div>
+                  </div>
+
+                  {/* CONTENT AREA */}
+                  <div className="p-4 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
+                    {/* Title with inline FREE badge on mobile */}
+                    <div className="flex items-start gap-2 mb-2 md:mb-3">
+                      <h3 className="text-base md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight flex-1">
+                        <span className="text-zinc-500 text-xs md:text-base font-bold mr-1">BONUS #1:</span>
+                        <span className="md:hidden"> Social Media & Business</span>
+                        <span className="hidden md:inline">Social Media, Business & Music Industry Module</span>
+                      </h3>
+                      {/* Mobile FREE badge */}
+                      <span className="md:hidden shrink-0 bg-white text-black text-[10px] font-bold px-2 py-1 rounded">
+                        FREE
+                      </span>
+                    </div>
+                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed line-clamp-3 md:line-clamp-none md:mb-6 md:flex-1">
+                      Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income.
+                    </p>
+                    
+                    {/* Desktop-only footer */}
+                    <div className="hidden md:flex mt-auto pt-6 border-t border-zinc-800 justify-between items-center">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                        Instant Access
+                      </span>
+                      <span className="text-[#D3FF02] text-lg">+</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* --- BONUS #2 --- */}
-              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 flex flex-col">
+              <div className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10">
                 
-                {/* IMAGE AREA */}
-                <div className="h-56 bg-zinc-900 relative overflow-hidden">
-                  {/* 1. THE IMAGE (Directly visible, no overlay) */}
-                  <img 
-                    src={tiktokBreakdownVault} 
-                    alt="TikTok Vault Mockup"
-                    className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
-                  />
+                {/* MOBILE: Row layout | DESKTOP: Column layout */}
+                <div className="flex flex-row md:flex-col">
                   
-                  {/* 2. VALUE BADGE */}
-                  <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
-                    Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#D3FF02]">FREE</span>
+                  {/* IMAGE AREA */}
+                  <div className="w-28 h-28 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
+                    <img 
+                      src={tiktokBreakdownVault} 
+                      alt="TikTok Vault Mockup"
+                      className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                    />
+                    {/* Desktop-only Value Badge on Image */}
+                    <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
+                      Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#D3FF02]">FREE</span>
+                    </div>
                   </div>
-                </div>
 
-                {/* CONTENT AREA */}
-                <div className="p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D3FF02] transition-colors">
-                    BONUS #2: Rob's TikTok/IG Breakdown Vault
-                  </h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
-                    The ultimate "Cheat Sheet." Get exclusive access to the project files and walkthroughs of some of my most viral content. See the exact layers, processing, and decisions behind the videos that caught the attention of <strong className="text-white">The Chainsmokers</strong>.
-                  </p>
-                  
-                  <div className="mt-auto pt-6 border-t border-zinc-800 flex justify-between items-center">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
-                      Instant Access
-                    </span>
-                    <span className="text-[#D3FF02] text-lg">+</span>
+                  {/* CONTENT AREA */}
+                  <div className="p-4 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
+                    {/* Title with inline FREE badge on mobile */}
+                    <div className="flex items-start gap-2 mb-2 md:mb-3">
+                      <h3 className="text-base md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight flex-1">
+                        <span className="text-zinc-500 text-xs md:text-base font-bold mr-1">BONUS #2:</span>
+                        <span className="md:hidden"> TikTok/IG Breakdown Vault</span>
+                        <span className="hidden md:inline">Rob's TikTok/IG Breakdown Vault</span>
+                      </h3>
+                      {/* Mobile FREE badge */}
+                      <span className="md:hidden shrink-0 bg-white text-black text-[10px] font-bold px-2 py-1 rounded">
+                        FREE
+                      </span>
+                    </div>
+                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed line-clamp-3 md:line-clamp-none md:mb-6 md:flex-1">
+                      The ultimate "Cheat Sheet." Get exclusive access to project files and walkthroughs of my most viral content.
+                    </p>
+                    
+                    {/* Desktop-only footer */}
+                    <div className="hidden md:flex mt-auto pt-6 border-t border-zinc-800 justify-between items-center">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                        Instant Access
+                      </span>
+                      <span className="text-[#D3FF02] text-lg">+</span>
+                    </div>
                   </div>
                 </div>
               </div>
