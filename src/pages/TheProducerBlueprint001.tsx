@@ -1648,154 +1648,102 @@ const TheProducerBlueprint001 = () => {
               </p>
             </div>
 
-            {/* HERO CARDS - CAROUSEL ON MOBILE, GRID ON DESKTOP */}
-            {/* We use -mx-6 on mobile to break out of the parent padding and let the carousel touch the screen edges */}
+            {/* ================= CLEAN VERIFIED STUDENT GRID (NO FOLLOWERS) ================= */}
             <div className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide mb-20">
-              
-              {/* HIGH-STATUS FULL-SIZE TESTIMONIAL: KOSANA */}
-              <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
-                
-                {/* PREMIUM IG PROFILE HEADER */}
-                <div className="p-4 flex items-center gap-3">
-                  {/* Stories Ring Avatar */}
-                  <div className="relative p-[2px] rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
-                    <div className="bg-black p-[2px] rounded-full">
-                      <Avatar className="w-10 h-10 border-none">
-                        <AvatarImage src={avatarKosana} className="object-cover" />
-                        <AvatarFallback>K</AvatarFallback>
-                      </Avatar>
-                    </div>
-                  </div>
+              {[
+                {
+                  id: "kosana",
+                  name: "Kosana",
+                  handle: "@djkosana",
+                  title: "International DJ",
+                  media: djkieraTestimonial,
+                  isVideo: true,
+                  quote: "The best investment I've made for my music career.",
+                  avatar: avatarKosana
+                },
+                {
+                  id: "david",
+                  name: "David R.",
+                  handle: "@david.prod",
+                  title: "Label-Signed Producer",
+                  media: headroomRecordsTestimonial,
+                  isVideo: false,
+                  quote: "Headroom Records wants to sign my next single!",
+                  avatar: avatarProducer1
+                },
+                {
+                  id: "sarah",
+                  name: "Sarah Jenkins",
+                  handle: "@sarah.music",
+                  title: "Electronic Producer",
+                  media: streamingNumbersTestimonial,
+                  isVideo: false,
+                  quote: "Highest streaming numbers yet. 12k on the latest track.",
+                  avatar: avatarProducer2
+                }
+              ].map((student) => (
+                <div key={student.id} className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
                   
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-1">
-                      <p className="text-white font-bold text-sm tracking-tight">djkosana</p>
-                      {/* Official IG Verified SVG */}
-                      <svg viewBox="0 0 22 22" className="h-3.5 w-3.5 fill-[#0095F6]">
-                        <path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z" />
-                      </svg>
-                    </div>
-                    <p className="text-zinc-500 text-xs">@djkosana</p>
-                  </div>
-                </div>
-
-                {/* FULL SIZE MEDIA AREA (9:16 Ratio) */}
-                <div 
-                  className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer"
-                  onClick={() => {
-                    const video = kieraVideoRef.current;
-                    if (video) {
-                      if (video.paused) {
-                        video.muted = false;
-                        video.play();
-                        setKieraPlaying(true);
-                      } else {
-                        video.pause();
-                        setKieraPlaying(false);
-                      }
-                    }
-                  }}
-                >
-                  <video
-                    ref={kieraVideoRef}
-                    src={djkieraTestimonial}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    loop
-                    playsInline
-                    preload="metadata"
-                    onMouseEnter={(e) => { e.currentTarget.muted = true; e.currentTarget.play(); }}
-                    onMouseLeave={(e) => { if (!kieraPlaying) { e.currentTarget.pause(); e.currentTarget.currentTime = 0; } }}
-                  />
-                  {/* Play Button Overlay */}
-                  <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${kieraPlaying ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
-                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
-                      <Play className="w-6 h-6 text-white fill-white ml-1" />
-                    </div>
-                  </div>
-                  {/* Pause indicator when playing */}
-                  {kieraPlaying && (
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-14 h-14 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
-                        <Pause className="w-6 h-6 text-white fill-white" />
+                  {/* CLEAN PROFILE HEADER */}
+                  <div className="p-4 flex items-center gap-3">
+                    <div className="relative p-[2px] rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
+                      <div className="bg-black p-[2px] rounded-full">
+                        <Avatar className="w-10 h-10 border-none">
+                          <AvatarImage src={student.avatar} className="object-cover" />
+                          <AvatarFallback>{student.name[0]}</AvatarFallback>
+                        </Avatar>
                       </div>
                     </div>
-                  )}
-                </div>
-
-                {/* CLEAN QUOTE AREA */}
-                <div className="p-6">
-                  <p className="text-zinc-200 text-base font-medium leading-snug">
-                    "The best investment I've made for my music career."
-                  </p>
-                </div>
-              </div>
-
-              {/* CARD 2: Headroom Records */}
-              <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
-                {/* MEDIA AREA */}
-                <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
-                  <img 
-                    src={headroomRecordsTestimonial}
-                    alt="Headroom Records testimonial"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
-                  />
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
-                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
-                      <Play className="w-6 h-6 text-white fill-white ml-1" />
+                    
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1">
+                        <p className="text-white font-bold text-sm tracking-tight">{student.name}</p>
+                        {/* Meta Verified Badge */}
+                        <svg viewBox="0 0 22 22" className="h-3.5 w-3.5 fill-[#0095F6]">
+                          <path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z" />
+                        </svg>
+                      </div>
+                      <p className="text-zinc-500 text-xs">{student.handle} • {student.title}</p>
                     </div>
                   </div>
-                </div>
-                {/* TEXT AREA */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <p className="text-white font-bold text-sm flex items-center gap-1">
-                        David R.
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02] fill-[#D3FF02]/10" />
-                      </p>
-                      <p className="text-zinc-500 text-sm">@david.prod</p>
-                    </div>
-                  </div>
-                  <p className="text-zinc-200 text-base font-medium leading-snug">
-                    "Headroom Records wants to sign my next single!"
-                  </p>
-                </div>
-              </div>
 
-              {/* CARD 3: Streaming Numbers */}
-              <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
-                {/* MEDIA AREA */}
-                <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
-                  <img 
-                    src={streamingNumbersTestimonial}
-                    alt="Streaming numbers testimonial"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
-                  />
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
-                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
-                      <Play className="w-6 h-6 text-white fill-white ml-1" />
+                  {/* VIDEO/IMAGE AREA (Full 9:16) */}
+                  <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
+                    {student.isVideo ? (
+                      <video
+                        src={student.media}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        onMouseEnter={(e) => e.currentTarget.play()}
+                        onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                      />
+                    ) : (
+                      <img 
+                        src={student.media}
+                        alt={`${student.name} testimonial`}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                      />
+                    )}
+                    {/* Play Button Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                      <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
+                        <Play className="w-6 h-6 text-white fill-white ml-1" />
+                      </div>
                     </div>
                   </div>
-                </div>
-                {/* TEXT AREA */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <p className="text-white font-bold text-sm flex items-center gap-1">
-                        Sarah Jenkins
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02] fill-[#D3FF02]/10" />
-                      </p>
-                      <p className="text-zinc-500 text-sm">@sarah.music</p>
-                    </div>
-                  </div>
-                  <p className="text-zinc-200 text-base font-medium leading-snug">
-                    "Highest streaming numbers yet. 12k on the latest track."
-                  </p>
-                </div>
-              </div>
 
+                  {/* CAPTION AREA */}
+                  <div className="p-6">
+                    <p className="text-zinc-200 text-base font-medium leading-snug">
+                      "{student.quote}"
+                    </p>
+                  </div>
+                </div>
+              ))}
+              
               {/* Spacer for mobile scrolling */}
               <div className="w-2 shrink-0 md:hidden"></div>
             </div>
