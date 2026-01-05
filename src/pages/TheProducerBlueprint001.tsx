@@ -844,7 +844,7 @@ const TheProducerBlueprint001 = () => {
 
       {/* Navigation Bar - LOGIN REMOVED */}
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
-        <div className="text-xl font-bold tracking-tight">The Producer Blueprint<sup className="text-[10px] font-normal ml-0.5">™</sup></div>
+        <div className="text-xl font-bold tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">The Producer Blueprint<sup className="text-[10px] font-normal ml-0.5">™</sup></div>
         <div className="flex items-center gap-6">
           <a href="#pricing" className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
             Get Instant Access
