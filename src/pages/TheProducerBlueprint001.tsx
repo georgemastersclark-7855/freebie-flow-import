@@ -1131,8 +1131,8 @@ const TheProducerBlueprint001 = () => {
             <p className="text-zinc-400 text-base md:text-lg">Join 500+ producers who have upgraded their workflow.</p>
           </div>
 
-          {/* MASONRY WALL - No more blocking overlays */}
-          <div className="w-full relative z-0">
+          {/* MASONRY WALL - Cinematic fade on desktop, clean on mobile */}
+          <div className="w-full relative z-0 overflow-hidden md:max-h-[700px]">
             <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 pb-12 md:pb-32">
               {/* Display first 3 on mobile, all 6 on desktop */}
               {miniSocialProofImages.map((img, idx) => (
@@ -1147,12 +1147,14 @@ const TheProducerBlueprint001 = () => {
                 </div>
               ))}
             </div>
+            {/* Fade overlay - minimal on mobile, cinematic on desktop */}
+            <div className="absolute bottom-0 left-0 w-full h-32 md:h-[400px] bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-20 pointer-events-none"></div>
           </div>
         </div>
       </section>
 
       {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO + SCRIBBLES) ================= */}
-      <section className="py-32 px-6 bg-[#050505] relative z-20">
+      <section className="py-16 md:py-32 px-6 bg-[#050505] relative z-20 md:-mt-32">
         {/* Deep Red Ambient Glow Behind Tutorial Hell */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none z-0"
