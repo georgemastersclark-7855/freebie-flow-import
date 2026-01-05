@@ -1349,9 +1349,30 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* ================= SECTION 3: THE SOLUTION (RESPONSIVE IMAGE SWAP) ================= */}
-      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0 pb-0 md:pt-32 md:pb-0">
+      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0 pb-0 md:pt-0 md:pb-0">
         
-        {/* 1. CINEMATIC IMAGE HEADER */}
+        {/* 1. MANIFESTO TEXT BLOCK */}
+        <div className="py-20 md:py-32 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-2xl md:text-5xl font-bold tracking-tight leading-[1.1] text-white mb-12">
+              It's the era of home studio production. You no longer need expensive gear. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
+            </p>
+            
+            {/* CTA Button */}
+            <a 
+              href="#pricing"
+              className="inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black font-black text-lg px-8 py-4 rounded-full hover:bg-[#e5ff4d] transition-all duration-300 shadow-[0_0_30px_rgba(211,255,2,0.3)]"
+            >
+              Start The Blueprint Today
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-white/10"></div>
+        
+        {/* 2. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
           {/* Height: Mobile 600px, Desktop 800px */}
           <div className="relative w-full max-w-6xl h-[600px] md:h-[800px] overflow-hidden">
@@ -1382,7 +1403,7 @@ const TheProducerBlueprint001 = () => {
           </div>
         </div>
 
-        {/* 2. CONTENT CONTAINER - Responsive negative margins */}
+        {/* 3. CONTENT CONTAINER - Responsive negative margins */}
         <div className="max-w-7xl mx-auto px-6 relative z-20 -mt-12 md:z-10 md:-mt-[350px] pt-6 md:pt-0">
           
           {/* HEADER AREA (CONTEXT) */}
@@ -1396,14 +1417,13 @@ const TheProducerBlueprint001 = () => {
               Actually Made <span className="font-serif italic text-white">In A Home Studio.</span>
             </h2>
             
-            {/* TOP TEXT: The "Why" */}
-            <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed mb-8">
-              It's the era of home studio production. You no longer need expensive gear. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
+            {/* The Producer Blueprint will show you */}
+            <p className="text-xl md:text-2xl font-semibold tracking-tight">
+              <span className="text-zinc-400">The Producer Blueprint</span> <span className="text-white">will show you:</span>
             </p>
-            
           </div>
 
-          {/* 3. THE 4 PILLARS (THE CARDS) */}
+          {/* Divider before cards */}
           <div className="flex flex-col items-center mt-4 md:mt-8 mb-6 md:mb-10">
             <div className="w-24 h-px bg-white/10 mb-6 md:mb-8"></div>
             <p className="text-xs uppercase tracking-widest text-zinc-500 font-medium">
