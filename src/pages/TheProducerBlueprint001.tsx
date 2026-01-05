@@ -201,27 +201,27 @@ const CurriculumSection = () => {
   ];
 
   return (
-    <section id="curriculum" className="py-16 md:py-24 px-4 md:px-6 bg-[#050505] relative z-20">
+    <section id="curriculum" className="py-12 md:py-24 px-4 md:px-6 bg-[#050505] relative z-20">
       <div className="max-w-5xl mx-auto">
         
         {/* HEADER */}
-        <div className="text-center mb-16 md:mb-20 max-w-3xl mx-auto">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
+        <div className="text-center mb-10 md:mb-20 max-w-3xl mx-auto">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-4">
             What's Inside The Program
           </div>
-          <h2 className="text-3xl md:text-6xl font-bold tracking-tighter text-white mb-4 md:mb-6">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-4 md:mb-6">
             7 Modules. 75+ Lessons. <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
               The Producer Blueprint.
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-zinc-400 font-medium tracking-tight">
+          <p className="text-base md:text-xl text-zinc-400 font-medium tracking-tight">
             The complete step-by-step workflow to go from <span className="text-white">"Idea"</span> to <span className="text-white">"Release Ready Song."</span>
           </p>
         </div>
 
         {/* STACKED LIST LAYOUT (Slim Compact + Drawer) */}
-        <div className="flex flex-col gap-4 mb-24 md:mb-32">
+        <div className="flex flex-col gap-3 md:gap-4 mb-16 md:mb-32">
           {modules.map((module) => {
             const isOpen = expandedModule === module.id;
             
@@ -330,14 +330,14 @@ const CurriculumSection = () => {
         <section className="relative pb-16 md:pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
           {/* VISUAL CONNECTOR */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-12 md:h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
           
-          <div className="max-w-6xl mx-auto relative z-10 pt-12 md:pt-16">
+          <div className="max-w-6xl mx-auto relative z-10 pt-8 md:pt-16">
             
             {/* HEADER */}
-            <div className="text-center mb-10 md:mb-16">
+            <div className="text-center mb-8 md:mb-16">
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-[#D3FF02]/10 border border-[#D3FF02]/20 mb-4 md:mb-6 animate-pulse">
+              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-[#D3FF02]/10 border border-[#D3FF02]/20 mb-3 md:mb-6 animate-pulse">
                 <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#D3FF02]"></span>
                 <span className="text-[#D3FF02] text-[10px] md:text-xs font-bold uppercase tracking-widest">
                   Available for a limited time
@@ -345,7 +345,7 @@ const CurriculumSection = () => {
               </div>
               
               {/* Headline */}
-              <h2 className="text-3xl md:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-6 tracking-tighter">
                 Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D3FF02] to-[#D3FF02]">FREE</span> bonuses
               </h2>
               
@@ -459,25 +459,25 @@ const CurriculumSection = () => {
         </section>
 
         {/* ================= OFFER STACK SECTION (REVISED) ================= */}
-        <section className="relative py-24 px-4 md:px-6 bg-[#050505]">
+        <section className="relative py-12 md:py-24 px-4 md:px-6 bg-[#050505]">
           
           {/* Connector Line */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-12 md:h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
           
-          <div className="max-w-3xl mx-auto relative z-10 pt-8">
+          <div className="max-w-3xl mx-auto relative z-10 pt-4 md:pt-8">
             
             {/* HEADER */}
-            <div className="text-center mb-16">
-              <div className="inline-block mb-6">
+            <div className="text-center mb-10 md:mb-16">
+              <div className="inline-block mb-4">
                 <span className="py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-xs font-bold uppercase tracking-widest">
                   WHAT YOU GET
                 </span>
               </div>
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter">
                 Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint.</span>
               </h2>
               {/* Subhead - Neutralized "2 FREE bonuses" */}
-              <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto">
+              <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto">
                 Get immediate access to the complete system, templates, and <span className="text-white font-bold">2 FREE bonuses</span>.
               </p>
             </div>
@@ -1559,7 +1559,7 @@ const TheProducerBlueprint001 = () => {
 
 
         {/* ================= WALL OF WINS SECTION ================= */}
-        <section id="testimonials" className="relative py-24 md:py-32 overflow-hidden">
+        <section id="testimonials" className="relative py-12 md:py-24 overflow-hidden">
           
           {/* Background Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none">
@@ -1569,14 +1569,14 @@ const TheProducerBlueprint001 = () => {
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             
             {/* HEADER */}
-            <div className="text-center mb-16">
-              <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+            <div className="text-center mb-10 md:mb-16">
+              <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
                 Student Wins
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-white mb-6">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-white mb-4 md:mb-6">
                 Real Results. <span className="font-serif italic font-normal tracking-normal text-zinc-200">Real Producers.</span>
               </h2>
-              <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+              <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto">
                 Real feedback from producers who are finally finishing their best music.
               </p>
             </div>
