@@ -2102,7 +2102,7 @@ const TheProducerBlueprint001 = () => {
                     <h4 className="text-[#D3FF02] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
                     <p className="text-white font-medium text-lg mb-2">Steal my workflow.</p>
                     <p className="text-zinc-400 text-sm leading-relaxed">
-                      You get instant access to the exact system I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
+                      You get instant access to the exact workflows I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
                     </p>
                   </div>
                 </div>
