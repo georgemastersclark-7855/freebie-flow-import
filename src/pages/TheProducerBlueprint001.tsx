@@ -887,7 +887,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[1.05] mb-6 md:mb-10">
+        <h1 className="hero-headline text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] md:tracking-[-0.04em] md:leading-[1.05] md:font-bold mb-6 md:mb-10">
           The Complete Production Workflow.
           <br />
           <span className="font-serif italic font-normal tracking-normal text-zinc-200">Start to Finish.</span>
@@ -1178,7 +1178,7 @@ const TheProducerBlueprint001 = () => {
               {/* Mobile: Show mobile-specific order (3 images) */}
               {miniSocialProofImagesMobile.map((img, idx) => (
                 <div key={`mobile-${idx}`} className="break-inside-avoid max-w-[92%] mx-auto md:hidden">
-                  <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                  <div className="feedback-card rounded-2xl border-0 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-white/[0.02]">
                     <img
                       src={img}
                       className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
@@ -1767,52 +1767,52 @@ const TheProducerBlueprint001 = () => {
               <div className="columns-2 lg:columns-3 gap-4 space-y-4">
                 
                 {/* Screenshot 1 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
                 
                 {/* Screenshot 2 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 3 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 4 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 5 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 6 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 7 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 8 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 9 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 10 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
                   <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
