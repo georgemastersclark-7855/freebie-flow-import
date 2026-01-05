@@ -1780,53 +1780,53 @@ const TheProducerBlueprint001 = () => {
               <div className="columns-2 lg:columns-3 gap-4 space-y-4">
                 
                 {/* Screenshot 1 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
                 
                 {/* Screenshot 2 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 3 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 4 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 5 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 6 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 7 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 8 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 9 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={testimonial1} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 10 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden">
-                  <img src={testimonial2} alt="Student feedback" className="w-full h-auto" />
+                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
+                  <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
               </div>
