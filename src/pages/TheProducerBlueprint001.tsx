@@ -1118,13 +1118,13 @@ const TheProducerBlueprint001 = () => {
       </main>
 
       {/* ================= MINI SOCIAL PROOF SECTION ================= */}
-      <section className="pt-12 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
+      <section className="pt-8 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
             Unfiltered Feedback
           </div>
 
-          <div className="text-center mb-10 md:mb-24">
+          <div className="text-center mb-6 md:mb-24">
             <h2 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4 leading-[1.1]">
               Hear it directly from <span className="font-serif italic text-white">the producers.</span>
             </h2>
@@ -1136,7 +1136,7 @@ const TheProducerBlueprint001 = () => {
             <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 pb-12 md:pb-32">
               {/* Display first 3 on mobile, all 6 on desktop */}
               {miniSocialProofImages.map((img, idx) => (
-                <div key={idx} className={`break-inside-avoid ${idx >= 3 ? 'hidden md:block' : ''}`}>
+                <div key={idx} className={`break-inside-avoid max-w-[92%] mx-auto md:max-w-none ${idx >= 3 ? 'hidden md:block' : ''}`}>
                   <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
                     <img
                       src={img}
@@ -1147,8 +1147,8 @@ const TheProducerBlueprint001 = () => {
                 </div>
               ))}
             </div>
-            {/* Fade overlay - minimal on mobile, cinematic on desktop */}
-            <div className="absolute bottom-0 left-0 w-full h-32 md:h-[400px] bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-20 pointer-events-none"></div>
+            {/* Fade overlay - hidden on mobile, cinematic on desktop */}
+            <div className="hidden md:block absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-20 pointer-events-none"></div>
           </div>
         </div>
       </section>
