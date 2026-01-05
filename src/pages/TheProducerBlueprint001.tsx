@@ -33,6 +33,7 @@ import robStudio from "@/assets/rob-home-studio.jpg";
 import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
 import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
+import robChainsmokersGif from "@/assets/rob-chainsmokers.gif";
 import robFirstStudio from "@/assets/rob-first-studio.jpg";
 import robLockdownStudio from "@/assets/rob-lockdown-guitar.png";
 import earlyDaysSticker from "@/assets/early-days-sticker.png";
@@ -2123,9 +2124,9 @@ const TheProducerBlueprint001 = () => {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none"></div>
                 
                 <img 
-                  src={productStackMockup} 
-                  alt="The Producer Blueprint Package" 
-                  className="relative z-10 w-full max-w-sm drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                  src={robChainsmokersGif} 
+                  alt="Rob Late with The Chainsmokers" 
+                  className="relative z-10 w-full max-w-md rounded-2xl drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
