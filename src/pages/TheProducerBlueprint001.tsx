@@ -57,6 +57,7 @@ import tiktokVaultThumbnail from "@/assets/tiktok-vault-thumbnail.png";
 import avatarBen from "@/assets/avatars/avatar-ben.webp";
 import avatarProducer1 from "@/assets/avatars/avatar-producer-1.png";
 import avatarProducer2 from "@/assets/avatars/avatar-producer-2.png";
+import avatarProducer3 from "@/assets/avatars/avatar-producer-3.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -780,10 +781,10 @@ const TheProducerBlueprint001 = () => {
               <AvatarImage src={avatarProducer2} className="object-cover" />
               <AvatarFallback>P2</AvatarFallback>
             </Avatar>
-            {/* +500 Badge */}
-            <div className="w-10 h-10 rounded-full bg-[#FF4F33] border-2 border-[#050505] flex items-center justify-center text-white text-[10px] font-bold">
-              +500
-            </div>
+            <Avatar className="w-10 h-10 border-2 border-[#050505]">
+              <AvatarImage src={avatarProducer3} className="object-cover" />
+              <AvatarFallback>P3</AvatarFallback>
+            </Avatar>
           </div>
           <div className="text-left">
             <div className="flex gap-0.5">
