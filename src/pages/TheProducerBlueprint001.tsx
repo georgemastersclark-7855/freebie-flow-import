@@ -1318,7 +1318,7 @@ const TheProducerBlueprint001 = () => {
             {/* MOBILE IMAGE (Visible < md) - Uses tall image for better verticality */}
             <img 
               src={robMarshmello}
-              className="block md:hidden w-full h-full object-cover object-center opacity-100 brightness-[1.15] contrast-[1.05] saturate-[1.1]"
+              className="block md:hidden w-full h-full object-cover object-top opacity-100 brightness-[1.15] contrast-[1.05] saturate-[1.1]"
               alt="Rob and Marshmello Mobile"
             />
             
@@ -1332,8 +1332,8 @@ const TheProducerBlueprint001 = () => {
             {/* Top Fade - Mobile: h-24 simple fade, Desktop: h-40 strong vignette */}
             <div className="absolute top-0 left-0 w-full h-24 md:h-40 bg-gradient-to-b from-[#050505] to-transparent md:from-[#050505] md:via-[#050505] md:to-transparent opacity-100"></div>
             
-            {/* Bottom Fade - Mobile: h-32 simple fade, Desktop: h-[500px] deep fade */}
-            <div className="absolute bottom-0 left-0 w-full h-32 md:h-[500px] bg-gradient-to-t from-[#050505] to-transparent md:from-[#050505] md:via-[#050505] md:to-transparent"></div>
+            {/* Bottom Fade - Mobile: h-48 deep fade with via, Desktop: h-[500px] deep fade */}
+            <div className="absolute bottom-0 left-0 w-full h-48 md:h-[500px] bg-gradient-to-t from-[#050505] via-[#050505]/90 to-transparent md:from-[#050505] md:via-[#050505] md:to-transparent"></div>
             
             {/* Side Fades (Desktop only) */}
             <div className="hidden md:block absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
@@ -1342,7 +1342,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* 2. CONTENT CONTAINER - Responsive negative margins */}
-        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px] pt-6 md:pt-0">
+        <div className="max-w-7xl mx-auto px-6 relative z-20 -mt-12 md:z-10 md:-mt-[350px] pt-6 md:pt-0">
           
           {/* HEADER AREA (CONTEXT) */}
           <div className="text-center mb-6 md:mb-24 max-w-4xl mx-auto">
@@ -1350,7 +1350,7 @@ const TheProducerBlueprint001 = () => {
               The Producer Blueprint 2.0
             </div>
             
-            <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-8 text-white drop-shadow-2xl leading-[1.1]">
+            <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-8 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] md:drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
               Actually Made <span className="font-serif italic text-white">In A Home Studio.</span>
             </h2>
