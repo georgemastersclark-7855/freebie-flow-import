@@ -1117,30 +1117,23 @@ const TheProducerBlueprint001 = () => {
         </div>
       </main>
 
-      {/* ================= MINI SOCIAL PROOF SECTION (FIXED TO 6) ================= */}
-      <section className="pt-16 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
-        {/* Ambient Glow Behind Unfiltered Feedback */}
-        <div 
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, transparent 60%)',
-          }}
-        />
+      {/* ================= MINI SOCIAL PROOF SECTION ================= */}
+      <section className="pt-12 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
             Unfiltered Feedback
           </div>
 
           <div className="text-center mb-10 md:mb-24">
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4 leading-[1.1]">
               Hear it directly from <span className="font-serif italic text-white">the producers.</span>
             </h2>
-            <p className="text-zinc-400 text-lg">Join 500+ producers who have upgraded their workflow.</p>
+            <p className="text-zinc-400 text-base md:text-lg">Join 500+ producers who have upgraded their workflow.</p>
           </div>
 
-          {/* MASONRY WALL (Fading out) */}
+          {/* MASONRY WALL - No more blocking overlays */}
           <div className="w-full relative z-0">
-            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-20 md:pb-96">
+            <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 pb-12 md:pb-32">
               {/* Display first 3 on mobile, all 6 on desktop */}
               {miniSocialProofImages.map((img, idx) => (
                 <div key={idx} className={`break-inside-avoid ${idx >= 3 ? 'hidden md:block' : ''}`}>
@@ -1154,15 +1147,12 @@ const TheProducerBlueprint001 = () => {
                 </div>
               ))}
             </div>
-
-            {/* MASSIVE FADE OVERLAY */}
-            <div className="absolute bottom-0 left-0 w-full h-[800px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-10 pointer-events-none"></div>
           </div>
         </div>
       </section>
 
       {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO + SCRIBBLES) ================= */}
-      <section className="py-32 px-6 bg-[#050505] relative z-20 -mt-[500px]">
+      <section className="py-32 px-6 bg-[#050505] relative z-20">
         {/* Deep Red Ambient Glow Behind Tutorial Hell */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none z-0"
