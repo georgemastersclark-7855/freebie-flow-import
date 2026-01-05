@@ -346,28 +346,13 @@ const CurriculumSection = () => {
           })}
         </div>
 
-        {/* BRIDGE CTA - Below Curriculum */}
-        <div className="flex flex-col items-center mt-8 md:mt-12">
-          <a 
-            href="#pricing" 
-            className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
-          >
-            Start The Blueprint Today
-            <ArrowRight className="w-5 h-5" />
-          </a>
-          <div className="flex items-center gap-2 mt-4 text-sm text-zinc-500">
-            <Check className="w-4 h-4 text-[#D3FF02]" />
-            Complete start-to-finish workflow
-          </div>
-        </div>
-
         {/* ================= BONUS SECTION (No Overlay) ================= */}
-        <section className="relative pb-16 md:pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
+        <section className="relative pt-24 md:pt-32 pb-16 md:pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
           {/* VISUAL CONNECTOR */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-12 md:h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 md:h-32 bg-gradient-to-b from-zinc-800 to-transparent"></div>
           
-          <div className="max-w-6xl mx-auto relative z-10 pt-8 md:pt-16">
+          <div className="max-w-6xl mx-auto relative z-10">
             
             {/* HEADER */}
             <div className="text-center mb-8 md:mb-16">
@@ -420,7 +405,7 @@ const CurriculumSection = () => {
                     {/* Mobile: Badge on its own line */}
                     <div className="flex items-center justify-between mb-1 md:hidden">
                       <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider">BONUS #1</span>
-                      <span className="bg-white text-black text-[10px] font-bold px-2 py-0.5 rounded">
+                      <span className="bg-[#D3FF02] text-black text-[10px] font-bold px-2 py-0.5 rounded">
                         FREE
                       </span>
                     </div>
@@ -480,7 +465,7 @@ const CurriculumSection = () => {
                     {/* Mobile: Badge on its own line */}
                     <div className="flex items-center justify-between mb-1 md:hidden">
                       <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider">BONUS #2</span>
-                      <span className="bg-white text-black text-[10px] font-bold px-2 py-0.5 rounded">
+                      <span className="bg-[#D3FF02] text-black text-[10px] font-bold px-2 py-0.5 rounded">
                         FREE
                       </span>
                     </div>
