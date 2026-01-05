@@ -2086,7 +2086,7 @@ const TheProducerBlueprint001 = () => {
               {/* Left: The Argument */}
               <div className="order-2 md:order-1">
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-                  You have <span className="text-[#D3FF02]">two choices</span> from here.
+                  You have <span className="font-serif italic font-normal tracking-normal text-zinc-200">two choices</span> from here.
                 </h2>
                 
                 <div className="space-y-8">
