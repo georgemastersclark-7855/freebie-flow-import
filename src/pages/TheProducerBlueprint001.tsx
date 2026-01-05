@@ -240,7 +240,7 @@ const CurriculumSection = () => {
                 className={`group relative w-full border rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 ease-in-out ${
                   isOpen 
                     ? 'border-zinc-600 bg-zinc-900 shadow-[0_0_30px_rgba(255,255,255,0.05)]' 
-                    : 'border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black hover:border-zinc-700 md:hover:border-[#D3FF02]/30'
+                    : 'border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black hover:border-zinc-700 md:bg-zinc-900/50 md:backdrop-blur-sm md:border-white/10 md:hover:border-[#D3FF02]/30'
                 }`}
               >
                 {/* MOBILE: Horizontal row with thumbnail | DESKTOP: Large horizontal cards */}
@@ -256,25 +256,24 @@ const CurriculumSection = () => {
                   </div>
 
                   {/* DESKTOP IMAGE - Large w-1/3 image (hidden md:block) */}
-                  <div className="hidden md:block relative w-1/3 min-h-[280px] shrink-0 overflow-hidden">
-                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
+                  <div className="hidden md:block md:relative md:w-1/3 md:min-h-[320px] md:shrink-0 md:overflow-hidden md:rounded-l-2xl">
                     <img 
                       src={module.image} 
                       alt={module.title} 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
                     />
-                    {/* Right edge fade */}
-                    <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-zinc-900 to-transparent"></div>
+                    {/* Right edge fade for seamless blend */}
+                    <div className="md:absolute md:inset-y-0 md:right-0 md:w-24 md:bg-gradient-to-l md:from-zinc-900/90 md:to-transparent"></div>
                   </div>
 
                   {/* CONTENT SECTION - Flex-1 on mobile, w-2/3 on desktop */}
                   <div className="flex-1 flex flex-col relative min-w-0 md:w-2/3">
                     
                     {/* MAIN CONTENT */}
-                    <div className={`flex flex-col justify-center p-4 md:px-8 md:py-6 ${isOpen ? '' : 'md:min-h-[280px]'} shrink-0 relative z-20`}>
+                    <div className={`flex flex-col justify-center p-4 md:p-8 md:py-10 lg:p-12 ${isOpen ? '' : 'md:min-h-[320px]'} shrink-0 relative z-20`}>
                       
                       {/* Background Number (Subtle Watermark) - Desktop only */}
-                      <div className="hidden md:block absolute top-4 right-6 text-7xl font-bold text-white/5 select-none pointer-events-none">
+                      <div className="hidden md:block absolute md:top-6 md:right-8 lg:top-8 lg:right-12 md:text-8xl lg:text-9xl font-bold text-white/[0.03] select-none pointer-events-none">
                         {module.id}
                       </div>
 
