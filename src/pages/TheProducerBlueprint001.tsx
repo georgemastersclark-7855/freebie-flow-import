@@ -235,10 +235,10 @@ const CurriculumSection = () => {
                 }`}
               >
                 {/* MOBILE: Row layout | DESKTOP: Column layout */}
-                <div className="flex flex-row md:flex-col h-full">
+                <div className="flex flex-row md:flex-col items-start md:items-stretch">
                   
-                  {/* LEFT/TOP: IMAGE SECTION */}
-                  <div className="relative z-30 w-24 h-24 md:w-[300px] md:h-auto shrink-0">
+                  {/* LEFT/TOP: IMAGE SECTION - stays at top-left on mobile */}
+                  <div className="relative z-30 w-24 h-24 md:w-[300px] md:h-auto shrink-0 self-start">
                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
                     <img 
                       src={module.image} 
@@ -251,7 +251,7 @@ const CurriculumSection = () => {
                   <div className="flex-1 flex flex-col relative min-w-0">
                     
                     {/* TOP SECTION: Compact View */}
-                    <div className="flex flex-col justify-center px-4 py-3 md:px-8 md:py-6 md:h-[280px] shrink-0 relative z-20">
+                    <div className={`flex flex-col justify-center px-4 py-3 md:px-8 md:py-6 ${isOpen ? '' : 'md:h-[280px]'} shrink-0 relative z-20`}>
                       
                       {/* Background Number (Subtle Watermark) */}
                       <div className="absolute top-2 right-3 md:top-4 md:right-6 text-4xl md:text-7xl font-bold text-white/5 select-none pointer-events-none">
@@ -267,7 +267,8 @@ const CurriculumSection = () => {
                             </span>
                           )}
                         </h3>
-                        <p className="text-zinc-400 text-[11px] md:text-sm leading-snug md:leading-relaxed mb-2 md:mb-6 max-w-lg font-medium line-clamp-2 md:line-clamp-3 group-hover:text-zinc-300 transition-colors">
+                        {/* Description - remove line-clamp when expanded */}
+                        <p className={`text-zinc-400 text-[11px] md:text-sm leading-snug md:leading-relaxed mb-2 md:mb-6 max-w-lg font-medium group-hover:text-zinc-300 transition-colors ${isOpen ? '' : 'line-clamp-2 md:line-clamp-3'}`}>
                           {module.desc}
                         </p>
                         
