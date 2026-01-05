@@ -826,8 +826,8 @@ const TheProducerBlueprint001 = () => {
   // Mobile order (first 3 shown, deepintheforest first)
   const miniSocialProofImagesMobile = [
     deepintheforestTestimonial,
-    austriaTestimonial,
     rsmyth111Testimonial,
+    austriaTestimonial,
   ];
 
   return (
