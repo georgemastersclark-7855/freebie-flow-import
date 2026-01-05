@@ -823,7 +823,7 @@ const TheProducerBlueprint001 = () => {
       </nav>
 
       {/* Hero Content */}
-      <main className="relative z-10 px-6 md:px-12 pt-8 md:pt-24 pb-0 md:pb-20 max-w-5xl mx-auto text-center">
+      <main className="relative z-10 px-6 md:px-12 pt-8 md:pt-24 pb-4 md:pb-32 max-w-5xl mx-auto text-center">
         {/* HERO AMBIENT GLOW */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
         
@@ -865,71 +865,75 @@ const TheProducerBlueprint001 = () => {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-16 leading-relaxed">
+        <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed">
           Watch <span className="text-white font-semibold">Rob Late</span> (The Chainsmokers, Marshmello, Clean Bandit)
           demonstrate the end-to-end process he uses to write, produce, and mix professional records from a home studio.
         </p>
 
-        {/* Hero VSL Container with Vidalytics */}
-        <div
-          className="w-full max-w-6xl mx-auto relative group cursor-pointer mb-8 md:mb-12 animate-fade-in"
-          style={{ animationDelay: "0.5s" }}
-        >
-          {/* Large Ambient Glow Behind VSL */}
-          <div 
-            className="absolute -inset-32 pointer-events-none z-0"
-            style={{
-              background: 'radial-gradient(ellipse at center, rgba(180,230,0,0.15) 0%, rgba(211,255,2,0.08) 40%, transparent 70%)',
-            }}
-          />
-          {/* Glow Effect */}
-          <div className="absolute -inset-1 bg-[#D3FF02]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
+        {/* Desktop/Mobile flex container with order swapping */}
+        <div className="flex flex-col">
+          
+          {/* CTA Area - order-2 on mobile (after VSL), order-1 on desktop (before VSL) */}
+          <div className="order-2 md:order-1 mb-6 md:mb-8">
+            <button className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+              Start The Blueprint Today
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
 
-          {/* Video Container */}
-          <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
-            
-            {/* THE VISIBLE OVERLAY (Z-30) */}
-            <div className="absolute top-3 left-3 md:top-6 md:left-6 z-30 pointer-events-none">
-              <div className="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white text-[11px] md:text-sm font-bold tracking-tight">
-                Watch: Inside The Producer Blueprint
-              </div>
+          {/* Benefit Bullets - order-3 on mobile (after CTA), order-2 on desktop (before VSL) */}
+          <div className="order-3 md:order-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-8 md:mb-12">
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-[#D3FF02]" />
+              Complete start-to-finish workflow
             </div>
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-[#D3FF02]" />
+              Home studio focused
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-[#D3FF02]" />
+              Updated for 2025
+            </div>
+          </div>
 
-            {/* Vidalytics Embed */}
-            <div
-              id="vidalytics_embed_V5HrhyRBNAeDtppA"
-              className="relative z-10 w-full"
-              style={{ width: "100%", position: "relative", paddingTop: "56.25%" }}
+          {/* Hero VSL Container - order-1 on mobile (first), order-3 on desktop (after CTA & Benefits) */}
+          <div
+            className="order-1 md:order-3 w-full max-w-6xl mx-auto relative group cursor-pointer mb-8 md:mb-16 animate-fade-in"
+            style={{ animationDelay: "0.5s" }}
+          >
+            {/* Large Ambient Glow Behind VSL */}
+            <div 
+              className="absolute -inset-32 pointer-events-none z-0"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(180,230,0,0.15) 0%, rgba(211,255,2,0.08) 40%, transparent 70%)',
+              }}
             />
-          </div>
-        </div>
+            {/* Glow Effect */}
+            <div className="absolute -inset-1 bg-[#D3FF02]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
 
-        {/* CTA Area - Moved after VSL */}
-        <div className="mb-6 md:mb-8">
-          <button className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
-            Start The Blueprint Today
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+            {/* Video Container */}
+            <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
+              
+              {/* THE VISIBLE OVERLAY - Mobile only */}
+              <div className="absolute top-3 left-3 z-30 pointer-events-none md:hidden">
+                <div className="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white text-[11px] font-bold tracking-tight">
+                  Watch: Inside The Producer Blueprint
+                </div>
+              </div>
 
-        {/* Benefit Bullets - Moved after CTA */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-8 md:mb-16">
-          <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#D3FF02]" />
-            Complete start-to-finish workflow
-          </div>
-          <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#D3FF02]" />
-            Home studio focused
-          </div>
-          <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#D3FF02]" />
-            Updated for 2025
+              {/* Vidalytics Embed */}
+              <div
+                id="vidalytics_embed_V5HrhyRBNAeDtppA"
+                className="relative z-10 w-full"
+                style={{ width: "100%", position: "relative", paddingTop: "56.25%" }}
+              />
+            </div>
           </div>
         </div>
 
         {/* Footer: Scrolling Credits */}
-        <div className="w-full max-w-7xl mx-auto relative z-20 my-16 md:my-24">
+        <div className="w-full max-w-7xl mx-auto relative z-20 my-12 md:my-24">
           <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-10 text-center">
             ROB LATE CREDITS
           </p>
