@@ -49,7 +49,7 @@ const RefundPolicy = () => {
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Immediate access to all video lessons</li>
                 <li>Downloadable project files and templates</li>
-                <li>Lifetime access to the course materials</li>
+                <li>12 months access to the course materials</li>
                 <li>All included bonuses as described on the sales page</li>
               </ul>
             </section>
