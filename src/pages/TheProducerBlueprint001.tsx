@@ -963,118 +963,36 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* ================= INFINITE ACCREDITATIONS TICKER ================= */}
-        <div className="w-full max-w-7xl mx-auto relative z-20 my-12 md:my-24">
-          <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-10 text-center">
+        <div className="w-full relative z-20 my-12 md:my-24 border-none" style={{ border: 'none' }}>
+          <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-6 text-center">
             ROB LATE CREDITS
           </p>
 
           {/* Gradient Fades for Smooth Edges */}
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden border-none" style={{ border: 'none' }}>
             <div className="absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
             
-            <motion.div 
-              className="flex whitespace-nowrap gap-12 items-start"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ 
-                repeat: Infinity, 
-                duration: 40, 
-                ease: "linear" 
+            <div 
+              className="flex whitespace-nowrap gap-16 md:gap-24 items-center animate-marquee"
+              style={{
+                animation: 'marquee 20s linear infinite',
               }}
             >
-              {/* Credits set - duplicated for seamless loop */}
-              {[0, 1].map((setIndex) => (
-                <div key={setIndex} className="flex gap-12 items-start shrink-0">
-                  {/* Credit: The Chainsmokers - Friday */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={chainsomokersFriday}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="The Chainsmokers - Friday"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">The Chainsmokers</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">Friday ft. Fridayy</p>
+              {/* Credits duplicated 4 times for seamless loop */}
+              {[0, 1, 2, 3].map((setIndex) => (
+                <div key={setIndex} className="flex gap-16 md:gap-24 items-center shrink-0">
+                  <div className="flex flex-col items-center shrink-0">
+                    <p className="text-white font-black text-sm md:text-base tracking-[0.2em] uppercase">Spinnin' Records</p>
+                    <p className="text-zinc-500 text-[10px] md:text-xs mt-1 tracking-wider">Official Remix</p>
                   </div>
-                  
-                  {/* Credit: The Chainsmokers - No Shade */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={chainsmokersNoShade}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="The Chainsmokers - No Shade At Pitti"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">The Chainsmokers</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">No Shade At Pitti</p>
-                  </div>
-                  
-                  {/* Credit: The Chainsmokers - See You Again */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={chainsmokersSeeYouAgain}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="The Chainsmokers - See You Again"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">The Chainsmokers</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
-                  </div>
-                  
-                  {/* Credit: Gary Barlow */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={robGaryBarlow}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="Gary Barlow"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">Gary Barlow</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
-                  </div>
-                  
-                  {/* Credit: The Chainsmokers - Tennis Court */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={chainsmokersTennisCourt}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="The Chainsmokers - Tennis Court"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">The Chainsmokers</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">Tennis Court</p>
-                  </div>
-                  
-                  {/* Credit: Flawes */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={flawesDontBlameMe}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="Flawes - Don't Blame Me"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">Flawes</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">Don't Blame Me</p>
-                  </div>
-                  
-                  {/* Credit: January */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={januaryAllMyFriends}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="January - All My Friends Are Famous"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">January</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">All My Friends Are Famous</p>
-                  </div>
-                  
-                  {/* Credit: Tianda */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={tiandaNothingButLove}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="Tianda - Nothing But Love"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">Tianda</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">Nothing But Love</p>
+                  <div className="flex flex-col items-center shrink-0">
+                    <p className="text-white font-black text-sm md:text-base tracking-[0.2em] uppercase">The Chainsmokers</p>
+                    <p className="text-zinc-500 text-[10px] md:text-xs mt-1 tracking-wider">Tennis Court</p>
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </main>
