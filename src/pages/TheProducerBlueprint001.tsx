@@ -1390,7 +1390,7 @@ const TheProducerBlueprint001 = () => {
           <div className="text-center mb-6 md:mb-24 max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-0 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] md:drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
-              Actually Made <span className="font-serif italic text-white">In A Home Studio.</span>
+              Actually Made In A <span className="font-serif italic text-[#D3FF02]">Home Studio.</span>
             </h2>
           </div>
 
