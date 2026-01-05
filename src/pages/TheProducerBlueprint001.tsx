@@ -412,7 +412,7 @@ const CurriculumSection = () => {
                     
                     {/* Title */}
                     <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
-                      <span className="hidden md:inline text-zinc-500 text-base font-bold mr-1">BONUS #1:</span>
+                      <span className="hidden md:inline text-zinc-500 text-2xl font-bold mr-2">BONUS #1:</span>
                       <span className="md:hidden">Social Media & Business</span>
                       <span className="hidden md:inline">Social Media, Business & Music Industry Module</span>
                     </h3>
@@ -472,7 +472,7 @@ const CurriculumSection = () => {
                     
                     {/* Title */}
                     <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
-                      <span className="hidden md:inline text-zinc-500 text-base font-bold mr-1">BONUS #2:</span>
+                      <span className="hidden md:inline text-zinc-500 text-2xl font-bold mr-2">BONUS #2:</span>
                       <span className="md:hidden">TikTok/IG Breakdown Vault</span>
                       <span className="hidden md:inline">Rob's TikTok/IG Breakdown Vault</span>
                     </h3>
