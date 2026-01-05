@@ -1697,10 +1697,10 @@ const TheProducerBlueprint001 = () => {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <p className="text-white font-bold text-sm flex items-center gap-1">
-                        Kiera
+                        Kosana
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02] fill-[#D3FF02]/10" />
                       </p>
-                      <p className="text-zinc-500 text-sm">@djkiera</p>
+                      <p className="text-zinc-500 text-sm">@djkosana</p>
                     </div>
                   </div>
                   <p className="text-zinc-200 text-base font-medium leading-snug">
