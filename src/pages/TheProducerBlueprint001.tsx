@@ -449,7 +449,7 @@ const CurriculumSection = () => {
                 </span>
               </div>
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
-                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">Blueprint.</span>
+                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint.</span>
               </h2>
               <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto">
                 Get immediate access to the complete system, templates, and <span className="text-[#FF4F33] font-bold">2 FREE bonuses</span>.
