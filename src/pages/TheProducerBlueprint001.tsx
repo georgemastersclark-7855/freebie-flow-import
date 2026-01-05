@@ -2038,6 +2038,85 @@ const TheProducerBlueprint001 = () => {
             </div>
           </div>
         </section>
+
+        {/* ================= ROBUST FOOTER ================= */}
+        <footer className="bg-[#030303] border-t border-zinc-900 pt-16 pb-8 px-6">
+          <div className="max-w-6xl mx-auto">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+              
+              {/* Column 1: Brand */}
+              <div className="lg:col-span-1">
+                <h3 className="text-white font-bold text-lg mb-3">The Producer Blueprint.</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed mb-6">
+                  The complete system for modern music production. From idea to release-ready master.
+                </p>
+                <div className="flex gap-4">
+                  {/* Social Placeholders */}
+                  <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
+                    <span className="text-zinc-400 text-xs">IG</span>
+                  </a>
+                  <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
+                    <span className="text-zinc-400 text-xs">YT</span>
+                  </a>
+                  <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
+                    <span className="text-zinc-400 text-xs">TT</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Column 2: Program */}
+              <div>
+                <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Program</h4>
+                <ul className="space-y-3">
+                  <li><a href="#curriculum" className="text-zinc-500 hover:text-white text-sm transition-colors">Curriculum</a></li>
+                  <li><a href="#testimonials" className="text-zinc-500 hover:text-white text-sm transition-colors">Testimonials</a></li>
+                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Student Login</a></li>
+                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Support</a></li>
+                </ul>
+              </div>
+
+              {/* Column 3: Legal */}
+              <div>
+                <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Legal</h4>
+                <ul className="space-y-3">
+                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
+                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Terms of Service</a></li>
+                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Earnings Disclaimer</a></li>
+                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Refund Policy</a></li>
+                </ul>
+              </div>
+
+              {/* Column 4: Contact */}
+              <div>
+                <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Contact</h4>
+                <p className="text-zinc-500 text-sm mb-2">Have questions?</p>
+                <a href="mailto:support@roblate.com" className="text-white font-medium hover:text-[#FF4F33] transition-colors">
+                  support@roblate.com
+                </a>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-zinc-800 pt-8">
+              {/* Bottom Legal Text (Ad Compliance) */}
+              <div className="text-center space-y-4">
+                <p className="text-zinc-600 text-xs">
+                  © {new Date().getFullYear()} Rob Late Music. All rights reserved.
+                </p>
+                
+                <div className="max-w-3xl mx-auto space-y-3">
+                  <p className="text-zinc-700 text-[10px] leading-relaxed">
+                    This site is not a part of the Facebook website or Facebook Inc. Additionally, This site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc.
+                  </p>
+                  <p className="text-zinc-700 text-[10px] leading-relaxed">
+                    DISCLAIMER: The sales figures stated above are my personal sales figures. Please understand my results are not typical, I'm not implying you'll duplicate them (or do anything for that matter). Your results will vary and depend on many factors. All business entails risk as well as massive and consistent effort and action.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
     </div>
   );
 };
