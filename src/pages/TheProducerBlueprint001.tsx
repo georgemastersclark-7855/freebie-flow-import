@@ -1018,16 +1018,6 @@ const TheProducerBlueprint001 = () => {
                     <p className="text-zinc-500 text-[10px] text-center mt-1">See You Again</p>
                   </div>
                   
-                  {/* Credit: Gary Barlow */}
-                  <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
-                    <img
-                      src={robGaryBarlow}
-                      className="w-32 h-32 object-cover rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300"
-                      alt="Gary Barlow"
-                    />
-                    <p className="text-white font-bold text-xs mt-4 text-center leading-tight tracking-widest uppercase">Gary Barlow</p>
-                    <p className="text-zinc-500 text-[10px] text-center mt-1">Session Work</p>
-                  </div>
                   
                   {/* Credit: The Chainsmokers - Tennis Court */}
                   <div className="flex flex-col items-center w-32 shrink-0 group cursor-pointer">
