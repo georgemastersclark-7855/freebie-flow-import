@@ -228,27 +228,24 @@ const CurriculumSection = () => {
             return (
               <div 
                 key={module.id}
-                className={`group relative w-full rounded-2xl overflow-hidden transition-all duration-500 ease-in-out border-t border-t-white/10 border-x border-x-white/5 border-b border-b-black ${
+                className={`group relative w-full border rounded-2xl overflow-hidden transition-all duration-500 ease-in-out ${
                   isOpen 
-                    ? 'h-auto bg-zinc-900 shadow-[0_0_50px_rgba(0,0,0,0.8)]' 
-                    : 'h-[280px] bg-gradient-to-b from-zinc-900 to-black hover:from-zinc-800 hover:to-zinc-900'
+                    ? 'border-zinc-600 bg-zinc-900 shadow-[0_0_30px_rgba(255,255,255,0.05)]' 
+                    : 'border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black hover:border-zinc-700'
                 }`}
               >
                 <div className="flex flex-col md:flex-row h-full">
                   
                   {/* LEFT: IMAGE SECTION (300px) */}
                   <div className="relative z-30 w-full md:w-[300px] shrink-0 h-64 md:h-auto">
-                    {/* Inner Bevel Highlight */}
-                    <div className="absolute inset-0 border-r border-white/5 z-20 pointer-events-none hidden md:block"></div>
-                    
-                    <div className="absolute inset-0 bg-blue-500/5 mix-blend-overlay z-10"></div>
+                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
                     <img 
                       src={module.image} 
                       alt={module.title} 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    {/* Gradient Overlay for Text Readability on Mobile */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent md:hidden"></div>
+                    {/* Mobile gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent md:hidden"></div>
                   </div>
 
                   {/* RIGHT: CONTENT SECTION */}
@@ -258,7 +255,7 @@ const CurriculumSection = () => {
                     <div className="flex flex-col justify-center px-6 py-6 md:px-8 h-[280px] shrink-0 relative z-20">
                       
                       {/* Background Number (Subtle Watermark) */}
-                      <div className="absolute top-4 right-6 text-7xl font-black text-white/5 select-none pointer-events-none font-serif italic">
+                      <div className="absolute top-4 right-6 text-7xl font-bold text-white/5 select-none pointer-events-none">
                         {module.id}
                       </div>
 
