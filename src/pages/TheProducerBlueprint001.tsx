@@ -346,6 +346,21 @@ const CurriculumSection = () => {
           })}
         </div>
 
+        {/* BRIDGE CTA - Below Curriculum */}
+        <div className="flex flex-col items-center mt-8 md:mt-12">
+          <a 
+            href="#pricing" 
+            className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+          >
+            Start The Blueprint Today
+            <ArrowRight className="w-5 h-5" />
+          </a>
+          <div className="flex items-center gap-2 mt-4 text-sm text-zinc-500">
+            <Check className="w-4 h-4 text-[#D3FF02]" />
+            Complete start-to-finish workflow
+          </div>
+        </div>
+
         {/* ================= BONUS SECTION (No Overlay) ================= */}
         <section className="relative pb-16 md:pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
@@ -498,6 +513,21 @@ const CurriculumSection = () => {
                 </div>
               </div>
 
+            </div>
+
+            {/* BRIDGE CTA - Below Bonus Section */}
+            <div className="flex flex-col items-center mt-12 md:mt-16">
+              <a 
+                href="#pricing" 
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+              >
+                Start The Blueprint Today
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <div className="flex items-center gap-2 mt-4 text-sm text-zinc-500">
+                <Check className="w-4 h-4 text-[#D3FF02]" />
+                Complete start-to-finish workflow
+              </div>
             </div>
           </div>
         </section>
@@ -1835,6 +1865,21 @@ const TheProducerBlueprint001 = () => {
                   <img src={testimonial2} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
+              </div>
+            </div>
+
+            {/* BRIDGE CTA - Below Social Proof Grid */}
+            <div className="flex flex-col items-center mt-12 md:mt-16">
+              <a 
+                href="#pricing" 
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+              >
+                Start The Blueprint Today
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <div className="flex items-center gap-2 mt-4 text-sm text-zinc-500">
+                <Check className="w-4 h-4 text-[#D3FF02]" />
+                Complete start-to-finish workflow
               </div>
             </div>
 
