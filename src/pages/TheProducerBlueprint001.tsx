@@ -629,8 +629,8 @@ const CurriculumSection = () => {
                     1 Year Access
                   </span>
                   <span className="flex items-center gap-2">
-                    <X className="w-4 h-4 text-zinc-400" />
-                    No Subscriptions
+                    <Check className="w-4 h-4 text-zinc-400" />
+                    One-Time Payment
                   </span>
                   <span className="flex items-center gap-2">
                     <Zap className="w-4 h-4 text-zinc-400" />
