@@ -877,11 +877,30 @@ const TheProducerBlueprint001 = () => {
           {/* Glow Effect */}
           <div className="absolute -inset-1 bg-[#D3FF02]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
 
-          {/* Video Container with loading stability */}
-          <div className="relative w-full min-h-[200px] md:min-h-[500px] bg-zinc-900/50 animate-pulse rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
-            {/* Vidalytics Embed */}
+          {/* Video Container - Final Polish with Combined Hook Text */}
+          <div className="relative w-full bg-zinc-900/80 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl min-h-[220px] sm:min-h-[350px] md:min-h-[500px] flex items-center justify-center group">
+            
+            {/* The "Immediate" Hook Badge (Top Left) */}
+            <div className="absolute top-4 left-4 md:top-8 md:left-8 z-0 flex flex-col items-start gap-1">
+              <div className="px-2 py-1 rounded bg-[#D3FF02] text-black text-[9px] md:text-[10px] font-black uppercase tracking-wider">
+                Exclusive Masterclass
+              </div>
+              <div className="px-2 py-1 rounded bg-black/40 backdrop-blur-md border border-white/10 text-white text-xs md:text-sm font-bold tracking-tight">
+                Watch: Inside The Producer Blueprint
+              </div>
+            </div>
+
+            {/* Centered Play Button Placeholder */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-0">
+              <div className="w-16 h-16 md:w-24 md:h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-300">
+                <Play className="w-8 h-8 md:w-12 md:h-12 text-[#D3FF02] fill-[#D3FF02] ml-1" />
+              </div>
+            </div>
+
+            {/* Vidalytics Embed - The script will mount here */}
             <div
               id="vidalytics_embed_V5HrhyRBNAeDtppA"
+              className="relative z-10 w-full"
               style={{ width: "100%", position: "relative", paddingTop: "56.25%" }}
             />
           </div>
