@@ -16,6 +16,12 @@ import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
+// Legal Pages
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+import TermsOfService from "./pages/legal/TermsOfService";
+import RefundPolicy from "./pages/legal/RefundPolicy";
+import EarningsDisclaimer from "./pages/legal/EarningsDisclaimer";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -37,6 +43,11 @@ const App = () => (
           <Route path="/theproducerblueprint001" element={<TheProducerBlueprint001 />} />
           <Route path="/HowToResampleLikeaPro" element={<Index />} />
           <Route path="/30daysofproducersauce" element={<Index />} />
+          {/* Legal Pages */}
+          <Route path="/legal/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/legal/terms-of-service" element={<TermsOfService />} />
+          <Route path="/legal/refund-policy" element={<RefundPolicy />} />
+          <Route path="/legal/earnings-disclaimer" element={<EarningsDisclaimer />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
