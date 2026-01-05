@@ -54,6 +54,9 @@ import producerBlueprintThumbnail from "@/assets/producer-blueprint-thumbnail.jp
 import abletonTemplatesThumbnail from "@/assets/ableton-templates-thumbnail.png";
 import socialMediaBonusThumbnail from "@/assets/social-media-bonus-thumbnail.png";
 import tiktokVaultThumbnail from "@/assets/tiktok-vault-thumbnail.png";
+import avatarBen from "@/assets/avatars/avatar-ben.webp";
+import avatarProducer1 from "@/assets/avatars/avatar-producer-1.png";
+import avatarProducer2 from "@/assets/avatars/avatar-producer-2.png";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -766,16 +769,16 @@ const TheProducerBlueprint001 = () => {
         <div className="flex items-center justify-center gap-4 mb-10">
           <div className="flex -space-x-3 relative">
             <Avatar className="w-10 h-10 border-2 border-[#050505]">
-              <AvatarImage src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" />
-              <AvatarFallback>U1</AvatarFallback>
+              <AvatarImage src={avatarBen} className="object-cover" />
+              <AvatarFallback>B</AvatarFallback>
             </Avatar>
             <Avatar className="w-10 h-10 border-2 border-[#050505]">
-              <AvatarImage src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" />
-              <AvatarFallback>U2</AvatarFallback>
+              <AvatarImage src={avatarProducer1} className="object-cover" />
+              <AvatarFallback>P1</AvatarFallback>
             </Avatar>
             <Avatar className="w-10 h-10 border-2 border-[#050505]">
-              <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" />
-              <AvatarFallback>U3</AvatarFallback>
+              <AvatarImage src={avatarProducer2} className="object-cover" />
+              <AvatarFallback>P2</AvatarFallback>
             </Avatar>
             {/* +500 Badge */}
             <div className="w-10 h-10 rounded-full bg-[#FF4F33] border-2 border-[#050505] flex items-center justify-center text-white text-[10px] font-bold">
