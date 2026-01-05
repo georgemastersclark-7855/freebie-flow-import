@@ -1301,14 +1301,14 @@ const TheProducerBlueprint001 = () => {
 
           {/* Connector Line to Solution */}
           <div className="my-8 md:mt-24 flex flex-col items-center opacity-20">
-            <div className="w-[1px] h-10 md:h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
+            <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
           </div>
 
         </div>
       </section>
 
       {/* ================= SECTION 3: THE SOLUTION (RESPONSIVE IMAGE SWAP) ================= */}
-      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-4 md:pt-32">
+      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0 md:pt-32">
         
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
@@ -1318,7 +1318,7 @@ const TheProducerBlueprint001 = () => {
             {/* MOBILE IMAGE (Visible < md) - Uses tall image for better verticality */}
             <img 
               src={robMarshmello}
-              className="block md:hidden w-full h-full object-cover object-center opacity-80"
+              className="block md:hidden w-full h-full object-cover object-center opacity-100 brightness-110 contrast-[1.05] saturate-[1.1]"
               alt="Rob and Marshmello Mobile"
             />
             
@@ -1329,11 +1329,11 @@ const TheProducerBlueprint001 = () => {
               alt="Rob in Home Studio Desktop"
             />
             
-            {/* Top Vignette (Stronger to mask top hard edge) */}
-            <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#050505] via-[#050505] to-transparent opacity-100"></div>
+            {/* Top Vignette - Reduced on mobile (h-20), full on desktop (h-40) */}
+            <div className="absolute top-0 left-0 w-full h-20 md:h-40 bg-gradient-to-b from-[#050505] via-[#050505] to-transparent opacity-100"></div>
             
-            {/* Bottom Fade (Deep fade for text overlap) */}
-            <div className="absolute bottom-0 left-0 w-full h-[400px] md:h-[500px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
+            {/* Bottom Fade - Reduced on mobile (h-24), full on desktop (h-[500px]) */}
+            <div className="absolute bottom-0 left-0 w-full h-24 md:h-[500px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
             
             {/* Side Fades (Desktop only) */}
             <div className="hidden md:block absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
