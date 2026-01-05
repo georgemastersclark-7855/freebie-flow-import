@@ -532,7 +532,7 @@ const CurriculumSection = () => {
                 </span>
               </div>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter">
-                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint<sup className="text-[10px] md:text-xs font-normal ml-0.5">™</sup></span>
+                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint<sup className="text-[10px] md:text-xs font-normal ml-0.5 text-white">™</sup></span>
               </h2>
               {/* Subhead - Neutralized "2 FREE bonuses" */}
               <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto">
@@ -563,7 +563,7 @@ const CurriculumSection = () => {
                     <div className="flex flex-col justify-center flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
-                          The Producer Blueprint Program™
+                          The Producer Blueprint™ Program
                         </h3>
                         {/* RETAIL PRICE - Mobile Top Right */}
                         <span className="shrink-0 inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs md:text-sm font-mono font-bold">
