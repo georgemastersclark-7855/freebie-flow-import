@@ -13,6 +13,7 @@ import levinMusicTestimonial from "@/assets/testimonials/levin-music-testimonial
 import deepintheforestTestimonial from "@/assets/testimonials/deepintheforest-testimonial.jpg";
 import nateSawyerTestimonial from "@/assets/testimonials/nate-sawyer-testimonial.jpg";
 import completePackageTestimonial from "@/assets/testimonials/complete-package-testimonial.jpg";
+import switzerlandTestimonial from "@/assets/testimonials/switzerland-testimonial.jpeg";
 import djkieraTestimonial from "@/assets/testimonials/djkiera-testimonial.mp4";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import streamingNumbersTestimonial from "@/assets/testimonials/streaming-numbers-testimonial.jpg";
@@ -827,7 +828,7 @@ const TheProducerBlueprint001 = () => {
   const miniSocialProofImagesMobile = [
     deepintheforestTestimonial,
     rsmyth111Testimonial,
-    austriaTestimonial,
+    switzerlandTestimonial,
   ];
 
   return (
