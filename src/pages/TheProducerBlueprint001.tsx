@@ -511,10 +511,7 @@ const CurriculumSection = () => {
                 Start The Blueprint Today
                 <ArrowRight className="w-5 h-5" />
               </a>
-              <div className="flex items-center gap-2 mt-4 text-sm text-zinc-500">
-                <Check className="w-4 h-4 text-[#D3FF02]" />
-                Complete start-to-finish workflow
-              </div>
+              <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
             </div>
           </div>
         </section>
@@ -1819,10 +1816,7 @@ const TheProducerBlueprint001 = () => {
                 Start The Blueprint Today
                 <ArrowRight className="w-5 h-5" />
               </a>
-              <div className="flex items-center gap-2 mt-4 text-sm text-zinc-500">
-                <Check className="w-4 h-4 text-[#D3FF02]" />
-                Complete start-to-finish workflow
-              </div>
+              <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
             </div>
 
           </div>
