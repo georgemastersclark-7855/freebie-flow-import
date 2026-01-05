@@ -1165,7 +1165,7 @@ const TheProducerBlueprint001 = () => {
         <div className="max-w-7xl mx-auto">
           
           {/* 1. HEADLINE AREA */}
-          <div className="text-center mb-16 relative z-10">
+          <div className="text-center mb-10 md:mb-16 relative z-10">
             <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#D3FF02] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
               For Self-Taught Producers
             </div>
@@ -1183,14 +1183,14 @@ const TheProducerBlueprint001 = () => {
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
               
               {/* Item 1: Wrong Mentors */}
-              <div className="space-y-2 relative group">
-                <h4 className="text-white font-medium text-lg relative inline-block">
+              <div className="space-y-1.5 relative group">
+                <h4 className="text-white font-medium text-base md:text-lg relative inline-block">
                   Wrong Mentors
                   {/* Scribble: Underline */}
-                  <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#D3FF02]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <svg className="absolute -bottom-1.5 md:-bottom-2 left-0 w-full h-2 md:h-3 text-[#D3FF02]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M2,5 Q50,8 98,2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </h4>
@@ -1200,8 +1200,8 @@ const TheProducerBlueprint001 = () => {
               </div>
               
               {/* Item 2: Fragmented Knowledge */}
-              <div className="space-y-2 relative">
-                <h4 className="text-white font-medium text-lg">Fragmented Knowledge</h4>
+              <div className="space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg">Fragmented Knowledge</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You're watching a mixing tip from one YouTuber and an arrangement hack from another. Nothing connects.
                 </p>
@@ -1242,14 +1242,14 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* RIGHT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-16 text-center md:text-left order-3 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-left order-3 relative z-10">
               
               {/* Item 3: Frankenstein Workflow */}
-              <div className="space-y-2 relative">
+              <div className="space-y-1.5 relative">
                 <div className="relative inline-block">
-                  <h4 className="text-white font-medium text-lg relative z-10">Frankenstein Workflow</h4>
+                  <h4 className="text-white font-medium text-base md:text-lg relative z-10">Frankenstein Workflow</h4>
                   {/* Scribble: Circle around title */}
-                  <svg className="absolute -top-3 -left-4 w-[120%] h-[180%] text-[#D3FF02]/40 z-0 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
+                  <svg className="absolute -top-2 md:-top-3 -left-3 md:-left-4 w-[115%] md:w-[120%] h-[160%] md:h-[180%] text-[#D3FF02]/40 z-0 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
                     <path d="M10,20 Q50,5 90,20 T10,20" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   </svg>
                 </div>
@@ -1259,7 +1259,7 @@ const TheProducerBlueprint001 = () => {
               </div>
               
               {/* Item 4: The Highlight Reel */}
-              <div className="space-y-2 relative">
+              <div className="space-y-1.5 relative">
                 {/* Scribble: Arrow pointing left to video */}
                 <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
                    <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform rotate-12 scale-x-[-1]">
@@ -1267,7 +1267,7 @@ const TheProducerBlueprint001 = () => {
                    </svg>
                 </div>
                 
-                <h4 className="text-white font-medium text-lg">The "Highlight Reel"</h4>
+                <h4 className="text-white font-medium text-base md:text-lg">The "Highlight Reel"</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You only see the polished result on YouTube, never the messy problem-solving required to actually finish music.
                 </p>
@@ -1276,7 +1276,7 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* Connector Line to Solution */}
-          <div className="mt-24 flex flex-col items-center opacity-20">
+          <div className="mt-16 md:mt-24 flex flex-col items-center opacity-20">
             <div className="w-[1px] h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
           </div>
 
