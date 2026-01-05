@@ -58,7 +58,7 @@ const RefundPolicy = () => {
               <h2 className="text-xl font-bold text-white mb-4">Technical Issues</h2>
               <p>
                 If you experience any technical issues accessing the course materials, please contact us at{" "}
-                <a href="mailto:team@roblate.com" className="text-white hover:text-[#FF4F33] transition-colors">
+                <a href="mailto:team@roblate.com" className="text-white hover:text-[#D3FF02] transition-colors">
                   team@roblate.com
                 </a>
                 {" "}and our team will work to resolve the issue promptly.
@@ -69,7 +69,7 @@ const RefundPolicy = () => {
               <h2 className="text-xl font-bold text-white mb-4">Contact Us</h2>
               <p>
                 If you have any questions about this Refund Policy before making a purchase, please reach out to:{" "}
-                <a href="mailto:team@roblate.com" className="text-white hover:text-[#FF4F33] transition-colors">
+                <a href="mailto:team@roblate.com" className="text-white hover:text-[#D3FF02] transition-colors">
                   team@roblate.com
                 </a>
               </p>
