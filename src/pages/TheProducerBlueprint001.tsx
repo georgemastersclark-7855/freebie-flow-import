@@ -1912,7 +1912,7 @@ const TheProducerBlueprint001 = () => {
                     </span>
                   </summary>
                   <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
-                    I teach everything in <strong>Ableton Live</strong> and include my personal project files/templates for Ableton. However, the <em>principles</em> of sound design, arrangement, mixing, and vocal production apply to any DAW (FL Studio, Logic, Pro Tools). If you use another DAW, you can still get massive value, but you won't be able to open the project files.
+                    I teach everything in <strong>Ableton Live</strong> and include my personal project files/templates for Ableton. However, the <em>principles</em> of sound design, arrangement, mixing, and vocal production apply to any DAW (FL Studio, Logic, Pro Tools). We have had plenty of students take the course working in other DAWs like Logic and FL Studio who have had huge success, and some who have used it as a chance to make the DAW switch! If you use another DAW, you can still get massive value, but you won't be able to open the project files.
                   </div>
                 </details>
               </div>
