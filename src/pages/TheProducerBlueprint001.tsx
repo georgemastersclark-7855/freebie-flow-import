@@ -2060,7 +2060,7 @@ const TheProducerBlueprint001 = () => {
                 <ul className="space-y-3">
                   <li><a href="#curriculum" className="text-zinc-500 hover:text-white text-sm transition-colors">Curriculum</a></li>
                   <li><a href="#testimonials" className="text-zinc-500 hover:text-white text-sm transition-colors">Testimonials</a></li>
-                  <li><a href="https://soundsquad.io" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white text-sm transition-colors">Student Login</a></li>
+                  <li><a href="https://www.soundssquad.io" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white text-sm transition-colors">Student Login</a></li>
                   <li><a href="mailto:team@roblate.com" className="text-zinc-500 hover:text-white text-sm transition-colors">Support</a></li>
                 </ul>
               </div>
