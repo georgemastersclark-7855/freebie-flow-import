@@ -1118,7 +1118,7 @@ const TheProducerBlueprint001 = () => {
       </main>
 
       {/* ================= MINI SOCIAL PROOF SECTION (FIXED TO 6) ================= */}
-      <section className="pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
+      <section className="pt-16 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
         {/* Ambient Glow Behind Unfiltered Feedback */}
         <div 
           className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] pointer-events-none z-0"
@@ -1131,7 +1131,7 @@ const TheProducerBlueprint001 = () => {
             Unfiltered Feedback
           </div>
 
-          <div className="text-center mb-24">
+          <div className="text-center mb-10 md:mb-24">
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
               Hear it directly from <span className="font-serif italic text-white">the producers.</span>
             </h2>
@@ -1140,10 +1140,10 @@ const TheProducerBlueprint001 = () => {
 
           {/* MASONRY WALL (Fading out) */}
           <div className="w-full relative z-0">
-            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-96">
-              {/* Display only the top 6 testimonials */}
+            <div className="columns-1 md:columns-3 gap-6 space-y-6 pb-20 md:pb-96">
+              {/* Display first 3 on mobile, all 6 on desktop */}
               {miniSocialProofImages.map((img, idx) => (
-                <div key={idx} className="break-inside-avoid">
+                <div key={idx} className={`break-inside-avoid ${idx >= 3 ? 'hidden md:block' : ''}`}>
                   <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
                     <img
                       src={img}
