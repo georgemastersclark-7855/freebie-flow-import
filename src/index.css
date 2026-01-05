@@ -132,6 +132,20 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Force high-status weight and tight tracking on all mobile headlines */
+  h1, h2, h3 {
+    @apply font-extrabold tracking-[-0.04em] leading-[1.1];
+  }
+
+  /* Specific fix for Hero Headlines on small screens */
+  @media (max-width: 768px) {
+    .hero-headline {
+      font-weight: 900 !important;
+      letter-spacing: -0.05em !important;
+      line-height: 1.05 !important;
+    }
+  }
 }
 
 /* Hide scrollbar for horizontal carousels */
