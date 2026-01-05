@@ -1877,8 +1877,8 @@ const TheProducerBlueprint001 = () => {
                       <span>Instant Digital Delivery</span>
                     </div>
                     <div className="flex items-center gap-2 text-zinc-500 text-sm">
-                      <X className="w-4 h-4 text-zinc-500" />
-                      <span>No Subscriptions</span>
+                      <Check className="w-4 h-4 text-zinc-500" />
+                      <span>One-Time Payment</span>
                     </div>
                   </div>
                 </div>
