@@ -210,7 +210,7 @@ const CurriculumSection = () => {
   ];
 
   return (
-    <section id="curriculum" className="py-12 md:py-24 px-4 md:px-6 bg-[#050505] relative z-20">
+    <section id="curriculum" className="py-12 md:py-24 px-4 md:px-6 bg-[#050505] relative z-20 scroll-mt-20">
       <div className="max-w-5xl mx-auto">
         
         {/* HEADER */}
@@ -684,11 +684,11 @@ const CurriculumSection = () => {
                 </p>
 
                 {/* PRIMARY CTA BUTTON */}
-                <button className="w-full md:max-w-md group relative inline-flex h-14 md:h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#D3FF02] hover:text-black hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+                <a href="#pricing" className="w-full md:max-w-md group relative inline-flex h-14 md:h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#D3FF02] hover:text-black hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
                   <span className="relative text-base md:text-lg uppercase tracking-wide flex items-center gap-2 md:gap-3">
                     Get Instant Access <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                   </span>
-                </button>
+                </a>
 
                 {/* TRUST BADGES (Clarified) */}
                 <div className="mt-6 md:mt-8 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 text-[10px] md:text-xs text-zinc-500 font-medium uppercase tracking-wider">
@@ -827,9 +827,9 @@ const TheProducerBlueprint001 = () => {
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
         <div className="text-xl font-bold tracking-tight">The Producer Blueprint</div>
         <div className="flex items-center gap-6">
-          <button className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
+          <a href="#pricing" className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
             Get Instant Access
-          </button>
+          </a>
         </div>
       </nav>
 
@@ -886,10 +886,10 @@ const TheProducerBlueprint001 = () => {
           
           {/* CTA Area - order-2 on mobile (after VSL), order-1 on desktop (before VSL) */}
           <div className="order-2 md:order-1 mb-6 md:mb-8">
-            <button className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+            <a href="#pricing" className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
               Start The Blueprint Today
               <ArrowRight className="w-5 h-5" />
-            </button>
+            </a>
           </div>
 
           {/* Benefit Bullets - order-3 on mobile (after CTA), order-2 on desktop (before VSL) */}
@@ -1141,7 +1141,7 @@ const TheProducerBlueprint001 = () => {
       </main>
 
       {/* ================= MINI SOCIAL PROOF SECTION ================= */}
-      <section className="pt-0 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
+      <section id="reviews" className="pt-0 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10 scroll-mt-20">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
             Unfiltered Feedback
@@ -1643,7 +1643,7 @@ const TheProducerBlueprint001 = () => {
 
 
         {/* ================= WALL OF WINS SECTION ================= */}
-        <section id="testimonials" className="relative py-12 md:py-24 overflow-hidden">
+        <section id="testimonials" className="relative py-12 md:py-24 overflow-hidden scroll-mt-20">
           
           {/* Background Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none">
@@ -1842,7 +1842,7 @@ const TheProducerBlueprint001 = () => {
         </section>
 
         {/* ================= CHECKOUT SECTION ================= */}
-        <section id="checkout" className="relative py-24 md:py-32">
+        <section id="pricing" className="relative py-24 md:py-32 scroll-mt-20">
           <div className="max-w-xl mx-auto px-6">
             
             {/* Headline */}
@@ -2121,10 +2121,10 @@ const TheProducerBlueprint001 = () => {
                 </div>
 
                 <div className="mt-10">
-                  <button className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
+                  <a href="#pricing" className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
                     Join The Producer Blueprint
                     <ArrowRight className="w-5 h-5" />
-                  </button>
+                  </a>
                   <p className="text-zinc-500 text-xs mt-4 text-center md:text-left">
                     Instant Digital Access • One-Time Payment
                   </p>
