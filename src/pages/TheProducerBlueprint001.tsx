@@ -1408,10 +1408,6 @@ const TheProducerBlueprint001 = () => {
           
           {/* HEADER AREA (CONTEXT) */}
           <div className="text-center mb-6 md:mb-24 max-w-4xl mx-auto">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-4 md:mb-8 backdrop-blur-sm shadow-xl">
-              The System
-            </div>
-            
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-0 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] md:drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
               Actually Made <span className="font-serif italic text-white">In A Home Studio.</span>
@@ -1419,7 +1415,7 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* The Producer Blueprint will show you - Subheadline */}
-          <p className="text-xl md:text-2xl text-white font-bold text-center mt-12 mb-16">
+          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-12 mb-16">
             The Producer Blueprint will show you:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative mb-20">
