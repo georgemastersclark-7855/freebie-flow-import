@@ -1395,19 +1395,19 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* The Producer Blueprint will show you - Subheadline */}
-          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-6 mb-8">
+          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-4 mb-6">
             The Producer Blueprint will show you:
           </p>
           
-          {/* Background Glow / Lighting Effect */}
-          <div className="relative mb-20 pt-8 md:pt-16">
-            {/* Radial gradient "pool of light" behind cards */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.04)_0%,_transparent_65%)] pointer-events-none"></div>
+          {/* Background Glow / Lighting Effect - Restructured Layers */}
+          <div className="relative z-10 mb-20 -mt-10">
+            {/* Radial gradient "pool of light" behind cards - z-0 sits behind */}
+            <div className="absolute z-0 inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_transparent_70%)] pointer-events-none"></div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
               
               {/* Card 01 */}
-              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">01</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1421,7 +1421,7 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 02 */}
-              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">02</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1435,7 +1435,7 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 03 */}
-              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">03</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1449,7 +1449,7 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 04 */}
-              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">04</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
