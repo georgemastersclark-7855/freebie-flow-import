@@ -34,7 +34,7 @@ import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
 import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
 import robFirstStudio from "@/assets/rob-first-studio.jpg";
-import robLockdownStudio from "@/assets/rob-lockdown-studio.jpg";
+import robLockdownStudio from "@/assets/rob-lockdown-guitar.png";
 import earlyDaysSticker from "@/assets/early-days-sticker.png";
 import nowSticker from "@/assets/now-sticker.png";
 import robLateSignature from "@/assets/rob-late-signature-white.png";
