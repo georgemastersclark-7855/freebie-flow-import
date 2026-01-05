@@ -618,9 +618,6 @@ const CurriculumSection = () => {
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
                           Social Media & Business Module
-                          <span className="ml-1 md:ml-2 inline-block align-middle text-[#D3FF02] text-[8px] md:text-[10px] border border-[#D3FF02]/30 bg-[#D3FF02]/10 px-1.5 md:px-2 py-0.5 rounded uppercase tracking-wider">
-                            Bonus
-                          </span>
                         </h3>
                         {/* RETAIL + FREE - Mobile Top Right */}
                         <div className="shrink-0 flex items-center gap-1.5 md:gap-3">
@@ -650,9 +647,6 @@ const CurriculumSection = () => {
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
                           Rob's TikTok/IG Breakdown Vault
-                          <span className="ml-1 md:ml-2 inline-block align-middle text-[#D3FF02] text-[8px] md:text-[10px] border border-[#D3FF02]/30 bg-[#D3FF02]/10 px-1.5 md:px-2 py-0.5 rounded uppercase tracking-wider">
-                            Bonus
-                          </span>
                         </h3>
                         {/* RETAIL + FREE - Mobile Top Right */}
                         <div className="shrink-0 flex items-center gap-1.5 md:gap-3">
