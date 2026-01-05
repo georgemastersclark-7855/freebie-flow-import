@@ -1917,7 +1917,22 @@ const TheProducerBlueprint001 = () => {
                 </details>
               </div>
 
-              {/* FAQ ITEM 2 */}
+              {/* FAQ ITEM 2 - GENRES */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                    <span>What genres is this for?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    This is a <strong>multi-genre course</strong>. Rob's known for his Pop and EDM productions, so it's centred around this. However, the principles of this approach are universal and Rob works across multiple genres.
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ ITEM 3 */}
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
                   <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
