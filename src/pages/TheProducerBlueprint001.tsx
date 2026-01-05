@@ -1508,12 +1508,9 @@ const TheProducerBlueprint001 = () => {
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative">
             
-            {/* MOBILE TIMELINE LINE (hidden on desktop) */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-white/10 z-0 md:hidden"></div>
-            
             {/* ITEM 1: 2019 */}
-            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0 z-10">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[85%] md:max-w-[280px] -rotate-1 md:-rotate-2">
+            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] -rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" />
                 </div>
@@ -1521,8 +1518,8 @@ const TheProducerBlueprint001 = () => {
                   2019: THE GRIND
                 </p>
               </div>
-              <div className="mt-4 md:mt-8 text-center max-w-[85%] md:max-w-[240px]">
-                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">The 9-5 Grind</h3>
+              <div className="mt-8 text-center max-w-[240px]">
+                <h3 className="text-white text-xl font-bold mb-3">The 9-5 Grind</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   I was working a sales job for a phone mount company, producing music as a 'hobby' in the evenings. Couple of super cheap production gigs here and there. This was my first setup - simple speakers, mic and interface. All you need!
                 </p>
@@ -1530,8 +1527,8 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* ITEM 2: 2020 */}
-            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32 z-10">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[85%] md:max-w-[280px] rotate-1">
+            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" />
                 </div>
@@ -1539,8 +1536,8 @@ const TheProducerBlueprint001 = () => {
                   2020: LOCKDOWN
                 </p>
               </div>
-              <div className="mt-4 md:mt-8 text-center max-w-[85%] md:max-w-[240px]">
-                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">The Lockdown Era</h3>
+              <div className="mt-8 text-center max-w-[240px]">
+                <h3 className="text-white text-xl font-bold mb-3">The Lockdown Era</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I posted some Reels sampling random objects in my studio. A few started getting views. I didn't know it yet, but everything changed right here.
                 </p>
@@ -1548,8 +1545,8 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* ITEM 3: 2021 */}
-            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0 z-10">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[85%] md:max-w-[280px] -rotate-1">
+            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] -rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robChainsmokers} alt="The Breakthrough" className="w-full h-full object-cover object-top" />
                 </div>
@@ -1557,8 +1554,8 @@ const TheProducerBlueprint001 = () => {
                   2021: BREAKTHROUGH
                 </p>
               </div>
-              <div className="mt-4 md:mt-8 text-center max-w-[85%] md:max-w-[240px]">
-                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">The Breakthrough</h3>
+              <div className="mt-8 text-center max-w-[240px]">
+                <h3 className="text-white text-xl font-bold mb-3">The Breakthrough</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   My content was going viral, followers growing. Drew from <span className="text-white font-semibold">The Chainsmokers</span> DM'd me after seeing a video and we started working on music together. No management, no label connections at this point - just making cool music & getting reach with content.
                 </p>
@@ -1566,8 +1563,8 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* ITEM 4: 2022 */}
-            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32 z-10">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[85%] md:max-w-[280px] rotate-1 md:rotate-2">
+            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robGaryBarlow} alt="The A-List Sessions" className="w-full h-full object-cover object-center" />
                 </div>
@@ -1575,8 +1572,8 @@ const TheProducerBlueprint001 = () => {
                   2022: A-LIST
                 </p>
               </div>
-              <div className="mt-4 md:mt-8 text-center max-w-[85%] md:max-w-[240px]">
-                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">The A-List Sessions</h3>
+              <div className="mt-8 text-center max-w-[240px]">
+                <h3 className="text-white text-xl font-bold mb-3">The A-List Sessions</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy part is I was still doing it all from a home setup, proving you don't need a million-dollar facility to play at the top level.
                 </p>
@@ -1584,8 +1581,8 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* ITEM 5: TODAY */}
-            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0 z-10">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[85%] md:max-w-[280px] -rotate-1">
+            <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] -rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robMarsmelloCropped} alt="The Producer Blueprint" className="w-full h-full object-cover object-center" />
                 </div>
@@ -1593,8 +1590,8 @@ const TheProducerBlueprint001 = () => {
                   TODAY: THE BLUEPRINT
                 </p>
               </div>
-              <div className="mt-4 md:mt-8 text-center max-w-[85%] md:max-w-[240px]">
-                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3">The Producer Blueprint</h3>
+              <div className="mt-8 text-center max-w-[240px]">
+                <h3 className="text-white text-xl font-bold mb-3">The Producer Blueprint</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   100 Million+ streams later, I moved house and built a dedicated space in my garage. It's still a home studio. It's basically the same gear. I just have fancier lights now.
                 </p>
