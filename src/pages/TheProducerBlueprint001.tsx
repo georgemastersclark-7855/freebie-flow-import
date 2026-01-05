@@ -921,7 +921,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Footer: Scrolling Credits */}
-        <div className="w-full max-w-7xl mx-auto relative z-20 mt-12 mb-4 md:mb-20">
+        <div className="w-full max-w-7xl mx-auto relative z-20 mt-16 md:mt-24 mb-16 md:mb-20">
           <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em] mb-10 text-center">
             ROB LATE CREDITS
           </p>
@@ -1118,7 +1118,7 @@ const TheProducerBlueprint001 = () => {
       </main>
 
       {/* ================= MINI SOCIAL PROOF SECTION ================= */}
-      <section className="pt-4 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
+      <section className="pt-10 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
             Unfiltered Feedback
