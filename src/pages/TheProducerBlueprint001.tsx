@@ -433,7 +433,7 @@ const CurriculumSection = () => {
           {/* Connector Line */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
           
-          <div className="max-w-4xl mx-auto relative z-10 pt-8">
+          <div className="max-w-3xl mx-auto relative z-10 pt-8">
             
             {/* HEADER */}
             <div className="text-center mb-16">
