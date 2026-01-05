@@ -1351,26 +1351,6 @@ const TheProducerBlueprint001 = () => {
       {/* ================= SECTION 3: THE SOLUTION (RESPONSIVE IMAGE SWAP) ================= */}
       <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0 pb-0 md:pt-0 md:pb-0">
         
-        {/* 1. MANIFESTO TEXT BLOCK */}
-        <div className="py-20 md:py-32 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-2xl md:text-5xl font-bold tracking-tight leading-[1.1] text-white mb-12">
-              It's the era of home studio production. You no longer need expensive gear. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
-            </p>
-            
-            {/* CTA Button */}
-            <a 
-              href="#pricing"
-              className="inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black font-black text-lg px-8 py-4 rounded-full hover:bg-[#e5ff4d] transition-all duration-300 shadow-[0_0_30px_rgba(211,255,2,0.3)]"
-            >
-              Start The Blueprint Today
-              <ArrowRight className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="w-full h-px bg-white/10"></div>
         
         {/* 2. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
