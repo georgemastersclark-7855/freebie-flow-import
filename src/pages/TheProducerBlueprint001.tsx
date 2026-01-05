@@ -1556,219 +1556,173 @@ const TheProducerBlueprint001 = () => {
                 Real Results. <span className="font-serif italic font-normal tracking-normal text-zinc-200">Real Producers.</span>
               </h2>
               <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-                From "bedroom producer" to signed artist. Here is what happens when you have a professional workflow.
+                From "bedroom producer" to signed artist.
               </p>
             </div>
 
-            {/* HERO TRIO - The Big Wins */}
+            {/* HERO VIDEO CARDS (Text Underneath) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
               
-              {/* CARD 1: VIDEO TESTIMONIAL (Kiera) */}
-              <div className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 cursor-pointer hover:border-zinc-700 transition-colors">
-                <video
-                  src={djkieraTestimonial}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  onMouseEnter={(e) => e.currentTarget.play()}
-                  onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                
-                {/* Play Button Center */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
-                    <Play className="w-8 h-8 text-white fill-white ml-1" />
-                  </div>
-                </div>
-
-                {/* Platform Icon */}
-                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm p-2 rounded-full">
-                  <Instagram className="w-4 h-4 text-white" />
-                </div>
-
-                {/* Bottom Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <p className="text-white font-semibold text-lg mb-1">"Best investment I made."</p>
-                  <p className="text-zinc-400 text-sm">@djkiera • Producer</p>
-                </div>
-              </div>
-
-              {/* CARD 2: CAREER WIN (Headroom Records) */}
-              <div className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 cursor-pointer hover:border-zinc-700 transition-colors">
-                <div className="absolute inset-0">
-                  <img 
-                    src={headroomRecordsTestimonial}
-                    alt="Headroom Records signing"
-                    className="w-full h-full object-cover object-top"
+              {/* CARD 1: Kiera Video Testimonial */}
+              <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors">
+                {/* MEDIA AREA (Clean Video Look) */}
+                <div className="relative aspect-[9/16] overflow-hidden cursor-pointer">
+                  <video
+                    src={djkieraTestimonial}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
                   />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-
-                {/* Platform Icon */}
-                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm p-2 rounded-full">
-                  <MessageCircle className="w-4 h-4 text-white" />
-                </div>
-
-                {/* Win Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="bg-[#FF4F33] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                    Career Milestone
-                  </span>
-                </div>
-
-                {/* Bottom Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="flex items-center gap-1.5 text-[#FF4F33] mb-2">
-                    <Music className="w-4 h-4" />
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                    <div className="w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                      <Play className="w-7 h-7 text-white fill-white ml-1" />
+                    </div>
                   </div>
-                  <p className="text-white font-semibold text-lg mb-1">"Headroom Records wants to sign my single!"</p>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    "You really helped me get to the point where that's even a possibility."
+                </div>
+
+                {/* TEXT AREA (Clean Feed Style) */}
+                <div className="p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
+                        <User className="w-4 h-4 text-zinc-400" />
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-sm flex items-center gap-1.5">
+                          Kiera
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#FF4F33]" />
+                        </p>
+                        <p className="text-zinc-500 text-xs">@djkiera</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    "The best investment I've made for my music career."
                   </p>
                 </div>
               </div>
 
-              {/* CARD 3: GROWTH WIN (Streaming Numbers) */}
-              <div className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 cursor-pointer hover:border-zinc-700 transition-colors">
-                <div className="absolute inset-0">
+              {/* CARD 2: Headroom Records */}
+              <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors">
+                {/* MEDIA AREA (Clean Video Look) */}
+                <div className="relative aspect-[9/16] overflow-hidden cursor-pointer">
+                  <img 
+                    src={headroomRecordsTestimonial}
+                    alt="Headroom Records testimonial"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                      <Play className="w-7 h-7 text-white fill-white ml-1" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* TEXT AREA (Clean Feed Style) */}
+                <div className="p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
+                        <User className="w-4 h-4 text-zinc-400" />
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-sm flex items-center gap-1.5">
+                          David R.
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#FF4F33]" />
+                        </p>
+                        <p className="text-zinc-500 text-xs">@david.prod</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    "Headroom Records wants to sign my next single!"
+                  </p>
+                </div>
+              </div>
+
+              {/* CARD 3: Streaming Numbers */}
+              <div className="group bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors">
+                {/* MEDIA AREA (Clean Video Look) */}
+                <div className="relative aspect-[9/16] overflow-hidden cursor-pointer">
                   <img 
                     src={streamingNumbersTestimonial}
-                    alt="Streaming numbers growth"
-                    className="w-full h-full object-cover object-top"
+                    alt="Streaming numbers testimonial"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-
-                {/* Platform Icon */}
-                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm p-2 rounded-full">
-                  <MessageCircle className="w-4 h-4 text-white" />
-                </div>
-
-                {/* Win Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                    Growth
-                  </span>
-                </div>
-
-                {/* Bottom Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="flex items-center gap-1.5 text-emerald-400 mb-2">
-                    <TrendingUp className="w-4 h-4" />
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                      <Play className="w-7 h-7 text-white fill-white ml-1" />
+                    </div>
                   </div>
-                  <p className="text-white font-semibold text-lg mb-1">Highest Streaming Numbers Yet</p>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    "12k and 14k on the latest tracks... Insane how much watching your workflow simplified things."
+                </div>
+
+                {/* TEXT AREA (Clean Feed Style) */}
+                <div className="p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
+                        <User className="w-4 h-4 text-zinc-400" />
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-sm flex items-center gap-1.5">
+                          Sarah Jenkins
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#FF4F33]" />
+                        </p>
+                        <p className="text-zinc-500 text-xs">@sarah.music</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    "Highest streaming numbers yet. 12k on the latest track."
                   </p>
                 </div>
               </div>
 
             </div>
 
-            {/* FEEDBACK MASONRY (The "Community" Vibe) */}
+            {/* WALL OF PROOF (Masonry Raw Screenshots) */}
             <div className="mt-8">
               <p className="text-center text-zinc-500 text-sm uppercase tracking-widest mb-10">
                 More Feedback From The Community
               </p>
               
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
+              <div className="columns-2 lg:columns-3 gap-4 space-y-4">
                 
-                {/* Drew Adieu (Verified) */}
-                <div className="break-inside-avoid bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-zinc-800 border border-zinc-700">
-                      <img src={drewAdieuTestimonial} alt="Drew" className="w-full h-full object-cover object-top" />
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold text-sm flex items-center gap-1.5">
-                        drew.adieu 
-                        <span className="text-[#FF4F33] text-xs">✓</span>
-                      </p>
-                    </div>
-                    <Instagram className="w-4 h-4 text-zinc-600 ml-auto" />
-                  </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
-                    "Highly recommend getting this... his accomplishments and credits speak for themselves."
-                  </p>
+                {/* Drew Adieu Screenshot */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto" />
+                </div>
+                
+                {/* Nate Sawyer Screenshot */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Nate Sawyer */}
-                <div className="break-inside-avoid bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
-                      <User className="w-5 h-5 text-zinc-500" />
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold text-sm">Nate Sawyer</p>
-                    </div>
-                    <MessageCircle className="w-4 h-4 text-zinc-600 ml-auto" />
-                  </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
-                    "My writing is fundamentally changed for the better because of it... Rob breaks down his thought process beyond just saying 'do x,y,z'."
-                  </p>
+                {/* Austria Screenshot */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Austria DM */}
-                <div className="break-inside-avoid bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <p className="text-zinc-400 text-xs font-medium">DM Message</p>
-                    <MessageCircle className="w-4 h-4 text-zinc-600 ml-auto" />
-                  </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed mb-3">
-                    "Absolutely changed my perspective of producing... packed all the secret sauce in it."
-                  </p>
-                  <p className="text-zinc-500 text-xs">Big love from Austria 🇦🇹</p>
+                {/* Deep in the Forest Screenshot */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Aaron Lyon (YouTube) */}
-                <div className="break-inside-avoid bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-zinc-800 border border-zinc-700">
-                      <img src={aaronly0nsYoutubeTestimonial} alt="Aaron" className="w-full h-full object-cover object-top" />
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold text-sm">@aaronly0ns</p>
-                    </div>
-                    <Youtube className="w-4 h-4 text-zinc-600 ml-auto" />
-                  </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
-                    "This course is packed with value. Definitely worth every penny."
-                  </p>
+                {/* Complete Package Screenshot */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Complete Package */}
-                <div className="break-inside-avoid bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
-                      <User className="w-5 h-5 text-zinc-500" />
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold text-sm">Student</p>
-                    </div>
-                    <MessageCircle className="w-4 h-4 text-zinc-600 ml-auto" />
-                  </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
-                    "The complete package - everything I needed to finally finish tracks I'm proud of."
-                  </p>
-                </div>
-
-                {/* Deep in the Forest */}
-                <div className="break-inside-avoid bg-zinc-900/50 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-zinc-800 border border-zinc-700">
-                      <img src={deepintheforestTestimonial} alt="Deep in the forest" className="w-full h-full object-cover object-top" />
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold text-sm">deepintheforest</p>
-                    </div>
-                    <Instagram className="w-4 h-4 text-zinc-600 ml-auto" />
-                  </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed">
-                    "Finally broke through the plateau. Rob's approach just clicks."
-                  </p>
+                {/* Aaron Lyon Screenshot */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
               </div>
