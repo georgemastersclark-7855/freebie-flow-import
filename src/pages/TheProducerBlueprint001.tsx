@@ -1951,13 +1951,13 @@ const TheProducerBlueprint001 = () => {
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
                   <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
-                    <span>Is this a subscription?</span>
+                    <span>How long do I get access for?</span>
                     <span className="transition group-open:rotate-180">
                       <ChevronDown className="w-5 h-5" />
                     </span>
                   </summary>
                   <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
-                    No. This is a one-time payment for <strong>lifetime access</strong>. You get all future updates to the course for free.
+                    You get <strong>12 months of access</strong> to the full course, all downloads, and any updates released during that period. This is a one-time payment, not a subscription.
                   </div>
                 </details>
               </div>
