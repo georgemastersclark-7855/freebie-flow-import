@@ -532,7 +532,7 @@ const CurriculumSection = () => {
                 </span>
               </div>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter">
-                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint<sup className="text-[10px] md:text-xs font-normal ml-0.5 text-white">™</sup></span>
+                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint<span className="text-white">™</span></span>
               </h2>
               {/* Subhead - Neutralized "2 FREE bonuses" */}
               <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto">
