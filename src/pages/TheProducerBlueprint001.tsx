@@ -815,7 +815,7 @@ const TheProducerBlueprint001 = () => {
       </nav>
 
       {/* Hero Content */}
-      <main className="relative z-10 px-6 md:px-12 pt-16 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
+      <main className="relative z-10 px-6 md:px-12 pt-10 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
         {/* HERO AMBIENT GLOW */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
         
@@ -850,45 +850,21 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[1.05] mb-6">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[1.05] mb-4 md:mb-6">
           The Complete Production Workflow.
           <br />
           <span className="font-serif italic font-normal tracking-normal text-zinc-200">Start to Finish.</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto mb-6 md:mb-10 leading-relaxed">
           Watch <span className="text-white font-semibold">Rob Late</span> (The Chainsmokers, Marshmello, Clean Bandit)
           demonstrate the end-to-end process he uses to write, produce, and mix professional records from a home studio.
         </p>
 
-        {/* CTA Area */}
-        <div className="mb-8">
-          <button className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
-            Start The Blueprint Today
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Benefit Bullets */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-16">
-          <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#D3FF02]" />
-            Complete start-to-finish workflow
-          </div>
-          <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#D3FF02]" />
-            Home studio focused
-          </div>
-          <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#D3FF02]" />
-            Updated for 2025
-          </div>
-        </div>
-
         {/* Hero VSL Container with Vidalytics */}
         <div
-          className="w-full max-w-6xl mx-auto relative group cursor-pointer mb-24 animate-fade-in"
+          className="w-full max-w-6xl mx-auto relative group cursor-pointer mb-8 md:mb-12 animate-fade-in"
           style={{ animationDelay: "0.5s" }}
         >
           {/* Large Ambient Glow Behind VSL */}
@@ -901,13 +877,37 @@ const TheProducerBlueprint001 = () => {
           {/* Glow Effect */}
           <div className="absolute -inset-1 bg-[#D3FF02]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
 
-          {/* Video Container */}
-          <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
+          {/* Video Container with loading stability */}
+          <div className="relative w-full min-h-[200px] md:min-h-[500px] bg-zinc-900/50 animate-pulse rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
             {/* Vidalytics Embed */}
             <div
               id="vidalytics_embed_V5HrhyRBNAeDtppA"
               style={{ width: "100%", position: "relative", paddingTop: "56.25%" }}
             />
+          </div>
+        </div>
+
+        {/* CTA Area - Moved after VSL */}
+        <div className="mb-6 md:mb-8">
+          <button className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+            Start The Blueprint Today
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Benefit Bullets - Moved after CTA */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-12 md:mb-16">
+          <div className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-[#D3FF02]" />
+            Complete start-to-finish workflow
+          </div>
+          <div className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-[#D3FF02]" />
+            Home studio focused
+          </div>
+          <div className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-[#D3FF02]" />
+            Updated for 2025
           </div>
         </div>
 
