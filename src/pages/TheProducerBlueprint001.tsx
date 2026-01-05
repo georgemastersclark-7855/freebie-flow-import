@@ -1511,7 +1511,7 @@ const TheProducerBlueprint001 = () => {
             {/* ITEM 1: 2019 - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] -translate-x-8 md:w-full md:translate-x-0 max-w-[280px] -rotate-2">
-                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
+                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
                   <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
@@ -1521,7 +1521,7 @@ const TheProducerBlueprint001 = () => {
               <div className="mt-8 text-center max-w-[240px] overflow-hidden">
                 <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
                   <span className="relative z-10">The 9-5 Grind</span>
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block" />
                 </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   I was working a sales job for a phone mount company, producing music as a 'hobby' in the evenings. Couple of super cheap production gigs here and there. This was my first setup - simple speakers, mic and interface. All you need!
@@ -1532,7 +1532,7 @@ const TheProducerBlueprint001 = () => {
             {/* ITEM 2: 2020 - Peek right on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] translate-x-8 md:w-full md:translate-x-0 max-w-[280px] rotate-1">
-                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
+                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
                   <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
@@ -1542,7 +1542,7 @@ const TheProducerBlueprint001 = () => {
               <div className="mt-8 text-center max-w-[240px] overflow-hidden">
                 <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
                   <span className="relative z-10">The Lockdown Era</span>
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block" />
                 </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I posted some Reels sampling random objects in my studio. A few started getting views. I didn't know it yet, but everything changed right here.
@@ -1553,7 +1553,7 @@ const TheProducerBlueprint001 = () => {
             {/* ITEM 3: 2021 - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] -translate-x-8 md:w-full md:translate-x-0 max-w-[280px] -rotate-1">
-                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
+                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
                   <img src={robChainsmokers} alt="The Breakthrough" className="w-full h-full object-cover object-top" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
@@ -1563,7 +1563,7 @@ const TheProducerBlueprint001 = () => {
               <div className="mt-8 text-center max-w-[240px] overflow-hidden">
                 <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
                   <span className="relative z-10">The Breakthrough</span>
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block" />
                 </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   My content was going viral, followers growing. Drew from <span className="text-white font-semibold">The Chainsmokers</span> DM'd me after seeing a video and we started working on music together. No management, no label connections at this point - just making cool music & getting reach with content.
@@ -1574,7 +1574,7 @@ const TheProducerBlueprint001 = () => {
             {/* ITEM 4: 2022 - Peek right on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] translate-x-8 md:w-full md:translate-x-0 max-w-[280px] rotate-2">
-                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
+                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
                   <img src={robGaryBarlow} alt="The A-List Sessions" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
@@ -1584,7 +1584,7 @@ const TheProducerBlueprint001 = () => {
               <div className="mt-8 text-center max-w-[240px] overflow-hidden">
                 <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
                   <span className="relative z-10">The A-List Sessions</span>
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block" />
                 </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy part is I was still doing it all from a home setup, proving you don't need a million-dollar facility to play at the top level.
@@ -1595,7 +1595,7 @@ const TheProducerBlueprint001 = () => {
             {/* ITEM 5: TODAY - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] -translate-x-8 md:w-full md:translate-x-0 max-w-[280px] -rotate-1">
-                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
+                <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
                   <img src={robMarsmelloCropped} alt="The Producer Blueprint" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
@@ -1605,7 +1605,7 @@ const TheProducerBlueprint001 = () => {
               <div className="mt-8 text-center max-w-[240px] overflow-hidden">
                 <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
                   <span className="relative z-10">The Producer Blueprint</span>
-                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/50 -z-10 -rotate-1 skew-x-12 block" />
                 </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   100 Million+ streams later, I moved house and built a dedicated space in my garage. It's still a home studio. It's basically the same gear. I just have fancier lights now.
