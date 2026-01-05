@@ -388,7 +388,7 @@ const CurriculumSection = () => {
                 <div className="flex flex-row md:flex-col">
                   
                   {/* IMAGE AREA */}
-                  <div className="w-24 h-24 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
+                  <div className="w-28 self-stretch md:w-full md:h-56 md:self-auto bg-zinc-900 relative overflow-hidden shrink-0 rounded-l-xl md:rounded-l-none md:rounded-t-3xl">
                     <img 
                       src={robOnLaptop}
                       alt="Social Media Module Mockup" 
@@ -448,7 +448,7 @@ const CurriculumSection = () => {
                 <div className="flex flex-row md:flex-col">
                   
                   {/* IMAGE AREA */}
-                  <div className="w-24 h-24 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
+                  <div className="w-28 self-stretch md:w-full md:h-56 md:self-auto bg-zinc-900 relative overflow-hidden shrink-0 rounded-l-xl md:rounded-l-none md:rounded-t-3xl">
                     <img 
                       src={tiktokBreakdownVault} 
                       alt="TikTok Vault Mockup"
