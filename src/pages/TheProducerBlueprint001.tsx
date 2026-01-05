@@ -475,7 +475,7 @@ const CurriculumSection = () => {
                         <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
                           The Producer Blueprint Program™
                         </h3>
-                        <p className="text-zinc-400 text-sm mt-2 leading-relaxed max-w-md font-medium">
+                        <p className="text-zinc-400 text-sm mt-2 leading-relaxed max-w-md">
                           The complete 7-module video program. 75+ lessons. Learn to produce top-streaming music.
                         </p>
                       </div>
@@ -503,7 +503,7 @@ const CurriculumSection = () => {
                         <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
                           Ableton Project Files & Templates
                         </h3>
-                        <p className="text-zinc-400 text-sm mt-2 leading-relaxed max-w-md font-medium">
+                        <p className="text-zinc-400 text-sm mt-2 leading-relaxed max-w-md">
                           Download the exact starting templates and finished project files Rob uses in sessions.
                         </p>
                       </div>
