@@ -1395,22 +1395,22 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* The Producer Blueprint will show you - Subheadline */}
-          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-12 mb-8">
+          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-6 mb-8">
             The Producer Blueprint will show you:
           </p>
           
           {/* Background Glow / Lighting Effect */}
-          <div className="relative mb-20 pt-20 md:pt-32">
+          <div className="relative mb-20 pt-8 md:pt-16">
             {/* Radial gradient "pool of light" behind cards */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_0%,_transparent_70%)] pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.04)_0%,_transparent_65%)] pointer-events-none"></div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
               
               {/* Card 01 */}
-              <div className="bg-[#0D0D0D] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
-                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/5 select-none pointer-events-none">01</div>
+              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">01</div>
                 <div className="relative z-10">
-                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-white">
+                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">...how to go from "Loop Phase" to finished record</h3>
@@ -1421,10 +1421,10 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 02 */}
-              <div className="bg-[#0D0D0D] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
-                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/5 select-none pointer-events-none">02</div>
+              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">02</div>
                 <div className="relative z-10">
-                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-white">
+                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">...the "Bedroom" mixing standard for label-ready tracks</h3>
@@ -1435,10 +1435,10 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 03 */}
-              <div className="bg-[#0D0D0D] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
-                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/5 select-none pointer-events-none">03</div>
+              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">03</div>
                 <div className="relative z-10">
-                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-white">
+                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">...session-proven chains used with major artists</h3>
@@ -1449,10 +1449,10 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 04 */}
-              <div className="bg-[#0D0D0D] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
-                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/5 select-none pointer-events-none">04</div>
+              <div className="bg-[#0D0D0D] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,1)]">
+                <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">04</div>
                 <div className="relative z-10">
-                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-white">
+                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">...how to design professional sounds with intent</h3>
@@ -1470,12 +1470,12 @@ const TheProducerBlueprint001 = () => {
             
             {/* The "How" - High Contrast Statement */}
             <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-12">
-              Learn top creative workflows with <span className="text-[#D3FF02]">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
+              Learn top creative workflows with <span className="text-zinc-100 font-semibold">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
             </p>
 
             {/* CTA Button */}
-            <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-[#D3FF02] transition-all">
-              <span className="border-b border-white/30 pb-0.5 group-hover:border-[#D3FF02]">See The Curriculum</span>
+            <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-zinc-300 transition-all">
+              <span className="border-b border-white/30 pb-0.5 group-hover:border-white">See The Curriculum</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
