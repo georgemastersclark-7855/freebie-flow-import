@@ -1556,7 +1556,7 @@ const TheProducerBlueprint001 = () => {
                 Real Results. <span className="font-serif italic font-normal tracking-normal text-zinc-200">Real Producers.</span>
               </h2>
               <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-                From "bedroom producer" to signed artist.
+                Real feedback from producers who are finally finishing their best music.
               </p>
             </div>
 
@@ -1687,7 +1687,7 @@ const TheProducerBlueprint001 = () => {
 
             </div>
 
-            {/* WALL OF PROOF (Masonry Raw Screenshots) */}
+            {/* WALL OF PROOF (Masonry with 10 Images) */}
             <div className="mt-8">
               <p className="text-center text-zinc-500 text-sm uppercase tracking-widest mb-10">
                 More Feedback From The Community
@@ -1695,34 +1695,54 @@ const TheProducerBlueprint001 = () => {
               
               <div className="columns-2 lg:columns-3 gap-4 space-y-4">
                 
-                {/* Drew Adieu Screenshot */}
+                {/* Screenshot 1 */}
                 <div className="break-inside-avoid rounded-xl overflow-hidden">
                   <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
                 
-                {/* Nate Sawyer Screenshot */}
+                {/* Screenshot 2 */}
                 <div className="break-inside-avoid rounded-xl overflow-hidden">
                   <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Austria Screenshot */}
+                {/* Screenshot 3 */}
                 <div className="break-inside-avoid rounded-xl overflow-hidden">
                   <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Deep in the Forest Screenshot */}
+                {/* Screenshot 4 */}
                 <div className="break-inside-avoid rounded-xl overflow-hidden">
                   <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Complete Package Screenshot */}
+                {/* Screenshot 5 */}
                 <div className="break-inside-avoid rounded-xl overflow-hidden">
                   <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
-                {/* Aaron Lyon Screenshot */}
+                {/* Screenshot 6 */}
                 <div className="break-inside-avoid rounded-xl overflow-hidden">
                   <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto" />
+                </div>
+
+                {/* Screenshot 7 */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto" />
+                </div>
+
+                {/* Screenshot 8 */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto" />
+                </div>
+
+                {/* Screenshot 9 */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={testimonial1} alt="Student feedback" className="w-full h-auto" />
+                </div>
+
+                {/* Screenshot 10 */}
+                <div className="break-inside-avoid rounded-xl overflow-hidden">
+                  <img src={testimonial2} alt="Student feedback" className="w-full h-auto" />
                 </div>
 
               </div>
