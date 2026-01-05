@@ -1395,19 +1395,18 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* The Producer Blueprint will show you - Subheadline */}
-          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-4 mb-6">
+          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-2 mb-4">
             The Producer Blueprint will show you:
           </p>
-          
-          {/* Background Glow / Lighting Effect - Restructured Layers */}
-          <div className="relative z-10 mb-20 -mt-10">
-            {/* Radial gradient "pool of light" behind cards - z-0 sits behind */}
-            <div className="absolute z-0 inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_transparent_70%)] pointer-events-none"></div>
-            
+
+          {/* Cards + Forced Lighting Layers */}
+          <div className="relative isolate z-10 mb-20 mt-[-60px]">
+            {/* Pool of light (forced behind cards) */}
+            <div className="absolute -inset-x-20 -inset-y-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.06)_0%,_transparent_70%)] z-[-1] pointer-events-none" />
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-              
               {/* Card 01 */}
-              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
+              <div className="bg-[hsl(0_0%_4%)] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_40px_rgba(255,255,255,0.1),_0_0_10px_rgba(255,255,255,0.05)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">01</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1421,7 +1420,7 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 02 */}
-              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
+              <div className="bg-[hsl(0_0%_4%)] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_40px_rgba(255,255,255,0.1),_0_0_10px_rgba(255,255,255,0.05)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">02</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1435,7 +1434,7 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 03 */}
-              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
+              <div className="bg-[hsl(0_0%_4%)] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_40px_rgba(255,255,255,0.1),_0_0_10px_rgba(255,255,255,0.05)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">03</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1449,7 +1448,7 @@ const TheProducerBlueprint001 = () => {
               </div>
 
               {/* Card 04 */}
-              <div className="bg-[#0D0D0D] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] hover:scale-[1.01] transition-all duration-500">
+              <div className="bg-[hsl(0_0%_4%)] border border-white/20 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_40px_rgba(255,255,255,0.1),_0_0_10px_rgba(255,255,255,0.05)] hover:scale-[1.01] transition-all duration-500">
                 <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">04</div>
                 <div className="relative z-10">
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1461,20 +1460,18 @@ const TheProducerBlueprint001 = () => {
                   </p>
                 </div>
               </div>
-
             </div>
           </div>
 
           {/* 4. FOOTER / BRIDGE (THE "CLOSER") */}
           <div className="text-center pb-24 max-w-3xl mx-auto">
-            
             {/* The "How" - High Contrast Statement */}
             <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-12">
-              Learn top creative workflows with <span className="text-zinc-100 font-semibold">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
+              Learn top creative workflows with <span className="text-white font-bold">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
             </p>
 
             {/* CTA Button */}
-            <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-zinc-300 transition-all">
+            <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-white transition-all">
               <span className="border-b border-white/30 pb-0.5 group-hover:border-white">See The Curriculum</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
