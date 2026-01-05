@@ -2048,21 +2048,10 @@ const TheProducerBlueprint001 = () => {
               {/* Column 1: Brand */}
               <div className="lg:col-span-1">
                 <h3 className="text-white font-bold text-lg mb-3">The Producer Blueprint.</h3>
-                <p className="text-zinc-500 text-sm leading-relaxed mb-6">
-                  The complete system for modern music production. From idea to release-ready master.
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  The complete program for modern music production. From idea to release-ready master.
                 </p>
-                <div className="flex gap-4">
-                  {/* Social Placeholders */}
-                  <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
-                    <span className="text-zinc-400 text-xs">IG</span>
-                  </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
-                    <span className="text-zinc-400 text-xs">YT</span>
-                  </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 transition-colors">
-                    <span className="text-zinc-400 text-xs">TT</span>
-                  </a>
-                </div>
+                {/* Social Links removed to prevent conversion leaks */}
               </div>
 
               {/* Column 2: Program */}
@@ -2091,8 +2080,8 @@ const TheProducerBlueprint001 = () => {
               <div>
                 <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Contact</h4>
                 <p className="text-zinc-500 text-sm mb-2">Have questions?</p>
-                <a href="mailto:support@roblate.com" className="text-white font-medium hover:text-[#FF4F33] transition-colors">
-                  support@roblate.com
+                <a href="mailto:team@roblate.com" className="text-white font-medium hover:text-[#FF4F33] transition-colors">
+                  team@roblate.com
                 </a>
               </div>
             </div>
