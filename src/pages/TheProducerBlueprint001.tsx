@@ -272,10 +272,10 @@ const CurriculumSection = () => {
                           {module.desc}
                         </p>
                         
-                        {/* TOGGLE BUTTON */}
+                        {/* TOGGLE BUTTON - Reverted to Neutral */}
                         <button 
                           onClick={() => toggleModule(module.id)}
-                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-[#D3FF02] uppercase hover:text-white transition-colors"
+                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
                         >
                           {isOpen ? 'Hide Lessons' : 'View Lessons'}
                           <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180 -translate-y-[1px]' : 'group-hover:translate-y-1'}`}>
@@ -451,8 +451,9 @@ const CurriculumSection = () => {
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
                 Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint.</span>
               </h2>
+              {/* Subhead - Neutralized "2 FREE bonuses" */}
               <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto">
-                Get immediate access to the complete system, templates, and <span className="text-[#D3FF02] font-bold">2 FREE bonuses</span>.
+                Get immediate access to the complete system, templates, and <span className="text-white font-bold">2 FREE bonuses</span>.
               </p>
             </div>
 
