@@ -275,7 +275,7 @@ const CurriculumSection = () => {
                         {/* TOGGLE BUTTON */}
                         <button 
                           onClick={() => toggleModule(module.id)}
-                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-[#FF4F33] uppercase hover:text-white transition-colors"
+                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-[#D3FF02] uppercase hover:text-white transition-colors"
                         >
                           {isOpen ? 'Hide Lessons' : 'View Lessons'}
                           <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180 -translate-y-[1px]' : 'group-hover:translate-y-1'}`}>
@@ -303,7 +303,7 @@ const CurriculumSection = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-12">
                           {module.lessons.map((lesson, idx) => (
                             <div key={idx} className="flex items-start group/lesson cursor-default">
-                              <span className="mr-3 text-zinc-700 text-[10px] mt-[5px] group-hover/lesson:text-[#FF4F33] transition-colors">▶</span>
+                              <span className="mr-3 text-zinc-700 text-[10px] mt-[5px] group-hover/lesson:text-[#D3FF02] transition-colors">▶</span>
                               <span className="text-zinc-400 text-sm font-medium group-hover/lesson:text-zinc-200 transition-colors">{lesson}</span>
                             </div>
                           ))}
@@ -337,21 +337,21 @@ const CurriculumSection = () => {
             {/* HEADER */}
             <div className="text-center mb-16">
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF4F33]/10 border border-[#FF4F33]/20 mb-6 animate-pulse">
-                <span className="w-2 h-2 rounded-full bg-[#FF4F33]"></span>
-                <span className="text-[#FF4F33] text-xs font-bold uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D3FF02]/10 border border-[#D3FF02]/20 mb-6 animate-pulse">
+                <span className="w-2 h-2 rounded-full bg-[#D3FF02]"></span>
+                <span className="text-[#D3FF02] text-xs font-bold uppercase tracking-widest">
                   Available for a limited time
                 </span>
               </div>
               
               {/* Headline */}
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter">
-                Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4F33] to-orange-500">FREE</span> bonuses
+                Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D3FF02] to-[#D3FF02]">FREE</span> bonuses
               </h2>
               
               {/* Subhead */}
               <p className="text-lg md:text-xl text-zinc-400 font-medium max-w-2xl mx-auto">
-                Join today and get <span className="text-white underline decoration-[#FF4F33] decoration-2 underline-offset-4 font-bold">2 exclusive bonuses</span> included.
+                Join today and get <span className="text-white underline decoration-[#D3FF02] decoration-2 underline-offset-4 font-bold">2 exclusive bonuses</span> included.
               </p>
             </div>
 
@@ -359,7 +359,7 @@ const CurriculumSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
               {/* --- BONUS #1 --- */}
-              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
+              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 flex flex-col">
                 
                 {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
@@ -371,13 +371,13 @@ const CurriculumSection = () => {
                   />
                   {/* 2. VALUE BADGE */}
                   <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
-                    Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#FF4F33]">FREE</span>
+                    Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#D3FF02]">FREE</span>
                   </div>
                 </div>
 
                 {/* CONTENT AREA */}
                 <div className="p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF4F33] transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D3FF02] transition-colors">
                     BONUS #1: Social Media, Business & Music Industry Module
                   </h3>
                   <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
@@ -388,13 +388,13 @@ const CurriculumSection = () => {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
                       Instant Access
                     </span>
-                    <span className="text-[#FF4F33] text-lg">+</span>
+                    <span className="text-[#D3FF02] text-lg">+</span>
                   </div>
                 </div>
               </div>
 
               {/* --- BONUS #2 --- */}
-              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#FF4F33]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF4F33]/10 flex flex-col">
+              <div className="group relative rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 flex flex-col">
                 
                 {/* IMAGE AREA */}
                 <div className="h-56 bg-zinc-900 relative overflow-hidden">
@@ -407,13 +407,13 @@ const CurriculumSection = () => {
                   
                   {/* 2. VALUE BADGE */}
                   <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
-                    Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#FF4F33]">FREE</span>
+                    Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#D3FF02]">FREE</span>
                   </div>
                 </div>
 
                 {/* CONTENT AREA */}
                 <div className="p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF4F33] transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#D3FF02] transition-colors">
                     BONUS #2: Rob's TikTok/IG Breakdown Vault
                   </h3>
                   <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-1">
@@ -424,7 +424,7 @@ const CurriculumSection = () => {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
                       Instant Access
                     </span>
-                    <span className="text-[#FF4F33] text-lg">+</span>
+                    <span className="text-[#D3FF02] text-lg">+</span>
                   </div>
                 </div>
               </div>
@@ -452,7 +452,7 @@ const CurriculumSection = () => {
                 Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint.</span>
               </h2>
               <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto">
-                Get immediate access to the complete system, templates, and <span className="text-[#FF4F33] font-bold">2 FREE bonuses</span>.
+                Get immediate access to the complete system, templates, and <span className="text-[#D3FF02] font-bold">2 FREE bonuses</span>.
               </p>
             </div>
 
@@ -538,7 +538,7 @@ const CurriculumSection = () => {
                         <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
                           Social Media & Business Module
                           {/* INLINE BONUS BADGE */}
-                          <span className="ml-2 inline-block align-middle text-[#FF4F33] text-[10px] border border-[#FF4F33]/30 bg-[#FF4F33]/10 px-2 py-0.5 rounded uppercase tracking-wider">
+                          <span className="ml-2 inline-block align-middle text-[#D3FF02] text-[10px] border border-[#D3FF02]/30 bg-[#D3FF02]/10 px-2 py-0.5 rounded uppercase tracking-wider">
                             Bonus
                           </span>
                         </h3>
@@ -571,7 +571,7 @@ const CurriculumSection = () => {
                         <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
                           Rob's TikTok/IG Breakdown Vault
                           {/* INLINE BONUS BADGE */}
-                          <span className="ml-2 inline-block align-middle text-[#FF4F33] text-[10px] border border-[#FF4F33]/30 bg-[#FF4F33]/10 px-2 py-0.5 rounded uppercase tracking-wider">
+                          <span className="ml-2 inline-block align-middle text-[#D3FF02] text-[10px] border border-[#D3FF02]/30 bg-[#D3FF02]/10 px-2 py-0.5 rounded uppercase tracking-wider">
                             Bonus
                           </span>
                         </h3>
@@ -611,7 +611,7 @@ const CurriculumSection = () => {
                 {/* The Price (12 MONTHS FOCUS) */}
                 <div className="flex flex-col items-center justify-center gap-2 mb-2">
                   <span className="text-2xl font-medium text-white">12 Months Full Access:</span>
-                  <span className="text-6xl md:text-7xl font-black text-[#FF4F33] tracking-tighter drop-shadow-[0_0_25px_rgba(255,79,51,0.2)]">
+                  <span className="text-6xl md:text-7xl font-black text-[#D3FF02] tracking-tighter drop-shadow-[0_0_25px_rgba(211,255,2,0.2)]">
                     $297
                   </span>
                 </div>
@@ -622,7 +622,7 @@ const CurriculumSection = () => {
                 </p>
 
                 {/* PRIMARY CTA BUTTON */}
-                <button className="w-full md:max-w-md group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#FF4F33] hover:text-white hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(255,79,51,0.5)]">
+                <button className="w-full md:max-w-md group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#D3FF02] hover:text-black hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
                   <span className="relative text-lg uppercase tracking-wide flex items-center gap-3">
                     Get Instant Access <ArrowRight className="w-6 h-6" />
                   </span>
@@ -749,7 +749,7 @@ const TheProducerBlueprint001 = () => {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] pointer-events-none z-0"
         style={{
           background:
-            "radial-gradient(ellipse at center bottom, rgba(255,200,150,0.15) 0%, rgba(255,120,50,0.1) 25%, rgba(255,79,51,0.05) 50%, transparent 70%)",
+            "radial-gradient(ellipse at center bottom, rgba(211,255,2,0.15) 0%, rgba(180,230,0,0.1) 25%, rgba(211,255,2,0.05) 50%, transparent 70%)",
         }}
       />
 
@@ -766,7 +766,7 @@ const TheProducerBlueprint001 = () => {
       {/* Hero Content */}
       <main className="relative z-10 px-6 md:px-12 pt-16 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
         {/* HERO AMBIENT GLOW */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF4F33]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
         
         {/* Social Proof Eyebrow */}
         <div className="flex items-center justify-center gap-4 mb-10">
@@ -813,7 +813,7 @@ const TheProducerBlueprint001 = () => {
 
         {/* CTA Area */}
         <div className="mb-8">
-          <button className="inline-flex items-center gap-2 bg-[#FF4F33] text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#e64530] transition-all shadow-[0_0_40px_rgba(255,79,51,0.4)] hover:shadow-[0_0_50px_rgba(255,79,51,0.5)]">
+          <button className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
             Start The Blueprint Today
             <ArrowRight className="w-5 h-5" />
           </button>
@@ -822,15 +822,15 @@ const TheProducerBlueprint001 = () => {
         {/* Benefit Bullets */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-16">
           <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#FF4F33]" />
+            <Check className="w-4 h-4 text-[#D3FF02]" />
             Complete start-to-finish workflow
           </div>
           <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#FF4F33]" />
+            <Check className="w-4 h-4 text-[#D3FF02]" />
             Home studio focused
           </div>
           <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-[#FF4F33]" />
+            <Check className="w-4 h-4 text-[#D3FF02]" />
             Updated for 2025
           </div>
         </div>
@@ -844,11 +844,11 @@ const TheProducerBlueprint001 = () => {
           <div 
             className="absolute -inset-32 pointer-events-none z-0"
             style={{
-              background: 'radial-gradient(ellipse at center, rgba(255,120,50,0.15) 0%, rgba(255,79,51,0.08) 40%, transparent 70%)',
+              background: 'radial-gradient(ellipse at center, rgba(180,230,0,0.15) 0%, rgba(211,255,2,0.08) 40%, transparent 70%)',
             }}
           />
           {/* Glow Effect */}
-          <div className="absolute -inset-1 bg-[#FF4F33]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
+          <div className="absolute -inset-1 bg-[#D3FF02]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
 
           {/* Video Container */}
           <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
@@ -1114,7 +1114,7 @@ const TheProducerBlueprint001 = () => {
           
           {/* 1. HEADLINE AREA */}
           <div className="text-center mb-16 relative z-10">
-            <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#FF4F33] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#D3FF02] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
               For Self-Taught Producers
             </div>
             
@@ -1138,7 +1138,7 @@ const TheProducerBlueprint001 = () => {
                 <h4 className="text-white font-medium text-lg relative inline-block">
                   Wrong Mentors
                   {/* Scribble: Underline */}
-                  <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FF4F33]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#D3FF02]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M2,5 Q50,8 98,2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </h4>
@@ -1155,7 +1155,7 @@ const TheProducerBlueprint001 = () => {
                 </p>
                 {/* Scribble: Arrow pointing right to video */}
                 <div className="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 opacity-60">
-                   <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform -rotate-12">
+                   <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform -rotate-12">
                      <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
                      <defs>
                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -1170,7 +1170,7 @@ const TheProducerBlueprint001 = () => {
             {/* CENTER VIDEO (THE VIGNETTE) */}
             <div className="md:w-1/2 order-1 md:order-2 relative flex justify-center">
               {/* Glow Effect */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#FF4F33]/5 blur-[80px] rounded-full pointer-events-none"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#D3FF02]/5 blur-[80px] rounded-full pointer-events-none"></div>
               
               <div className="relative w-full max-w-md aspect-square overflow-visible flex items-center justify-center">
                 <video 
@@ -1197,7 +1197,7 @@ const TheProducerBlueprint001 = () => {
                 <div className="relative inline-block">
                   <h4 className="text-white font-medium text-lg relative z-10">Frankenstein Workflow</h4>
                   {/* Scribble: Circle around title */}
-                  <svg className="absolute -top-3 -left-4 w-[120%] h-[180%] text-[#FF4F33]/40 z-0 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
+                  <svg className="absolute -top-3 -left-4 w-[120%] h-[180%] text-[#D3FF02]/40 z-0 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
                     <path d="M10,20 Q50,5 90,20 T10,20" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   </svg>
                 </div>
@@ -1210,7 +1210,7 @@ const TheProducerBlueprint001 = () => {
               <div className="space-y-2 relative">
                 {/* Scribble: Arrow pointing left to video */}
                 <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
-                   <svg viewBox="0 0 50 50" className="text-[#FF4F33] w-full h-full transform rotate-12 scale-x-[-1]">
+                   <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform rotate-12 scale-x-[-1]">
                      <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
                    </svg>
                 </div>
@@ -1293,10 +1293,10 @@ const TheProducerBlueprint001 = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative mb-20">
             
             {/* Card 01 */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#D3FF02]/30 transition-colors duration-500">
               <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">01</div>
               <div className="relative z-10">
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#D3FF02]">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">From "Loop Phase" To Finished Record</h3>
@@ -1307,10 +1307,10 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* Card 02 */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#D3FF02]/30 transition-colors duration-500">
               <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">02</div>
               <div className="relative z-10">
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#D3FF02]">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">The "Bedroom" Mixing Standard</h3>
@@ -1321,10 +1321,10 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* Card 03 */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#D3FF02]/30 transition-colors duration-500">
               <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">03</div>
               <div className="relative z-10">
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#D3FF02]">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Session-Proven Chains</h3>
@@ -1335,10 +1335,10 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* Card 04 */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#FF4F33]/30 transition-colors duration-500">
+            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-[#D3FF02]/30 transition-colors duration-500">
               <div className="absolute top-0 right-0 p-4 opacity-10 font-black text-6xl text-white select-none pointer-events-none group-hover:opacity-20 transition-opacity">04</div>
               <div className="relative z-10">
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#FF4F33]">
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-[#D3FF02]">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Design Sounds With Intent</h3>
@@ -1355,12 +1355,12 @@ const TheProducerBlueprint001 = () => {
             
             {/* The "How" - High Contrast Statement */}
             <p className="text-xl md:text-2xl text-white font-medium leading-relaxed mb-12">
-              Learn top creative workflows with <span className="text-[#FF4F33]">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
+              Learn top creative workflows with <span className="text-[#D3FF02]">an over-the-shoulder look</span> at how Rob Late goes from idea to finished song.
             </p>
 
             {/* CTA Button */}
-            <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-[#FF4F33] transition-all">
-              <span className="border-b border-white/30 pb-0.5 group-hover:border-[#FF4F33]">See The Curriculum</span>
+            <button className="group inline-flex items-center gap-3 text-white text-lg font-medium hover:text-[#D3FF02] transition-all">
+              <span className="border-b border-white/30 pb-0.5 group-hover:border-[#D3FF02]">See The Curriculum</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -1519,7 +1519,7 @@ const TheProducerBlueprint001 = () => {
               <h4 className="text-white font-medium tracking-tight text-2xl md:text-3xl leading-relaxed mb-6">
                 "For me, the real 'producer blueprint' is a solid income from 'making music', doing what we all love. Having control over your time. No boss."
               </h4>
-              <p className="text-[#FF4F33] font-bold uppercase tracking-widest text-sm mb-12">
+              <p className="text-[#D3FF02] font-bold uppercase tracking-widest text-sm mb-12">
                 Priceless.
               </p>
               {/* Signature Image */}
@@ -1545,14 +1545,14 @@ const TheProducerBlueprint001 = () => {
           
           {/* Background Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF4F33]/5 rounded-full blur-[150px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/5 rounded-full blur-[150px]" />
           </div>
 
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             
             {/* HEADER */}
             <div className="text-center mb-16">
-              <span className="inline-block bg-[#FF4F33]/10 text-[#FF4F33] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+              <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
                 Student Wins
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-white mb-6">
@@ -1598,7 +1598,7 @@ const TheProducerBlueprint001 = () => {
                       <div>
                         <p className="text-white font-semibold text-sm flex items-center gap-1.5">
                           Kiera
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#FF4F33]" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02]" />
                         </p>
                         <p className="text-zinc-500 text-xs">@djkiera</p>
                       </div>
@@ -1637,7 +1637,7 @@ const TheProducerBlueprint001 = () => {
                       <div>
                         <p className="text-white font-semibold text-sm flex items-center gap-1.5">
                           David R.
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#FF4F33]" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02]" />
                         </p>
                         <p className="text-zinc-500 text-xs">@david.prod</p>
                       </div>
@@ -1676,7 +1676,7 @@ const TheProducerBlueprint001 = () => {
                       <div>
                         <p className="text-white font-semibold text-sm flex items-center gap-1.5">
                           Sarah Jenkins
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#FF4F33]" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#D3FF02]" />
                         </p>
                         <p className="text-zinc-500 text-xs">@sarah.music</p>
                       </div>
@@ -1818,7 +1818,7 @@ const TheProducerBlueprint001 = () => {
                     <input
                       type="text"
                       placeholder="Your full name"
-                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#FF4F33]/50 transition-colors"
+                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
                     />
                   </div>
                   <div>
@@ -1826,15 +1826,15 @@ const TheProducerBlueprint001 = () => {
                     <input
                       type="email"
                       placeholder="you@example.com"
-                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#FF4F33]/50 transition-colors"
+                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
                     />
                   </div>
                 </div>
 
                 {/* Order Bump */}
-                <div className="bg-[#FF4F33]/5 border-2 border-dashed border-[#FF4F33]/30 rounded-xl p-4">
+                <div className="bg-[#D3FF02]/5 border-2 border-dashed border-[#D3FF02]/30 rounded-xl p-4">
                   <div className="text-center mb-3">
-                    <span className="inline-block bg-[#FF4F33] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                    <span className="inline-block bg-[#D3FF02] text-black text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
                       One-Time Offer
                     </span>
                   </div>
@@ -1842,20 +1842,20 @@ const TheProducerBlueprint001 = () => {
                     <input
                       type="checkbox"
                       id="orderBump"
-                      className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#FF4F33] focus:ring-[#FF4F33] focus:ring-offset-0 cursor-pointer"
+                      className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#D3FF02] focus:ring-[#D3FF02] focus:ring-offset-0 cursor-pointer"
                     />
                     <label htmlFor="orderBump" className="cursor-pointer flex-1">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-white font-semibold">YES, ADD: Alpha Drums 3 Sample Pack</span>
                         <div className="flex items-center gap-2">
                           <span className="text-zinc-500 line-through text-sm">$97</span>
-                          <span className="text-[#FF4F33] font-bold">+$37</span>
+                          <span className="text-[#D3FF02] font-bold">+$37</span>
                         </div>
                       </div>
                       <p className="text-zinc-400 text-sm mb-2">
                         Rob's premium drum library with over 700 curated sounds from sessions with A-list artists. Kicks, snares, and percussion that cut through any mix.
                       </p>
-                      <p className="text-[#FF4F33] text-xs font-medium">&gt;&gt; Click box to add this deal</p>
+                      <p className="text-[#D3FF02] text-xs font-medium">&gt;&gt; Click box to add this deal</p>
                     </label>
                   </div>
                 </div>
@@ -1867,7 +1867,7 @@ const TheProducerBlueprint001 = () => {
                     <span className="text-2xl font-bold text-white">$297.00</span>
                   </div>
 
-                  <button className="w-full bg-[#FF4F33] hover:bg-[#FF4F33]/90 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#FF4F33]/25 flex items-center justify-center gap-2">
+                  <button className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2">
                     Get Instant Access
                     <ArrowRight className="w-5 h-5" />
                   </button>
@@ -1911,7 +1911,7 @@ const TheProducerBlueprint001 = () => {
               {/* FAQ ITEM 1 */}
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
-                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
                     <span>Do I need to use Ableton Live?</span>
                     <span className="transition group-open:rotate-180">
                       <ChevronDown className="w-5 h-5" />
@@ -1926,7 +1926,7 @@ const TheProducerBlueprint001 = () => {
               {/* FAQ ITEM 2 - GENRES */}
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
-                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
                     <span>What genres is this for?</span>
                     <span className="transition group-open:rotate-180">
                       <ChevronDown className="w-5 h-5" />
@@ -1941,7 +1941,7 @@ const TheProducerBlueprint001 = () => {
               {/* FAQ ITEM 3 */}
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
-                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
                     <span>Do I need expensive 3rd party plugins?</span>
                     <span className="transition group-open:rotate-180">
                       <ChevronDown className="w-5 h-5" />
@@ -1956,7 +1956,7 @@ const TheProducerBlueprint001 = () => {
               {/* FAQ ITEM 3 */}
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
-                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
                     <span>Is this course for beginners?</span>
                     <span className="transition group-open:rotate-180">
                       <ChevronDown className="w-5 h-5" />
@@ -1971,7 +1971,7 @@ const TheProducerBlueprint001 = () => {
               {/* FAQ ITEM 4 */}
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
-                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
                     <span>How long do I get access for?</span>
                     <span className="transition group-open:rotate-180">
                       <ChevronDown className="w-5 h-5" />
@@ -1986,7 +1986,7 @@ const TheProducerBlueprint001 = () => {
               {/* FAQ ITEM 5 */}
               <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
                 <details className="group">
-                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#FF4F33] transition-colors">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
                     <span>When do I get access?</span>
                     <span className="transition group-open:rotate-180">
                       <ChevronDown className="w-5 h-5" />
@@ -2012,7 +2012,7 @@ const TheProducerBlueprint001 = () => {
               {/* Left: The Argument */}
               <div className="order-2 md:order-1">
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-                  You have <span className="text-[#FF4F33]">two choices</span> from here.
+                  You have <span className="text-[#D3FF02]">two choices</span> from here.
                 </h2>
                 
                 <div className="space-y-8">
@@ -2024,8 +2024,8 @@ const TheProducerBlueprint001 = () => {
                     </p>
                   </div>
 
-                  <div className="pl-6 border-l-2 border-[#FF4F33]">
-                    <h4 className="text-[#FF4F33] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
+                  <div className="pl-6 border-l-2 border-[#D3FF02]">
+                    <h4 className="text-[#D3FF02] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
                     <p className="text-white font-medium text-lg mb-2">Steal my workflow.</p>
                     <p className="text-zinc-400 text-sm leading-relaxed">
                       You get instant access to the exact system I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
@@ -2047,7 +2047,7 @@ const TheProducerBlueprint001 = () => {
               {/* Right: Visual Anchor */}
               <div className="order-1 md:order-2 flex justify-center relative">
                 {/* Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#FF4F33]/20 blur-[100px] rounded-full pointer-events-none"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none"></div>
                 
                 <img 
                   src={productStackMockup} 
@@ -2101,7 +2101,7 @@ const TheProducerBlueprint001 = () => {
               <div>
                 <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Contact</h4>
                 <p className="text-zinc-500 text-sm mb-2">Have questions?</p>
-                <a href="mailto:team@roblate.com" className="text-white font-medium hover:text-[#FF4F33] transition-colors">
+                <a href="mailto:team@roblate.com" className="text-white font-medium hover:text-[#D3FF02] transition-colors">
                   team@roblate.com
                 </a>
               </div>
