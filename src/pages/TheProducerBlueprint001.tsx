@@ -197,7 +197,7 @@ const CurriculumSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 bg-[#050505] relative z-20">
+    <section id="curriculum" className="py-16 md:py-24 px-4 md:px-6 bg-[#050505] relative z-20">
       <div className="max-w-5xl mx-auto">
         
         {/* HEADER */}
@@ -1535,7 +1535,7 @@ const TheProducerBlueprint001 = () => {
 
 
         {/* ================= WALL OF WINS SECTION ================= */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section id="testimonials" className="relative py-24 md:py-32 overflow-hidden">
           
           {/* Background Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none">
