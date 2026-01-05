@@ -784,13 +784,21 @@ const TheProducerBlueprint001 = () => {
   ];
 
   // Selected 6 for the "Mini" Social Proof section
-  const miniSocialProofImages = [
+  // Desktop order (all 6 shown)
+  const miniSocialProofImagesDesktop = [
     austriaTestimonial,
     rsmyth111Testimonial,
     levinMusicTestimonial,
     deepintheforestTestimonial,
     nateSawyerTestimonial,
     completePackageTestimonial,
+  ];
+  
+  // Mobile order (first 3 shown, deepintheforest first)
+  const miniSocialProofImagesMobile = [
+    deepintheforestTestimonial,
+    austriaTestimonial,
+    rsmyth111Testimonial,
   ];
 
   return (
@@ -1134,9 +1142,21 @@ const TheProducerBlueprint001 = () => {
           {/* MASONRY WALL - Cinematic fade on desktop, clean on mobile */}
           <div className="w-full relative z-0 overflow-hidden md:max-h-[700px]">
             <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 pb-12 md:pb-32">
-              {/* Display first 3 on mobile, all 6 on desktop */}
-              {miniSocialProofImages.map((img, idx) => (
-                <div key={idx} className={`break-inside-avoid max-w-[92%] mx-auto md:max-w-none ${idx >= 3 ? 'hidden md:block' : ''}`}>
+              {/* Mobile: Show mobile-specific order (3 images) */}
+              {miniSocialProofImagesMobile.map((img, idx) => (
+                <div key={`mobile-${idx}`} className="break-inside-avoid max-w-[92%] mx-auto md:hidden">
+                  <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
+                    <img
+                      src={img}
+                      className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
+                      alt={`Testimonial ${idx + 1}`}
+                    />
+                  </div>
+                </div>
+              ))}
+              {/* Desktop: Show all 6 images in original order */}
+              {miniSocialProofImagesDesktop.map((img, idx) => (
+                <div key={`desktop-${idx}`} className="break-inside-avoid hidden md:block">
                   <div className="rounded-xl border border-white/10 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-[#121212]">
                     <img
                       src={img}
