@@ -1369,11 +1369,11 @@ const TheProducerBlueprint001 = () => {
           <div className="text-center mb-24 space-y-4">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-500 font-medium">Meet Your Instructor</p>
             <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
-              <span className="inline-flex items-center">
-                Rob Late.
+              <span className="relative inline-block">
+                Rob Late
                 <svg 
                   viewBox="0 0 22 22" 
-                  className="ml-3 h-[0.6em] w-[0.6em] drop-shadow-[0_0_8px_rgba(0,149,246,0.3)]"
+                  className="absolute -top-1 -right-5 md:-right-6 h-4 w-4 md:h-5 md:w-5 drop-shadow-[0_0_8px_rgba(0,149,246,0.3)]"
                   aria-label="Verified"
                 >
                   <path 
