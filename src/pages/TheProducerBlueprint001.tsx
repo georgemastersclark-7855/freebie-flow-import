@@ -1401,12 +1401,15 @@ const TheProducerBlueprint001 = () => {
               It's the era of home studio production. You no longer need expensive gear. <span className="text-zinc-400">DJs are producing headline tracks in hotel rooms on a laptop and headphones.</span>
             </p>
             
-            <p className="text-xl md:text-2xl font-semibold tracking-tight">
-              <span className="text-zinc-400">The Producer Blueprint</span> <span className="text-white">will show you:</span>
-            </p>
           </div>
 
           {/* 3. THE 4 PILLARS (THE CARDS) */}
+          <div className="flex flex-col items-center mt-4 md:mt-8 mb-6 md:mb-10">
+            <div className="w-24 h-px bg-white/10 mb-6 md:mb-8"></div>
+            <p className="text-xs uppercase tracking-widest text-zinc-500 font-medium">
+              Inside The Workflow
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative mb-20">
             
             {/* Card 01 */}
