@@ -1300,15 +1300,15 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* Connector Line to Solution */}
-          <div className="my-8 md:mt-24 flex flex-col items-center opacity-20">
-            <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
+          <div className="pb-0 md:mt-24 flex flex-col items-center opacity-20">
+            <div className="w-[1px] h-20 md:h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
           </div>
 
         </div>
       </section>
 
       {/* ================= SECTION 3: THE SOLUTION (RESPONSIVE IMAGE SWAP) ================= */}
-      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0 md:pt-32">
+      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0 pb-0 md:pt-32 md:pb-0">
         
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
@@ -1318,7 +1318,7 @@ const TheProducerBlueprint001 = () => {
             {/* MOBILE IMAGE (Visible < md) - Uses tall image for better verticality */}
             <img 
               src={robMarshmello}
-              className="block md:hidden w-full h-full object-cover object-center opacity-100 brightness-110 contrast-[1.05] saturate-[1.1]"
+              className="block md:hidden w-full h-full object-cover object-center opacity-100 brightness-[1.15] contrast-[1.05] saturate-[1.1]"
               alt="Rob and Marshmello Mobile"
             />
             
@@ -1329,11 +1329,11 @@ const TheProducerBlueprint001 = () => {
               alt="Rob in Home Studio Desktop"
             />
             
-            {/* Top Vignette - Reduced on mobile (h-20), full on desktop (h-40) */}
-            <div className="absolute top-0 left-0 w-full h-20 md:h-40 bg-gradient-to-b from-[#050505] via-[#050505] to-transparent opacity-100"></div>
+            {/* Top Fade - Mobile: h-24 simple fade, Desktop: h-40 strong vignette */}
+            <div className="absolute top-0 left-0 w-full h-24 md:h-40 bg-gradient-to-b from-[#050505] to-transparent md:from-[#050505] md:via-[#050505] md:to-transparent opacity-100"></div>
             
-            {/* Bottom Fade - Reduced on mobile (h-24), full on desktop (h-[500px]) */}
-            <div className="absolute bottom-0 left-0 w-full h-24 md:h-[500px] bg-gradient-to-t from-[#050505] via-[#050505] to-transparent"></div>
+            {/* Bottom Fade - Mobile: h-32 simple fade, Desktop: h-[500px] deep fade */}
+            <div className="absolute bottom-0 left-0 w-full h-32 md:h-[500px] bg-gradient-to-t from-[#050505] to-transparent md:from-[#050505] md:via-[#050505] md:to-transparent"></div>
             
             {/* Side Fades (Desktop only) */}
             <div className="hidden md:block absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#050505] to-transparent"></div>
@@ -1342,7 +1342,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* 2. CONTENT CONTAINER - Responsive negative margins */}
-        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px] pt-6 md:pt-0">
           
           {/* HEADER AREA (CONTEXT) */}
           <div className="text-center mb-6 md:mb-24 max-w-4xl mx-auto">
