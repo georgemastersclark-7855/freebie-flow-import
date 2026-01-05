@@ -1758,79 +1758,51 @@ const TheProducerBlueprint001 = () => {
               <div className="w-2 shrink-0 md:hidden"></div>
             </motion.div>
 
-            {/* WALL OF PROOF (Masonry with 10 Images) */}
-            <div className="mt-8">
-              <p className="text-center text-zinc-500 text-sm uppercase tracking-widest mb-10">
-                More Feedback From The Community
-              </p>
-              
-              <div className="columns-2 lg:columns-3 gap-4 space-y-4">
-                
-                {/* Screenshot 1 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
-                
-                {/* Screenshot 2 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
+          </div>
+        </section>
 
-                {/* Screenshot 3 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
+        {/* ================= MORE FEEDBACK: MASONRY GRID ================= */}
+        <section className="relative bg-[#050505] py-24">
+          <div className="max-w-7xl mx-auto px-6">
+            
+            <p className="text-zinc-500 text-xs font-bold uppercase tracking-[0.2em] text-center mb-12">
+              More Feedback From The Community
+            </p>
 
-                {/* Screenshot 4 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+            {/* Masonry Layout: 2 Columns on Mobile, 3 on Desktop */}
+            <div className="columns-2 lg:columns-3 gap-3 space-y-3">
+              {[
+                drewAdieuTestimonial,
+                nateSawyerTestimonial,
+                testimonial1,
+                rsmyth111Testimonial,
+                levinMusicTestimonial,
+                deepintheforestTestimonial,
+                testimonial2
+              ].map((img, idx) => (
+                <div key={idx} className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl">
+                  <img 
+                    src={img} 
+                    alt="Student Proof" 
+                    className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
+                  />
                 </div>
-
-                {/* Screenshot 5 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
-
-                {/* Screenshot 6 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
-
-                {/* Screenshot 7 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
-
-                {/* Screenshot 8 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
-
-                {/* Screenshot 9 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
-
-                {/* Screenshot 10 */}
-                <div className="break-inside-avoid rounded-xl overflow-hidden shadow-2xl transition-transform duration-300">
-                  <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
-
-              </div>
+              ))}
             </div>
 
-            {/* BRIDGE CTA - Below Social Proof Grid */}
-            <div className="flex flex-col items-center mt-12 md:mt-16">
+            {/* FINAL CALL TO ACTION: Isolated with heavy top margin */}
+            <div className="flex flex-col items-center mt-32">
               <a 
-                href="#pricing" 
-                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+                href="#pricing"
+                className="relative group px-10 py-5 bg-[#D3FF02] hover:bg-[#e2ff45] text-black font-bold text-lg rounded-full shadow-[0_0_50px_rgba(211,255,2,0.4)] transition-all duration-300"
               >
-                Start The Blueprint Today
-                <ArrowRight className="w-5 h-5" />
+                Start The Blueprint Today →
               </a>
-              <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
+              
+              <p className="mt-5 text-zinc-500 text-sm font-medium tracking-tight opacity-80">
+                Get Instant Access
+              </p>
             </div>
-
           </div>
         </section>
 
