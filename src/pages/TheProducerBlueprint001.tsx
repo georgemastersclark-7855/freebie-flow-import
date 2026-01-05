@@ -1518,8 +1518,11 @@ const TheProducerBlueprint001 = () => {
                   2019: THE GRIND
                 </p>
               </div>
-              <div className="mt-8 text-center max-w-[240px]">
-                <h3 className="text-white text-xl font-bold mb-3">The 9-5 Grind</h3>
+              <div className="mt-8 text-center max-w-[240px] overflow-hidden">
+                <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
+                  <span className="relative z-10">The 9-5 Grind</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/30 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   I was working a sales job for a phone mount company, producing music as a 'hobby' in the evenings. Couple of super cheap production gigs here and there. This was my first setup - simple speakers, mic and interface. All you need!
                 </p>
@@ -1536,8 +1539,11 @@ const TheProducerBlueprint001 = () => {
                   2020: LOCKDOWN
                 </p>
               </div>
-              <div className="mt-8 text-center max-w-[240px]">
-                <h3 className="text-white text-xl font-bold mb-3">The Lockdown Era</h3>
+              <div className="mt-8 text-center max-w-[240px] overflow-hidden">
+                <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
+                  <span className="relative z-10">The Lockdown Era</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/30 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   Stuck in a spare room in my London flat during lockdown, I started taking remote sessions. I posted some Reels sampling random objects in my studio. A few started getting views. I didn't know it yet, but everything changed right here.
                 </p>
@@ -1554,8 +1560,11 @@ const TheProducerBlueprint001 = () => {
                   2021: BREAKTHROUGH
                 </p>
               </div>
-              <div className="mt-8 text-center max-w-[240px]">
-                <h3 className="text-white text-xl font-bold mb-3">The Breakthrough</h3>
+              <div className="mt-8 text-center max-w-[240px] overflow-hidden">
+                <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
+                  <span className="relative z-10">The Breakthrough</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/30 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   My content was going viral, followers growing. Drew from <span className="text-white font-semibold">The Chainsmokers</span> DM'd me after seeing a video and we started working on music together. No management, no label connections at this point - just making cool music & getting reach with content.
                 </p>
@@ -1572,8 +1581,11 @@ const TheProducerBlueprint001 = () => {
                   2022: A-LIST
                 </p>
               </div>
-              <div className="mt-8 text-center max-w-[240px]">
-                <h3 className="text-white text-xl font-bold mb-3">The A-List Sessions</h3>
+              <div className="mt-8 text-center max-w-[240px] overflow-hidden">
+                <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
+                  <span className="relative z-10">The A-List Sessions</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/30 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   The major artist sessions started stacking up: Marshmello, Clean Bandit, Gary Barlow. The crazy part is I was still doing it all from a home setup, proving you don't need a million-dollar facility to play at the top level.
                 </p>
@@ -1590,8 +1602,11 @@ const TheProducerBlueprint001 = () => {
                   TODAY: THE BLUEPRINT
                 </p>
               </div>
-              <div className="mt-8 text-center max-w-[240px]">
-                <h3 className="text-white text-xl font-bold mb-3">The Producer Blueprint</h3>
+              <div className="mt-8 text-center max-w-[240px] overflow-hidden">
+                <h3 className="text-white text-xl font-bold mb-3 relative inline-block">
+                  <span className="relative z-10">The Producer Blueprint</span>
+                  <span className="absolute bottom-1 left-0 w-full h-3 bg-[#D3FF02]/30 -z-10 -rotate-1 skew-x-12 block md:hidden" />
+                </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   100 Million+ streams later, I moved house and built a dedicated space in my garage. It's still a home studio. It's basically the same gear. I just have fancier lights now.
                 </p>
