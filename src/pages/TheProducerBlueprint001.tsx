@@ -1976,7 +1976,7 @@ const TheProducerBlueprint001 = () => {
                 Frequently Asked Questions
               </h2>
               <p className="text-zinc-400">
-                Everything you need to know about The Blueprint.
+                Everything you need to know about The Producer Blueprint.
               </p>
             </div>
 
