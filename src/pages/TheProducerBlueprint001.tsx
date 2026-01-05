@@ -1983,57 +1983,61 @@ const TheProducerBlueprint001 = () => {
           </div>
         </section>
 
-      {/* SECTION: THE ERA OF HOME STUDIO PRODUCTION */}
-      <section className="relative z-10 px-6 md:px-12 py-24 max-w-5xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-          {/* Left Column - Header */}
-          <div>
-            <div className="inline-flex items-center px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 mb-6">
-              <span className="text-sm font-medium text-zinc-300">The Blueprint Has Changed</span>
+        {/* ================= FINAL SELL: THE CROSSROADS ================= */}
+        <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              
+              {/* Left: The Argument */}
+              <div className="order-2 md:order-1">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                  You have <span className="text-[#FF4F33]">two choices</span> from here.
+                </h2>
+                
+                <div className="space-y-8">
+                  <div className="pl-6 border-l-2 border-zinc-800">
+                    <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-2">Option 1</h4>
+                    <p className="text-white font-medium text-lg mb-2">Keep guessing.</p>
+                    <p className="text-zinc-500 text-sm leading-relaxed">
+                      You can keep hunting for free tutorials, piecing together advice from different YouTubers, and wondering why your tracks still don't sound "pro." You might get there eventually, but it will cost you years of trial and error.
+                    </p>
+                  </div>
+
+                  <div className="pl-6 border-l-2 border-[#FF4F33]">
+                    <h4 className="text-[#FF4F33] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
+                    <p className="text-white font-medium text-lg mb-2">Steal my workflow.</p>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      You get instant access to the exact system I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-10">
+                  <button className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
+                    Join The Producer Blueprint
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                  <p className="text-zinc-500 text-xs mt-4 text-center md:text-left">
+                    Instant Digital Access • One-Time Payment
+                  </p>
+                </div>
+              </div>
+
+              {/* Right: Visual Anchor */}
+              <div className="order-1 md:order-2 flex justify-center relative">
+                {/* Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#FF4F33]/20 blur-[100px] rounded-full pointer-events-none"></div>
+                
+                <img 
+                  src={productStackMockup} 
+                  alt="The Producer Blueprint Package" 
+                  className="relative z-10 w-full max-w-sm drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
             </div>
-
-            <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.03em] mb-6">
-              It's The Era of <br />
-              <span className="font-serif italic font-normal text-zinc-200">Home Studio Production.</span>
-            </h2>
-
-            <p className="text-zinc-400 text-lg">
-              Major industry credits from a home studio is now a reality. I can show you the blueprint.
-            </p>
           </div>
-
-          {/* Right Column - Content */}
-          <div className="space-y-6">
-            <p className="text-zinc-300 leading-relaxed">
-              You no longer need a £10k mic to be 'pro'. There are kids making 100-million stream hits on laptops. DJs
-              are producing headline tracks in hotel rooms. I produce in coffee shops with headphones when I need a
-              change of scene.
-            </p>
-
-            <p className="text-zinc-300 leading-relaxed">
-              Many people are stuck in the headspace of "I need this pro gear or setup" before I can make top music. But
-              the people who 'just do' - who have fun making music - have 10x the output, and therefore make 10x the
-              progress.
-            </p>
-
-            <p className="text-zinc-300 leading-relaxed">
-              To be a working producer you need efficiency of output, creative workflows to fall back on, and to have a
-              strong sense of taste.
-            </p>
-
-            <p className="text-zinc-300 leading-relaxed">
-              I can help you develop these. This is why I built The Producer Blueprint.
-            </p>
-
-            <div className="pt-4">
-              <button className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-200 transition-all">
-                See How The Blueprint Works
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </div>
   );
 };
