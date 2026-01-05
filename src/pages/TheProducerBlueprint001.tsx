@@ -243,10 +243,19 @@ const CurriculumSection = () => {
                     : 'border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black hover:border-zinc-700 md:hover:border-[#D3FF02]/30'
                 }`}
               >
-                {/* DESKTOP: Horizontal row layout with image | MOBILE: Vertical stack without image */}
-                <div className="flex flex-col md:flex-row">
+                {/* MOBILE: Horizontal row with thumbnail | DESKTOP: Large horizontal cards */}
+                <div className="flex flex-row md:flex-row">
                   
-                  {/* IMAGE SECTION - Hidden on mobile, visible on desktop (w-1/3) */}
+                  {/* MOBILE THUMBNAIL - Small square image (block md:hidden) */}
+                  <div className="block md:hidden w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 m-4 mr-0">
+                    <img 
+                      src={module.image} 
+                      alt={module.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* DESKTOP IMAGE - Large w-1/3 image (hidden md:block) */}
                   <div className="hidden md:block relative w-1/3 min-h-[280px] shrink-0 overflow-hidden">
                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
                     <img 
@@ -258,19 +267,19 @@ const CurriculumSection = () => {
                     <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-zinc-900 to-transparent"></div>
                   </div>
 
-                  {/* CONTENT SECTION - Full width on mobile, w-2/3 on desktop */}
+                  {/* CONTENT SECTION - Flex-1 on mobile, w-2/3 on desktop */}
                   <div className="flex-1 flex flex-col relative min-w-0 md:w-2/3">
                     
                     {/* MAIN CONTENT */}
-                    <div className={`flex flex-col justify-center p-6 md:px-8 md:py-6 ${isOpen ? '' : 'md:min-h-[280px]'} shrink-0 relative z-20`}>
+                    <div className={`flex flex-col justify-center p-4 md:px-8 md:py-6 ${isOpen ? '' : 'md:min-h-[280px]'} shrink-0 relative z-20`}>
                       
-                      {/* Background Number (Subtle Watermark) */}
-                      <div className="absolute top-3 right-4 md:top-4 md:right-6 text-5xl md:text-7xl font-bold text-white/5 select-none pointer-events-none">
+                      {/* Background Number (Subtle Watermark) - Desktop only */}
+                      <div className="hidden md:block absolute top-4 right-6 text-7xl font-bold text-white/5 select-none pointer-events-none">
                         {module.id}
                       </div>
 
-                      <div className="pr-12">
-                        <h3 className="text-lg md:text-3xl font-bold text-white tracking-tight mb-2 md:mb-3 leading-tight group-hover:text-zinc-100 transition-colors">
+                      <div className="pr-4 md:pr-12">
+                        <h3 className="text-lg md:text-3xl font-bold text-white tracking-tight mb-1 md:mb-3 leading-tight group-hover:text-zinc-100 transition-colors">
                           {module.title}
                           {module.subtitle && (
                             <span className="hidden md:inline font-serif italic font-normal text-zinc-500 ml-2 group-hover:text-zinc-400 transition-colors">
@@ -279,17 +288,17 @@ const CurriculumSection = () => {
                           )}
                         </h3>
                         {/* Description - truncated when closed */}
-                        <p className={`text-zinc-400 text-sm md:text-sm leading-relaxed mb-4 md:mb-6 max-w-lg font-medium group-hover:text-zinc-300 transition-colors ${isOpen ? '' : 'line-clamp-2 md:line-clamp-3'}`}>
+                        <p className={`text-zinc-400 text-xs md:text-sm leading-relaxed mb-2 md:mb-6 max-w-lg font-medium group-hover:text-zinc-300 transition-colors ${isOpen ? '' : 'line-clamp-2 md:line-clamp-3'}`}>
                           {module.desc}
                         </p>
                         
-                        {/* VIEW LESSONS BUTTON */}
+                        {/* VIEW LESSONS BUTTON - Text link style */}
                         <button 
                           onClick={() => toggleModule(module.id)}
-                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
+                          className="inline-flex items-center text-[10px] md:text-xs font-bold tracking-[0.12em] md:tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
                         >
-                          {isOpen ? 'Hide Lessons' : 'View Lessons'}
-                          <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'group-hover:translate-y-1'}`}>
+                          {isOpen ? 'Hide' : 'View Lessons'}
+                          <span className={`ml-1.5 md:ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'group-hover:translate-y-1'}`}>
                             ↓
                           </span>
                         </button>
