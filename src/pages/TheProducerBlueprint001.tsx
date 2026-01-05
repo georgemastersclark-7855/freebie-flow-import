@@ -58,6 +58,7 @@ import avatarBen from "@/assets/avatars/avatar-ben.webp";
 import avatarProducer1 from "@/assets/avatars/avatar-producer-1.png";
 import avatarProducer2 from "@/assets/avatars/avatar-producer-2.png";
 import avatarProducer3 from "@/assets/avatars/avatar-producer-3.png";
+import avatarKosana from "@/assets/avatars/avatar-kosana.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -1660,7 +1661,7 @@ const TheProducerBlueprint001 = () => {
                   <div className="relative p-[2px] rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
                     <div className="bg-black p-[2px] rounded-full">
                       <Avatar className="w-10 h-10 border-none">
-                        <AvatarImage src={avatarProducer1} className="object-cover" />
+                        <AvatarImage src={avatarKosana} className="object-cover" />
                         <AvatarFallback>K</AvatarFallback>
                       </Avatar>
                     </div>
