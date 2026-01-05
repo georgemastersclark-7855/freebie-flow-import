@@ -1300,15 +1300,15 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* Connector Line to Solution */}
-          <div className="mt-16 md:mt-24 flex flex-col items-center opacity-20">
-            <div className="w-[1px] h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
+          <div className="my-8 md:mt-24 flex flex-col items-center opacity-20">
+            <div className="w-[1px] h-10 md:h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
           </div>
 
         </div>
       </section>
 
       {/* ================= SECTION 3: THE SOLUTION (RESPONSIVE IMAGE SWAP) ================= */}
-      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-0">
+      <section className="relative bg-[#050505] z-20 border-t border-white/5 pt-4 md:pt-32">
         
         {/* 1. CINEMATIC IMAGE HEADER */}
         <div className="relative w-full flex justify-center">
@@ -1345,8 +1345,8 @@ const TheProducerBlueprint001 = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10 -mt-[200px] md:-mt-[350px]">
           
           {/* HEADER AREA (CONTEXT) */}
-          <div className="text-center mb-16 md:mb-24 max-w-4xl mx-auto">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-8 backdrop-blur-sm shadow-xl">
+          <div className="text-center mb-6 md:mb-24 max-w-4xl mx-auto">
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-4 md:mb-8 backdrop-blur-sm shadow-xl">
               The Producer Blueprint 2.0
             </div>
             
