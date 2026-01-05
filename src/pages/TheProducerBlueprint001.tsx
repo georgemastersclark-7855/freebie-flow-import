@@ -2069,10 +2069,10 @@ const TheProducerBlueprint001 = () => {
               <div>
                 <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Legal</h4>
                 <ul className="space-y-3">
-                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Terms of Service</a></li>
-                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Earnings Disclaimer</a></li>
-                  <li><a href="#" className="text-zinc-500 hover:text-white text-sm transition-colors">Refund Policy</a></li>
+                  <li><a href="/legal/privacy-policy" className="text-zinc-500 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
+                  <li><a href="/legal/terms-of-service" className="text-zinc-500 hover:text-white text-sm transition-colors">Terms of Service</a></li>
+                  <li><a href="/legal/earnings-disclaimer" className="text-zinc-500 hover:text-white text-sm transition-colors">Earnings Disclaimer</a></li>
+                  <li><a href="/legal/refund-policy" className="text-zinc-500 hover:text-white text-sm transition-colors">Refund Policy</a></li>
                 </ul>
               </div>
 
