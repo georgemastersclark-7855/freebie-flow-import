@@ -1651,43 +1651,36 @@ const TheProducerBlueprint001 = () => {
             {/* We use -mx-6 on mobile to break out of the parent padding and let the carousel touch the screen edges */}
             <div className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide mb-20">
               
-              {/* HIGH-STATUS INSTAGRAM TESTIMONIAL: KOSANA */}
-              <div className="snap-center shrink-0 w-[85vw] max-w-[340px] md:w-auto md:max-w-none bg-[#0A0A0A] rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(220,39,67,0.08)] transition-all duration-500 group">
+              {/* HIGH-STATUS FULL-SIZE TESTIMONIAL: KOSANA */}
+              <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
                 
-                {/* IG HEADER AREA */}
-                <div className="p-4 flex items-center justify-between border-b border-white/5">
-                  <div className="flex items-center gap-3">
-                    {/* Stories Ring Avatar */}
-                    <div className="relative p-[2px] rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
-                      <div className="bg-black p-[2px] rounded-full">
-                        <Avatar className="w-10 h-10 border-none">
-                          <AvatarImage src={avatarProducer1} className="object-cover" />
-                          <AvatarFallback>K</AvatarFallback>
-                        </Avatar>
-                      </div>
-                    </div>
-                    
-                    <div className="flex flex-col">
-                      <div className="flex items-center gap-1">
-                        <p className="text-white font-bold text-sm tracking-tight">djkosana</p>
-                        {/* Official IG Verified SVG */}
-                        <svg viewBox="0 0 22 22" className="h-3.5 w-3.5 fill-[#0095F6]">
-                          <path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z" />
-                        </svg>
-                      </div>
-                      <p className="text-zinc-500 text-[10px] font-medium uppercase tracking-tight">
-                        251K FOLLOWERS • INTERNATIONAL DJ
-                      </p>
+                {/* PREMIUM IG PROFILE HEADER */}
+                <div className="p-4 flex items-center gap-3">
+                  {/* Stories Ring Avatar */}
+                  <div className="relative p-[2px] rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
+                    <div className="bg-black p-[2px] rounded-full">
+                      <Avatar className="w-10 h-10 border-none">
+                        <AvatarImage src={avatarProducer1} className="object-cover" />
+                        <AvatarFallback>K</AvatarFallback>
+                      </Avatar>
                     </div>
                   </div>
-                  <div className="text-zinc-400">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-1">
+                      <p className="text-white font-bold text-sm tracking-tight">djkosana</p>
+                      {/* Official IG Verified SVG */}
+                      <svg viewBox="0 0 22 22" className="h-3.5 w-3.5 fill-[#0095F6]">
+                        <path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z" />
+                      </svg>
+                    </div>
+                    <p className="text-zinc-500 text-xs">@djkosana</p>
                   </div>
                 </div>
 
-                {/* MAIN CONTENT (IG POST RATIO) */}
+                {/* FULL SIZE MEDIA AREA (9:16 Ratio) */}
                 <div 
-                  className="relative aspect-[4/5] overflow-hidden bg-black cursor-pointer group-hover:scale-[1.01] transition-transform duration-500"
+                  className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer"
                   onClick={() => {
                     const video = kieraVideoRef.current;
                     if (video) {
@@ -1709,14 +1702,16 @@ const TheProducerBlueprint001 = () => {
                     loop
                     playsInline
                     preload="metadata"
+                    onMouseEnter={(e) => { e.currentTarget.muted = true; e.currentTarget.play(); }}
+                    onMouseLeave={(e) => { if (!kieraPlaying) { e.currentTarget.pause(); e.currentTarget.currentTime = 0; } }}
                   />
-                  {/* Play/Pause Button Overlay */}
-                  <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${kieraPlaying ? 'opacity-0' : 'opacity-100'}`}>
+                  {/* Play Button Overlay */}
+                  <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${kieraPlaying ? 'opacity-0' : 'opacity-100 group-hover:opacity-0'}`}>
                     <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
                       <Play className="w-6 h-6 text-white fill-white ml-1" />
                     </div>
                   </div>
-                  {/* Pause indicator on hover when playing */}
+                  {/* Pause indicator when playing */}
                   {kieraPlaying && (
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                       <div className="w-14 h-14 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
@@ -1724,20 +1719,13 @@ const TheProducerBlueprint001 = () => {
                       </div>
                     </div>
                   )}
-                  {/* IG Heart/Comment Overlay Mockup */}
-                  <div className="absolute bottom-4 left-4 flex gap-4 text-white z-20 opacity-80">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.9A8.38 8.38 0 0 1 4 11.3a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                  </div>
                 </div>
 
-                {/* CAPTION AREA */}
-                <div className="p-4 pt-3">
-                  <p className="text-white text-sm leading-snug">
-                    <span className="font-bold mr-2">djkosana</span>
-                    "The best investment I've made for my music career." 💎
+                {/* CLEAN QUOTE AREA */}
+                <div className="p-6">
+                  <p className="text-zinc-200 text-base font-medium leading-snug">
+                    "The best investment I've made for my music career."
                   </p>
-                  <div className="mt-2 text-zinc-500 text-xs">View all 142 comments</div>
                 </div>
               </div>
 
