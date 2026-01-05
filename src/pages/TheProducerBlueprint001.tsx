@@ -815,12 +815,12 @@ const TheProducerBlueprint001 = () => {
       </nav>
 
       {/* Hero Content */}
-      <main className="relative z-10 px-6 md:px-12 pt-6 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
+      <main className="relative z-10 px-6 md:px-12 pt-8 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
         {/* HERO AMBIENT GLOW */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
         
         {/* Social Proof Eyebrow */}
-        <div className="flex items-center justify-center gap-4 mb-6 md:mb-10">
+        <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-10">
           <div className="flex -space-x-3 relative">
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
               <AvatarImage src={avatarBen} className="object-cover" />
@@ -850,14 +850,14 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[1.05] mb-3 md:mb-6">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[1.05] mb-6 md:mb-10">
           The Complete Production Workflow.
           <br />
           <span className="font-serif italic font-normal tracking-normal text-zinc-200">Start to Finish.</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto mb-6 md:mb-10 leading-relaxed">
+        <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-16 leading-relaxed">
           Watch <span className="text-white font-semibold">Rob Late</span> (The Chainsmokers, Marshmello, Clean Bandit)
           demonstrate the end-to-end process he uses to write, produce, and mix professional records from a home studio.
         </p>
@@ -881,11 +881,8 @@ const TheProducerBlueprint001 = () => {
           <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
             
             {/* THE VISIBLE OVERLAY (Z-30) */}
-            <div className="absolute top-3 left-3 md:top-6 md:left-6 z-30 pointer-events-none flex flex-col items-start gap-1">
-              <div className="px-2 py-0.5 rounded bg-[#D3FF02] text-black text-[8px] md:text-[10px] font-black uppercase tracking-wider">
-                Exclusive Masterclass
-              </div>
-              <div className="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] md:text-sm font-bold tracking-tight">
+            <div className="absolute top-3 left-3 md:top-6 md:left-6 z-30 pointer-events-none">
+              <div className="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white text-[11px] md:text-sm font-bold tracking-tight">
                 Watch: Inside The Producer Blueprint
               </div>
             </div>
