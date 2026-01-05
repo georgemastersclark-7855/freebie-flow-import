@@ -1705,8 +1705,8 @@ const TheProducerBlueprint001 = () => {
                     </div>
                   </div>
 
-                  {/* VIDEO/IMAGE AREA (Full 9:16) */}
-                  <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
+                  {/* DYNAMIC ASPECT RATIO: 4:5 on Mobile, 9:16 on Desktop */}
+                  <div className="relative aspect-[4/5] md:aspect-[9/16] overflow-hidden bg-black cursor-pointer">
                     {student.isVideo ? (
                       <video
                         src={student.media}
@@ -1734,7 +1734,7 @@ const TheProducerBlueprint001 = () => {
                   </div>
 
                   {/* CAPTION AREA */}
-                  <div className="p-6">
+                  <div className="p-5 md:p-6">
                     <p className="text-zinc-200 text-base font-medium leading-snug">
                       "{student.quote}"
                     </p>
