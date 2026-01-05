@@ -1484,7 +1484,7 @@ const TheProducerBlueprint001 = () => {
       </section>
 
       {/* ================= SECTION: THE ORIGIN STORY (MEET YOUR INSTRUCTOR) ================= */}
-      <section className="relative w-full bg-black pt-12 pb-24 px-4 overflow-hidden">
+      <section className="relative w-full bg-black pt-12 pb-24 px-4 overflow-x-hidden">
         
         {/* Subtle radial glow behind the content */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-zinc-800/30 blur-[120px] rounded-full pointer-events-none z-0" />
@@ -1508,9 +1508,9 @@ const TheProducerBlueprint001 = () => {
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative">
             
-            {/* ITEM 1: 2019 */}
+            {/* ITEM 1: 2019 - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] -rotate-2">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] -translate-x-8 md:w-full md:translate-x-0 max-w-[280px] -rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" />
                 </div>
@@ -1526,9 +1526,9 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
 
-            {/* ITEM 2: 2020 */}
+            {/* ITEM 2: 2020 - Peek right on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] rotate-1">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] translate-x-8 md:w-full md:translate-x-0 max-w-[280px] rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" />
                 </div>
@@ -1544,9 +1544,9 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
 
-            {/* ITEM 3: 2021 */}
+            {/* ITEM 3: 2021 - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] -rotate-1">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] -translate-x-8 md:w-full md:translate-x-0 max-w-[280px] -rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robChainsmokers} alt="The Breakthrough" className="w-full h-full object-cover object-top" />
                 </div>
@@ -1562,9 +1562,9 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
 
-            {/* ITEM 4: 2022 */}
+            {/* ITEM 4: 2022 - Peek right on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] rotate-2">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] translate-x-8 md:w-full md:translate-x-0 max-w-[280px] rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robGaryBarlow} alt="The A-List Sessions" className="w-full h-full object-cover object-center" />
                 </div>
@@ -1580,9 +1580,9 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
 
-            {/* ITEM 5: TODAY */}
+            {/* ITEM 5: TODAY - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
-              <div className="relative bg-white p-3 pb-8 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-20 w-full max-w-[280px] -rotate-1">
+              <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[85%] -translate-x-8 md:w-full md:translate-x-0 max-w-[280px] -rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 grayscale contrast-125 transition-all duration-500 group-hover:grayscale-0">
                   <img src={robMarsmelloCropped} alt="The Producer Blueprint" className="w-full h-full object-cover object-center" />
                 </div>
