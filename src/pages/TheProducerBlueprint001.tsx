@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ArrowRight, Check, CheckCircle2, Play, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Assets
@@ -730,6 +730,9 @@ const CurriculumSection = () => {
 };
 
 const TheProducerBlueprint001 = () => {
+  const [kieraPlaying, setKieraPlaying] = useState(false);
+  const kieraVideoRef = useRef<HTMLVideoElement>(null);
+
   // Load Vidalytics script on mount
   useEffect(() => {
     const script = document.createElement("script");
@@ -1648,26 +1651,46 @@ const TheProducerBlueprint001 = () => {
             {/* We use -mx-6 on mobile to break out of the parent padding and let the carousel touch the screen edges */}
             <div className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide mb-20">
               
-              {/* CARD 1: Kiera Video Testimonial */}
               <div className="snap-center shrink-0 w-[85vw] max-w-[320px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors group">
                 {/* MEDIA AREA */}
-                <div className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer">
+                <div 
+                  className="relative aspect-[9/16] overflow-hidden bg-black cursor-pointer"
+                  onClick={() => {
+                    const video = kieraVideoRef.current;
+                    if (video) {
+                      if (video.paused) {
+                        video.muted = false;
+                        video.play();
+                        setKieraPlaying(true);
+                      } else {
+                        video.pause();
+                        setKieraPlaying(false);
+                      }
+                    }
+                  }}
+                >
                   <video
+                    ref={kieraVideoRef}
                     src={djkieraTestimonial}
                     className="absolute inset-0 w-full h-full object-cover"
-                    muted
                     loop
                     playsInline
                     preload="metadata"
-                    onMouseEnter={(e) => e.currentTarget.play()}
-                    onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
                   />
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                  {/* Play/Pause Button Overlay */}
+                  <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${kieraPlaying ? 'opacity-0' : 'opacity-100'}`}>
                     <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform">
                       <Play className="w-6 h-6 text-white fill-white ml-1" />
                     </div>
                   </div>
+                  {/* Pause indicator on hover when playing */}
+                  {kieraPlaying && (
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-14 h-14 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
+                        <Pause className="w-6 h-6 text-white fill-white" />
+                      </div>
+                    </div>
+                  )}
                 </div>
                 {/* TEXT AREA */}
                 <div className="p-6">
