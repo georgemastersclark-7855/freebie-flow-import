@@ -815,26 +815,26 @@ const TheProducerBlueprint001 = () => {
       </nav>
 
       {/* Hero Content */}
-      <main className="relative z-10 px-6 md:px-12 pt-10 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
+      <main className="relative z-10 px-6 md:px-12 pt-6 md:pt-24 pb-20 max-w-5xl mx-auto text-center">
         {/* HERO AMBIENT GLOW */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
         
         {/* Social Proof Eyebrow */}
-        <div className="flex items-center justify-center gap-4 mb-10">
+        <div className="flex items-center justify-center gap-4 mb-6 md:mb-10">
           <div className="flex -space-x-3 relative">
-            <Avatar className="w-10 h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
               <AvatarImage src={avatarBen} className="object-cover" />
               <AvatarFallback>B</AvatarFallback>
             </Avatar>
-            <Avatar className="w-10 h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
               <AvatarImage src={avatarProducer1} className="object-cover" />
               <AvatarFallback>P1</AvatarFallback>
             </Avatar>
-            <Avatar className="w-10 h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
               <AvatarImage src={avatarProducer2} className="object-cover" />
               <AvatarFallback>P2</AvatarFallback>
             </Avatar>
-            <Avatar className="w-10 h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
               <AvatarImage src={avatarProducer3} className="object-cover" />
               <AvatarFallback>P3</AvatarFallback>
             </Avatar>
@@ -850,7 +850,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[1.05] mb-4 md:mb-6">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[1.05] mb-3 md:mb-6">
           The Complete Production Workflow.
           <br />
           <span className="font-serif italic font-normal tracking-normal text-zinc-200">Start to Finish.</span>
@@ -877,27 +877,20 @@ const TheProducerBlueprint001 = () => {
           {/* Glow Effect */}
           <div className="absolute -inset-1 bg-[#D3FF02]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
 
-          {/* Video Container - Final Polish with Combined Hook Text */}
-          <div className="relative w-full bg-zinc-900/80 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl min-h-[220px] sm:min-h-[350px] md:min-h-[500px] flex items-center justify-center group">
+          {/* Video Container */}
+          <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
             
-            {/* The "Immediate" Hook Badge (Top Left) */}
-            <div className="absolute top-4 left-4 md:top-8 md:left-8 z-0 flex flex-col items-start gap-1">
-              <div className="px-2 py-1 rounded bg-[#D3FF02] text-black text-[9px] md:text-[10px] font-black uppercase tracking-wider">
+            {/* THE VISIBLE OVERLAY (Z-30) */}
+            <div className="absolute top-3 left-3 md:top-6 md:left-6 z-30 pointer-events-none flex flex-col items-start gap-1">
+              <div className="px-2 py-0.5 rounded bg-[#D3FF02] text-black text-[8px] md:text-[10px] font-black uppercase tracking-wider">
                 Exclusive Masterclass
               </div>
-              <div className="px-2 py-1 rounded bg-black/40 backdrop-blur-md border border-white/10 text-white text-xs md:text-sm font-bold tracking-tight">
+              <div className="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] md:text-sm font-bold tracking-tight">
                 Watch: Inside The Producer Blueprint
               </div>
             </div>
 
-            {/* Centered Play Button Placeholder */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 z-0">
-              <div className="w-16 h-16 md:w-24 md:h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-300">
-                <Play className="w-8 h-8 md:w-12 md:h-12 text-[#D3FF02] fill-[#D3FF02] ml-1" />
-              </div>
-            </div>
-
-            {/* Vidalytics Embed - The script will mount here */}
+            {/* Vidalytics Embed */}
             <div
               id="vidalytics_embed_V5HrhyRBNAeDtppA"
               className="relative z-10 w-full"
@@ -915,7 +908,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Benefit Bullets - Moved after CTA */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-12 md:mb-16">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-8 md:mb-16">
           <div className="flex items-center gap-2">
             <Check className="w-4 h-4 text-[#D3FF02]" />
             Complete start-to-finish workflow
