@@ -589,50 +589,50 @@ const CurriculumSection = () => {
               </div>
 
               {/* FOOTER / PRICING AREA */}
-              <div className="bg-zinc-900/90 border-t border-zinc-800 p-8 md:p-12 flex flex-col items-center text-center backdrop-blur-xl relative z-10">
+              <div className="bg-zinc-900/90 border-t border-zinc-800 p-6 md:p-12 flex flex-col items-center text-center backdrop-blur-xl relative z-10">
                 
                 {/* Total Value */}
-                <div className="mb-6 space-y-1">
-                  <p className="text-zinc-500 font-medium text-sm uppercase tracking-wide">
+                <div className="mb-4 md:mb-6 space-y-0.5 md:space-y-1">
+                  <p className="text-zinc-500 font-medium text-[10px] md:text-sm uppercase tracking-wide">
                     Total Value
                   </p>
-                  <p className="text-3xl font-bold text-zinc-400 line-through decoration-zinc-600 decoration-2 opacity-70">
+                  <p className="text-xl md:text-3xl font-bold text-zinc-400 line-through decoration-zinc-600 decoration-2 opacity-70">
                     $938
                   </p>
                 </div>
 
                 {/* The Price (12 MONTHS FOCUS) */}
-                <div className="flex flex-col items-center justify-center gap-2 mb-2">
-                  <span className="text-2xl font-medium text-white">12 Months Full Access:</span>
-                  <span className="text-6xl md:text-7xl font-black text-[#D3FF02] tracking-tighter drop-shadow-[0_0_25px_rgba(211,255,2,0.2)]">
+                <div className="flex flex-col items-center justify-center gap-1 md:gap-2 mb-1 md:mb-2">
+                  <span className="text-base md:text-2xl font-medium text-white">12 Months Full Access:</span>
+                  <span className="text-5xl md:text-7xl font-black text-[#D3FF02] tracking-tighter drop-shadow-[0_0_25px_rgba(211,255,2,0.2)]">
                     $297
                   </span>
                 </div>
 
                 {/* Clarification Text */}
-                <p className="text-zinc-500 text-sm font-medium mb-10">
+                <p className="text-zinc-500 text-[10px] md:text-sm font-medium mb-6 md:mb-10">
                   One-time payment. No auto-renew.
                 </p>
 
                 {/* PRIMARY CTA BUTTON */}
-                <button className="w-full md:max-w-md group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#D3FF02] hover:text-black hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
-                  <span className="relative text-lg uppercase tracking-wide flex items-center gap-3">
-                    Get Instant Access <ArrowRight className="w-6 h-6" />
+                <button className="w-full md:max-w-md group relative inline-flex h-14 md:h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#D3FF02] hover:text-black hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+                  <span className="relative text-base md:text-lg uppercase tracking-wide flex items-center gap-2 md:gap-3">
+                    Get Instant Access <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                   </span>
                 </button>
 
                 {/* TRUST BADGES (Clarified) */}
-                <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-xs text-zinc-500 font-medium uppercase tracking-wider">
-                  <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-zinc-400" />
+                <div className="mt-6 md:mt-8 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 text-[10px] md:text-xs text-zinc-500 font-medium uppercase tracking-wider">
+                  <span className="flex items-center gap-1.5 md:gap-2">
+                    <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-zinc-400" />
                     1 Year Access
                   </span>
-                  <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-zinc-400" />
+                  <span className="flex items-center gap-1.5 md:gap-2">
+                    <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-zinc-400" />
                     One-Time Payment
                   </span>
-                  <span className="flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-zinc-400" />
+                  <span className="flex items-center gap-1.5 md:gap-2">
+                    <Zap className="w-3.5 h-3.5 md:w-4 md:h-4 text-zinc-400" />
                     Instant Digital Delivery
                   </span>
                 </div>
