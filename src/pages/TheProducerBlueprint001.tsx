@@ -65,12 +65,21 @@ const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+La
 // ================= CURRICULUM SECTION COMPONENT =================
 const CurriculumSection = () => {
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
+  const [expandedBonus, setExpandedBonus] = useState<string | null>(null);
 
   const toggleModule = (id: string) => {
     if (expandedModule === id) {
       setExpandedModule(null);
     } else {
       setExpandedModule(id);
+    }
+  };
+
+  const toggleBonus = (id: string) => {
+    if (expandedBonus === id) {
+      setExpandedBonus(null);
+    } else {
+      setExpandedBonus(id);
     }
   };
 
@@ -359,13 +368,16 @@ const CurriculumSection = () => {
             <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-8">
               
               {/* --- BONUS #1 --- */}
-              <div className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10">
+              <div 
+                className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 cursor-pointer md:cursor-default"
+                onClick={() => toggleBonus('bonus1')}
+              >
                 
                 {/* MOBILE: Row layout | DESKTOP: Column layout */}
                 <div className="flex flex-row md:flex-col">
                   
                   {/* IMAGE AREA */}
-                  <div className="w-28 h-28 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
+                  <div className="w-24 h-24 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
                     <img 
                       src={robOnLaptop}
                       alt="Social Media Module Mockup" 
@@ -378,22 +390,31 @@ const CurriculumSection = () => {
                   </div>
 
                   {/* CONTENT AREA */}
-                  <div className="p-4 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
-                    {/* Title with inline FREE badge on mobile */}
-                    <div className="flex items-start gap-2 mb-2 md:mb-3">
-                      <h3 className="text-base md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight flex-1">
-                        <span className="text-zinc-500 text-xs md:text-base font-bold mr-1">BONUS #1:</span>
-                        <span className="md:hidden"> Social Media & Business</span>
-                        <span className="hidden md:inline">Social Media, Business & Music Industry Module</span>
-                      </h3>
-                      {/* Mobile FREE badge */}
-                      <span className="md:hidden shrink-0 bg-white text-black text-[10px] font-bold px-2 py-1 rounded">
+                  <div className="p-3 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
+                    {/* Mobile: Badge on its own line */}
+                    <div className="flex items-center justify-between mb-1 md:hidden">
+                      <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider">BONUS #1</span>
+                      <span className="bg-white text-black text-[10px] font-bold px-2 py-0.5 rounded">
                         FREE
                       </span>
                     </div>
-                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed line-clamp-3 md:line-clamp-none md:mb-6 md:flex-1">
-                      Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income.
+                    
+                    {/* Title */}
+                    <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
+                      <span className="hidden md:inline text-zinc-500 text-base font-bold mr-1">BONUS #1:</span>
+                      <span className="md:hidden">Social Media & Business</span>
+                      <span className="hidden md:inline">Social Media, Business & Music Industry Module</span>
+                    </h3>
+                    
+                    {/* Description - expandable on mobile */}
+                    <p className={`text-zinc-400 text-[11px] md:text-sm leading-relaxed md:mb-6 md:flex-1 transition-all duration-300 ${expandedBonus === 'bonus1' ? '' : 'line-clamp-2 md:line-clamp-none'}`}>
+                      Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).
                     </p>
+                    
+                    {/* Mobile tap hint */}
+                    <span className={`md:hidden text-[10px] text-zinc-600 mt-1 transition-opacity ${expandedBonus === 'bonus1' ? 'opacity-0' : 'opacity-100'}`}>
+                      Tap to read more
+                    </span>
                     
                     {/* Desktop-only footer */}
                     <div className="hidden md:flex mt-auto pt-6 border-t border-zinc-800 justify-between items-center">
@@ -407,13 +428,16 @@ const CurriculumSection = () => {
               </div>
 
               {/* --- BONUS #2 --- */}
-              <div className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10">
+              <div 
+                className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 cursor-pointer md:cursor-default"
+                onClick={() => toggleBonus('bonus2')}
+              >
                 
                 {/* MOBILE: Row layout | DESKTOP: Column layout */}
                 <div className="flex flex-row md:flex-col">
                   
                   {/* IMAGE AREA */}
-                  <div className="w-28 h-28 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
+                  <div className="w-24 h-24 md:w-full md:h-56 bg-zinc-900 relative overflow-hidden shrink-0">
                     <img 
                       src={tiktokBreakdownVault} 
                       alt="TikTok Vault Mockup"
@@ -426,22 +450,31 @@ const CurriculumSection = () => {
                   </div>
 
                   {/* CONTENT AREA */}
-                  <div className="p-4 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
-                    {/* Title with inline FREE badge on mobile */}
-                    <div className="flex items-start gap-2 mb-2 md:mb-3">
-                      <h3 className="text-base md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight flex-1">
-                        <span className="text-zinc-500 text-xs md:text-base font-bold mr-1">BONUS #2:</span>
-                        <span className="md:hidden"> TikTok/IG Breakdown Vault</span>
-                        <span className="hidden md:inline">Rob's TikTok/IG Breakdown Vault</span>
-                      </h3>
-                      {/* Mobile FREE badge */}
-                      <span className="md:hidden shrink-0 bg-white text-black text-[10px] font-bold px-2 py-1 rounded">
+                  <div className="p-3 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
+                    {/* Mobile: Badge on its own line */}
+                    <div className="flex items-center justify-between mb-1 md:hidden">
+                      <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider">BONUS #2</span>
+                      <span className="bg-white text-black text-[10px] font-bold px-2 py-0.5 rounded">
                         FREE
                       </span>
                     </div>
-                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed line-clamp-3 md:line-clamp-none md:mb-6 md:flex-1">
-                      The ultimate "Cheat Sheet." Get exclusive access to project files and walkthroughs of my most viral content.
+                    
+                    {/* Title */}
+                    <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
+                      <span className="hidden md:inline text-zinc-500 text-base font-bold mr-1">BONUS #2:</span>
+                      <span className="md:hidden">TikTok/IG Breakdown Vault</span>
+                      <span className="hidden md:inline">Rob's TikTok/IG Breakdown Vault</span>
+                    </h3>
+                    
+                    {/* Description - expandable on mobile */}
+                    <p className={`text-zinc-400 text-[11px] md:text-sm leading-relaxed md:mb-6 md:flex-1 transition-all duration-300 ${expandedBonus === 'bonus2' ? '' : 'line-clamp-2 md:line-clamp-none'}`}>
+                      The ultimate "Cheat Sheet." Get exclusive access to project files and walkthroughs of my most viral content. See the exact layers, processing, and decisions behind the videos.
                     </p>
+                    
+                    {/* Mobile tap hint */}
+                    <span className={`md:hidden text-[10px] text-zinc-600 mt-1 transition-opacity ${expandedBonus === 'bonus2' ? 'opacity-0' : 'opacity-0'}`}>
+                      Tap to read more
+                    </span>
                     
                     {/* Desktop-only footer */}
                     <div className="hidden md:flex mt-auto pt-6 border-t border-zinc-800 justify-between items-center">
