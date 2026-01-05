@@ -228,57 +228,56 @@ const CurriculumSection = () => {
             return (
               <div 
                 key={module.id}
-                className={`group relative w-full border rounded-2xl overflow-hidden transition-all duration-500 ease-in-out ${
+                className={`group relative w-full border rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 ease-in-out ${
                   isOpen 
                     ? 'border-zinc-600 bg-zinc-900 shadow-[0_0_30px_rgba(255,255,255,0.05)]' 
                     : 'border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black hover:border-zinc-700'
                 }`}
               >
-                <div className="flex flex-col md:flex-row h-full">
+                {/* MOBILE: Row layout | DESKTOP: Column layout */}
+                <div className="flex flex-row md:flex-col h-full">
                   
-                  {/* LEFT: IMAGE SECTION (300px) */}
-                  <div className="relative z-30 w-full md:w-[300px] shrink-0 h-64 md:h-auto">
+                  {/* LEFT/TOP: IMAGE SECTION */}
+                  <div className="relative z-30 w-24 h-24 md:w-[300px] md:h-auto shrink-0">
                     <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10"></div>
                     <img 
                       src={module.image} 
                       alt={module.title} 
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    {/* Mobile gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent md:hidden"></div>
                   </div>
 
-                  {/* RIGHT: CONTENT SECTION */}
-                  <div className="flex-1 flex flex-col relative">
+                  {/* RIGHT/BOTTOM: CONTENT SECTION */}
+                  <div className="flex-1 flex flex-col relative min-w-0">
                     
                     {/* TOP SECTION: Compact View */}
-                    <div className="flex flex-col justify-center px-6 py-6 md:px-8 h-[280px] shrink-0 relative z-20">
+                    <div className="flex flex-col justify-center px-4 py-3 md:px-8 md:py-6 md:h-[280px] shrink-0 relative z-20">
                       
                       {/* Background Number (Subtle Watermark) */}
-                      <div className="absolute top-4 right-6 text-7xl font-bold text-white/5 select-none pointer-events-none">
+                      <div className="absolute top-2 right-3 md:top-4 md:right-6 text-4xl md:text-7xl font-bold text-white/5 select-none pointer-events-none">
                         {module.id}
                       </div>
 
-                      <div className="pr-12">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3 leading-none group-hover:text-zinc-100 transition-colors">
+                      <div className="pr-8 md:pr-12">
+                        <h3 className="text-base md:text-3xl font-bold text-white tracking-tight mb-1 md:mb-3 leading-tight md:leading-none group-hover:text-zinc-100 transition-colors">
                           {module.title}
                           {module.subtitle && (
-                            <span className="font-serif italic font-normal text-zinc-500 ml-2 group-hover:text-zinc-400 transition-colors">
+                            <span className="hidden md:inline font-serif italic font-normal text-zinc-500 ml-2 group-hover:text-zinc-400 transition-colors">
                               {module.subtitle}
                             </span>
                           )}
                         </h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed mb-6 max-w-lg font-medium line-clamp-3 group-hover:text-zinc-300 transition-colors">
+                        <p className="text-zinc-400 text-[11px] md:text-sm leading-snug md:leading-relaxed mb-2 md:mb-6 max-w-lg font-medium line-clamp-2 md:line-clamp-3 group-hover:text-zinc-300 transition-colors">
                           {module.desc}
                         </p>
                         
-                        {/* TOGGLE BUTTON - Reverted to Neutral */}
+                        {/* TOGGLE BUTTON - Text link on mobile, styled on desktop */}
                         <button 
                           onClick={() => toggleModule(module.id)}
-                          className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
+                          className="inline-flex items-center text-[10px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
                         >
-                          {isOpen ? 'Hide Lessons' : 'View Lessons'}
-                          <span className={`ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180 -translate-y-[1px]' : 'group-hover:translate-y-1'}`}>
+                          {isOpen ? 'Hide' : 'View Lessons'}
+                          <span className={`ml-1.5 md:ml-2 transform transition-transform duration-300 text-sm md:text-base ${isOpen ? 'rotate-180 -translate-y-[1px]' : 'group-hover:translate-y-1'}`}>
                             ↓
                           </span>
                         </button>
@@ -291,25 +290,25 @@ const CurriculumSection = () => {
                         isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
                       }`}
                     >
-                      <div className="border-t border-white/5 bg-black/20 p-6 md:p-8 pt-4">
-                        <div className="flex items-center gap-3 mb-6">
-                          <h4 className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
+                      <div className="border-t border-white/5 bg-black/20 p-4 md:p-8 pt-3 md:pt-4">
+                        <div className="flex items-center gap-3 mb-4 md:mb-6">
+                          <h4 className="text-[10px] md:text-xs font-bold text-zinc-600 uppercase tracking-widest">
                             Module Breakdown
                           </h4>
                           <div className="h-px bg-zinc-800 flex-1"></div>
                         </div>
                         
                         {/* LESSON GRID */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-12">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-3 gap-x-12">
                           {module.lessons.map((lesson, idx) => (
                             <div key={idx} className="flex items-start group/lesson cursor-default">
-                              <span className="mr-3 text-zinc-700 text-[10px] mt-[5px] group-hover/lesson:text-[#D3FF02] transition-colors">▶</span>
-                              <span className="text-zinc-400 text-sm font-medium group-hover/lesson:text-zinc-200 transition-colors">{lesson}</span>
+                              <span className="mr-2 md:mr-3 text-zinc-700 text-[10px] mt-[3px] md:mt-[5px] group-hover/lesson:text-[#D3FF02] transition-colors">▶</span>
+                              <span className="text-zinc-400 text-xs md:text-sm font-medium group-hover/lesson:text-zinc-200 transition-colors">{lesson}</span>
                             </div>
                           ))}
                         </div>
 
-                        <div className="mt-6 pt-4 border-t border-zinc-800/50 flex justify-end">
+                        <div className="mt-4 md:mt-6 pt-3 md:pt-4 border-t border-zinc-800/50 flex justify-end">
                           <button 
                             onClick={() => toggleModule(module.id)}
                             className="text-[10px] font-bold text-zinc-600 uppercase tracking-wider hover:text-zinc-400 transition-colors flex items-center"
