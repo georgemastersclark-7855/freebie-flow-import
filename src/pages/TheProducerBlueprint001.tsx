@@ -1553,16 +1553,7 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* ================= SCROLLABLE GALLERY WITH MOBILE NUDGE ================= */}
-            <motion.div 
-              initial={{ x: 0 }}
-              whileInView={{ x: [0, -20, 0] }}
-              transition={{ 
-                delay: 0.5, 
-                duration: 0.8, 
-                ease: "easeInOut",
-                times: [0, 0.5, 1] 
-              }}
-              viewport={{ once: true, margin: "-100px" }}
+            <div 
               className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide mb-20"
             >
               {[
@@ -1661,7 +1652,7 @@ const TheProducerBlueprint001 = () => {
               
               {/* Spacer for mobile scrolling */}
               <div className="w-2 shrink-0 md:hidden"></div>
-            </motion.div>
+            </div>
 
             {/* WALL OF PROOF (Masonry with 10 Images) */}
             <div className="mt-8">
