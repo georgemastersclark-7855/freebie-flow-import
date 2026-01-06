@@ -13,6 +13,7 @@ import SqueezePage from "./pages/SqueezePage";
 import FreePackDownload from "./pages/FreePackDownload";
 import UploadEmailAssets from "./pages/UploadEmailAssets";
 import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
+import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/freepack" element={<FreePackDownload />} />
           <Route path="/upload-email-assets" element={<UploadEmailAssets />} />
           <Route path="/theproducerblueprint001" element={<TheProducerBlueprint001 />} />
+          <Route path="/theproducerblueprint002spotify" element={<TheProducerBlueprint002Spotify />} />
           <Route path="/HowToResampleLikeaPro" element={<Index />} />
           <Route path="/30daysofproducersauce" element={<Index />} />
           {/* Legal Pages */}
