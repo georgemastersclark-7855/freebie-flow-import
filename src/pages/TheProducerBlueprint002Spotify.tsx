@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
+import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User, Lock } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Assets
@@ -357,85 +357,99 @@ const CurriculumSection = () => {
                 {/* MOBILE: Horizontal row with thumbnail | DESKTOP: Large horizontal cards */}
                 <div className="flex flex-row md:flex-row">
                   
-                  {/* IMAGE: Thumbnail on mobile, larger on desktop */}
-                  <div className="w-20 h-20 md:w-40 md:h-auto shrink-0 overflow-hidden rounded-l-xl md:rounded-l-2xl bg-zinc-800">
+                  {/* MOBILE THUMBNAIL - Small square image (block md:hidden) */}
+                  <div className="block md:hidden w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 m-4 mr-0">
                     <img 
                       src={module.image} 
-                      alt={module.title}
-                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                      alt={module.title} 
+                      className="w-full h-full object-cover"
                     />
                   </div>
 
-                  {/* CONTENT */}
-                  <div className="flex-1 p-4 md:p-8">
-                    {/* ROW 1: Module number, title, and expand toggle */}
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        {/* Module number + Title */}
-                        <div className="flex items-baseline gap-2 md:gap-3 mb-1 md:mb-2">
-                          <span className="text-[#D3FF02] font-mono text-xs md:text-sm font-bold">
-                            {module.id}
+                  {/* DESKTOP IMAGE - Large w-1/3 image (hidden md:block) */}
+                  <div className="hidden md:block md:relative md:w-1/3 md:min-h-[320px] md:shrink-0 md:overflow-hidden md:rounded-l-2xl">
+                    <img 
+                      src={module.image} 
+                      alt={module.title} 
+                      className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
+                    />
+                  </div>
+
+                  {/* DESKTOP DIVIDER LINE (hidden md:block) */}
+                  <div className="hidden md:block md:w-[1px] md:self-stretch md:bg-white/10"></div>
+
+                  {/* CONTENT SECTION - Flex-1 on mobile, w-2/3 on desktop */}
+                  <div className="flex-1 flex flex-col relative min-w-0 md:w-2/3">
+                    
+                    {/* MAIN CONTENT */}
+                    <div className={`flex flex-col justify-center p-4 md:p-8 md:py-10 lg:p-12 ${isOpen ? '' : 'md:min-h-[320px]'} shrink-0 relative z-20`}>
+                      
+                      {/* Background Number (Subtle Watermark) - Desktop only */}
+                      <div className="hidden md:block absolute md:top-6 md:right-8 lg:top-8 lg:right-12 md:text-8xl lg:text-9xl font-bold text-white/[0.03] select-none pointer-events-none">
+                        {module.id}
+                      </div>
+
+                      <div className="pr-4 md:pr-12">
+                        <h3 className="text-lg md:text-3xl font-bold text-white tracking-tight mb-1 md:mb-3 leading-tight group-hover:text-zinc-100 transition-colors">
+                          {module.title}
+                          {module.subtitle && (
+                            <span className="hidden md:inline font-serif italic font-normal text-zinc-500 ml-2 group-hover:text-zinc-400 transition-colors">
+                              {module.subtitle}
+                            </span>
+                          )}
+                        </h3>
+                        {/* Description - truncated when closed */}
+                        <p className={`text-zinc-400 text-xs md:text-sm leading-relaxed mb-2 md:mb-6 max-w-lg font-medium group-hover:text-zinc-300 transition-colors ${isOpen ? '' : 'line-clamp-2 md:line-clamp-3'}`}>
+                          {module.desc}
+                        </p>
+                        
+                        {/* VIEW LESSONS BUTTON - Text link style */}
+                        <button 
+                          onClick={() => toggleModule(module.id)}
+                          className="inline-flex items-center text-[10px] md:text-xs font-bold tracking-[0.12em] md:tracking-[0.15em] text-zinc-500 uppercase hover:text-white transition-colors"
+                        >
+                          {isOpen ? 'Hide' : 'View Lessons'}
+                          <span className={`ml-1.5 md:ml-2 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'group-hover:translate-y-1'}`}>
+                            ↓
                           </span>
-                          <h3 className="text-white font-bold text-base md:text-2xl tracking-tight">
-                            {module.title}
-                            {module.subtitle && (
-                              <span className="text-zinc-500 font-normal ml-2 text-sm md:text-lg">
-                                {module.subtitle}
-                              </span>
-                            )}
-                          </h3>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* EXPANDED DRAWER */}
+                    <div 
+                      className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                        isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <div className="border-t border-white/5 bg-black/20 p-6 md:p-8 pt-4">
+                        <div className="flex items-center gap-3 mb-4 md:mb-6">
+                          <h4 className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
+                            Module Breakdown
+                          </h4>
+                          <div className="h-px bg-zinc-800 flex-1"></div>
                         </div>
                         
-                        {/* Description - Hidden on mobile, visible on desktop */}
-                        <p className="hidden md:block text-zinc-400 text-sm leading-relaxed max-w-2xl">
-                          {module.desc}
-                        </p>
-                      </div>
-
-                      {/* Expand/Collapse Button */}
-                      <button 
-                        onClick={() => toggleModule(module.id)}
-                        className="shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center transition-all"
-                      >
-                        {isOpen ? (
-                          <ChevronUp className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                        ) : (
-                          <ChevronDown className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                        )}
-                      </button>
-                    </div>
-
-                    {/* Lesson count pill - Mobile only */}
-                    <div className="md:hidden mt-2">
-                      <span className="text-zinc-500 text-xs">
-                        {module.lessons.length} lessons
-                      </span>
-                    </div>
-
-                    {/* EXPANDED CONTENT */}
-                    {isOpen && (
-                      <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-zinc-800">
-                        {/* Mobile description when expanded */}
-                        <p className="md:hidden text-zinc-400 text-sm leading-relaxed mb-4">
-                          {module.desc}
-                        </p>
-                        
-                        <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">
-                          {module.lessons.length} Lessons Inside
-                        </p>
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                        {/* LESSON GRID */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-3 gap-x-12">
                           {module.lessons.map((lesson, idx) => (
-                            <li 
-                              key={idx} 
-                              className="flex items-start gap-2 md:gap-3 text-zinc-300 text-sm"
-                            >
-                              <PlayCircle className="w-4 h-4 text-[#D3FF02] shrink-0 mt-0.5" />
-                              <span>{lesson}</span>
-                            </li>
+                            <div key={idx} className="flex items-start group/lesson cursor-default">
+                              <span className="mr-3 text-zinc-700 text-[10px] mt-[5px] group-hover/lesson:text-[#D3FF02] transition-colors">▶</span>
+                              <span className="text-zinc-400 text-sm font-medium group-hover/lesson:text-zinc-200 transition-colors">{lesson}</span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
+
+                        <div className="mt-6 pt-4 border-t border-zinc-800/50 flex justify-end">
+                          <button 
+                            onClick={() => toggleModule(module.id)}
+                            className="text-[10px] font-bold text-zinc-600 uppercase tracking-wider hover:text-zinc-400 transition-colors flex items-center"
+                          >
+                            Close Module <span className="ml-1 text-lg leading-none">×</span>
+                          </button>
+                        </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -443,137 +457,367 @@ const CurriculumSection = () => {
           })}
         </div>
 
-        {/* ================= BONUS MODULES ================= */}
-        <div className="space-y-8 md:space-y-12">
+        {/* ================= BONUS SECTION (No Overlay) ================= */}
+        <section className="relative pt-24 md:pt-32 pb-16 md:pb-32 px-4 md:px-6 bg-[#050505] overflow-hidden">
           
-          {/* HEADER */}
-          <div className="text-center">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-4">
-              + Bonuses Included
+          {/* VISUAL CONNECTOR */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 md:h-32 bg-gradient-to-b from-zinc-800 to-transparent"></div>
+          
+          <div className="max-w-6xl mx-auto relative z-10">
+            
+            {/* HEADER */}
+            <div className="text-center mb-8 md:mb-16">
+              {/* Eyebrow */}
+              <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-[#D3FF02]/10 border border-[#D3FF02]/20 mb-3 md:mb-6 animate-pulse">
+                <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#D3FF02]"></span>
+                <span className="text-[#D3FF02] text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                  Available for a limited time
+                </span>
+              </div>
+              
+              {/* Headline */}
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-6 tracking-tighter">
+                Get 2x <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D3FF02] to-[#D3FF02]">FREE</span> bonuses
+              </h2>
+              
+              {/* Subhead */}
+              <p className="text-base md:text-xl text-zinc-400 font-medium max-w-2xl mx-auto">
+                Join today and get <span className="text-white underline decoration-[#D3FF02] decoration-2 underline-offset-4 font-bold">2 exclusive bonuses</span> included.
+              </p>
             </div>
-            <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-white">
-              Everything Else You Need
-            </h3>
+
+            {/* BONUS CARDS GRID */}
+            <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-8">
+              
+              {/* --- BONUS #1 --- */}
+              <div 
+                className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 cursor-pointer md:cursor-default"
+                onClick={() => toggleBonus('bonus1')}
+              >
+                
+                {/* MOBILE: Row layout | DESKTOP: Column layout */}
+                <div className="flex flex-row md:flex-col">
+                  
+                  {/* IMAGE AREA */}
+                  <div className="w-28 self-stretch md:w-full md:h-56 md:self-auto bg-zinc-900 relative overflow-hidden shrink-0 rounded-l-xl md:rounded-l-none md:rounded-t-3xl">
+                    <img 
+                      src={robOnLaptop}
+                      alt="Social Media Module Mockup" 
+                      className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                    />
+                    {/* Desktop-only Value Badge on Image */}
+                    <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
+                      Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#D3FF02]">FREE</span>
+                    </div>
+                  </div>
+
+                  {/* CONTENT AREA */}
+                  <div className="p-3 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
+                    {/* Mobile: Badge on its own line */}
+                    <div className="flex items-center justify-between mb-1 md:hidden">
+                      <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider">BONUS #1</span>
+                      <span className="bg-[#D3FF02] text-black text-[10px] font-bold px-2 py-0.5 rounded">
+                        FREE
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
+                      <span className="hidden md:inline text-zinc-500 text-2xl font-bold mr-2">BONUS #1:</span>
+                      <span className="md:hidden">Social Media & Business</span>
+                      <span className="hidden md:inline">Social Media, Business & Music Industry Module</span>
+                    </h3>
+                    
+                    {/* Description - expandable on mobile */}
+                    <p className={`text-zinc-400 text-[11px] md:text-sm leading-relaxed md:mb-6 md:flex-1 transition-all duration-300 ${expandedBonus === 'bonus1' ? '' : 'line-clamp-2 md:line-clamp-none'}`}>
+                      Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).
+                    </p>
+                    
+                    {/* Mobile tap hint */}
+                    <span className={`md:hidden text-[10px] text-zinc-600 mt-1 transition-opacity ${expandedBonus === 'bonus1' ? 'opacity-0' : 'opacity-100'}`}>
+                      Tap to read more
+                    </span>
+                    
+                    {/* Desktop-only footer */}
+                    <div className="hidden md:flex mt-auto pt-6 border-t border-zinc-800 justify-between items-center">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                        Instant Access
+                      </span>
+                      <span className="text-[#D3FF02] text-lg">+</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* --- BONUS #2 --- */}
+              <div 
+                className="group relative rounded-xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10 cursor-pointer md:cursor-default"
+                onClick={() => toggleBonus('bonus2')}
+              >
+                
+                {/* MOBILE: Row layout | DESKTOP: Column layout */}
+                <div className="flex flex-row md:flex-col">
+                  
+                  {/* IMAGE AREA */}
+                  <div className="w-28 self-stretch md:w-full md:h-56 md:self-auto bg-zinc-900 relative overflow-hidden shrink-0 rounded-l-xl md:rounded-l-none md:rounded-t-3xl">
+                    <img 
+                      src={tiktokBreakdownVault} 
+                      alt="TikTok Vault Mockup"
+                      className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                    />
+                    {/* Desktop-only Value Badge on Image */}
+                    <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
+                      Value: <span className="line-through text-zinc-500 mx-1">$147</span> <span className="text-[#D3FF02]">FREE</span>
+                    </div>
+                  </div>
+
+                  {/* CONTENT AREA */}
+                  <div className="p-3 md:p-8 flex-1 flex flex-col bg-[#0A0A0A] relative z-20">
+                    {/* Mobile: Badge on its own line */}
+                    <div className="flex items-center justify-between mb-1 md:hidden">
+                      <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider">BONUS #2</span>
+                      <span className="bg-[#D3FF02] text-black text-[10px] font-bold px-2 py-0.5 rounded">
+                        FREE
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
+                      <span className="hidden md:inline text-zinc-500 text-2xl font-bold mr-2">BONUS #2:</span>
+                      <span className="md:hidden">TikTok/IG Breakdown Vault</span>
+                      <span className="hidden md:inline">Rob's TikTok/IG Breakdown Vault</span>
+                    </h3>
+                    
+                    {/* Description - expandable on mobile */}
+                    <p className={`text-zinc-400 text-[11px] md:text-sm leading-relaxed md:mb-6 md:flex-1 transition-all duration-300 ${expandedBonus === 'bonus2' ? '' : 'line-clamp-2 md:line-clamp-none'}`}>
+                      The ultimate "Cheat Sheet." Get exclusive access to project files and walkthroughs of my most viral content. See the exact layers, processing, and decisions behind the videos.
+                    </p>
+                    
+                    {/* Mobile tap hint */}
+                    <span className={`md:hidden text-[10px] text-zinc-600 mt-1 transition-opacity ${expandedBonus === 'bonus2' ? 'opacity-0' : 'opacity-0'}`}>
+                      Tap to read more
+                    </span>
+                    
+                    {/* Desktop-only footer */}
+                    <div className="hidden md:flex mt-auto pt-6 border-t border-zinc-800 justify-between items-center">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                        Instant Access
+                      </span>
+                      <span className="text-[#D3FF02] text-lg">+</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* BRIDGE CTA - Below Bonus Section */}
+            <div className="flex flex-col items-center mt-12 md:mt-16">
+              <a 
+                href="#pricing" 
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+              >
+                Start The Blueprint Today
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
+            </div>
           </div>
+        </section>
 
-          {/* BONUS CARDS - 2x2 Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-
-            {/* BONUS 1: Ableton Templates Pack */}
-            <div className="group relative border border-zinc-800 rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-900 to-black hover:border-zinc-700 transition-all">
-              <div className="flex flex-col md:flex-row h-full">
-                {/* Image - Full height on left for desktop, top for mobile */}
-                <div className="w-full md:w-2/5 aspect-video md:aspect-auto shrink-0 overflow-hidden">
-                  <img 
-                    src={abletonTemplatesThumbnail}
-                    alt="Ableton Templates Pack"
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                </div>
-                {/* Content */}
-                <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-2xl font-bold text-zinc-500">BONUS 1</span>
-                    <span className="px-2 py-0.5 bg-[#D3FF02] text-black text-[10px] font-black uppercase rounded">Free</span>
-                  </div>
-                  <h4 className="text-xl md:text-2xl font-bold text-white mb-2">Ableton Templates Pack</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    6 fully deconstructed project files from Rob's catalog. Reverse-engineer the arrangements, processing chains, and sound design.
-                  </p>
-                </div>
+        {/* ================= OFFER STACK SECTION (REVISED) ================= */}
+        <section className="relative py-12 md:py-24 px-4 md:px-6 bg-[#050505]">
+          
+          {/* Connector Line */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-12 md:h-24 bg-gradient-to-b from-zinc-800 to-transparent"></div>
+          
+          <div className="max-w-3xl mx-auto relative z-10 pt-4 md:pt-8">
+            
+            {/* HEADER */}
+            <div className="text-center mb-10 md:mb-16">
+              <div className="inline-block mb-4">
+                <span className="py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-xs font-bold uppercase tracking-widest">
+                  WHAT YOU GET
+                </span>
               </div>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter">
+                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint<span className="text-white">™</span></span>
+              </h2>
+              {/* Subhead - Neutralized "2 FREE bonuses" */}
+              <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto">
+                Get immediate access to the complete system, templates, and <span className="text-white font-bold">2 FREE bonuses</span>.
+              </p>
             </div>
 
-            {/* BONUS 2: Social Media Masterclass */}
-            <div className="group relative border border-zinc-800 rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-900 to-black hover:border-zinc-700 transition-all">
-              <div className="flex flex-col md:flex-row h-full">
-                {/* Image */}
-                <div className="w-full md:w-2/5 aspect-video md:aspect-auto shrink-0 overflow-hidden">
-                  <img 
-                    src={socialMediaBonusThumbnail}
-                    alt="Social Media Masterclass"
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                </div>
-                {/* Content */}
-                <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-2xl font-bold text-zinc-500">BONUS 2</span>
-                    <span className="px-2 py-0.5 bg-[#D3FF02] text-black text-[10px] font-black uppercase rounded">Free</span>
-                  </div>
-                  <h4 className="text-xl md:text-2xl font-bold text-white mb-2">Music Business Module</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    Turn production into income. Growing a following, making content, and building real customers.
+            {/* THE STACK CARD */}
+            <div className="rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden shadow-2xl shadow-black/50 relative animate-fade-in-up">
+              
+              {/* Subtle top lighting */}
+              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+
+              <div className="p-6 md:p-10">
+                
+                {/* LIST ITEMS */}
+                <ul className="space-y-4 md:space-y-8">
+                  
+                  {/* ITEM 1: MAIN PROGRAM */}
+                  <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
+                    {/* THUMBNAIL */}
+                    <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
+                      <img src={producerBlueprintThumbnail} alt="Program Thumbnail" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                    </div>
+                    
+                    {/* CONTENT */}
+                    <div className="flex flex-col justify-center flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
+                          The Producer Blueprint™ Program
+                        </h3>
+                        {/* RETAIL PRICE - Mobile Top Right */}
+                        <span className="shrink-0 inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs md:text-sm font-mono font-bold">
+                          $497
+                        </span>
+                      </div>
+                      <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
+                        The complete 7-module video program. 75+ lessons. Learn to produce top-streaming music.
+                      </p>
+                    </div>
+                  </li>
+
+                  {/* ITEM 2: PROJECT FILES */}
+                  <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
+                    {/* THUMBNAIL */}
+                    <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
+                      <img src={abletonTemplatesThumbnail} alt="Files Thumbnail" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                    </div>
+                    
+                    {/* CONTENT */}
+                    <div className="flex flex-col justify-center flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
+                          Ableton Project Files & Templates
+                        </h3>
+                        {/* RETAIL PRICE - Mobile Top Right */}
+                        <span className="shrink-0 inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs md:text-sm font-mono font-bold">
+                          $197
+                        </span>
+                      </div>
+                      <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
+                        Download the exact starting templates and finished project files Rob uses in sessions.
+                      </p>
+                    </div>
+                  </li>
+
+                  {/* DIVIDER */}
+                  <li className="h-px bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 w-full my-4 md:my-6"></li>
+
+                  {/* ITEM 3: BONUS 1 */}
+                  <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
+                    {/* THUMBNAIL */}
+                    <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
+                      <img src={socialMediaBonusThumbnail} alt="Bonus 1 Thumbnail" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    {/* CONTENT */}
+                    <div className="flex flex-col justify-center flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
+                          Social Media & Business Module
+                        </h3>
+                        {/* RETAIL + FREE - Mobile Top Right */}
+                        <div className="shrink-0 flex items-center gap-1.5 md:gap-3">
+                          <span className="text-zinc-500 text-xs md:text-sm font-mono line-through font-medium decoration-zinc-600 decoration-2">
+                            $97
+                          </span>
+                          <span className="inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-white text-black border border-white/20 text-[10px] md:text-xs font-mono font-extrabold tracking-wider shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            FREE
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
+                        Turn production into income. Strategies for growing a following & building real customers.
+                      </p>
+                    </div>
+                  </li>
+
+                  {/* ITEM 4: BONUS 2 */}
+                  <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
+                    {/* THUMBNAIL */}
+                    <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
+                      <img src={tiktokVaultThumbnail} alt="Bonus 2 Thumbnail" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    {/* CONTENT */}
+                    <div className="flex flex-col justify-center flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
+                          Rob's TikTok/IG Breakdown Vault
+                        </h3>
+                        {/* RETAIL + FREE - Mobile Top Right */}
+                        <div className="shrink-0 flex items-center gap-1.5 md:gap-3">
+                          <span className="text-zinc-500 text-xs md:text-sm font-mono line-through font-medium decoration-zinc-600 decoration-2">
+                            $147
+                          </span>
+                          <span className="inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-white text-black border border-white/20 text-[10px] md:text-xs font-mono font-extrabold tracking-wider shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            FREE
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
+                        Exclusive project walkthroughs from Rob's viral content + downloadable presets.
+                      </p>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+
+              {/* FOOTER / PRICING AREA */}
+              <div className="bg-zinc-900/90 border-t border-zinc-800 p-6 md:p-12 flex flex-col items-center text-center backdrop-blur-xl relative z-10">
+                
+                {/* Total Value */}
+                <div className="mb-4 md:mb-6 space-y-0.5 md:space-y-1">
+                  <p className="text-zinc-500 font-medium text-[10px] md:text-sm uppercase tracking-wide">
+                    Total Value
+                  </p>
+                  <p className="text-xl md:text-3xl font-bold text-zinc-400 line-through decoration-zinc-600 decoration-2 opacity-70">
+                    $938
                   </p>
                 </div>
+
+                {/* The Price (12 MONTHS FOCUS) */}
+                <div className="flex flex-col items-center justify-center gap-1 md:gap-2 mb-1 md:mb-2">
+                  <span className="text-base md:text-2xl font-medium text-white">12 Months Full Access:</span>
+                  <span className="text-5xl md:text-7xl font-black text-[#D3FF02] tracking-tighter drop-shadow-[0_0_25px_rgba(211,255,2,0.2)]">
+                    $297
+                  </span>
+                </div>
+
+                {/* Clarification Text */}
+                <p className="text-zinc-500 text-[10px] md:text-sm font-medium mb-6 md:mb-10">
+                  One-time payment. No auto-renew.
+                </p>
+
+                {/* PRIMARY CTA BUTTON */}
+                <a href="#pricing" className="w-full md:max-w-md group relative inline-flex h-14 md:h-16 items-center justify-center overflow-hidden rounded-full bg-white font-bold text-black transition-all duration-300 hover:bg-[#D3FF02] hover:text-black hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+                  <span className="relative z-10 text-base md:text-lg font-black tracking-tight flex items-center gap-2">
+                    GET INSTANT ACCESS
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </a>
+                
+                {/* Trust Text */}
+                <p className="mt-4 md:mt-6 text-zinc-600 text-[10px] md:text-xs font-medium flex items-center gap-2 justify-center">
+                  <Lock className="w-3 h-3 md:w-4 md:h-4" />
+                  Secure 256-bit SSL Encrypted Checkout
+                </p>
               </div>
             </div>
-
-            {/* BONUS 3: TikTok Breakdown Vault */}
-            <div className="group relative border border-zinc-800 rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-900 to-black hover:border-zinc-700 transition-all">
-              <div className="flex flex-col md:flex-row h-full">
-                {/* Image */}
-                <div className="w-full md:w-2/5 aspect-video md:aspect-auto shrink-0 overflow-hidden">
-                  <img 
-                    src={tiktokVaultThumbnail}
-                    alt="TikTok Breakdown Vault"
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                </div>
-                {/* Content */}
-                <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-2xl font-bold text-zinc-500">BONUS 3</span>
-                    <span className="px-2 py-0.5 bg-[#D3FF02] text-black text-[10px] font-black uppercase rounded">Free</span>
-                  </div>
-                  <h4 className="text-xl md:text-2xl font-bold text-white mb-2">Breakdown Vault</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    Project walkthroughs from Rob's viral content. See the thinking behind every decision. Updated regularly.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* BONUS 4: Producer Blueprint Thumbnail */}
-            <div className="group relative border border-zinc-800 rounded-2xl overflow-hidden bg-gradient-to-b from-zinc-900 to-black hover:border-zinc-700 transition-all">
-              <div className="flex flex-col md:flex-row h-full">
-                {/* Image */}
-                <div className="w-full md:w-2/5 aspect-video md:aspect-auto shrink-0 overflow-hidden">
-                  <img 
-                    src={producerBlueprintThumbnail}
-                    alt="Private Community"
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                </div>
-                {/* Content */}
-                <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-2xl font-bold text-zinc-500">BONUS 4</span>
-                    <span className="px-2 py-0.5 bg-[#D3FF02] text-black text-[10px] font-black uppercase rounded">Free</span>
-                  </div>
-                  <h4 className="text-xl md:text-2xl font-bold text-white mb-2">Private Community Access</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    Get feedback on your music from Rob and fellow Blueprint members. Network, collaborate, and grow together.
-                  </p>
-                </div>
-              </div>
-            </div>
-
           </div>
+        </section>
 
-          {/* BRIDGE CTA - Below Curriculum */}
-          <div className="flex flex-col items-center pt-8 md:pt-12">
-            <a 
-              href="#pricing" 
-              className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
-            >
-              Start The Blueprint Today
-              <ArrowRight className="w-5 h-5" />
-            </a>
-            <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
-          </div>
-
-        </div>
       </div>
     </section>
   );
