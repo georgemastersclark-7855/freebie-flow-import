@@ -1512,253 +1512,373 @@ const TheProducerBlueprint002Spotify = () => {
             
             {/* Headline */}
             <div className="text-center mb-10">
-              <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-                Limited Time Offer
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                Get The Complete Blueprint
+              <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.05] text-white mb-4">
+                Get Instant Access
               </h2>
               <p className="text-zinc-400">
-                One-time payment. 12 months of access.
+                Join 500+ producers building their career from a home studio.
               </p>
             </div>
 
-            {/* Offer Stack Card */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-6">
+            {/* Checkout Card */}
+            <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
               
-              {/* What You Get */}
-              <div className="space-y-4 mb-8">
-                <h3 className="text-white font-bold text-lg mb-4">What You Get:</h3>
+              {/* SSL Badge */}
+              <div className="flex items-center justify-center gap-2 mb-6 pb-6 border-b border-zinc-800">
+                <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                </svg>
+                <span className="text-zinc-400 text-xs uppercase tracking-wider font-medium">256-Bit SSL Secure</span>
+              </div>
+
+              <div className="space-y-6">
                 
-                {/* Main Program */}
-                <div className="flex justify-between items-start pb-4 border-b border-zinc-800">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-white font-medium">The Producer Blueprint Program</p>
-                      <p className="text-zinc-500 text-sm">7 modules, 75+ lessons</p>
-                    </div>
-                  </div>
-                  <span className="text-zinc-500 text-sm line-through">$997</span>
-                </div>
-
-                {/* Bonus 1 */}
-                <div className="flex justify-between items-start pb-4 border-b border-zinc-800">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-white font-medium">Ableton Templates Pack</p>
-                      <p className="text-zinc-500 text-sm">6 deconstructed project files</p>
-                    </div>
-                  </div>
-                  <span className="text-zinc-500 text-sm line-through">$197</span>
-                </div>
-
-                {/* Bonus 2 */}
-                <div className="flex justify-between items-start pb-4 border-b border-zinc-800">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-white font-medium">Music Business Module</p>
-                      <p className="text-zinc-500 text-sm">Turn production into income</p>
-                    </div>
-                  </div>
-                  <span className="text-zinc-500 text-sm line-through">$297</span>
-                </div>
-
-                {/* Bonus 3 */}
-                <div className="flex justify-between items-start pb-4 border-b border-zinc-800">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-white font-medium">Breakdown Vault</p>
-                      <p className="text-zinc-500 text-sm">Viral content walkthroughs</p>
-                    </div>
-                  </div>
-                  <span className="text-zinc-500 text-sm line-through">$197</span>
-                </div>
-
-                {/* Bonus 4 */}
+                {/* Product Info */}
                 <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-white font-semibold text-lg">The Producer Blueprint™</p>
+                    <p className="text-zinc-500 text-sm">Complete System + 7 Modules + Templates</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-zinc-500 line-through text-sm block">$741</span>
+                    <span className="text-white font-bold text-xl">$297</span>
+                  </div>
+                </div>
+
+                {/* Bonuses */}
+                <div className="space-y-2 py-4 border-y border-zinc-800">
+                  <div className="flex justify-between items-center text-sm">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-green-500" />
+                      <span className="text-zinc-300">BONUS: Music Business Mastery</span>
+                    </div>
+                    <span className="text-green-500 font-medium">Free</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-green-500" />
+                      <span className="text-zinc-300">BONUS: The Breakdown Vault</span>
+                    </div>
+                    <span className="text-green-500 font-medium">Free</span>
+                  </div>
+                </div>
+
+                {/* Form Fields */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2">Full Name</label>
+                    <input
+                      type="text"
+                      placeholder="Your full name"
+                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-zinc-400 text-sm mb-2">Email Address</label>
+                    <input
+                      type="email"
+                      placeholder="you@example.com"
+                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* Order Bump */}
+                <div className="bg-[#D3FF02]/5 border-2 border-dashed border-[#D3FF02]/30 rounded-xl p-4">
+                  <div className="text-center mb-3">
+                    <span className="inline-block bg-[#D3FF02] text-black text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                      One-Time Offer
+                    </span>
+                  </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-white font-medium">Private Community Access</p>
-                      <p className="text-zinc-500 text-sm">Feedback & networking</p>
+                    <input
+                      type="checkbox"
+                      id="orderBump"
+                      className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#D3FF02] focus:ring-[#D3FF02] focus:ring-offset-0 cursor-pointer"
+                    />
+                    <label htmlFor="orderBump" className="cursor-pointer flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-white font-semibold">YES, ADD: Alpha Drums 3 Sample Pack</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-zinc-500 line-through text-sm">$97</span>
+                          <span className="text-[#D3FF02] font-bold">+$37</span>
+                        </div>
+                      </div>
+                      <p className="text-zinc-400 text-sm mb-2">
+                        Rob's premium drum library with over 700 curated sounds from sessions with A-list artists. Kicks, snares, and percussion that cut through any mix.
+                      </p>
+                      <p className="text-[#D3FF02] text-xs font-medium">&gt;&gt; Click box to add this deal</p>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Total & CTA */}
+                <div className="pt-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-zinc-400">Total Due Today:</span>
+                    <span className="text-2xl font-bold text-white">$297.00</span>
+                  </div>
+
+                  <button className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2">
+                    Get Instant Access
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+
+                  {/* Trust Badges - Updated for Compliance */}
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mt-6 pt-6 border-t border-zinc-800">
+                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
+                      <CheckCircle2 className="w-4 h-4 text-zinc-500" />
+                      <span>Secure Payment</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
+                      <Zap className="w-4 h-4 text-zinc-500" />
+                      <span>Instant Digital Delivery</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
+                      <Check className="w-4 h-4 text-zinc-500" />
+                      <span>One-Time Payment</span>
                     </div>
                   </div>
-                  <span className="text-zinc-500 text-sm line-through">$197</span>
-                </div>
-              </div>
-
-              {/* Price Section */}
-              <div className="bg-zinc-800/50 rounded-xl p-6 mb-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-zinc-400">Total Value:</span>
-                  <span className="text-zinc-500 line-through">$1,885</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-white font-bold text-lg">Today's Price:</span>
-                  <span className="text-[#D3FF02] font-black text-4xl">$297</span>
-                </div>
-              </div>
-
-              {/* CTA Button */}
-              <a 
-                href="https://roblate.thrivecart.com/the-producer-blueprint/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_30px_rgba(211,255,2,0.3)]"
-              >
-                Get Instant Access
-                <ArrowRight className="w-5 h-5" />
-              </a>
-
-              {/* Trust Badges */}
-              <div className="flex items-center justify-center gap-6 mt-6 text-zinc-500 text-xs">
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
-                  Secure Checkout
-                </div>
-                <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                  30-Day Guarantee
                 </div>
               </div>
             </div>
-
           </div>
         </section>
 
         {/* ================= FAQ SECTION ================= */}
-        <section className="py-16 md:py-24 px-6 bg-[#050505]">
+        <section className="py-24 px-6 bg-[#050505] border-t border-zinc-900">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
+            
+            <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Frequently Asked Questions
               </h2>
               <p className="text-zinc-400">
-                Everything you need to know before joining.
+                Everything you need to know about The Producer Blueprint.
               </p>
             </div>
 
             <div className="space-y-4">
-              {[
-                {
-                  q: "What DAW is this for?",
-                  a: "The Producer Blueprint is taught in Ableton Live. However, all the concepts, techniques, and workflows translate to any DAW - Logic, FL Studio, etc. The principles are universal."
-                },
-                {
-                  q: "What genres does this cover?",
-                  a: "The Blueprint focuses on Pop and EDM production - the genres Rob works in professionally. That said, the core workflows (arrangement, mixing, sound design) apply across all modern electronic music."
-                },
-                {
-                  q: "Do I need expensive plugins?",
-                  a: "No. Rob uses mostly stock Ableton plugins and a handful of affordable third-party tools. You'll get his exact recommendations, but nothing required is expensive."
-                },
-                {
-                  q: "How long do I have access?",
-                  a: "You get 12 months of access from the date of purchase. This includes all updates and new content added during that period."
-                },
-                {
-                  q: "Is there a refund policy?",
-                  a: "Yes. If you complete the first two modules and don't feel it's right for you, email us within 30 days for a full refund. Simple as that."
-                },
-                {
-                  q: "I'm a complete beginner - is this for me?",
-                  a: "Yes. Module 1 covers Ableton basics from scratch. If you're brand new, start there. If you're more advanced, you can skip ahead to the production modules."
-                }
-              ].map((faq, idx) => (
-                <div key={idx} className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
-                  <h3 className="text-white font-bold mb-2">{faq.q}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              
+              {/* FAQ ITEM 1 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
+                    <span>Do I need to use Ableton Live?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    I teach everything in <strong>Ableton Live</strong> and include my personal project files/templates for Ableton. However, the <em>principles</em> of sound design, arrangement, mixing, and vocal production apply to any DAW (FL Studio, Logic, Pro Tools). We have had plenty of students take the course working in other DAWs like Logic and FL Studio who have had huge success, and some who have used it as a chance to make the DAW switch! If you use another DAW, you can still get massive value, but you won't be able to open the project files.
+                  </div>
+                </details>
+              </div>
 
-        {/* ================= FINAL SELL / CROSSROADS ================= */}
-        <section className="py-16 md:py-24 px-6 bg-gradient-to-b from-[#050505] to-black">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
-              You Have Two Choices Right Now.
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
-              {/* Choice 1 */}
-              <div className="bg-zinc-900/30 border border-zinc-800 rounded-2xl p-6 text-left">
-                <div className="text-red-400 font-bold text-sm uppercase tracking-widest mb-4">Choice #1</div>
-                <p className="text-zinc-400 leading-relaxed">
-                  Keep doing what you're doing. Watching random tutorials. Collecting loops. Maybe finishing a track here and there. See where you are in 12 months.
-                </p>
+              {/* FAQ ITEM 2 - GENRES */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
+                    <span>What genres is this for?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    This is a <strong>multi-genre course</strong>. Rob's known for his Pop and EDM productions, so it's centred around this. However, the principles of this approach are universal and Rob works across multiple genres.
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ ITEM 3 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
+                    <span>Do I need expensive 3rd party plugins?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    No. While I do show you my favorite paid plugins (like Serum, FabFilter, etc.), I always explain the <strong>fundamental concept</strong> first. I also dedicate entire sections to "Stock Plugin" alternatives. You can achieve professional results with stock tools if you know how to use them.
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ ITEM 3 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
+                    <span>Is this course for beginners?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    This course is designed for <strong>Intermediate</strong> producers who know the basics but are stuck in the "loop phase" or aren't happy with their mix quality. However, I have included a "Module 1: Foundation" specifically for beginners or those switching to Ableton to get you up to speed fast.
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ ITEM 4 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
+                    <span>How long do I get access for?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                    You get <strong>12 months of access</strong> to the full course, all downloads, and any updates released during that period. This is a one-time payment, not a subscription.
+                  </div>
+                </details>
               </div>
               
-              {/* Choice 2 */}
-              <div className="bg-[#D3FF02]/5 border border-[#D3FF02]/30 rounded-2xl p-6 text-left">
-                <div className="text-[#D3FF02] font-bold text-sm uppercase tracking-widest mb-4">Choice #2</div>
-                <p className="text-zinc-300 leading-relaxed">
-                  Copy the exact workflow of a producer with 100M+ streams. Learn the complete process. Start actually finishing music you're proud of.
-                </p>
+              {/* FAQ ITEM 5 */}
+              <div className="border border-zinc-800 rounded-xl bg-[#0A0A0A] overflow-hidden">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-white hover:text-[#D3FF02] transition-colors">
+                    <span>When do I get access?</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="text-zinc-400 text-sm px-6 pb-6 leading-relaxed">
+                     Instantly. As soon as you complete your order, you'll receive an email with your login details to the private portal. You can start watching immediately.
+                     <br /><br />
+                     <em>Note: Due to the digital nature of this product (downloadable files/templates), all sales are final.</em>
+                  </div>
+                </details>
               </div>
-            </div>
 
-            <a 
-              href="#pricing" 
-              className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)]"
-            >
-              Join The Producer Blueprint
-              <ArrowRight className="w-5 h-5" />
-            </a>
+            </div>
           </div>
         </section>
 
-        {/* ================= FOOTER ================= */}
-        <footer className="py-12 px-6 bg-black border-t border-zinc-900">
+        {/* ================= FINAL SELL: THE CROSSROADS ================= */}
+        <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
           <div className="max-w-5xl mx-auto">
-            
-            {/* Top Row */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
-              <div>
-                <div className="text-xl font-bold tracking-tight text-white mb-2">The Producer Blueprint<sup className="text-[10px] font-normal ml-0.5">™</sup></div>
-                <p className="text-zinc-500 text-sm">The complete production workflow by Rob Late.</p>
-              </div>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               
-              <div className="flex flex-wrap gap-6 text-sm">
-                <a href="#curriculum" className="text-zinc-400 hover:text-white transition-colors">Curriculum</a>
-                <a href="#testimonials" className="text-zinc-400 hover:text-white transition-colors">Testimonials</a>
-                <a href="#pricing" className="text-zinc-400 hover:text-white transition-colors">Pricing</a>
-                <a href="https://producerblueprint.circle.so" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">Student Login</a>
+              {/* Left: The Argument */}
+              <div className="order-2 md:order-1">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                  You have two choices from <span className="font-serif italic font-normal tracking-normal text-zinc-200">here.</span>
+                </h2>
+                
+                <div className="space-y-8">
+                  <div className="pl-6 border-l-2 border-zinc-800">
+                    <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-2">Option 1</h4>
+                    <p className="text-white font-medium text-lg mb-2">Keep guessing.</p>
+                    <p className="text-zinc-500 text-sm leading-relaxed">
+                      You can keep hunting for free tutorials, piecing together advice from different YouTubers, and wondering why your tracks still don't sound "pro." You might get there eventually, but it will cost you years of trial and error.
+                    </p>
+                  </div>
+
+                  <div className="pl-6 border-l-2 border-[#D3FF02]">
+                    <h4 className="text-[#D3FF02] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
+                    <p className="text-white font-medium text-lg mb-2">Steal my workflow.</p>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      You get instant access to the exact workflows I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-10">
+                  <a href="#pricing" className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
+                    Join The Producer Blueprint
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                  <p className="text-zinc-500 text-xs mt-4 text-center md:text-left">
+                    Instant Digital Access • One-Time Payment
+                  </p>
+                </div>
+              </div>
+
+              {/* Right: Visual Anchor */}
+              <div className="order-1 md:order-2 flex justify-center relative">
+                {/* Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none"></div>
+                
+                <img 
+                  src={robChainsmokersGif} 
+                  alt="Rob Late with The Chainsmokers" 
+                  className="relative z-10 w-full max-w-md rounded-2xl drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ================= ROBUST FOOTER ================= */}
+        <footer className="relative z-10 bg-[#030303] border-t border-zinc-900 pt-16 pb-8 px-6">
+          <div className="max-w-6xl mx-auto">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+              
+              {/* Column 1: Brand */}
+              <div className="lg:col-span-1">
+                <h3 className="text-white font-bold text-lg mb-3">The Producer Blueprint.</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  The complete program for modern music production. From idea to release-ready master.
+                </p>
+                {/* Social Links removed to prevent conversion leaks */}
+              </div>
+
+              {/* Column 2: Program */}
+              <div>
+                <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Program</h4>
+                <ul className="space-y-3">
+                  <li><a href="#curriculum" className="text-zinc-500 hover:text-white text-sm transition-colors">Curriculum</a></li>
+                  <li><a href="#testimonials" className="text-zinc-500 hover:text-white text-sm transition-colors">Testimonials</a></li>
+                  <li><a href="https://www.soundssquad.io" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white text-sm transition-colors">Student Login</a></li>
+                  <li><a href="mailto:team@roblate.com" className="text-zinc-500 hover:text-white text-sm transition-colors">Support</a></li>
+                </ul>
+              </div>
+
+              {/* Column 3: Legal */}
+              <div>
+                <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Legal</h4>
+                <ul className="space-y-3">
+                  <li><a href="/legal/privacy-policy" className="text-zinc-500 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
+                  <li><a href="/legal/terms-of-service" className="text-zinc-500 hover:text-white text-sm transition-colors">Terms of Service</a></li>
+                  <li><a href="/legal/earnings-disclaimer" className="text-zinc-500 hover:text-white text-sm transition-colors">Earnings Disclaimer</a></li>
+                  <li><a href="/legal/refund-policy" className="text-zinc-500 hover:text-white text-sm transition-colors">Refund Policy</a></li>
+                </ul>
+              </div>
+
+              {/* Column 4: Contact */}
+              <div>
+                <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-4">Contact</h4>
+                <p className="text-zinc-500 text-sm mb-2">Have questions?</p>
+                <a href="mailto:team@roblate.com" className="text-white font-medium hover:text-[#D3FF02] transition-colors">
+                  team@roblate.com
+                </a>
               </div>
             </div>
 
-            {/* Legal Links */}
-            <div className="flex flex-wrap gap-6 text-xs text-zinc-600 mb-8">
-              <a href="/legal/privacy-policy" className="hover:text-zinc-400 transition-colors">Privacy Policy</a>
-              <a href="/legal/terms-of-service" className="hover:text-zinc-400 transition-colors">Terms of Service</a>
-              <a href="/legal/refund-policy" className="hover:text-zinc-400 transition-colors">Refund Policy</a>
-              <a href="/legal/earnings-disclaimer" className="hover:text-zinc-400 transition-colors">Earnings Disclaimer</a>
-            </div>
-
-            {/* Bottom Row */}
-            <div className="pt-8 border-t border-zinc-900 text-zinc-600 text-xs space-y-4">
-              <p>© {new Date().getFullYear()} Rob Late Media Ltd. All rights reserved.</p>
-              <p>Contact: team@roblate.com</p>
-              <p className="leading-relaxed">
-                This site is not a part of the Facebook™ website or Facebook™ Inc. Additionally, this site is NOT endorsed by Facebook™ in any way. FACEBOOK™ is a trademark of FACEBOOK™, Inc.
-              </p>
-              <p className="leading-relaxed">
-                EARNINGS DISCLAIMER: Results vary. The testimonials shown are real but not typical. Your results will depend on your effort, skill level, and many other factors. We make no guarantees of income or success.
-              </p>
+            {/* Divider */}
+            <div className="border-t border-zinc-800 pt-8">
+              {/* Bottom Legal Text (Ad Compliance) */}
+              <div className="text-center space-y-4">
+                <p className="text-zinc-600 text-xs">
+                  © {new Date().getFullYear()} Rob Late Music. All rights reserved.
+                </p>
+                
+                <div className="max-w-3xl mx-auto space-y-3">
+                  <p className="text-zinc-700 text-[10px] leading-relaxed">
+                    This site is not a part of the Facebook website or Facebook Inc. Additionally, This site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc.
+                  </p>
+                  <p className="text-zinc-700 text-[10px] leading-relaxed">
+                    DISCLAIMER: The sales figures stated above are my personal sales figures. Please understand my results are not typical, I'm not implying you'll duplicate them (or do anything for that matter). Your results will vary and depend on many factors. All business entails risk as well as massive and consistent effort and action.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </footer>
-
     </div>
   );
 };
