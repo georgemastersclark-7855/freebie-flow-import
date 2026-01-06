@@ -15,6 +15,7 @@ import nateSawyerTestimonial from "@/assets/testimonials/nate-sawyer-testimonial
 import completePackageTestimonial from "@/assets/testimonials/complete-package-testimonial.jpg";
 import switzerlandTestimonial from "@/assets/testimonials/switzerland-testimonial.jpeg";
 import djkieraTestimonial from "@/assets/testimonials/djkiera-testimonial.mp4";
+import djkieraThumbnail from "@/assets/testimonials/djkiera-thumbnail.jpg";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import streamingNumbersTestimonial from "@/assets/testimonials/streaming-numbers-testimonial.jpg";
 import drewAdieuTestimonial from "@/assets/testimonials/drew-adieu-testimonial.jpg";
@@ -126,28 +127,17 @@ const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avata
         onClick={handleVideoClick}
       >
         {isVideo ? (
-          <>
-            <video
-              ref={videoRef}
-              src={media}
-              poster={poster}
-              className="absolute inset-0 w-full h-full object-cover"
-              muted
-              loop
-              playsInline
-              preload="none"
-              style={{ transform: 'translateZ(0)' }}
-            />
-            {/* Fallback overlay when no poster - styled background */}
-            {!poster && !isPlaying && (
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex flex-col items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-3">
-                  <Play className="w-8 h-8 text-white fill-white ml-1" />
-                </div>
-                <p className="text-white/60 text-sm font-medium">Tap to play</p>
-              </div>
-            )}
-          </>
+          <video
+            ref={videoRef}
+            src={media}
+            poster={poster}
+            className="absolute inset-0 w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+            preload="none"
+            style={{ transform: 'translateZ(0)' }}
+          />
         ) : (
           <img 
             src={media}
@@ -1683,6 +1673,7 @@ const TheProducerBlueprint001 = () => {
                 isVideo={true}
                 quote="The best investment I've made for my music career."
                 avatar={avatarKosana}
+                poster={djkieraThumbnail}
               />
               <TestimonialCard
                 id="david"
