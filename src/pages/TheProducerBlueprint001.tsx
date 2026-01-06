@@ -76,9 +76,10 @@ interface TestimonialCardProps {
   isVideo: boolean;
   quote: string;
   avatar: string;
+  poster?: string;
 }
 
-const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avatar }: TestimonialCardProps) => {
+const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avatar, poster }: TestimonialCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -125,16 +126,28 @@ const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avata
         onClick={handleVideoClick}
       >
         {isVideo ? (
-          <video
-            ref={videoRef}
-            src={media}
-            className="absolute inset-0 w-full h-full object-cover"
-            muted
-            loop
-            playsInline
-            preload="none"
-            style={{ transform: 'translateZ(0)' }}
-          />
+          <>
+            <video
+              ref={videoRef}
+              src={media}
+              poster={poster}
+              className="absolute inset-0 w-full h-full object-cover"
+              muted
+              loop
+              playsInline
+              preload="none"
+              style={{ transform: 'translateZ(0)' }}
+            />
+            {/* Fallback overlay when no poster - styled background */}
+            {!poster && !isPlaying && (
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex flex-col items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-3">
+                  <Play className="w-8 h-8 text-white fill-white ml-1" />
+                </div>
+                <p className="text-white/60 text-sm font-medium">Tap to play</p>
+              </div>
+            )}
+          </>
         ) : (
           <img 
             src={media}
