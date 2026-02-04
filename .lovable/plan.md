@@ -1,109 +1,128 @@
 
 
-## Plan: Producer Accelerator Waitlist Page (Typeform Version)
+## Plan: Redesign Producer Accelerator Page
 
 ### Overview
-Create a simple, high-converting waitlist landing page at `/produceraccellerator` for the 8-week small group mentorship program. The "Apply Now" button will link directly to an external Typeform, keeping the page simple and letting Typeform handle the application process.
+Completely rewrite `src/pages/ProducerAccelerator.tsx` to match the established squeeze page aesthetic from `TheProducerBlueprint001.tsx`. Add a centered hero image, and include a "Who is this for" section positioned **after** the main CTA button.
 
 ---
 
-### Page Structure
+### Layout Structure
 
 ```text
-+------------------------------------------+
-|              Header (Logo)               |
-+------------------------------------------+
-|                                          |
-|       Have Rob Late Mentor You           |
-|   (8-week small group mentorship)        |
-|                                          |
-|   "I'm opening up places for the first   |
-|    ever Producer Accelerator..."         |
-|                                          |
-+------------------------------------------+
-|                                          |
-|           What You Get:                  |
-|   - Direct feedback on your music        |
-|   - Weekly live calls (90 mins)          |
-|   - Private WhatsApp group               |
-|   - Limited to 15 people                 |
-|                                          |
-+------------------------------------------+
-|                                          |
-|   "Spaces are super limited..."          |
-|                                          |
-|   [   Apply Now   ] --> Opens Typeform   |
-|                                          |
-+------------------------------------------+
-|              Footer                      |
-+------------------------------------------+
++--------------------------------------------------+
+|  [The Producer Blueprint™]         [Apply Now]   |   <- Nav
++--------------------------------------------------+
+|                                                  |
+|              [Aurora Glow Effect]                |
+|                                                  |
+|          HAVE ROB LATE MENTOR YOU                |
+|   8-week small group mentorship for producers    |
+|                                                  |
+|              [Rob Image - Centered]              |
+|                                                  |
+|   "I'm opening up places for the first ever      |
+|    Producer Accelerator..."                      |
+|                                                  |
+|   What you get:                                  |
+|   ✓ Direct feedback on your music from me        |
+|   ✓ Weekly live calls (90 mins)                  |
+|   ✓ Private WhatsApp group to ask questions      |
+|   ✓ Limited to 15 people                         |
+|                                                  |
+|   "Spaces are super limited..."                  |
+|                                                  |
+|          [    Apply Now    ]                     |   <- Main CTA
+|                                                  |
++--------------------------------------------------+
+|                                                  |
+|            WHO IS THIS FOR?                      |   <- After CTA
+|                                                  |
+|   This is for you if:                            |
+|   ✓ You're serious about making music...         |
+|   ✓ You're already making tracks...              |
+|   ✓ You're willing to share your work...         |
+|   ✓ You can commit to 8 weeks...                 |
+|                                                  |
+|   This isn't for you if:                         |
+|   ✗ You're just starting out...                  |
+|   ✗ You're not ready to have your music...       |
+|   ✗ You can't commit to the weekly calls         |
+|                                                  |
++--------------------------------------------------+
+|                Full Footer                       |
++--------------------------------------------------+
 ```
 
 ---
 
-### Design Specifications
+### Design Specifications (matching TheProducerBlueprint001)
 
 | Element | Style |
 |---------|-------|
-| Background | `bg-black` (#050505) |
-| Primary CTA | `bg-[#D3FF02]` with black text, opens Typeform in new tab |
-| Card styling | `bg-gray-900/50 border-gray-700` with subtle glow |
-| Typography | `font-zurich-condensed` for body, bold white for headlines |
-| Icons | Lucide icons (Music, MessageCircle, Users, Video) for benefits |
+| Background | `bg-[#050505]` with aurora radial gradient |
+| Nav | Logo with `drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]`, white pill CTA |
+| Headline | `text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em]` |
+| Accent text | `font-serif italic font-normal tracking-normal text-zinc-200` |
+| Body text | `text-zinc-400 text-base md:text-xl leading-relaxed` |
+| Check icons | `text-[#D3FF02]` for positive, `text-red-500` for negative |
+| CTA Button | `bg-[#D3FF02] text-black rounded-2xl shadow-[0_0_40px_rgba(211,255,2,0.4)]` |
+| Section cards | `border border-zinc-800 bg-[#0A0A0A] rounded-2xl` |
 
 ---
 
 ### Technical Implementation
 
-**Files to Create/Modify:**
+**File to Modify:** `src/pages/ProducerAccelerator.tsx`
 
-1. **Create** `src/pages/ProducerAccelerator.tsx`
-   - Static landing page component
-   - No form fields needed
-   - "Apply Now" button links to Typeform URL (placeholder until you provide actual URL)
+**Key Components:**
 
-2. **Edit** `src/App.tsx`
-   - Add import for `ProducerAccelerator`
-   - Add route: `/produceraccellerator`
+1. **Imports:**
+   - `ArrowRight`, `Check`, `X` from lucide-react
+   - `robHomeStudio` image from assets
 
-**Button Implementation:**
-```tsx
-<a 
-  href="https://your-typeform-url.typeform.com/to/xxxxx" 
-  target="_blank" 
-  rel="noopener noreferrer"
->
-  <Button className="bg-[#D3FF02] text-black font-bold">
-    Apply Now
-  </Button>
-</a>
-```
+2. **Aurora glow effect** - Radial gradient positioned at bottom center
+
+3. **Navigation** - Logo with trademark glow + white pill "Apply Now" button
+
+4. **Hero Section:**
+   - Large headline with serif italic accent on "Mentor You"
+   - Subheadline: "8-week small group mentorship for producers"
+   - Centered hero image with subtle glow behind it
+
+5. **Body Copy** - Centered text about the Producer Accelerator offer
+
+6. **Benefits List** - Lime green check icons with benefit text
+
+7. **Main CTA** - "Apply Now" button with lime background and glow shadow
+
+8. **Who Is This For Section** (positioned after CTA):
+   - Section heading
+   - Two-column grid on desktop
+   - Left: "This is for you if:" with green checks
+   - Right: "This isn't for you if:" with red X icons
+   - Card styling with dark background and border
+
+9. **Footer** - Matching main site footer style
 
 ---
 
 ### Copy
 
-**Headline:** Have Rob Late Mentor You
+**This is for you if:**
+- You're serious about making music your career.
+- You're already making tracks - doesn't matter if you've released or not
+- You're willing to share your work and take action on feedback
+- You can commit to 8 weeks of showing up
 
-**Subheadline:** 8-week small group mentorship for producers
-
-**Body:**
-I'm opening up places for the first ever Producer Accelerator.
-
-15 producers get mentored directly by me for 8 weeks. I help you finish more music, improve your sound, and get clarity on what's actually holding you back in your music (and career).
-
-**Benefits List:**
-- Direct feedback on your music from me
-- Weekly live calls (90 mins)
-- Private WhatsApp group to ask questions
-- Limited to 15 people
-
-**CTA Context:** Spaces are super limited. Click to apply below.
-
-**Button:** Apply Now
+**This isn't for you if:**
+- You're just starting out and still learning your DAW
+- You're not ready to have your music critiqued directly
+- You can't commit to the weekly calls
 
 ---
 
-### Next Steps After Implementation
-Once you have your Typeform created, just provide the URL and I'll update the button link.
+### Files to Modify
+
+1. **Rewrite** `src/pages/ProducerAccelerator.tsx` - Complete redesign with correct styling and section order
 
