@@ -105,7 +105,7 @@ const TermsOfService = () => {
               <h2 className="text-xl font-bold text-white mb-4">9. Contact Us</h2>
               <p>
                 If you have any questions about these Terms of Service, please contact us at:{" "}
-                <a href="mailto:team@roblate.com" className="text-white hover:text-[#FF4F33] transition-colors">
+                <a href="mailto:team@roblate.com" className="text-white hover:text-[#D3FF02] transition-colors">
                   team@roblate.com
                 </a>
               </p>
