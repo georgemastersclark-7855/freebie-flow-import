@@ -1,9 +1,10 @@
 
 
-## Plan: Redesign Producer Accelerator Page
+## Plan: Two-Column Layout with Credits Row
 
 ### Overview
-Completely rewrite `src/pages/ProducerAccelerator.tsx` to match the established squeeze page aesthetic from `TheProducerBlueprint001.tsx`. Add a centered hero image, and include a "Who is this for" section positioned **after** the main CTA button.
+1. Convert the hero section to a two-column layout on desktop (content left, image right)
+2. Add a credits row (album art covers) beneath the image, similar to how the reference page shows brand logos
 
 ---
 
@@ -11,118 +12,109 @@ Completely rewrite `src/pages/ProducerAccelerator.tsx` to match the established 
 
 ```text
 +--------------------------------------------------+
-|  [The Producer Blueprint™]         [Apply Now]   |   <- Nav
+|  [The Producer Blueprint™]         [Apply Now]   |
 +--------------------------------------------------+
 |                                                  |
-|              [Aurora Glow Effect]                |
-|                                                  |
-|          HAVE ROB LATE MENTOR YOU                |
-|   8-week small group mentorship for producers    |
-|                                                  |
-|              [Rob Image - Centered]              |
-|                                                  |
-|   "I'm opening up places for the first ever      |
-|    Producer Accelerator..."                      |
-|                                                  |
-|   What you get:                                  |
-|   ✓ Direct feedback on your music from me        |
-|   ✓ Weekly live calls (90 mins)                  |
-|   ✓ Private WhatsApp group to ask questions      |
-|   ✓ Limited to 15 people                         |
-|                                                  |
-|   "Spaces are super limited..."                  |
-|                                                  |
-|          [    Apply Now    ]                     |   <- Main CTA
-|                                                  |
+|  LEFT (lg:w-1/2)          |  RIGHT (lg:w-1/2)    |
+|                           |                      |
+|  HAVE ROB LATE            |  [Rob Image]         |
+|  MENTOR YOU               |  (large hero photo)  |
+|                           |                      |
+|  8-week mentorship...     |  Credits from:       |
+|                           |  [album] [album] ... |
+|  Body copy text...        |  (row of covers)     |
+|                           |                      |
+|  What you get:            |                      |
+|  ✓ Direct feedback        |                      |
+|  ✓ Weekly calls           |                      |
+|  ✓ WhatsApp group         |                      |
+|  ✓ Limited to 15          |                      |
+|                           |                      |
+|  [Apply Now]              |                      |
+|                           |                      |
 +--------------------------------------------------+
-|                                                  |
-|            WHO IS THIS FOR?                      |   <- After CTA
-|                                                  |
-|   This is for you if:                            |
-|   ✓ You're serious about making music...         |
-|   ✓ You're already making tracks...              |
-|   ✓ You're willing to share your work...         |
-|   ✓ You can commit to 8 weeks...                 |
-|                                                  |
-|   This isn't for you if:                         |
-|   ✗ You're just starting out...                  |
-|   ✗ You're not ready to have your music...       |
-|   ✗ You can't commit to the weekly calls         |
-|                                                  |
+|            WHO IS THIS FOR?                      |
+|   (two-column cards - unchanged)                 |
 +--------------------------------------------------+
-|                Full Footer                       |
+|                Footer                            |
 +--------------------------------------------------+
 ```
 
 ---
 
-### Design Specifications (matching TheProducerBlueprint001)
-
-| Element | Style |
-|---------|-------|
-| Background | `bg-[#050505]` with aurora radial gradient |
-| Nav | Logo with `drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]`, white pill CTA |
-| Headline | `text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em]` |
-| Accent text | `font-serif italic font-normal tracking-normal text-zinc-200` |
-| Body text | `text-zinc-400 text-base md:text-xl leading-relaxed` |
-| Check icons | `text-[#D3FF02]` for positive, `text-red-500` for negative |
-| CTA Button | `bg-[#D3FF02] text-black rounded-2xl shadow-[0_0_40px_rgba(211,255,2,0.4)]` |
-| Section cards | `border border-zinc-800 bg-[#0A0A0A] rounded-2xl` |
-
----
-
 ### Technical Implementation
 
-**File to Modify:** `src/pages/ProducerAccelerator.tsx`
+**File:** `src/pages/ProducerAccelerator.tsx`
 
-**Key Components:**
+**Changes:**
 
-1. **Imports:**
-   - `ArrowRight`, `Check`, `X` from lucide-react
-   - `robHomeStudio` image from assets
+1. **Add album art imports:**
+```tsx
+import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
+import chainsmokersNoShade from "@/assets/album-art/chainsmokers-no-shade.jpeg";
+import chainsmokersSeeYouAgain from "@/assets/album-art/chainsmokers-see-you-again.jpeg";
+import flawesDontBlameMe from "@/assets/album-art/flawes-dont-blame-me.jpg";
+import tiandaNothingButLove from "@/assets/album-art/tianda-nothing-but-love.jpeg";
+```
 
-2. **Aurora glow effect** - Radial gradient positioned at bottom center
+2. **Two-column hero wrapper:**
+```tsx
+<div className="flex flex-col lg:flex-row lg:items-start lg:gap-16 max-w-7xl mx-auto">
+```
 
-3. **Navigation** - Logo with trademark glow + white pill "Apply Now" button
+3. **Left column (content):**
+```tsx
+<div className="lg:w-1/2 text-center lg:text-left">
+  {/* Headline, subhead, body, benefits, CTA */}
+</div>
+```
 
-4. **Hero Section:**
-   - Large headline with serif italic accent on "Mentor You"
-   - Subheadline: "8-week small group mentorship for producers"
-   - Centered hero image with subtle glow behind it
+4. **Right column (image + credits):**
+```tsx
+<div className="lg:w-1/2 mt-10 lg:mt-0">
+  {/* Hero image */}
+  <img className="w-full rounded-2xl shadow-2xl" />
+  
+  {/* Credits row beneath image */}
+  <div className="mt-8">
+    <p className="text-xs text-zinc-500 uppercase tracking-[0.2em] mb-4 text-center">
+      Credits from artists like:
+    </p>
+    <div className="flex justify-center gap-3 flex-wrap">
+      {/* Album art thumbnails - smaller, in a row */}
+      <img src={...} className="w-14 h-14 rounded-lg" />
+      ...
+    </div>
+  </div>
+</div>
+```
 
-5. **Body Copy** - Centered text about the Producer Accelerator offer
-
-6. **Benefits List** - Lime green check icons with benefit text
-
-7. **Main CTA** - "Apply Now" button with lime background and glow shadow
-
-8. **Who Is This For Section** (positioned after CTA):
-   - Section heading
-   - Two-column grid on desktop
-   - Left: "This is for you if:" with green checks
-   - Right: "This isn't for you if:" with red X icons
-   - Card styling with dark background and border
-
-9. **Footer** - Matching main site footer style
+5. **Benefits alignment update:**
+```tsx
+<div className="flex items-center gap-3 justify-center lg:justify-start">
+```
 
 ---
 
-### Copy
+### Credits Data
 
-**This is for you if:**
-- You're serious about making music your career.
-- You're already making tracks - doesn't matter if you've released or not
-- You're willing to share your work and take action on feedback
-- You can commit to 8 weeks of showing up
+Will display 5 album covers in a compact row:
+- The Chainsmokers - Friday
+- The Chainsmokers - No Shade
+- The Chainsmokers - See You Again  
+- Flawes - Don't Blame Me
+- Tianda - Nothing But Love
 
-**This isn't for you if:**
-- You're just starting out and still learning your DAW
-- You're not ready to have your music critiqued directly
-- You can't commit to the weekly calls
+These will be `w-14 h-14` thumbnails with `rounded-lg`, displayed horizontally beneath the hero image with a subtle label above.
+
+---
+
+### Mobile Behavior
+On mobile, the layout remains single-column with centered text. The image and credits appear after the subheadline, before the body copy.
 
 ---
 
 ### Files to Modify
 
-1. **Rewrite** `src/pages/ProducerAccelerator.tsx` - Complete redesign with correct styling and section order
+1. **Edit** `src/pages/ProducerAccelerator.tsx` - Two-column layout with credits row beneath image
 
