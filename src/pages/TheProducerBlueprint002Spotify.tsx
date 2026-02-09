@@ -377,7 +377,7 @@ const CurriculumSection = () => {
                   </div>
 
                   {/* DESKTOP IMAGE - Large w-1/3 image (hidden md:block) */}
-                  <div className="hidden md:block md:relative md:w-1/3 md:min-h-[320px] md:shrink-0 md:overflow-hidden md:rounded-l-2xl">
+                  <div className="hidden md:block md:relative md:w-1/3 md:min-h-[240px] md:shrink-0 md:overflow-hidden md:rounded-l-2xl">
                     <img 
                       src={module.image} 
                       alt={module.title} 
@@ -392,7 +392,7 @@ const CurriculumSection = () => {
                   <div className="flex-1 flex flex-col relative min-w-0 md:w-2/3">
                     
                     {/* MAIN CONTENT */}
-                    <div className={`flex flex-col justify-center p-4 md:p-8 md:py-10 lg:p-12 ${isOpen ? '' : 'md:min-h-[320px]'} shrink-0 relative z-20`}>
+                    <div className={`flex flex-col justify-center p-4 md:p-6 md:py-8 lg:p-10 ${isOpen ? '' : 'md:min-h-[240px]'} shrink-0 relative z-20`}>
                       
                       {/* Background Number (Subtle Watermark) - Desktop only */}
                       <div className="hidden md:block absolute md:top-6 md:right-8 lg:top-8 lg:right-12 md:text-8xl lg:text-9xl font-bold text-white/[0.03] select-none pointer-events-none">
