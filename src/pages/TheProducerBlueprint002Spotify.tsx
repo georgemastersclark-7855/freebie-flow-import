@@ -757,7 +757,7 @@ const CurriculumSection = () => {
                   <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
                     {/* THUMBNAIL */}
                     <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
-                      <img src={tiktokVaultThumbnail} alt="Bonus 2 Thumbnail" className="w-full h-full object-cover" />
+                      <img src={tiktokBreakdownVault} alt="Bonus 2 Thumbnail" className="w-full h-full object-cover" />
                     </div>
                     
                     {/* CONTENT */}
