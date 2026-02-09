@@ -45,6 +45,7 @@ import earlyDaysSticker from "@/assets/early-days-sticker.png";
 import nowSticker from "@/assets/now-sticker.png";
 import robLateSignature from "@/assets/rob-late-signature-white.png";
 import robWritingSession from "@/assets/rob-writing-session.jpg";
+import artistSoundsIdentity from "@/assets/artist-sounds-identity.png";
 import vocalProductionStudio from "@/assets/vocal-production-studio.png";
 import abletonSession from "@/assets/ableton-session.png";
 import drumProductionGif from "@/assets/drum-production.gif";
@@ -318,7 +319,7 @@ const CurriculumSection = () => {
       id: "07",
       title: "Artist Sounds & Identity",
       desc: "How to analyze trends without copying them. Learn to deconstruct the sounds of top artists and rebuild them with your own unique sonic fingerprint.",
-      image: robWritingSession,
+      image: artistSoundsIdentity,
       lessons: [
         "Finding Your Own Sound: Building a reference playlist & capturing ideas",
         "Workflow & Getting Inspired: Using Splice the right way",
