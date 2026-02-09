@@ -318,6 +318,22 @@ const CurriculumSection = () => {
         "Percussion Masterclass: UK Garage, Drum & Bass + Future House"
       ]
     },
+    {
+      id: "08",
+      title: "Marketing & Social Media",
+      desc: "How to grow an audience online, make content that converts, and build real income streams from your production skills. This is the module most producers wish existed - Rob breaks down exactly how he turned social media into sessions, brand deals, sample pack sales, and sync placements.",
+      image: robOnLaptop,
+      lessons: [
+        "Building Your Online Presence as a Producer",
+        "Content That Converts: What to post & why",
+        "Growing on TikTok, Instagram & YouTube",
+        "Monetisation: Brand deals & sponsorships",
+        "Selling Sample Packs & Presets",
+        "Sync Licensing & Placements",
+        "Building a Sustainable Music Income",
+        "Turning Followers Into Real Clients"
+      ]
+    },
   ];
 
   return (
@@ -330,7 +346,7 @@ const CurriculumSection = () => {
             What's Inside The Program
           </div>
           <h2 className="text-3xl md:text-6xl font-bold tracking-tighter text-white mb-4 md:mb-6">
-            7 Modules. 75+ Lessons. <br className="hidden md:block" />
+            8 Modules. 80+ Lessons. <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
               The Producer Blueprint.
             </span>
@@ -501,13 +517,13 @@ const CurriculumSection = () => {
                   {/* IMAGE AREA */}
                   <div className="w-28 self-stretch md:w-full md:h-56 md:self-auto bg-zinc-900 relative overflow-hidden shrink-0 rounded-l-xl md:rounded-l-none md:rounded-t-3xl">
                     <img 
-                      src={robOnLaptop}
-                      alt="Social Media Module Mockup" 
+                      src={abletonTemplatesThumbnail}
+                      alt="Ableton Project Files & Templates" 
                       className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
                     />
                     {/* Desktop-only Value Badge on Image */}
                     <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
-                      Value: <span className="line-through text-zinc-500 mx-1">$97</span> <span className="text-[#D3FF02]">FREE</span>
+                      Value: <span className="line-through text-zinc-500 mx-1">$197</span> <span className="text-[#D3FF02]">FREE</span>
                     </div>
                   </div>
 
@@ -524,13 +540,13 @@ const CurriculumSection = () => {
                     {/* Title */}
                     <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
                       <span className="hidden md:inline text-zinc-500 text-2xl font-bold mr-2">BONUS #1:</span>
-                      <span className="md:hidden">Social Media & Business</span>
-                      <span className="hidden md:inline">Social Media, Business & Music Industry Module</span>
+                      <span className="md:hidden">Ableton Project Files & Templates</span>
+                      <span className="hidden md:inline">Ableton Project Files & Templates</span>
                     </h3>
                     
                     {/* Description - expandable on mobile */}
                     <p className={`text-zinc-400 text-[11px] md:text-sm leading-relaxed md:mb-6 md:flex-1 transition-all duration-300 ${expandedBonus === 'bonus1' ? '' : 'line-clamp-2 md:line-clamp-none'}`}>
-                      Talent is only half the battle. I break down exactly how I built a following of 170k+ and how to turn your production skills into a sustainable income (Brand deals, Sample Packs, Sync, Production).
+                      Download the exact starting templates and finished project files Rob uses in sessions. Open them up, see how everything is built, and use them as your starting point.
                     </p>
                     
                     {/* Mobile tap hint */}
@@ -562,7 +578,7 @@ const CurriculumSection = () => {
                   <div className="w-28 self-stretch md:w-full md:h-56 md:self-auto bg-zinc-900 relative overflow-hidden shrink-0 rounded-l-xl md:rounded-l-none md:rounded-t-3xl">
                     <img 
                       src={tiktokBreakdownVault} 
-                      alt="TikTok Vault Mockup"
+                      alt="Rob's Breakdown Vault"
                       className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
                     />
                     {/* Desktop-only Value Badge on Image */}
@@ -584,17 +600,17 @@ const CurriculumSection = () => {
                     {/* Title */}
                     <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
                       <span className="hidden md:inline text-zinc-500 text-2xl font-bold mr-2">BONUS #2:</span>
-                      <span className="md:hidden">TikTok/IG Breakdown Vault</span>
-                      <span className="hidden md:inline">Rob's TikTok/IG Breakdown Vault</span>
+                      <span className="md:hidden">Rob's Breakdown Vault</span>
+                      <span className="hidden md:inline">Rob's Breakdown Vault</span>
                     </h3>
                     
                     {/* Description - expandable on mobile */}
                     <p className={`text-zinc-400 text-[11px] md:text-sm leading-relaxed md:mb-6 md:flex-1 transition-all duration-300 ${expandedBonus === 'bonus2' ? '' : 'line-clamp-2 md:line-clamp-none'}`}>
-                      The ultimate "Cheat Sheet." Get exclusive access to project files and walkthroughs of my most viral content. See the exact layers, processing, and decisions behind the videos.
+                      Genuine project files and walkthroughs from Rob's most viral videos. See the exact layers, processing, and creative decisions behind the content that built his audience.
                     </p>
                     
                     {/* Mobile tap hint */}
-                    <span className={`md:hidden text-[10px] text-zinc-600 mt-1 transition-opacity ${expandedBonus === 'bonus2' ? 'opacity-0' : 'opacity-0'}`}>
+                    <span className={`md:hidden text-[10px] text-zinc-600 mt-1 transition-opacity ${expandedBonus === 'bonus2' ? 'opacity-0' : 'opacity-100'}`}>
                       Tap to read more
                     </span>
                     
@@ -676,21 +692,23 @@ const CurriculumSection = () => {
                         </h3>
                         {/* RETAIL PRICE - Mobile Top Right */}
                         <span className="shrink-0 inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs md:text-sm font-mono font-bold">
-                          $497
+                          $597
                         </span>
                       </div>
                       <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
-                        The complete 7-module video program. 75+ lessons. Learn to produce top-streaming music.
+                        The complete 8-module video program. 80+ lessons. Learn to produce top-streaming music.
                       </p>
                     </div>
                   </li>
 
-                  {/* ITEM 2: PROJECT FILES */}
+                  {/* DIVIDER */}
+                  <li className="h-px bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 w-full my-4 md:my-6"></li>
+
+                  {/* ITEM 2: BONUS 1 - Ableton Project Files & Templates */}
                   <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
                     {/* THUMBNAIL */}
                     <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
-                      <img src={abletonTemplatesThumbnail} alt="Files Thumbnail" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                      <img src={abletonTemplatesThumbnail} alt="Bonus 1 Thumbnail" className="w-full h-full object-cover" />
                     </div>
                     
                     {/* CONTENT */}
@@ -699,37 +717,10 @@ const CurriculumSection = () => {
                         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
                           Ableton Project Files & Templates
                         </h3>
-                        {/* RETAIL PRICE - Mobile Top Right */}
-                        <span className="shrink-0 inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs md:text-sm font-mono font-bold">
-                          $197
-                        </span>
-                      </div>
-                      <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
-                        Download the exact starting templates and finished project files Rob uses in sessions.
-                      </p>
-                    </div>
-                  </li>
-
-                  {/* DIVIDER */}
-                  <li className="h-px bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 w-full my-4 md:my-6"></li>
-
-                  {/* ITEM 3: BONUS 1 */}
-                  <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
-                    {/* THUMBNAIL */}
-                    <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
-                      <img src={socialMediaBonusThumbnail} alt="Bonus 1 Thumbnail" className="w-full h-full object-cover" />
-                    </div>
-                    
-                    {/* CONTENT */}
-                    <div className="flex flex-col justify-center flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
-                          Social Media & Business Module
-                        </h3>
                         {/* RETAIL + FREE - Mobile Top Right */}
                         <div className="shrink-0 flex items-center gap-1.5 md:gap-3">
                           <span className="text-zinc-500 text-xs md:text-sm font-mono line-through font-medium decoration-zinc-600 decoration-2">
-                            $97
+                            $197
                           </span>
                           <span className="inline-block py-1 px-2 md:py-1.5 md:px-3 rounded-md md:rounded-lg bg-white text-black border border-white/20 text-[10px] md:text-xs font-mono font-extrabold tracking-wider shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                             FREE
@@ -737,12 +728,12 @@ const CurriculumSection = () => {
                         </div>
                       </div>
                       <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
-                        Turn production into income. Strategies for growing a following & building real customers.
+                        Download the exact starting templates and finished project files Rob uses in sessions. Open them up, see how everything is built, and use them as your starting point.
                       </p>
                     </div>
                   </li>
 
-                  {/* ITEM 4: BONUS 2 */}
+                  {/* ITEM 3: BONUS 2 - Rob's Breakdown Vault */}
                   <li className="flex flex-row gap-3 md:gap-6 items-start group relative">
                     {/* THUMBNAIL */}
                     <div className="shrink-0 w-14 h-14 md:w-24 md:h-24 bg-zinc-900 rounded-lg md:rounded-xl border border-zinc-800 overflow-hidden relative shadow-lg group-hover:border-zinc-600 transition-colors">
@@ -753,7 +744,7 @@ const CurriculumSection = () => {
                     <div className="flex flex-col justify-center flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
-                          Rob's TikTok/IG Breakdown Vault
+                          Rob's Breakdown Vault
                         </h3>
                         {/* RETAIL + FREE - Mobile Top Right */}
                         <div className="shrink-0 flex items-center gap-1.5 md:gap-3">
@@ -766,7 +757,7 @@ const CurriculumSection = () => {
                         </div>
                       </div>
                       <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
-                        Exclusive project walkthroughs from Rob's viral content + downloadable presets.
+                        Genuine project files and walkthroughs from Rob's most viral videos. See the exact layers, processing, and creative decisions behind the content that built his audience.
                       </p>
                     </div>
                   </li>
@@ -783,7 +774,7 @@ const CurriculumSection = () => {
                     Total Value
                   </p>
                   <p className="text-xl md:text-3xl font-bold text-zinc-400 line-through decoration-zinc-600 decoration-2 opacity-70">
-                    $938
+                    $941
                   </p>
                 </div>
 
@@ -901,17 +892,23 @@ const TheProducerBlueprint001 = () => {
       description:
         "Modern production techniques. Finding your sound, melody loops, vocal effects, and genre-specific percussion.",
     },
+    {
+      number: "08",
+      title: "Marketing & Social Media",
+      description:
+        "Growing an audience online, making content that converts, and building real income streams from your production skills.",
+    },
   ];
 
   const bonusModules = [
     {
-      title: "Music Business",
-      description: "Turn production into income. Growing a following, making content, and building real customers.",
+      title: "Project Files & Templates",
+      description: "Download the exact starting templates and finished project files Rob uses in sessions.",
     },
     {
       title: "Breakdown Vault",
       description:
-        "Project walkthroughs from Rob's viral content. See the thinking behind every decision. Updated regularly.",
+        "Genuine project files and walkthroughs from Rob's most viral videos. See the creative decisions behind the content.",
     },
   ];
 
@@ -1808,10 +1805,10 @@ const TheProducerBlueprint001 = () => {
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-white font-semibold text-lg">The Producer Blueprint™</p>
-                    <p className="text-zinc-500 text-sm">Complete System + 7 Modules + Templates</p>
+                    <p className="text-zinc-500 text-sm">Complete 8-Module Program</p>
                   </div>
                   <div className="text-right">
-                    <span className="text-zinc-500 line-through text-sm block">$741</span>
+                    <span className="text-zinc-500 line-through text-sm block">$941</span>
                     <span className="text-white font-bold text-xl">$297</span>
                   </div>
                 </div>
@@ -1821,14 +1818,14 @@ const TheProducerBlueprint001 = () => {
                   <div className="flex justify-between items-center text-sm">
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-zinc-300">BONUS: Music Business Mastery</span>
+                      <span className="text-zinc-300">BONUS: Ableton Project Files & Templates</span>
                     </div>
                     <span className="text-green-500 font-medium">Free</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-zinc-300">BONUS: The Breakdown Vault</span>
+                      <span className="text-zinc-300">BONUS: Rob's Breakdown Vault</span>
                     </div>
                     <span className="text-green-500 font-medium">Free</span>
                   </div>
