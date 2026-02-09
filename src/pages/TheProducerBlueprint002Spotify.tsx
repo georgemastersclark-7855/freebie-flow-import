@@ -78,11 +78,21 @@ interface TestimonialCardProps {
   quote: string;
   avatar: string;
   poster?: string;
+  activeVideoId?: string | null;
+  onPlay?: (id: string) => void;
 }
 
-const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avatar, poster }: TestimonialCardProps) => {
+const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avatar, poster, activeVideoId, onPlay }: TestimonialCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Pause this video when another video starts playing
+  useEffect(() => {
+    if (activeVideoId && activeVideoId !== id && isPlaying) {
+      videoRef.current?.pause();
+      setIsPlaying(false);
+    }
+  }, [activeVideoId, id, isPlaying]);
 
   const handleVideoClick = () => {
     if (!videoRef.current || !isVideo) return;
@@ -92,6 +102,7 @@ const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avata
     } else {
       videoRef.current.play();
       setIsPlaying(true);
+      onPlay?.(id);
     }
   };
 
@@ -132,7 +143,6 @@ const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avata
             src={media}
             poster={poster}
             className="absolute inset-0 w-full h-full object-cover"
-            muted
             loop
             playsInline
             preload="none"
@@ -825,6 +835,8 @@ const CurriculumSection = () => {
 
 // ================= MAIN PAGE COMPONENT =================
 const TheProducerBlueprint002Spotify = () => {
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+
   useEffect(() => {
     // Load Vidalytics script
     const script = document.createElement("script");
@@ -1648,6 +1660,8 @@ const TheProducerBlueprint002Spotify = () => {
                 quote="The best investment I've made for my music career."
                 avatar={avatarKosana}
                 poster={djkieraThumbnail}
+                activeVideoId={activeVideoId}
+                onPlay={setActiveVideoId}
               />
               <TestimonialCard
                 id="david"
@@ -1658,6 +1672,8 @@ const TheProducerBlueprint002Spotify = () => {
                 isVideo={false}
                 quote="Headroom Records wants to sign my next single!"
                 avatar={avatarProducer1}
+                activeVideoId={activeVideoId}
+                onPlay={setActiveVideoId}
               />
               <TestimonialCard
                 id="sarah"
@@ -1668,6 +1684,8 @@ const TheProducerBlueprint002Spotify = () => {
                 isVideo={false}
                 quote="Highest streaming numbers yet. 12k on the latest track."
                 avatar={avatarProducer2}
+                activeVideoId={activeVideoId}
+                onPlay={setActiveVideoId}
               />
               
               {/* Spacer for mobile scrolling */}
