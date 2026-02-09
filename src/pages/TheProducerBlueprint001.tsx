@@ -1677,8 +1677,8 @@ const TheProducerBlueprint001 = () => {
             >
               <TestimonialCard
                 id="kiera"
-                name="DJ Kiera"
-                handle="@djkiera"
+                name="Kosana"
+                handle="@djkosana"
                 title="International DJ"
                 media={djkieraTestimonial}
                 isVideo={true}
