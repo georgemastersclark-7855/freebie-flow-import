@@ -833,6 +833,7 @@ const CurriculumSection = () => {
 
 const TheProducerBlueprint001 = () => {
   const [kieraPlaying, setKieraPlaying] = useState(false);
+  const [orderBumpAdded, setOrderBumpAdded] = useState(false);
   const kieraVideoRef = useRef<HTMLVideoElement>(null);
 
   // Load Vidalytics script on mount
@@ -1854,11 +1855,19 @@ const TheProducerBlueprint001 = () => {
                 </div>
 
                 {/* Order Bump */}
-                <div className="border-2 border-dashed border-zinc-600 rounded-xl p-4">
+                <div 
+                  className={`border-2 border-dashed rounded-xl p-4 transition-all duration-300 ${
+                    orderBumpAdded 
+                      ? 'border-[#D3FF02]/40 bg-[#D3FF02]/5' 
+                      : 'border-zinc-600'
+                  }`}
+                >
                   <div className="flex items-start gap-3">
                     <input
                       type="checkbox"
                       id="orderBump"
+                      checked={orderBumpAdded}
+                      onChange={(e) => setOrderBumpAdded(e.target.checked)}
                       className="mt-1.5 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#D3FF02] focus:ring-[#D3FF02] focus:ring-offset-0 cursor-pointer"
                     />
                     <label htmlFor="orderBump" className="cursor-pointer flex-1">
@@ -1888,7 +1897,7 @@ const TheProducerBlueprint001 = () => {
                 <div className="pt-4">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-zinc-400">Total Due Today:</span>
-                    <span className="text-2xl font-bold text-white">$297.00</span>
+                    <span className="text-2xl font-bold text-white">${orderBumpAdded ? '334.00' : '297.00'}</span>
                   </div>
 
                   <button className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2">
