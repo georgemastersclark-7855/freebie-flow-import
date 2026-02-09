@@ -1,29 +1,34 @@
 
 
-## Replace Order Bump Content
+## Auto-Unmuted Video Testimonials with Single-Play Logic
 
 ### What changes
-Update the order bump in `src/pages/TheProducerBlueprint001.tsx` (lines 1857-1883) to replace the "Alpha Drums 3 Sample Pack" offer with "Rob's Effects Chains."
+- Video testimonials will play with full audio automatically when tapped/clicked (no mute state at all)
+- When a user plays one video, all other videos stop immediately
+- No mute/unmute toggle -- audio is always on
 
-### Content update
+### Technical approach
 
-| Field | Old | New |
-|-------|-----|-----|
-| Product name | Alpha Drums 3 Sample Pack | Rob's Effects Chains |
-| Crossed-out price | $97 | $105 |
-| Add-on price | +$37 | +$37 |
-| Description | Rob's premium drum library with over 700 curated sounds... | 8 signature Ableton racks from Rob's sessions. His vocal chain, creative vocal FX, sub bass processor, drum bus glue, snare enhancer, kick fattener, vibe/saturation tool, and tension builder. 100% stock plugins - drag, drop, done. |
-| Extra note | (none) | Requires Ableton 11 Standard or above. |
+**1. Add a shared "active video" context**
 
-### Technical details
+Lift the "currently playing" state up to the parent component level. Add a state variable like `activeVideoId` that tracks which testimonial video is currently playing.
 
-**File:** `src/pages/TheProducerBlueprint001.tsx`
+**2. Pass callbacks to TestimonialCard**
 
-- Line 1871: Change product name to "Rob's Effects Chains"
-- Line 1873: Change strikethrough price from `$97` to `$105`
-- Lines 1877-1879: Replace description paragraph with the new copy
-- Add a second small paragraph for the Ableton requirement note
-- Line 1880 (click box text): Remains unchanged
+- Add `onPlay` and `activeVideoId` props to `TestimonialCard`
+- When a video is clicked to play, call `onPlay(id)` to notify the parent
+- When `activeVideoId` changes and doesn't match this card's `id`, pause the video
 
-No structural or styling changes needed -- just swapping the text content within the existing order bump component.
+**3. Remove muted attribute**
+
+- Remove `muted` from the `<video>` element so audio plays by default
+- Note: Most browsers block autoplay with audio, but since these are user-initiated (click to play), this will work fine
+
+**4. useEffect to pause when another video starts**
+
+Inside `TestimonialCard`, add a `useEffect` watching `activeVideoId` -- if it changes to a different card's id, pause this card's video and reset `isPlaying` to false.
+
+### Files modified
+- `src/pages/TheProducerBlueprint001.tsx` -- TestimonialCard component and its usage (3 instances)
+- `src/pages/TheProducerBlueprint002Spotify.tsx` -- same changes for consistency
 
