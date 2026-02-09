@@ -1854,33 +1854,32 @@ const TheProducerBlueprint001 = () => {
                 </div>
 
                 {/* Order Bump */}
-                <div className="bg-[#D3FF02]/5 border-2 border-dashed border-[#D3FF02]/30 rounded-xl p-4">
-                  <div className="text-center mb-3">
-                    <span className="inline-block bg-[#D3FF02] text-black text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                      One-Time Offer
-                    </span>
-                  </div>
+                <div className="border-2 border-dashed border-zinc-600 rounded-xl p-4">
                   <div className="flex items-start gap-3">
                     <input
                       type="checkbox"
                       id="orderBump"
-                      className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#D3FF02] focus:ring-[#D3FF02] focus:ring-offset-0 cursor-pointer"
+                      className="mt-1.5 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#D3FF02] focus:ring-[#D3FF02] focus:ring-offset-0 cursor-pointer"
                     />
                     <label htmlFor="orderBump" className="cursor-pointer flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-white font-semibold">YES, ADD: Rob's Effects Chains</span>
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className="inline-block bg-zinc-700 text-zinc-200 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                          Add-on
+                        </span>
                         <div className="flex items-center gap-2">
                           <span className="text-zinc-500 line-through text-sm">$105</span>
-                          <span className="text-[#D3FF02] font-bold">+$37</span>
+                          <span className="text-white font-bold">+$37</span>
                         </div>
                       </div>
-                      <p className="text-zinc-400 text-sm mb-2">
+                      <p className="text-white font-semibold mb-1">
+                        Rob's Effects Chains 🎛️
+                      </p>
+                      <p className="text-zinc-400 text-sm">
                         8 signature Ableton racks from Rob's sessions. His vocal chain, creative vocal FX, sub bass processor, drum bus glue, snare enhancer, kick fattener, vibe/saturation tool, and tension builder. 100% stock plugins - drag, drop, done.
                       </p>
-                      <p className="text-zinc-500 text-xs mb-2">
+                      <p className="text-zinc-500 text-xs mt-1">
                         Requires Ableton 11 Standard or above.
                       </p>
-                      <p className="text-[#D3FF02] text-xs font-medium">&gt;&gt; Click box to add this deal</p>
                     </label>
                   </div>
                 </div>
