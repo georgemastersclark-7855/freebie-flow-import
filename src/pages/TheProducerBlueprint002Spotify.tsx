@@ -1161,16 +1161,6 @@ const TheProducerBlueprint002Spotify = () => {
       {/* ================= MINI SOCIAL PROOF SECTION ================= */}
       <section id="reviews" className="pt-0 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10 scroll-mt-20">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-6">
-            Unfiltered Feedback
-          </div>
-
-          <div className="text-center mb-6 md:mb-24">
-            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4 leading-[1.1]">
-              Hear it directly from <span className="font-serif italic text-white">the producers.</span>
-            </h2>
-            <p className="text-zinc-400 text-base md:text-lg">Join 500+ producers who have upgraded their workflow.</p>
-          </div>
 
           {/* MASONRY WALL - Cinematic fade on desktop, clean on mobile */}
           <div className="w-full relative z-0 overflow-hidden md:max-h-[700px]">
