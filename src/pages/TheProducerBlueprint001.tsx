@@ -17,6 +17,7 @@ import switzerlandTestimonial from "@/assets/testimonials/switzerland-testimonia
 import djkieraTestimonial from "@/assets/testimonials/djkiera-testimonial.mp4";
 import djkieraThumbnail from "@/assets/testimonials/djkiera-thumbnail.jpg";
 import test1Testimonial from "@/assets/testimonials/test1-testimonial.mp4";
+import test1Thumbnail from "@/assets/testimonials/test1-thumbnail.png";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import streamingNumbersTestimonial from "@/assets/testimonials/streaming-numbers-testimonial.jpg";
 import drewAdieuTestimonial from "@/assets/testimonials/drew-adieu-testimonial.jpg";
@@ -1683,6 +1684,7 @@ const TheProducerBlueprint001 = () => {
                 isVideo={true}
                 quote="Headroom Records wants to sign my next single!"
                 avatar={avatarProducer1}
+                poster={test1Thumbnail}
               />
               <TestimonialCard
                 id="sarah"
