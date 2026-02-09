@@ -600,13 +600,13 @@ const CurriculumSection = () => {
                     {/* Title */}
                     <h3 className="text-sm md:text-2xl font-bold text-white group-hover:text-[#D3FF02] transition-colors leading-tight mb-1 md:mb-3">
                       <span className="hidden md:inline text-zinc-500 text-2xl font-bold mr-2">BONUS #2:</span>
-                      <span className="md:hidden">Rob's Breakdown Vault</span>
-                      <span className="hidden md:inline">Rob's Breakdown Vault</span>
+                      <span className="md:hidden">Rob's IG/TikTok Breakdown Vault</span>
+                      <span className="hidden md:inline">Rob's IG/TikTok Breakdown Vault</span>
                     </h3>
                     
                     {/* Description - expandable on mobile */}
                     <p className={`text-zinc-400 text-[11px] md:text-sm leading-relaxed md:mb-6 md:flex-1 transition-all duration-300 ${expandedBonus === 'bonus2' ? '' : 'line-clamp-2 md:line-clamp-none'}`}>
-                      Genuine project files and walkthroughs from Rob's most viral videos. See the exact layers, processing, and creative decisions behind the content that built his audience.
+                      Watch Rob break down his most viral videos step by step. He walks you through exactly how each one was made - the production decisions, the processing, and why it worked. Learn what's actually behind the content that built his audience.
                     </p>
                     
                     {/* Mobile tap hint */}
@@ -744,7 +744,7 @@ const CurriculumSection = () => {
                     <div className="flex flex-col justify-center flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-zinc-200 transition-colors leading-tight">
-                          Rob's Breakdown Vault
+                          Rob's IG/TikTok Breakdown Vault
                         </h3>
                         {/* RETAIL + FREE - Mobile Top Right */}
                         <div className="shrink-0 flex items-center gap-1.5 md:gap-3">
@@ -757,7 +757,7 @@ const CurriculumSection = () => {
                         </div>
                       </div>
                       <p className="text-zinc-400 text-xs md:text-sm mt-1 md:mt-2 leading-relaxed max-w-md">
-                        Genuine project files and walkthroughs from Rob's most viral videos. See the exact layers, processing, and creative decisions behind the content that built his audience.
+                        Watch Rob break down his most viral videos step by step. He walks you through exactly how each one was made - the production decisions, the processing, and why it worked. Learn what's actually behind the content that built his audience.
                       </p>
                     </div>
                   </li>
@@ -906,9 +906,9 @@ const TheProducerBlueprint001 = () => {
       description: "Download the exact starting templates and finished project files Rob uses in sessions.",
     },
     {
-      title: "Breakdown Vault",
+      title: "IG/TikTok Breakdown Vault",
       description:
-        "Genuine project files and walkthroughs from Rob's most viral videos. See the creative decisions behind the content.",
+        "Watch Rob break down his most viral videos step by step. Learn what's actually behind the content that built his audience.",
     },
   ];
 
@@ -1825,7 +1825,7 @@ const TheProducerBlueprint001 = () => {
                   <div className="flex justify-between items-center text-sm">
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-zinc-300">BONUS: Rob's Breakdown Vault</span>
+                      <span className="text-zinc-300">BONUS: Rob's IG/TikTok Breakdown Vault</span>
                     </div>
                     <span className="text-green-500 font-medium">Free</span>
                   </div>
