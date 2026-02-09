@@ -16,6 +16,7 @@ import completePackageTestimonial from "@/assets/testimonials/complete-package-t
 import switzerlandTestimonial from "@/assets/testimonials/switzerland-testimonial.jpeg";
 import djkieraTestimonial from "@/assets/testimonials/djkiera-testimonial.mp4";
 import djkieraThumbnail from "@/assets/testimonials/djkiera-thumbnail.jpg";
+import test1Testimonial from "@/assets/testimonials/test1-testimonial.mp4";
 import chainsomokersFriday from "@/assets/album-art/chainsmokers-friday.jpeg";
 import streamingNumbersTestimonial from "@/assets/testimonials/streaming-numbers-testimonial.jpg";
 import drewAdieuTestimonial from "@/assets/testimonials/drew-adieu-testimonial.jpg";
@@ -1678,8 +1679,8 @@ const TheProducerBlueprint001 = () => {
                 name="David R."
                 handle="@david.prod"
                 title="Label-Signed Producer"
-                media={headroomRecordsTestimonial}
-                isVideo={false}
+                media={test1Testimonial}
+                isVideo={true}
                 quote="Headroom Records wants to sign my next single!"
                 avatar={avatarProducer1}
               />
