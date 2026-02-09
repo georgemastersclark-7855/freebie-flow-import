@@ -1863,7 +1863,7 @@ const TheProducerBlueprint001 = () => {
                     />
                     <label htmlFor="orderBump" className="cursor-pointer flex-1">
                       <div className="flex items-center gap-3 mb-1">
-                        <span className="inline-block bg-zinc-700 text-zinc-200 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                        <span className="inline-block bg-white text-black text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
                           Add-on
                         </span>
                         <div className="flex items-center gap-2">
