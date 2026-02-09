@@ -1868,14 +1868,17 @@ const TheProducerBlueprint001 = () => {
                     />
                     <label htmlFor="orderBump" className="cursor-pointer flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-white font-semibold">YES, ADD: Alpha Drums 3 Sample Pack</span>
+                        <span className="text-white font-semibold">YES, ADD: Rob's Effects Chains</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-zinc-500 line-through text-sm">$97</span>
+                          <span className="text-zinc-500 line-through text-sm">$105</span>
                           <span className="text-[#D3FF02] font-bold">+$37</span>
                         </div>
                       </div>
                       <p className="text-zinc-400 text-sm mb-2">
-                        Rob's premium drum library with over 700 curated sounds from sessions with A-list artists. Kicks, snares, and percussion that cut through any mix.
+                        8 signature Ableton racks from Rob's sessions. His vocal chain, creative vocal FX, sub bass processor, drum bus glue, snare enhancer, kick fattener, vibe/saturation tool, and tension builder. 100% stock plugins - drag, drop, done.
+                      </p>
+                      <p className="text-zinc-500 text-xs mb-2">
+                        Requires Ableton 11 Standard or above.
                       </p>
                       <p className="text-[#D3FF02] text-xs font-medium">&gt;&gt; Click box to add this deal</p>
                     </label>
