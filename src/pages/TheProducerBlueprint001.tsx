@@ -3,6 +3,12 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
+declare global {
+  interface Window {
+    fbq: (...args: any[]) => void;
+  }
+}
+
 // Assets
 import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
 import testimonial2 from "@/assets/testimonials/testimonial-2.jpeg";
@@ -840,6 +846,34 @@ const TheProducerBlueprint001 = () => {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [orderBumpAdded, setOrderBumpAdded] = useState(false);
   const kieraVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Meta Pixel: ViewContent when pricing section is visible
+  useEffect(() => {
+    const pricingSection = document.getElementById('pricing');
+    if (!pricingSection) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (typeof window.fbq === 'function') {
+              window.fbq('track', 'ViewContent', {
+                content_name: 'The Producer Blueprint',
+                content_type: 'product',
+                value: 297.00,
+                currency: 'USD'
+              });
+            }
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    
+    observer.observe(pricingSection);
+    return () => observer.disconnect();
+  }, []);
 
   // Load Vidalytics script on mount
   useEffect(() => {
@@ -1908,7 +1942,21 @@ const TheProducerBlueprint001 = () => {
                     <span className="text-2xl font-bold text-white">${orderBumpAdded ? '334.00' : '297.00'}</span>
                   </div>
 
-                  <button className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2">
+                  <button 
+                    onClick={() => {
+                      if (typeof window.fbq === 'function') {
+                        window.fbq('track', 'InitiateCheckout', {
+                          content_name: 'The Producer Blueprint',
+                          value: orderBumpAdded ? 334.00 : 297.00,
+                          currency: 'USD',
+                          num_items: orderBumpAdded ? 2 : 1
+                        });
+                      }
+                      // TODO: Replace with actual Shopify checkout URL
+                      // window.location.href = 'SHOPIFY_CHECKOUT_URL_HERE';
+                    }}
+                    className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2"
+                  >
                     Get Instant Access
                     <ArrowRight className="w-5 h-5" />
                   </button>
