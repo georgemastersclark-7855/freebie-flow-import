@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { getKlaviyoWebhookUrl } from "@/config/marketing";
+import { useUTMTracking } from "@/hooks/useUTMTracking";
 
 declare global {
   interface Window {
@@ -846,7 +848,11 @@ const TheProducerBlueprint001 = () => {
   const [kieraPlaying, setKieraPlaying] = useState(false);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [orderBumpAdded, setOrderBumpAdded] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState<{ fullName?: string; email?: string }>({});
   const kieraVideoRef = useRef<HTMLVideoElement>(null);
+  const utmParams = useUTMTracking();
 
   // Meta Pixel: ViewContent when pricing section is visible
   useEffect(() => {
@@ -901,6 +907,23 @@ const TheProducerBlueprint001 = () => {
   }, []);
 
   const handleCheckout = async () => {
+    // Step 1: Validate form fields
+    const newErrors: { fullName?: string; email?: string } = {};
+    if (!fullName.trim()) {
+      newErrors.fullName = 'Please enter your full name.';
+    }
+    if (!email.trim()) {
+      newErrors.email = 'Please enter your email address.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      newErrors.email = 'Please enter a valid email address.';
+    }
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+
+    // Step 2: Fire Meta pixel
     if (typeof window.fbq === 'function') {
       window.fbq('track', 'InitiateCheckout', {
         content_name: 'The Producer Blueprint',
@@ -910,6 +933,26 @@ const TheProducerBlueprint001 = () => {
       });
     }
 
+    // Step 3: Send lead data to Klaviyo (non-blocking)
+    const webhookUrl = getKlaviyoWebhookUrl();
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        body: JSON.stringify({
+          email: email.trim(),
+          full_name: fullName.trim(),
+          source: 'producer_blueprint_checkout',
+          order_bump_added: orderBumpAdded,
+          value: orderBumpAdded ? 334.00 : 297.00,
+          timestamp: new Date().toISOString(),
+          ...utmParams
+        })
+      }).catch(err => console.error('Webhook error:', err));
+    }
+
+    // Steps 4-7: Build Shopify checkout & redirect
     try {
       const client = window.ShopifyBuy.buildClient({
         domain: 'the-producer-blueprint-7594.myshopify.com',
@@ -929,7 +972,19 @@ const TheProducerBlueprint001 = () => {
       }
       
       const updatedCheckout = await client.checkout.addLineItems(checkout.id, lineItems);
-      window.location.href = updatedCheckout.webUrl;
+
+      // Attach email to checkout
+      await client.checkout.updateEmail(checkout.id, email.trim());
+
+      // Build redirect URL with pre-filled customer data
+      const checkoutUrl = new URL(updatedCheckout.webUrl);
+      const nameParts = fullName.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      checkoutUrl.searchParams.set('checkout[email]', email.trim());
+      checkoutUrl.searchParams.set('checkout[shipping_address][first_name]', firstName);
+      checkoutUrl.searchParams.set('checkout[shipping_address][last_name]', lastName);
+      window.location.href = checkoutUrl.toString();
     } catch (error) {
       console.error('Checkout error:', error);
       window.location.href = 'https://roblate.com/products/the-producer-blueprint';
@@ -1502,16 +1557,22 @@ const TheProducerBlueprint001 = () => {
                     <input
                       type="text"
                       placeholder="Your full name"
-                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
+                      value={fullName}
+                      onChange={(e) => { setFullName(e.target.value); setErrors(prev => ({ ...prev, fullName: undefined })); }}
+                      className={`w-full bg-[#050505] border rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors ${errors.fullName ? 'border-red-500' : 'border-white/10'}`}
                     />
+                    {errors.fullName && <p className="text-red-400 text-sm mt-1">{errors.fullName}</p>}
                   </div>
                   <div>
                     <label className="block text-zinc-400 text-sm mb-2">Email Address</label>
                     <input
                       type="email"
                       placeholder="you@example.com"
-                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
+                      value={email}
+                      onChange={(e) => { setEmail(e.target.value); setErrors(prev => ({ ...prev, email: undefined })); }}
+                      className={`w-full bg-[#050505] border rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors ${errors.email ? 'border-red-500' : 'border-white/10'}`}
                     />
+                    {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
