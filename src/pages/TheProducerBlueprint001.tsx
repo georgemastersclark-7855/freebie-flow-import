@@ -967,7 +967,7 @@ const TheProducerBlueprint001 = () => {
       ];
 
       if (orderBumpAdded) {
-        const rackBundle = await client.product.fetch('gid://shopify/Product/15013885870467');
+        const rackBundle = await client.product.fetch('gid://shopify/Product/15640127930755');
         lineItems.push({ variantId: rackBundle.variants[0].id, quantity: 1 });
       }
       
