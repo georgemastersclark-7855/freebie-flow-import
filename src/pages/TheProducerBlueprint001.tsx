@@ -851,20 +851,8 @@ const TheProducerBlueprint001 = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{ fullName?: string; email?: string }>({});
-  const [isLoading, setIsLoading] = useState(false);
   const kieraVideoRef = useRef<HTMLVideoElement>(null);
-  const shopifyClient = useRef<any>(null);
   const utmParams = useUTMTracking();
-
-  // Build Shopify client once on mount
-  useEffect(() => {
-    if (window.ShopifyBuy) {
-      shopifyClient.current = window.ShopifyBuy.buildClient({
-        domain: 'the-producer-blueprint-7594.myshopify.com',
-        storefrontAccessToken: '92053f10fedc25746cd619c30edadbde',
-      });
-    }
-  }, []);
 
   // Meta Pixel: ViewContent when pricing section is visible
   useEffect(() => {
@@ -934,7 +922,6 @@ const TheProducerBlueprint001 = () => {
       return;
     }
     setErrors({});
-    setIsLoading(true);
 
     // Step 2: Fire Meta pixel
     if (typeof window.fbq === 'function') {
@@ -967,35 +954,27 @@ const TheProducerBlueprint001 = () => {
 
     // Steps 4-7: Build Shopify checkout & redirect
     try {
-      // Ensure client is ready
-      if (!shopifyClient.current) {
-        shopifyClient.current = window.ShopifyBuy.buildClient({
-          domain: 'the-producer-blueprint-7594.myshopify.com',
-          storefrontAccessToken: '92053f10fedc25746cd619c30edadbde',
-        });
-      }
+      const client = window.ShopifyBuy.buildClient({
+        domain: 'the-producer-blueprint-7594.myshopify.com',
+        storefrontAccessToken: '92053f10fedc25746cd619c30edadbde',
+      });
 
-      // Fetch products in parallel
-      const [blueprint, rackBundle, checkout] = await Promise.all([
-        shopifyClient.current.product.fetch('gid://shopify/Product/6953404334164'),
-        orderBumpAdded
-          ? shopifyClient.current.product.fetch('gid://shopify/Product/15640127930755')
-          : Promise.resolve(null),
-        shopifyClient.current.checkout.create()
-      ]);
+      const blueprint = await client.product.fetch('gid://shopify/Product/6953404334164');
+      const checkout = await client.checkout.create();
       
       const lineItems: { variantId: string; quantity: number }[] = [
         { variantId: blueprint.variants[0].id, quantity: 1 }
       ];
 
-      if (rackBundle) {
+      if (orderBumpAdded) {
+        const rackBundle = await client.product.fetch('gid://shopify/Product/15640127930755');
         lineItems.push({ variantId: rackBundle.variants[0].id, quantity: 1 });
       }
       
-      const updatedCheckout = await shopifyClient.current.checkout.addLineItems(checkout.id, lineItems);
+      const updatedCheckout = await client.checkout.addLineItems(checkout.id, lineItems);
 
       // Attach email to checkout
-      await shopifyClient.current.checkout.updateEmail(checkout.id, email.trim());
+      await client.checkout.updateEmail(checkout.id, email.trim());
 
       // Build redirect URL with pre-filled customer data
       const checkoutUrl = new URL(updatedCheckout.webUrl);
@@ -1008,7 +987,6 @@ const TheProducerBlueprint001 = () => {
       window.location.href = checkoutUrl.toString();
     } catch (error) {
       console.error('Checkout error:', error);
-      setIsLoading(false);
       window.location.href = 'https://roblate.com/products/the-producer-blueprint';
     }
   };
@@ -1646,11 +1624,10 @@ const TheProducerBlueprint001 = () => {
 
                   <button 
                     onClick={handleCheckout}
-                    disabled={isLoading}
-                    className={`w-full bg-[#D3FF02] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2 ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#b8e000] hover:scale-[1.02]'}`}
+                    className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2"
                   >
-                    {isLoading ? 'Processing...' : 'Get Instant Access'}
-                    {!isLoading && <ArrowRight className="w-5 h-5" />}
+                    Get Instant Access
+                    <ArrowRight className="w-5 h-5" />
                   </button>
 
                   {/* Trust Badges - Updated for Compliance */}
