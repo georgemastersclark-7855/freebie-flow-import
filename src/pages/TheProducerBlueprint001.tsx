@@ -896,6 +896,24 @@ const TheProducerBlueprint001 = () => {
 
   // Load Vidalytics script on mount
   useEffect(() => {
+    // Clear any stale Vidalytics state from previous mounts
+    const embedId = 'vidalytics_embed_iZTJyib6xT9dwcHs';
+    const embedUrl = 'https://fast.vidalytics.com/embeds/TEaBLdFh/iZTJyib6xT9dwcHs/';
+    
+    // Reset Vidalytics globals so the player initializes fresh
+    delete (window as any).Vidalytics;
+    delete (window as any).VidalyticsL;
+    delete (window as any)._vidalytics;
+
+    // Clear the embed container
+    const embedEl = document.getElementById(embedId);
+    if (embedEl) {
+      embedEl.innerHTML = '';
+    }
+
+    // Remove any previously injected Vidalytics scripts
+    document.querySelectorAll('script[src*="vidalytics"]').forEach(s => s.remove());
+
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.innerHTML = `
@@ -907,14 +925,19 @@ const TheProducerBlueprint001 = () => {
           i.getElementsByTagName("head")[0].appendChild(s);
         };}
         vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-      })(window, document, 'Vidalytics', 'vidalytics_embed_iZTJyib6xT9dwcHs', 'https://fast.vidalytics.com/embeds/TEaBLdFh/iZTJyib6xT9dwcHs/');
+      })(window, document, 'Vidalytics', '${embedId}', '${embedUrl}');
     `;
     document.body.appendChild(script);
 
     return () => {
+      // Full cleanup on unmount
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
+      document.querySelectorAll('script[src*="vidalytics"]').forEach(s => s.remove());
+      delete (window as any).Vidalytics;
+      delete (window as any).VidalyticsL;
+      delete (window as any)._vidalytics;
     };
   }, []);
 
