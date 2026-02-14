@@ -1235,10 +1235,10 @@ const TheProducerBlueprint004Gear = () => {
           
           {/* 1. HEADLINE AREA */}
           <div className="text-center mb-10 md:mb-16 relative z-10">
-            
+            <span className="inline-block text-zinc-400 text-sm md:text-base font-medium tracking-widest uppercase mb-4">More Gear. More Plugins. Same Results.</span>
             <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 text-white leading-[1.1]">
-              Why Your Music Still <br />
-              <span className="font-serif italic text-white">Sounds Amateur.</span>
+              You're Not Short On Talent. You're Stuck In <br />
+              <span className="font-serif italic text-white">The Wrong Habits.</span>
             </h2>
             <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
               You've spent thousands on plugins, sample packs, and gear upgrades. <span className="text-zinc-400">Your tracks still don't sound like what you hear on Spotify.</span>
