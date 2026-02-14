@@ -1,34 +1,62 @@
 
 
-## Auto-Unmuted Video Testimonials with Single-Play Logic
+# Reconnect Shopify Buy Button Checkout
 
-### What changes
-- Video testimonials will play with full audio automatically when tapped/clicked (no mute state at all)
-- When a user plays one video, all other videos stop immediately
-- No mute/unmute toggle -- audio is always on
+## What This Does
+Wires up the "Get Instant Access" checkout button on both `/theproducerblueprint001` and `/theproducerblueprint002spotify` so that clicking it:
 
-### Technical approach
+1. Validates the Full Name and Email fields
+2. Fires a non-blocking Klaviyo/Zapier lead capture
+3. Creates a Shopify checkout using the Buy Button SDK
+4. If the order bump is selected, adds **both** products to a single checkout
+5. Pre-fills the customer's name and email in Shopify checkout
+6. Shows a loading state to prevent double-clicks
 
-**1. Add a shared "active video" context**
+## Shopify Configuration (extracted from your embed codes)
 
-Lift the "currently playing" state up to the parent component level. Add a state variable like `activeVideoId` that tracks which testimonial video is currently playing.
+| Detail | Value |
+|---|---|
+| Domain | `the-producer-blueprint-7594.myshopify.com` |
+| Storefront Access Token | `92053f10fedc25746cd619c30edadbde` |
+| Main Product ID | `6953404334164` |
+| Order Bump Product ID | `15640127930755` |
 
-**2. Pass callbacks to TestimonialCard**
+## Technical Steps
 
-- Add `onPlay` and `activeVideoId` props to `TestimonialCard`
-- When a video is clicked to play, call `onPlay(id)` to notify the parent
-- When `activeVideoId` changes and doesn't match this card's `id`, pause the video
+### 1. Load the Shopify Buy Button SDK
+Add a `<script>` tag for `https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js` to `index.html` (or load it dynamically on mount inside the component). A persistent Shopify client ref will be created once.
 
-**3. Remove muted attribute**
+### 2. Add state and refs to both page components
+- `useRef` for `fullName` and `email` input elements
+- `useState` for `isLoading` (disables button during checkout creation)
+- `useRef` for the Shopify client instance
 
-- Remove `muted` from the `<video>` element so audio plays by default
-- Note: Most browsers block autoplay with audio, but since these are user-initiated (click to play), this will work fine
+### 3. Implement `handleCheckout` function
+The core logic:
 
-**4. useEffect to pause when another video starts**
+```text
+handleCheckout flow:
+  1. Validate name + email (show toast on failure)
+  2. Set isLoading = true
+  3. Fire Klaviyo/Zapier lead capture (non-blocking via sendZapierEvent)
+  4. Use Shopify SDK to fetch product(s) by ID
+  5. Create a checkout with the main product
+  6. If orderBumpAdded, also add order bump product to the same checkout
+  7. Pre-fill email via checkout.updateEmail()
+  8. Append customer name as URL params on the checkout URL
+  9. Redirect to Shopify checkout URL
+  10. Set isLoading = false on error
+```
 
-Inside `TestimonialCard`, add a `useEffect` watching `activeVideoId` -- if it changes to a different card's id, pause this card's video and reset `isPlaying` to false.
+### 4. Wire up the button
+- Add `onClick={handleCheckout}` to the "Get Instant Access" button
+- Add `disabled={isLoading}` and show a spinner/loading text when active
+- Add `ref` attributes to the name and email `<input>` elements
 
-### Files modified
-- `src/pages/TheProducerBlueprint001.tsx` -- TestimonialCard component and its usage (3 instances)
-- `src/pages/TheProducerBlueprint002Spotify.tsx` -- same changes for consistency
+### 5. Apply to both pages
+- `TheProducerBlueprint001.tsx` -- already has `orderBumpAdded` state
+- `TheProducerBlueprint002Spotify.tsx` -- needs `orderBumpAdded` state added (currently the order bump checkbox is uncontrolled) and the same checkout handler
+
+### 6. No new dependencies needed
+The Shopify Buy Button SDK is loaded via CDN script tag, not an npm package.
 
