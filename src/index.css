@@ -145,7 +145,7 @@ html {
 
     /* Career variant: longer headline needs smaller mobile size */
     .hero-headline-career {
-      font-size: 1.75rem !important; /* 28px */
+      font-size: 2.25rem !important; /* 36px — 75% of original 48px */
     }
 
     h3 {
