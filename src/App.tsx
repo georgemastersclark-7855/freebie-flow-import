@@ -18,6 +18,7 @@ import ClaudeTest from "./pages/ClaudeTest";
 import ProducerAccelerator from "./pages/ProducerAccelerator";
 import TheProducerBlueprint004Gear from "./pages/TheProducerBlueprint004Gear";
 import TheProducerBlueprint003Career from "./pages/TheProducerBlueprint003Career";
+import TheProducerBlueprint005Workflow from "./pages/TheProducerBlueprint005Workflow";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
@@ -51,6 +52,7 @@ const App = () => (
           <Route path="/produceraccellerator" element={<ProducerAccelerator />} />
           <Route path="/theproducerblueprint003career" element={<TheProducerBlueprint003Career />} />
           <Route path="/theproducerblueprint004gear" element={<TheProducerBlueprint004Gear />} />
+          <Route path="/theproducerblueprint005workflow" element={<TheProducerBlueprint005Workflow />} />
           <Route path="/HowToResampleLikeaPro" element={<Index />} />
           <Route path="/30daysofproducersauce" element={<Index />} />
           {/* Legal Pages */}
