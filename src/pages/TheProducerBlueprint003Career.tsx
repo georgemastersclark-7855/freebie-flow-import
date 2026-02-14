@@ -1001,7 +1001,7 @@ const TheProducerBlueprint001 = () => {
                 <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
               ))}
             </div>
-            <p className="text-zinc-500 text-sm">500+ producers enrolled</p>
+            <p className="text-zinc-500 text-sm">1,200+ producers enrolled</p>
           </div>
         </div>
 
@@ -1030,15 +1030,15 @@ const TheProducerBlueprint001 = () => {
           <div className="order-3 md:order-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400 mb-8 md:mb-12">
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-[#D3FF02]" />
-              100M+ streams from a home studio
+              Complete start-to-finish workflow
             </div>
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-[#D3FF02]" />
-              Multiple income streams (no label deal)
+              Home studio focused
             </div>
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-[#D3FF02]" />
-              1,000+ producers inside
+              Updated for 2026
             </div>
           </div>
 
@@ -1235,7 +1235,7 @@ const TheProducerBlueprint001 = () => {
           
           {/* 1. HEADLINE AREA */}
           <div className="text-center mb-10 md:mb-16 relative z-10">
-            <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#D3FF02] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-zinc-400 text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
               Hobbyists vs Working Producers
             </div>
             
