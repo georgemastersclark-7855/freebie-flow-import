@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useShopifyCheckout } from "@/hooks/useShopifyCheckout";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -840,6 +841,7 @@ const TheProducerBlueprint001 = () => {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [orderBumpAdded, setOrderBumpAdded] = useState(false);
   const kieraVideoRef = useRef<HTMLVideoElement>(null);
+  const { nameRef, emailRef, isLoading, handleCheckout } = useShopifyCheckout();
 
   // Load Vidalytics script on mount
   useEffect(() => {
@@ -1847,6 +1849,7 @@ const TheProducerBlueprint001 = () => {
                   <div>
                     <label className="block text-zinc-400 text-sm mb-2">Full Name</label>
                     <input
+                      ref={nameRef}
                       type="text"
                       placeholder="Your full name"
                       className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
@@ -1855,6 +1858,7 @@ const TheProducerBlueprint001 = () => {
                   <div>
                     <label className="block text-zinc-400 text-sm mb-2">Email Address</label>
                     <input
+                      ref={emailRef}
                       type="email"
                       placeholder="you@example.com"
                       className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
@@ -1908,9 +1912,22 @@ const TheProducerBlueprint001 = () => {
                     <span className="text-2xl font-bold text-white">${orderBumpAdded ? '334.00' : '297.00'}</span>
                   </div>
 
-                  <button className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2">
-                    Get Instant Access
-                    <ArrowRight className="w-5 h-5" />
+                  <button
+                    onClick={() => handleCheckout(orderBumpAdded)}
+                    disabled={isLoading}
+                    className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  >
+                    {isLoading ? (
+                      <>
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        Get Instant Access
+                        <ArrowRight className="w-5 h-5" />
+                      </>
+                    )}
                   </button>
 
                   {/* Trust Badges - Updated for Compliance */}
