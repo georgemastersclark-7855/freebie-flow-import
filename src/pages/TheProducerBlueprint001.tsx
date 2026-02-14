@@ -1001,7 +1001,7 @@ const TheProducerBlueprint001 = () => {
                 <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
               ))}
             </div>
-            <p className="text-zinc-500 text-sm">500+ producers enrolled</p>
+            <p className="text-zinc-500 text-sm"><p className="text-zinc-500 text-sm">1,200+ producers enrolled</p></p>
           </div>
         </div>
 
@@ -1041,7 +1041,7 @@ const TheProducerBlueprint001 = () => {
             </div>
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-[#D3FF02]" />
-              Updated for 2025
+              Updated for 2026
             </div>
           </div>
 
@@ -1801,7 +1801,7 @@ const TheProducerBlueprint001 = () => {
                 Get Instant Access
               </h2>
               <p className="text-zinc-400">
-                Join 500+ producers building their career from a home studio.
+                Join 1,200+ producers building their career from a home studio.
               </p>
             </div>
 
