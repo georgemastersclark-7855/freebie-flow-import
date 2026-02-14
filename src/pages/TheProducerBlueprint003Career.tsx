@@ -1006,7 +1006,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="hero-headline text-3xl md:text-5xl lg:text-6xl font-black tracking-[-0.05em] leading-[1.1] md:tracking-[-0.04em] md:leading-[1.05] md:font-bold mb-6 md:mb-10 md:max-w-4xl md:mx-auto">
+        <h1 className="hero-headline text-2xl md:text-5xl lg:text-6xl font-black tracking-[-0.05em] leading-[1.1] md:tracking-[-0.04em] md:leading-[1.05] md:font-bold mb-6 md:mb-10 md:max-w-4xl md:mx-auto">
           Get the production workflow behind 100M+ streams so you can start earning a real income from music, without a label, manager, or expensive studio.
         </h1>
 
