@@ -1006,12 +1006,12 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="hero-headline text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] md:tracking-[-0.04em] md:leading-[1.05] md:font-bold mb-6 md:mb-10">
+        <h1 className="hero-headline text-5xl md:text-5xl lg:text-6xl font-black tracking-[-0.05em] leading-[1.1] md:tracking-[-0.04em] md:leading-[1.05] md:font-bold mb-6 md:mb-10 md:max-w-4xl md:mx-auto">
           Get the production workflow behind 100M+ streams so you can start earning a real income from music, without a label, manager, or expensive studio.
         </h1>
 
         {/* Subheadline */}
-        <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed">
+        <p className="text-zinc-400 text-base md:text-lg max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed">
           <span className="text-white font-semibold">Rob Late</span> built multiple income streams from production sessions, sample packs, brand deals, and sync placements, all from a home studio. Inside The Producer Blueprint, he breaks down the exact creative workflow and business approach that made it possible.
         </p>
 
