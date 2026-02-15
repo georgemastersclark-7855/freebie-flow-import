@@ -1217,13 +1217,6 @@ const TheProducerBlueprint005Workflow = () => {
 
       {/* ================= SECTION 2: PAIN AGITATION (CINEMATIC VIDEO + SCRIBBLES) ================= */}
       <section className="py-16 md:py-32 px-6 bg-[#050505] relative z-20 md:-mt-32">
-        {/* Ambient Glow Behind Problem Section */}
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(180,230,0,0.15) 0%, rgba(211,255,2,0.08) 40%, transparent 70%)',
-          }}
-        />
         <div className="max-w-7xl mx-auto">
           
           {/* 1. HEADLINE AREA — CHANGED */}
@@ -1248,7 +1241,7 @@ const TheProducerBlueprint005Workflow = () => {
             <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
               
               {/* Item 1: Wrong Mentors */}
-              <div className="space-y-1.5 relative group">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
                 <h4 className="text-white font-medium text-base md:text-lg relative inline-block">
                   Wrong Mentors
                   {/* Scribble: Underline */}
@@ -1262,7 +1255,7 @@ const TheProducerBlueprint005Workflow = () => {
               </div>
               
               {/* Item 2: Fragmented Knowledge */}
-              <div className="space-y-1.5 relative">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 <h4 className="text-white font-medium text-base md:text-lg">Fragmented Knowledge</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You're watching a mixing tip from one YouTuber and an arrangement hack from another. Nothing connects.
@@ -1307,7 +1300,7 @@ const TheProducerBlueprint005Workflow = () => {
             <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-left order-3 relative z-10">
               
               {/* Item 3: Frankenstein Workflow */}
-              <div className="space-y-1.5 relative">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 <div className="relative inline-block">
                   <h4 className="text-white font-medium text-base md:text-lg relative z-10">Frankenstein Workflow</h4>
                   {/* Scribble: Circle around title */}
@@ -1321,7 +1314,7 @@ const TheProducerBlueprint005Workflow = () => {
               </div>
               
               {/* Item 4: The Highlight Reel */}
-              <div className="space-y-1.5 relative">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 {/* Scribble: Arrow pointing left to video */}
                 <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
                    <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform rotate-12 scale-x-[-1]">
