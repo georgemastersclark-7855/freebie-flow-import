@@ -1,34 +1,40 @@
 
 
-## Update Problem and Solution Headlines Across All Variants
+## Diagnose and Fix Invisible Problem Section Glow
 
-Apply the same bolder headline styling (already done on 005Workflow) to the Problem and Solution section headlines on all four remaining variants.
+### The Problem
 
-### The Change
+The glow div exists at lines 1220-1226 but is invisible because:
+- It uses **dark red** colors (`rgba(180,30,30,...)` and `rgba(120,20,20,...)`) on a near-black `#050505` background
+- The opacity values are extremely low: **0.08** and **0.04** (4-8% opacity)
+- For comparison, the hero VSL glow uses **bright lime** colors at **0.15** and **0.08** opacity -- nearly double the strength with a much more visible color
 
-**From:** `text-4xl md:text-6xl font-semibold tracking-tight`
-**To:** `text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold`
+### The Fix
 
-### Files and Lines
+Replace the invisible red glow with the same lime glow used behind the hero VSL (line 1053-1055).
 
-**1. TheProducerBlueprint001.tsx**
-- Problem headline (line 1245)
-- Solution headline (line 1396)
+**File:** `src/pages/TheProducerBlueprint005Workflow.tsx`
 
-**2. TheProducerBlueprint002Spotify.tsx**
-- Problem headline (line 1219)
-- Solution headline (line 1370)
+**Lines 1220-1226 -- from:**
+```tsx
+{/* Deep Red Ambient Glow Behind Tutorial Hell */}
+<div 
+  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none z-0"
+  style={{
+    background: 'radial-gradient(ellipse at center, rgba(180,30,30,0.08) 0%, rgba(120,20,20,0.04) 40%, transparent 70%)',
+  }}
+/>
+```
 
-**3. TheProducerBlueprint003Career.tsx**
-- Problem headline (line 1242)
-- Solution headline (line 1393)
+**To:**
+```tsx
+{/* Ambient Glow Behind Problem Section */}
+<div 
+  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none z-0"
+  style={{
+    background: 'radial-gradient(ellipse at center, rgba(180,230,0,0.15) 0%, rgba(211,255,2,0.08) 40%, transparent 70%)',
+  }}
+/>
+```
 
-**4. TheProducerBlueprint004Gear.tsx**
-- Problem headline (line 1239) -- keeps the existing `problem-headline-gear` class for mobile override
-- Solution headline (line 1390)
-
-### What stays the same
-- All headline content, line breaks, italic serif spans, and drop-shadow attributes
-- The `problem-headline-gear` mobile override class on variant 004
-- Every other section on every page
-
+This uses the exact same gradient values as the hero VSL glow, so the two sections will feel visually connected. No other changes needed.
