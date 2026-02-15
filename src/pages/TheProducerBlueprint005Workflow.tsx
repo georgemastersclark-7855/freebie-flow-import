@@ -1399,6 +1399,8 @@ const TheProducerBlueprint005Workflow = () => {
                 { id: "04", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>, title: "...how to design professional sounds with intent", desc: "Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders." }
               ].map((card) => (
                 <div key={card.id} className="bg-[#0A0A0A] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500">
+                  {/* Desaturated ambient glow behind card */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(200,200,200,0.02) 40%, transparent 70%)' }} />
                   <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">{card.id}</div>
                   <div className="relative z-10">
                     <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
