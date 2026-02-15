@@ -1,40 +1,45 @@
 
-## Fix: Visible Ambient Glow Behind Solution Feature Cards
 
-### Why It's Not Working
+## Fix: Visible Ambient Glow Behind Story Cards
 
-The current glow div is placed **inside** each individual card, which has `overflow-hidden` set. This clips the glow to the card boundaries. Combined with only 4% white opacity against a near-black background, it's completely invisible.
+### Why It's Still Invisible
+
+Two problems:
+
+1. **Clipping:** The parent `<section>` (line 1458) has `overflow-x-hidden`, so the glow's `w-[140%]` gets cut off horizontally.
+2. **Too faint:** 6% white opacity on a black background is nearly invisible -- same issue as the previous solution cards fix.
 
 ### The Fix
 
-1. **Remove** the per-card glow div (lines 1402-1403) from inside the `.map()` loop
-2. **Add a single large glow** positioned behind the entire 2x2 card grid, outside the cards, with higher opacity
-
-### Technical Details
+Change the glow to stay within bounds (`w-full h-full` instead of 140%) and increase opacity so it's actually visible. Keep it desaturated (white-based, not green).
 
 **File:** `src/pages/TheProducerBlueprint005Workflow.tsx`
 
-**Step 1 -- Delete lines 1402-1403** (the inner-card glow):
+**Lines 1494-1499 -- replace the glow div:**
+
+From:
 ```tsx
-{/* Desaturated ambient glow behind card */}
-<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(200,200,200,0.02) 40%, transparent 70%)' }} />
+<div 
+  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none z-0"
+  style={{
+    background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 40%, transparent 70%)'
+  }}
+/>
 ```
 
-**Step 2 -- Add a glow behind the grid container.** Find the grid wrapper `<div>` (line 1394, the `grid grid-cols-1 md:grid-cols-2 gap-4` div) and wrap it in a `relative` container with an ambient glow behind it:
-
+To:
 ```tsx
-<div className="relative">
-  {/* Desaturated ambient glow behind card grid */}
-  <div 
-    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none z-0"
-    style={{
-      background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 40%, transparent 70%)'
-    }}
-  />
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-    {/* ...existing card map... */}
-  </div>
-</div>
+<div 
+  className="absolute inset-0 pointer-events-none z-0"
+  style={{
+    background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.10) 0%, rgba(200,200,200,0.05) 45%, transparent 75%)'
+  }}
+/>
 ```
 
-This places a single, larger glow that spans the full card grid area at 6% opacity (visible but desaturated), and isn't clipped by any `overflow-hidden`.
+Changes:
+- Use `inset-0` instead of oversized width/height so it isn't clipped by the parent's `overflow-x-hidden`
+- Increase opacity from 6%/3% to **10%/5%** so it's actually visible against `bg-black`
+
+Also apply the same fix to the **Solution section** glow (around line 1394) which likely has the same clipping issue.
+
