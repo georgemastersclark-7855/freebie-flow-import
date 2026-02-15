@@ -1244,7 +1244,7 @@ const TheProducerBlueprint001 = () => {
             
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-6 text-white leading-[1.1]">
               Why You're Still Stuck In <br />
-              <span className="font-serif italic text-white">Tutorial Hell.</span>
+              <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Tutorial Hell.</span>
             </h2>
             <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
               You have the taste. You have the plugins. <span className="text-zinc-400">But your hard drive is a graveyard of unfinished ideas.</span>
@@ -1395,7 +1395,7 @@ const TheProducerBlueprint001 = () => {
           <div className="text-center mb-6 md:mb-12 max-w-4xl mx-auto">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
-              Actually Made In A <span className="font-serif italic text-zinc-500">Home Studio.</span>
+              Actually Made In A <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Home Studio.</span>
             </h2>
           </div>
 
