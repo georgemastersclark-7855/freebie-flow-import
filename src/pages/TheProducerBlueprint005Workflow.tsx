@@ -1225,7 +1225,7 @@ const TheProducerBlueprint005Workflow = () => {
               For Producers Who Know Enough But Can't Apply It
             </div>
             
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-6 text-white leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-6 text-white leading-[1.1]">
               Why You're Still Not <br />
               <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Finishing Music.</span>
             </h2>
@@ -1375,7 +1375,7 @@ const TheProducerBlueprint005Workflow = () => {
         {/* 2. CONTENT CONTAINER */}
         <div className="max-w-7xl mx-auto px-6 relative z-20 -mt-12 md:z-10 md:-mt-[350px]">
           <div className="text-center mb-6 md:mb-12 max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
               Actually Made In A <span className="font-serif italic text-zinc-500">Home Studio.</span>
             </h2>
@@ -1650,7 +1650,7 @@ const TheProducerBlueprint005Workflow = () => {
               <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
                 Student Wins
               </span>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-white mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-white mb-4 md:mb-6">
                 Real Results. <span className="font-serif italic font-normal tracking-normal text-zinc-200">Real Producers.</span>
               </h2>
               <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto">
@@ -1789,7 +1789,7 @@ const TheProducerBlueprint005Workflow = () => {
             
             {/* Headline */}
             <div className="text-center mb-10">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.05] text-white mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter leading-[1.05] text-white mb-4">
                 Get Instant Access
               </h2>
               <p className="text-zinc-400">
@@ -1960,7 +1960,7 @@ const TheProducerBlueprint005Workflow = () => {
           <div className="max-w-3xl mx-auto">
             
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-white mb-4">
                 Frequently Asked Questions
               </h2>
               <p className="text-zinc-400">
@@ -2073,7 +2073,7 @@ const TheProducerBlueprint005Workflow = () => {
               
               {/* Left: The Argument */}
               <div className="order-2 md:order-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
                   You have two choices from <span className="font-serif italic font-normal tracking-normal text-zinc-200">here.</span>
                 </h2>
                 
