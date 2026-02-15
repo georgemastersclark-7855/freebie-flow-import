@@ -1241,7 +1241,7 @@ const TheProducerBlueprint005Workflow = () => {
             <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
               
               {/* Item 1: Wrong Mentors */}
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
                 <h4 className="text-white font-medium text-base md:text-lg relative inline-block">
                   Wrong Mentors
                   {/* Scribble: Underline */}
@@ -1255,7 +1255,7 @@ const TheProducerBlueprint005Workflow = () => {
               </div>
               
               {/* Item 2: Fragmented Knowledge */}
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 <h4 className="text-white font-medium text-base md:text-lg">Fragmented Knowledge</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You're watching a mixing tip from one YouTuber and an arrangement hack from another. Nothing connects.
@@ -1300,7 +1300,7 @@ const TheProducerBlueprint005Workflow = () => {
             <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-left order-3 relative z-10">
               
               {/* Item 3: Frankenstein Workflow */}
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 <div className="relative inline-block">
                   <h4 className="text-white font-medium text-base md:text-lg relative z-10">Frankenstein Workflow</h4>
                   {/* Scribble: Circle around title */}
@@ -1314,7 +1314,7 @@ const TheProducerBlueprint005Workflow = () => {
               </div>
               
               {/* Item 4: The Highlight Reel */}
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 {/* Scribble: Arrow pointing left to video */}
                 <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
                    <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform rotate-12 scale-x-[-1]">
@@ -1406,7 +1406,7 @@ const TheProducerBlueprint005Workflow = () => {
                 { id: "03", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>, title: "...session-proven chains used with major artists", desc: "Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists to get that loud, punchy commercial sound without over-complicating it." },
                 { id: "04", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>, title: "...how to design professional sounds with intent", desc: "Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders." }
               ].map((card) => (
-                <div key={card.id} className="bg-[#0A0A0A] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500">
+                <div key={card.id} className="bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black border border-zinc-800 rounded-2xl p-6 relative overflow-hidden group hover:border-zinc-600 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:scale-[1.01] transition-all duration-500">
                   <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">{card.id}</div>
                   <div className="relative z-10">
                     <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
