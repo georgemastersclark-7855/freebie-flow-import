@@ -1232,7 +1232,7 @@ const TheProducerBlueprint005Workflow = () => {
               For Producers Who Know Enough But Can't Apply It
             </div>
             
-            <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 text-white leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-6 text-white leading-[1.1]">
               Why You're Still Not <br />
               <span className="font-serif italic text-white">Finishing Music.</span>
             </h2>
@@ -1382,7 +1382,7 @@ const TheProducerBlueprint005Workflow = () => {
         {/* 2. CONTENT CONTAINER */}
         <div className="max-w-7xl mx-auto px-6 relative z-20 -mt-12 md:z-10 md:-mt-[350px]">
           <div className="text-center mb-6 md:mb-12 max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-semibold tracking-tight mb-0 text-white drop-shadow-2xl leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
               Actually Made In A <span className="font-serif italic text-zinc-500">Home Studio.</span>
             </h2>
