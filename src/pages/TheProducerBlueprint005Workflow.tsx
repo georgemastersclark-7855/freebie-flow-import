@@ -1238,7 +1238,7 @@ const TheProducerBlueprint005Workflow = () => {
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-2 md:order-1 relative z-10">
               
               {/* Item 1: Wrong Mentors */}
               <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
@@ -1297,7 +1297,7 @@ const TheProducerBlueprint005Workflow = () => {
             </div>
 
             {/* RIGHT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-left order-3 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-3 relative z-10">
               
               {/* Item 3: Frankenstein Workflow */}
               <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
