@@ -1490,7 +1490,15 @@ const TheProducerBlueprint005Workflow = () => {
           </div>
 
           {/* Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative">
+          <div className="relative">
+            {/* Desaturated ambient glow behind story cards */}
+            <div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none z-0"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 40%, transparent 70%)'
+              }}
+            />
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative z-10">
             
             {/* ITEM 1: 2019 - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
@@ -1597,6 +1605,7 @@ const TheProducerBlueprint005Workflow = () => {
               </div>
             </div>
 
+          </div>
           </div>
 
           {/* TIMELINE FOOTER - Quote & Signature */}
