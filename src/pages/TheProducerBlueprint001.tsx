@@ -1188,7 +1188,7 @@ const TheProducerBlueprint001 = () => {
       </main>
 
       {/* ================= MINI SOCIAL PROOF SECTION ================= */}
-      <section id="reviews" className="pt-0 md:pt-32 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10 scroll-mt-20">
+      <section id="reviews" className="pt-0 md:pt-8 pb-0 px-6 bg-[#050505] overflow-hidden relative z-10 scroll-mt-20">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
 
           {/* MASONRY WALL - Cinematic fade on desktop, clean on mobile */}
@@ -1258,7 +1258,7 @@ const TheProducerBlueprint001 = () => {
             <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
               
               {/* Item 1: Wrong Mentors */}
-              <div className="space-y-1.5 relative group">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
                 <h4 className="text-white font-medium text-base md:text-lg relative inline-block">
                   Wrong Mentors
                   {/* Scribble: Underline */}
@@ -1272,7 +1272,7 @@ const TheProducerBlueprint001 = () => {
               </div>
               
               {/* Item 2: Fragmented Knowledge */}
-              <div className="space-y-1.5 relative">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 <h4 className="text-white font-medium text-base md:text-lg">Fragmented Knowledge</h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You're watching a mixing tip from one YouTuber and an arrangement hack from another. Nothing connects.
@@ -1317,7 +1317,7 @@ const TheProducerBlueprint001 = () => {
             <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-left order-3 relative z-10">
               
               {/* Item 3: Frankenstein Workflow */}
-              <div className="space-y-1.5 relative">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 <div className="relative inline-block">
                   <h4 className="text-white font-medium text-base md:text-lg relative z-10">Frankenstein Workflow</h4>
                   {/* Scribble: Circle around title */}
@@ -1331,11 +1331,11 @@ const TheProducerBlueprint001 = () => {
               </div>
               
               {/* Item 4: The Highlight Reel */}
-              <div className="space-y-1.5 relative">
+              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
                 {/* Scribble: Arrow pointing left to video */}
                 <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
                    <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform rotate-12 scale-x-[-1]">
-                     <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+                      <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
                    </svg>
                 </div>
                 
@@ -1406,17 +1406,21 @@ const TheProducerBlueprint001 = () => {
 
           {/* 3. FEATURE CARDS WITH ISOLATED LIGHTING */}
           <div className="relative isolate mb-20">
-            {/* Background Spotlight - Forced to stay behind via z-[-1] and isolate */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_transparent_70%)] z-[-1] pointer-events-none"></div>
+            <div 
+              className="absolute inset-0 pointer-events-none z-0"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.10) 0%, rgba(200,200,200,0.05) 45%, transparent 75%)'
+              }}
+            />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
               {[
                 { id: "01", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>, title: "...how to go from \"Loop Phase\" to finished record", desc: "Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs." },
                 { id: "02", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>, title: "...the \"Bedroom\" mixing standard for label-ready tracks", desc: "You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road." },
                 { id: "03", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>, title: "...session-proven chains used with major artists", desc: "Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists to get that loud, punchy commercial sound without over-complicating it." },
                 { id: "04", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>, title: "...how to design professional sounds with intent", desc: "Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders." }
               ].map((card) => (
-                <div key={card.id} className="bg-[#0A0A0A] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500">
+                <div key={card.id} className="bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black border border-zinc-800 rounded-2xl p-6 relative overflow-hidden group hover:border-zinc-600 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:scale-[1.01] transition-all duration-500">
                   <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">{card.id}</div>
                   <div className="relative z-10">
                     <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1507,7 +1511,14 @@ const TheProducerBlueprint001 = () => {
           </div>
 
           {/* Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative">
+          <div className="relative">
+            <div 
+              className="absolute inset-0 pointer-events-none z-0"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.10) 0%, rgba(200,200,200,0.05) 45%, transparent 75%)'
+              }}
+            />
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative z-10">
             
             {/* ITEM 1: 2019 - Peek left on mobile */}
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
@@ -1614,6 +1625,7 @@ const TheProducerBlueprint001 = () => {
               </div>
             </div>
 
+          </div>
           </div>
 
           {/* TIMELINE FOOTER - Quote & Signature */}
