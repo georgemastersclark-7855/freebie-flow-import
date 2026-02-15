@@ -1227,7 +1227,7 @@ const TheProducerBlueprint005Workflow = () => {
             
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-6 text-white leading-[1.1]">
               Why You're Still Not <br />
-              <span className="bg-gradient-to-r from-[#D3FF02] to-[#a8cc00] bg-clip-text text-transparent">Finishing Music.</span>
+              <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Finishing Music.</span>
             </h2>
             <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
               You have the taste. You have the plugins. <span className="text-zinc-400">But your hard drive is a graveyard of unfinished ideas.</span>
