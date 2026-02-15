@@ -1221,13 +1221,13 @@ const TheProducerBlueprint005Workflow = () => {
           
           {/* 1. HEADLINE AREA — CHANGED */}
           <div className="text-center mb-10 md:mb-16 relative z-10">
-            <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-[#D3FF02] text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center px-3 py-1 rounded-full border border-white/5 bg-white/5 text-zinc-400 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md whitespace-nowrap">
               For Producers Who Know Enough But Can't Apply It
             </div>
             
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-6 text-white leading-[1.1]">
               Why You're Still Not <br />
-              <span className="font-serif italic text-white">Finishing Music.</span>
+              <span className="bg-gradient-to-r from-[#D3FF02] to-[#a8cc00] bg-clip-text text-transparent">Finishing Music.</span>
             </h2>
             <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
               You have the taste. You have the plugins. <span className="text-zinc-400">But your hard drive is a graveyard of unfinished ideas.</span>
