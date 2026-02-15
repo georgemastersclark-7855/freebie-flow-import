@@ -1394,9 +1394,9 @@ const TheProducerBlueprint005Workflow = () => {
             <div className="relative">
               {/* Desaturated ambient glow behind card grid */}
               <div 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none z-0"
+                className="absolute inset-0 pointer-events-none z-0"
                 style={{
-                  background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 40%, transparent 70%)'
+                  background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.10) 0%, rgba(200,200,200,0.05) 45%, transparent 75%)'
                 }}
               />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
@@ -1493,9 +1493,9 @@ const TheProducerBlueprint005Workflow = () => {
           <div className="relative">
             {/* Desaturated ambient glow behind story cards */}
             <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none z-0"
+              className="absolute inset-0 pointer-events-none z-0"
               style={{
-                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 40%, transparent 70%)'
+                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.10) 0%, rgba(200,200,200,0.05) 45%, transparent 75%)'
               }}
             />
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative z-10">
