@@ -980,7 +980,7 @@ const TheProducerBlueprint002Spotify = () => {
         </div>
 
         {/* Headline - UPDATED FOR SPOTIFY ANGLE */}
-        <h1 className="hero-headline text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] md:tracking-[-0.04em] md:leading-[1.05] md:font-bold mb-6 md:mb-10">
+        <h1 className="hero-headline text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] md:leading-[1.05] md:font-bold mb-6 md:mb-10">
           Stop Collecting Loops.
           <br />
           Start Building A Catalog.
@@ -1216,7 +1216,7 @@ const TheProducerBlueprint002Spotify = () => {
               For Producers With Hard Drives Full Of Ideas
             </div>
             
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-6 text-white leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-6 text-white leading-[1.1]">
               Spotify Doesn't Pay For Loops.
             </h2>
             <p className="text-zinc-500 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
@@ -1228,7 +1228,7 @@ const TheProducerBlueprint002Spotify = () => {
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-2 md:order-1 relative z-10">
               
               {/* Item 1: The Loop Graveyard */}
               <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
@@ -1287,7 +1287,7 @@ const TheProducerBlueprint002Spotify = () => {
             </div>
 
             {/* RIGHT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-left order-3 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-3 relative z-10">
               
               {/* Item 3: Hobbyist Output */}
               <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
@@ -1367,7 +1367,7 @@ const TheProducerBlueprint002Spotify = () => {
         {/* 2. CONTENT CONTAINER - UPDATED HEADLINE */}
         <div className="max-w-7xl mx-auto px-6 relative z-20 -mt-12 md:z-10 md:-mt-[350px]">
           <div className="text-center mb-6 md:mb-12 max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
               The Workflow Behind 100 Million Streams.
             </h2>
           </div>
@@ -1643,7 +1643,7 @@ const TheProducerBlueprint002Spotify = () => {
               <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
                 Student Wins
               </span>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-white mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-white mb-4 md:mb-6">
                 Real Results. <span className="font-serif italic font-normal tracking-normal text-zinc-200">Real Producers.</span>
               </h2>
               <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto">
@@ -1780,7 +1780,7 @@ const TheProducerBlueprint002Spotify = () => {
             
             {/* Headline */}
             <div className="text-center mb-10">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.05] text-white mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter leading-[1.05] text-white mb-4">
                 Get Instant Access
               </h2>
               <p className="text-zinc-400">
@@ -1935,7 +1935,7 @@ const TheProducerBlueprint002Spotify = () => {
           <div className="max-w-3xl mx-auto">
             
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tighter">
                 Frequently Asked Questions
               </h2>
               <p className="text-zinc-400">
@@ -2048,7 +2048,7 @@ const TheProducerBlueprint002Spotify = () => {
               
               {/* Left: The Argument */}
               <div className="order-2 md:order-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
                   You have two choices from <span className="font-serif italic font-normal tracking-normal text-zinc-200">here.</span>
                 </h2>
                 

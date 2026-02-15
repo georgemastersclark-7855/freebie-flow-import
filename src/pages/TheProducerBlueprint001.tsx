@@ -1006,7 +1006,7 @@ const TheProducerBlueprint001 = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="hero-headline text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] md:tracking-[-0.04em] md:leading-[1.05] md:font-bold mb-6 md:mb-10">
+        <h1 className="hero-headline text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] md:leading-[1.05] md:font-bold mb-6 md:mb-10">
           The Complete Production Workflow.
           <br />
           <span className="font-serif italic font-normal tracking-normal text-zinc-200">Start to Finish.</span>
@@ -1242,7 +1242,7 @@ const TheProducerBlueprint001 = () => {
               For Self-Taught Producers
             </div>
             
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-6 text-white leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-6 text-white leading-[1.1]">
               Why You're Still Stuck In <br />
               <span className="font-serif italic text-white">Tutorial Hell.</span>
             </h2>
@@ -1255,7 +1255,7 @@ const TheProducerBlueprint001 = () => {
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-right order-2 md:order-1 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-2 md:order-1 relative z-10">
               
               {/* Item 1: Wrong Mentors */}
               <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
@@ -1314,7 +1314,7 @@ const TheProducerBlueprint001 = () => {
             </div>
 
             {/* RIGHT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center md:text-left order-3 relative z-10">
+            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-3 relative z-10">
               
               {/* Item 3: Frankenstein Workflow */}
               <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
@@ -1393,7 +1393,7 @@ const TheProducerBlueprint001 = () => {
         {/* 2. CONTENT CONTAINER */}
         <div className="max-w-7xl mx-auto px-6 relative z-20 -mt-12 md:z-10 md:-mt-[350px]">
           <div className="text-center mb-6 md:mb-12 max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:tracking-[-0.04em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
               Actually Made In A <span className="font-serif italic text-zinc-500">Home Studio.</span>
             </h2>
@@ -1415,10 +1415,10 @@ const TheProducerBlueprint001 = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
               {[
-                { id: "01", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>, title: "...how to go from \"Loop Phase\" to finished record", desc: "Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs." },
-                { id: "02", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>, title: "...the \"Bedroom\" mixing standard for label-ready tracks", desc: "You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road." },
-                { id: "03", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>, title: "...session-proven chains used with major artists", desc: "Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists to get that loud, punchy commercial sound without over-complicating it." },
-                { id: "04", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>, title: "...how to design professional sounds with intent", desc: "Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders." }
+                { id: "01", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>, title: "How to go from \"Loop Phase\" to finished record", desc: "Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs." },
+                { id: "02", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>, title: "The \"Bedroom\" mixing standard for label-ready tracks", desc: "You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road." },
+                { id: "03", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>, title: "Session-proven chains used with major artists", desc: "Your mixes sound thin because your processing is wrong. Copy the exact vocal and drum chains Rob uses in sessions with major artists to get that loud, punchy commercial sound without over-complicating it." },
+                { id: "04", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>, title: "How to design professional sounds with intent", desc: "Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders." }
               ].map((card) => (
                 <div key={card.id} className="bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black border border-zinc-800 rounded-2xl p-6 relative overflow-hidden group hover:border-zinc-600 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:scale-[1.01] transition-all duration-500">
                   <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">{card.id}</div>
@@ -1670,7 +1670,7 @@ const TheProducerBlueprint001 = () => {
               <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
                 Student Wins
               </span>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-white mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-white mb-4 md:mb-6">
                 Real Results. <span className="font-serif italic font-normal tracking-normal text-zinc-200">Real Producers.</span>
               </h2>
               <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto">
@@ -1809,7 +1809,7 @@ const TheProducerBlueprint001 = () => {
             
             {/* Headline */}
             <div className="text-center mb-10">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-[-0.04em] leading-[1.05] text-white mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter leading-[1.05] text-white mb-4">
                 Get Instant Access
               </h2>
               <p className="text-zinc-400">
@@ -1980,7 +1980,7 @@ const TheProducerBlueprint001 = () => {
           <div className="max-w-3xl mx-auto">
             
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tighter">
                 Frequently Asked Questions
               </h2>
               <p className="text-zinc-400">
@@ -2093,7 +2093,7 @@ const TheProducerBlueprint001 = () => {
               
               {/* Left: The Argument */}
               <div className="order-2 md:order-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
                   You have two choices from <span className="font-serif italic font-normal tracking-normal text-zinc-200">here.</span>
                 </h2>
                 
