@@ -1391,7 +1391,15 @@ const TheProducerBlueprint005Workflow = () => {
             {/* Background Spotlight - Forced to stay behind via z-[-1] and isolate */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_transparent_70%)] z-[-1] pointer-events-none"></div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="relative">
+              {/* Desaturated ambient glow behind card grid */}
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] pointer-events-none z-0"
+                style={{
+                  background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 40%, transparent 70%)'
+                }}
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
               {[
                 { id: "01", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>, title: "...how to go from \"Loop Phase\" to finished record", desc: "Stop hoarding unfinished ideas. Watch Rob's personal workflow for taking a track from a 4-bar loop to a complete arrangement. No rigid frameworks - just the fluid process of actually finishing songs." },
                 { id: "02", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>, title: "...the \"Bedroom\" mixing standard for label-ready tracks", desc: "You don't always need a pro engineer. Learn the functional mixing and mastering process Rob uses to get tracks ready for label demos, live sets, or streaming releases - all from a laptop on the road." },
@@ -1399,8 +1407,6 @@ const TheProducerBlueprint005Workflow = () => {
                 { id: "04", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>, title: "...how to design professional sounds with intent", desc: "Stop relying on happy accidents. Learn the fundamentals of sound design so you can build the exact 808s, leads, and pads you hear in your head, rather than endlessly hunting through Splice folders." }
               ].map((card) => (
                 <div key={card.id} className="bg-[#0A0A0A] border border-white/15 rounded-2xl p-6 relative overflow-hidden group hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:scale-[1.01] transition-all duration-500">
-                  {/* Desaturated ambient glow behind card */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(200,200,200,0.02) 40%, transparent 70%)' }} />
                   <div className="absolute top-0 right-0 p-4 font-black text-6xl text-white/[0.03] select-none pointer-events-none">{card.id}</div>
                   <div className="relative z-10">
                     <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center mb-6 text-zinc-400">
@@ -1411,6 +1417,7 @@ const TheProducerBlueprint005Workflow = () => {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           </div>
 
