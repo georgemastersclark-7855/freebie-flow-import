@@ -1505,13 +1505,17 @@ const TheProducerBlueprint005Workflow = () => {
           <div className="max-w-xl mx-auto px-6">
             
             {/* Headline */}
-            <div className="text-center mb-10">
-              <p className="text-zinc-400 text-xs font-bold uppercase tracking-widest mb-3">COMPLETE YOUR ORDER</p>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter leading-[1.05] text-white mb-4">
-                Join The Producer Blueprint
+            <div className="text-center mb-10 md:mb-16">
+              <div className="inline-block mb-4">
+                <span className="py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-xs font-bold uppercase tracking-widest">
+                  COMPLETE YOUR ORDER
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter">
+                Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint<span className="text-white">™</span></span>
               </h2>
-              <p className="text-zinc-400">
-                Get immediate access to the complete program, templates, and 2 FREE bonuses.
+              <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto">
+                Get immediate access to the complete program, templates, and <span className="text-white font-bold">2 FREE bonuses</span>.
               </p>
             </div>
 
@@ -1541,35 +1545,9 @@ const TheProducerBlueprint005Workflow = () => {
                     <div className="text-right">
                       <span className="text-zinc-500 line-through text-sm block">$941</span>
                       <span className="text-white font-bold text-xl">$297</span>
+                      <p className="text-zinc-500 text-[10px] mt-0.5">12 months full access. One-time payment.</p>
                     </div>
                   </div>
-                </div>
-
-                {/* Bonuses */}
-                <div className="space-y-2 py-4 border-y border-zinc-800">
-                  <div className="flex justify-between items-center text-sm">
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-zinc-300">BONUS: Ableton Project Files & Templates</span>
-                    </div>
-                    <span className="text-green-500 font-medium">Free</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-500" />
-                      <span className="text-zinc-300">BONUS: Rob's IG/TikTok Breakdown Vault</span>
-                    </div>
-                    <span className="text-green-500 font-medium">Free</span>
-                  </div>
-                </div>
-
-                {/* Value Anchoring */}
-                <div className="text-center py-4">
-                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">TOTAL VALUE</p>
-                  <p className="text-zinc-400 line-through text-lg mb-2">$941</p>
-                  <p className="text-white font-medium text-lg">12 Months Full Access:</p>
-                  <p className="text-[#D3FF02] text-3xl font-black tracking-tight">$297</p>
-                  <p className="text-zinc-500 text-xs mt-1">One-time payment. No auto-renew.</p>
                 </div>
 
                 {/* Form Fields */}
