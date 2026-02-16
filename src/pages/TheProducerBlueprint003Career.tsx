@@ -1003,8 +1003,8 @@ const TheProducerBlueprint003Career = () => {
                   className="w-full h-full object-cover opacity-90 scale-110"
                   style={{
                     objectPosition: '60% center', 
-                    maskImage: 'radial-gradient(circle, black 35%, transparent 65%)',
-                    WebkitMaskImage: 'radial-gradient(circle, black 35%, transparent 65%)'
+                    maskImage: 'radial-gradient(circle, black 50%, transparent 75%)',
+                    WebkitMaskImage: 'radial-gradient(circle, black 50%, transparent 75%)'
                   }}
                 />
               </div>
