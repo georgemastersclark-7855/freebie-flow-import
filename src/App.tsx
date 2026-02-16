@@ -39,12 +39,6 @@ const App = () => (
           <Route path="/make-money-with-music" element={<TheProducerBlueprint003Career />} />
           <Route path="/produce-without-expensive-gear" element={<TheProducerBlueprint004Gear />} />
           <Route path="/finish-more-tracks" element={<TheProducerBlueprint005Workflow />} />
-          {/* Legacy redirects */}
-          <Route path="/theproducerblueprint001" element={<Redirect to="/producer-blueprint" />} />
-          <Route path="/theproducerblueprint002spotify" element={<Redirect to="/build-your-music-catalog" />} />
-          <Route path="/theproducerblueprint003career" element={<Redirect to="/make-money-with-music" />} />
-          <Route path="/theproducerblueprint004gear" element={<Redirect to="/produce-without-expensive-gear" />} />
-          <Route path="/theproducerblueprint005workflow" element={<Redirect to="/finish-more-tracks" />} />
           <Route path="/claudetest" element={<ClaudeTest />} />
           <Route path="/produceraccellerator" element={<ProducerAccelerator />} />
           {/* Legal Pages */}
