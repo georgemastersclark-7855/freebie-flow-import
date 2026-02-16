@@ -1371,7 +1371,7 @@ const TheProducerBlueprint001 = () => {
 
 
         {/* ================= WALL OF WINS SECTION ================= */}
-        <section id="testimonials" className="relative py-12 md:py-24 overflow-hidden scroll-mt-20">
+        <section id="testimonials" className="relative py-12 md:py-24 overflow-x-clip scroll-mt-20">
           
           {/* Background Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none">
