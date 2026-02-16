@@ -4,14 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import JulyGiveaway from "./pages/JulyGiveaway";
-import AlphaDrums3VipList from "./pages/AlphaDrums3VipList";
-import TestKlaviyo from "./pages/TestKlaviyo";
-import SqueezePage from "./pages/SqueezePage";
-import FreePackDownload from "./pages/FreePackDownload";
-import UploadEmailAssets from "./pages/UploadEmailAssets";
 import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
 import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
 import ClaudeTest from "./pages/ClaudeTest";
@@ -39,13 +32,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Redirect to="https://roblate.com" />} />
-          <Route path="/drumsthatslapfreedownload" element={<Index />} />
-          <Route path="/julygiveaway" element={<JulyGiveaway />} />
-          <Route path="/alphadrums3viplist" element={<AlphaDrums3VipList />} />
-          <Route path="/test-klaviyo" element={<TestKlaviyo />} />
-          <Route path="/squeeze" element={<SqueezePage />} />
-          <Route path="/freepack" element={<FreePackDownload />} />
-          <Route path="/upload-email-assets" element={<UploadEmailAssets />} />
+          
           {/* Canonical Blueprint routes */}
           <Route path="/producer-blueprint" element={<TheProducerBlueprint001 />} />
           <Route path="/build-your-music-catalog" element={<TheProducerBlueprint002Spotify />} />
@@ -60,8 +47,6 @@ const App = () => (
           <Route path="/theproducerblueprint005workflow" element={<Redirect to="/finish-more-tracks" />} />
           <Route path="/claudetest" element={<ClaudeTest />} />
           <Route path="/produceraccellerator" element={<ProducerAccelerator />} />
-          <Route path="/HowToResampleLikeaPro" element={<Index />} />
-          <Route path="/30daysofproducersauce" element={<Index />} />
           {/* Legal Pages */}
           <Route path="/legal/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/legal/terms-of-service" element={<TermsOfService />} />
