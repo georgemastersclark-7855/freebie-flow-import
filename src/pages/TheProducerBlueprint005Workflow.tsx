@@ -68,6 +68,7 @@ import avatarProducer1 from "@/assets/avatars/avatar-producer-1.png";
 import avatarProducer2 from "@/assets/avatars/avatar-producer-2.png";
 import avatarProducer3 from "@/assets/avatars/avatar-producer-3.png";
 import avatarKosana from "@/assets/avatars/avatar-kosana.jpg";
+import avatarLorenzo from "@/assets/avatars/avatar-lorenzo.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -991,8 +992,8 @@ const TheProducerBlueprint005Workflow = () => {
               <AvatarFallback>P2</AvatarFallback>
             </Avatar>
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
-              <AvatarImage src={avatarProducer3} className="object-cover" />
-              <AvatarFallback>P3</AvatarFallback>
+              <AvatarImage src={avatarLorenzo} className="object-cover" />
+              <AvatarFallback>L</AvatarFallback>
             </Avatar>
           </div>
           <div className="text-left">
