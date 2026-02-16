@@ -1054,6 +1054,12 @@ const TheProducerBlueprint005Workflow = () => {
             {/* Video Container */}
             <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
 
+              <div className="absolute top-3 left-3 z-30 pointer-events-none md:hidden">
+                <div className="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white text-[11px] font-bold tracking-tight">
+                  Watch: Inside The Producer Blueprint
+                </div>
+              </div>
+
               {/* Vidalytics Embed */}
               <div
                 id="vidalytics_embed_VyGJ0Ft3INh06SLE"
