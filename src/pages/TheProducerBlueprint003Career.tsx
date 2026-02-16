@@ -352,17 +352,16 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
         
         {/* HEADER */}
         <div className="text-center mb-10 md:mb-20 max-w-3xl mx-auto">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 text-xs font-bold uppercase tracking-wide mb-4">
-            What's Inside The Program
+          <div className="inline-block mb-4">
+            <span className="py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-xs font-bold uppercase tracking-widest">
+              HERE'S HOW TO FIX IT
+            </span>
           </div>
           <h2 className="text-3xl md:text-6xl font-bold tracking-tighter text-white mb-4 md:mb-6">
-            8 Modules. 80+ Lessons. <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-500">
-              The Producer Blueprint.
-            </span>
+            What's Inside The Blueprint.
           </h2>
-          <p className="text-base md:text-xl text-zinc-400 font-medium tracking-tight">
-            The complete step-by-step workflow to go from <span className="text-white">"Idea"</span> to <span className="text-white">"Release Ready Song."</span>
+          <p className="text-base md:text-lg text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+            Everything Rob uses to write, produce, mix, and master release-ready tracks from a home studio, and turn that skill into real income. The same workflow behind his sessions with major artists.
           </p>
         </div>
 
