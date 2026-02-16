@@ -1408,8 +1408,8 @@ const TheProducerBlueprint003Career = () => {
               />
               <TestimonialCard
                 id="david"
-                name="David R."
-                handle="@david.prod"
+                name="Chris Georgiou"
+                handle="@tokotamusic"
                 title="Label-Signed Producer"
                 media={test1Testimonial}
                 isVideo={true}
