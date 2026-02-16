@@ -1552,13 +1552,19 @@ const TheProducerBlueprint005Workflow = () => {
 
                 {/* Bonus Line Items */}
                 <div className="space-y-2 border-t border-zinc-800 pt-4">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#D3FF02] shrink-0" />
-                    <span className="text-zinc-300 text-sm">BONUS: Ableton Project Files & Templates — <span className="text-zinc-400">Free</span></span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-[#D3FF02] shrink-0" />
+                      <span className="text-zinc-300 text-sm">BONUS: Ableton Project Files & Templates</span>
+                    </div>
+                    <span className="text-green-400 text-xs font-bold uppercase tracking-wider bg-green-400/10 px-2 py-0.5 rounded">Free</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#D3FF02] shrink-0" />
-                    <span className="text-zinc-300 text-sm">BONUS: Rob's IG/TikTok Breakdown Vault — <span className="text-zinc-400">Free</span></span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-[#D3FF02] shrink-0" />
+                      <span className="text-zinc-300 text-sm">BONUS: Rob's IG/TikTok Breakdown Vault</span>
+                    </div>
+                    <span className="text-green-400 text-xs font-bold uppercase tracking-wider bg-green-400/10 px-2 py-0.5 rounded">Free</span>
                   </div>
                 </div>
 
