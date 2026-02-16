@@ -1567,6 +1567,13 @@ const TheProducerBlueprint003Career = () => {
               </div>
             </div>
 
+            {/* BRIDGE COPY */}
+            <div className="text-center py-16 md:py-20 max-w-[700px] mx-auto">
+              <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
+                You've seen the difference between producers who sound professional and those who don't. It's not the gear. It's knowing how to get the most out of what you already have. The Producer Blueprint gives you the complete production workflow to do exactly that.
+              </p>
+            </div>
+
             {/* GIF visual anchor */}
             <div className="flex justify-center py-12 md:py-16">
               <div className="relative group max-w-md w-full">
@@ -1577,13 +1584,6 @@ const TheProducerBlueprint003Career = () => {
                   className="relative z-10 w-full rounded-2xl border border-white/10 drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
                 />
               </div>
-            </div>
-
-            {/* BRIDGE COPY */}
-            <div className="text-center py-16 md:py-20 max-w-[700px] mx-auto">
-              <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
-                You've seen what separates hobbyist producers from working ones. It's not talent or gear. It's having a complete production workflow that gets you to a professional standard, and knowing what to do with that skill once you have it. The Producer Blueprint gives you both.
-              </p>
             </div>
           </div>
         </section>
