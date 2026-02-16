@@ -925,7 +925,7 @@ const TheProducerBlueprint002Spotify = () => {
           </div>
 
           {/* 2. CINEMATIC GRID LAYOUT - UPDATED PAIN POINTS */}
-          <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
+          <div className="relative flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-2 md:order-1 relative z-10">
