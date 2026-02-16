@@ -46,13 +46,20 @@ const App = () => (
           <Route path="/squeeze" element={<SqueezePage />} />
           <Route path="/freepack" element={<FreePackDownload />} />
           <Route path="/upload-email-assets" element={<UploadEmailAssets />} />
-          <Route path="/theproducerblueprint001" element={<TheProducerBlueprint001 />} />
-          <Route path="/theproducerblueprint002spotify" element={<TheProducerBlueprint002Spotify />} />
+          {/* Canonical Blueprint routes */}
+          <Route path="/producer-blueprint" element={<TheProducerBlueprint001 />} />
+          <Route path="/build-your-music-catalog" element={<TheProducerBlueprint002Spotify />} />
+          <Route path="/make-money-with-music" element={<TheProducerBlueprint003Career />} />
+          <Route path="/produce-without-expensive-gear" element={<TheProducerBlueprint004Gear />} />
+          <Route path="/finish-more-tracks" element={<TheProducerBlueprint005Workflow />} />
+          {/* Legacy redirects */}
+          <Route path="/theproducerblueprint001" element={<Redirect to="/producer-blueprint" />} />
+          <Route path="/theproducerblueprint002spotify" element={<Redirect to="/build-your-music-catalog" />} />
+          <Route path="/theproducerblueprint003career" element={<Redirect to="/make-money-with-music" />} />
+          <Route path="/theproducerblueprint004gear" element={<Redirect to="/produce-without-expensive-gear" />} />
+          <Route path="/theproducerblueprint005workflow" element={<Redirect to="/finish-more-tracks" />} />
           <Route path="/claudetest" element={<ClaudeTest />} />
           <Route path="/produceraccellerator" element={<ProducerAccelerator />} />
-          <Route path="/theproducerblueprint003career" element={<TheProducerBlueprint003Career />} />
-          <Route path="/theproducerblueprint004gear" element={<TheProducerBlueprint004Gear />} />
-          <Route path="/theproducerblueprint005workflow" element={<TheProducerBlueprint005Workflow />} />
           <Route path="/HowToResampleLikeaPro" element={<Index />} />
           <Route path="/30daysofproducersauce" element={<Index />} />
           {/* Legal Pages */}
