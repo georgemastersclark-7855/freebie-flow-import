@@ -25,7 +25,7 @@ import drewAdieuTestimonial from "@/assets/testimonials/drew-adieu-testimonial.j
 import headroomRecordsTestimonial from "@/assets/testimonials/headroom-records-testimonial.jpg";
 import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtube-testimonial.jpg";
 import productStackMockup from "@/assets/product-stack-mockup.png";
-import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
+import usingAbletonGif from "@/assets/using-ableton.gif";
 import solutionVideo from "@/assets/solution-video.mp4";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
 import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
@@ -990,18 +990,15 @@ const TheProducerBlueprint005Workflow = () => {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#D3FF02]/5 blur-[80px] rounded-full pointer-events-none"></div>
               
               <div className="relative w-full max-w-md aspect-square overflow-visible flex items-center justify-center">
-                <video 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline
+                <img 
+                  src={usingAbletonGif}
+                  alt="Using Ableton"
                   className="w-full h-full object-cover opacity-90 scale-110"
                   style={{
                     objectPosition: '60% center', 
                     maskImage: 'radial-gradient(circle, black 35%, transparent 65%)',
                     WebkitMaskImage: 'radial-gradient(circle, black 35%, transparent 65%)'
                   }}
-                  src={tutorialHellVideo}
                 />
               </div>
             </div>
