@@ -1091,7 +1091,7 @@ const TheProducerBlueprint004Gear = () => {
           </div>
 
           {/* The Bridge Subheadline */}
-          <p className="text-base md:text-lg text-zinc-500 font-medium text-center mt-8 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-zinc-400 font-medium text-center mt-8 mb-10 max-w-2xl mx-auto leading-relaxed">
             Everything Rob uses to <span className="text-zinc-300">produce, mix, and master</span> release-ready tracks from a <span className="text-zinc-300">home studio</span>, and turn that skill into real income. The same workflow behind his sessions with <span className="text-zinc-300">major artists</span>.
           </p>
 
