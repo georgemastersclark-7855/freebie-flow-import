@@ -1,27 +1,29 @@
 
-## Move Rob's Credits Ticker Below His Signature
 
-Currently the credits ticker (album art carousel) sits near the top of the page, right after the mini social proof section. We'll relocate it to appear directly after Rob's signature at the end of his story section.
+## Remove Credits Ticker from All Landing Page Variants
 
-### What changes
+Remove the "Infinite Accreditations Ticker" section and its unused album art imports from all 4 remaining variants.
 
-**File:** `src/pages/TheProducerBlueprint005Workflow.tsx`
+### Files to modify
 
-1. **Cut** the entire credits ticker block (lines 1074-1178) from its current position above `</main>`
-2. **Paste** it immediately after the signature block (after line 1630), inside the story section but before the `</div></section>` closing tags
-3. Add appropriate top margin (e.g. `mt-24 md:mt-32`) so it flows naturally after the signature
-4. No other files or sections are modified
+**1. TheProducerBlueprint001.tsx**
+- Delete the ticker block (lines 1083-1187, from the comment to the closing `</div>`)
+- Remove album art imports (lines 23, 28-30 and lines 31-32 for januaryAllMyFriends, tiandaNothingButLove, chainsmokersTennisCourt)
 
-### Layout result
+**2. TheProducerBlueprint002Spotify.tsx**
+- Delete the ticker block (lines 1057-1161)
+- Remove the same album art imports (lines 20, 25-29, 30)
 
-```
-Story timeline content
-  -> Quote & "Priceless"
-  -> Signature image
-  -> ROB LATE CREDITS ticker (moved here)
-Curriculum section
-Wall of Wins section
-...
-```
+**3. TheProducerBlueprint003Career.tsx**
+- Delete the ticker block (lines 1080-1184)
+- Remove the same album art imports
 
-Only the 005Workflow variant is affected. The ticker markup stays identical -- just repositioned.
+**4. TheProducerBlueprint004Gear.tsx**
+- Delete the ticker block (lines 1080-1184)
+- Remove the same album art imports
+
+### What stays the same
+- All other sections remain untouched
+- The `</main>` tag stays in place (ticker sits just above it)
+- No structural changes beyond removing the ticker and cleaning up unused imports
+
