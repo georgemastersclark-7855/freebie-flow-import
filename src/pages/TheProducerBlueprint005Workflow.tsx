@@ -979,19 +979,19 @@ const TheProducerBlueprint005Workflow = () => {
         {/* Social Proof Eyebrow */}
         <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-10">
           <div className="flex -space-x-3 relative">
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
               <AvatarImage src={avatarBen} className="object-cover" />
               <AvatarFallback>B</AvatarFallback>
             </Avatar>
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
               <AvatarImage src={avatarLorenzo} className="object-cover" />
               <AvatarFallback>L</AvatarFallback>
             </Avatar>
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
               <AvatarImage src={avatarProducer2} className="object-cover" />
               <AvatarFallback>P2</AvatarFallback>
             </Avatar>
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
               <AvatarImage src={avatarProducer1} className="object-cover" />
               <AvatarFallback>P1</AvatarFallback>
             </Avatar>
