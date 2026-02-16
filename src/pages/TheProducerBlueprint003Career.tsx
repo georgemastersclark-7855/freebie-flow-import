@@ -968,25 +968,25 @@ const TheProducerBlueprint003Career = () => {
             {/* LEFT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-6 md:space-y-12 text-center order-2 md:order-1 relative z-10">
               
-              {/* Item 1: Skills Without Output */}
+              {/* Item 1 */}
               <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
-                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
-                  Skills Without Output
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                  How long have you been producing without earning a penny from it?
                 </h4>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  You can hear when music is good. You know your way around your DAW. But you're still not finishing enough tracks to build any momentum, and you can't get paid for ideas that live on your hard drive.
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  You've got the skills to make great music. But nobody taught you how to turn that into income.
                 </p>
               </div>
               
-              {/* Item 2: Nobody Taught the Business Side */}
+              {/* Item 2 */}
               <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
-                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
-                  Nobody Taught the Business Side
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                  Still waiting for someone to discover your music?
                 </h4>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  YouTube taught you compression and EQ. It didn't teach you how to land sessions, price your work, sell sample packs, or build income streams that don't depend on one client saying yes.
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  The producers earning real money aren't waiting to be found. They learned how the business side works.
                 </p>
               </div>
             </div>
@@ -1013,25 +1013,25 @@ const TheProducerBlueprint003Career = () => {
             {/* RIGHT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-6 md:space-y-12 text-center order-3 relative z-10">
               
-              {/* Item 3: Moving the Goalpost */}
+              {/* Item 3 */}
               <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
-                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
-                  Moving the Goalpost
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                  Do you actually know how producers make money?
                 </h4>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  A better studio. More followers. A label deal. More experience. You keep moving the goalpost on when you'll be "ready" while producers with less talent and worse setups are getting paid.
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  Sessions, sync placements, sample packs, streaming. Most producers have no idea where the income actually comes from.
                 </p>
               </div>
               
-              {/* Item 4: Hobby-Level Consistency */}
+              {/* Item 4 */}
               <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
-                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
-                  Hobby-Level Consistency
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                  Making music you're proud of but can't pay rent with it?
                 </h4>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  You can make something great once in a while. But you can't do it reliably, to a deadline, on a Tuesday when you're not feeling it. That consistency gap is the difference between a hobby and a career.
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  Production talent without business knowledge is an expensive hobby. The gap isn't your music. It's your strategy.
                 </p>
               </div>
             </div>
