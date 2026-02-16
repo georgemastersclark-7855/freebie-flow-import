@@ -642,7 +642,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
               <a 
                 href="#pricing" 
                 onClick={() => onScrollToPricing?.("below_bonuses")}
-                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-white text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-zinc-200 transition-all"
               >
                 Start Producing Professional Music
                 <ArrowRight className="w-5 h-5" />
@@ -1358,7 +1358,7 @@ const TheProducerBlueprint004Gear = () => {
             
             {/* HEADER */}
             <div className="text-center mb-10 md:mb-16">
-              <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
+              <span className="inline-block border border-zinc-700 text-zinc-300 bg-zinc-900/50 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
                 Student Wins
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-white mb-4 md:mb-6">
