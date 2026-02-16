@@ -1337,7 +1337,7 @@ const TheProducerBlueprint002Spotify = () => {
             
             {/* HEADER */}
             <div className="text-center mb-10 md:mb-16">
-              <span className="inline-block bg-[#D3FF02]/10 text-[#D3FF02] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
+              <span className="inline-block border border-zinc-700 text-zinc-300 bg-zinc-900/50 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4">
                 Student Wins
               </span>
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-white mb-4 md:mb-6">
