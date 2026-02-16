@@ -1576,7 +1576,7 @@ const TheProducerBlueprint005Workflow = () => {
                       ref={nameRef}
                       type="text"
                       placeholder="Your full name"
-                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
+                      className="w-full bg-zinc-800/50 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
                     />
                   </div>
                   <div>
@@ -1585,7 +1585,7 @@ const TheProducerBlueprint005Workflow = () => {
                       ref={emailRef}
                       type="email"
                       placeholder="you@example.com"
-                      className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
+                      className="w-full bg-zinc-800/50 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#D3FF02]/50 transition-colors"
                     />
                   </div>
                 </div>
