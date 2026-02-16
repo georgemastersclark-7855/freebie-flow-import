@@ -1,20 +1,23 @@
 
 
-## Fix: Uneven Gap Between Pain Point Cards on Mobile
+## Match Career Hero Styling to Gear Variant
 
-### Problem
-On mobile, the Problem section stacks three groups vertically: left cards (1-2), center image, and right cards (3-4). The outer container uses `gap-12` (3rem) between these groups, but the cards within each group use `space-y-6` (1.5rem). This creates a noticeably larger gap between cards 2 and 3 (where the image sits in between).
+### What's Different
+The only styling difference between the two hero sections is the `hero-headline-career` CSS class on the Career variant's `<h1>` tag (line 830 of `TheProducerBlueprint003Career.tsx`). This class forces a smaller mobile font size (`2.5rem` instead of the default `3rem`). The Gear variant does not use this class.
 
-### Solution
-Change `gap-12` to `gap-6` on mobile so the spacing between all four cards is uniform. The desktop gap (`md:gap-8`) stays unchanged.
+### Change
+Remove `hero-headline-career` from the Career variant's `<h1>` className so both variants use the same base `hero-headline` class and identical mobile font sizing.
 
-### Files to Edit
-Replace `gap-12 md:gap-8` with `gap-6 md:gap-8` on the cinematic grid layout div in all 5 variants:
+**File:** `src/pages/TheProducerBlueprint003Career.tsx` (line 830)
 
-- `src/pages/TheProducerBlueprint001.tsx` (line 969)
-- `src/pages/TheProducerBlueprint002Spotify.tsx` (line 928)
-- `src/pages/TheProducerBlueprint003Career.tsx` (line 966)
-- `src/pages/TheProducerBlueprint004Gear.tsx` (line 963)
-- `src/pages/TheProducerBlueprint005Workflow.tsx` (line 959)
+```
+// Before
+className="hero-headline hero-headline-career text-2xl md:text-5xl ..."
 
-One-line change per file. No other elements affected.
+// After
+className="hero-headline text-2xl md:text-5xl ..."
+```
+
+**Note:** The Career headline is longer than the Gear headline, so at `3rem` on mobile it will wrap more. If it looks too large, we can revisit.
+
+One-line change. No other files or elements affected.
