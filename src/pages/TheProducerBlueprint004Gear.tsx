@@ -966,18 +966,24 @@ const TheProducerBlueprint004Gear = () => {
             <div className="md:w-1/4 space-y-6 md:space-y-12 text-center order-2 md:order-1 relative z-10">
               
               {/* Item 1 */}
-              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 relative">
-                <p className="text-white text-sm md:text-base leading-relaxed flex items-start gap-3">
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
                   <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                  How many plugins have you bought this year that actually changed your sound?
+                  How many plugins have you bought that changed nothing?
+                </h4>
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  Every new tool promises a breakthrough. None of them fix what's actually wrong.
                 </p>
               </div>
               
               {/* Item 2 */}
-              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 relative">
-                <p className="text-white text-sm md:text-base leading-relaxed flex items-start gap-3">
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
                   <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                  Still think better gear is the difference between your tracks and what you hear on Spotify?
+                  Still think better gear is what's missing?
+                </h4>
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  The producers behind the biggest records are using the same stock plugins you already own. The difference isn't equipment.
                 </p>
               </div>
             </div>
@@ -1005,18 +1011,24 @@ const TheProducerBlueprint004Gear = () => {
             <div className="md:w-1/4 space-y-6 md:space-y-12 text-center order-3 relative z-10">
               
               {/* Item 3 */}
-              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 relative">
-                <p className="text-white text-sm md:text-base leading-relaxed flex items-start gap-3">
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
                   <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                  Can you take a track from idea to finished master without getting lost halfway through?
+                  Can you take a track from idea to master without getting stuck?
+                </h4>
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  You know bits of everything but have no complete workflow. Every track is a different experiment with no repeatable process.
                 </p>
               </div>
               
               {/* Item 4 */}
-              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 relative">
-                <p className="text-white text-sm md:text-base leading-relaxed flex items-start gap-3">
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-start gap-2">
                   <X className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                  How many hours have you spent tweaking sounds on a track that was never structured properly?
+                  Spending hours on sound design before the arrangement works?
+                </h4>
+                <p className="text-zinc-500 text-sm leading-relaxed pl-7">
+                  Hours tweaking kicks and EQ curves on tracks that were never structured properly in the first place.
                 </p>
               </div>
             </div>
