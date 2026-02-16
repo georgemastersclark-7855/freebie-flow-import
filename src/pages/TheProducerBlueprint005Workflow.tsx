@@ -984,16 +984,16 @@ const TheProducerBlueprint005Workflow = () => {
               <AvatarFallback>B</AvatarFallback>
             </Avatar>
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
-              <AvatarImage src={avatarProducer1} className="object-cover" />
-              <AvatarFallback>P1</AvatarFallback>
+              <AvatarImage src={avatarLorenzo} className="object-cover" />
+              <AvatarFallback>L</AvatarFallback>
             </Avatar>
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
               <AvatarImage src={avatarProducer2} className="object-cover" />
               <AvatarFallback>P2</AvatarFallback>
             </Avatar>
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
-              <AvatarImage src={avatarLorenzo} className="object-cover" />
-              <AvatarFallback>L</AvatarFallback>
+              <AvatarImage src={avatarProducer1} className="object-cover" />
+              <AvatarFallback>P1</AvatarFallback>
             </Avatar>
           </div>
           <div className="text-left">
