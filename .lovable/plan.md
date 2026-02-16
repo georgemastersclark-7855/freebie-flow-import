@@ -1,26 +1,37 @@
 
-## Clean Up Legacy TPB Routes
 
-A simple removal of 6 lines in one file.
+## Mobile Testimonial Readability Fix
 
-### What changes
+**Problem**: The "More Feedback From The Community" masonry grid uses `columns-2` on mobile, making each DM screenshot too small to read comfortably.
 
-**src/App.tsx** -- Remove lines 42-47 (the legacy redirect routes block):
+**Solution**: Switch to a single-column layout on mobile with a "show more" pattern to keep the section manageable, while keeping the current 2/3-column masonry on tablet/desktop.
 
-```
-{/* Legacy redirects */}
-<Route path="/theproducerblueprint001" element={<Redirect to="/producer-blueprint" />} />
-<Route path="/theproducerblueprint002spotify" element={<Redirect to="/build-your-music-catalog" />} />
-<Route path="/theproducerblueprint003career" element={<Redirect to="/make-money-with-music" />} />
-<Route path="/theproducerblueprint004gear" element={<Redirect to="/produce-without-expensive-gear" />} />
-<Route path="/theproducerblueprint005workflow" element={<Redirect to="/finish-more-tracks" />} />
-```
+### Changes (applied to ALL variants)
 
-These old URLs will now hit the catch-all `*` route and show the 404 page instead of redirecting.
+**1. Single-column masonry on mobile**
+- Change `columns-2 lg:columns-3` to `columns-1 sm:columns-2 lg:columns-3`
+- This makes each screenshot full-width on phones, so text in the DMs is actually readable
 
-### What stays the same
+**2. Collapse with "Show More" on mobile**
+- Show only the first 4 screenshots on mobile by default
+- Add a "Show More" button that reveals the rest
+- Desktop remains unchanged (all visible, no button)
+- This prevents an overwhelmingly long scroll on phones while keeping all social proof accessible
 
-- All 5 canonical routes remain unchanged
-- Legal page links (already pointing to `/producer-blueprint`)
-- All page copy, design, pricing, checkout logic, and tracking
-- `/claudetest` and `/produceraccellerator` routes
+**3. Increase mobile card width**
+- Remove the `max-w-[92%]` constraint on the mini social proof section's mobile cards as well, letting them use full container width for better readability
+
+### Technical Details
+
+- Add a `showAllWallOfProof` state variable (useState, default false)
+- On mobile, render only the first 4 items; when toggled, render all
+- The toggle button uses the existing muted text styling (`text-zinc-500`, `border-zinc-800`)
+- Hide the toggle on `md:` breakpoint since desktop shows all items naturally
+- Apply the `columns-1 sm:columns-2 lg:columns-3` change to the wall-of-proof grid in all 5 variant files
+
+### Files to modify
+- `src/pages/TheProducerBlueprint001.tsx`
+- `src/pages/TheProducerBlueprint002Spotify.tsx`
+- `src/pages/TheProducerBlueprint003Career.tsx`
+- `src/pages/TheProducerBlueprint004Gear.tsx`
+- `src/pages/TheProducerBlueprint005Workflow.tsx`
