@@ -1363,7 +1363,7 @@ const TheProducerBlueprint002Spotify = () => {
                 title="International DJ"
                 media={djkieraTestimonial}
                 isVideo={true}
-                quote="The best investment I've made for my music career."
+                quote="An investment worth making."
                 avatar={avatarKosana}
                 poster={djkieraThumbnail}
                 activeVideoId={activeVideoId}
@@ -1376,19 +1376,19 @@ const TheProducerBlueprint002Spotify = () => {
                 title="Label-Signed Producer"
                 media={headroomRecordsTestimonial}
                 isVideo={false}
-                quote="Headroom Records wants to sign my next single!"
+                quote="The price of the course alone is worth it based on Rob showing how he creates his content."
                 avatar={avatarChrisGeorgiou}
                 activeVideoId={activeVideoId}
                 onPlay={setActiveVideoId}
               />
               <TestimonialCard
                 id="sarah"
-                name="Sarah Jenkins"
-                handle="@sarah.music"
-                title="Electronic Producer"
+                name="Marcus Cole"
+                handle=""
+                title="Music Producer"
                 media={streamingNumbersTestimonial}
                 isVideo={false}
-                quote="Highest streaming numbers yet. 12k on the latest track."
+                quote="Watch the full testimonial."
                 avatar={avatarProducer2}
                 activeVideoId={activeVideoId}
                 onPlay={setActiveVideoId}
