@@ -1051,15 +1051,13 @@ const TheProducerBlueprint004Gear = () => {
             {/* Glow Effect */}
             <div className="absolute -inset-1 bg-[#D3FF02]/10 blur-3xl rounded-[30px] opacity-40 group-hover:opacity-60 transition duration-700" />
 
+            {/* VSL Label */}
+            <div className="text-center mb-3 md:hidden">
+              <span className="text-white text-[11px] font-bold tracking-tight">Watch: Inside The Producer Blueprint</span>
+            </div>
+
             {/* Video Container */}
             <div className="relative w-full bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
-              
-              {/* THE VISIBLE OVERLAY - Mobile only */}
-              <div className="absolute top-3 left-3 z-30 pointer-events-none md:hidden">
-                <div className="px-2 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 text-white text-[11px] font-bold tracking-tight">
-                  Watch: Inside The Producer Blueprint
-                </div>
-              </div>
 
               {/* Vidalytics Embed */}
               <div
