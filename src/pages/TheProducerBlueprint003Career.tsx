@@ -1687,6 +1687,55 @@ const TheProducerBlueprint003Career = () => {
           </div>
         </section>
 
+        {/* ================= CLOSE SECTION: TWO-COLUMN CONTRAST ================= */}
+        <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-zinc-800">
+              
+              {/* Left Column - Muted/Static */}
+              <div className="bg-zinc-900/60 p-8 md:p-12 flex flex-col justify-center">
+                <p className="text-zinc-600 text-xs font-bold uppercase tracking-widest mb-4">Stay where you are</p>
+                <h3 className="text-2xl md:text-3xl font-bold text-zinc-400 tracking-tighter mb-4">
+                  Keep waiting for permission.
+                </h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  You can keep making music and hoping someone notices. Keep waiting for the right connection, the right moment, the right opportunity. But the producers who are actually earning from music aren't waiting. They learned how the business works.
+                </p>
+              </div>
+
+              {/* Right Column - Energised/Highlighted */}
+              <div className="bg-[#0A0A0A] border-t md:border-t-0 md:border-l border-zinc-800 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
+                {/* Accent glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#D3FF02]/10 blur-[100px] rounded-full pointer-events-none"></div>
+                <div className="relative z-10">
+                  <p className="text-[#D3FF02] text-xs font-bold uppercase tracking-widest mb-4">Or make the change</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tighter mb-4">
+                    Start earning from your music.
+                  </h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-8">
+                    Get instant access to the exact creative workflow and business approach behind 100M+ streams. Learn how to turn your production skills into real income, from sessions, sample packs, sync placements, and more.
+                  </p>
+                  <a 
+                    href="#pricing" 
+                    onClick={() => trackScrollToPricing({ cta_location: "close_section" })}
+                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+                  >
+                    Start Building Your Music Income
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* BRIDGE COPY */}
+            <div className="text-center py-16 md:py-20 max-w-[700px] mx-auto">
+              <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
+                You've seen what separates hobbyist producers from working ones. It's not talent or gear. It's having a complete production workflow that gets you to a professional standard, and knowing what to do with that skill once you have it. The Producer Blueprint gives you both.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* ================= CHECKOUT SECTION ================= */}
         <section id="pricing" className="relative py-24 md:py-32 scroll-mt-20">
           <div className="max-w-xl mx-auto px-6">
@@ -1966,55 +2015,6 @@ const TheProducerBlueprint003Career = () => {
                 </details>
               </div>
 
-            </div>
-          </div>
-        </section>
-
-        {/* ================= CLOSE SECTION: TWO-COLUMN CONTRAST ================= */}
-        <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-zinc-800">
-              
-              {/* Left Column - Muted/Static */}
-              <div className="bg-zinc-900/60 p-8 md:p-12 flex flex-col justify-center">
-                <p className="text-zinc-600 text-xs font-bold uppercase tracking-widest mb-4">Stay where you are</p>
-                <h3 className="text-2xl md:text-3xl font-bold text-zinc-400 tracking-tighter mb-4">
-                  Keep waiting for permission.
-                </h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  You can keep making music and hoping someone notices. Keep waiting for the right connection, the right moment, the right opportunity. But the producers who are actually earning from music aren't waiting. They learned how the business works.
-                </p>
-              </div>
-
-              {/* Right Column - Energised/Highlighted */}
-              <div className="bg-[#0A0A0A] border-t md:border-t-0 md:border-l border-zinc-800 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
-                {/* Accent glow */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#D3FF02]/10 blur-[100px] rounded-full pointer-events-none"></div>
-                <div className="relative z-10">
-                  <p className="text-[#D3FF02] text-xs font-bold uppercase tracking-widest mb-4">Or make the change</p>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tighter mb-4">
-                    Start earning from your music.
-                  </h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-8">
-                    Get instant access to the exact creative workflow and business approach behind 100M+ streams. Learn how to turn your production skills into real income, from sessions, sample packs, sync placements, and more.
-                  </p>
-                  <a 
-                    href="#pricing" 
-                    onClick={() => trackScrollToPricing({ cta_location: "close_section" })}
-                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
-                  >
-                    Start Building Your Music Income
-                    <ArrowRight className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* BRIDGE COPY */}
-            <div className="text-center py-16 md:py-20 max-w-[700px] mx-auto">
-              <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
-                You've seen what separates hobbyist producers from working ones. It's not talent or gear. It's having a complete production workflow that gets you to a professional standard, and knowing what to do with that skill once you have it. The Producer Blueprint gives you both.
-              </p>
             </div>
           </div>
         </section>
