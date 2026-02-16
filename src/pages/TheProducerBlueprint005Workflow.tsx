@@ -1075,15 +1075,19 @@ const TheProducerBlueprint005Workflow = () => {
         {/* 2. CONTENT CONTAINER */}
         <div className="max-w-7xl mx-auto px-6 relative z-20 -mt-12 md:z-10 md:-mt-[350px]">
           <div className="text-center mb-6 md:mb-12 max-w-4xl mx-auto">
+            <div className="inline-block mb-5">
+              <span className="py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-xs font-bold uppercase tracking-widest">
+                HERE'S HOW TO FIX IT
+              </span>
+            </div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
-              See How "A-List" Music Is <br />
-              <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Actually Made</span> In A Home Studio.
+              What's Inside The <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Blueprint.</span>
             </h2>
           </div>
 
           {/* The Bridge Subheadline */}
-          <p className="text-lg md:text-xl text-zinc-400 font-medium text-center mt-12 mb-10">
-            The Producer Blueprint will show you:
+          <p className="text-base md:text-lg text-zinc-400 font-medium text-center mt-8 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Everything Rob uses to write, produce, mix, and master release-ready tracks from a home studio, and turn that skill into real income. The same workflow behind his sessions with major artists.
           </p>
 
           {/* 3. FEATURE CARDS WITH ISOLATED LIGHTING */}
