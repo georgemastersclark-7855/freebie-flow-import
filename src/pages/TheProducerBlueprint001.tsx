@@ -1565,7 +1565,18 @@ const TheProducerBlueprint001 = () => {
                   </div>
                 </div>
 
-                {/* Form Fields */}
+                {/* Bonus Line Items */}
+                <div className="space-y-2 border-t border-zinc-800 pt-4">
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#D3FF02] shrink-0" />
+                    <span className="text-zinc-300 text-sm">BONUS: Ableton Project Files & Templates — <span className="text-zinc-400">Free</span></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#D3FF02] shrink-0" />
+                    <span className="text-zinc-300 text-sm">BONUS: Rob's IG/TikTok Breakdown Vault — <span className="text-zinc-400">Free</span></span>
+                  </div>
+                </div>
+{/* Form Fields */}
                 <div className="space-y-4">
                   <div>
                     <label className="block text-zinc-400 text-sm mb-2">Full Name</label>
@@ -1663,15 +1674,15 @@ const TheProducerBlueprint001 = () => {
                   <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mt-6 pt-6 border-t border-zinc-800">
                     <div className="flex items-center gap-2 text-zinc-500 text-sm">
                       <CheckCircle2 className="w-4 h-4 text-zinc-500" />
-                      <span>Secure Payment</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
-                      <Zap className="w-4 h-4 text-zinc-500" />
-                      <span>Instant Digital Delivery</span>
+                      <span>SECURE PAYMENT</span>
                     </div>
                     <div className="flex items-center gap-2 text-zinc-500 text-sm">
                       <Check className="w-4 h-4 text-zinc-500" />
-                      <span>One-Time Payment</span>
+                      <span>1 YEAR ACCESS</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-zinc-500 text-sm">
+                      <Check className="w-4 h-4 text-zinc-500" />
+                      <span>ONE-TIME PAYMENT</span>
                     </div>
                   </div>
                 </div>
