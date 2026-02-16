@@ -966,16 +966,13 @@ const TheProducerBlueprint003Career = () => {
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-2 md:order-1 relative z-10">
+            <div className="md:w-1/4 space-y-6 md:space-y-12 text-center order-2 md:order-1 relative z-10">
               
               {/* Item 1: Skills Without Output */}
-              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative group">
-                <h4 className="text-white font-medium text-base md:text-lg relative inline-block">
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
                   Skills Without Output
-                  {/* Scribble: Underline */}
-                  <svg className="absolute -bottom-1.5 md:-bottom-2 left-0 w-full h-2 md:h-3 text-[#D3FF02]/60" viewBox="0 0 100 10" preserveAspectRatio="none">
-                    <path d="M2,5 Q50,8 98,2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
                 </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You can hear when music is good. You know your way around your DAW. But you're still not finishing enough tracks to build any momentum, and you can't get paid for ideas that live on your hard drive.
@@ -983,22 +980,14 @@ const TheProducerBlueprint003Career = () => {
               </div>
               
               {/* Item 2: Nobody Taught the Business Side */}
-              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
-                <h4 className="text-white font-medium text-base md:text-lg">Nobody Taught the Business Side</h4>
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
+                  Nobody Taught the Business Side
+                </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   YouTube taught you compression and EQ. It didn't teach you how to land sessions, price your work, sell sample packs, or build income streams that don't depend on one client saying yes.
                 </p>
-                {/* Scribble: Arrow pointing right to video */}
-                <div className="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 opacity-60">
-                   <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform -rotate-12">
-                     <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-                     <defs>
-                       <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                         <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
-                       </marker>
-                     </defs>
-                   </svg>
-                </div>
               </div>
             </div>
 
@@ -1025,32 +1014,25 @@ const TheProducerBlueprint003Career = () => {
             </div>
 
             {/* RIGHT COLUMN TEXT */}
-            <div className="md:w-1/4 space-y-10 md:space-y-16 text-center order-3 relative z-10">
+            <div className="md:w-1/4 space-y-6 md:space-y-12 text-center order-3 relative z-10">
               
               {/* Item 3: Moving the Goalpost */}
-              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
-                <div className="relative inline-block">
-                  <h4 className="text-white font-medium text-base md:text-lg relative z-10">Moving the Goalpost</h4>
-                  {/* Scribble: Circle around title */}
-                  <svg className="absolute -top-2 md:-top-3 -left-3 md:-left-4 w-[115%] md:w-[120%] h-[160%] md:h-[180%] text-[#D3FF02]/40 z-0 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
-                    <path d="M10,20 Q50,5 90,20 T10,20" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
-                </div>
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
+                  Moving the Goalpost
+                </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   A better studio. More followers. A label deal. More experience. You keep moving the goalpost on when you'll be "ready" while producers with less talent and worse setups are getting paid.
                 </p>
               </div>
               
               {/* Item 4: Hobby-Level Consistency */}
-              <div className="rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
-                {/* Scribble: Arrow pointing left to video */}
-                <div className="hidden md:block absolute -left-16 top-0 w-12 h-12 opacity-60">
-                   <svg viewBox="0 0 50 50" className="text-[#D3FF02] w-full h-full transform rotate-12 scale-x-[-1]">
-                      <path d="M5,25 Q25,10 45,25" fill="none" stroke="currentColor" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-                   </svg>
-                </div>
-                
-                <h4 className="text-white font-medium text-base md:text-lg">Hobby-Level Consistency</h4>
+              <div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b from-zinc-900 via-[#0A0A0A] to-black backdrop-blur-sm p-4 md:p-5 space-y-1.5 relative">
+                <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
+                  Hobby-Level Consistency
+                </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed">
                   You can make something great once in a while. But you can't do it reliably, to a deadline, on a Tuesday when you're not feeling it. That consistency gap is the difference between a hobby and a career.
                 </p>
