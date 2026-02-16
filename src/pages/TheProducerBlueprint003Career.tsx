@@ -1094,8 +1094,8 @@ const TheProducerBlueprint003Career = () => {
           </div>
 
           {/* The Bridge Subheadline */}
-          <p className="text-base md:text-lg text-zinc-400 font-medium text-center mt-8 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Everything Rob uses to write, produce, mix, and master release-ready tracks from a home studio, and turn that skill into real income. The same workflow behind his sessions with major artists.
+          <p className="text-base md:text-lg text-zinc-500 font-medium text-center mt-8 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Everything Rob uses to <span className="text-white">produce, mix, and master</span> release-ready tracks from a <span className="text-white">home studio</span>, and turn that skill into real income. The same workflow behind his sessions with <span className="text-white">major artists</span>.
           </p>
 
           {/* 3. FEATURE CARDS WITH ISOLATED LIGHTING */}
