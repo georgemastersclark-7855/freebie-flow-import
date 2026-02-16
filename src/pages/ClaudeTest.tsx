@@ -52,7 +52,7 @@ import flawesDontBlameMe from "@/assets/album-art/flawes-dont-blame-me.jpg";
 import januaryAllMyFriends from "@/assets/album-art/january-all-my-friends.jpg";
 import tiandaNothingButLove from "@/assets/album-art/tianda-nothing-but-love.jpeg";
 import chainsmokersTennisCourt from "@/assets/album-art/chainsmokers-tennis-court.jpeg";
-import tutorialHellVideo from "@/assets/tutorial-hell-video.mp4";
+import usingAbletonGif from "@/assets/using-ableton.gif";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
 import robMarsmelloCropped from "@/assets/rob-marshmello-cropped.jpg";
 import robStudio from "@/assets/rob-home-studio.jpg";
