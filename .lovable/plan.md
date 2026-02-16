@@ -1,25 +1,22 @@
 
 
-## Fix: Video Testimonial Horizontal Scroll Glitch on Mobile
+## Make Polaroids Smaller on Mobile (About Rob Section)
 
-### Root Cause
-The parent `<section>` wrapping the entire Wall of Wins area (line 1353) has `overflow-hidden`. This clips the horizontally scrollable testimonial gallery inside it, causing the browser to fight between the container's hidden overflow and the gallery's `overflow-x-auto`, resulting in the scroll snapping back to the start.
+### Change
+Reduce the mobile width of each polaroid card from `w-[85%] max-w-[280px]` to `w-[65%] max-w-[200px]`, keeping the desktop sizing unchanged (`md:w-full`).
 
-### Solution
-Change the section's `overflow-hidden` to `overflow-x-clip` (or remove it and scope the overflow control more tightly). `overflow-x-clip` still hides the decorative background glow from bleeding out horizontally, but does not interfere with the scroll mechanics of child elements the way `overflow-hidden` does.
-
-### File to Edit
-**`src/pages/TheProducerBlueprint003Career.tsx`** -- line 1353
+### Files to Edit
+This applies to all 5 polaroid items in each of the 5 variant pages. Each polaroid's inner div follows the same pattern:
 
 ```
 // Before
-<section id="testimonials" className="relative py-12 md:py-24 overflow-hidden scroll-mt-20">
+w-[85%] ... md:w-full md:translate-x-0 max-w-[280px]
 
-// After
-<section id="testimonials" className="relative py-12 md:py-24 overflow-x-clip scroll-mt-20">
+// After  
+w-[65%] ... md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px]
 ```
 
-This same fix should be applied to all 5 variant pages if they share the same structure:
+5 polaroid cards per file, across all 5 files:
 
 - `src/pages/TheProducerBlueprint001.tsx`
 - `src/pages/TheProducerBlueprint002Spotify.tsx`
@@ -27,4 +24,4 @@ This same fix should be applied to all 5 variant pages if they share the same st
 - `src/pages/TheProducerBlueprint004Gear.tsx`
 - `src/pages/TheProducerBlueprint005Workflow.tsx`
 
-One-line change per file. The decorative glow remains clipped; horizontal card scrolling works freely on mobile.
+25 one-line edits total. No other elements affected. Desktop layout stays identical.
