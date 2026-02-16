@@ -1,46 +1,63 @@
 
 
-## Move GIF into Close Section and Remove Old Crossroads
+## Redesign Problem Section Cards — Clean Monotone Style
 
-### What's happening now
+### What changes
 
-- **Gear (004)** and **Workflow (005)** both have the new Close Section (two-column contrast + bridge copy) AND the old "two choices" crossroads section with the gif still sitting below the checkout. The crossroads should have been removed already.
-- **Career (003)** has the Close Section but no gif anywhere on the page.
+Remove all hand-drawn sketch SVG elements (underlines, circles, arrows) from the Problem section cards on all three variants. Replace with a clean, monotone aesthetic — no lime/neon green accents anywhere.
 
-### Changes
+### Card redesign details
 
-**1. Gear variant (004)** -- `src/pages/TheProducerBlueprint004Gear.tsx`
-- Add the gif (with glow + hover effect) into the Close Section, placed between the two-column contrast block and the bridge copy (centered, matching the existing gif styling)
-- Delete the entire "FINAL SELL: THE CROSSROADS" section (lines ~1926-1980)
+**Remove from each card:**
+- SVG scribble underlines on titles
+- SVG circle annotations on titles
+- SVG arrow elements pointing to center video
+- The `inline-block` / `relative` wrappers that only existed for SVG positioning
+- The `group` class on cards (no longer needed)
 
-**2. Workflow variant (005)** -- `src/pages/TheProducerBlueprint005Workflow.tsx`
-- Same as above: add gif into the Close Section between the contrast block and bridge copy
-- Delete the entire "FINAL SELL: THE CROSSROADS" section (lines ~1915-1969)
+**New card style (monotone):**
+- Add a subtle top border accent: `border-t border-t-white/10` (just a faint white line for visual separation)
+- Card titles use a small white dot bullet: `<span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>` as a clean marker
+- Everything stays in the white/zinc palette — no color accents
 
-**3. Career variant (003)** -- `src/pages/TheProducerBlueprint003Career.tsx`
-- Add the same gif block into the Close Section between the contrast block and bridge copy, matching the other two variants exactly
+**Tighten mobile spacing:**
+- Card column gap reduced from `space-y-10 md:space-y-16` to `space-y-6 md:space-y-12`
 
-### GIF placement (all three pages, identical markup)
-
-Positioned inside the Close Section's `max-w-5xl` container, after the two-column grid closes and before the bridge copy div. Centered with glow effect:
-
-```text
-</div>  (end of two-column grid)
-
-<!-- GIF visual anchor -->
-<div class="flex justify-center py-12 md:py-16">
-  <div class="relative group max-w-md w-full">
-    <div class="absolute top-1/2 left-1/2 ... glow"></div>
-    <img src={robChainsmokersGif} ... />
-  </div>
-</div>
-
-<!-- BRIDGE COPY -->
-<div class="text-center py-16 ...">
-```
+### What stays the same
+- 3-column grid layout (left cards / center video / right cards)
+- Card gradient backgrounds (`from-zinc-900 via-[#0A0A0A] to-black`)
+- All copy unchanged
+- Video, section headline, connector line all unchanged
 
 ### Files modified
 - `src/pages/TheProducerBlueprint003Career.tsx`
 - `src/pages/TheProducerBlueprint004Gear.tsx`
 - `src/pages/TheProducerBlueprint005Workflow.tsx`
+
+### Per-card change
+
+Before:
+```text
+<div className="rounded-xl border border-zinc-800 bg-gradient-to-b ... relative group">
+  <h4 className="... relative inline-block">
+    Title
+    <svg ...scribble underline.../>
+  </h4>
+  <p>...</p>
+  <div className="hidden md:block absolute ...">
+    <svg ...arrow.../>
+  </div>
+</div>
+```
+
+After:
+```text
+<div className="rounded-xl border border-zinc-800 border-t border-t-white/10 bg-gradient-to-b ... relative">
+  <h4 className="text-white font-medium text-base md:text-lg flex items-center justify-center gap-2">
+    <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0"></span>
+    Title
+  </h4>
+  <p>...</p>
+</div>
+```
 
