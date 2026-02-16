@@ -1,36 +1,27 @@
 
-## Replace Social Proof Bar with Single Screenshot
+## Move Rob's Credits Ticker Below His Signature
 
-**Why this is faster:** Currently the browser makes 4 separate requests for avatar images plus renders SVG star icons. A single composite image means 1 request total -- noticeably faster on slow connections.
+Currently the credits ticker (album art carousel) sits near the top of the page, right after the mini social proof section. We'll relocate it to appear directly after Rob's signature at the end of his story section.
 
-### Steps
+### What changes
 
-1. **Copy the screenshot** to `src/assets/social-proof-bar.png`
-2. **Replace the entire social proof block** (lines 980-1006) with a single `<img>` tag that imports and displays the screenshot
-3. **Clean up unused avatar imports** if they are no longer used elsewhere in the file (avatarBen, avatarLorenzo, avatarProducer1, avatarProducer2)
-4. The Star icon import from lucide-react may also be removable if not used elsewhere in the file
+**File:** `src/pages/TheProducerBlueprint005Workflow.tsx`
 
-### Technical Detail
+1. **Cut** the entire credits ticker block (lines 1074-1178) from its current position above `</main>`
+2. **Paste** it immediately after the signature block (after line 1630), inside the story section but before the `</div></section>` closing tags
+3. Add appropriate top margin (e.g. `mt-24 md:mt-32`) so it flows naturally after the signature
+4. No other files or sections are modified
 
-The current block:
+### Layout result
+
 ```
-<div className="flex items-center justify-center gap-3 ...">
-  <div className="flex -space-x-3 relative">
-    <!-- 4 Avatar components -->
-  </div>
-  <div> <!-- stars + text --> </div>
-</div>
-```
-
-Will become:
-```
-<div className="flex items-center justify-center mb-6 md:mb-10">
-  <img
-    src={socialProofBar}
-    alt="1,200+ producers enrolled - 5 star rating"
-    className="h-8 md:h-10 w-auto"
-  />
-</div>
+Story timeline content
+  -> Quote & "Priceless"
+  -> Signature image
+  -> ROB LATE CREDITS ticker (moved here)
+Curriculum section
+Wall of Wins section
+...
 ```
 
-The sizing (`h-8 md:h-10`) matches the current avatar heights so the layout stays identical. Only the 005Workflow variant is touched.
+Only the 005Workflow variant is affected. The ticker markup stays identical -- just repositioned.
