@@ -960,7 +960,7 @@ const TheProducerBlueprint004Gear = () => {
           </div>
 
           {/* 2. CINEMATIC GRID LAYOUT */}
-          <div className="relative flex flex-col md:flex-row items-center justify-center gap-12 md:gap-8">
+          <div className="relative flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
             
             {/* LEFT COLUMN TEXT */}
             <div className="md:w-1/4 space-y-6 md:space-y-12 text-center order-2 md:order-1 relative z-10">
