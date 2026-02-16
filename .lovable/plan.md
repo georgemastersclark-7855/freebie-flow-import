@@ -1,37 +1,46 @@
 
 
-## Mobile Testimonial Readability Fix
+## Move GIF into Close Section and Remove Old Crossroads
 
-**Problem**: The "More Feedback From The Community" masonry grid uses `columns-2` on mobile, making each DM screenshot too small to read comfortably.
+### What's happening now
 
-**Solution**: Switch to a single-column layout on mobile with a "show more" pattern to keep the section manageable, while keeping the current 2/3-column masonry on tablet/desktop.
+- **Gear (004)** and **Workflow (005)** both have the new Close Section (two-column contrast + bridge copy) AND the old "two choices" crossroads section with the gif still sitting below the checkout. The crossroads should have been removed already.
+- **Career (003)** has the Close Section but no gif anywhere on the page.
 
-### Changes (applied to ALL variants)
+### Changes
 
-**1. Single-column masonry on mobile**
-- Change `columns-2 lg:columns-3` to `columns-1 sm:columns-2 lg:columns-3`
-- This makes each screenshot full-width on phones, so text in the DMs is actually readable
+**1. Gear variant (004)** -- `src/pages/TheProducerBlueprint004Gear.tsx`
+- Add the gif (with glow + hover effect) into the Close Section, placed between the two-column contrast block and the bridge copy (centered, matching the existing gif styling)
+- Delete the entire "FINAL SELL: THE CROSSROADS" section (lines ~1926-1980)
 
-**2. Collapse with "Show More" on mobile**
-- Show only the first 4 screenshots on mobile by default
-- Add a "Show More" button that reveals the rest
-- Desktop remains unchanged (all visible, no button)
-- This prevents an overwhelmingly long scroll on phones while keeping all social proof accessible
+**2. Workflow variant (005)** -- `src/pages/TheProducerBlueprint005Workflow.tsx`
+- Same as above: add gif into the Close Section between the contrast block and bridge copy
+- Delete the entire "FINAL SELL: THE CROSSROADS" section (lines ~1915-1969)
 
-**3. Increase mobile card width**
-- Remove the `max-w-[92%]` constraint on the mini social proof section's mobile cards as well, letting them use full container width for better readability
+**3. Career variant (003)** -- `src/pages/TheProducerBlueprint003Career.tsx`
+- Add the same gif block into the Close Section between the contrast block and bridge copy, matching the other two variants exactly
 
-### Technical Details
+### GIF placement (all three pages, identical markup)
 
-- Add a `showAllWallOfProof` state variable (useState, default false)
-- On mobile, render only the first 4 items; when toggled, render all
-- The toggle button uses the existing muted text styling (`text-zinc-500`, `border-zinc-800`)
-- Hide the toggle on `md:` breakpoint since desktop shows all items naturally
-- Apply the `columns-1 sm:columns-2 lg:columns-3` change to the wall-of-proof grid in all 5 variant files
+Positioned inside the Close Section's `max-w-5xl` container, after the two-column grid closes and before the bridge copy div. Centered with glow effect:
 
-### Files to modify
-- `src/pages/TheProducerBlueprint001.tsx`
-- `src/pages/TheProducerBlueprint002Spotify.tsx`
+```text
+</div>  (end of two-column grid)
+
+<!-- GIF visual anchor -->
+<div class="flex justify-center py-12 md:py-16">
+  <div class="relative group max-w-md w-full">
+    <div class="absolute top-1/2 left-1/2 ... glow"></div>
+    <img src={robChainsmokersGif} ... />
+  </div>
+</div>
+
+<!-- BRIDGE COPY -->
+<div class="text-center py-16 ...">
+```
+
+### Files modified
 - `src/pages/TheProducerBlueprint003Career.tsx`
 - `src/pages/TheProducerBlueprint004Gear.tsx`
 - `src/pages/TheProducerBlueprint005Workflow.tsx`
+
