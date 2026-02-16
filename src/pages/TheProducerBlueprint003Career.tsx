@@ -643,7 +643,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                 onClick={() => onScrollToPricing?.("below_bonuses")}
                 className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
               >
-                Start The Blueprint Today
+                Start Building Your Music Income
                 <ArrowRight className="w-5 h-5" />
               </a>
               <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
@@ -1015,7 +1015,7 @@ const TheProducerBlueprint003Career = () => {
           {/* CTA Area - order-2 on mobile (after VSL), order-1 on desktop (before VSL) */}
           <div className="order-2 md:order-1 mb-6 md:mb-8">
             <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "hero" })} className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
-              Start The Blueprint Today
+              Start Building Your Music Income
               <ArrowRight className="w-5 h-5" />
             </a>
           </div>
@@ -1678,7 +1678,7 @@ const TheProducerBlueprint003Career = () => {
                 onClick={() => trackScrollToPricing({ cta_location: "below_social_proof" })}
                 className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
               >
-                Start The Blueprint Today
+                Start Building Your Music Income
                 <ArrowRight className="w-5 h-5" />
               </a>
               <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
@@ -1697,7 +1697,7 @@ const TheProducerBlueprint003Career = () => {
                 Get Instant Access
               </h2>
               <p className="text-zinc-400">
-                Join 500+ producers building their career from a home studio.
+                Join 1,200+ producers building real income from their music.
               </p>
             </div>
 
@@ -1970,58 +1970,107 @@ const TheProducerBlueprint003Career = () => {
           </div>
         </section>
 
-        {/* ================= FINAL SELL: THE CROSSROADS ================= */}
+        {/* ================= CLOSE SECTION: TWO-COLUMN CONTRAST ================= */}
         <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
           <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-zinc-800">
               
-              {/* Left: The Argument */}
-              <div className="order-2 md:order-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
-                  You have two choices from <span className="font-serif italic font-normal tracking-normal text-zinc-200">here.</span>
-                </h2>
-                
-                <div className="space-y-8">
-                  <div className="pl-6 border-l-2 border-zinc-800">
-                    <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-2">Option 1</h4>
-                    <p className="text-white font-medium text-lg mb-2">Keep guessing.</p>
-                    <p className="text-zinc-500 text-sm leading-relaxed">
-                      You can keep hunting for free tutorials, piecing together advice from different YouTubers, and wondering why your tracks still don't sound "pro." You might get there eventually, but it will cost you years of trial and error.
-                    </p>
-                  </div>
+              {/* Left Column - Muted/Static */}
+              <div className="bg-zinc-900/60 p-8 md:p-12 flex flex-col justify-center">
+                <p className="text-zinc-600 text-xs font-bold uppercase tracking-widest mb-4">Stay where you are</p>
+                <h3 className="text-2xl md:text-3xl font-bold text-zinc-400 tracking-tighter mb-4">
+                  Keep waiting for permission.
+                </h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  You can keep making music and hoping someone notices. Keep waiting for the right connection, the right moment, the right opportunity. But the producers who are actually earning from music aren't waiting. They learned how the business works.
+                </p>
+              </div>
 
-                  <div className="pl-6 border-l-2 border-[#D3FF02]">
-                    <h4 className="text-[#D3FF02] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
-                    <p className="text-white font-medium text-lg mb-2">Steal my workflow.</p>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      You get instant access to the exact workflows I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-10">
-                  <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "crossroads" })} className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
-                    Join The Producer Blueprint
+              {/* Right Column - Energised/Highlighted */}
+              <div className="bg-[#0A0A0A] border-t md:border-t-0 md:border-l border-zinc-800 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
+                {/* Accent glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#D3FF02]/10 blur-[100px] rounded-full pointer-events-none"></div>
+                <div className="relative z-10">
+                  <p className="text-[#D3FF02] text-xs font-bold uppercase tracking-widest mb-4">Or make the change</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tighter mb-4">
+                    Start earning from your music.
+                  </h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-8">
+                    Get instant access to the exact creative workflow and business approach behind 100M+ streams. Learn how to turn your production skills into real income, from sessions, sample packs, sync placements, and more.
+                  </p>
+                  <a 
+                    href="#pricing" 
+                    onClick={() => trackScrollToPricing({ cta_location: "close_section" })}
+                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+                  >
+                    Start Building Your Music Income
                     <ArrowRight className="w-5 h-5" />
                   </a>
-                  <p className="text-zinc-500 text-xs mt-4 text-center md:text-left">
-                    Instant Digital Access • One-Time Payment
-                  </p>
                 </div>
               </div>
+            </div>
 
-              {/* Right: Visual Anchor */}
-              <div className="order-1 md:order-2 flex justify-center relative">
-                {/* Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none"></div>
-                
-                <img 
-                  src={robChainsmokersGif} 
-                  alt="Rob Late with The Chainsmokers" 
-                  className="relative z-10 w-full max-w-md rounded-2xl drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
-                />
+            {/* BRIDGE COPY */}
+            <div className="text-center py-16 md:py-20 max-w-[700px] mx-auto">
+              <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
+                You've seen what separates hobbyist producers from working ones. It's not talent or gear. It's having a complete production workflow that gets you to a professional standard, and knowing what to do with that skill once you have it. The Producer Blueprint gives you both.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= WHO THIS IS FOR / NOT FOR ================= */}
+        <section className="py-24 px-6 bg-[#050505] border-t border-zinc-900">
+          <div className="max-w-4xl mx-auto">
+            
+            <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-zinc-800">
+              
+              {/* Left: This is for you */}
+              <div className="bg-zinc-900/40 p-8 md:p-10">
+                <h3 className="text-xl font-bold text-white mb-6 tracking-tight">This is for you if...</h3>
+                <ul className="space-y-4">
+                  {[
+                    "You want to produce music at a professional level, whether you're just starting out or have been producing for years",
+                    "You're ready to learn a complete production workflow instead of guessing your way through every track",
+                    "You want to turn your production skills into something that actually pays",
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
+              {/* Right: This isn't for you */}
+              <div className="bg-[#0A0A0A] border-t md:border-t-0 md:border-l border-zinc-800 p-8 md:p-10">
+                <h3 className="text-xl font-bold text-white mb-6 tracking-tight">This isn't for you if...</h3>
+                <ul className="space-y-4">
+                  {[
+                    "You just want to collect loops and presets without learning the craft",
+                    "You're expecting overnight results without putting in the hours",
+                    "You're happy where you are and not looking to take production seriously",
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <X className="w-5 h-5 text-zinc-500 shrink-0 mt-0.5" />
+                      <span className="text-zinc-500 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* CTA Below */}
+            <div className="flex flex-col items-center mt-12">
+              <a 
+                href="#pricing" 
+                onClick={() => trackScrollToPricing({ cta_location: "who_this_is_for" })}
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+              >
+                Start Building Your Music Income
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
             </div>
           </div>
         </section>
