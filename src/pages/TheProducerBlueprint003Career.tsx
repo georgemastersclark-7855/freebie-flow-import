@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useShopifyCheckout } from "@/hooks/useShopifyCheckout";
 import { useProducerBlueprintMeta } from "@/hooks/useProducerBlueprintMeta";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -666,6 +667,11 @@ const TheProducerBlueprint003Career = () => {
   const kieraVideoRef = useRef<HTMLVideoElement>(null);
   const { nameRef, emailRef, isLoading, handleCheckout } = useShopifyCheckout();
   const { trackScrollToPricing, trackOrderBumpChecked, trackFinalCheckoutClick } = useProducerBlueprintMeta("tpb_003_career");
+  usePageMeta({
+    title: "The Producer Blueprint | Make Money With Music",
+    description: "Learn how to turn your production skills into real income. Sessions, sync placements, sample packs, and more. The complete production and business workflow behind 100M+ streams.",
+    canonical: "https://audio.roblate.com/make-money-with-music",
+  });
 
   // Load Vidalytics script on mount
   useEffect(() => {
@@ -1423,7 +1429,7 @@ const TheProducerBlueprint003Career = () => {
             {/* WALL OF PROOF (Masonry with 10 Images) */}
             <div className="mt-8">
               <p className="text-center text-zinc-500 text-sm uppercase tracking-widest mb-10">
-                More Feedback From The Community
+                More Feedback From Producers
               </p>
               
               <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
