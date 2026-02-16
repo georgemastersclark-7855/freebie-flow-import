@@ -63,12 +63,12 @@ import producerBlueprintThumbnail from "@/assets/producer-blueprint-thumbnail.jp
 import abletonTemplatesThumbnail from "@/assets/ableton-templates-thumbnail.png";
 import socialMediaBonusThumbnail from "@/assets/social-media-bonus-thumbnail.png";
 import tiktokVaultThumbnail from "@/assets/tiktok-vault-thumbnail.png";
-import socialProofBar from "@/assets/social-proof-bar.png";
+import avatarBen from "@/assets/avatars/avatar-ben.webp";
 import avatarProducer1 from "@/assets/avatars/avatar-producer-1.png";
 import avatarProducer2 from "@/assets/avatars/avatar-producer-2.png";
 import avatarProducer3 from "@/assets/avatars/avatar-producer-3.png";
 import avatarKosana from "@/assets/avatars/avatar-kosana.jpg";
-
+import avatarLorenzo from "@/assets/avatars/avatar-lorenzo.jpg";
 
 // Signature Placeholder
 const robSignature = "https://placehold.co/300x100/000000/FFFFFF/png?text=Rob+Late+Signature";
@@ -977,12 +977,33 @@ const TheProducerBlueprint005Workflow = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
         
         {/* Social Proof Eyebrow */}
-        <div className="flex items-center justify-center mb-6 md:mb-10">
-          <img
-            src={socialProofBar}
-            alt="1,200+ producers enrolled - 5 star rating"
-            className="h-8 md:h-10 w-auto"
-          />
+        <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-10">
+          <div className="flex -space-x-3 relative">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-[1.5px] border-white" style={{ boxShadow: '-3px 0 4px rgba(0,0,0,0.45)' }}>
+              <AvatarImage src={avatarBen} className="object-cover" />
+              <AvatarFallback>B</AvatarFallback>
+            </Avatar>
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-[1.5px] border-white" style={{ boxShadow: '-3px 0 4px rgba(0,0,0,0.45)' }}>
+              <AvatarImage src={avatarLorenzo} className="object-cover" />
+              <AvatarFallback>L</AvatarFallback>
+            </Avatar>
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-[1.5px] border-white" style={{ boxShadow: '-3px 0 4px rgba(0,0,0,0.45)' }}>
+              <AvatarImage src={avatarProducer2} className="object-cover" />
+              <AvatarFallback>P2</AvatarFallback>
+            </Avatar>
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-[1.5px] border-white" style={{ boxShadow: '-3px 0 4px rgba(0,0,0,0.45)' }}>
+              <AvatarImage src={avatarProducer1} className="object-cover" />
+              <AvatarFallback>P1</AvatarFallback>
+            </Avatar>
+          </div>
+          <div className="text-left">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
+              ))}
+            </div>
+            <p className="text-zinc-500 text-sm">1,200+ producers enrolled</p>
+          </div>
         </div>
 
         {/* Headline — CHANGED: Single line, no italic serif */}
