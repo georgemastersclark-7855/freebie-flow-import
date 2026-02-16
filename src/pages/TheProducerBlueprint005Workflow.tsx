@@ -1266,7 +1266,7 @@ const TheProducerBlueprint005Workflow = () => {
           <div className="text-center mb-6 md:mb-12 max-w-4xl mx-auto">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] md:font-bold mb-0 text-white drop-shadow-2xl leading-[1.1]">
               See How "A-List" Music Is <br />
-              Actually Made In A <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Home Studio.</span>
+              <span className="bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent">Actually Made</span> In A Home Studio.
             </h2>
           </div>
 
