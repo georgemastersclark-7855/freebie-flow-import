@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useShopifyCheckout } from "@/hooks/useShopifyCheckout";
 import { useProducerBlueprintMeta } from "@/hooks/useProducerBlueprintMeta";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User, Lock } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -647,6 +648,11 @@ const TheProducerBlueprint002Spotify = () => {
   const [showAllWallOfProof, setShowAllWallOfProof] = useState(false);
   const { nameRef, emailRef, isLoading, handleCheckout } = useShopifyCheckout();
   const { trackScrollToPricing, trackOrderBumpChecked, trackFinalCheckoutClick } = useProducerBlueprintMeta("tpb_002_spotify");
+  usePageMeta({
+    title: "The Producer Blueprint | Build Your Music Catalog",
+    description: "The complete 8-module production program. Learn to produce, mix, and master release-ready tracks from a home studio. The same workflow behind 100M+ streams.",
+    canonical: "https://audio.roblate.com/build-your-music-catalog",
+  });
 
   useEffect(() => {
     // Load Vidalytics script
@@ -1398,7 +1404,7 @@ const TheProducerBlueprint002Spotify = () => {
             {/* WALL OF PROOF (Masonry with 10 Images) */}
             <div className="mt-8">
               <p className="text-center text-zinc-500 text-sm uppercase tracking-widest mb-10">
-                More Feedback From The Community
+                More Feedback From Producers
               </p>
               
               <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
