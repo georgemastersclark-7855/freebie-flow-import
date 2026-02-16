@@ -1389,7 +1389,7 @@ const TheProducerBlueprint005Workflow = () => {
                 title="International DJ"
                 media={djkieraTestimonial}
                 isVideo={true}
-                quote="The best investment I've made for my music career."
+                quote="An investment worth making."
                 avatar={avatarKosana}
                 poster={djkieraThumbnail}
                 activeVideoId={activeVideoId}
@@ -1402,7 +1402,7 @@ const TheProducerBlueprint005Workflow = () => {
                 title="Label-Signed Producer"
                 media={test1Testimonial}
                 isVideo={true}
-                quote="Headroom Records wants to sign my next single!"
+                quote="The price of the course alone is worth it based on Rob showing how he creates his content."
                 avatar={avatarChrisGeorgiou}
                 poster={test1Thumbnail}
                 activeVideoId={activeVideoId}
@@ -1410,12 +1410,12 @@ const TheProducerBlueprint005Workflow = () => {
               />
               <TestimonialCard
                 id="sarah"
-                name="Sarah Jenkins"
-                handle="@sarah.music"
-                title="Electronic Producer"
+                name="Marcus Cole"
+                handle=""
+                title="Music Producer"
                 media={streamingNumbersTestimonial}
                 isVideo={false}
-                quote="Highest streaming numbers yet. 12k on the latest track."
+                quote="Watch the full testimonial."
                 avatar={avatarProducer2}
                 activeVideoId={activeVideoId}
                 onPlay={setActiveVideoId}
