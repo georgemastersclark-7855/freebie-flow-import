@@ -979,19 +979,19 @@ const TheProducerBlueprint005Workflow = () => {
         {/* Social Proof Eyebrow */}
         <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-10">
           <div className="flex -space-x-3 relative">
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white" style={{ boxShadow: '-4px 0 6px rgba(0,0,0,0.5)' }}>
               <AvatarImage src={avatarBen} className="object-cover" />
               <AvatarFallback>B</AvatarFallback>
             </Avatar>
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white" style={{ boxShadow: '-4px 0 6px rgba(0,0,0,0.5)' }}>
               <AvatarImage src={avatarLorenzo} className="object-cover" />
               <AvatarFallback>L</AvatarFallback>
             </Avatar>
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white" style={{ boxShadow: '-4px 0 6px rgba(0,0,0,0.5)' }}>
               <AvatarImage src={avatarProducer2} className="object-cover" />
               <AvatarFallback>P2</AvatarFallback>
             </Avatar>
-            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white">
+            <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-white" style={{ boxShadow: '-4px 0 6px rgba(0,0,0,0.5)' }}>
               <AvatarImage src={avatarProducer1} className="object-cover" />
               <AvatarFallback>P1</AvatarFallback>
             </Avatar>
