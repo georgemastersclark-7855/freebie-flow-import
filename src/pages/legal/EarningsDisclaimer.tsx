@@ -7,11 +7,11 @@ const EarningsDisclaimer = () => {
       {/* Simple Navbar */}
       <nav className="border-b border-zinc-900 px-6 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link to="/theproducerblueprint001" className="text-white font-bold text-lg">
+          <Link to="/producer-blueprint" className="text-white font-bold text-lg">
             The Producer Blueprint.
           </Link>
           <Link 
-            to="/theproducerblueprint001" 
+            to="/producer-blueprint"
             className="flex items-center gap-2 text-zinc-400 hover:text-white text-sm transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />

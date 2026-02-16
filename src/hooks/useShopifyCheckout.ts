@@ -68,16 +68,7 @@ export function useShopifyCheckout() {
       source: "producer_blueprint",
     }).catch(() => {});
 
-    // Meta Pixel InitiateCheckout
-    try {
-      if ((window as any).fbq) {
-        (window as any).fbq("track", "InitiateCheckout", {
-          value: orderBumpAdded ? 334 : 297,
-          currency: "USD",
-          num_items: orderBumpAdded ? 2 : 1,
-        });
-      }
-    } catch {}
+    // Meta Pixel InitiateCheckout — fired via useProducerBlueprintMeta.trackFinalCheckoutClick() in each variant
 
     try {
       const client = clientRef.current;

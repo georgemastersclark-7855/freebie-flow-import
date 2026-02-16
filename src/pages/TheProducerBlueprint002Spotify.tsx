@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useShopifyCheckout } from "@/hooks/useShopifyCheckout";
+import { useProducerBlueprintMeta } from "@/hooks/useProducerBlueprintMeta";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User, Lock } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -834,6 +835,7 @@ const TheProducerBlueprint002Spotify = () => {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [orderBumpAdded, setOrderBumpAdded] = useState(false);
   const { nameRef, emailRef, isLoading, handleCheckout } = useShopifyCheckout();
+  const { trackScrollToPricing, trackOrderBumpChecked, trackFinalCheckoutClick } = useProducerBlueprintMeta("tpb_002_spotify");
 
   useEffect(() => {
     // Load Vidalytics script
@@ -932,7 +934,7 @@ const TheProducerBlueprint002Spotify = () => {
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
         <div className="text-xl font-bold tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">The Producer Blueprint<sup className="text-[10px] font-normal ml-0.5">™</sup></div>
         <div className="flex items-center gap-6">
-          <a href="#pricing" className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
+          <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "nav_bar" })} className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
             Get Instant Access
           </a>
         </div>
@@ -991,7 +993,7 @@ const TheProducerBlueprint002Spotify = () => {
           
           {/* CTA Area - order-2 on mobile (after VSL), order-1 on desktop (before VSL) */}
           <div className="order-2 md:order-1 mb-6 md:mb-8">
-            <a href="#pricing" className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+            <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "hero" })} className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
               Start The Blueprint Today
               <ArrowRight className="w-5 h-5" />
             </a>
@@ -1649,7 +1651,8 @@ const TheProducerBlueprint002Spotify = () => {
             {/* BRIDGE CTA - Below Social Proof Grid */}
             <div className="flex flex-col items-center mt-12 md:mt-16">
               <a 
-                href="#pricing" 
+                href="#pricing"
+                onClick={() => trackScrollToPricing({ cta_location: "below_social_proof" })}
                 className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
               >
                 Start The Blueprint Today
@@ -1752,7 +1755,12 @@ const TheProducerBlueprint002Spotify = () => {
                       type="checkbox"
                       id="orderBump"
                       checked={orderBumpAdded}
-                      onChange={(e) => setOrderBumpAdded(e.target.checked)}
+                      onChange={(e) => {
+                        setOrderBumpAdded(e.target.checked);
+                        if (e.target.checked) {
+                          trackOrderBumpChecked({ value: 37 });
+                        }
+                      }}
                       className="mt-1 w-5 h-5 rounded border-zinc-600 bg-zinc-800 text-[#D3FF02] focus:ring-[#D3FF02] focus:ring-offset-0 cursor-pointer"
                     />
                     <label htmlFor="orderBump" className="cursor-pointer flex-1">
@@ -1779,7 +1787,10 @@ const TheProducerBlueprint002Spotify = () => {
                   </div>
 
                   <button
-                    onClick={() => handleCheckout(orderBumpAdded)}
+                    onClick={() => {
+                      trackFinalCheckoutClick({ value: orderBumpAdded ? 334 : 297, order_bump_selected: orderBumpAdded });
+                      handleCheckout(orderBumpAdded);
+                    }}
                     disabled={isLoading}
                     className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
@@ -1958,7 +1969,7 @@ const TheProducerBlueprint002Spotify = () => {
                 </div>
 
                 <div className="mt-10">
-                  <a href="#pricing" className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
+                  <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "crossroads" })} className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
                     Join The Producer Blueprint
                     <ArrowRight className="w-5 h-5" />
                   </a>

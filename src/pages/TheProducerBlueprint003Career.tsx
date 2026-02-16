@@ -832,7 +832,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
   );
 };
 
-const TheProducerBlueprint001 = () => {
+const TheProducerBlueprint003Career = () => {
   const [kieraPlaying, setKieraPlaying] = useState(false);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [orderBumpAdded, setOrderBumpAdded] = useState(false);
@@ -2097,4 +2097,4 @@ const TheProducerBlueprint001 = () => {
   );
 };
 
-export default TheProducerBlueprint001;
+export default TheProducerBlueprint003Career;
