@@ -1591,7 +1591,7 @@ const TheProducerBlueprint003Career = () => {
                 Join The Producer <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">Blueprint<span className="text-white">™</span></span>
               </h2>
               <p className="text-zinc-400 text-base md:text-xl max-w-2xl mx-auto">
-                Join 1,200+ producers building real income from their music.
+                Get immediate access to the complete program, templates, and <span className="text-white font-bold">2 FREE bonuses</span>.
               </p>
             </div>
 
