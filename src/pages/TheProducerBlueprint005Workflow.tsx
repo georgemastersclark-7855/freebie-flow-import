@@ -61,6 +61,7 @@ import avatarProducer1 from "@/assets/avatars/avatar-producer-1.png";
 import avatarProducer2 from "@/assets/avatars/avatar-producer-2.png";
 import avatarProducer3 from "@/assets/avatars/avatar-producer-3.png";
 import avatarKosana from "@/assets/avatars/avatar-kosana.jpg";
+import avatarChrisGeorgiou from "@/assets/avatars/avatar-chris-georgiou.jpg";
 import avatarLorenzo from "@/assets/avatars/avatar-lorenzo.jpg";
 
 // Signature Placeholder
@@ -1402,7 +1403,7 @@ const TheProducerBlueprint005Workflow = () => {
                 media={test1Testimonial}
                 isVideo={true}
                 quote="Headroom Records wants to sign my next single!"
-                avatar={avatarProducer1}
+                avatar={avatarChrisGeorgiou}
                 poster={test1Thumbnail}
                 activeVideoId={activeVideoId}
                 onPlay={setActiveVideoId}
