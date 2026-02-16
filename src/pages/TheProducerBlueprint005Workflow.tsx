@@ -1555,6 +1555,18 @@ const TheProducerBlueprint005Workflow = () => {
               </div>
             </div>
 
+            {/* GIF visual anchor */}
+            <div className="flex justify-center py-12 md:py-16">
+              <div className="relative group max-w-md w-full">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                <img 
+                  src={robChainsmokersGif} 
+                  alt="Rob Late with The Chainsmokers" 
+                  className="relative z-10 w-full rounded-2xl border border-white/10 drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            </div>
+
             {/* BRIDGE COPY */}
             <div className="text-center py-16 md:py-20 max-w-[700px] mx-auto">
               <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
@@ -1908,62 +1920,6 @@ const TheProducerBlueprint005Workflow = () => {
                 <ArrowRight className="w-5 h-5" />
               </a>
               <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= FINAL SELL: THE CROSSROADS ================= */}
-        <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              
-              {/* Left: The Argument */}
-              <div className="order-2 md:order-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
-                  You have two choices from <span className="font-serif italic font-normal tracking-normal text-zinc-200">here.</span>
-                </h2>
-                
-                <div className="space-y-8">
-                  <div className="pl-6 border-l-2 border-zinc-800">
-                    <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-2">Option 1</h4>
-                    <p className="text-white font-medium text-lg mb-2">Keep guessing.</p>
-                    <p className="text-zinc-500 text-sm leading-relaxed">
-                      You can keep hunting for free tutorials, piecing together advice from different YouTubers, and wondering why your tracks still don't sound "pro." You might get there eventually, but it will cost you years of trial and error.
-                    </p>
-                  </div>
-
-                  <div className="pl-6 border-l-2 border-[#D3FF02]">
-                    <h4 className="text-[#D3FF02] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
-                    <p className="text-white font-medium text-lg mb-2">Steal my workflow.</p>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      You get instant access to the exact workflows I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-10">
-                  <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "crossroads" })} className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
-                    Start Finishing More Music
-                    <ArrowRight className="w-5 h-5" />
-                  </a>
-                  <p className="text-zinc-500 text-xs mt-4 text-center md:text-left">
-                    Instant Digital Access • One-Time Payment
-                  </p>
-                </div>
-              </div>
-
-              {/* Right: Visual Anchor */}
-              <div className="order-1 md:order-2 flex justify-center relative">
-                {/* Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none"></div>
-                
-                <img 
-                  src={robChainsmokersGif} 
-                  alt="Rob Late with The Chainsmokers" 
-                  className="relative z-10 w-full max-w-md rounded-2xl drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
             </div>
           </div>
         </section>

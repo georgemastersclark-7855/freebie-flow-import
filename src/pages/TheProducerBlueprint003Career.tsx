@@ -1567,6 +1567,18 @@ const TheProducerBlueprint003Career = () => {
               </div>
             </div>
 
+            {/* GIF visual anchor */}
+            <div className="flex justify-center py-12 md:py-16">
+              <div className="relative group max-w-md w-full">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                <img 
+                  src={robChainsmokersGif} 
+                  alt="Rob Late with The Chainsmokers" 
+                  className="relative z-10 w-full rounded-2xl border border-white/10 drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            </div>
+
             {/* BRIDGE COPY */}
             <div className="text-center py-16 md:py-20 max-w-[700px] mx-auto">
               <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
