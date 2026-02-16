@@ -1428,7 +1428,7 @@ const TheProducerBlueprint003Career = () => {
                 media={streamingNumbersTestimonial}
                 isVideo={false}
                 quote="Watch the full testimonial."
-                avatar={avatarProducer2}
+                avatar={streamingNumbersTestimonial}
                 activeVideoId={activeVideoId}
                 onPlay={setActiveVideoId}
               />
