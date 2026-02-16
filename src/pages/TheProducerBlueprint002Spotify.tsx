@@ -643,6 +643,7 @@ const CurriculumSection = () => {
 const TheProducerBlueprint002Spotify = () => {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [orderBumpAdded, setOrderBumpAdded] = useState(false);
+  const [showAllWallOfProof, setShowAllWallOfProof] = useState(false);
   const { nameRef, emailRef, isLoading, handleCheckout } = useShopifyCheckout();
   const { trackScrollToPricing, trackOrderBumpChecked, trackFinalCheckoutClick } = useProducerBlueprintMeta("tpb_002_spotify");
 
@@ -868,7 +869,7 @@ const TheProducerBlueprint002Spotify = () => {
             <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 pb-12 md:pb-32">
               {/* Mobile: Show mobile-specific order (3 images) */}
               {miniSocialProofImagesMobile.map((img, idx) => (
-                <div key={`mobile-${idx}`} className="break-inside-avoid max-w-[92%] mx-auto md:hidden">
+                <div key={`mobile-${idx}`} className="break-inside-avoid mx-auto md:hidden">
                   <div className="feedback-card rounded-2xl border-0 overflow-hidden shadow-2xl hover:scale-[1.01] transition-transform duration-300 group cursor-pointer bg-white/[0.02]">
                     <img
                       src={img}
@@ -1402,7 +1403,7 @@ const TheProducerBlueprint002Spotify = () => {
                 More Feedback From The Community
               </p>
               
-              <div className="columns-2 lg:columns-3 gap-4 space-y-4">
+              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
                 
                 {/* Screenshot 1 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
@@ -1424,37 +1425,50 @@ const TheProducerBlueprint002Spotify = () => {
                   <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
-                {/* Screenshot 5 */}
-                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
+                {/* Screenshots 5-10: hidden on mobile until "Show More" */}
+                <div className={`contents ${!showAllWallOfProof ? 'hidden sm:contents' : ''}`}>
+                  {/* Screenshot 5 */}
+                  <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
+                    <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  </div>
 
-                {/* Screenshot 6 */}
-                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
+                  {/* Screenshot 6 */}
+                  <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
+                    <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  </div>
 
-                {/* Screenshot 7 */}
-                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
+                  {/* Screenshot 7 */}
+                  <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
+                    <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  </div>
 
-                {/* Screenshot 8 */}
-                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
+                  {/* Screenshot 8 */}
+                  <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
+                    <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  </div>
 
-                {/* Screenshot 9 */}
-                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
-                </div>
+                  {/* Screenshot 9 */}
+                  <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
+                    <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  </div>
 
-                {/* Screenshot 10 */}
-                <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  {/* Screenshot 10 */}
+                  <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
+                    <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  </div>
                 </div>
 
               </div>
+              
+              {/* Show More button - mobile only */}
+              {!showAllWallOfProof && (
+                <button
+                  onClick={() => setShowAllWallOfProof(true)}
+                  className="mt-6 w-full py-3 rounded-xl border border-zinc-800 text-zinc-500 text-sm font-medium hover:text-zinc-300 hover:border-zinc-700 transition-colors sm:hidden"
+                >
+                  Show More Feedback
+                </button>
+              )}
             </div>
 
             {/* BRIDGE CTA - Below Social Proof Grid */}
