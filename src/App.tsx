@@ -3,10 +3,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useSearchParams } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Redirect from "./components/Redirect";
-import { UTMDebugger } from "@/components/UTMDebugger";
 
 // Lazy-loaded pages
 const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
@@ -23,16 +22,40 @@ const TermsOfService = lazy(() => import("./pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("./pages/legal/RefundPolicy"));
 const EarningsDisclaimer = lazy(() => import("./pages/legal/EarningsDisclaimer"));
 
+// Lazy-load UTM debugger so it never loads in production
+const UTMDebugger = lazy(() => import("@/components/UTMDebugger").then(m => ({ default: m.UTMDebugger })));
+
 const queryClient = new QueryClient();
+
+// Branded loading fallback
+const LoadingFallback = () => (
+  <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center">
+    <h1 className="text-white text-2xl md:text-3xl font-bold tracking-tighter animate-pulse">
+      The Producer Blueprint
+    </h1>
+    <p className="text-zinc-500 text-sm mt-3 tracking-wide">Loading...</p>
+  </div>
+);
+
+// Only mount UTMDebugger when ?debug=true
+const ConditionalDebugger = () => {
+  const [searchParams] = useSearchParams();
+  if (searchParams.get("debug") !== "true") return null;
+  return (
+    <Suspense fallback={null}>
+      <UTMDebugger />
+    </Suspense>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <UTMDebugger />
       <BrowserRouter>
-        <Suspense fallback={<div className="min-h-screen bg-[#050505]" />}>
+        <ConditionalDebugger />
+        <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Redirect to="https://roblate.com" />} />
             
