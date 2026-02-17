@@ -1,27 +1,38 @@
 
 
-## Make Polaroids Smaller on Mobile (About Rob Section)
+## Remove Vignette and Style as a Square Video
 
-### Change
-Reduce the mobile width of each polaroid card from `w-[85%] max-w-[280px]` to `w-[65%] max-w-[200px]`, keeping the desktop sizing unchanged (`md:w-full`).
+The looping studio video currently uses a radial gradient mask (vignette) and an `aspect-video` container. The plan is to remove the vignette, make it a square with rounded corners and a subtle border/glow treatment across all 5 landing page variants.
 
-### Files to Edit
-This applies to all 5 polaroid items in each of the 5 variant pages. Each polaroid's inner div follows the same pattern:
+### Changes (applied identically to all 5 pages)
 
-```
-// Before
-w-[85%] ... md:w-full md:translate-x-0 max-w-[280px]
+**Section: "VISUAL EVIDENCE: STUDIO POV"** (the `robWorking3Loop` video between the curriculum and instructor sections)
 
-// After  
-w-[65%] ... md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px]
-```
+1. Remove the radial gradient `maskImage` / `WebkitMaskImage` style from the `<video>` element
+2. Change the container from `aspect-video` to `aspect-square` for a square crop
+3. Reduce max width slightly (`max-w-md`) so the square is well-proportioned
+4. Add `rounded-2xl overflow-hidden` to the container for rounded corners
+5. Add a subtle ring/border (`ring-1 ring-white/10`) for definition against the dark background
+6. Keep the existing backlight glow behind it for ambiance
 
-5 polaroid cards per file, across all 5 files:
-
+### Files to edit
 - `src/pages/TheProducerBlueprint001.tsx`
 - `src/pages/TheProducerBlueprint002Spotify.tsx`
 - `src/pages/TheProducerBlueprint003Career.tsx`
 - `src/pages/TheProducerBlueprint004Gear.tsx`
 - `src/pages/TheProducerBlueprint005Workflow.tsx`
 
-25 one-line edits total. No other elements affected. Desktop layout stays identical.
+### Technical detail
+
+The video container changes from:
+```text
+<div class="relative w-full aspect-video z-10">
+  <video ... style="mask-image: radial-gradient(...)">
+```
+To:
+```text
+<div class="relative w-full aspect-square rounded-2xl overflow-hidden ring-1 ring-white/10 z-10">
+  <video ... (no mask styles)>
+```
+
+No copy, routing, tracking, or checkout changes. Visual layout and section order unchanged.
