@@ -1,12 +1,7 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import { toast } from "@/hooks/use-toast";
 import { sendZapierEvent } from "@/lib/zapier";
-
-declare global {
-  interface Window {
-    ShopifyBuy: any;
-  }
-}
+import { loadShopifySDK } from "@/utils/loadShopifySDK";
 
 const SHOPIFY_DOMAIN = "the-producer-blueprint-7594.myshopify.com";
 const STOREFRONT_TOKEN = "92053f10fedc25746cd619c30edadbde";
@@ -18,28 +13,6 @@ export function useShopifyCheckout() {
   const [isLoading, setIsLoading] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const initClient = () => {
-      if (window.ShopifyBuy && !clientRef.current) {
-        clientRef.current = window.ShopifyBuy.buildClient({
-          domain: SHOPIFY_DOMAIN,
-          storefrontAccessToken: STOREFRONT_TOKEN,
-        });
-      }
-    };
-    if (window.ShopifyBuy) {
-      initClient();
-    } else {
-      const interval = setInterval(() => {
-        if (window.ShopifyBuy) {
-          initClient();
-          clearInterval(interval);
-        }
-      }, 200);
-      return () => clearInterval(interval);
-    }
-  }, []);
 
   const handleCheckout = useCallback(async (orderBumpAdded: boolean) => {
     const name = nameRef.current?.value?.trim() || "";
@@ -71,10 +44,16 @@ export function useShopifyCheckout() {
     // Meta Pixel InitiateCheckout — fired via useProducerBlueprintMeta.trackFinalCheckoutClick() in each variant
 
     try {
-      const client = clientRef.current;
-      if (!client) {
-        throw new Error("Shopify client not initialized");
+      // Load SDK on demand if not already loaded
+      if (!clientRef.current) {
+        const ShopifyBuy = await loadShopifySDK();
+        clientRef.current = ShopifyBuy.buildClient({
+          domain: SHOPIFY_DOMAIN,
+          storefrontAccessToken: STOREFRONT_TOKEN,
+        });
       }
+
+      const client = clientRef.current;
 
       // Fetch products in parallel
       const [mainProduct, bumpProduct] = await Promise.all([
@@ -114,7 +93,7 @@ export function useShopifyCheckout() {
       console.error("Shopify checkout error:", error);
       toast({
         title: "Checkout Error",
-        description: "Something went wrong. Please try again.",
+        description: "Checkout is temporarily unavailable — please refresh and try again.",
         variant: "destructive",
       });
       setIsLoading(false);
