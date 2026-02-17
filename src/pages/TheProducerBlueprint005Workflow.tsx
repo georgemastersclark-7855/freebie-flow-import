@@ -1174,7 +1174,7 @@ const TheProducerBlueprint005Workflow = () => {
       </section>
 
       {/* ================= VISUAL EVIDENCE: STUDIO POV ================= */}
-      <section className="relative z-10 px-6 pb-8 -mt-12 pointer-events-none">
+      <section className="relative z-10 px-6 py-8 pointer-events-none">
         <div className="max-w-lg mx-auto relative flex flex-col items-center justify-center">
           
           <div className="absolute inset-0 bg-indigo-600/30 blur-[80px] rounded-full transform scale-75 z-0"></div>
