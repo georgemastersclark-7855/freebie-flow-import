@@ -1,19 +1,34 @@
 
 
-## Remove Vignette and Style as a Square Video
+## Fix Spacing and Background Banding on Studio POV Video Section
 
-The looping studio video currently uses a radial gradient mask (vignette) and an `aspect-video` container. The plan is to remove the vignette, make it a square with rounded corners and a subtle border/glow treatment across all 5 landing page variants.
+### Issue 1: Background Banding
+The video section has no explicit background color. The curriculum section above uses `bg-[#050505]` and the instructor section below uses `bg-black` (`#000`). The video section inherits the page default, creating a visible color band. The `bg-indigo-600/30 blur-[80px]` backlight glow also adds a faint purple tint that makes the difference more noticeable.
 
-### Changes (applied identically to all 5 pages)
+**Fix**: Add `bg-black` to the video section so it seamlessly blends with the instructor section below. Also change the backlight glow from `bg-indigo-600/30` to a more neutral `bg-white/5` to avoid any purple tinting of the surrounding area.
 
-**Section: "VISUAL EVIDENCE: STUDIO POV"** (the `robWorking3Loop` video between the curriculum and instructor sections)
+### Issue 2: Unbalanced Spacing
+The section currently uses `py-8` which may look tight above and below. We'll increase to `py-16` for balanced breathing room above and below the video.
 
-1. Remove the radial gradient `maskImage` / `WebkitMaskImage` style from the `<video>` element
-2. Change the container from `aspect-video` to `aspect-square` for a square crop
-3. Reduce max width slightly (`max-w-md`) so the square is well-proportioned
-4. Add `rounded-2xl overflow-hidden` to the container for rounded corners
-5. Add a subtle ring/border (`ring-1 ring-white/10`) for definition against the dark background
-6. Keep the existing backlight glow behind it for ambiance
+### Changes (identical across all 5 pages)
+
+The video section changes from:
+```
+<section className="relative z-10 px-6 py-8 pointer-events-none">
+```
+To:
+```
+<section className="relative z-10 px-6 py-16 pointer-events-none bg-black">
+```
+
+And the backlight glow changes from:
+```
+<div className="absolute inset-0 bg-indigo-600/30 blur-[80px] ...">
+```
+To:
+```
+<div className="absolute inset-0 bg-white/5 blur-[80px] ...">
+```
 
 ### Files to edit
 - `src/pages/TheProducerBlueprint001.tsx`
@@ -22,17 +37,4 @@ The looping studio video currently uses a radial gradient mask (vignette) and an
 - `src/pages/TheProducerBlueprint004Gear.tsx`
 - `src/pages/TheProducerBlueprint005Workflow.tsx`
 
-### Technical detail
-
-The video container changes from:
-```text
-<div class="relative w-full aspect-video z-10">
-  <video ... style="mask-image: radial-gradient(...)">
-```
-To:
-```text
-<div class="relative w-full aspect-square rounded-2xl overflow-hidden ring-1 ring-white/10 z-10">
-  <video ... (no mask styles)>
-```
-
-No copy, routing, tracking, or checkout changes. Visual layout and section order unchanged.
+No copy, layout order, tracking, or checkout changes.
