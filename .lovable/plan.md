@@ -1,71 +1,76 @@
 
 
-## Make Landing Pages Load Fast
+## Fix: Eliminate the Black Screen Delay
 
-### The Problem
+### What's Causing It
 
-Two things are making these pages painfully slow:
+Even after the asset migration, each page's JavaScript chunk is still very large because:
 
-1. **All 5 landing pages load at once.** Right now, visiting `/produce-without-expensive-gear` also downloads all the code and assets for the other 4 pages you're NOT viewing. That's 5x the work for no reason.
+1. **`framer-motion` (approximately 150KB) is imported but literally never used.** It's in the `import` block of all 5 pages, but there are zero `<motion.div>` elements anywhere in the JSX. The browser downloads and parses this entire library for nothing.
 
-2. **Every single image and video loads before anything appears.** Each page has ~55 asset imports at the top of the file. The browser must resolve ALL of them before it can even start rendering the page -- including testimonials, curriculum screenshots, and instructor photos that are way below the fold.
+2. **Each page is a single 2,000-line component.** React.lazy splits at the route level, but the chunk for one page still contains everything -- hero, testimonials, curriculum, pricing, FAQ, footer. The browser must download and execute all 2,000 lines before it can paint the hero.
 
-### The Fix (no loading spinners)
+3. **Facebook Pixel script competes for bandwidth.** `initMetaPixel()` fires on mount and injects `fbevents.js`, which fights for network resources during the critical first render.
 
-#### 1. Only load the page the visitor actually lands on
+### The Fix
 
-Convert all page imports in `App.tsx` to load on-demand. When someone clicks your ad and hits `/produce-without-expensive-gear`, only that page's code loads. The other 4 pages are never touched.
+#### 1. Remove the unused `framer-motion` import (instant win)
 
-The fallback while the page chunk loads is just a plain black screen matching the page background (`bg-[#050505]`) -- visually seamless, no spinner, no branding, nothing. On a decent connection this black flash won't even be perceptible.
+Delete `import { motion } from "framer-motion"` from all 5 pages. It's not used anywhere. This alone removes approximately 150KB from each page chunk.
 
-#### 2. Move below-fold assets out of the import block
+#### 2. Split each page into above-fold and below-fold chunks
 
-Right now, every image is imported at the top of the file like this:
-```
-import testimonial1 from "@/assets/testimonials/testimonial-1.jpeg";
-```
-This means the browser treats ALL 55 assets as dependencies that must load before the page renders.
+Break each 2,000-line page into two parts:
 
-The fix: Move below-fold images (testimonials, curriculum screenshots, instructor photos, etc.) into the `/public` folder and reference them as plain URL strings. This way:
-- Above-the-fold content (hero text, avatars, CTA) renders immediately
-- Below-fold images load lazily in the background as the user scrolls
-- The browser no longer blocks rendering on assets the user can't even see yet
+- **Above-fold component** (loads immediately): Hero section with headline, avatars, CTA, and Vidalytics embed -- roughly lines 680-900 of each file. This is small and renders instantly.
+- **Below-fold component** (lazy-loaded): Everything else -- testimonials, curriculum, instructor bio, pricing, FAQ, footer. This loads in the background via `React.lazy()` with a seamless invisible fallback (empty div, no spinner).
 
-Only ~6 small assets need to stay as eager imports (the 4 avatar thumbnails and a couple of hero elements).
+The user sees the hero content immediately. By the time they scroll, the rest has already loaded silently.
 
-#### 3. Convert remaining unoptimized assets
+#### 3. Defer Facebook Pixel to after first paint
 
-- `using-ableton.gif` still loads as a GIF -- convert to `.mp4` video element
-- Several below-fold images are still `.png`/`.jpg` that could be `.webp`
+Move the `initMetaPixel()` call from `useEffect` (fires immediately on mount) to a `requestIdleCallback` or short `setTimeout` (e.g., 1 second). The pixel still fires well before any user action, but it no longer blocks the initial render.
 
 ### What stays exactly the same
 
-- All copy, layout, section order
+- All copy, layout, section order, visual styling
 - Checkout flow and Shopify integration
-- UTM tracking and Klaviyo
-- Vidalytics embed behavior
-- All visual styling and animations
+- UTM tracking and Klaviyo behavior
+- Vidalytics embed
+- All animations and interactions
 
 ### Technical Details
 
 **Files modified:**
-- `src/App.tsx` -- lazy route imports with `React.lazy()` + black `Suspense` fallback
-- `src/pages/TheProducerBlueprint001.tsx` through `005Workflow.tsx` -- replace ~45 top-level asset imports per file with `/public` URL strings; keep only above-fold assets as imports
-- Move ~40 asset files from `src/assets/` to `public/assets/` so they can be referenced by URL
+- `src/pages/TheProducerBlueprint001.tsx` through `005Workflow.tsx` -- remove `framer-motion` import; split into `HeroSection` (inline) + `BelowFoldContent` (lazy-loaded)
+- `src/hooks/useProducerBlueprintMeta.ts` -- defer `initMetaPixel()` with `requestIdleCallback` fallback
+- New files: `src/components/blueprint/BelowFoldContent001.tsx` through `005.tsx` (or a single shared component if the below-fold sections are identical across variants)
 
-**Above-fold assets that stay as eager imports (per page):**
-- `avatar-ben.webp`, `avatar-producer-1.webp`, `avatar-producer-2.webp`, `avatar-producer-3.webp` (hero social proof)
-- Lucide icons and UI components (already tree-shaken)
+**How the split works:**
 
-**Below-fold assets that move to `/public` and load lazily:**
-- All 15+ testimonial images/videos
-- All curriculum module screenshots (8 images)
-- Instructor section photos (rob-marshmello, rob-chainsmokers, rob-studio, etc.)
-- Pricing section mockups
-- All other below-fold media
+Each page file becomes roughly:
+
+```text
+// Page file (small, loads fast)
+import HeroSection from "./HeroSection"  // inline, ~200 lines
+const BelowFold = lazy(() => import("./BelowFoldContent"))  // ~1800 lines, loads in background
+
+export default function Page() {
+  return (
+    <>
+      <HeroSection />
+      <Suspense fallback={<div />}>
+        <BelowFold />
+      </Suspense>
+    </>
+  )
+}
+```
+
+The fallback is an empty `<div />` -- completely invisible. No spinner, no black screen. The hero renders instantly, and by the time the user even thinks about scrolling, the rest has loaded.
 
 **Expected impact:**
-- Initial page load goes from ~150 requests to ~10-15
-- First paint happens almost immediately (text + avatars + Vidalytics embed)
-- Everything else streams in as the user scrolls
+- Initial JS chunk per page drops from approximately 300KB+ to approximately 30-40KB
+- First contentful paint (hero + CTA) happens near-instantly
+- Below-fold content streams in silently within 1-2 seconds
 
