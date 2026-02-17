@@ -11,17 +11,31 @@ export function useProducerBlueprintMeta(variant: string) {
   const pageViewFired = useRef(false);
   const viewContentFired = useRef(false);
 
-  // ── On mount: init pixel, capture attribution, fire PageView ──
+  // ── On mount: init pixel (deferred), capture attribution, fire PageView ──
   useEffect(() => {
-    initMetaPixel();
+    // Capture attribution immediately (lightweight, no network)
     captureAttribution();
 
-    // Guard duplicate PageView per page load using sessionStorage
-    const pvKey = `tpb_pv_${window.location.pathname}`;
-    if (!sessionStorage.getItem(pvKey) && !pageViewFired.current) {
-      pageViewFired.current = true;
-      sessionStorage.setItem(pvKey, "1");
-      trackStandard("PageView", { variant });
+    // Defer pixel init to avoid blocking first paint
+    const deferPixel = () => {
+      initMetaPixel();
+
+      // Guard duplicate PageView per page load using sessionStorage
+      const pvKey = `tpb_pv_${window.location.pathname}`;
+      if (!sessionStorage.getItem(pvKey) && !pageViewFired.current) {
+        pageViewFired.current = true;
+        sessionStorage.setItem(pvKey, "1");
+        trackStandard("PageView", { variant });
+      }
+    };
+
+    // Use requestIdleCallback if available, otherwise setTimeout
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(deferPixel, { timeout: 2000 });
+      return () => cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(deferPixel, 1000);
+      return () => clearTimeout(timer);
     }
   }, [variant]);
 

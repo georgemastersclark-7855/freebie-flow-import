@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, ChevronDown, Zap, X } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
