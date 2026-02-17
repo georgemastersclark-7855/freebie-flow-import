@@ -1584,11 +1584,9 @@ const TheProducerBlueprint004Gear = () => {
               <div className="flex justify-center relative">
                 <div className="relative group max-w-md w-full">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                  <video autoPlay muted loop playsInline preload="none"
+                  <video autoPlay muted loop playsInline src={robChainsmokersGif}
                     className="relative z-10 w-full rounded-2xl border border-white/10 drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
-                  >
-                    <source src={robChainsmokersGif} type="video/mp4" />
-                  </video>
+                  />
                 </div>
               </div>
             </div>
