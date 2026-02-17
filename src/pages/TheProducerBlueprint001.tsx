@@ -390,8 +390,6 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={module.image} 
                       alt={module.title} 
                       className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
 
@@ -401,8 +399,6 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={module.image} 
                       alt={module.title} 
                       className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
 
@@ -535,8 +531,6 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={abletonTemplatesThumbnail}
                       alt="Ableton Project Files & Templates" 
                       className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
-                      loading="lazy"
-                      decoding="async"
                     />
                     {/* Desktop-only Value Badge on Image */}
                     <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
@@ -597,8 +591,6 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={tiktokBreakdownVault} 
                       alt="Rob's Breakdown Vault"
                       className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
-                      loading="lazy"
-                      decoding="async"
                     />
                     {/* Desktop-only Value Badge on Image */}
                     <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
@@ -930,8 +922,6 @@ const TheProducerBlueprint001 = () => {
                       src={img}
                       className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
                       alt={`Testimonial ${idx + 1}`}
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
                 </div>
@@ -944,8 +934,6 @@ const TheProducerBlueprint001 = () => {
                       src={img}
                       className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
                       alt={`Testimonial ${idx + 1}`}
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
                 </div>
@@ -1033,8 +1021,6 @@ const TheProducerBlueprint001 = () => {
                   src={usingAbletonGif}
                   alt="Using Ableton"
                   className="w-full h-full object-cover opacity-90 scale-110"
-                  loading="lazy"
-                  decoding="async"
                   style={{
                     objectPosition: '60% center', 
                     maskImage: 'radial-gradient(circle, black 50%, transparent 75%)',
@@ -1099,8 +1085,6 @@ const TheProducerBlueprint001 = () => {
               src={robMarshmello}
               className="block md:hidden w-full h-full object-cover object-top opacity-100 brightness-[1.15]"
               alt="Rob and Marshmello Mobile"
-              loading="lazy"
-              decoding="async"
             />
             
             {/* DESKTOP IMAGE */}
@@ -1108,8 +1092,6 @@ const TheProducerBlueprint001 = () => {
               src={robHomeStudioWide}
               className="hidden md:block w-full h-full object-cover object-center opacity-80"
               alt="Rob in Home Studio Desktop"
-              loading="lazy"
-              decoding="async"
             />
             
             {/* Top Fade - Smooth transition from previous section */}
@@ -1204,8 +1186,6 @@ const TheProducerBlueprint001 = () => {
               src={robPovStudio} 
               alt="Rob Late Studio POV" 
               className="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
               style={{
                 // Tighter mask: fades to transparent at 60% to ensure edges are invisible
                 maskImage: 'radial-gradient(circle at center, black 25%, transparent 60%)',
@@ -1265,7 +1245,7 @@ const TheProducerBlueprint001 = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] -translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] -rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                  <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2019: THE GRIND
@@ -1286,7 +1266,7 @@ const TheProducerBlueprint001 = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
+                  <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2020: LOCKDOWN
@@ -1307,7 +1287,7 @@ const TheProducerBlueprint001 = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] -translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] -rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robChainsmokers} alt="The Breakthrough" className="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
+                  <img src={robChainsmokers} alt="The Breakthrough" className="w-full h-full object-cover object-top" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2021: BREAKTHROUGH
@@ -1328,7 +1308,7 @@ const TheProducerBlueprint001 = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robGaryBarlow} alt="The A-List Sessions" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
+                  <img src={robGaryBarlow} alt="The A-List Sessions" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2022: A-LIST
@@ -1349,7 +1329,7 @@ const TheProducerBlueprint001 = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] -translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] -rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robMarsmelloCropped} alt="The Producer Blueprint" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
+                  <img src={robMarsmelloCropped} alt="The Producer Blueprint" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   TODAY: THE BLUEPRINT
@@ -1384,8 +1364,6 @@ const TheProducerBlueprint001 = () => {
                   src={robLateSignature} 
                   alt="Rob Late" 
                   className="h-20 w-auto object-contain opacity-80" 
-                  loading="lazy"
-                  decoding="async"
                 />
               </div>
             </div>
@@ -1479,54 +1457,54 @@ const TheProducerBlueprint001 = () => {
                 
                 {/* Screenshot 1 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
                 
                 {/* Screenshot 2 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 3 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshot 4 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                 </div>
 
                 {/* Screenshots 5-10: hidden on mobile until "Show More" */}
                 <div className={`contents ${!showAllWallOfProof ? 'hidden sm:contents' : ''}`}>
                   {/* Screenshot 5 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                   </div>
 
                   {/* Screenshot 6 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                   </div>
 
                   {/* Screenshot 7 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                   </div>
 
                   {/* Screenshot 8 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                   </div>
 
                   {/* Screenshot 9 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                   </div>
 
                   {/* Screenshot 10 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
                   </div>
                 </div>
 

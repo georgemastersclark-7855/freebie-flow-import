@@ -390,8 +390,6 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={module.image} 
                       alt={module.title} 
                       className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
 
@@ -401,8 +399,6 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={module.image} 
                       alt={module.title} 
                       className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
 
@@ -923,8 +919,6 @@ const TheProducerBlueprint004Gear = () => {
                       src={img}
                       className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
                       alt={`Testimonial ${idx + 1}`}
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
                 </div>
@@ -937,8 +931,6 @@ const TheProducerBlueprint004Gear = () => {
                       src={img}
                       className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
                       alt={`Testimonial ${idx + 1}`}
-                      loading="lazy"
-                      decoding="async"
                     />
                   </div>
                 </div>
@@ -1069,8 +1061,6 @@ const TheProducerBlueprint004Gear = () => {
               src={robMarshmello}
               className="block md:hidden w-full h-full object-cover object-top opacity-100 brightness-[1.15]"
               alt="Rob and Marshmello Mobile"
-              loading="lazy"
-              decoding="async"
             />
             
             {/* DESKTOP IMAGE */}
@@ -1078,8 +1068,6 @@ const TheProducerBlueprint004Gear = () => {
               src={robHomeStudioWide}
               className="hidden md:block w-full h-full object-cover object-center opacity-80"
               alt="Rob in Home Studio Desktop"
-              loading="lazy"
-              decoding="async"
             />
             
             {/* Top Fade - Smooth transition from previous section */}
@@ -1233,7 +1221,7 @@ const TheProducerBlueprint004Gear = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] -translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] -rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                  <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2019: THE GRIND
@@ -1254,7 +1242,7 @@ const TheProducerBlueprint004Gear = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
+                  <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2020: LOCKDOWN
