@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { useShopifyCheckout } from "@/hooks/useShopifyCheckout";
 import { useProducerBlueprintMeta } from "@/hooks/useProducerBlueprintMeta";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { motion } from "framer-motion";
 import { ArrowRight, Check, CheckCircle2, Play, Pause, Star, TrendingUp, Music2, X, Youtube, ChevronDown, ChevronUp, PlayCircle, Zap, Instagram, MessageCircle, Music, User, Lock } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
