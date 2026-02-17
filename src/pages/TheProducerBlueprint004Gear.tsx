@@ -1174,7 +1174,7 @@ const TheProducerBlueprint004Gear = () => {
       </section>
 
       {/* ================= VISUAL EVIDENCE: STUDIO POV ================= */}
-      <section className="relative z-10 px-6 pb-8 -mt-12 pointer-events-none">
+      <section className="relative z-10 px-6 py-8 pointer-events-none">
         <div className="max-w-lg mx-auto relative flex flex-col items-center justify-center">
           
           {/* 1. The Backlight Glow 
