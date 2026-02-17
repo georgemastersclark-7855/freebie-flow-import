@@ -1194,9 +1194,9 @@ const TheProducerBlueprint003Career = () => {
             />
           </div>
         </div>
-        {/* Divider line */}
-        <div className="max-w-xs mx-auto mt-16">
-          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        {/* Vertical connector line */}
+        <div className="flex flex-col items-center mt-16 opacity-20">
+          <div className="w-[1px] h-20 md:h-24 bg-gradient-to-b from-white via-white to-transparent"></div>
         </div>
       </section>
 
