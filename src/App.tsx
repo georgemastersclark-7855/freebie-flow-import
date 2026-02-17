@@ -1,29 +1,31 @@
 
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { loadKlaviyo } from "@/utils/loadKlaviyo";
-import NotFound from "./pages/NotFound";
-import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
-import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
-import ClaudeTest from "./pages/ClaudeTest";
-import ProducerAccelerator from "./pages/ProducerAccelerator";
-import TheProducerBlueprint004Gear from "./pages/TheProducerBlueprint004Gear";
-import TheProducerBlueprint003Career from "./pages/TheProducerBlueprint003Career";
-import TheProducerBlueprint005Workflow from "./pages/TheProducerBlueprint005Workflow";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
-// Legal Pages
-import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
-import TermsOfService from "./pages/legal/TermsOfService";
-import RefundPolicy from "./pages/legal/RefundPolicy";
-import EarningsDisclaimer from "./pages/legal/EarningsDisclaimer";
+// Lazy-loaded pages
+const NotFound = lazy(() => import("./pages/NotFound"));
+const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
+const TheProducerBlueprint002Spotify = lazy(() => import("./pages/TheProducerBlueprint002Spotify"));
+const TheProducerBlueprint003Career = lazy(() => import("./pages/TheProducerBlueprint003Career"));
+const TheProducerBlueprint004Gear = lazy(() => import("./pages/TheProducerBlueprint004Gear"));
+const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBlueprint005Workflow"));
+const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
+const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
+const PrivacyPolicy = lazy(() => import("./pages/legal/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/legal/TermsOfService"));
+const RefundPolicy = lazy(() => import("./pages/legal/RefundPolicy"));
+const EarningsDisclaimer = lazy(() => import("./pages/legal/EarningsDisclaimer"));
 
 const queryClient = new QueryClient();
+
+const BlackFallback = <div className="bg-[#050505] min-h-screen" />;
 
 const App = () => {
   useEffect(() => {
@@ -38,6 +40,7 @@ const App = () => {
       <Sonner />
       {new URLSearchParams(window.location.search).get('debug') === 'true' && <UTMDebugger />}
       <BrowserRouter>
+        <Suspense fallback={BlackFallback}>
         <Routes>
           <Route path="/" element={<Redirect to="https://roblate.com" />} />
           
@@ -57,6 +60,7 @@ const App = () => {
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
