@@ -1,76 +1,68 @@
 
 
-## Fix: Eliminate the Black Screen Delay
+## Fix: Split Pages So the Hero Loads Instantly
 
-### What's Causing It
+### Why it's still a black screen
 
-Even after the asset migration, each page's JavaScript chunk is still very large because:
+Your page files are each ~2,000 lines long. Even though only one variant loads, the browser must download and parse ALL 2,000 lines before it can show a single pixel. That includes ~600 lines of TestimonialCard and CurriculumSection components the user can't even see yet.
 
-1. **`framer-motion` (approximately 150KB) is imported but literally never used.** It's in the `import` block of all 5 pages, but there are zero `<motion.div>` elements anywhere in the JSX. The browser downloads and parses this entire library for nothing.
+Think of it like ordering a burger but the kitchen won't serve it until they've also cooked every side dish, dessert, and drink. You just want the burger first.
 
-2. **Each page is a single 2,000-line component.** React.lazy splits at the route level, but the chunk for one page still contains everything -- hero, testimonials, curriculum, pricing, FAQ, footer. The browser must download and execute all 2,000 lines before it can paint the hero.
+### The fix
 
-3. **Facebook Pixel script competes for bandwidth.** `initMetaPixel()` fires on mount and injects `fbevents.js`, which fights for network resources during the critical first render.
+Split each page into two pieces:
 
-### The Fix
+1. **Hero chunk (loads instantly)** -- the nav bar, headline, avatars, CTA button, and Vidalytics embed. This is roughly 250 lines of simple text and a few small avatar images. It renders in milliseconds.
 
-#### 1. Remove the unused `framer-motion` import (instant win)
+2. **Below-fold chunk (loads silently in background)** -- testimonials, curriculum, instructor bio, pricing, FAQ, footer. This is ~1,750 lines that loads via `React.lazy()` while the user is watching the hero. By the time they scroll, it's already there.
 
-Delete `import { motion } from "framer-motion"` from all 5 pages. It's not used anywhere. This alone removes approximately 150KB from each page chunk.
+There's no spinner, no loading indicator. The hero appears immediately, and the rest streams in invisibly behind it.
 
-#### 2. Split each page into above-fold and below-fold chunks
+### What this looks like in practice
 
-Break each 2,000-line page into two parts:
+Each page file shrinks from ~2,000 lines to ~50 lines:
 
-- **Above-fold component** (loads immediately): Hero section with headline, avatars, CTA, and Vidalytics embed -- roughly lines 680-900 of each file. This is small and renders instantly.
-- **Below-fold component** (lazy-loaded): Everything else -- testimonials, curriculum, instructor bio, pricing, FAQ, footer. This loads in the background via `React.lazy()` with a seamless invisible fallback (empty div, no spinner).
+```text
+Page file (tiny, loads fast):
+  - Hero section inline (~250 lines)
+  - lazy(() => import("./BelowFold")) for everything else
 
-The user sees the hero content immediately. By the time they scroll, the rest has already loaded silently.
-
-#### 3. Defer Facebook Pixel to after first paint
-
-Move the `initMetaPixel()` call from `useEffect` (fires immediately on mount) to a `requestIdleCallback` or short `setTimeout` (e.g., 1 second). The pixel still fires well before any user action, but it no longer blocks the initial render.
+BelowFold file (loads in background):
+  - TestimonialCard component
+  - CurriculumSection component  
+  - All remaining sections (social proof, pain, curriculum, pricing, FAQ, footer)
+```
 
 ### What stays exactly the same
 
 - All copy, layout, section order, visual styling
 - Checkout flow and Shopify integration
-- UTM tracking and Klaviyo behavior
+- UTM tracking, Klaviyo, and Meta Pixel behavior
 - Vidalytics embed
-- All animations and interactions
+- All interactions (video playback, accordion, checkout form)
 
-### Technical Details
+### Technical details
 
-**Files modified:**
-- `src/pages/TheProducerBlueprint001.tsx` through `005Workflow.tsx` -- remove `framer-motion` import; split into `HeroSection` (inline) + `BelowFoldContent` (lazy-loaded)
-- `src/hooks/useProducerBlueprintMeta.ts` -- defer `initMetaPixel()` with `requestIdleCallback` fallback
-- New files: `src/components/blueprint/BelowFoldContent001.tsx` through `005.tsx` (or a single shared component if the below-fold sections are identical across variants)
+**New files created (5):**
+- `src/components/blueprint/BelowFold001.tsx`
+- `src/components/blueprint/BelowFold002Spotify.tsx`
+- `src/components/blueprint/BelowFold003Career.tsx`
+- `src/components/blueprint/BelowFold004Gear.tsx`
+- `src/components/blueprint/BelowFold005Workflow.tsx`
 
-**How the split works:**
+Each contains: TestimonialCard, CurriculumSection, and all JSX from line ~924 to end of file, plus the state/refs they need (orderBumpAdded, kieraPlaying, activeVideoId, modules, bonusModules, etc.).
 
-Each page file becomes roughly:
+**Modified files (5):**
+- `src/pages/TheProducerBlueprint001.tsx` through `005Workflow.tsx`
 
-```text
-// Page file (small, loads fast)
-import HeroSection from "./HeroSection"  // inline, ~200 lines
-const BelowFold = lazy(() => import("./BelowFoldContent"))  // ~1800 lines, loads in background
+Each shrinks to: imports, hooks (useShopifyCheckout, useProducerBlueprintMeta, usePageMeta, Vidalytics useEffect), hero JSX (nav + main), and a `Suspense`-wrapped lazy import of its BelowFold component. Props like `trackScrollToPricing`, `nameRef`, `emailRef`, `handleCheckout` are passed down to BelowFold.
 
-export default function Page() {
-  return (
-    <>
-      <HeroSection />
-      <Suspense fallback={<div />}>
-        <BelowFold />
-      </Suspense>
-    </>
-  )
-}
-```
-
-The fallback is an empty `<div />` -- completely invisible. No spinner, no black screen. The hero renders instantly, and by the time the user even thinks about scrolling, the rest has loaded.
+**How state is handled:**
+- State that only the below-fold uses (kieraPlaying, activeVideoId, orderBumpAdded, showAllWallOfProof) moves into the BelowFold component
+- Hooks that both need (useShopifyCheckout, useProducerBlueprintMeta) stay in the page and pass results as props
+- The Vidalytics script stays in the page component since it targets a hero-level DOM element
 
 **Expected impact:**
-- Initial JS chunk per page drops from approximately 300KB+ to approximately 30-40KB
-- First contentful paint (hero + CTA) happens near-instantly
-- Below-fold content streams in silently within 1-2 seconds
-
+- Initial JS per page drops from ~2,000 lines (~200KB+) to ~250 lines (~20-30KB)
+- First contentful paint (headline + CTA + video embed) happens near-instantly
+- Below-fold content loads silently within 1-2 seconds
