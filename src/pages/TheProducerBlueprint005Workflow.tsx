@@ -155,6 +155,7 @@ const TestimonialCard = ({ id, name, handle, title, media, isVideo, quote, avata
             alt={`${name} testimonial`}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
             loading="lazy"
+            decoding="async"
           />
         )}
         {/* Play Button Overlay - show when not playing (videos) or on hover (images) */}
@@ -390,6 +391,8 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={module.image} 
                       alt={module.title} 
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
@@ -399,6 +402,8 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={module.image} 
                       alt={module.title} 
                       className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
@@ -531,6 +536,8 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={abletonTemplatesThumbnail}
                       alt="Ableton Project Files & Templates" 
                       className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                      loading="lazy"
+                      decoding="async"
                     />
                     {/* Desktop-only Value Badge on Image */}
                     <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
@@ -591,6 +598,8 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={tiktokBreakdownVault} 
                       alt="Rob's Breakdown Vault"
                       className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                      loading="lazy"
+                      decoding="async"
                     />
                     {/* Desktop-only Value Badge on Image */}
                     <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
@@ -919,6 +928,8 @@ const TheProducerBlueprint005Workflow = () => {
                       src={img}
                       className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
                       alt={`Testimonial ${idx + 1}`}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>
@@ -931,6 +942,8 @@ const TheProducerBlueprint005Workflow = () => {
                       src={img}
                       className="w-full h-auto block opacity-90 group-hover:opacity-100 transition-opacity object-contain"
                       alt={`Testimonial ${idx + 1}`}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>
@@ -1057,6 +1070,8 @@ const TheProducerBlueprint005Workflow = () => {
               src={robMarshmello}
               className="block md:hidden w-full h-full object-cover object-top opacity-100 brightness-[1.15]"
               alt="Rob and Marshmello Mobile"
+              loading="lazy"
+              decoding="async"
             />
             
             {/* DESKTOP IMAGE */}
@@ -1064,6 +1079,8 @@ const TheProducerBlueprint005Workflow = () => {
               src={robHomeStudioWide}
               className="hidden md:block w-full h-full object-cover object-center opacity-80"
               alt="Rob in Home Studio Desktop"
+              loading="lazy"
+              decoding="async"
             />
             
             {/* Top Fade - Smooth transition from previous section */}
@@ -1214,7 +1231,7 @@ const TheProducerBlueprint005Workflow = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] -translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] -rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" />
+                  <img src={robFirstStudio} alt="The 9-5 Grind" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2019: THE GRIND
@@ -1235,7 +1252,7 @@ const TheProducerBlueprint005Workflow = () => {
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" />
+                  <img src={robLockdownStudio} alt="The Lockdown Era" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2020: LOCKDOWN

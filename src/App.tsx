@@ -28,7 +28,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <UTMDebugger />
+      {new URLSearchParams(window.location.search).get('debug') === 'true' && <UTMDebugger />}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Redirect to="https://roblate.com" />} />
