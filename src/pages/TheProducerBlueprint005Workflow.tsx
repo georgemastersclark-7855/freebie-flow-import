@@ -1188,6 +1188,10 @@ const TheProducerBlueprint005Workflow = () => {
             />
           </div>
         </div>
+        {/* Divider line */}
+        <div className="max-w-xs mx-auto mt-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        </div>
       </section>
 
       {/* ================= SECTION: THE ORIGIN STORY (MEET YOUR INSTRUCTOR) ================= */}
