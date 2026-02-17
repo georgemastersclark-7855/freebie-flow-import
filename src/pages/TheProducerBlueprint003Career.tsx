@@ -535,6 +535,8 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={abletonTemplatesThumbnail}
                       alt="Ableton Project Files & Templates" 
                       className="absolute inset-0 w-full h-full object-cover object-[center_42%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                      loading="lazy"
+                      decoding="async"
                     />
                     {/* Desktop-only Value Badge on Image */}
                     <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
@@ -595,6 +597,8 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                       src={tiktokBreakdownVault} 
                       alt="Rob's Breakdown Vault"
                       className="absolute inset-0 w-full h-full object-cover object-[center_70%] transition-transform duration-700 group-hover:scale-105 z-0" 
+                      loading="lazy"
+                      decoding="async"
                     />
                     {/* Desktop-only Value Badge on Image */}
                     <div className="hidden md:block absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-xs font-bold text-white shadow-lg z-20">
@@ -1015,6 +1019,8 @@ const TheProducerBlueprint003Career = () => {
                   src={usingAbletonGif}
                   alt="Using Ableton"
                   className="w-full h-full object-cover opacity-90 scale-110"
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     objectPosition: '60% center', 
                     maskImage: 'radial-gradient(circle, black 50%, transparent 75%)',
