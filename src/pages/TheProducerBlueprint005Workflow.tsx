@@ -25,7 +25,6 @@ import streamingNumbersTestimonial from "@/assets/testimonials/streaming-numbers
 import drewAdieuTestimonial from "@/assets/testimonials/drew-adieu-testimonial.jpg";
 import headroomRecordsTestimonial from "@/assets/testimonials/headroom-records-testimonial.jpg";
 import aaronly0nsYoutubeTestimonial from "@/assets/testimonials/aaronly0ns-youtube-testimonial.jpg";
-import productStackMockup from "@/assets/product-stack-mockup.png";
 import usingAbletonGif from "@/assets/using-ableton.gif";
 import solutionVideo from "@/assets/solution-video.mp4";
 import robMarshmello from "@/assets/rob-marshmello.jpg";
@@ -34,35 +33,31 @@ import robStudio from "@/assets/rob-home-studio.jpg";
 import robGaryBarlow from "@/assets/rob-gary-barlow.jpg";
 import robHomeStudioWide from "@/assets/rob-home-studio-wide.jpg";
 import robChainsmokers from "@/assets/rob-chainsmokers.jpg";
-import robChainsmokersGif from "@/assets/rob-chainsmokers.gif";
+import robChainsmokersGif from "@/assets/rob-chainsmokers.mp4";
 import robFirstStudio from "@/assets/rob-first-studio.jpg";
 import robLockdownStudio from "@/assets/rob-lockdown-guitar.png";
 import earlyDaysSticker from "@/assets/early-days-sticker.png";
 import nowSticker from "@/assets/now-sticker.png";
 import robLateSignature from "@/assets/rob-late-signature-white.png";
 import robWritingSession from "@/assets/rob-writing-session.jpg";
-import artistSoundsIdentity from "@/assets/artist-sounds-identity.png";
+import artistSoundsIdentity from "@/assets/artist-sounds-identity.webp";
 import vocalProductionStudio from "@/assets/vocal-production-studio.png";
-import abletonSession from "@/assets/ableton-session.png";
-import drumProductionGif from "@/assets/drum-production.gif";
+import abletonSession from "@/assets/ableton-session.webp";
+import drumProductionGif from "@/assets/drum-production.mp4";
 import mixingMasteringStudio from "@/assets/mixing-mastering-studio.jpg";
 import robWorkingLoop from "@/assets/rob-working-loop.m4v";
-import foundationLaptop from "@/assets/foundation-laptop.png";
 import soundDesignStudio from "@/assets/sound-design-studio.png";
 import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
-import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
 import robPovStudio from "@/assets/rob-pov-studio-new.png";
 import robWorking3Loop from "@/assets/rob-working-3-loop.mp4";
 import blueprintLaptopMockup from "@/assets/producer-blueprint-mockup.jpg";
 import producerBlueprintThumbnail from "@/assets/producer-blueprint-thumbnail.jpg";
-import abletonTemplatesThumbnail from "@/assets/ableton-templates-thumbnail.png";
-import socialMediaBonusThumbnail from "@/assets/social-media-bonus-thumbnail.png";
-import tiktokVaultThumbnail from "@/assets/tiktok-vault-thumbnail.png";
+import abletonTemplatesThumbnail from "@/assets/ableton-templates-thumbnail.webp";
 import avatarBen from "@/assets/avatars/avatar-ben.webp";
-import avatarProducer1 from "@/assets/avatars/avatar-producer-1.png";
-import avatarProducer2 from "@/assets/avatars/avatar-producer-2.png";
-import avatarProducer3 from "@/assets/avatars/avatar-producer-3.png";
+import avatarProducer1 from "@/assets/avatars/avatar-producer-1.webp";
+import avatarProducer2 from "@/assets/avatars/avatar-producer-2.webp";
+import avatarProducer3 from "@/assets/avatars/avatar-producer-3.webp";
 import avatarKosana from "@/assets/avatars/avatar-kosana.jpg";
 import avatarChrisGeorgiou from "@/assets/avatars/avatar-chris-georgiou.jpg";
 import avatarLorenzo from "@/assets/avatars/avatar-lorenzo.jpg";
@@ -252,6 +247,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
       title: "Pro Drum Production",
       desc: "The difference between \"demo\" and \"pro\" is usually in the drums. Learn my sample selection process, arrangement, bus processing, and sidechain secrets and more for drums that punch through laptop speakers.",
       image: drumProductionGif,
+      video: drumProductionGif,
       lessons: [
         "Secret Sauce: My all time favourite drum plugins",
         "The Great Debate: audio vs. midi drums",
@@ -1584,11 +1580,11 @@ const TheProducerBlueprint005Workflow = () => {
               <div className="flex justify-center relative">
                 <div className="relative group max-w-md w-full">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                  <img 
-                    src={robChainsmokersGif} 
-                    alt="Rob Late with The Chainsmokers" 
+                  <video autoPlay muted loop playsInline preload="none"
                     className="relative z-10 w-full rounded-2xl border border-white/10 drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
-                  />
+                  >
+                    <source src={robChainsmokersGif} type="video/mp4" />
+                  </video>
                 </div>
               </div>
             </div>
