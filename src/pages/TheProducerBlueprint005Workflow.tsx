@@ -1565,7 +1565,7 @@ const TheProducerBlueprint005Workflow = () => {
                   <a 
                     href="#pricing" 
                     onClick={() => trackScrollToPricing({ cta_location: "close_section" })}
-                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+                    className="inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-base md:text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
                   >
                     Start Finishing More Music
                     <ArrowRight className="w-5 h-5" />
