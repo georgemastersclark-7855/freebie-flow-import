@@ -1,9 +1,11 @@
 
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { loadKlaviyo } from "@/utils/loadKlaviyo";
 import NotFound from "./pages/NotFound";
 import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
 import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
@@ -23,7 +25,13 @@ import EarningsDisclaimer from "./pages/legal/EarningsDisclaimer";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    const timer = setTimeout(loadKlaviyo, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -52,6 +60,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
