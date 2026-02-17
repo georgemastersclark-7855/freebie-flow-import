@@ -5,6 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  assetsInclude: ['**/*.m4v'],
   server: {
     host: "::",
     port: 8080,
