@@ -1208,19 +1208,12 @@ const TheProducerBlueprint001 = () => {
           */}
           <div className="absolute inset-0 bg-indigo-600/30 blur-[80px] rounded-full transform scale-75 z-0"></div>
 
-          {/* 2. The Vignetted Image Container 
-              - Reduced to max-w-lg to stop it being huge
-              - Mask is tighter to hide the top edge
-          */}
-          <div className="relative w-full aspect-video z-10">
+          {/* 2. Square Video Container */}
+          <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden ring-1 ring-white/10 z-10">
             <video 
               src={robWorking3Loop} 
               autoPlay loop muted playsInline
               className="w-full h-full object-cover"
-              style={{
-                maskImage: 'radial-gradient(circle at center, black 25%, transparent 60%)',
-                WebkitMaskImage: 'radial-gradient(circle at center, black 25%, transparent 60%)'
-              }}
             />
           </div>
         </div>
