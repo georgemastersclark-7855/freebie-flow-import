@@ -1174,13 +1174,13 @@ const TheProducerBlueprint004Gear = () => {
       </section>
 
       {/* ================= VISUAL EVIDENCE: STUDIO POV ================= */}
-      <section className="relative z-10 px-6 py-8 pointer-events-none">
+      <section className="relative z-10 px-6 py-16 pointer-events-none bg-black">
         <div className="max-w-lg mx-auto relative flex flex-col items-center justify-center">
           
           {/* 1. The Backlight Glow 
               (Purple/Blue ambient light to match the photo) 
           */}
-          <div className="absolute inset-0 bg-indigo-600/30 blur-[80px] rounded-full transform scale-75 z-0"></div>
+          <div className="absolute inset-0 bg-white/5 blur-[80px] rounded-full transform scale-75 z-0"></div>
 
           {/* 2. Square Video Container */}
           <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden ring-1 ring-white/10 z-10">
