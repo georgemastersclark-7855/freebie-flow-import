@@ -54,6 +54,7 @@ import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 import arrangementEnergyScreenshot from "@/assets/arrangement-energy-screenshot.png";
 import robPovStudio from "@/assets/rob-pov-studio-new.png";
+import robWorking3Loop from "@/assets/rob-working-3-loop.mp4";
 import blueprintLaptopMockup from "@/assets/producer-blueprint-mockup.jpg";
 import producerBlueprintThumbnail from "@/assets/producer-blueprint-thumbnail.jpg";
 import abletonTemplatesThumbnail from "@/assets/ableton-templates-thumbnail.png";
@@ -214,6 +215,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
       subtitle: "(Ableton Basics)",
       desc: "Stop fighting your DAW. Set up the exact templates, shortcuts, and preferences I use to stay in a \"flow state\" and work 2x faster. (Note: If you are an advanced user, you can skip this. If you are new, this saves you 6 months of headache.)",
       image: robPovStudio,
+      video: robWorking3Loop,
       lessons: [
         "Ableton layout & menus",
         "Preferences & setting up projects",
@@ -1185,12 +1187,11 @@ const TheProducerBlueprint004Gear = () => {
               - Mask is tighter to hide the top edge
           */}
           <div className="relative w-full aspect-video z-10">
-            <img 
-              src={robPovStudio} 
-              alt="Rob Late Studio POV" 
+            <video 
+              src={robWorking3Loop} 
+              autoPlay loop muted playsInline
               className="w-full h-full object-cover"
               style={{
-                // Tighter mask: fades to transparent at 60% to ensure edges are invisible
                 maskImage: 'radial-gradient(circle at center, black 25%, transparent 60%)',
                 WebkitMaskImage: 'radial-gradient(circle at center, black 25%, transparent 60%)'
               }}
