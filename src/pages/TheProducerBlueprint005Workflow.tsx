@@ -46,6 +46,7 @@ import vocalProductionStudio from "@/assets/vocal-production-studio.png";
 import abletonSession from "@/assets/ableton-session.png";
 import drumProductionGif from "@/assets/drum-production.gif";
 import mixingMasteringStudio from "@/assets/mixing-mastering-studio.jpg";
+import robWorkingLoop from "@/assets/rob-working-loop.m4v";
 import foundationLaptop from "@/assets/foundation-laptop.png";
 import soundDesignStudio from "@/assets/sound-design-studio.png";
 import tiktokBreakdownVault from "@/assets/tiktok-breakdown-vault.png";
@@ -301,6 +302,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
       title: "Mixing & Mastering",
       desc: "Learn how I approach the final steps of the creation process to get music ready to send to the artist, label, or even to release to streaming platforms. Finish the job.",
       image: mixingMasteringStudio,
+      video: robWorkingLoop,
       lessons: [
         "The honest truth about mixing & mastering",
         "Priority: Fix your monitoring & room acoustics",
@@ -385,26 +387,34 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                 {/* MOBILE: Horizontal row with thumbnail | DESKTOP: Large horizontal cards */}
                 <div className="flex flex-row md:flex-row">
                   
-                  {/* MOBILE THUMBNAIL - Small square image (block md:hidden) */}
+                  {/* MOBILE THUMBNAIL - Small square image/video (block md:hidden) */}
                   <div className="block md:hidden w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 m-4 mr-0">
-                    <img 
-                      src={module.image} 
-                      alt={module.title} 
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    {module.video ? (
+                      <video src={module.video} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                    ) : (
+                      <img 
+                        src={module.image} 
+                        alt={module.title} 
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
                   </div>
 
-                  {/* DESKTOP IMAGE - Large w-1/3 image (hidden md:block) */}
+                  {/* DESKTOP IMAGE/VIDEO - Large w-1/3 (hidden md:block) */}
                   <div className="hidden md:block md:relative md:w-1/3 md:min-h-[200px] md:shrink-0 md:overflow-hidden md:rounded-l-2xl">
-                    <img 
-                      src={module.image} 
-                      alt={module.title} 
-                      className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    {module.video ? (
+                      <video src={module.video} autoPlay loop muted playsInline className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105" />
+                    ) : (
+                      <img 
+                        src={module.image} 
+                        alt={module.title} 
+                        className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
                   </div>
 
                   {/* DESKTOP DIVIDER LINE (hidden md:block) */}
