@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useShopifyCheckout } from "@/hooks/useShopifyCheckout";
 import { useProducerBlueprintMeta } from "@/hooks/useProducerBlueprintMeta";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { useDeferBelowFold } from "@/hooks/useDeferBelowFold";
 import { ArrowRight, Check, Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
@@ -11,6 +12,7 @@ const BelowFold = lazy(() => import("@/components/blueprint/BelowFold004Gear"));
 const TheProducerBlueprint004Gear = () => {
   const { nameRef, emailRef, isLoading, handleCheckout } = useShopifyCheckout();
   const { trackScrollToPricing, trackOrderBumpChecked, trackFinalCheckoutClick } = useProducerBlueprintMeta("tpb_004_gear");
+  const { shouldRenderBelowFold, revealBelowFold } = useDeferBelowFold();
   usePageMeta({
     title: "The Producer Blueprint | Produce Without Expensive Gear",
     description: "Learn how to produce professional music from a home studio without spending thousands on gear. The complete production workflow behind 100M+ streams.",
@@ -69,7 +71,7 @@ const TheProducerBlueprint004Gear = () => {
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
         <div className="text-xl font-bold tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">The Producer Blueprint<sup className="text-[10px] font-normal ml-0.5">™</sup></div>
         <div className="flex items-center gap-6">
-          <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "nav_bar" })} className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
+          <a href="#pricing" onClick={() => { revealBelowFold(); trackScrollToPricing({ cta_location: "nav_bar" }); }} className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
             Get Instant Access
           </a>
         </div>
@@ -125,7 +127,7 @@ const TheProducerBlueprint004Gear = () => {
           
           {/* CTA Area - order-2 on mobile (after VSL), order-1 on desktop (before VSL) */}
           <div className="order-2 md:order-1 mb-6 md:mb-8">
-            <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "hero" })} className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+            <a href="#pricing" onClick={() => { revealBelowFold(); trackScrollToPricing({ cta_location: "hero" }); }} className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
               Start Producing Professional Music
               <ArrowRight className="w-5 h-5" />
             </a>
@@ -181,18 +183,19 @@ const TheProducerBlueprint004Gear = () => {
         </div>
 
       </main>
-
-      <Suspense fallback={<div />}>
-        <BelowFold
-          trackScrollToPricing={trackScrollToPricing}
-          trackOrderBumpChecked={trackOrderBumpChecked}
-          trackFinalCheckoutClick={trackFinalCheckoutClick}
-          nameRef={nameRef}
-          emailRef={emailRef}
-          isLoading={isLoading}
-          handleCheckout={handleCheckout}
-        />
-      </Suspense>
+      {shouldRenderBelowFold && (
+        <Suspense fallback={<div />}>
+          <BelowFold
+            trackScrollToPricing={trackScrollToPricing}
+            trackOrderBumpChecked={trackOrderBumpChecked}
+            trackFinalCheckoutClick={trackFinalCheckoutClick}
+            nameRef={nameRef}
+            emailRef={emailRef}
+            isLoading={isLoading}
+            handleCheckout={handleCheckout}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };

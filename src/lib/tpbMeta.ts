@@ -14,6 +14,21 @@ const SESSION_KEY = "rla_tpb_session_id";
 
 let pixelInitialized = false;
 
+function createSafeId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return `tpb_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+}
+
+function safeSetLocalStorage(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // Ignore storage write failures (older Safari private mode / restricted contexts).
+  }
+}
+
 function isDebug(): boolean {
   try {
     return new URLSearchParams(window.location.search).has("meta_debug") &&
@@ -65,7 +80,7 @@ export function initMetaPixel() {
 // ── Event ID ──────────────────────────────────────────
 
 export function generateEventId(): string {
-  return crypto.randomUUID();
+  return createSafeId();
 }
 
 // ── Attribution ───────────────────────────────────────
@@ -112,7 +127,7 @@ export function captureAttribution(): Attribution {
     merged.first_seen_at = new Date().toISOString();
   }
 
-  localStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(merged));
+  safeSetLocalStorage(ATTRIBUTION_KEY, JSON.stringify(merged));
   debugLog("Attribution captured:", merged);
   return merged;
 }
@@ -144,10 +159,15 @@ export function getFbc(): string | undefined {
 // ── Session ID ────────────────────────────────────────
 
 export function getSessionId(): string {
-  let sid = localStorage.getItem(SESSION_KEY);
+  let sid: string | null = null;
+  try {
+    sid = localStorage.getItem(SESSION_KEY);
+  } catch {
+    sid = null;
+  }
   if (!sid) {
-    sid = crypto.randomUUID();
-    localStorage.setItem(SESSION_KEY, sid);
+    sid = createSafeId();
+    safeSetLocalStorage(SESSION_KEY, sid);
   }
   return sid;
 }

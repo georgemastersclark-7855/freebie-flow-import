@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useShopifyCheckout } from "@/hooks/useShopifyCheckout";
 import { useProducerBlueprintMeta } from "@/hooks/useProducerBlueprintMeta";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { useDeferBelowFold } from "@/hooks/useDeferBelowFold";
 import { ArrowRight, Check, Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
@@ -11,13 +12,14 @@ const BelowFold = lazy(() => import("@/components/blueprint/BelowFold001"));
 const TheProducerBlueprint001 = () => {
   const { nameRef, emailRef, isLoading, handleCheckout } = useShopifyCheckout();
   const { trackScrollToPricing, trackOrderBumpChecked, trackFinalCheckoutClick } = useProducerBlueprintMeta("tpb_001");
+  const { shouldRenderBelowFold, revealBelowFold } = useDeferBelowFold();
   usePageMeta({
     title: "The Producer Blueprint | Learn Professional Music Production",
     description: "The complete 8-module production program. Learn to produce, mix, and master release-ready tracks from a home studio. The same workflow behind 100M+ streams.",
     canonical: "https://audio.roblate.com/producer-blueprint",
   });
 
-  // Load Vidalytics script (deferred to avoid blocking hero paint)
+  // Load Vidalytics script after initial paint.
   useEffect(() => {
     let script: HTMLScriptElement | null = null;
 
@@ -44,13 +46,13 @@ const TheProducerBlueprint001 = () => {
         cancelIdleCallback(id);
         if (script && document.body.contains(script)) document.body.removeChild(script);
       };
-    } else {
-      const timer = setTimeout(loadVidalytics, 2000);
-      return () => {
-        clearTimeout(timer);
-        if (script && document.body.contains(script)) document.body.removeChild(script);
-      };
     }
+
+    const timer = setTimeout(loadVidalytics, 2000);
+    return () => {
+      clearTimeout(timer);
+      if (script && document.body.contains(script)) document.body.removeChild(script);
+    };
   }, []);
 
   return (
@@ -68,7 +70,7 @@ const TheProducerBlueprint001 = () => {
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
         <div className="text-xl font-bold tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">The Producer Blueprint<sup className="text-[10px] font-normal ml-0.5">™</sup></div>
         <div className="flex items-center gap-6">
-          <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "nav_bar" })} className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
+          <a href="#pricing" onClick={() => { revealBelowFold(); trackScrollToPricing({ cta_location: "nav_bar" }); }} className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
             Get Instant Access
           </a>
         </div>
@@ -127,7 +129,7 @@ const TheProducerBlueprint001 = () => {
           
           {/* CTA Area - order-2 on mobile (after VSL), order-1 on desktop (before VSL) */}
           <div className="order-2 md:order-1 mb-6 md:mb-8">
-            <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "hero" })} className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
+            <a href="#pricing" onClick={() => { revealBelowFold(); trackScrollToPricing({ cta_location: "hero" }); }} className="inline-flex items-center gap-2 bg-[#D3FF02] text-black px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]">
               Start The Blueprint Today
               <ArrowRight className="w-5 h-5" />
             </a>
@@ -183,18 +185,19 @@ const TheProducerBlueprint001 = () => {
         </div>
 
       </main>
-
-      <Suspense fallback={<div />}>
-        <BelowFold
-          trackScrollToPricing={trackScrollToPricing}
-          trackOrderBumpChecked={trackOrderBumpChecked}
-          trackFinalCheckoutClick={trackFinalCheckoutClick}
-          nameRef={nameRef}
-          emailRef={emailRef}
-          isLoading={isLoading}
-          handleCheckout={handleCheckout}
-        />
-      </Suspense>
+      {shouldRenderBelowFold && (
+        <Suspense fallback={<div />}>
+          <BelowFold
+            trackScrollToPricing={trackScrollToPricing}
+            trackOrderBumpChecked={trackOrderBumpChecked}
+            trackFinalCheckoutClick={trackFinalCheckoutClick}
+            nameRef={nameRef}
+            emailRef={emailRef}
+            isLoading={isLoading}
+            handleCheckout={handleCheckout}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };

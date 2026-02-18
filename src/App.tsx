@@ -23,7 +23,11 @@ const TermsOfService = lazy(() => import("./pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("./pages/legal/RefundPolicy"));
 const EarningsDisclaimer = lazy(() => import("./pages/legal/EarningsDisclaimer"));
 
-const BlackFallback = <div className="bg-[#050505] min-h-screen" />;
+const RouteFallback = (
+  <div className="bg-[#050505] min-h-screen flex items-center justify-center">
+    <div className="text-zinc-400 text-sm tracking-wide">Loading page...</div>
+  </div>
+);
 
 const App = () => {
   useEffect(() => {
@@ -37,7 +41,7 @@ const App = () => {
       <Sonner />
       {new URLSearchParams(window.location.search).get('debug') === 'true' && <UTMDebugger />}
       <BrowserRouter>
-        <Suspense fallback={BlackFallback}>
+        <Suspense fallback={RouteFallback}>
           <Routes>
             <Route path="/" element={<Redirect to="https://roblate.com" />} />
             

@@ -381,7 +381,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                   {/* MOBILE THUMBNAIL - Small square image/video (block md:hidden) */}
                   <div className="block md:hidden w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 m-4 mr-0">
                     {module.video ? (
-                      <video src={module.video} autoPlay loop muted playsInline className="w-full h-full object-cover" style={{ objectPosition: 'center 40%' }} />
+                      <video src={module.video} autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover" style={{ objectPosition: 'center 40%' }} />
                     ) : (
                       <img 
                         src={module.image} 
@@ -396,7 +396,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                   {/* DESKTOP IMAGE/VIDEO - Large w-1/3 (hidden md:block) */}
                   <div className="hidden md:block md:relative md:w-1/3 md:min-h-[200px] md:shrink-0 md:overflow-hidden md:rounded-l-2xl">
                     {module.video ? (
-                      <video src={module.video} autoPlay loop muted playsInline className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105" style={{ objectPosition: 'center 40%' }} />
+                      <video src={module.video} autoPlay loop muted playsInline preload="none" className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105" style={{ objectPosition: 'center 40%' }} />
                     ) : (
                       <img 
                         src={module.image} 
@@ -1426,7 +1426,7 @@ const BelowFold005Workflow = ({ trackScrollToPricing, trackOrderBumpChecked, tra
               <div className="flex justify-center relative">
                 <div className="relative group max-w-md w-full">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                  <video autoPlay muted loop playsInline src={robChainsmokersGif}
+                  <video autoPlay muted loop playsInline preload="none" src={robChainsmokersGif}
                     className="relative z-10 w-full rounded-2xl border border-white/10 drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
                   />
                 </div>
