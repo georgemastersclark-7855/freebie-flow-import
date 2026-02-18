@@ -9,13 +9,15 @@ import { loadKlaviyo } from "@/utils/loadKlaviyo";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
-// Lazy-loaded pages
+// Eager imports for landing pages (no lazy loading = no black screen)
+import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
+import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
+import TheProducerBlueprint003Career from "./pages/TheProducerBlueprint003Career";
+import TheProducerBlueprint004Gear from "./pages/TheProducerBlueprint004Gear";
+import TheProducerBlueprint005Workflow from "./pages/TheProducerBlueprint005Workflow";
+
+// Lazy-loaded secondary pages
 const NotFound = lazy(() => import("./pages/NotFound"));
-const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
-const TheProducerBlueprint002Spotify = lazy(() => import("./pages/TheProducerBlueprint002Spotify"));
-const TheProducerBlueprint003Career = lazy(() => import("./pages/TheProducerBlueprint003Career"));
-const TheProducerBlueprint004Gear = lazy(() => import("./pages/TheProducerBlueprint004Gear"));
-const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBlueprint005Workflow"));
 const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
 const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
 const PrivacyPolicy = lazy(() => import("./pages/legal/PrivacyPolicy"));
