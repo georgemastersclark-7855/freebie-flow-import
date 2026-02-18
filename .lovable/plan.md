@@ -1,89 +1,64 @@
 
 
-## Speed Up Mobile Load: Remove Unnecessary Head Resources and Strip Unused Bundle Weight
+## Defer Vidalytics Loading on 4 Landing Pages
 
-### What's causing the black screen on mobile
+App.tsx is already correct -- lazy imports are in place and no unnecessary providers exist. The only remaining change is deferring the Vidalytics script injection on 4 pages that still load it immediately on mount.
 
-When a mobile visitor hits `/produce-without-expensive-gear`, the browser must:
+Page 004 (Gear) already uses the deferred `requestIdleCallback` pattern. Pages 001, 002, 003, and 005 still inject the script synchronously in `useEffect`, which competes with the hero render on mobile.
 
-1. Open TLS connections for 6 preconnected domains (4 are unnecessary at page load)
-2. Download and parse the main JS bundle, which includes ~100KB of libraries that no landing page actually needs at render time
-3. Only then can React mount and show pixels on screen
+### Changes
 
-On a fast desktop connection this takes under 1 second. On a typical mobile connection (50-100ms latency per handshake, slower download), it adds up to several seconds of black screen.
+**4 files to edit** (same pattern applied to each):
 
-### The two changes
+**1. `src/pages/TheProducerBlueprint001.tsx`** (lines 21-42)
+Wrap the existing Vidalytics inline script injection in `requestIdleCallback` with a 3-second timeout fallback, matching the pattern already used in 004.
 
-**1. Clean up `index.html` -- remove 4 unnecessary preconnects**
+**2. `src/pages/TheProducerBlueprint002Spotify.tsx`** (lines 20-31)
+Wrap the existing Vidalytics `src`-based script injection in `requestIdleCallback` with a 3-second timeout fallback.
 
-Currently in the `<head>`:
-- `fonts.googleapis.com` -- KEEP (needed for fonts)
-- `fonts.gstatic.com` -- KEEP (needed for fonts)  
-- `fast.vidalytics.com` -- REMOVE (video loads after page renders)
-- `static.klaviyo.com` -- REMOVE (already deferred 3 seconds in JS)
-- `sdks.shopifycdn.com` -- REMOVE (only loaded during checkout)
-- `budvnuggykvqydjmkyfx.supabase.co` -- REMOVE (only used on form submit)
+**3. `src/pages/TheProducerBlueprint003Career.tsx`** (lines 21-42)
+Same deferred pattern as 001 (inline script variant).
 
-Each preconnect opens a TLS handshake immediately, competing with the actual app bundle download. Removing 4 frees up mobile bandwidth for the JS that matters.
+**4. `src/pages/TheProducerBlueprint005Workflow.tsx`** (lines 21-42)
+Same deferred pattern as 001 (inline script variant).
 
-**2. Strip unused providers from `src/App.tsx`**
+### What each deferred useEffect looks like
 
-These are statically imported and wrap the entire app, but no landing page uses them:
-
-| Import | Why it's safe to remove |
-|--------|------------------------|
-| `@tanstack/react-query` (QueryClientProvider + QueryClient) | Zero `useQuery` or `useMutation` calls exist anywhere in the codebase |
-| `@radix-ui/react-tooltip` (TooltipProvider) | No landing page uses tooltips -- only sidebar.tsx and chart.tsx use them internally, and neither is part of any route |
-
-The Toaster, Sonner, and UTMDebugger will stay as static imports (the previous attempt to lazy-load these caused the build break). They are small enough that the risk is not worth it.
-
-### What the files will look like after changes
-
-**`index.html`** -- only two preconnects remain:
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-```
-
-**`src/App.tsx`** -- remove two imports and their wrappers:
 ```tsx
-// REMOVED: import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// REMOVED: import { TooltipProvider } from "@/components/ui/tooltip";
-// REMOVED: const queryClient = new QueryClient();
+useEffect(() => {
+  let script: HTMLScriptElement | null = null;
 
-// The return becomes:
-return (
-  <>
-    <Toaster />
-    <Sonner />
-    {/* UTMDebugger stays unchanged */}
-    <BrowserRouter>
-      <Suspense fallback={BlackFallback}>
-        <Routes>
-          {/* all routes unchanged */}
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-  </>
-);
+  const loadVidalytics = () => {
+    script = document.createElement("script");
+    // ... existing script setup (unchanged) ...
+    document.body.appendChild(script);
+  };
+
+  if ("requestIdleCallback" in window) {
+    const id = requestIdleCallback(loadVidalytics, { timeout: 3000 });
+    return () => {
+      cancelIdleCallback(id);
+      if (script && document.body.contains(script)) document.body.removeChild(script);
+    };
+  } else {
+    const timer = setTimeout(loadVidalytics, 2000);
+    return () => {
+      clearTimeout(timer);
+      if (script && document.body.contains(script)) document.body.removeChild(script);
+    };
+  }
+}, []);
 ```
 
-### What stays exactly the same
+### What stays the same
 
-- All 5 landing page designs and layouts
-- All routes and page components
-- The BelowFold lazy-loading architecture
-- The preload map in `main.tsx`
-- Shopify checkout flow (loadShopifySDK is already on-demand)
-- Klaviyo (already deferred 3 seconds)
-- Meta Pixel tracking (already deferred via requestIdleCallback)
-- Zapier webhook (Supabase client is already dynamically imported)
-- Toast notifications (still work for checkout validation)
-- The inline redirect script in `index.html`
+- App.tsx (already correct -- lazy imports, no unnecessary providers)
+- main.tsx preload map
+- All page designs, routes, and layouts
+- BelowFold lazy loading
+- Shopify, Klaviyo, Zapier integrations
+- Page 004 Gear (already deferred)
 
-### Estimated savings
+### Expected impact
 
-- 4 fewer TLS handshakes at page load (frees mobile bandwidth)
-- ~65KB less JavaScript to parse before first paint (React Query ~50KB, Tooltip ~15KB)
-- No functionality lost -- these libraries were imported but never actually used by any page
-
+On mobile, the hero section will paint before Vidalytics starts downloading its loader and player scripts, eliminating the competition for bandwidth during the critical first paint.
