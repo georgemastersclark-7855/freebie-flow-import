@@ -1,10 +1,10 @@
 
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { loadKlaviyo } from "@/utils/loadKlaviyo";
 import Redirect from "./components/Redirect";
 
-// Lazy-loaded UI chrome (only needed for checkout error toasts)
+// Lazy-loaded UI chrome (only needed for checkout error toasts — deferred until after page render)
 const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
 const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
 const UTMDebugger = lazy(() => import("@/components/UTMDebugger").then(m => ({ default: m.UTMDebugger })));
@@ -27,19 +27,27 @@ const EarningsDisclaimer = lazy(() => import("./pages/legal/EarningsDisclaimer")
 
 const BlackFallback = <div className="bg-[#050505] min-h-screen" />;
 
+const isDebug = new URLSearchParams(window.location.search).get('debug') === 'true';
+
 const App = () => {
+  const [chromeReady, setChromeReady] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(loadKlaviyo, 3000);
-    return () => clearTimeout(timer);
+    // Defer toast/sonner chunks until after page has painted — avoids bandwidth competition on mobile
+    const chromeTimer = setTimeout(() => setChromeReady(true), 2000);
+    return () => { clearTimeout(timer); clearTimeout(chromeTimer); };
   }, []);
 
   return (
     <>
-      <Suspense fallback={null}>
-        <Toaster />
-        <Sonner />
-      </Suspense>
-      {new URLSearchParams(window.location.search).get('debug') === 'true' && (
+      {chromeReady && (
+        <Suspense fallback={null}>
+          <Toaster />
+          <Sonner />
+        </Suspense>
+      )}
+      {isDebug && (
         <Suspense fallback={null}>
           <UTMDebugger />
         </Suspense>
