@@ -1,66 +1,54 @@
 
 
-## Fix: Preload Only the ONE Page the Visitor Is Loading
+## Fix: Eager-Import the 5 Landing Pages
 
-### The Problem
+### What's happening now
 
-Right now, lazy loading creates a waterfall: the browser downloads React, starts the router, THEN requests the page chunk as a second download. That second download is the black screen.
+The preload map in `main.tsx` is present but clearly not solving the black screen. The `lazy()` wrapper in `App.tsx` still forces React to show the Suspense fallback (black div) while it resolves. Your other Lovable project ("Low Ticket Playbook") works instantly because it eagerly imports all pages -- no lazy loading for primary routes.
 
-Eager-importing all 5 pages would fix the waterfall but bundles all 5 pages into one file -- wasteful when the visitor only needs one.
+### The fix
 
-### The Proper Fix
+One file change: `src/App.tsx`
 
-Add a **preload trigger** in `src/main.tsx` that fires the `import()` for the matching page **immediately**, before React even starts. This means the page chunk downloads **in parallel** with React initialization instead of after it.
+Convert the 5 landing page imports from `lazy()` to direct eager imports. Everything else stays exactly as-is.
 
-The visitor hitting `/produce-without-expensive-gear` only downloads that one page's code. The other 4 pages are never touched.
-
-```text
-Current waterfall (sequential):
-  Download main.js → Parse React → Start Router → Download page chunk → Render
-  |________________ BLACK SCREEN ___________________________________|
-
-Fixed (parallel):
-  Download main.js ──→ Parse React → Start Router → Render (chunk already ready)
-  Download page chunk ─────────────────────────↗
-  |________________ BLACK SCREEN ______|
+**Before (lines 14-18):**
+```
+const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
+const TheProducerBlueprint002Spotify = lazy(() => import("./pages/TheProducerBlueprint002Spotify"));
+const TheProducerBlueprint003Career = lazy(() => import("./pages/TheProducerBlueprint003Career"));
+const TheProducerBlueprint004Gear = lazy(() => import("./pages/TheProducerBlueprint004Gear"));
+const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBlueprint005Workflow"));
 ```
 
-### What Changes
-
-**`src/main.tsx`** -- Add a route-to-import map before `createRoot`. Check `window.location.pathname` and call the matching `import()` immediately. The browser caches the result, so when React's lazy() requests the same module later, it's already downloaded.
-
-```ts
-// Preload the matching page chunk immediately (before React mounts)
-const preloadMap: Record<string, () => Promise<unknown>> = {
-  '/producer-blueprint': () => import('./pages/TheProducerBlueprint001'),
-  '/build-your-music-catalog': () => import('./pages/TheProducerBlueprint002Spotify'),
-  '/make-money-with-music': () => import('./pages/TheProducerBlueprint003Career'),
-  '/produce-without-expensive-gear': () => import('./pages/TheProducerBlueprint004Gear'),
-  '/finish-more-tracks': () => import('./pages/TheProducerBlueprint005Workflow'),
-};
-preloadMap[window.location.pathname]?.();
-
-createRoot(document.getElementById("root")!).render(<App />);
+**After:**
+```
+import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
+import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
+import TheProducerBlueprint003Career from "./pages/TheProducerBlueprint003Career";
+import TheProducerBlueprint004Gear from "./pages/TheProducerBlueprint004Gear";
+import TheProducerBlueprint005Workflow from "./pages/TheProducerBlueprint005Workflow";
 ```
 
-**`src/App.tsx`** -- No changes. The lazy() imports stay as-is. They'll resolve instantly because the chunk is already cached from the preload.
+**Stays lazy (secondary pages):**
+- NotFound, ClaudeTest, ProducerAccelerator, PrivacyPolicy, TermsOfService, RefundPolicy, EarningsDisclaimer
 
-**Avatar images** -- Move the 4 hero avatars from `src/assets/avatars/` to `public/avatars/` and update the `src` references in all 5 page files from Vite imports to static paths (e.g., `src="/avatars/avatar-ben.webp"`). This lets the browser load them in parallel with JS instead of waiting for the JS to parse first.
+**Stays as-is:**
+- `Suspense` wrapper (still needed for the remaining lazy pages)
+- `BlackFallback` (still used by that Suspense)
+- `main.tsx` preload map (harmless, can stay or be removed later)
+- All routes, copy, layout, tracking, checkout, avatars
 
-### Files Changed
+### What does NOT need changing
 
-- `src/main.tsx` -- Add preload map (6 lines added)
-- `src/pages/TheProducerBlueprint001.tsx` -- Remove 4 avatar imports, update 4 src references
-- `src/pages/TheProducerBlueprint002Spotify.tsx` -- Same
-- `src/pages/TheProducerBlueprint003Career.tsx` -- Same
-- `src/pages/TheProducerBlueprint004Gear.tsx` -- Same
-- `src/pages/TheProducerBlueprint005Workflow.tsx` -- Same
-- Copy 4 files to `public/avatars/`
+- Avatar images: already moved to `public/avatars/` and referenced as static paths
+- `main.tsx`: preload map is already there (harmless to keep)
+- No page component files change at all
 
-### What Stays the Same
+### Why this works
 
-- All copy, layout, visual design, section order
-- Checkout flow, Shopify, tracking, Vidalytics
-- Route paths
-- Below-fold lazy loading
-- All other files untouched
+The 5 page components get bundled into the main JS file. When the browser downloads and parses that one file, React can render the page immediately -- no second network request, no Suspense fallback, no black screen. This matches exactly how your "Low Ticket Playbook" project works.
+
+### Files changed
+
+- `src/App.tsx` -- 5 lines changed (lazy to eager imports)
