@@ -1,49 +1,82 @@
 
 
-## Fix: Revert the Eager Imports (The Last Change Caused the Regression)
+## Fix: Remove Supabase from the Main Bundle + Make Redirect Instant
 
-### What broke it
+### Root cause (confirmed)
 
-The most recent code change converted the 5 landing page imports in `App.tsx` from `lazy()` to direct eager imports. This means **every visitor to any route** (including `/` which is just a redirect) must now download and parse all 5 landing pages plus all their dependencies before React can even mount.
+The delay on `/` proves the issue isn't the landing pages — it's the **main bundle itself** being too heavy. Here's why:
 
-Before that change, lazy loading meant each route only loaded what it needed. The redirect on `/` was near-instant because it only needed the tiny main bundle.
+1. `App.tsx` eagerly imports `UTMDebugger.tsx`
+2. `UTMDebugger.tsx` imports `sendZapierEvent` and `flushZapierQueue` from `zapier.ts`
+3. `zapier.ts` has a static import of `supabase` from `@/integrations/supabase/client`
+4. This pulls the entire Supabase JS SDK (~100KB+) into the main bundle
 
-### The fix
+Even though UTMDebugger only renders when `?debug=true`, the **module-level import chain** still executes for every visitor. Combined with React Router, Radix UI components (Toaster, Tooltip, Sonner, Toast), and TanStack Query — all eagerly imported — the main bundle is massive.
 
-**Revert `src/App.tsx`** back to lazy imports for the 5 landing pages. The preload map already in `main.tsx` handles pre-fetching the correct page chunk in parallel with the main bundle, so there's no black screen — the chunk is already downloaded by the time React needs it.
+The redirect on `/` uses `useEffect` inside a React component, so it can't fire until React has parsed everything, mounted, and run effects. That's where the 8-second gap comes from on mobile.
 
-**One file changed: `src/App.tsx`**
+### Two changes needed
 
-Replace the eager imports:
+**1. Make the Supabase import dynamic in `zapier.ts` (line 3)**
+
+Replace the static import:
 ```
-import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
-import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
-import TheProducerBlueprint003Career from "./pages/TheProducerBlueprint003Career";
-import TheProducerBlueprint004Gear from "./pages/TheProducerBlueprint004Gear";
-import TheProducerBlueprint005Workflow from "./pages/TheProducerBlueprint005Workflow";
-```
-
-Back to lazy imports:
-```
-const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
-const TheProducerBlueprint002Spotify = lazy(() => import("./pages/TheProducerBlueprint002Spotify"));
-const TheProducerBlueprint003Career = lazy(() => import("./pages/TheProducerBlueprint003Career"));
-const TheProducerBlueprint004Gear = lazy(() => import("./pages/TheProducerBlueprint004Gear"));
-const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBlueprint005Workflow"));
+import { supabase } from "@/integrations/supabase/client";
 ```
 
-### Why this won't cause a black screen
+With a dynamic import inside `tryEdge()` only:
+```
+async function tryEdge(url: string, payload: any) {
+  try {
+    const { supabase } = await import("@/integrations/supabase/client");
+    // ... rest unchanged
+  }
+}
+```
 
-The preload map in `main.tsx` (already in place) fires `import('./pages/TheProducerBlueprintXXX')` immediately on page load, **before React even mounts**. By the time React resolves the lazy component, the chunk is already cached. The Suspense fallback (black div) only shows if the chunk hasn't finished downloading yet — with the preload, it essentially never shows.
+And do the same in `flushZapierQueue()` which also calls `tryEdge` with `supabase`.
+
+This removes ~100KB+ from the main bundle. Supabase only loads when someone actually triggers a Zapier event (checkout, debug test).
+
+**2. Add an instant meta-refresh redirect in `index.html` for `/`**
+
+Since `/` is just a redirect to `https://roblate.com`, we can handle it before React even loads by adding a small inline script to `index.html`:
+
+```html
+<script>
+  if (window.location.pathname === '/') {
+    window.location.replace('https://roblate.com');
+  }
+</script>
+```
+
+Place this before the `<script type="module" src="/src/main.tsx">` tag. This makes the redirect instant — no waiting for React, no waiting for any JS bundle to parse.
+
+### Files changed
+
+| File | Change |
+|------|--------|
+| `src/lib/zapier.ts` | Remove static Supabase import (line 3). Add dynamic `await import()` inside `tryEdge` and `flushZapierQueue`. |
+| `index.html` | Add inline redirect script for `/` before the main module script. |
 
 ### What stays the same
-- All page components, BelowFold architecture, checkout flow
-- All tracking (Meta Pixel, Vidalytics, Klaviyo, Zapier)
-- The preload map in `main.tsx`
+
+- All landing pages, BelowFold architecture, checkout flow
+- All tracking (Meta Pixel, Vidalytics, Klaviyo)
+- Zapier functionality (works identically, just loads Supabase on-demand)
+- UTMDebugger (still works when `?debug=true`)
 - All routes, copy, layout, design
-- Secondary pages remain lazy-loaded
+
+### Expected impact
+
+- The `/` redirect becomes instant (no JS bundle needed)
+- Landing pages load faster because ~100KB of Supabase SDK is no longer in the main bundle
+- Supabase SDK only loads when checkout is initiated or debug mode sends a test event
 
 ### After publishing
-Test both:
-1. `audio.roblate.com` (the `/` redirect) — should be near-instant
-2. `audio.roblate.com/make-money-with-music` — landing page should load without the 8-second delay
+
+Test on mobile:
+1. `audio.roblate.com` — should redirect to `roblate.com` instantly (no delay)
+2. `audio.roblate.com/make-money-with-music` — should load significantly faster
+3. Test checkout flow to confirm Supabase/Zapier still works when needed
+
