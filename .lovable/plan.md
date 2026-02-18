@@ -1,82 +1,121 @@
 
 
-## Fix: Remove Supabase from the Main Bundle + Make Redirect Instant
+## Fix: Strip the Main Bundle Down to Bare Minimum
 
-### Root cause (confirmed)
+### The real problem
 
-The delay on `/` proves the issue isn't the landing pages — it's the **main bundle itself** being too heavy. Here's why:
+The domain reconnect didn't help because the issue is **bundle size and parse time on mobile**. The black screen you're seeing for 7-10 seconds is the time it takes a mobile browser to download, parse, and execute the main JavaScript bundle before React can mount and show anything.
 
-1. `App.tsx` eagerly imports `UTMDebugger.tsx`
-2. `UTMDebugger.tsx` imports `sendZapierEvent` and `flushZapierQueue` from `zapier.ts`
-3. `zapier.ts` has a static import of `supabase` from `@/integrations/supabase/client`
-4. This pulls the entire Supabase JS SDK (~100KB+) into the main bundle
+Right now, your main bundle eagerly includes all of this before a single pixel renders:
 
-Even though UTMDebugger only renders when `?debug=true`, the **module-level import chain** still executes for every visitor. Combined with React Router, Radix UI components (Toaster, Tooltip, Sonner, Toast), and TanStack Query — all eagerly imported — the main bundle is massive.
+| Library | Approx. Size | Actually Used? |
+|---------|-------------|----------------|
+| TanStack React Query | ~50KB | **No** - zero useQuery/useMutation calls in entire codebase |
+| Radix Toast + hook system | ~15KB | Only during checkout errors (rare) |
+| Sonner + next-themes | ~20KB | Only during checkout errors (rare) |
+| Radix Tooltip | ~15KB | Not used by any landing page |
+| UTMDebugger module | ~5KB+ | Only renders when ?debug=true |
 
-The redirect on `/` uses `useEffect` inside a React component, so it can't fire until React has parsed everything, mounted, and run effects. That's where the 8-second gap comes from on mobile.
+That's roughly **100KB+ of JavaScript** that every mobile visitor must parse before seeing anything, and none of it is needed for initial page render.
 
-### Two changes needed
+### The fix (4 changes to 1 file)
 
-**1. Make the Supabase import dynamic in `zapier.ts` (line 3)**
+All changes are in **`src/App.tsx`**:
 
-Replace the static import:
+**1. Remove TanStack React Query entirely**
+
+It's imported and wrapped around the entire app, but literally no component in the codebase uses `useQuery` or `useMutation`. Remove the import, the `QueryClient` instance, and the `QueryClientProvider` wrapper.
+
+**2. Remove TooltipProvider wrapper**
+
+No landing page uses tooltips. It's only used internally by sidebar.tsx and chart.tsx (which aren't part of any route). Remove the import and wrapper.
+
+**3. Lazy-load the Toasters**
+
+The `Toaster` and `Sonner` components only fire during checkout validation errors, which happens long after the page loads. Lazy-load them so they don't block initial render.
+
+**4. Lazy-load UTMDebugger**
+
+Even though it only renders when `?debug=true`, the static import means its entire module (including zapier.ts and marketing config) is parsed for every visitor. Making it lazy means the module is only loaded when debug mode is active.
+
+### What the new App.tsx will look like
+
+```tsx
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { loadKlaviyo } from "@/utils/loadKlaviyo";
+import Redirect from "./components/Redirect";
+
+// Lazy-loaded UI chrome (only needed for checkout error toasts)
+const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
+const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
+const UTMDebugger = lazy(() => import("@/components/UTMDebugger").then(m => ({ default: m.UTMDebugger })));
+
+// Lazy-loaded landing pages
+const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
+// ... (same as current for all 5 variants + secondary pages)
+
+const BlackFallback = <div className="bg-[#050505] min-h-screen" />;
+
+const App = () => {
+  useEffect(() => {
+    const timer = setTimeout(loadKlaviyo, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <Suspense fallback={null}>
+        <Toaster />
+        <Sonner />
+      </Suspense>
+      {new URLSearchParams(window.location.search).get('debug') === 'true' && (
+        <Suspense fallback={null}>
+          <UTMDebugger />
+        </Suspense>
+      )}
+      <BrowserRouter>
+        <Suspense fallback={BlackFallback}>
+          <Routes>
+            {/* ... all routes unchanged ... */}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </>
+  );
+};
 ```
-import { supabase } from "@/integrations/supabase/client";
-```
 
-With a dynamic import inside `tryEdge()` only:
-```
-async function tryEdge(url: string, payload: any) {
-  try {
-    const { supabase } = await import("@/integrations/supabase/client");
-    // ... rest unchanged
-  }
-}
-```
+### What's removed from the main bundle
 
-And do the same in `flushZapierQueue()` which also calls `tryEdge` with `supabase`.
-
-This removes ~100KB+ from the main bundle. Supabase only loads when someone actually triggers a Zapier event (checkout, debug test).
-
-**2. Add an instant meta-refresh redirect in `index.html` for `/`**
-
-Since `/` is just a redirect to `https://roblate.com`, we can handle it before React even loads by adding a small inline script to `index.html`:
-
-```html
-<script>
-  if (window.location.pathname === '/') {
-    window.location.replace('https://roblate.com');
-  }
-</script>
-```
-
-Place this before the `<script type="module" src="/src/main.tsx">` tag. This makes the redirect instant — no waiting for React, no waiting for any JS bundle to parse.
-
-### Files changed
-
-| File | Change |
-|------|--------|
-| `src/lib/zapier.ts` | Remove static Supabase import (line 3). Add dynamic `await import()` inside `tryEdge` and `flushZapierQueue`. |
-| `index.html` | Add inline redirect script for `/` before the main module script. |
+| Removed | Savings |
+|---------|---------|
+| @tanstack/react-query | ~50KB |
+| @radix-ui/react-tooltip | ~15KB |
+| sonner + next-themes (deferred) | ~20KB |
+| @radix-ui/react-toast (deferred) | ~15KB |
+| UTMDebugger + zapier chain (deferred) | ~5KB |
+| **Total** | **~105KB** |
 
 ### What stays the same
 
 - All landing pages, BelowFold architecture, checkout flow
-- All tracking (Meta Pixel, Vidalytics, Klaviyo)
-- Zapier functionality (works identically, just loads Supabase on-demand)
-- UTMDebugger (still works when `?debug=true`)
+- All tracking (Meta Pixel, Vidalytics, Klaviyo, Zapier)
+- Toast notifications still work during checkout (they just load on demand)
+- UTMDebugger still works with ?debug=true
 - All routes, copy, layout, design
+- The preload map in main.tsx
+- The inline redirect in index.html
 
-### Expected impact
+### Technical detail
 
-- The `/` redirect becomes instant (no JS bundle needed)
-- Landing pages load faster because ~100KB of Supabase SDK is no longer in the main bundle
-- Supabase SDK only loads when checkout is initiated or debug mode sends a test event
+- `QueryClientProvider` is removed because no component uses React Query hooks. If React Query is needed later, it can be re-added.
+- `TooltipProvider` is removed because no landing page route uses Radix Tooltip. The sidebar component has its own internal `TooltipProvider`.
+- The Toasters are wrapped in their own `Suspense` with `fallback={null}` so they don't block the page from rendering.
 
 ### After publishing
 
 Test on mobile:
-1. `audio.roblate.com` — should redirect to `roblate.com` instantly (no delay)
-2. `audio.roblate.com/make-money-with-music` — should load significantly faster
-3. Test checkout flow to confirm Supabase/Zapier still works when needed
-
+1. `audio.roblate.com/produce-without-expensive-gear` should load dramatically faster (105KB less JS to parse)
+2. `audio.roblate.com` redirect should remain instant
+3. Test checkout to confirm toast error messages still appear if you submit without a name/email
