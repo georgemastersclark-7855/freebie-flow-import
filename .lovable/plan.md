@@ -1,68 +1,66 @@
 
 
-## Fix: Split Pages So the Hero Loads Instantly
+## Fix: Preload Only the ONE Page the Visitor Is Loading
 
-### Why it's still a black screen
+### The Problem
 
-Your page files are each ~2,000 lines long. Even though only one variant loads, the browser must download and parse ALL 2,000 lines before it can show a single pixel. That includes ~600 lines of TestimonialCard and CurriculumSection components the user can't even see yet.
+Right now, lazy loading creates a waterfall: the browser downloads React, starts the router, THEN requests the page chunk as a second download. That second download is the black screen.
 
-Think of it like ordering a burger but the kitchen won't serve it until they've also cooked every side dish, dessert, and drink. You just want the burger first.
+Eager-importing all 5 pages would fix the waterfall but bundles all 5 pages into one file -- wasteful when the visitor only needs one.
 
-### The fix
+### The Proper Fix
 
-Split each page into two pieces:
+Add a **preload trigger** in `src/main.tsx` that fires the `import()` for the matching page **immediately**, before React even starts. This means the page chunk downloads **in parallel** with React initialization instead of after it.
 
-1. **Hero chunk (loads instantly)** -- the nav bar, headline, avatars, CTA button, and Vidalytics embed. This is roughly 250 lines of simple text and a few small avatar images. It renders in milliseconds.
-
-2. **Below-fold chunk (loads silently in background)** -- testimonials, curriculum, instructor bio, pricing, FAQ, footer. This is ~1,750 lines that loads via `React.lazy()` while the user is watching the hero. By the time they scroll, it's already there.
-
-There's no spinner, no loading indicator. The hero appears immediately, and the rest streams in invisibly behind it.
-
-### What this looks like in practice
-
-Each page file shrinks from ~2,000 lines to ~50 lines:
+The visitor hitting `/produce-without-expensive-gear` only downloads that one page's code. The other 4 pages are never touched.
 
 ```text
-Page file (tiny, loads fast):
-  - Hero section inline (~250 lines)
-  - lazy(() => import("./BelowFold")) for everything else
+Current waterfall (sequential):
+  Download main.js → Parse React → Start Router → Download page chunk → Render
+  |________________ BLACK SCREEN ___________________________________|
 
-BelowFold file (loads in background):
-  - TestimonialCard component
-  - CurriculumSection component  
-  - All remaining sections (social proof, pain, curriculum, pricing, FAQ, footer)
+Fixed (parallel):
+  Download main.js ──→ Parse React → Start Router → Render (chunk already ready)
+  Download page chunk ─────────────────────────↗
+  |________________ BLACK SCREEN ______|
 ```
 
-### What stays exactly the same
+### What Changes
 
-- All copy, layout, section order, visual styling
-- Checkout flow and Shopify integration
-- UTM tracking, Klaviyo, and Meta Pixel behavior
-- Vidalytics embed
-- All interactions (video playback, accordion, checkout form)
+**`src/main.tsx`** -- Add a route-to-import map before `createRoot`. Check `window.location.pathname` and call the matching `import()` immediately. The browser caches the result, so when React's lazy() requests the same module later, it's already downloaded.
 
-### Technical details
+```ts
+// Preload the matching page chunk immediately (before React mounts)
+const preloadMap: Record<string, () => Promise<unknown>> = {
+  '/producer-blueprint': () => import('./pages/TheProducerBlueprint001'),
+  '/build-your-music-catalog': () => import('./pages/TheProducerBlueprint002Spotify'),
+  '/make-money-with-music': () => import('./pages/TheProducerBlueprint003Career'),
+  '/produce-without-expensive-gear': () => import('./pages/TheProducerBlueprint004Gear'),
+  '/finish-more-tracks': () => import('./pages/TheProducerBlueprint005Workflow'),
+};
+preloadMap[window.location.pathname]?.();
 
-**New files created (5):**
-- `src/components/blueprint/BelowFold001.tsx`
-- `src/components/blueprint/BelowFold002Spotify.tsx`
-- `src/components/blueprint/BelowFold003Career.tsx`
-- `src/components/blueprint/BelowFold004Gear.tsx`
-- `src/components/blueprint/BelowFold005Workflow.tsx`
+createRoot(document.getElementById("root")!).render(<App />);
+```
 
-Each contains: TestimonialCard, CurriculumSection, and all JSX from line ~924 to end of file, plus the state/refs they need (orderBumpAdded, kieraPlaying, activeVideoId, modules, bonusModules, etc.).
+**`src/App.tsx`** -- No changes. The lazy() imports stay as-is. They'll resolve instantly because the chunk is already cached from the preload.
 
-**Modified files (5):**
-- `src/pages/TheProducerBlueprint001.tsx` through `005Workflow.tsx`
+**Avatar images** -- Move the 4 hero avatars from `src/assets/avatars/` to `public/avatars/` and update the `src` references in all 5 page files from Vite imports to static paths (e.g., `src="/avatars/avatar-ben.webp"`). This lets the browser load them in parallel with JS instead of waiting for the JS to parse first.
 
-Each shrinks to: imports, hooks (useShopifyCheckout, useProducerBlueprintMeta, usePageMeta, Vidalytics useEffect), hero JSX (nav + main), and a `Suspense`-wrapped lazy import of its BelowFold component. Props like `trackScrollToPricing`, `nameRef`, `emailRef`, `handleCheckout` are passed down to BelowFold.
+### Files Changed
 
-**How state is handled:**
-- State that only the below-fold uses (kieraPlaying, activeVideoId, orderBumpAdded, showAllWallOfProof) moves into the BelowFold component
-- Hooks that both need (useShopifyCheckout, useProducerBlueprintMeta) stay in the page and pass results as props
-- The Vidalytics script stays in the page component since it targets a hero-level DOM element
+- `src/main.tsx` -- Add preload map (6 lines added)
+- `src/pages/TheProducerBlueprint001.tsx` -- Remove 4 avatar imports, update 4 src references
+- `src/pages/TheProducerBlueprint002Spotify.tsx` -- Same
+- `src/pages/TheProducerBlueprint003Career.tsx` -- Same
+- `src/pages/TheProducerBlueprint004Gear.tsx` -- Same
+- `src/pages/TheProducerBlueprint005Workflow.tsx` -- Same
+- Copy 4 files to `public/avatars/`
 
-**Expected impact:**
-- Initial JS per page drops from ~2,000 lines (~200KB+) to ~250 lines (~20-30KB)
-- First contentful paint (headline + CTA + video embed) happens near-instantly
-- Below-fold content loads silently within 1-2 seconds
+### What Stays the Same
+
+- All copy, layout, visual design, section order
+- Checkout flow, Shopify, tracking, Vidalytics
+- Route paths
+- Below-fold lazy loading
+- All other files untouched
