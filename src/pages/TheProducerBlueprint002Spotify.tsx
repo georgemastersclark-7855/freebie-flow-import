@@ -17,17 +17,30 @@ const TheProducerBlueprint002Spotify = () => {
     canonical: "https://audio.roblate.com/build-your-music-catalog",
   });
 
+  // Load Vidalytics script (deferred to avoid blocking hero paint)
   useEffect(() => {
-    // Load Vidalytics script
-    const script = document.createElement("script");
-    script.src =
-      "https://fast.vidalytics.com/embeds/WKf5vBAN/V5HrhyRBNAeDtppA/";
-    script.async = true;
-    document.body.appendChild(script);
+    let script: HTMLScriptElement | null = null;
 
-    return () => {
-      document.body.removeChild(script);
+    const loadVidalytics = () => {
+      script = document.createElement("script");
+      script.src = "https://fast.vidalytics.com/embeds/WKf5vBAN/V5HrhyRBNAeDtppA/";
+      script.async = true;
+      document.body.appendChild(script);
     };
+
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(loadVidalytics, { timeout: 3000 });
+      return () => {
+        cancelIdleCallback(id);
+        if (script && document.body.contains(script)) document.body.removeChild(script);
+      };
+    } else {
+      const timer = setTimeout(loadVidalytics, 2000);
+      return () => {
+        clearTimeout(timer);
+        if (script && document.body.contains(script)) document.body.removeChild(script);
+      };
+    }
   }, []);
 
   return (
