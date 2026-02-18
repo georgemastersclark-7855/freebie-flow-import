@@ -5,11 +5,6 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight, Check, Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-// Above-fold assets (eager imports)
-import avatarBen from "@/assets/avatars/avatar-ben.webp";
-import avatarProducer1 from "@/assets/avatars/avatar-producer-1.webp";
-import avatarProducer2 from "@/assets/avatars/avatar-producer-2.webp";
-import avatarProducer3 from "@/assets/avatars/avatar-producer-3.webp";
 
 const BelowFold = lazy(() => import("@/components/blueprint/BelowFold001"));
 
@@ -76,19 +71,19 @@ const TheProducerBlueprint001 = () => {
         <div className="flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-10">
           <div className="flex -space-x-3 relative">
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
-              <AvatarImage src={avatarBen} className="object-cover" />
+              <AvatarImage src="/avatars/avatar-ben.webp" className="object-cover" />
               <AvatarFallback>B</AvatarFallback>
             </Avatar>
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
-              <AvatarImage src={avatarProducer1} className="object-cover" />
+              <AvatarImage src="/avatars/avatar-producer-1.webp" className="object-cover" />
               <AvatarFallback>P1</AvatarFallback>
             </Avatar>
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
-              <AvatarImage src={avatarProducer2} className="object-cover" />
+              <AvatarImage src="/avatars/avatar-producer-2.webp" className="object-cover" />
               <AvatarFallback>P2</AvatarFallback>
             </Avatar>
             <Avatar className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#050505]">
-              <AvatarImage src={avatarProducer3} className="object-cover" />
+              <AvatarImage src="/avatars/avatar-producer-3.webp" className="object-cover" />
               <AvatarFallback>P3</AvatarFallback>
             </Avatar>
           </div>
