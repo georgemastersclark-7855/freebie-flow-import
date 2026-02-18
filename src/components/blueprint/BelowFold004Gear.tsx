@@ -380,7 +380,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                   {/* MOBILE THUMBNAIL - Small square image/video (block md:hidden) */}
                   <div className="block md:hidden w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 m-4 mr-0">
                     {module.video ? (
-                      <video src={module.video} autoPlay loop muted playsInline className="w-full h-full object-cover" style={{ objectPosition: 'center 40%' }} />
+                      <video src={module.video} autoPlay loop muted playsInline preload="none" className="w-full h-full object-cover" style={{ objectPosition: 'center 40%' }} />
                     ) : (
                       <img 
                         src={module.image} 
@@ -395,7 +395,7 @@ const CurriculumSection = ({ onScrollToPricing }: { onScrollToPricing?: (loc: st
                   {/* DESKTOP IMAGE/VIDEO - Large w-1/3 (hidden md:block) */}
                   <div className="hidden md:block md:relative md:w-1/3 md:min-h-[200px] md:shrink-0 md:overflow-hidden md:rounded-l-2xl">
                     {module.video ? (
-                      <video src={module.video} autoPlay loop muted playsInline className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105" style={{ objectPosition: 'center 40%' }} />
+                      <video src={module.video} autoPlay loop muted playsInline preload="none" className="md:absolute md:inset-0 md:w-full md:h-full md:object-cover md:transition-transform md:duration-700 md:group-hover:scale-105" style={{ objectPosition: 'center 40%' }} />
                     ) : (
                       <img 
                         src={module.image} 
@@ -869,6 +869,8 @@ const BelowFold004Gear = ({ trackScrollToPricing, trackOrderBumpChecked, trackFi
                 <img 
                   src={usingAbletonGif}
                   alt="Using Ableton"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover opacity-90 scale-110"
                   style={{
                     objectPosition: '60% center', 
@@ -1028,6 +1030,7 @@ const BelowFold004Gear = ({ trackScrollToPricing, trackOrderBumpChecked, trackFi
             <video 
               src={robWorking3Loop} 
               autoPlay loop muted playsInline
+              preload="none"
               className="w-full h-full object-cover"
             />
           </div>
@@ -1150,7 +1153,7 @@ const BelowFold004Gear = ({ trackScrollToPricing, trackOrderBumpChecked, trackFi
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-32">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] rotate-2">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robGaryBarlow} alt="The A-List Sessions" className="w-full h-full object-cover object-center" />
+                  <img src={robGaryBarlow} alt="The A-List Sessions" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   2022: A-LIST
@@ -1171,7 +1174,7 @@ const BelowFold004Gear = ({ trackScrollToPricing, trackOrderBumpChecked, trackFi
             <div className="relative flex flex-col items-center group transition-all duration-500 md:mt-0">
               <div className="relative bg-white p-3 pb-8 shadow-2xl drop-shadow-2xl md:drop-shadow-none transform transition-transform duration-300 hover:scale-105 hover:z-20 w-[65%] -translate-x-8 md:w-full md:translate-x-0 max-w-[200px] md:max-w-[280px] -rotate-1">
                 <div className="aspect-square bg-gray-200 overflow-hidden mb-4 contrast-125 transition-all duration-500">
-                  <img src={robMarsmelloCropped} alt="The Producer Blueprint" className="w-full h-full object-cover object-center" />
+                  <img src={robMarsmelloCropped} alt="The Producer Blueprint" className="w-full h-full object-cover object-center" loading="lazy" decoding="async" />
                 </div>
                 <p className="text-center font-mono text-xs tracking-widest text-gray-800 uppercase">
                   TODAY: THE BLUEPRINT
@@ -1299,54 +1302,54 @@ const BelowFold004Gear = ({ trackScrollToPricing, trackOrderBumpChecked, trackFi
                 
                 {/* Screenshot 1 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  <img src={drewAdieuTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                 </div>
                 
                 {/* Screenshot 2 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  <img src={nateSawyerTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                 </div>
 
                 {/* Screenshot 3 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  <img src={austriaTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                 </div>
 
                 {/* Screenshot 4 */}
                 <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                  <img src={deepintheforestTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                 </div>
 
                 {/* Screenshots 5-10: hidden on mobile until "Show More" */}
                 <div className={`contents ${!showAllWallOfProof ? 'hidden sm:contents' : ''}`}>
                   {/* Screenshot 5 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                    <img src={completePackageTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </div>
 
                   {/* Screenshot 6 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                    <img src={aaronly0nsYoutubeTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </div>
 
                   {/* Screenshot 7 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                    <img src={rsmyth111Testimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </div>
 
                   {/* Screenshot 8 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                    <img src={levinMusicTestimonial} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </div>
 
                   {/* Screenshot 9 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                    <img src={testimonial1} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </div>
 
                   {/* Screenshot 10 */}
                   <div className="feedback-card break-inside-avoid rounded-2xl border-0 overflow-hidden shadow-2xl transition-transform duration-300 bg-white/[0.02] md:bg-transparent md:border md:border-white/10">
-                    <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" />
+                    <img src={testimonial2} alt="Student feedback" className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
                   </div>
                 </div>
 
