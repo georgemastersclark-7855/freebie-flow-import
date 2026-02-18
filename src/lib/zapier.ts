@@ -1,6 +1,6 @@
 // Robust Zapier/Klaviyo webhook sender with fallbacks
 import { getKlaviyoWebhookUrl } from "@/config/marketing";
-import { supabase } from "@/integrations/supabase/client";
+
 
 export type Transport = "edge" | "fetch" | "beacon" | "get";
 export type SendResult = { ok: boolean; method?: Transport; error?: string };
@@ -44,6 +44,7 @@ function toQuery(obj: Record<string, any>): string {
 
 async function tryEdge(url: string, payload: any) {
   try {
+    const { supabase } = await import("@/integrations/supabase/client");
     const { data, error } = await supabase.functions.invoke('zapier-relay', {
       body: { webhook: url, payload },
     });
