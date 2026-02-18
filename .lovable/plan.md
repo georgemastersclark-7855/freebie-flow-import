@@ -1,27 +1,20 @@
 
 
-## Fix: Eager-Import the 5 Landing Pages
+## Fix: Revert the Eager Imports (The Last Change Caused the Regression)
 
-### What's happening now
+### What broke it
 
-The preload map in `main.tsx` is present but clearly not solving the black screen. The `lazy()` wrapper in `App.tsx` still forces React to show the Suspense fallback (black div) while it resolves. Your other Lovable project ("Low Ticket Playbook") works instantly because it eagerly imports all pages -- no lazy loading for primary routes.
+The most recent code change converted the 5 landing page imports in `App.tsx` from `lazy()` to direct eager imports. This means **every visitor to any route** (including `/` which is just a redirect) must now download and parse all 5 landing pages plus all their dependencies before React can even mount.
+
+Before that change, lazy loading meant each route only loaded what it needed. The redirect on `/` was near-instant because it only needed the tiny main bundle.
 
 ### The fix
 
-One file change: `src/App.tsx`
+**Revert `src/App.tsx`** back to lazy imports for the 5 landing pages. The preload map already in `main.tsx` handles pre-fetching the correct page chunk in parallel with the main bundle, so there's no black screen — the chunk is already downloaded by the time React needs it.
 
-Convert the 5 landing page imports from `lazy()` to direct eager imports. Everything else stays exactly as-is.
+**One file changed: `src/App.tsx`**
 
-**Before (lines 14-18):**
-```
-const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
-const TheProducerBlueprint002Spotify = lazy(() => import("./pages/TheProducerBlueprint002Spotify"));
-const TheProducerBlueprint003Career = lazy(() => import("./pages/TheProducerBlueprint003Career"));
-const TheProducerBlueprint004Gear = lazy(() => import("./pages/TheProducerBlueprint004Gear"));
-const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBlueprint005Workflow"));
-```
-
-**After:**
+Replace the eager imports:
 ```
 import TheProducerBlueprint001 from "./pages/TheProducerBlueprint001";
 import TheProducerBlueprint002Spotify from "./pages/TheProducerBlueprint002Spotify";
@@ -30,25 +23,27 @@ import TheProducerBlueprint004Gear from "./pages/TheProducerBlueprint004Gear";
 import TheProducerBlueprint005Workflow from "./pages/TheProducerBlueprint005Workflow";
 ```
 
-**Stays lazy (secondary pages):**
-- NotFound, ClaudeTest, ProducerAccelerator, PrivacyPolicy, TermsOfService, RefundPolicy, EarningsDisclaimer
+Back to lazy imports:
+```
+const TheProducerBlueprint001 = lazy(() => import("./pages/TheProducerBlueprint001"));
+const TheProducerBlueprint002Spotify = lazy(() => import("./pages/TheProducerBlueprint002Spotify"));
+const TheProducerBlueprint003Career = lazy(() => import("./pages/TheProducerBlueprint003Career"));
+const TheProducerBlueprint004Gear = lazy(() => import("./pages/TheProducerBlueprint004Gear"));
+const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBlueprint005Workflow"));
+```
 
-**Stays as-is:**
-- `Suspense` wrapper (still needed for the remaining lazy pages)
-- `BlackFallback` (still used by that Suspense)
-- `main.tsx` preload map (harmless, can stay or be removed later)
-- All routes, copy, layout, tracking, checkout, avatars
+### Why this won't cause a black screen
 
-### What does NOT need changing
+The preload map in `main.tsx` (already in place) fires `import('./pages/TheProducerBlueprintXXX')` immediately on page load, **before React even mounts**. By the time React resolves the lazy component, the chunk is already cached. The Suspense fallback (black div) only shows if the chunk hasn't finished downloading yet — with the preload, it essentially never shows.
 
-- Avatar images: already moved to `public/avatars/` and referenced as static paths
-- `main.tsx`: preload map is already there (harmless to keep)
-- No page component files change at all
+### What stays the same
+- All page components, BelowFold architecture, checkout flow
+- All tracking (Meta Pixel, Vidalytics, Klaviyo, Zapier)
+- The preload map in `main.tsx`
+- All routes, copy, layout, design
+- Secondary pages remain lazy-loaded
 
-### Why this works
-
-The 5 page components get bundled into the main JS file. When the browser downloads and parses that one file, React can render the page immediately -- no second network request, no Suspense fallback, no black screen. This matches exactly how your "Low Ticket Playbook" project works.
-
-### Files changed
-
-- `src/App.tsx` -- 5 lines changed (lazy to eager imports)
+### After publishing
+Test both:
+1. `audio.roblate.com` (the `/` redirect) — should be near-instant
+2. `audio.roblate.com/make-money-with-music` — landing page should load without the 8-second delay
