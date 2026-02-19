@@ -11,6 +11,22 @@ export function useProducerBlueprintMeta(variant: string) {
   const pageViewFired = useRef(false);
   const viewContentFired = useRef(false);
 
+  const getSessionValue = (key: string): string | null => {
+    try {
+      return sessionStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  };
+
+  const setSessionValue = (key: string, value: string) => {
+    try {
+      sessionStorage.setItem(key, value);
+    } catch {
+      // Ignore storage failures and continue tracking.
+    }
+  };
+
   // ── On mount: init pixel (deferred), capture attribution, fire PageView ──
   useEffect(() => {
     // Capture attribution immediately (lightweight, no network)
@@ -22,9 +38,9 @@ export function useProducerBlueprintMeta(variant: string) {
 
       // Guard duplicate PageView per page load using sessionStorage
       const pvKey = `tpb_pv_${window.location.pathname}`;
-      if (!sessionStorage.getItem(pvKey) && !pageViewFired.current) {
+      if (!getSessionValue(pvKey) && !pageViewFired.current) {
         pageViewFired.current = true;
-        sessionStorage.setItem(pvKey, "1");
+        setSessionValue(pvKey, "1");
         trackStandard("PageView", { variant });
       }
     };

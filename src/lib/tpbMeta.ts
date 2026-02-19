@@ -44,6 +44,12 @@ function debugLog(...args: any[]) {
   }
 }
 
+function ensurePixelReady() {
+  if (!window.fbq || !pixelInitialized) {
+    initMetaPixel();
+  }
+}
+
 // ── Init ──────────────────────────────────────────────
 
 export function initMetaPixel() {
@@ -218,6 +224,7 @@ export function trackStandard(eventName: string, params?: Record<string, any>, e
   const mergedParams = { ...params, ...ctx };
 
   try {
+    ensurePixelReady();
     window.fbq("track", eventName, mergedParams, { eventID: eid });
     debugLog(`track "${eventName}"`, { params: mergedParams, eventID: eid });
   } catch (err) {
@@ -231,6 +238,7 @@ export function trackCustom(eventName: string, params?: Record<string, any>, eve
   const mergedParams = { ...params, ...ctx };
 
   try {
+    ensurePixelReady();
     window.fbq("trackCustom", eventName, mergedParams, { eventID: eid });
     debugLog(`trackCustom "${eventName}"`, { params: mergedParams, eventID: eid });
   } catch (err) {
