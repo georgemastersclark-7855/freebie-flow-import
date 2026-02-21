@@ -8,13 +8,24 @@ const STOREFRONT_TOKEN = "92053f10fedc25746cd619c30edadbde";
 const MAIN_PRODUCT_ID = "gid://shopify/Product/6953404334164";
 const BUMP_PRODUCT_ID = "gid://shopify/Product/15640127930755";
 
+type CheckoutTrackingPayload = {
+  value: number;
+  order_bump_selected: boolean;
+};
+
 export function useShopifyCheckout() {
   const clientRef = useRef<any>(null);
+  const checkoutInFlightRef = useRef(false);
   const [isLoading, setIsLoading] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
 
-  const handleCheckout = useCallback(async (orderBumpAdded: boolean) => {
+  const handleCheckout = useCallback(async (
+    orderBumpAdded: boolean,
+    onInitiateCheckout?: (payload: CheckoutTrackingPayload) => void,
+  ) => {
+    if (checkoutInFlightRef.current) return;
+
     const name = nameRef.current?.value?.trim() || "";
     const email = emailRef.current?.value?.trim() || "";
 
@@ -29,7 +40,13 @@ export function useShopifyCheckout() {
       return;
     }
 
+    checkoutInFlightRef.current = true;
     setIsLoading(true);
+
+    onInitiateCheckout?.({
+      value: orderBumpAdded ? 334 : 297,
+      order_bump_selected: orderBumpAdded,
+    });
 
     // Non-blocking lead capture
     sendZapierEvent({
@@ -40,8 +57,6 @@ export function useShopifyCheckout() {
       value: orderBumpAdded ? 334 : 297,
       source: "producer_blueprint",
     }).catch(() => {});
-
-    // Meta Pixel InitiateCheckout — fired via useProducerBlueprintMeta.trackFinalCheckoutClick() in each variant
 
     try {
       // Load SDK on demand if not already loaded
@@ -96,6 +111,7 @@ export function useShopifyCheckout() {
         description: "Checkout is temporarily unavailable — please refresh and try again.",
         variant: "destructive",
       });
+      checkoutInFlightRef.current = false;
       setIsLoading(false);
     }
   }, []);

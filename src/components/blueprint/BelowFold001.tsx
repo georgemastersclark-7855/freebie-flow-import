@@ -1546,8 +1546,7 @@ const BelowFold001 = ({ trackScrollToPricing, trackOrderBumpChecked, trackFinalC
 
                   <button
                     onClick={() => {
-                      trackFinalCheckoutClick({ value: orderBumpAdded ? 334 : 297, order_bump_selected: orderBumpAdded });
-                      handleCheckout(orderBumpAdded);
+                      handleCheckout(orderBumpAdded, trackFinalCheckoutClick);
                     }}
                     disabled={isLoading}
                     className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
