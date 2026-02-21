@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { loadKlaviyo } from "@/utils/loadKlaviyo";
+import { startZapierQueueAutoFlush } from "@/lib/zapier";
 import Redirect from "./components/Redirect";
 import { UTMDebugger } from "@/components/UTMDebugger";
 
@@ -32,6 +33,7 @@ const RouteFallback = (
 const App = () => {
   useEffect(() => {
     const timer = setTimeout(loadKlaviyo, 3000);
+    startZapierQueueAutoFlush();
     return () => clearTimeout(timer);
   }, []);
 

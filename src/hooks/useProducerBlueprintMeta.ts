@@ -6,6 +6,7 @@ import {
   trackCustom,
   generateEventId,
 } from "@/lib/tpbMeta";
+import { FIRE_META_INITIATE_CHECKOUT_ON_LP } from "@/config/marketing";
 
 export function useProducerBlueprintMeta(variant: string) {
   const pageViewFired = useRef(false);
@@ -105,13 +106,15 @@ export function useProducerBlueprintMeta(variant: string) {
   const trackFinalCheckoutClick = useCallback(
     ({ value, order_bump_selected }: { value: number; order_bump_selected: boolean }) => {
       const eid = generateEventId();
-      trackStandard("InitiateCheckout", {
-        value,
-        currency: "USD",
-        content_name: "The Producer Blueprint",
-        content_type: "product",
-        variant,
-      }, eid);
+      if (FIRE_META_INITIATE_CHECKOUT_ON_LP) {
+        trackStandard("InitiateCheckout", {
+          value,
+          currency: "USD",
+          content_name: "The Producer Blueprint",
+          content_type: "product",
+          variant,
+        }, eid);
+      }
       trackCustom("TPB_Checkout_Click", {
         variant,
         cta_location: "pricing_card",

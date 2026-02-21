@@ -2,6 +2,7 @@ import { useRef, useState, useCallback } from "react";
 import { toast } from "@/hooks/use-toast";
 import { sendZapierEvent } from "@/lib/zapier";
 import { loadShopifySDK } from "@/utils/loadShopifySDK";
+import { trackKlaviyoCheckoutStart } from "@/utils/loadKlaviyo";
 
 const SHOPIFY_DOMAIN = "the-producer-blueprint-7594.myshopify.com";
 const STOREFRONT_TOKEN = "92053f10fedc25746cd619c30edadbde";
@@ -12,6 +13,17 @@ type CheckoutTrackingPayload = {
   value: number;
   order_bump_selected: boolean;
 };
+
+function getSavedUTMParams(): Record<string, string> {
+  try {
+    const raw = localStorage.getItem("utm_params");
+    const parsed = raw ? JSON.parse(raw) : {};
+    if (!parsed || typeof parsed !== "object") return {};
+    return parsed as Record<string, string>;
+  } catch {
+    return {};
+  }
+}
 
 export function useShopifyCheckout() {
   const clientRef = useRef<any>(null);
@@ -42,21 +54,40 @@ export function useShopifyCheckout() {
 
     checkoutInFlightRef.current = true;
     setIsLoading(true);
+    const checkoutValue = orderBumpAdded ? 334 : 297;
+    const [firstName, ...lastParts] = name.split(" ");
+    const lastName = lastParts.join(" ") || "";
+    const utmParams = getSavedUTMParams();
 
     onInitiateCheckout?.({
-      value: orderBumpAdded ? 334 : 297,
+      value: checkoutValue,
       order_bump_selected: orderBumpAdded,
     });
 
-    // Non-blocking lead capture
-    sendZapierEvent({
+    // Primary lead capture path (acknowledged by edge relay or queued for retry).
+    const leadCapturePromise = sendZapierEvent({
       event_type: "initiate_checkout",
+      event_name: "InitiateCheckout",
       name,
+      first_name: firstName,
+      last_name: lastName,
       email,
       order_bump: orderBumpAdded,
-      value: orderBumpAdded ? 334 : 297,
+      order_bump_selected: orderBumpAdded,
+      value: checkoutValue,
+      currency: "USD",
       source: "producer_blueprint",
-    }).catch(() => {});
+      ...utmParams,
+    }).catch((error) => ({ ok: false, error: String(error) }));
+
+    // Secondary signal directly into Klaviyo's onsite queue.
+    trackKlaviyoCheckoutStart({
+      name,
+      email,
+      value: checkoutValue,
+      order_bump_selected: orderBumpAdded,
+      source: "producer_blueprint",
+    });
 
     try {
       // Load SDK on demand if not already loaded
@@ -93,9 +124,13 @@ export function useShopifyCheckout() {
       // Pre-fill email
       await client.checkout.updateEmail(updatedCheckout.id, email);
 
+      // Give lead capture a short head start before redirecting to Shopify.
+      await Promise.race([
+        leadCapturePromise,
+        new Promise((resolve) => setTimeout(resolve, 600)),
+      ]);
+
       // Build redirect URL with name params
-      const [firstName, ...lastParts] = name.split(" ");
-      const lastName = lastParts.join(" ") || "";
       const checkoutUrl = new URL(updatedCheckout.webUrl);
       checkoutUrl.searchParams.set("checkout[shipping_address][first_name]", firstName);
       if (lastName) {
