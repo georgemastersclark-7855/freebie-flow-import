@@ -1404,6 +1404,65 @@ const BelowFold001 = ({ trackScrollToPricing, trackOrderBumpChecked, trackFinalC
           </div>
         </section>
 
+        {/* ================= CLOSE SECTION: TWO-COLUMN CONTRAST ================= */}
+        <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-zinc-800">
+              
+              {/* Left Column - Muted/Static */}
+              <div className="bg-zinc-900/60 p-8 md:p-12 flex flex-col justify-center">
+                <p className="text-zinc-600 text-xs font-bold uppercase tracking-widest mb-4">Stay where you are</p>
+                <h3 className="text-2xl md:text-3xl font-bold text-zinc-400 tracking-tighter mb-4">
+                  Keep piecing together random advice.
+                </h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  You can keep bouncing between YouTube tips, free PDFs, and production hacks that never connect into one clear process. But that path keeps most producers stuck in unfinished tracks and inconsistent results.
+                </p>
+              </div>
+
+              {/* Right Column - Energised/Highlighted */}
+              <div className="bg-[#0A0A0A] border-t md:border-t-0 md:border-l border-zinc-800 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
+                {/* Accent glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#D3FF02]/10 blur-[100px] rounded-full pointer-events-none"></div>
+                <div className="relative z-10">
+                  <p className="text-[#D3FF02] text-xs font-bold uppercase tracking-widest mb-4">Or make the change</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tighter mb-4">
+                    Learn the full workflow and finish better music.
+                  </h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-8">
+                    Get instant access to the exact start-to-finish system behind 100M+ streams. From idea, to arrangement, to final master, you will know exactly what to do next every time.
+                  </p>
+                  <a 
+                    href="#pricing" 
+                    onClick={() => trackScrollToPricing({ cta_location: "close_section" })}
+                    className="inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-base md:text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+                  >
+                    Start The Blueprint Today
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* BRIDGE COPY + GIF */}
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center py-10 md:py-14">
+              <div className="text-center md:text-left">
+                <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
+                  You've seen what happens when producers follow a complete system instead of guessing. The Producer Blueprint gives you that system so you can make better records faster with the setup you already have.
+                </p>
+              </div>
+              <div className="flex justify-center relative">
+                <div className="relative group max-w-md w-full">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                  <video autoPlay muted loop playsInline preload="none" src={robChainsmokersGif}
+                    className="relative z-10 w-full rounded-2xl border border-white/10 drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ================= CHECKOUT SECTION ================= */}
         <section id="pricing" className="relative py-24 md:py-32 scroll-mt-20">
           <div className="max-w-xl mx-auto px-6">
@@ -1696,56 +1755,58 @@ const BelowFold001 = ({ trackScrollToPricing, trackOrderBumpChecked, trackFinalC
           </div>
         </section>
 
-        {/* ================= FINAL SELL: THE CROSSROADS ================= */}
+        {/* ================= WHO THIS IS FOR / NOT FOR ================= */}
         <section className="relative py-24 px-6 bg-[#050505] border-t border-zinc-900">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="max-w-4xl mx-auto">
+            
+            <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-zinc-800">
               
-              {/* Left: The Argument */}
-              <div className="order-2 md:order-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tighter">
-                  You have two choices from <span className="font-serif italic font-normal tracking-normal text-zinc-200">here.</span>
-                </h2>
-                
-                <div className="space-y-8">
-                  <div className="pl-6 border-l-2 border-zinc-800">
-                    <h4 className="text-zinc-400 font-bold uppercase tracking-wider text-xs mb-2">Option 1</h4>
-                    <p className="text-white font-medium text-lg mb-2">Keep guessing.</p>
-                    <p className="text-zinc-500 text-sm leading-relaxed">
-                      You can keep hunting for free tutorials, piecing together advice from different YouTubers, and wondering why your tracks still don't sound "pro." You might get there eventually, but it will cost you years of trial and error.
-                    </p>
-                  </div>
-
-                  <div className="pl-6 border-l-2 border-[#D3FF02]">
-                    <h4 className="text-[#D3FF02] font-bold uppercase tracking-wider text-xs mb-2">Option 2</h4>
-                    <p className="text-white font-medium text-lg mb-2">Steal my workflow.</p>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
-                      You get instant access to the exact workflows I use for major label releases. You skip the frustration, fix your workflow, and start finishing music you are proud to release.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-10">
-                  <a href="#pricing" onClick={() => trackScrollToPricing({ cta_location: "crossroads" })} className="w-full md:w-auto bg-white text-black px-8 py-4 rounded-xl text-lg font-bold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
-                    Join The Producer Blueprint
-                    <ArrowRight className="w-5 h-5" />
-                  </a>
-                  <p className="text-zinc-500 text-xs mt-4 text-center md:text-left">
-                    Instant Digital Access • One-Time Payment
-                  </p>
-                </div>
+              {/* Left: This is for you */}
+              <div className="bg-zinc-900/40 p-8 md:p-10">
+                <h3 className="text-xl font-bold text-white mb-6 tracking-tight">This is for you if...</h3>
+                <ul className="space-y-4">
+                  {[
+                    "You're tired of unfinished tracks and want a repeatable production process",
+                    "You want to write, produce, and finish better records from your current setup",
+                    "You're ready to stop guessing and follow a clear workflow from start to final master",
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Right: Visual Anchor */}
-              <div className="order-1 md:order-2 flex justify-center relative">
-                {/* Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#D3FF02]/20 blur-[100px] rounded-full pointer-events-none"></div>
-                
-                <video autoPlay muted loop playsInline preload="none" src={robChainsmokersGif}
-                  className="relative z-10 w-full max-w-md rounded-2xl drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
-                />
+              {/* Right: This isn't for you */}
+              <div className="bg-[#0A0A0A] border-t md:border-t-0 md:border-l border-zinc-800 p-8 md:p-10">
+                <h3 className="text-xl font-bold text-white mb-6 tracking-tight">This isn't for you if...</h3>
+                <ul className="space-y-4">
+                  {[
+                    "You're looking for a magic plugin instead of learning the actual process",
+                    "You want results without putting in the reps and finishing full tracks",
+                    "You're not willing to follow a structured system and apply it consistently",
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <X className="w-5 h-5 text-zinc-500 shrink-0 mt-0.5" />
+                      <span className="text-zinc-500 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+            </div>
 
+            {/* CTA Below */}
+            <div className="flex flex-col items-center mt-12">
+              <a 
+                href="#pricing" 
+                onClick={() => trackScrollToPricing({ cta_location: "who_this_is_for" })}
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)]"
+              >
+                Start The Blueprint Today
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <p className="mt-4 text-sm font-medium text-zinc-500">Get Instant Access</p>
             </div>
           </div>
         </section>

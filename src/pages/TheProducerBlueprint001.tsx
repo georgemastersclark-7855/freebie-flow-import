@@ -35,7 +35,7 @@ const TheProducerBlueprint001 = () => {
             i.getElementsByTagName("head")[0].appendChild(s);
           };}
           vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-        })(window, document, 'Vidalytics', 'vidalytics_embed_V5HrhyRBNAeDtppA', 'https://fast.vidalytics.com/embeds/TEaBLdFh/V5HrhyRBNAeDtppA/');
+        })(window, document, 'Vidalytics', 'vidalytics_embed_4iBaZRf5oOq2RymX', 'https://fast.vidalytics.com/embeds/TEaBLdFh/4iBaZRf5oOq2RymX/');
       `;
       document.body.appendChild(script);
     };
@@ -107,7 +107,7 @@ const TheProducerBlueprint001 = () => {
                 <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
               ))}
             </div>
-            <p className="text-zinc-500 text-sm"><p className="text-zinc-500 text-sm">1,200+ producers enrolled</p></p>
+            <p className="text-zinc-500 text-sm">1,200+ producers enrolled</p>
           </div>
         </div>
 
@@ -176,7 +176,7 @@ const TheProducerBlueprint001 = () => {
 
               {/* Vidalytics Embed */}
               <div
-                id="vidalytics_embed_V5HrhyRBNAeDtppA"
+                id="vidalytics_embed_4iBaZRf5oOq2RymX"
                 className="relative z-10 w-full"
                 style={{ width: "100%", position: "relative", paddingTop: "56.25%" }}
               />
