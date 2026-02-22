@@ -675,7 +675,7 @@ interface BelowFoldProps {
   nameRef: RefObject<HTMLInputElement>;
   emailRef: RefObject<HTMLInputElement>;
   isLoading: boolean;
-  handleCheckout: (orderBumpAdded: boolean) => Promise<void>;
+  handleCheckout: (orderBumpAdded: boolean, onInitiateCheckout?: (payload: { value: number; order_bump_selected: boolean }) => void) => Promise<void>;
 }
 
 const BelowFold003Career = ({ trackScrollToPricing, trackOrderBumpChecked, trackFinalCheckoutClick, nameRef, emailRef, isLoading, handleCheckout }: BelowFoldProps) => {
