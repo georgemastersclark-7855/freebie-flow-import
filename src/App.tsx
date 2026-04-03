@@ -16,6 +16,8 @@ const TheProducerBlueprint004Gear = lazy(() => import("./pages/TheProducerBluepr
 const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBlueprint005Workflow"));
 
 // Lazy-loaded secondary pages
+const LinkInBio = lazy(() => import("./pages/LinkInBio"));
+const Mentorship = lazy(() => import("./pages/Mentorship"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
 const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
@@ -60,6 +62,8 @@ const App = () => {
             <Route path="/legal/terms-of-service" element={<TermsOfService />} />
             <Route path="/legal/refund-policy" element={<RefundPolicy />} />
             <Route path="/legal/earnings-disclaimer" element={<EarningsDisclaimer />} />
+            <Route path="/links" element={<LinkInBio />} />
+            <Route path="/mentorship" element={<Mentorship />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

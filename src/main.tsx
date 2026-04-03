@@ -9,6 +9,8 @@ const preloadMap: Record<string, () => Promise<unknown>> = {
   '/make-money-with-music': () => import('./pages/TheProducerBlueprint003Career'),
   '/produce-without-expensive-gear': () => import('./pages/TheProducerBlueprint004Gear'),
   '/finish-more-tracks': () => import('./pages/TheProducerBlueprint005Workflow'),
+  '/links': () => import('./pages/LinkInBio'),
+  '/mentorship': () => import('./pages/Mentorship'),
 };
 preloadMap[window.location.pathname]?.();
 
