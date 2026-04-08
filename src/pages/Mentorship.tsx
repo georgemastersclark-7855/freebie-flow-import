@@ -29,15 +29,19 @@ const Mentorship = () => {
         {/* Opening letter with left border */}
         <div className="border-l-2 border-white/20 pl-6 mb-12">
           <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-            <span className="bg-[#297947]/30 text-white px-1">10 spots available.</span> This is the first cohort - I'm taking on 10 serious producers who want direct mentorship. I want your results and your testimonials. Once these spots are gone, price goes up. If this page is open, there is still a spot remaining.
+            I'm taking on 10 serious producers for direct mentorship. This is the first cohort at a reduced price, once these spaces are gone the next group will be at full price.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            I've been getting asked about mentorship for a while now. Rather than just doing one-off sessions, I've built something proper - a 6-week program where I work with a small group of producers directly.
+            I've been asked a lot about personalised mentorship for a long time now. Rather than pre-recorded courses and ad hoc Zoom sessions, I've been building something very special. A full 6-week program for serious producers.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            I'm keeping it to 10 people so I can give everyone the attention they deserve. Here's exactly what it is, how it works, and whether it's right for you.
+            I'm restricting this to only 10 people just to be sure that I can give everyone the attention they deserve.
+          </p>
+
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            Here's exactly what it is, how it works and whether it's right for you.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-8">
@@ -60,9 +64,9 @@ const Mentorship = () => {
 
         <ul className="space-y-3 mb-6">
           {[
-            "Personally listening to your tracks, telling you exactly what to fix and why, and working with you every week until your music sounds the way you hear it in your head",
-            "Coaching you through developing your sound, production skills, and social media presence",
-            "Bringing the experience of producing for The Chainsmokers, Marshmello and Clean Bandit directly to your music",
+            "Personally listening to your tracks, telling you exactly what to fix and why.",
+            "Coaching you through developing your sound, production skills, and social media presence.",
+            "Bringing the experience of producing for The Chainsmokers, Marshmello, Macklemore, Clean Bandit and more directly to your music",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
               <span className="text-white/40 mt-0.5">•</span>
@@ -84,7 +88,11 @@ const Mentorship = () => {
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          I've spent the last few years producing for artists like The Chainsmokers, Marshmello and Clean Bandit. I've built a career doing exactly what you're trying to do - and I want to bring that experience directly to your music.
+          I've spent the last few years writing and producing for artists like The Chainsmokers, Marshmello, Macklemore, Clean Bandit and others. I've built a successful business selling digital products, gained sponsorships from the biggest music brands in the world and I've built a global audience in the process. I've done this completely independently and I want to teach you exactly how I did it.
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+          I've spent the last few years producing for artists like The Chainsmokers, Marshmello and Clean Bandit. I've built a career doing exactly what you're trying to do and I want to bring that experience directly to your music.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
@@ -105,7 +113,7 @@ const Mentorship = () => {
             Weekly 1:1 Production Feedback
           </p>
           <p className="text-[15px] leading-relaxed text-white/80">
-            You send your work. I listen properly. I tell you exactly what to fix and why. Specific, actionable notes on your mix, your arrangement, your sound design, your everything. Every single week for 6 weeks.
+            You send your work. I listen properly. I tell you exactly what to fix and why. Specific, actionable notes on your mix, your arrangement, your sound design, everything. Every single week for 6 weeks.
           </p>
         </div>
 
@@ -115,7 +123,7 @@ const Mentorship = () => {
             6 Weekly Group Calls (Live)
           </p>
           <p className="text-[15px] leading-relaxed text-white/80">
-            I teach production techniques live, open up projects from major tracks, and do Q&A on anything you're working through - music or career. You can bring any track you're working on. This is where you see how I think in real time.
+            I teach production techniques live, open up projects from major tracks and do Q&A's on anything you're working through. Music or career advice. You can bring any track you're working on. This is where you see how I think in real time.
           </p>
         </div>
 
@@ -124,8 +132,14 @@ const Mentorship = () => {
           <p className="text-base font-bold text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
             Group Chat Access
           </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            You'll be given access to a private WhatsApp group. You can ask me anything, anytime. I check in every day. No waiting a week for a reply. If you're stuck at 1am on a mix decision, drop it in the chat. Production, gear or marketing questions, nothing is off limits. Photos, videos, voice messages, this is where the real magic happens.
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            No overthinking, get instant advice and feedback. A direct line.
+          </p>
           <p className="text-[15px] leading-relaxed text-white/80">
-            Ask me questions anytime. I check in every day. No waiting a week for a reply. If you're stuck at 1am on a mix decision, drop it in the chat. I'll get to it. My business partner George is in there too. He runs all the ads and ecommerce for Rob Late Audio - so if you're selling sample packs or want to know how to actually market your music, he's the one to ask.
+            My business partner George is in there too. He runs all my ads and e-commerce for Rob Late Audio so if you're selling sample packs or have marketing questions, he's got your back.
           </p>
         </div>
 
@@ -135,7 +149,7 @@ const Mentorship = () => {
             Your Cohort
           </p>
           <p className="text-[15px] leading-relaxed text-white/80">
-            You're grouped with other serious producers going through the program alongside you. People who are actually doing the work. Not lurkers. Not hobbyists. Producers who are here to level up.
+            You'll be grouped with other serious producers going through the program alongside you. People who are actually in the trenches doing the work. No time wasters, but real producers that are serious about improving their skills.
           </p>
         </div>
 
@@ -148,19 +162,19 @@ const Mentorship = () => {
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          We start with where you are right now. I listen to your current work, identify the biggest gaps holding you back, and give you a clear focus.
+          We start with a 1-1 Zoom call.. I listen to your current work, identify the biggest issues holding you back and give you a clear focus for the weeks ahead.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Most producers try to improve everything at once. That's why they don't improve at all. I'll identify what's actually holding your sound back and we go after that first. Then we keep building from there.
+          Most producers get overwhelmed trying to shortcut their way to improving everything at once. That's why they don't improve at all. I'll identify what's actually holding you back, then we keep building from there.
         </p>
 
         <div className="border-l-2 border-white/10 pl-6 my-8">
           <p className="text-[15px] leading-relaxed text-white/60 italic">
-            "Your low end is masking your kick, here's how to fix it."
+            "Your low end is ruining your mix, here's how to fix it."
           </p>
           <p className="text-[15px] leading-relaxed text-white/60 italic mt-2">
-            "Your B section drops energy because it's got the same elements as your A."
+            "Your arrangement is losing energy, you need to try doing this instead.."
           </p>
           <p className="text-[15px] leading-relaxed text-white/60 italic mt-2">
             "You need to focus on your drums right now - here's what you should be paying attention to..."
@@ -168,19 +182,19 @@ const Mentorship = () => {
         </div>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          That kind of feedback, every week, on your actual tracks.
+          I'll give you useful, actionable feedback, every week. You learn what's important, what not to waste your time on, send me updates and this continues for 6 weeks.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Then you go and work on it. Next week, you send me the updated version plus anything new. I listen again. We keep going for 6 weeks.
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          The other thing we'll work on is getting your music out there and building your profile. Whether that's dissecting what you're posting on Instagram and building your influence there, reaching out to artists or brands, or putting tracks on Spotify.
+          We'll also work on getting your music out there and building your profile. Whether that's dissecting what you're posting on social media to build your influence there, reaching out to artists or brands, or putting tracks on Spotify.
         </p>
 
         <p className="text-lg font-bold text-white mb-12" style={{ letterSpacing: "-0.02em" }}>
-          Making music is half the job. Getting it heard is the other half - and most producers never figure that part out.
+          Making music is half the job. Getting heard is the other half and most producers never figure that out.
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
+          By the end of the program, you'll see a clear transformation in your approach to music production.
         </p>
 
         {/* Divider */}
@@ -194,10 +208,10 @@ const Mentorship = () => {
         <ul className="space-y-4 mb-12">
           {[
             "You're looking for a magic pill. There's no shortcut that replaces putting in the hours. I'll show you exactly where to point those hours, but you still have to do the work.",
-            "You can't commit 5-10 hours per week to production during the 6 weeks. This only works if you're actually producing.",
-            "You're not open to feedback. I'm going to be honest about what needs fixing. That's what you're paying for.",
-            "You expect guaranteed placements or success. Nobody can promise that - anyone who does is lying to you.",
-            "You're brand new to production and haven't finished a track yet. This program is built around feedback on your work - you need to be at a level where you're actually making things I can give notes on.",
+            "You can't commit the necessary hours per week to making music. This only works if you're actively producing.",
+            "You're not open to constructive criticism. I'm going to be honest about what needs fixing. That's what you're paying for.",
+            "You expect guaranteed placements or success. Nobody can promise that. Anyone who does is lying to you.",
+            "You're brand new to production and haven't finished a track yet. This program is built around feedback on your work. You need to be at a level where you're actually making things that I can give notes on.",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
               <span className="text-red-400/80 mt-0.5">•</span>
@@ -213,8 +227,8 @@ const Mentorship = () => {
 
         <ul className="space-y-4 mb-6">
           {[
-            "You want someone who's actually doing it at the highest level to listen to YOUR music and tell you what to fix.",
-            "You're serious enough to commit 6 weeks of focused work. Not \"I'll try to find time\" - actually committed.",
+            "You want access to someone who's actually working at the highest level to listen to YOUR music and to tell you what to fix.",
+            "You're serious enough to commit 6 weeks of focused work. Not \"I'll try to find time\". You must be committed.",
             "You know your DAW. You've got a setup. You're past the basics. You need direction, not instruction.",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
@@ -225,7 +239,7 @@ const Mentorship = () => {
         </ul>
 
         <p className="text-lg font-bold text-white mb-12" style={{ letterSpacing: "-0.02em" }}>
-          By the end, you'll come out of the 6 weeks a different producer.
+          By the end, you'll come out of the 6 weeks a better producer.
         </p>
 
         {/* Divider */}
@@ -254,14 +268,14 @@ const Mentorship = () => {
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-6">
-          This is application-based. I don't take everyone who applies - I need to make sure you're a good fit and that I can actually help you. If you're not ready for the Mentorship yet, I'll tell you straight and point you in the right direction.
+          This is application-based only. I don't take on everyone that applies. I need to make sure you're a good fit and that I can actually help you. If you're not ready for the mentorship yet, I'll tell you straight and point you in the right direction.
         </p>
 
         <ol className="space-y-3 mb-8">
           {[
-            "Fill in a quick application below - takes a couple of minutes",
-            "I'll review your application personally and get back to you",
-            "If you're a fit, I'll get you set up. If you're not quite there yet, I'll tell you exactly what to work on first",
+            "Fill in a quick application below. This takes a couple of minutes.",
+            "I'll review your application personally and get back to you.",
+            "If we're a good fit, I'll get you set up. If you're not quite there yet, I'll tell you exactly what to work on first. But don't worry, there will be future cohorts for you to join when you're ready.",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
               <span className="text-white/40 mt-0.5 font-mono text-xs">{i + 1}.</span>
