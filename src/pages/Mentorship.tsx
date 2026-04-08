@@ -91,10 +91,6 @@ const Mentorship = () => {
           I've spent the last few years writing and producing for artists like The Chainsmokers, Marshmello, Macklemore, Clean Bandit and others. I've built a successful business selling digital products, gained sponsorships from the biggest music brands in the world and I've built a global audience in the process. I've done this completely independently and I want to teach you exactly how I did it.
         </p>
 
-        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          I've spent the last few years producing for artists like The Chainsmokers, Marshmello and Clean Bandit. I've built a career doing exactly what you're trying to do and I want to bring that experience directly to your music.
-        </p>
-
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
           I only take on people I'm confident I can help, so I'm looking for best-fit here.
         </p>
