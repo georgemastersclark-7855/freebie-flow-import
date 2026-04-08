@@ -250,13 +250,9 @@ const Mentorship = () => {
           Investment:
         </p>
 
-        <p className="text-[15px] leading-relaxed text-white/80 mb-2">
+        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
           <span className="text-white font-bold text-lg">$1,997</span>
           <span className="text-white/50 ml-2">for the full 6 weeks</span>
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          Or two payments of $1,097 (30 days apart) if you'd prefer to split it.
         </p>
 
         {/* Divider */}
