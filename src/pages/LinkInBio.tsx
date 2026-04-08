@@ -26,8 +26,8 @@ const links = [
 const LinkInBio = () => {
   return (
     <div
-      className="min-h-screen flex flex-col items-center px-4 py-10 relative overflow-hidden"
-      style={{ backgroundColor: "#050505" }}
+      className="min-h-screen flex flex-col items-center px-4 relative overflow-hidden"
+      style={{ backgroundColor: "#050505", paddingTop: "calc(env(safe-area-inset-top) + 2.5rem)", paddingBottom: "calc(env(safe-area-inset-bottom) + 2.5rem)" }}
     >
       {/* Monochrome glow effect */}
       <div
