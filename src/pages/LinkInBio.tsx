@@ -25,7 +25,7 @@ const links = [
     title: "30 Ways in 30 Days",
     subtitle: "Free daily production tips straight to your inbox",
     url: "https://audio.roblate.com/30-ways",
-    thumbnail: "/assets/rob-profile.jpg",
+    thumbnail: "/assets/rob-pov-studio-new.png",
   },
 ];
 
@@ -40,14 +40,14 @@ const LinkInBio = () => {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(220, 220, 220, 0.18) 0%, rgba(200, 200, 200, 0.06) 40%, transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(220, 220, 220, 0.14) 0%, rgba(200, 200, 200, 0.04) 40%, transparent 70%)",
         }}
       />
       <div
         className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[500px] h-[300px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(220, 220, 220, 0.1) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(220, 220, 220, 0.08) 0%, transparent 60%)",
         }}
       />
 
@@ -151,7 +151,7 @@ const LinkInBio = () => {
         </p>
 
         {/* Links */}
-        <div className="w-full max-w-lg flex flex-col gap-3">
+        <div className="w-full max-w-lg flex flex-col gap-4">
           {links.map((link, index) => (
             <a
               key={index}
