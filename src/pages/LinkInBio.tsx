@@ -151,7 +151,7 @@ const LinkInBio = () => {
         </p>
 
         {/* Links */}
-        <div className="w-full max-w-lg flex flex-col gap-4">
+        <div className="w-full max-w-lg flex flex-col gap-3">
           {links.map((link, index) => (
             <a
               key={index}
