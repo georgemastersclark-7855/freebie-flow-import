@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { loadKlaviyo } from "@/utils/loadKlaviyo";
 import robSignature from "/assets/rob-late-signature-white.png";
 
 const robProfile = "/assets/rob-profile.jpg";
@@ -22,6 +24,71 @@ const links = [
     thumbnail: "/assets/sound-packs-thumbnail.png",
   },
 ];
+
+const NewsletterSignup = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || loading) return;
+    setLoading(true);
+
+    loadKlaviyo();
+    window._learnq = window._learnq || [];
+    window._learnq.push(["identify", { $email: email, source: "link_in_bio_newsletter" }]);
+    window._learnq.push(["track", "Newsletter Signup", { source: "link_in_bio" }]);
+
+    // Small delay to let Klaviyo process
+    await new Promise((r) => setTimeout(r, 800));
+    setSubmitted(true);
+    setLoading(false);
+  };
+
+  if (submitted) {
+    return (
+      <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-[hsl(0_0%_7%)] p-6 mb-7 text-center">
+        <p className="text-white font-bold text-lg" style={{ letterSpacing: "-0.03em" }}>
+          You're in 🔥
+        </p>
+        <p className="text-white/50 text-sm mt-1">Check your inbox.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-[hsl(0_0%_7%)] p-6 mb-7">
+      <p
+        className="text-white font-bold text-lg mb-1"
+        style={{ letterSpacing: "-0.03em" }}
+      >
+        30 Ways in 30 Days
+      </p>
+      <p className="text-white/50 text-sm mb-4">
+        Daily production tips straight to your inbox. Free.
+      </p>
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Your email"
+          required
+          className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-white/25 transition-colors"
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-white text-black font-bold text-sm px-6 py-3 rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50 flex-shrink-0"
+          style={{ letterSpacing: "-0.02em" }}
+        >
+          {loading ? "..." : "Join"}
+        </button>
+      </form>
+    </div>
+  );
+};
 
 const LinkInBio = () => {
   return (
@@ -135,6 +202,9 @@ const LinkInBio = () => {
             </svg>
           </a>
         </div>
+
+        {/* Newsletter Signup */}
+        <NewsletterSignup />
 
         {/* Section header */}
         <p
