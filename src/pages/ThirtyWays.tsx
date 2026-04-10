@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { loadKlaviyo } from "@/utils/loadKlaviyo";
 
+const KLAVIYO_LIST_ID = "TUHS3v";
+const KLAVIYO_COMPANY_ID = "WrvxHn";
+
 const ThirtyWays = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -11,11 +15,21 @@ const ThirtyWays = () => {
     if (!email || loading) return;
     setLoading(true);
 
+    const nameParts = name.trim().split(/\s+/);
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ");
+
+    // Identify in Klaviyo
     loadKlaviyo();
     window._learnq = window._learnq || [];
     window._learnq.push([
       "identify",
-      { $email: email, source: "30_ways_squeeze" },
+      {
+        $email: email,
+        $first_name: firstName || undefined,
+        $last_name: lastName || undefined,
+        source: "30_ways_squeeze",
+      },
     ]);
     window._learnq.push([
       "track",
@@ -23,7 +37,36 @@ const ThirtyWays = () => {
       { source: "30_ways_squeeze" },
     ]);
 
-    await new Promise((r) => setTimeout(r, 800));
+    // Subscribe to Klaviyo list
+    try {
+      await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KLAVIYO_COMPANY_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", revision: "2024-02-15" },
+        body: JSON.stringify({
+          data: {
+            type: "subscription",
+            attributes: {
+              profile: {
+                data: {
+                  type: "profile",
+                  attributes: {
+                    email,
+                    first_name: firstName || undefined,
+                    last_name: lastName || undefined,
+                    properties: { source: "30_ways_squeeze" },
+                  },
+                },
+              },
+              list_id: KLAVIYO_LIST_ID,
+              custom_source: "30 Ways Squeeze Page",
+            },
+          },
+        }),
+      });
+    } catch (err) {
+      console.error("Klaviyo subscribe error:", err);
+    }
+
     setSubmitted(true);
     setLoading(false);
   };
@@ -66,6 +109,15 @@ const ThirtyWays = () => {
           </div>
         ) : (
           <>
+            {/* Photo */}
+            <div className="w-full max-w-sm mx-auto mb-8 rounded-2xl overflow-hidden border border-white/10">
+              <img
+                src="/assets/rob-marshmello-cropped.jpg"
+                alt="Rob Late x Marshmello"
+                className="w-full h-auto"
+              />
+            </div>
+
             {/* Badge */}
             <div className="inline-block mb-6">
               <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">
@@ -86,32 +138,39 @@ const ThirtyWays = () => {
               Level up your production game.
             </p>
             <p className="text-base text-white/40 mb-8 leading-relaxed">
-              One tip a day for 30 days. Straight from the studio. No fluff.
+              One lesson every day for 30 days. Straight from the studio.
             </p>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 mb-6">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 mb-6">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-base placeholder:text-white/25 focus:outline-none focus:border-white/20 transition-colors"
+              />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
                 required
-                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-base placeholder:text-white/25 focus:outline-none focus:border-white/20 transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-base placeholder:text-white/25 focus:outline-none focus:border-white/20 transition-colors"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-white text-black font-bold text-base px-8 py-4 rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50 flex-shrink-0"
+                className="w-full bg-white text-black font-bold text-base px-8 py-4 rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50"
                 style={{ letterSpacing: "-0.02em" }}
               >
-                {loading ? "..." : "Send me the tips"}
+                {loading ? "..." : "Send me the lessons"}
               </button>
             </form>
 
             {/* Trust line */}
             <p className="text-xs text-white/20">
-              Free. Unsubscribe any time. No spam, obviously.
+              Free. Unsubscribe any time.
             </p>
           </>
         )}
