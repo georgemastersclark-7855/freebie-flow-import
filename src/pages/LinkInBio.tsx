@@ -144,7 +144,7 @@ const LinkInBio = () => {
 
         {/* Section header */}
         <p
-          className="text-lg font-bold text-white mb-6"
+          className="text-lg font-bold text-white mb-4"
           style={{ letterSpacing: "-0.03em" }}
         >
           How I Can Help You:
