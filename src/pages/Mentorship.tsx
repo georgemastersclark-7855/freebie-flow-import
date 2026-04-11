@@ -23,13 +23,22 @@ const Mentorship = () => {
           </div>
         </div>
 
-        {/* Cohort info */}
-        <p className="text-sm font-semibold text-white/80 mb-8 tracking-wide">First cohort starting 27th April. 10 spots available.</p>
+        {/* Cohort status banner */}
+        <div className="w-full max-w-2xl rounded-xl border border-white/10 bg-white/[0.03] px-6 py-4 mb-8 flex items-center justify-between">
+          <div>
+            <p className="text-xs text-white/40 uppercase tracking-widest mb-1">Cohort 1</p>
+            <p className="text-lg font-bold text-white" style={{ letterSpacing: "-0.02em" }}>Starts 27th April</p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-white/40 uppercase tracking-widest mb-1">Spots</p>
+            <p className="text-lg font-bold text-[#22c55e]" style={{ letterSpacing: "-0.02em" }}>10 available</p>
+          </div>
+        </div>
 
         {/* Opening letter with left border */}
         <div className="border-l-2 border-white/20 pl-6 mb-12">
           <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-            I'm taking on 10 serious producers for direct mentorship. First cohort starts 27th April. When the 10 spots fill, I'm closing the doors and focusing on this group. The next cohort won't be for a while.
+            I'm taking on 10 serious producers for direct mentorship. When the 10 spots fill, I'm closing the doors and focusing on this group. The next cohort won't be for a while.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
