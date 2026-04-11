@@ -33,7 +33,7 @@ const Mentorship = () => {
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            I've been asked a lot about personalised mentorship for a long time now. Rather than pre-recorded courses and ad hoc Zoom sessions, I've been building something very special. A full 6-week program for serious producers.
+            I've been asked a lot about personalised mentorship for a long time now. Rather than pre-recorded courses and ad hoc Zoom sessions, I wanted to do something proper. 6 weeks working directly with a small group of producers.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
