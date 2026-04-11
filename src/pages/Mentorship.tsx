@@ -29,7 +29,7 @@ const Mentorship = () => {
         {/* Opening letter with left border */}
         <div className="border-l-2 border-white/20 pl-6 mb-12">
           <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-            I'm taking on 10 serious producers for direct mentorship. First cohort starts 27th April. Once these spots are gone, you'll have to wait for the next one.
+            I'm taking on 10 serious producers for direct mentorship. First cohort starts 27th April. When the 10 spots fill, I'm closing the doors and focusing on this group. The next cohort won't be for a while.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
