@@ -23,17 +23,8 @@ const Mentorship = () => {
           </div>
         </div>
 
-        {/* Cohort status banner */}
-        <div className="w-full max-w-2xl rounded-xl border border-white/10 bg-white/[0.03] px-6 py-4 mb-8 flex items-center justify-between">
-          <div>
-            <p className="text-xs text-white/40 uppercase tracking-widest mb-1">Cohort 1</p>
-            <p className="text-lg font-bold text-white" style={{ letterSpacing: "-0.02em" }}>Starts 27th April</p>
-          </div>
-          <div className="text-right">
-            <p className="text-xs text-white/40 uppercase tracking-widest mb-1">Spots</p>
-            <p className="text-lg font-bold text-[#22c55e]" style={{ letterSpacing: "-0.02em" }}>10 available</p>
-          </div>
-        </div>
+        {/* Cohort info */}
+        <p className="text-base font-bold text-white mb-8">First cohort starting 27th April. <span className="text-[#22c55e]">10 spots available.</span></p>
 
         {/* Opening letter with left border */}
         <div className="border-l-2 border-white/20 pl-6 mb-12">
