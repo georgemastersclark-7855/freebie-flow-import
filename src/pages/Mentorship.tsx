@@ -24,12 +24,12 @@ const Mentorship = () => {
         </div>
 
         {/* Cohort info */}
-        <p className="text-base font-bold text-white mb-8">First cohort starting 27th April. <span className="text-[#22c55e]">10 spots available.</span></p>
+        <p className="text-base font-bold text-white mb-8">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">8 spots available.</span></p>
 
         {/* Opening letter with left border */}
         <div className="border-l-2 border-white/20 pl-6 mb-12">
           <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-            I'm taking on 10 serious producers for direct mentorship. When the spots fill, I'm closing the doors to focus on getting results for this group. The next cohort won't be for a while.
+            I'm taking on 8 serious producers for direct mentorship. When the spots fill, I'm closing the doors to focus on getting results for this group. The next cohort won't be for a while.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
@@ -37,7 +37,7 @@ const Mentorship = () => {
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            I'm restricting this to only 10 people just to be sure that I can give everyone the attention they deserve.
+            I'm restricting this to only 8 people just to be sure that I can give everyone the attention they deserve.
           </p>
 
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
