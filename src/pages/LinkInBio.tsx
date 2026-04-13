@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import robSignature from "/assets/rob-late-signature-white.png";
 
 const robProfile = "/assets/rob-profile.jpg";
@@ -30,6 +31,10 @@ const links = [
 ];
 
 const LinkInBio = () => {
+  useEffect(() => {
+    document.title = "Rob Late";
+  }, []);
+
   return (
     <div
       className="min-h-screen flex flex-col items-center px-4 relative overflow-hidden"
