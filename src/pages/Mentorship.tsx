@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import robSignature from "/assets/rob-late-signature-white.png";
 
 const robProfile = "/assets/rob-profile.jpg";
 
 const Mentorship = () => {
+  useEffect(() => {
+    document.title = "Rob Late - Mentorship";
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#050505] text-white/90">
       <div className="max-w-2xl mx-auto px-6 py-16 font-sans">
