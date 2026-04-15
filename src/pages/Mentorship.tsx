@@ -29,8 +29,8 @@ const Mentorship = () => {
         </div>
 
         {/* Cohort info */}
-        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 14th April 2026, 11:24am</p>
-        <p className="text-base font-bold text-white mb-8">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">4 spots remaining.</span></p>
+        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 14th April 2026, 3:15pm</p>
+        <p className="text-base font-bold text-white mb-8">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">3 spots remaining.</span></p>
 
         {/* Opening letter with left border */}
         <div className="border-l-2 border-white/20 pl-6 mb-12">
