@@ -29,8 +29,9 @@ const Mentorship = () => {
         </div>
 
         {/* Cohort info */}
-        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 21st April 2026, 9:53pm</p>
-        <p className="text-base font-bold text-white mb-8">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">1 spot remaining.</span></p>
+        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 22nd April 2026, 10:50pm</p>
+        <p className="text-base font-bold text-white mb-4">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">SOLD OUT. Next cohort opens in June.</span></p>
+        <p className="text-sm text-white/60 mb-8">Email <span className="font-mono text-white">'WAITLIST'</span> to <a href="mailto:team@roblate.com?subject=WAITLIST" className="text-[#22c55e] underline hover:text-[#22c55e]/80">team@roblate.com</a> to be added to the June cohort waitlist.</p>
 
         {/* Opening letter with left border */}
         <div className="border-l-2 border-white/20 pl-6 mb-12">
@@ -260,38 +261,27 @@ const Mentorship = () => {
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* How to Apply */}
+        {/* Join the Waitlist */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          How to apply:
+          Join the waitlist:
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-6">
-          This is application-based only. I don't take on everyone that applies. I need to make sure you're a good fit and that I can actually help you. If you're not ready for the mentorship yet, I'll tell you straight and point you in the right direction.
+          The first cohort is sold out. The next cohort opens in June. If you'd like to be first in line when applications open, get on the waitlist below. I'll personally email you ahead of the next opening.
         </p>
-
-        <ol className="space-y-3 mb-8">
-          {[
-            "Fill in a quick application below. This takes a couple of minutes.",
-            "I'll review your application personally and get back to you.",
-            "If we're a good fit, I'll get you set up. If you're not quite there yet, I'll tell you exactly what to work on first. But don't worry, there will be future cohorts for you to join when you're ready.",
-          ].map((item, i) => (
-            <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
-              <span className="text-white/40 mt-0.5 font-mono text-xs">{i + 1}.</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ol>
 
         {/* CTA */}
         <a
-          href="https://form.typeform.com/to/EpLfx77a"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:team@roblate.com?subject=WAITLIST&body=Hey%20Rob%2C%0A%0AI%27d%20like%20to%20be%20added%20to%20the%20waitlist%20for%20the%20June%20mentorship%20cohort.%0A%0AThanks%2C"
           className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors"
           style={{ letterSpacing: "-0.02em" }}
         >
-          APPLY FOR THE MENTORSHIP
+          JOIN THE WAITLIST
         </a>
+
+        <p className="text-sm text-white/50 mt-4">
+          Or just email <span className="font-mono">'WAITLIST'</span> to team@roblate.com.
+        </p>
 
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/5">
