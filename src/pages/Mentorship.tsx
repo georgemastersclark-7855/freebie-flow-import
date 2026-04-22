@@ -31,7 +31,7 @@ const Mentorship = () => {
         {/* Cohort info */}
         <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 22nd April 2026, 10:24pm</p>
         <p className="text-base font-bold text-white mb-4">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">SOLD OUT. Next cohort opens in June.</span></p>
-        <p className="text-sm text-white/60 mb-8">Email <span className="font-mono text-white">'WAITLIST'</span> to <a href="mailto:team@roblate.com?subject=WAITLIST" className="text-[#22c55e] underline hover:text-[#22c55e]/80">team@roblate.com</a> to be added to the June cohort waitlist.</p>
+        <p className="text-sm text-white/60 mb-20">Email <span className="font-mono text-white">'WAITLIST'</span> to <a href="mailto:team@roblate.com?subject=WAITLIST" className="text-[#22c55e] underline hover:text-[#22c55e]/80">team@roblate.com</a> to be added to the June cohort waitlist.</p>
 
         {/* What This Is */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
@@ -56,12 +56,9 @@ const Mentorship = () => {
         </p>
 
         {/* Signature */}
-        <div className="mb-12">
+        <div className="mb-16">
           <img src={robSignature} alt="Rob Late" className="h-10 w-auto opacity-70" />
         </div>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
 
         {/* Why listen to me */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
