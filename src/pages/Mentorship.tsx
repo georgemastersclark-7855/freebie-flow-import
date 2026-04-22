@@ -33,37 +33,6 @@ const Mentorship = () => {
         <p className="text-base font-bold text-white mb-4">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">SOLD OUT. Next cohort opens in June.</span></p>
         <p className="text-sm text-white/60 mb-8">Email <span className="font-mono text-white">'WAITLIST'</span> to <a href="mailto:team@roblate.com?subject=WAITLIST" className="text-[#22c55e] underline hover:text-[#22c55e]/80">team@roblate.com</a> to be added to the June cohort waitlist.</p>
 
-        {/* Opening letter with left border */}
-        <div className="border-l-2 border-white/20 pl-6 mb-12">
-          <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-            I'm taking on 10 serious producers for direct mentorship. When the spots fill, I'm closing the doors to focus on getting results for this group. The next cohort won't be for a while.
-          </p>
-
-          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            I've been asked a lot about personalised mentorship for a long time now. Rather than pre-recorded courses and ad hoc Zoom sessions, I wanted to do something proper. 6 weeks working directly with a small group of producers.
-          </p>
-
-          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            I'm restricting this to only 10 people just to be sure that I can give everyone the attention they deserve.
-          </p>
-
-          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            Here's exactly what it is, how it works and whether it's right for you.
-          </p>
-
-          <p className="text-[15px] leading-relaxed text-white/80 mb-8">
-            Have a read, and apply with the link at the bottom.
-          </p>
-
-          {/* Signature */}
-          <div>
-            <img src={robSignature} alt="Rob Late" className="h-10 w-auto opacity-70" />
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
-
         {/* What This Is */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
           I'm going to work with you directly for 6 weeks to get your production to the level you've been chasing.
@@ -82,9 +51,14 @@ const Mentorship = () => {
           ))}
         </ul>
 
-        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
+        <p className="text-[15px] leading-relaxed text-white/80 mb-8">
           This is hands-on. Not a course. Not a community. Direct mentorship from someone who's doing it at the highest level.
         </p>
+
+        {/* Signature */}
+        <div className="mb-12">
+          <img src={robSignature} alt="Rob Late" className="h-10 w-auto opacity-70" />
+        </div>
 
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
