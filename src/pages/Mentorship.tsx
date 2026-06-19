@@ -30,7 +30,8 @@ const Mentorship = () => {
 
         {/* Cohort info */}
         <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 19th June 2026, 1:15pm</p>
-        <p className="text-base font-bold text-white mb-20">Next cohort <span className="text-[#22c55e]">starting July</span>. Join waitlist below - applications opening soon. <span className="text-[#22c55e]">First cohort sold out.</span></p>
+        <p className="text-base font-bold text-white mb-6">Next cohort <span className="text-[#22c55e]">starting July</span>. Join waitlist below - applications opening soon. <span className="text-[#22c55e]">First cohort sold out.</span></p>
+        <a href="mailto:team@roblate.com?subject=WAITLIST&body=Hey%20Rob%2C%0A%0AI%27d%20like%20to%20be%20added%20to%20the%20waitlist%20for%20the%20July%20mentorship%20cohort.%0A%0AThanks%2C" className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors mb-20" style={{ letterSpacing: "-0.02em" }}>JOIN THE WAITLIST</a>
 
         {/* What This Is */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
