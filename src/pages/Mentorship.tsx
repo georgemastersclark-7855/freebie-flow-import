@@ -29,9 +29,10 @@ const Mentorship = () => {
         </div>
 
         {/* Cohort info */}
-        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 22nd April 2026, 10:24pm</p>
-        <p className="text-base font-bold text-white mb-4">First cohort starting 27th April. <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">SOLD OUT. Next cohort opens in June.</span></p>
-        <p className="text-sm text-white/60 mb-20">Email <span className="font-mono text-white">'WAITLIST'</span> to <a href="mailto:team@roblate.com?subject=WAITLIST" className="text-[#22c55e] underline hover:text-[#22c55e]/80">team@roblate.com</a> to be added to the June cohort waitlist.</p>
+        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 19th June 2026</p>
+        <p className="text-base font-bold text-white mb-4">The next cohort starts in July, and I'm only taking a limited number of producers.</p>
+        <p className="text-sm text-white/60 mb-6">The first cohort sold out all 10 spots, so get your application in early to grab one.</p>
+        <a href="https://form.typeform.com/to/EpLfx77a" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors mb-20" style={{ letterSpacing: "-0.02em" }}>APPLY FOR THE JULY COHORT</a>
 
         {/* What This Is */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
@@ -232,27 +233,25 @@ const Mentorship = () => {
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* Join the Waitlist */}
+        {/* Apply */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          Join the waitlist:
+          Apply now:
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-6">
-          The first cohort is sold out. The next cohort opens in June. If you'd like to be first in line when applications open, get on the waitlist below. I'll personally email you ahead of the next opening.
+          The next cohort starts in July and spots are limited to keep it personal. Get your application in and I'll be in touch.
         </p>
 
         {/* CTA */}
         <a
-          href="mailto:team@roblate.com?subject=WAITLIST&body=Hey%20Rob%2C%0A%0AI%27d%20like%20to%20be%20added%20to%20the%20waitlist%20for%20the%20June%20mentorship%20cohort.%0A%0AThanks%2C"
+          href="https://form.typeform.com/to/EpLfx77a"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors"
           style={{ letterSpacing: "-0.02em" }}
         >
-          JOIN THE WAITLIST
+          APPLY FOR THE JULY COHORT
         </a>
-
-        <p className="text-sm text-white/50 mt-4">
-          Or just email <span className="font-mono">'WAITLIST'</span> to team@roblate.com.
-        </p>
 
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/5">
