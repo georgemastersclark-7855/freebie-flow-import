@@ -30,8 +30,7 @@ const Mentorship = () => {
 
         {/* Cohort info */}
         <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 19th June 2026, 1:15pm</p>
-        <p className="text-base font-bold text-white mb-6">First cohort <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">SOLD OUT</span>. Next cohort <span className="line-through text-white/40">opens in June</span> <span className="text-[#22c55e]">starts in July, spaces limited to 10 producers.</span></p>
-        <a href="https://form.typeform.com/to/EpLfx77a" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors mb-20" style={{ letterSpacing: "-0.02em" }}>APPLY NOW</a>
+        <p className="text-base font-bold text-white mb-20">Next cohort <span className="text-[#22c55e]">starting July</span>. Join waitlist below - applications opening soon. <span className="text-[#22c55e]">First cohort sold out.</span></p>
 
         {/* What This Is */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
@@ -232,25 +231,27 @@ const Mentorship = () => {
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* Apply */}
+        {/* Join the Waitlist */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          Apply now:
+          Join the waitlist:
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-6">
-          The next cohort starts in July and spots are limited to keep it personal. Get your application in and I'll be in touch.
+          The next cohort starts in July and applications are opening soon. Get on the waitlist below and I'll personally email you before spots open.
         </p>
 
         {/* CTA */}
         <a
-          href="https://form.typeform.com/to/EpLfx77a"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:team@roblate.com?subject=WAITLIST&body=Hey%20Rob%2C%0A%0AI%27d%20like%20to%20be%20added%20to%20the%20waitlist%20for%20the%20July%20mentorship%20cohort.%0A%0AThanks%2C"
           className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors"
           style={{ letterSpacing: "-0.02em" }}
         >
-          APPLY FOR THE JULY COHORT
+          JOIN THE WAITLIST
         </a>
+
+        <p className="text-sm text-white/50 mt-4">
+          Or just email <span className="font-mono">'WAITLIST'</span> to team@roblate.com.
+        </p>
 
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/5">
