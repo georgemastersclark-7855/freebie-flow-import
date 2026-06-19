@@ -29,10 +29,8 @@ const Mentorship = () => {
         </div>
 
         {/* Cohort info */}
-        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 19th June 2026</p>
-        <p className="text-base font-bold text-white mb-2">Spaces limited to 10 producers.</p>
-        <p className="text-sm text-white/60 mb-2">The first cohort sold out all 10 spots.</p>
-        <p className="text-base font-bold text-[#22c55e] mb-6">Apply now for the July cohort.</p>
+        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 19th June 2026, 1:15pm</p>
+        <p className="text-base font-bold text-white mb-6">First cohort <span className="line-through text-white/40">10 Spots</span> <span className="text-[#22c55e]">SOLD OUT</span>. Next cohort <span className="line-through text-white/40">opens in June</span> <span className="text-[#22c55e]">starts in July, spaces limited to 10 producers.</span></p>
         <a href="https://form.typeform.com/to/EpLfx77a" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors mb-20" style={{ letterSpacing: "-0.02em" }}>APPLY NOW</a>
 
         {/* What This Is */}
