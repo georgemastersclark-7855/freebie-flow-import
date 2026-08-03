@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { AlertCircle, ArrowLeft, ArrowRight, Check, CheckCircle2, Clock3, ExternalLink, Headphones, LockKeyhole, Send, Sparkles } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, Check, CheckCircle2, Clock3, ExternalLink, Headphones, LockKeyhole, Send } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { usePortalStore } from "../PortalStore";
@@ -42,11 +42,11 @@ export function WeekWorkspace() {
 
   const checks = useMemo(() => {
     if (!definition || !submission) return [];
-    return [
-      { complete: definition.requiredIdeas === 0 || submission.ideas.length >= definition.requiredIdeas, title: definition.requiredIdeas ? `${definition.requiredIdeas} ideas uploaded` : "Build-out uploaded" },
-      { complete: !definition.songRequired || Boolean(submission.song), title: definition.number >= 5 ? "Current build uploaded" : "Selected song uploaded" },
-      { complete: !definition.stemsRequired || Boolean(submission.stems), title: "Stems ZIP uploaded" },
-    ];
+    const requiredChecks: Array<{ complete: boolean; title: string }> = [];
+    if (definition.requiredIdeas > 0) requiredChecks.push({ complete: submission.ideas.length >= definition.requiredIdeas, title: `${definition.requiredIdeas} song ideas` });
+    if (definition.songRequired) requiredChecks.push({ complete: Boolean(submission.song), title: "Weekly song" });
+    if (definition.stemsRequired) requiredChecks.push({ complete: Boolean(submission.stems), title: "Stems" });
+    return requiredChecks;
   }, [definition, submission]);
 
   if (!definition || !submission || !Number.isInteger(weekNumber)) {
@@ -121,13 +121,13 @@ export function WeekWorkspace() {
       )}
 
       {submitted && !submission.feedback && (
-        <div className="mt-7 flex flex-col gap-4 rounded-2xl border border-[#9be15d]/20 bg-[#14200f] p-5 sm:flex-row sm:items-center"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#9be15d]/15 text-[#b8ef87]"><CheckCircle2 size={20} /></span><div className="min-w-0 flex-1"><div className="text-sm font-bold text-[#dff6cb]">Week {weekNumber} is with Rob.</div><div className="mt-1 text-xs text-[#8fa87b]">Rob will review your selected song before Sunday. Be on the call to find out which tracks go into surgery.</div></div>{submittedLabel && <span className="text-xs font-semibold text-[#8fa87b]">Submitted {submittedLabel}</span>}</div>
+        <div className="mt-7 flex flex-col gap-4 rounded-2xl border border-[#9be15d]/20 bg-[#14200f] p-5 sm:flex-row sm:items-center"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#9be15d]/15 text-[#b8ef87]"><CheckCircle2 size={20} /></span><div className="min-w-0 flex-1"><div className="text-sm font-bold text-[#dff6cb]">Week {weekNumber} submitted.</div><div className="mt-1 text-xs text-[#8fa87b]">Rob will review your weekly song before Sunday. Join the call to see which tracks are selected for surgery.</div></div>{submittedLabel && <span className="text-xs font-semibold text-[#8fa87b]">Submitted {submittedLabel}</span>}</div>
       )}
 
       {submission.feedback && (
         <a href="#feedback" className="mp-focus-ring mt-7 flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.025] p-5 transition hover:border-white/20 hover:bg-white/[0.04] sm:flex-row sm:items-center">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-[#aaa99f]"><Headphones size={18} /></span>
-          <span className="min-w-0 flex-1"><span className="block text-sm font-bold text-white">Rob's Week {weekNumber} feedback is ready.</span><span className="mt-1 block text-xs text-[#8f8e85]">Listen to the review and leave with one clear next action.</span></span>
+          <span className="min-w-0 flex-1"><span className="block text-sm font-bold text-white">Week {weekNumber} feedback is ready.</span><span className="mt-1 block text-xs text-[#8f8e85]">Listen to Rob's feedback.</span></span>
           <span className="inline-flex items-center gap-2 text-xs font-bold text-[#d9d6cd]">Open feedback <ArrowRight size={14} /></span>
         </a>
       )}
@@ -136,7 +136,7 @@ export function WeekWorkspace() {
         <div className="space-y-6">
           {submission.feedback && (
             <section id="feedback" className="scroll-mt-8 overflow-hidden rounded-3xl border border-white/[0.1] bg-[#141411]">
-              <div className="border-b border-white/[0.08] bg-white/[0.025] px-5 py-4 sm:px-7"><div className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-[#ddd9d0]"><Headphones size={17} /></span><div><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#8f8e85]">Feedback from Rob</div><div className="text-sm font-bold text-white">Week {weekNumber} review</div></div></div></div>
+              <div className="border-b border-white/[0.08] bg-white/[0.025] px-5 py-4 sm:px-7"><div className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-[#ddd9d0]"><Headphones size={17} /></span><div className="text-sm font-bold text-white">Rob's feedback</div></div></div>
               <div className="space-y-5 p-5 sm:p-7">
                 {submission.feedback.audioName && <MockAudioPlayer file={submission.feedback.audioUrl ? { id: `${submission.feedback.id}-audio`, name: submission.feedback.audioName, size: 0, kind: "feedback", uploadedAt: submission.feedback.publishedAt, objectUrl: submission.feedback.audioUrl } : undefined} label={submission.feedback.audioName} />}
                 {submission.feedback.videoUrl && <a href={submission.feedback.videoUrl} target="_blank" rel="noreferrer" className="mp-focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-[#f2efe6]">Watch Rob's video feedback <ExternalLink size={14} /></a>}
@@ -154,24 +154,24 @@ export function WeekWorkspace() {
           {definition.requiredIdeas > 0 && (
             <section className="mp-card rounded-3xl p-5 sm:p-7">
               <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-                <div><div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Part 1</div><h2 className="mp-display mt-1 text-[34px] leading-none text-[#ece9e0]">YOUR IDEAS</h2><p className="mt-2 text-xs leading-5 text-[#77766f]">Upload them as you make them. Rob's main review stays focused on the selected song.</p></div>
-                <div className="shrink-0 text-right"><div className="text-3xl font-black tracking-[-0.05em] text-white">{submission.ideas.length}/{definition.requiredIdeas}</div><div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#77766f]">ideas uploaded</div></div>
+                <div><h2 className="text-2xl font-black tracking-[-0.03em] text-[#ece9e0]">Song ideas</h2><p className="mt-1 text-xs leading-5 text-[#77766f]">Upload {definition.requiredIdeas} ideas this week.</p></div>
+                <div className="shrink-0 text-sm font-bold text-[#d9d6cd]">{submission.ideas.length}/{definition.requiredIdeas} uploaded</div>
               </div>
               <div className="mt-4"><ProgressBar value={submission.ideas.length} max={definition.requiredIdeas} /></div>
               <div className="mt-5 space-y-2">
                 {submission.ideas.map((file) => <FileRow key={file.id} file={file} onRemove={canEdit ? () => void removeUploadedFile("idea", file.id) : undefined} />)}
               </div>
-              {canEdit && <div className="mt-3"><FileDrop compact label={submission.ideas.length ? "Upload another idea" : "Upload your first idea"} help="MP3 or WAV. Name it so you can recognise it later." kind="idea" accept="audio/mpeg,audio/wav,audio/x-wav,.mp3,.wav" multiple onFiles={(files) => void uploadFiles("idea", files)} /></div>}
+              {canEdit && <div className="mt-3"><FileDrop compact label={submission.ideas.length ? "Upload another song idea" : "Upload a song idea"} help="MP3 or WAV." kind="idea" accept="audio/mpeg,audio/wav,audio/x-wav,.mp3,.wav" multiple onFiles={(files) => void uploadFiles("idea", files)} /></div>}
             </section>
           )}
 
           <section className="mp-card rounded-3xl p-5 sm:p-7">
-            <div><div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Part {definition.requiredIdeas > 0 ? 2 : 1}</div><h2 className="mp-display mt-1 text-[34px] leading-none text-[#ece9e0]">{definition.number >= 5 ? "YOUR CURRENT BUILD" : "YOUR SELECTED SONG"}</h2><p className="mt-2 text-xs leading-5 text-[#77766f]">This is the file Rob listens to and reviews. Use MP3 for speed or WAV for full quality.</p></div>
+            <div><h2 className="text-2xl font-black tracking-[-0.03em] text-[#ece9e0]">Weekly song</h2><p className="mt-1 text-xs leading-5 text-[#77766f]">Upload the version you want Rob to review.</p></div>
             <div className="mt-5">
               {submission.song ? (
                 <div className="space-y-3"><MockAudioPlayer file={submission.song} label={submission.song.name} /><FileRow file={submission.song} onRemove={canEdit ? () => void removeUploadedFile("song", submission.song!.id) : undefined} showDownload={submitted} /></div>
               ) : canEdit ? (
-                <FileDrop label="Upload your selected song" help="MP3 or WAV. Intro through the end of the first chorus." kind="song" accept="audio/mpeg,audio/wav,audio/x-wav,.mp3,.wav" onFiles={(files) => void uploadFiles("song", files)} />
+                <FileDrop label="Upload weekly song" help="MP3 or WAV. Intro to the end of the first chorus." kind="song" accept="audio/mpeg,audio/wav,audio/x-wav,.mp3,.wav" onFiles={(files) => void uploadFiles("song", files)} />
               ) : (
                 <div className="rounded-2xl border border-dashed border-white/10 p-6 text-center text-sm text-[#77766f]">No song uploaded yet.</div>
               )}
@@ -179,9 +179,9 @@ export function WeekWorkspace() {
           </section>
 
           <section className="mp-card rounded-3xl p-5 sm:p-7">
-            <div className="flex items-start gap-3"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/[0.05] text-[#aaa99f]"><Sparkles size={18} /></span><div><h2 className="text-base font-black text-[#ece9e0]">Surgery files</h2><p className="mt-1 text-xs leading-5 text-[#77766f]">Stems make this week's song eligible for live surgery. Uploading them does not mean Rob will review every stem separately.</p></div></div>
+            <div><h2 className="text-2xl font-black tracking-[-0.03em] text-[#ece9e0]">Stems</h2><p className="mt-1 text-xs leading-5 text-[#77766f]">Upload stems so this song can be selected for live surgery.</p></div>
             <div className="mt-5">
-              {submission.stems ? <FileRow file={submission.stems} onRemove={canEdit ? () => void removeUploadedFile("stems", submission.stems!.id) : undefined} showDownload={submitted} /> : canEdit ? <FileDrop label="Upload stems ZIP" help="One ZIP using the naming convention from the setup video." kind="stems" accept=".zip,application/zip" onFiles={(files) => void uploadFiles("stems", files)} /> : <div className="rounded-2xl border border-dashed border-white/10 p-6 text-center text-sm text-[#77766f]">No stems uploaded yet.</div>}
+              {submission.stems ? <FileRow file={submission.stems} onRemove={canEdit ? () => void removeUploadedFile("stems", submission.stems!.id) : undefined} showDownload={submitted} /> : canEdit ? <FileDrop label="Upload stems" help="One ZIP file." kind="stems" accept=".zip,application/zip" onFiles={(files) => void uploadFiles("stems", files)} /> : <div className="rounded-2xl border border-dashed border-white/10 p-6 text-center text-sm text-[#77766f]">No stems uploaded yet.</div>}
             </div>
           </section>
 
@@ -189,13 +189,12 @@ export function WeekWorkspace() {
 
         <aside className="space-y-4 xl:sticky xl:top-6 xl:self-start">
           <div className="mp-card rounded-3xl p-5">
-            <div className="flex items-center justify-between gap-3"><div><div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#77766f]">Weekly checklist</div><div className="mt-1 text-sm font-bold text-[#e5e1d8]">{completeCount} of {checks.length} ready</div></div><div className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-sm font-black text-[#aaa99f]">{Math.round((completeCount / checks.length) * 100)}%</div></div>
+            <div><div className="text-sm font-bold text-[#e5e1d8]">Before you submit</div><div className="mt-1 text-xs text-[#77766f]">{completeCount} of {checks.length} complete</div></div>
             <div className="mt-4"><ProgressBar value={completeCount} max={checks.length} /></div>
             <div className="mt-5 space-y-4">{checks.map((check) => <ChecklistRow key={check.title} complete={check.complete} title={check.title} />)}</div>
             {canEdit && <PrimaryButton onClick={() => void submit()} className="mt-6 w-full">Submit Week {weekNumber}<Send size={16} /></PrimaryButton>}
             {submissionMessage && <div className={cx("mt-3 rounded-xl border px-3 py-2.5 text-xs leading-5", submissionMessage.startsWith("Week") ? "border-[#9be15d]/15 bg-[#14200f] text-[#b8d99c]" : "border-red-400/20 bg-red-950/25 text-red-200")}><div className="flex items-start gap-2"><AlertCircle size={14} className="mt-0.5 shrink-0" />{submissionMessage}</div></div>}
           </div>
-          <div className="rounded-3xl border border-white/[0.08] bg-white/[0.025] p-5"><div className="text-sm font-bold text-[#dedbd2]">Remember the shape</div><p className="mt-2 text-xs leading-5 text-[#77766f]">Every weekly song runs from the intro to the end of the first chorus, at a commercial length.</p></div>
         </aside>
       </div>
 
