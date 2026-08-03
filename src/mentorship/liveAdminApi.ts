@@ -171,8 +171,8 @@ export async function uploadLiveAdminVideo(
   if (file.type !== "video/mp4" && !file.name.toLowerCase().endsWith(".mp4")) {
     throw new Error("Upload an MP4 video.");
   }
-  if (file.size > 300 * 1024 * 1024) {
-    throw new Error("This file is over 300 MB. Use the web-ready 1080p export.");
+  if (file.size > 2 * 1024 * 1024 * 1024) {
+    throw new Error("This file is over 2 GB. Export a smaller high-quality 4K version and try again.");
   }
   const path = `${resource.cohortId}/${resource.key}/${crypto.randomUUID()}-${safeFileName(file.name)}`;
   await resumableVideoUpload(file, path, onProgress);
