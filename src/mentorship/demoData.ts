@@ -9,9 +9,9 @@ import type {
 } from "./types";
 
 export const demoSetupVideos: SetupVideo[] = [
-  { id: "sound-library", title: "Craft your sound library", duration: "12 min", description: "Build a trusted stash so every session starts with momentum." },
-  { id: "session-template", title: "Build your session template", duration: "16 min", description: "Set up the workhorse project you will use for every weekly rep." },
-  { id: "reference-playlist", title: "Curate your reference playlist", duration: "11 min", description: "Choose the references that keep your structure and decisions honest." },
+  { id: "sound-library", title: "Craft your sound library", duration: "7:34", description: "Build a trusted stash so every session starts with momentum." },
+  { id: "session-template", title: "Build your session template", duration: "6:48", description: "Set up the workhorse project you will use for every weekly rep." },
+  { id: "reference-playlist", title: "Curate your reference playlist", duration: "4:21", description: "Choose the references that keep your structure and decisions honest." },
   { id: "stems-workflow", title: "Export stems properly", duration: "8 min", description: "Prepare files Rob can open quickly if your track is selected for surgery." },
 ];
 

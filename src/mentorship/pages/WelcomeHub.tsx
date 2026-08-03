@@ -43,15 +43,15 @@ export function WelcomeHub() {
             <div className="mb-4"><div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Pre-work</div><h2 className="mp-display mt-1 text-[34px] leading-none text-[#ece9e0]">YOUR SETUP VIDEOS</h2></div>
             <div className="grid gap-3 sm:grid-cols-2">
               {setupVideos.map((video, index) => (
-                <a href={video.url ?? undefined} target={video.url ? "_blank" : undefined} rel={video.url ? "noreferrer" : undefined} aria-disabled={!video.url} key={video.id} className={cx("group overflow-hidden rounded-2xl border border-white/[0.08] bg-[#141411] text-left transition", video.url ? "mp-focus-ring hover:border-white/15" : "cursor-not-allowed opacity-60")}>
-                  <div className="relative aspect-[16/8.5] overflow-hidden bg-[#1b1b17]">
+                <article key={video.id} className={cx("overflow-hidden rounded-2xl border border-white/[0.08] bg-[#141411] text-left", !video.url && "opacity-60")}>
+                  <div className="relative aspect-video overflow-hidden bg-[#1b1b17]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(255,255,255,0.06),transparent_38%)]" />
                     <div className="absolute left-4 top-4 text-[11px] font-black tracking-[0.15em] text-white/25">{String(index + 1).padStart(2, "0")}</div>
-                    <span className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-[#11110f] transition group-hover:scale-105"><Play size={15} fill="currentColor" className="ml-0.5" /></span>
+                    {video.url ? <video controls preload="metadata" className="relative h-full w-full bg-black object-contain" src={video.url}>Your browser cannot play this video.</video> : <span className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/70 text-[#11110f]"><Play size={15} fill="currentColor" className="ml-0.5" /></span>}
                     <span className="absolute bottom-3 right-3 rounded-full bg-black/55 px-2 py-1 text-[10px] font-bold text-white/70">{video.duration}</span>
                   </div>
                   <div className="p-4"><div className="text-sm font-black text-[#e8e4dc]">{video.title}</div><div className="mt-1.5 text-xs leading-5 text-[#77766f]">{video.description}</div></div>
-                </a>
+                </article>
               ))}
               {!setupVideos.length && <div className="col-span-full rounded-2xl border border-dashed border-white/10 p-6 text-sm text-[#77766f]">Rob's setup videos will appear here before your first call.</div>}
             </div>

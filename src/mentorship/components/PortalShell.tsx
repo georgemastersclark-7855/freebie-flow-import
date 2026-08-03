@@ -7,6 +7,7 @@ import {
   Gauge,
   LogOut,
   Menu,
+  Video,
   Sparkles,
   X,
 } from "lucide-react";
@@ -22,6 +23,7 @@ const studentNavigation = [
 
 const staffNavigation = [
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge },
+  { to: "/mentorship-portal/admin/videos", label: "Setup videos", icon: Video },
   { to: "/mentorship-portal/admin/review/review-maya-w2", label: "Review queue", icon: ClipboardList },
 ];
 

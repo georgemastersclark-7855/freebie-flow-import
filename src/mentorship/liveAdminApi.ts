@@ -2,6 +2,7 @@
 // This adapter stays isolated until the mentorship migration is applied and the
 // generated Supabase Database type can be refreshed.
 import { supabase } from "@/integrations/supabase/client";
+import { Upload } from "tus-js-client";
 import type {
   AdminOverview,
   AdminStudent,
@@ -13,6 +14,21 @@ import type {
 const db = supabase as any;
 const submissionsBucket = "mentorship-submissions";
 const feedbackBucket = "mentorship-feedback";
+const videosBucket = "mentorship-videos";
+
+export interface AdminVideoResource {
+  id: string;
+  cohortId: string;
+  key: string;
+  kind: "welcome_video" | "setup_video";
+  title: string;
+  description: string;
+  duration: string;
+  position: number;
+  published: boolean;
+  storagePath?: string;
+  videoUrl?: string;
+}
 
 type FeedbackInput = {
   writtenNotes: string;
@@ -86,6 +102,97 @@ async function findWorkingCohort() {
     if (data) return data;
   }
   throw new Error("No active or draft mentorship cohort exists yet.");
+}
+
+export async function loadLiveAdminVideoResources(): Promise<AdminVideoResource[]> {
+  const cohort = await findWorkingCohort();
+  const { data, error } = await db
+    .from("mentorship_resources")
+    .select("id, cohort_id, resource_key, resource_kind, title, description, duration_label, position, published, storage_path, video_url")
+    .eq("cohort_id", cohort.id)
+    .order("position");
+  if (error) throw error;
+  return (data ?? []).map((row: any) => ({
+    id: row.id,
+    cohortId: row.cohort_id,
+    key: row.resource_key,
+    kind: row.resource_kind,
+    title: row.title,
+    description: row.description,
+    duration: row.duration_label ?? "",
+    position: row.position,
+    published: row.published,
+    storagePath: row.storage_path ?? undefined,
+    videoUrl: row.video_url ?? undefined,
+  }));
+}
+
+const resumableVideoUpload = async (
+  file: File,
+  objectPath: string,
+  onProgress?: (percentage: number) => void,
+) => {
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+  const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+  const { data: sessionData } = await supabase.auth.getSession();
+  const accessToken = sessionData.session?.access_token;
+  if (!supabaseUrl || !publishableKey || !accessToken) throw new Error("Your session expired. Sign in again.");
+
+  await new Promise<void>((resolve, reject) => {
+    const upload = new Upload(file, {
+      endpoint: `${supabaseUrl}/storage/v1/upload/resumable`,
+      retryDelays: [0, 1_000, 3_000, 5_000, 10_000],
+      headers: { authorization: `Bearer ${accessToken}`, apikey: publishableKey },
+      uploadDataDuringCreation: true,
+      removeFingerprintOnSuccess: true,
+      chunkSize: 6 * 1024 * 1024,
+      metadata: {
+        bucketName: videosBucket,
+        objectName: objectPath,
+        contentType: "video/mp4",
+        cacheControl: "3600",
+      },
+      onError: (error) => reject(error),
+      onProgress: (uploaded, total) => onProgress?.(total ? Math.round((uploaded / total) * 100) : 0),
+      onSuccess: () => resolve(),
+    });
+    upload.findPreviousUploads().then((previous) => {
+      if (previous[0]) upload.resumeFromPreviousUpload(previous[0]);
+      upload.start();
+    }).catch(reject);
+  });
+};
+
+export async function uploadLiveAdminVideo(
+  resource: AdminVideoResource,
+  file: File,
+  onProgress?: (percentage: number) => void,
+) {
+  if (file.type !== "video/mp4" && !file.name.toLowerCase().endsWith(".mp4")) {
+    throw new Error("Upload an MP4 video.");
+  }
+  if (file.size > 300 * 1024 * 1024) {
+    throw new Error("This file is over 300 MB. Use the web-ready 1080p export.");
+  }
+  const path = `${resource.cohortId}/${resource.key}/${crypto.randomUUID()}-${safeFileName(file.name)}`;
+  await resumableVideoUpload(file, path, onProgress);
+  const { error } = await db.from("mentorship_resources").update({
+    storage_path: path,
+    video_url: null,
+    published: true,
+  }).eq("id", resource.id);
+  if (error) {
+    await db.storage.from(videosBucket).remove([path]);
+    throw error;
+  }
+  if (resource.storagePath && resource.storagePath !== path) {
+    await db.storage.from(videosBucket).remove([resource.storagePath]);
+  }
+}
+
+export async function setLiveAdminVideoPublished(resourceId: string, published: boolean) {
+  const { error } = await db.from("mentorship_resources").update({ published }).eq("id", resourceId);
+  if (error) throw error;
 }
 
 export async function loadLiveAdminOverview(): Promise<AdminOverview> {

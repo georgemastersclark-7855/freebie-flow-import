@@ -8,6 +8,7 @@ import { WeekWorkspace } from "./pages/WeekWorkspace";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminReview } from "./pages/AdminReview";
 import { PortalSetPassword } from "./pages/PortalSetPassword";
+import { AdminVideos } from "./pages/AdminVideos";
 import "./portal.css";
 
 function ProtectedPortal() {
@@ -52,6 +53,7 @@ export default function MentorshipPortal() {
           </Route>
           <Route element={<StaffOnly />}>
             <Route path="admin" element={<AdminDashboard />} />
+            <Route path="admin/videos" element={<AdminVideos />} />
             <Route path="admin/review/:reviewId" element={<AdminReview />} />
           </Route>
         </Route>

@@ -20,6 +20,7 @@ import type {
 const db = supabase as any;
 const submissionsBucket = "mentorship-submissions";
 const feedbackBucket = "mentorship-feedback";
+const videosBucket = "mentorship-videos";
 
 interface ProfileRow {
   user_id: string;
@@ -102,6 +103,7 @@ interface ResourceRow {
   description: string;
   duration_label: string | null;
   video_url: string | null;
+  storage_path: string | null;
 }
 
 interface CallRow {
@@ -193,7 +195,7 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     db.from("mentorship_onboarding_tasks").select("*").eq("cohort_id", enrollment.cohort_id).order("position"),
     db.from("mentorship_onboarding_progress").select("task_id, completed_at").eq("enrollment_id", enrollment.id),
     db.from("mentorship_submissions").select("id, week_id, state, submitted_at").eq("enrollment_id", enrollment.id),
-    db.from("mentorship_resources").select("id, resource_kind, title, description, duration_label, video_url").eq("cohort_id", enrollment.cohort_id).eq("published", true).order("position"),
+    db.from("mentorship_resources").select("id, resource_kind, title, description, duration_label, video_url, storage_path").eq("cohort_id", enrollment.cohort_id).eq("published", true).order("position"),
     db.from("mentorship_calls").select("id, title, starts_at, calendar_url, circle_event_url").eq("cohort_id", enrollment.cohort_id).gte("starts_at", new Date().toISOString()).order("starts_at").limit(1).maybeSingle(),
   ]);
 
@@ -283,16 +285,19 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     complete: completedTaskIds.has(task.id),
   }));
 
-  const setupVideos: SetupVideo[] = resourceRows
+  const setupVideos: SetupVideo[] = await Promise.all(resourceRows
     .filter((resource) => resource.resource_kind === "setup_video")
-    .map((resource) => ({
+    .map(async (resource) => ({
       id: resource.id,
       title: resource.title,
       duration: resource.duration_label ?? "",
       description: resource.description,
-      url: resource.video_url ?? undefined,
-    }));
-  const welcomeVideoUrl = resourceRows.find((resource) => resource.resource_kind === "welcome_video")?.video_url ?? undefined;
+      url: resource.video_url ?? await signedUrl(videosBucket, resource.storage_path),
+    })));
+  const welcomeVideo = resourceRows.find((resource) => resource.resource_kind === "welcome_video");
+  const welcomeVideoUrl = welcomeVideo
+    ? welcomeVideo.video_url ?? await signedUrl(videosBucket, welcomeVideo.storage_path)
+    : undefined;
   const firstCall: PortalCall | undefined = firstCallRow ? {
     id: firstCallRow.id,
     title: firstCallRow.title,
