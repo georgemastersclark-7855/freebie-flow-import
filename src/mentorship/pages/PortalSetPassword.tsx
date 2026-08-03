@@ -36,7 +36,7 @@ export function PortalSetPassword() {
       <div className="w-full max-w-[440px]">
         <PortalMark />
         <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-          <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D3FF02]">Your account</div>
+          <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#77766f]">Producer mentorship</div>
           <h1 className="mp-display mt-3 text-[44px] leading-none text-[#f2efe6]">SET YOUR PASSWORD</h1>
           <p className="mt-3 text-sm leading-6 text-[#8f8e85]">Choose it once, then this device can keep you signed in throughout the mentorship.</p>
           <form onSubmit={submit} className="mt-7 space-y-4">

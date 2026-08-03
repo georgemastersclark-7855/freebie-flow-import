@@ -55,15 +55,14 @@ export function PortalLogin() {
     <div className="mentorship-portal relative grid min-h-screen overflow-hidden lg:grid-cols-[1.08fr_0.92fr]">
       <div className="mp-grain absolute inset-0 z-30" />
       <section className="relative hidden min-h-screen overflow-hidden lg:block">
-        <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover opacity-65" src={robWorking} />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/35 to-[#0b0b0a]" />
+        <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover opacity-45 grayscale" src={robWorking} />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/55 to-[#0b0b0a]" />
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent" />
         <div className="relative z-10 flex h-full flex-col justify-between p-10 xl:p-14">
           <PortalMark />
           <div className="max-w-[560px] pb-6">
-            <div className="mb-5 h-px w-14 bg-[#D3FF02]" />
-            <h1 className="mp-display text-[62px] leading-[0.92] text-white xl:text-[76px]">YOUR SIX WEEKS, ORGANISED.</h1>
-            <p className="mt-5 max-w-md text-[15px] leading-7 text-white/65">Upload the work. Get Rob's feedback. See the folder grow.</p>
+            <h1 className="mp-display text-[62px] leading-[0.92] text-white xl:text-[76px]">ROB LATE'S PRODUCER MENTORSHIP.</h1>
+            <p className="mt-5 max-w-md text-[15px] leading-7 text-white/65">Upload this week's music and pick up Rob's feedback.</p>
             <img src={signature} alt="Rob Late" className="mt-8 h-10 w-auto object-contain opacity-80" />
           </div>
         </div>
@@ -73,9 +72,9 @@ export function PortalLogin() {
         <div className="w-full max-w-[430px]">
           <div className="mb-10 lg:hidden"><PortalMark /></div>
           <div className="mb-8">
-            <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D3FF02]">Student access</div>
+            <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#77766f]">Producer mentorship</div>
             <h2 className="mp-display mt-3 text-[44px] leading-none text-[#f2efe6] sm:text-[52px]">SIGN IN</h2>
-            <p className="mt-3 text-sm leading-6 text-[#8f8e85]">Use the email and password you set when you joined.</p>
+            <p className="mt-3 text-sm leading-6 text-[#8f8e85]">Use the email address you joined with.</p>
           </div>
 
           <form onSubmit={submit} className="space-y-4">
@@ -96,7 +95,7 @@ export function PortalLogin() {
             </label>
             <div className="flex items-center justify-between gap-4 py-1 text-xs">
               <label className="flex cursor-pointer items-center gap-2 text-[#8f8e85]">
-                <input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="h-4 w-4 accent-[#D3FF02]" />
+                <input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="h-4 w-4 accent-white" />
                 Keep me signed in
               </label>
               <button type="button" onClick={() => void forgotPassword()} className="mp-focus-ring rounded text-[#c5c1b8] hover:text-white">Forgot password?</button>
@@ -112,8 +111,8 @@ export function PortalLogin() {
               <div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Local preview</div>
               <p className="mt-1 text-xs text-[#8f8e85]">Load a demo account, then press Sign in.</p>
               <div className="mt-3 grid grid-cols-2 gap-2">
-                <button type="button" onClick={() => loadDemo("student")} className={cx("mp-focus-ring rounded-lg border px-3 py-2 text-xs font-semibold", email.startsWith("jack") ? "border-[#D3FF02]/40 bg-[#1d2400] text-[#D3FF02]" : "border-white/[0.08] text-[#aaa99f]")}>Student view</button>
-                <button type="button" onClick={() => loadDemo("coach")} className={cx("mp-focus-ring rounded-lg border px-3 py-2 text-xs font-semibold", email.startsWith("rob") ? "border-[#D3FF02]/40 bg-[#1d2400] text-[#D3FF02]" : "border-white/[0.08] text-[#aaa99f]")}>Rob's view</button>
+                <button type="button" onClick={() => loadDemo("student")} className={cx("mp-focus-ring rounded-lg border px-3 py-2 text-xs font-semibold", email.startsWith("jack") ? "border-white/25 bg-white/[0.08] text-white" : "border-white/[0.08] text-[#aaa99f]")}>Student view</button>
+                <button type="button" onClick={() => loadDemo("coach")} className={cx("mp-focus-ring rounded-lg border px-3 py-2 text-xs font-semibold", email.startsWith("rob") ? "border-white/25 bg-white/[0.08] text-white" : "border-white/[0.08] text-[#aaa99f]")}>Rob's view</button>
               </div>
             </div>
           )}

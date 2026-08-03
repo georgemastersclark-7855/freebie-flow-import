@@ -33,9 +33,9 @@ export function PortalMark({ compact = false }: { compact?: boolean }) {
 const stateStyles: Record<WeekState, string> = {
   not_started: "border-white/10 bg-white/[0.04] text-[#88887f]",
   in_progress: "border-white/10 bg-white/[0.05] text-[#b8b7af]",
-  ready: "border-[#e4c85a]/30 bg-[#302a12] text-[#f0d56d]",
-  submitted: "border-[#9be15d]/30 bg-[#1c2b13] text-[#b8ef87]",
-  late: "border-red-400/25 bg-red-950/30 text-red-300",
+  ready: "border-white/15 bg-white/[0.06] text-[#d9d6cd]",
+  submitted: "border-white/10 bg-white/[0.04] text-[#aaa99f]",
+  late: "border-[#d7bd65]/25 bg-[#2a2412]/35 text-[#d7bd65]",
 };
 
 const stateLabels: Record<WeekState, string> = {
