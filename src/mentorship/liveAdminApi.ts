@@ -187,7 +187,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
       && (!week.stems_required || Boolean(stemsRow));
     const hasStarted = rowFiles.length > 0;
     const activityDates = [submission?.updated_at, ...rowFiles.map((row: any) => row.uploaded_at)].filter(Boolean);
-    const mostRecent = activityDates.sort().at(-1) ?? enrollment.enrolled_at;
+    const mostRecent = activityDates.sort()[activityDates.length - 1] ?? enrollment.enrolled_at;
 
     students.push({
       id: enrollment.user_id,
