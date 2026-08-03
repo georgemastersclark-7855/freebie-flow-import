@@ -1,5 +1,8 @@
 project_id = "owjcahmjbsksoctgfhzo"
 
+[functions.zapier-relay]
+verify_jwt = false
+
 [functions.provision-mentorship-student]
 verify_jwt = false
 
