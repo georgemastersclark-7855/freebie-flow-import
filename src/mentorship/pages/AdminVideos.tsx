@@ -91,7 +91,7 @@ export function AdminVideos() {
       <div className="max-w-2xl">
         <div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Start Here content</div>
         <h1 className="mp-display mt-2 text-[46px] leading-none text-[#f1eee6] sm:text-[58px]">SETUP VIDEOS</h1>
-        <p className="mt-4 text-sm leading-6 text-[#8f8e85]">Upload the videos students watch before the first call. Use the web-ready 1080p MP4 files.</p>
+        <p className="mt-4 text-sm leading-6 text-[#8f8e85]">Upload the videos students watch before the first call. Use high-quality 4K MP4 files.</p>
       </div>
 
       <div className="mt-8 space-y-3">
