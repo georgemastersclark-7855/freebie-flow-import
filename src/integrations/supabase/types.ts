@@ -543,6 +543,7 @@ export type Database = {
           published: boolean
           resource_key: string
           resource_kind: string
+          storage_path: string | null
           title: string
           updated_at: string
           video_url: string | null
@@ -557,6 +558,7 @@ export type Database = {
           published?: boolean
           resource_key: string
           resource_kind: string
+          storage_path?: string | null
           title: string
           updated_at?: string
           video_url?: string | null
@@ -571,6 +573,7 @@ export type Database = {
           published?: boolean
           resource_key?: string
           resource_kind?: string
+          storage_path?: string | null
           title?: string
           updated_at?: string
           video_url?: string | null
