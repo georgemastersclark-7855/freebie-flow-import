@@ -1,0 +1,74 @@
+.mentorship-portal {
+  --mp-bg: #0b0b0a;
+  --mp-panel: #141411;
+  --mp-panel-raised: #1b1b17;
+  --mp-line: #303029;
+  --mp-paper: #f2efe6;
+  --mp-muted: #aaa99f;
+  --mp-accent: #d3ff02;
+  --mp-accent-soft: #1d2400;
+  --mp-green: #9be15d;
+  min-height: 100vh;
+  background: var(--mp-bg);
+  color: var(--mp-paper);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.mentorship-portal * {
+  box-sizing: border-box;
+}
+
+.mentorship-portal .mp-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.mentorship-portal .mp-display {
+  font-family: "Zurich BT Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.mentorship-portal .mp-card {
+  border: 1px solid var(--mp-line);
+  background: rgba(20, 20, 17, 0.92);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+}
+
+.mentorship-portal .mp-focus-ring:focus-visible {
+  outline: 2px solid var(--mp-accent);
+  outline-offset: 3px;
+}
+
+.mentorship-portal .mp-scrollbar::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.mentorship-portal .mp-scrollbar::-webkit-scrollbar-thumb {
+  background: #34342e;
+  border-radius: 999px;
+}
+
+@media (max-width: 767px) {
+  .mentorship-portal h1,
+  .mentorship-portal h2 {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mentorship-portal *,
+  .mentorship-portal *::before,
+  .mentorship-portal *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

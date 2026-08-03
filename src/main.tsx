@@ -12,6 +12,10 @@ const preloadMap: Record<string, () => Promise<unknown>> = {
   '/links': () => import('./pages/LinkInBio'),
   '/mentorship': () => import('./pages/Mentorship'),
 };
-preloadMap[window.location.pathname]?.();
+if (window.location.pathname.startsWith('/mentorship-portal')) {
+  import('./mentorship/MentorshipPortal');
+} else {
+  preloadMap[window.location.pathname]?.();
+}
 
 createRoot(document.getElementById("root")!).render(<App />);

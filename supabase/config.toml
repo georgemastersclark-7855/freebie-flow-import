@@ -2,3 +2,9 @@ project_id = "budvnuggykvqydjmkyfx"
 
 [functions."zapier-relay"]
 verify_jwt = false
+
+[functions."provision-mentorship-student"]
+verify_jwt = false
+
+[functions."publish-mentorship-feedback"]
+verify_jwt = true
