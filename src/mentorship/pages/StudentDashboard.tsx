@@ -14,7 +14,7 @@ export function StudentDashboard() {
     <div className="mx-auto max-w-[1320px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-14">
       <header className="max-w-2xl">
         <h1 className="mp-display text-[40px] leading-none text-[#f2efe6] sm:text-[48px]">YOUR SUBMISSIONS</h1>
-        <p className="mt-3 text-sm leading-6 text-[#8f8e85]">Upload ideas throughout the week, then add your selected song and stems before Friday.</p>
+        <p className="mt-3 text-sm leading-6 text-[#8f8e85]">Upload song ideas throughout the week, then add your weekly song and stems before Friday.</p>
       </header>
 
       {newFeedback && (
@@ -34,6 +34,7 @@ export function StudentDashboard() {
                 <h2 className="text-2xl font-black tracking-[-0.04em] text-[#f0ede5]">Week {currentWeek.number}</h2>
                 <StatusPill state={currentSubmission.state} />
               </div>
+              <div className="mt-1 text-xs text-[#9b9991]">{currentWeek.title}</div>
               <div className="mt-1 flex items-center gap-1.5 text-xs text-[#77766f]"><Clock3 size={13} />Due {currentWeek.deadlineLabel}</div>
             </div>
           </div>
@@ -48,7 +49,7 @@ export function StudentDashboard() {
           <div className="mt-3"><ProgressBar value={currentSubmission.ideas.length} max={currentWeek.requiredIdeas} /></div>
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             <ChecklistRow complete={currentSubmission.ideas.length >= currentWeek.requiredIdeas} title={`${currentWeek.requiredIdeas} ideas`} detail="Upload as you create them" />
-            <ChecklistRow complete={Boolean(currentSubmission.song)} title="Selected song" detail="Intro to first chorus" />
+            <ChecklistRow complete={Boolean(currentSubmission.song)} title="Weekly song" detail="Intro to first chorus" />
             <ChecklistRow complete={Boolean(currentSubmission.stems)} title="Stems ZIP" detail="For live surgery" />
           </div>
         </div>
@@ -59,7 +60,7 @@ export function StudentDashboard() {
           <h2 className="text-lg font-black text-[#e8e5dd]">All six weeks</h2>
           <div className="hidden text-xs text-[#77766f] sm:block">Open any week to review its files.</div>
         </div>
-        <div className="grid gap-2.5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-2.5 md:grid-cols-2">
           {weeks.map((week) => {
             const submission = submissions.find((item) => item.weekNumber === week.number)!;
             const future = week.phase === "upcoming";
@@ -69,7 +70,7 @@ export function StudentDashboard() {
                 <div className={cx("grid h-8 w-8 shrink-0 place-items-center rounded-full border text-xs font-black", submission.state === "submitted" ? "border-white/12 bg-white/[0.06] text-[#c8c5bc]" : "border-white/[0.08] bg-white/[0.04] text-[#8f8e85]")}>{submission.state === "submitted" ? <Check size={14} strokeWidth={3} /> : week.number}</div>
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-bold text-[#e5e2da]">Week {week.number}</div>
-                  <div className="mt-0.5 text-[11px] text-[#77766f]">{submission.ideas.length}/{week.requiredIdeas || "–"} ideas</div>
+                  <div className="mt-0.5 text-[11px] text-[#77766f]">{week.title} · {week.requiredIdeas ? `${submission.ideas.length}/${week.requiredIdeas} ideas` : "Weekly song"}</div>
                 </div>
                 {feedbackReady ? <span className="text-[11px] font-bold text-[#D3FF02]">Feedback ready</span> : !future ? <StatusPill state={submission.state} /> : null}
                 <ArrowRight size={14} className="shrink-0 text-[#66655f] transition group-hover:translate-x-0.5 group-hover:text-white" />

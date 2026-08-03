@@ -108,7 +108,7 @@ export function WeekWorkspace() {
       <header className="mt-7 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
         <div className="max-w-[760px]">
           <div className="flex flex-wrap items-center gap-3"><span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8f8e85]">Week {definition.number}</span><StatusPill state={submission.state} /></div>
-          <h1 className="mp-display mt-3 text-[48px] leading-[0.92] text-[#f2efe6] sm:text-[64px]">{definition.title.toUpperCase()}</h1>
+          <h1 className="mt-2 text-[32px] font-black leading-tight tracking-[-0.04em] text-[#f2efe6] sm:text-[40px]">{definition.title}</h1>
         </div>
         <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] px-4 py-3">
           <Clock3 size={18} className="text-[#8f8e85]" />
