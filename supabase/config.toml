@@ -1,1 +1,7 @@
 project_id = "owjcahmjbsksoctgfhzo"
+
+[functions.provision-mentorship-student]
+verify_jwt = false
+
+[functions.publish-mentorship-feedback]
+verify_jwt = true

@@ -1,0 +1,14 @@
+revoke all on function public.is_mentorship_staff() from public, anon;
+revoke all on function public.is_mentorship_member(uuid) from public, anon;
+revoke all on function public.owns_mentorship_enrollment(uuid) from public, anon;
+revoke all on function public.set_mentorship_updated_at() from public, anon;
+revoke all on function public.create_mentorship_profile_for_auth_user() from public, anon;
+revoke all on function public.create_submissions_for_mentorship_enrollment() from public, anon;
+revoke all on function public.create_submissions_for_mentorship_week() from public, anon;
+revoke execute on function public.submit_mentorship_week(uuid) from anon;
+revoke execute on function public.start_mentorship_submission(uuid) from anon;
+revoke execute on function public.mark_mentorship_feedback_viewed(uuid) from anon;
+revoke execute on function public.confirm_mentorship_feedback_action(uuid, text) from anon;
+grant execute on function public.is_mentorship_staff() to authenticated;
+grant execute on function public.is_mentorship_member(uuid) to authenticated;
+grant execute on function public.owns_mentorship_enrollment(uuid) to authenticated;
