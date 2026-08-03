@@ -14,8 +14,8 @@ export function WelcomeHub() {
         <div className="absolute inset-0 lg:left-[54%]"><img src={robOnLaptop} alt="Rob Late working in his studio" className="h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-gradient-to-r from-[#151512] via-[#151512]/85 to-[#151512]/15" /></div>
         <div className="relative z-10 max-w-[720px] px-5 py-10 sm:px-9 sm:py-14 lg:px-12 lg:py-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] font-bold text-[#bbb8af]"><Sparkles size={13} /> Welcome to Rob Late's Producer Mentorship</div>
-          <h1 className="mp-display mt-6 text-[49px] leading-[0.92] text-white sm:text-[64px]">LET'S GET YOU READY TO WORK.</h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#aaa99f]">Do these in order before the first group call. When we start, your sounds, template and references should already be out of the way.</p>
+          <h1 className="mp-display mt-6 text-[49px] leading-[0.92] text-white sm:text-[64px]">GET READY FOR WEEK 1.</h1>
+          <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#aaa99f]">Complete these steps before the first group call so you can start making music straight away.</p>
           {welcomeVideoUrl ? <a href={welcomeVideoUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-7 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-black text-[#11110f]"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#171714] text-white"><Play size={13} fill="currentColor" /></span>Watch Rob's welcome</a> : <button type="button" disabled className="mt-7 inline-flex cursor-not-allowed items-center gap-3 rounded-full bg-white/70 px-5 py-3 text-sm font-black text-[#11110f]"><span className="grid h-7 w-7 place-items-center rounded-full bg-[#171714] text-white"><Play size={13} fill="currentColor" /></span>Watch Rob's welcome</button>}
         </div>
       </section>
