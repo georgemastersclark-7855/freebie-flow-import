@@ -154,11 +154,16 @@ const ProductionEmails = () => {
                   <div
                     key={name}
                     className="bg-white rounded-xl p-2 shadow-lg shadow-black/30 w-full max-w-full"
+                    style={{ display: "none" }}
                   >
                     <img
                       src={`/replies/${name}.png`}
                       alt="Reply from a subscriber"
                       loading="lazy"
+                      onLoad={(e) => {
+                        const card = e.currentTarget.parentElement;
+                        if (card) card.style.display = "";
+                      }}
                       className="w-full h-auto rounded-lg block"
                       onError={(e) => {
                         const card = e.currentTarget.parentElement;
