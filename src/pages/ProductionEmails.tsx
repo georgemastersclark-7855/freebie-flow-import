@@ -147,7 +147,7 @@ const ProductionEmails = () => {
             <p
               role="heading"
               aria-level={1}
-              className="font-black text-white mb-4 leading-tight whitespace-nowrap text-center"
+              className="font-black text-white mb-4 leading-tight whitespace-nowrap relative left-1/2 -translate-x-1/2 w-max"
               style={{ letterSpacing: "-0.04em", fontSize: "clamp(24px, 8.5vw, 38px)" }}
             >
               Rob's Production Emails
