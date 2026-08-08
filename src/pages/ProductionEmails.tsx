@@ -159,7 +159,6 @@ const ProductionEmails = () => {
                     <img
                       src={`/replies/${name}.png`}
                       alt="Reply from a subscriber"
-                      loading="lazy"
                       onLoad={(e) => {
                         const card = e.currentTarget.parentElement;
                         if (card) card.style.display = "";
