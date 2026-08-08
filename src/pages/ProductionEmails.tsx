@@ -142,8 +142,8 @@ const ProductionEmails = () => {
 
             {/* Headline */}
             <h1
-              className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight"
-              style={{ letterSpacing: "-0.04em" }}
+              className="font-bold text-white mb-4 leading-tight whitespace-nowrap"
+              style={{ letterSpacing: "-0.04em", fontSize: "clamp(1.5rem, 7.2vw, 3rem)" }}
             >
               Rob's Production Emails
             </h1>
@@ -190,7 +190,7 @@ const ProductionEmails = () => {
             </form>
 
             {/* Signature */}
-            <div className="mb-4">
+            <div className="mt-8 mb-6">
               <img src={robSignature} alt="Rob Late" className="h-10 w-auto opacity-70 mx-auto" />
             </div>
 
@@ -201,7 +201,7 @@ const ProductionEmails = () => {
 
             {/* Reply screenshots */}
             <div className="flex flex-col gap-2">
-              {["reply-1", "reply-2", "reply-3"].map((name) => (
+              {["reply-2", "reply-1", "reply-3"].map((name) => (
                 <div
                   key={name}
                   className="bg-white rounded-none p-2 shadow-lg shadow-black/30 w-full max-w-full"
