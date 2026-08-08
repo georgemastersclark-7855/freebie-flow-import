@@ -142,8 +142,8 @@ const ProductionEmails = () => {
 
             {/* Headline */}
             <h1
-              className="font-bold text-white mb-4 leading-tight whitespace-nowrap text-[26px] sm:text-4xl md:text-5xl"
-              style={{ letterSpacing: "-0.04em" }}
+              className="font-bold text-white mb-4 leading-tight whitespace-nowrap"
+              style={{ letterSpacing: "-0.04em", fontSize: "clamp(24px, 8.5vw, 42px)" }}
             >
               Rob's Production Emails
             </h1>
