@@ -22,6 +22,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
 const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
 const ThirtyWays = lazy(() => import("./pages/ThirtyWays"));
+const ProductionEmails = lazy(() => import("./pages/ProductionEmails"));
 const MentorshipPortal = lazy(() => import("./mentorship/MentorshipPortal"));
 const PrivacyPolicy = lazy(() => import("./pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/legal/TermsOfService"));
@@ -67,7 +68,8 @@ const App = () => {
             <Route path="/links" element={<LinkInBio />} />
             <Route path="/mentorship" element={<Mentorship />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
-            <Route path="/30-ways" element={<ThirtyWays />} />
+            <Route path="/emails" element={<ProductionEmails />} />
+            <Route path="/30-ways" element={<ProductionEmails />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

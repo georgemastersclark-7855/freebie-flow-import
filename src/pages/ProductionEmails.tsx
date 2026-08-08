@@ -1,0 +1,178 @@
+import { useState } from "react";
+import { loadKlaviyo } from "@/utils/loadKlaviyo";
+
+const KLAVIYO_LIST_ID = "TU9xTM";
+const KLAVIYO_COMPANY_ID = "WrvxHn";
+const DEFAULT_SOURCE = "production-emails-page";
+
+const getCustomSource = () => {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("utm_source") || DEFAULT_SOURCE;
+};
+
+const ProductionEmails = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || loading) return;
+    setLoading(true);
+
+    const customSource = getCustomSource();
+
+    // Identify in Klaviyo
+    loadKlaviyo();
+    window._learnq = window._learnq || [];
+    window._learnq.push([
+      "identify",
+      {
+        $email: email,
+        source: customSource,
+      },
+    ]);
+    window._learnq.push([
+      "track",
+      "Newsletter Signup",
+      { source: customSource },
+    ]);
+
+    // Subscribe to Klaviyo list
+    try {
+      await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KLAVIYO_COMPANY_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", revision: "2024-02-15" },
+        body: JSON.stringify({
+          data: {
+            type: "subscription",
+            attributes: {
+              profile: {
+                data: {
+                  type: "profile",
+                  attributes: {
+                    email,
+                    properties: { source: customSource },
+                  },
+                },
+              },
+              list_id: KLAVIYO_LIST_ID,
+              custom_source: customSource,
+            },
+          },
+        }),
+      });
+    } catch (err) {
+      console.error("Klaviyo subscribe error:", err);
+    }
+
+    setSubmitted(true);
+    setLoading(false);
+  };
+
+  return (
+    <div
+      className="min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden"
+      style={{ backgroundColor: "#050505" }}
+    >
+      {/* Subtle glow */}
+      <div
+        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[500px] h-[400px] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(34, 197, 94, 0.08) 0%, transparent 60%)",
+        }}
+      />
+
+      {/* Noise texture */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E")`,
+          backgroundSize: "256px 256px",
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-md text-center">
+        {submitted ? (
+          <div>
+            <p
+              className="text-3xl font-bold text-white mb-3"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              You're in.
+            </p>
+            <p className="text-white/50 text-base leading-relaxed">
+              Your first email is on its way - go check your inbox (and drag it out of promotions if it landed there).
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* Eyebrow */}
+            <div className="inline-block mb-4">
+              <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">
+                Free Emails From Rob Late
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1
+              className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight"
+              style={{ letterSpacing: "-0.04em" }}
+            >
+              Rob's Production Emails
+            </h1>
+
+            {/* Promise */}
+            <p className="text-base text-white/60 mb-6 leading-relaxed">
+              Stories from real sessions with The Chainsmokers, Marshmello and Clean Bandit - and what they teach you about making music people actually want to hear. A few emails a week, written by me.
+            </p>
+
+            {/* Bullets */}
+            <ul className="flex flex-col gap-2 text-left mb-8 text-sm text-white/60">
+              <li className="flex items-start gap-2">
+                <span className="text-[#22c55e] mt-0.5">•</span>
+                <span>Real lessons from real sessions - not tutorials</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#22c55e] mt-0.5">•</span>
+                <span>The mindset and career stuff nobody teaches</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#22c55e] mt-0.5">•</span>
+                <span>First to hear when something new drops</span>
+              </li>
+            </ul>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 mb-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email"
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-base placeholder:text-white/25 focus:outline-none focus:border-white/20 transition-colors"
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-white text-black font-bold text-base px-8 py-4 rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50"
+                style={{ letterSpacing: "-0.02em" }}
+              >
+                {loading ? "..." : "GET THE EMAILS"}
+              </button>
+            </form>
+
+            {/* Trust line */}
+            <p className="text-xs text-white/20">
+              Free. Unsubscribe any time.
+            </p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ProductionEmails;

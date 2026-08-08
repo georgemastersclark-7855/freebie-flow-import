@@ -23,9 +23,9 @@ const links = [
     thumbnail: "/assets/sound-packs-thumbnail.png",
   },
   {
-    title: "30 Ways in 30 Days",
-    subtitle: "Free daily production tips straight to your inbox",
-    url: "https://audio.roblate.com/30-ways",
+    title: "Rob's Production Emails",
+    subtitle: "Session stories & career lessons in your inbox - free",
+    url: "https://audio.roblate.com/emails",
     thumbnail: "/assets/rob-pov-studio-new.png",
   },
 ];
