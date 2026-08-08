@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { loadKlaviyo } from "@/utils/loadKlaviyo";
+import robSignature from "/assets/rob-late-signature-white.png";
+
+const robProfile = "/assets/rob-profile.jpg";
 
 const KLAVIYO_LIST_ID = "TU9xTM";
 const KLAVIYO_COMPANY_ID = "WrvxHn";
@@ -108,6 +111,28 @@ const ProductionEmails = () => {
           </div>
         ) : (
           <>
+            {/* IG-style identity */}
+            <div className="flex flex-col items-center mb-5">
+              <div
+                className="w-16 h-16 rounded-full p-[2px] mb-3"
+                style={{
+                  background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
+                }}
+              >
+                <div className="w-full h-full rounded-full overflow-hidden border-2 border-[#050505]">
+                  <img src={robProfile} alt="Rob Late" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-bold text-white" style={{ letterSpacing: "-0.02em" }}>
+                  @roblate
+                </span>
+                <svg className="w-3.5 h-3.5 text-[#3897f0]" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.7 14.5L6 12.2l1.4-1.4 2.9 2.9 6.3-6.3 1.4 1.4-7.7 7.7z" />
+                </svg>
+              </div>
+            </div>
+
             {/* Eyebrow */}
             <div className="inline-block mb-4">
               <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">
@@ -125,7 +150,7 @@ const ProductionEmails = () => {
 
             {/* Promise */}
             <p className="text-base text-white/60 mb-6 leading-relaxed">
-              Stories from real sessions with artists like Clean Bandit, The Chainsmokers and Marshmello - and what they teach you about making music people actually want to hear. Plus honest thoughts on the industry and useful lessons for producers on the come up - from someone who started in (and still is in) a home studio. A few emails a week, written by me.
+              Stories from real sessions, honest thoughts on the industry and useful lessons for producers on the come up - from someone who started in (and still is in) a home studio.
             </p>
 
             {/* Bullets */}
@@ -143,36 +168,6 @@ const ProductionEmails = () => {
                 <span>Cool production hacks & techniques I've picked up from even cooler artists</span>
               </li>
             </ul>
-
-            {/* Reply screenshots */}
-            <div className="mb-8">
-              <p className="text-xs font-semibold tracking-widest text-white/30 uppercase mb-3">
-                Replies To These Emails
-              </p>
-              <div className="flex flex-col gap-2">
-                {["reply-1", "reply-2", "reply-3"].map((name) => (
-                  <div
-                    key={name}
-                    className="bg-white rounded-xl p-2 shadow-lg shadow-black/30 w-full max-w-full"
-                    style={{ display: "none" }}
-                  >
-                    <img
-                      src={`/replies/${name}.png`}
-                      alt="Reply from a subscriber"
-                      onLoad={(e) => {
-                        const card = e.currentTarget.parentElement;
-                        if (card) card.style.display = "";
-                      }}
-                      className="w-full h-auto rounded-lg block"
-                      onError={(e) => {
-                        const card = e.currentTarget.parentElement;
-                        if (card) card.style.display = "none";
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 mb-4">
@@ -194,10 +189,40 @@ const ProductionEmails = () => {
               </button>
             </form>
 
+            {/* Signature */}
+            <div className="mb-4">
+              <img src={robSignature} alt="Rob Late" className="h-10 w-auto opacity-70 mx-auto" />
+            </div>
+
             {/* Trust line */}
-            <p className="text-xs text-white/20">
+            <p className="text-xs text-white/20 mb-8">
               Free. Unsubscribe any time.
             </p>
+
+            {/* Reply screenshots */}
+            <div className="flex flex-col gap-2">
+              {["reply-1", "reply-2", "reply-3"].map((name) => (
+                <div
+                  key={name}
+                  className="bg-white rounded-none p-2 shadow-lg shadow-black/30 w-full max-w-full"
+                  style={{ display: "none" }}
+                >
+                  <img
+                    src={`/replies/${name}.png`}
+                    alt="Reply from a subscriber"
+                    onLoad={(e) => {
+                      const card = e.currentTarget.parentElement;
+                      if (card) card.style.display = "";
+                    }}
+                    className="w-full h-auto rounded-none block"
+                    onError={(e) => {
+                      const card = e.currentTarget.parentElement;
+                      if (card) card.style.display = "none";
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </>
         )}
       </div>
