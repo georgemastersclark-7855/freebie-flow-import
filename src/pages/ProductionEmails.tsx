@@ -144,12 +144,14 @@ const ProductionEmails = () => {
             </div>
 
             {/* Headline */}
-            <h1
-              className="font-bold text-white mb-4 leading-tight whitespace-nowrap text-center"
+            <p
+              role="heading"
+              aria-level={1}
+              className="font-black text-white mb-4 leading-tight whitespace-nowrap text-center"
               style={{ letterSpacing: "-0.04em", fontSize: "clamp(24px, 8.5vw, 38px)" }}
             >
               Rob's Production Emails
-            </h1>
+            </p>
 
             {/* Promise */}
             <p className="text-base text-white/60 mb-6 leading-relaxed">
