@@ -125,24 +125,50 @@ const ProductionEmails = () => {
 
             {/* Promise */}
             <p className="text-base text-white/60 mb-6 leading-relaxed">
-              Stories from real sessions with The Chainsmokers, Marshmello and Clean Bandit - and what they teach you about making music people actually want to hear. A few emails a week, written by me.
+              Stories from real sessions with artists like Clean Bandit, The Chainsmokers and Marshmello - and what they teach you about making music people actually want to hear. Plus honest thoughts on the industry and useful lessons for producers on the come up - from someone who started in a home studio. A few emails a week, written by me.
             </p>
 
             {/* Bullets */}
-            <ul className="flex flex-col gap-2 text-left mb-8 text-sm text-white/60">
+            <ul className="flex flex-col gap-2 text-left mb-6 text-sm text-white/60">
               <li className="flex items-start gap-2">
                 <span className="text-[#22c55e] mt-0.5">•</span>
-                <span>Real lessons from real sessions - not tutorials</span>
+                <span>Real lessons from real sessions</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#22c55e] mt-0.5">•</span>
-                <span>The mindset and career stuff nobody teaches</span>
+                <span>Mindset and career stuff you won't find anywhere else on the internet</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#22c55e] mt-0.5">•</span>
-                <span>First to hear when something new drops</span>
+                <span>Cool production hacks & techniques I've picked up from even cooler artists</span>
               </li>
             </ul>
+
+            {/* Reply screenshots */}
+            <div className="mb-8">
+              <p className="text-xs font-semibold tracking-widest text-white/30 uppercase mb-3">
+                Replies To These Emails
+              </p>
+              <div className="flex flex-col gap-2">
+                {["reply-1", "reply-2", "reply-3"].map((name) => (
+                  <div
+                    key={name}
+                    className="bg-white rounded-xl p-2 shadow-lg shadow-black/30 w-full max-w-full"
+                  >
+                    <img
+                      src={`/replies/${name}.png`}
+                      alt="Reply from a subscriber"
+                      loading="lazy"
+                      className="w-full h-auto rounded-lg block"
+                      onError={(e) => {
+                        const card = e.currentTarget.parentElement;
+                        if (card) card.style.display = "none";
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 mb-4">
