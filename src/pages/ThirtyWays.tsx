@@ -2,7 +2,7 @@ import { useState } from "react";
 import { loadKlaviyo } from "@/utils/loadKlaviyo";
 
 const KLAVIYO_LIST_ID = "TUHS3v";
-const KLAVIYO_COMPANY_ID = "WrvxHn";
+const KLAVIYO_COMPANY_ID = "Uagw3z";
 
 const ThirtyWays = () => {
   const [name, setName] = useState("");

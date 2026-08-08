@@ -5,7 +5,7 @@ import robSignature from "/assets/rob-late-signature-white.png";
 const robProfile = "/assets/rob-profile.jpg";
 
 const KLAVIYO_LIST_ID = "TU9xTM";
-const KLAVIYO_COMPANY_ID = "WrvxHn";
+const KLAVIYO_COMPANY_ID = "Uagw3z";
 const DEFAULT_SOURCE = "production-emails-page";
 
 const getCustomSource = () => {
@@ -52,6 +52,7 @@ const ProductionEmails = () => {
           data: {
             type: "subscription",
             attributes: {
+              custom_source: customSource,
               profile: {
                 data: {
                   type: "profile",
@@ -62,8 +63,9 @@ const ProductionEmails = () => {
                   },
                 },
               },
-              list_id: KLAVIYO_LIST_ID,
-              custom_source: customSource,
+            },
+            relationships: {
+              list: { data: { type: "list", id: KLAVIYO_LIST_ID } },
             },
           },
         }),

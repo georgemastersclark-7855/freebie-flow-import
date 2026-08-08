@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-const KLAVIYO_COMPANY_ID = "WrvxHn";
+const KLAVIYO_COMPANY_ID = "Uagw3z";
 let klaviyoLoaded = false;
 
 const pushLearnq = (args: any[]) => {
