@@ -125,7 +125,7 @@ const ProductionEmails = () => {
 
             {/* Promise */}
             <p className="text-base text-white/60 mb-6 leading-relaxed">
-              Stories from real sessions with artists like Clean Bandit, The Chainsmokers and Marshmello - and what they teach you about making music people actually want to hear. Plus honest thoughts on the industry and useful lessons for producers on the come up - from someone who started in a home studio. A few emails a week, written by me.
+              Stories from real sessions with artists like Clean Bandit, The Chainsmokers and Marshmello - and what they teach you about making music people actually want to hear. Plus honest thoughts on the industry and useful lessons for producers on the come up - from someone who started in (and still is in) a home studio. A few emails a week, written by me.
             </p>
 
             {/* Bullets */}
