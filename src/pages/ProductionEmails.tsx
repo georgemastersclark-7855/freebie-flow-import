@@ -15,6 +15,7 @@ const getCustomSource = () => {
 
 const ProductionEmails = () => {
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -32,6 +33,7 @@ const ProductionEmails = () => {
       "identify",
       {
         $email: email,
+        $first_name: firstName,
         source: customSource,
       },
     ]);
@@ -55,6 +57,7 @@ const ProductionEmails = () => {
                   type: "profile",
                   attributes: {
                     email,
+                    first_name: firstName,
                     properties: { source: customSource },
                   },
                 },
@@ -142,8 +145,8 @@ const ProductionEmails = () => {
 
             {/* Headline */}
             <h1
-              className="font-bold text-white mb-4 leading-tight whitespace-nowrap"
-              style={{ letterSpacing: "-0.04em", fontSize: "clamp(24px, 8.5vw, 42px)" }}
+              className="font-bold text-white mb-4 leading-tight whitespace-nowrap text-center"
+              style={{ letterSpacing: "-0.04em", fontSize: "clamp(24px, 8.5vw, 38px)" }}
             >
               Rob's Production Emails
             </h1>
@@ -171,6 +174,14 @@ const ProductionEmails = () => {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 mb-4">
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Your first name"
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-base placeholder:text-white/25 focus:outline-none focus:border-white/20 transition-colors"
+              />
               <input
                 type="email"
                 value={email}
