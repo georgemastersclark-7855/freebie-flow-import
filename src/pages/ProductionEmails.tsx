@@ -157,7 +157,7 @@ const ProductionEmails = () => {
 
             {/* Promise */}
             <p className="text-base text-white/60 mb-6 leading-relaxed">
-              Stories from real sessions, honest thoughts on the industry and useful lessons for producers on the come up - from someone who started in (and still is in) a home studio.
+              Stories from real sessions, honest thoughts on the industry and useful lessons for producers - from someone who started (and still works in) a home studio.
             </p>
 
             {/* Bullets */}
@@ -168,11 +168,11 @@ const ProductionEmails = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#22c55e] mt-0.5">•</span>
-                <span>Mindset and career stuff you won't find anywhere else on the internet</span>
+                <span>Mindset and career tips you won't find anywhere else</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-[#22c55e] mt-0.5">•</span>
-                <span>Cool production hacks & techniques I've picked up from even cooler artists</span>
+                <span>Production hacks & techniques I've learned over the years</span>
               </li>
             </ul>
 
