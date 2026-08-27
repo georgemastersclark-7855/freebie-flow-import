@@ -18,6 +18,7 @@ const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBl
 // Lazy-loaded secondary pages
 const LinkInBio = lazy(() => import("./pages/LinkInBio"));
 const Mentorship = lazy(() => import("./pages/Mentorship"));
+const MentorshipSeptember = lazy(() => import("./pages/MentorshipSeptember"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
 const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
@@ -67,6 +68,7 @@ const App = () => {
             <Route path="/legal/earnings-disclaimer" element={<EarningsDisclaimer />} />
             <Route path="/links" element={<LinkInBio />} />
             <Route path="/mentorship" element={<Mentorship />} />
+            <Route path="/mentorship-september" element={<MentorshipSeptember />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
             <Route path="/emails" element={<ProductionEmails />} />
             <Route path="/30-ways" element={<ProductionEmails />} />
