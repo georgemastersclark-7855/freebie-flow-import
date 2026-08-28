@@ -31,7 +31,7 @@ const Mentorship = () => {
         {/* Cohort info */}
         <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 23rd August 2026, 5:55pm</p>
         <p className="text-base font-bold text-white mb-6">Next cohort <span className="text-[#22c55e]">starting September</span>. Join waitlist below - applications opening soon. <span className="text-[#22c55e]">First cohort sold out.</span></p>
-        <a href="mailto:team@roblate.com?subject=WAITLIST&body=Hey%20Rob%2C%0A%0AI%27d%20like%20to%20be%20added%20to%20the%20waitlist%20for%20the%20September%20mentorship%20cohort.%0A%0AThanks%2C" className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors mb-20" style={{ letterSpacing: "-0.02em" }}>JOIN THE WAITLIST</a>
+        <a href="#join-waitlist" className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors mb-20" style={{ letterSpacing: "-0.02em" }}>JOIN THE WAITLIST</a>
 
         {/* What This Is */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
@@ -225,7 +225,7 @@ const Mentorship = () => {
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          <span className="text-white font-bold text-lg">$1,997</span>
+          <span className="text-white font-bold text-lg">$2,497</span>
           <span className="text-white/50 ml-2">for the full 6 weeks</span>
         </p>
 
