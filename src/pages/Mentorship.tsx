@@ -233,6 +233,7 @@ const Mentorship = () => {
         <div className="w-12 h-px bg-white/10 mb-12" />
 
         {/* Join the Waitlist */}
+        <div id="join-waitlist" />
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
           Join the waitlist:
         </p>
