@@ -250,6 +250,9 @@ const MentorshipSeptember = () => {
         <div className="w-12 h-px bg-white/10 mb-12" />
 
         {/* QuickFacts */}
+        <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
+          The quick facts:
+        </p>
         <ul className="space-y-3 mb-12">
           {[
             "10 seats",
@@ -270,6 +273,9 @@ const MentorshipSeptember = () => {
         <div className="w-12 h-px bg-white/10 mb-12" />
 
         {/* So if you... */}
+        <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
+          So, if you...
+        </p>
         <ol className="space-y-3 mb-8">
           {[
             "Can be on the live call every Sunday.",
