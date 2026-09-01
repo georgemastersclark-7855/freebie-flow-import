@@ -31,27 +31,51 @@ const MentorshipSeptember = () => {
         {/* Stamp */}
         <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 27th August 2026</p>
 
-        {/* Cohort banner */}
+        {/* Banner */}
         <p className="text-base font-bold text-white mb-6">
-          September 2026 cohort. <span className="text-[#22c55e]">10 seats.</span> Applications close Friday 11th September, or when every seat is taken. <span className="text-[#22c55e]">First cohort sold out.</span>
+          September 2026 cohort. <span className="text-[#22c55e]">10 seats.</span> Applications close Friday 11th September - or until every seat is taken. <span className="text-[#22c55e]">First cohort sold out.</span>
         </p>
         <a href="#apply" className="inline-block px-8 py-3 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors mb-20" style={{ letterSpacing: "-0.02em" }}>APPLY FOR THE SEPTEMBER COHORT</a>
 
-        {/* Rob's letter - What this is */}
+        {/* Intro - one flowing letter from Rob */}
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Most of my time is spent producing records with major artists. The Chainsmokers, Marshmello, Macklemore, Clean Bandit.
+          Here's what we're doing this September.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Those sessions all run the same way. Ideas out fast. The core of the song landing in the room that day. The producer who can do that is the one who gets the cut.
+          I'm taking 10 producers and running their production like an a-list writing camp for six weeks.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Earlier this year I ran my first mentorship. It sold out, and the results genuinely surprised me. The student who wrote and submitted a new track every single week improved more than everyone else. By miles. It had nothing to do with talent or gear. He just did the reps, and every week I corrected them.
+          A new track written every single week. My feedback on every one of them. Your best one finished by the end.
+        </p>
+
+        <p className="text-white font-bold text-xl mb-6" style={{ letterSpacing: "-0.02em" }}>
+          Write. Finish. Ship.
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+          Let me tell you why it's built like this.
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+          When I worked with Marshmello, we had three studios running in one building. A singer writing toplines in one room. Me producing the track next door. Final takes going down in the third. One song goes in, another comes out. Nobody obsessing. Everyone committing.
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+          That work rate is the actual job. The producer who can land the core of a song in the room, that day, is the one who gets the cut.
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+          Earlier this year I ran my first mentorship. Sold out. And the results told me everything. The student who wrote and submitted a new track every single week improved more than everyone else. By miles. He did the reps, I corrected them, week after week. That was the whole difference.
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+          So this time, everyone's doing the reps.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          So this cohort is built entirely around that.
+          This page shows you how the six weeks work, who it's for, and what we'll do together. Have a read, and apply at the bottom.
         </p>
 
         {/* Signature */}
@@ -62,37 +86,7 @@ const MentorshipSeptember = () => {
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* The promise */}
-        <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          I'm going to take 10 producers and run their production like an a-list writing camp for six weeks.
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-6">
-          A new track written every single week. My feedback on every one of them. Your best one finished by the end.
-        </p>
-
-        <p className="text-white font-bold text-xl mb-12" style={{ letterSpacing: "-0.02em" }}>
-          Write. Finish. Ship.
-        </p>
-
-        {/* Three outcomes */}
-        <ul className="space-y-3 mb-12">
-          {[
-            "Six new tracks written in six weeks, every one with my feedback on it",
-            "A library of session-ready ideas and song-starters you'll pull from for years",
-            "Your best track finished, plus the repeatable process that got it there",
-          ].map((item, i) => (
-            <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
-              <span className="text-white/40 mt-0.5">•</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
-
-        {/* Why listen to me */}
+        {/* Why listen to me? */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
           Why listen to me?
         </p>
@@ -108,26 +102,31 @@ const MentorshipSeptember = () => {
           <p className="text-white/40 text-sm mt-2">Griffin, cohort 1</p>
         </div>
 
-        <div className="border-l-2 border-[#22c55e]/40 pl-6 mb-12">
+        <div className="border-l-2 border-[#22c55e]/40 pl-6 mb-8">
           <p className="text-[15px] leading-relaxed text-white/70 italic">
             "So far it's been the most useful mentorship that I've done... I've spent much more money on programs that lasted much longer."
           </p>
           <p className="text-white/40 text-sm mt-2">Austin, cohort 1</p>
         </div>
 
+        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
+          It's a small group, and I'm looking for the best fit here.
+        </p>
+
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* This isn't for you if */}
+        {/* This won't work for you if you... */}
         <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          This isn't for you if...
+          This won't work for you if you...
         </p>
 
         <ul className="space-y-4 mb-8">
           {[
-            "You want to watch lessons and get round to it \"someday\". Every week you'll owe me a track.",
-            "You can't be on the live Sunday calls.",
-            "You want someone else to finish your music for you.",
+            "Want to watch lessons and \"get round to it\". Every week you'll owe me a track.",
+            "Can't be on the live Sunday calls.",
+            "Want someone else to finish your music for you.",
+            "Are planning to file this next to the 400 tutorials you've saved for later.",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
               <span className="text-red-400/80 mt-0.5">•</span>
@@ -136,193 +135,129 @@ const MentorshipSeptember = () => {
           ))}
         </ul>
 
-        <p className="text-base font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          But if you:
+        {/* But if you... */}
+        <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
+          But if you...
         </p>
 
         <ul className="space-y-4 mb-6">
           {[
             "Can give this a few focused hours a week",
             "Will submit something every Friday, finished or not",
-            "Are done with tutorials and want someone at this level correcting your actual work",
+            "Can take a straight answer about your music",
+            "Are done collecting information and want someone at this level correcting your actual work",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
-              <span className="text-green-400/80 mt-0.5">•</span>
+              <span className="text-white/40 mt-0.5">•</span>
               <span>{item}</span>
             </li>
           ))}
         </ul>
 
-        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          ...then keep reading, because this was designed for you.
-        </p>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
-
-        {/* Why nothing's moved the needle yet */}
-        <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          Why nothing's moved the needle yet
+        <p className="text-[15px] leading-relaxed text-white/80 mb-8">
+          ...this was built for you.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          You've done what everyone does. Years of YouTube. Maybe a course or two. And your tracks still take months, and most never get finished.
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Here's what I watched happen across cohort 1: the gap was never technical knowledge. Everyone arrives overcomplicating everything, sitting on one idea for months, polishing sections nobody will ever hear.
+          Because here's what I watched happen across the first cohort. Nobody's problem was technical knowledge. Not one person. Everyone arrives overcomplicating everything. Sitting on one idea for months. Polishing sections nobody will ever hear.
         </p>
 
         <div className="border-l-2 border-[#22c55e]/40 pl-6 mb-4">
           <p className="text-[15px] leading-relaxed text-white/70 italic">
             "The biggest change for me from the mentorship was realizing that I'm really overcomplicating the whole process of making music."
           </p>
-          <p className="text-white/40 text-sm mt-2">Austin</p>
+          <p className="text-white/40 text-sm mt-2">Austin, cohort 1</p>
         </div>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          The thing you've never had is reps. Writing at pace, week after week, with someone who does this at the highest level telling you exactly what to fix each time. That's how every professional producer I know got good. It's literally rehearsing the job.
+          The thing that's missing is reps. Writing at pace, week after week, with someone telling you exactly what to fix each time. It's literally rehearsing the job.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          Quality comes from fast, deliberate repetitions with feedback. Six weeks of them changes more than six years of tutorials.
+          Quality comes from fast, deliberate repetitions with feedback. Six weeks of those will move you further than six years of tutorials. I've watched it happen.
         </p>
 
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* How the six weeks work */}
+        {/* The plan is simple: */}
         <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-          How the six weeks work
+          The plan is simple:
         </p>
 
-        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Every week, everyone writes and submits a new track in the same commercial shape. I'll teach you exactly what that shape is on call 1, and it's the same one I use in every professional session.
+        <div className="mb-8">
+          <p className="text-base font-bold text-white mb-3" style={{ letterSpacing: "-0.02em" }}>
+            Phase 1: Set up like a pro, then write (week 1)
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            The moment you're in, I send you a short set of videos. How I organise a sound library I trust. The session template I use for speed. How I actually use reference playlists. One evening's work and your studio runs the way mine does. No more scrolling through 4,000 kicks.
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            Then the first Sunday call. I show you the commercial song shape every professional session aims for, and you write your first track in it that same week.
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80">
+            That's Phase 1. A real track written in week one, on foundations most producers never build.
+          </p>
+        </div>
+
+        <div className="mb-8">
+          <p className="text-base font-bold text-white mb-3" style={{ letterSpacing: "-0.02em" }}>
+            Phase 2: The reps (weeks 2 to 4)
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            Every Friday, you submit a new track. Every Sunday we're live for 90 minutes, and I open submissions up and operate on them in front of everyone. You watch exactly how I think inside a real project. Send your stems with your submission and you're in the draw for me to open yours up that week.
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            I'll also open my actual major-label projects and show you how finished records came from rough ideas that started exactly like yours.
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            Around week 4, we flag your strongest track.
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80">
+            Three more tracks written. Every one with my feedback on it.
+          </p>
+        </div>
+
+        <div className="mb-8">
+          <p className="text-base font-bold text-white mb-3" style={{ letterSpacing: "-0.02em" }}>
+            Phase 3: Finish (weeks 5 and 6)
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+            We take your best track and build it out. I'll show you how I turn a strong opening chorus into a full record. Then we finish it.
+          </p>
+          <p className="text-[15px] leading-relaxed text-white/80">
+            You leave with your best track done, a folder of session-ready ideas you'll be pulling from for years, and a process you can run on everything you make after this.
+          </p>
+        </div>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
+          And through all six weeks, you're in a private chat with me and the other nine. I'm in there every day. Stuck at 1am on a mix decision? Drop it in. No waiting a week for an answer. You'll start with a 1:1 call with me to map out your six weeks, and I'm throwing in the Master Bundle, so every sound I reach for is sitting in your library from day one.
         </p>
 
-        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Submissions land on Fridays. On Sundays we're live for 90 minutes: I open up submissions and operate on them live, so you watch exactly how I think inside a real project, then I teach into whatever the group needs. Send your stems with your submission and you're in the draw for that week's live surgery.
-        </p>
+        {/* Divider */}
+        <div className="w-12 h-px bg-white/10 mb-12" />
 
+        {/* Price + guarantee, woven - no header */}
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          You'll also see inside my actual major-label projects, and how finished records came from rough ideas that started exactly like yours.
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Weeks 1 to 4, you're writing a new track every week. Around week 4 we flag your strongest one. Weeks 5 and 6, we build it out and finish it.
+          It's $3,000, or two payments. Your first payment goes in with your application and holds your seat while I review it.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          And the moment you pay, your pre-work unlocks: a short set of videos where I help you build a sound library you trust, a session template designed for speed, and a reference playlist. It's a night's work, and it means everyone walks into call 1 with the same foundations I take into every session.
+          Then: watch the videos, get your studio set up, come to the first call. If you get to the end of that call and it's not for you, tell me and I'll refund every penny. I only want people in this room who want to be in it. So there's nothing to lose by applying.
         </p>
 
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* What you get */}
-        <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-          What you get
-        </p>
-
-        <div className="mb-8">
-          <p className="text-base font-bold text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
-            Six live group calls (Sundays, 90 minutes)
-          </p>
-          <p className="text-[15px] leading-relaxed text-white/80">
-            Live track surgeries first, then teaching built around what the group actually needs that week.
-          </p>
-        </div>
-
-        <div className="mb-8">
-          <p className="text-base font-bold text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
-            My feedback on every track, every week
-          </p>
-          <p className="text-[15px] leading-relaxed text-white/80">
-            You submit, I listen properly, I tell you exactly what to fix and why.
-          </p>
-        </div>
-
-        <div className="mb-8">
-          <p className="text-base font-bold text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
-            A private chat I'm in every day
-          </p>
-          <p className="text-[15px] leading-relaxed text-white/80">
-            Stuck at 1am on a mix decision? Drop it in. No waiting a week for answers.
-          </p>
-        </div>
-
-        <div className="mb-8">
-          <p className="text-base font-bold text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
-            Nine other serious producers doing the reps beside you
-          </p>
-          <p className="text-[15px] leading-relaxed text-white/80">
-            Same deadline every Friday, same goal, real accountability. This is half the value and the reason it's a cohort.
-          </p>
-        </div>
-
-        <div className="mb-8">
-          <p className="text-base font-bold text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
-            The pre-work foundations
-          </p>
-          <p className="text-[15px] leading-relaxed text-white/80">
-            Sound library, speed template, reference playlist. Yours before we even start.
-          </p>
-        </div>
-
-        <div className="mb-12">
-          <p className="text-base font-bold text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
-            The Master Bundle, included
-          </p>
-          <p className="text-[15px] leading-relaxed text-white/80">
-            Every sound I reach for, in your library from day one.
-          </p>
-        </div>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
-
-        {/* Price */}
-        <p className="text-lg font-bold text-white mb-3" style={{ letterSpacing: "-0.02em" }}>
-          Price
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          <span className="text-white font-bold text-lg">$3,000.</span>
-          <span className="text-white/50 ml-2">A 2-pay option is available.</span>
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          Six weeks of me inside your music, every single week.
-        </p>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
-
-        {/* The guarantee */}
-        <p className="text-lg font-bold text-white mb-4" style={{ letterSpacing: "-0.02em" }}>
-          The guarantee
-        </p>
-
-        <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          Do the pre-work and come to the first call. If you decide at the end of that call this isn't for you, tell me and I'll refund every penny. I only want people in this room who want to be in it.
-        </p>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
-
-        {/* Quick facts */}
-        <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-          Quick facts
-        </p>
-
+        {/* QuickFacts */}
         <ul className="space-y-3 mb-12">
           {[
             "10 seats",
-            "6 weeks: Sunday 13th September to Sunday 18th October",
+            "Sunday 13th September to Sunday 18th October",
             "Live calls: Sundays, 90 minutes",
             "A new track from you every Friday",
             "$3,000 (2-pay available)",
-            "Applications close: Friday 11th September, or when seats are gone",
+            "Applications close Friday 11th September, or when seats are gone",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
               <span className="text-white/40 mt-0.5">•</span>
@@ -334,18 +269,14 @@ const MentorshipSeptember = () => {
         {/* Divider */}
         <div className="w-12 h-px bg-white/10 mb-12" />
 
-        {/* Before you apply */}
-        <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-          Before you apply - be honest with yourself
-        </p>
-
-        <ol className="space-y-3 mb-6">
+        {/* So if you... */}
+        <ol className="space-y-3 mb-8">
           {[
-            "I can be on the live call every Sunday.",
-            "I can put in a few focused hours during the week.",
-            "I will submit a new track every Friday, finished or not.",
-            "I want direct, honest feedback on my actual music.",
-            "I'm doing this now. This six weeks. Once it starts, there's no catching up later.",
+            "Can be on the live call every Sunday.",
+            "Can put in a few focused hours during the week.",
+            "Will submit a new track every Friday, finished or not.",
+            "Want direct, honest feedback on your actual music.",
+            "And you're doing this now. This six weeks. No \"catching up later\".",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
               <span className="text-white/40 mt-0.5">{i + 1}.</span>
@@ -353,31 +284,18 @@ const MentorshipSeptember = () => {
             </li>
           ))}
         </ol>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-8">
+          We kick off Sunday 13th September. If that sounds like you:
+        </p>
+
+        <p className="text-[15px] leading-relaxed text-white/80 mb-4">
+          <span className="text-white font-bold">Step 1:</span> Hit apply and fill out the application. It takes about 5 minutes. Your best existing track, your goal, and your commitment.
+        </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          Ticked all five? Apply below.
+          <span className="text-white font-bold">Step 2:</span> I review every application personally within 72 hours. If you're in, everything unlocks immediately. If it's not the right fit, you get an instant full refund and I'll tell you what to work on first.
         </p>
-
-        {/* Divider */}
-        <div className="w-12 h-px bg-white/10 mb-12" />
-
-        {/* How to apply */}
-        <p className="text-lg font-bold text-white mb-6" style={{ letterSpacing: "-0.02em" }}>
-          How to apply
-        </p>
-
-        <ol className="space-y-4 mb-12">
-          {[
-            "Hit the button and fill out the application. Takes about 5 minutes: your best existing track, your goal, and your commitment.",
-            "Your first payment is taken with your application. That's what holds your seat while I review.",
-            "I review every application personally within 72 hours. If you're in, your pre-work unlocks immediately and you'll book your 1:1 onboarding call with me. If it's not the right fit, you get an instant full refund and I'll tell you what to work on first.",
-          ].map((item, i) => (
-            <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
-              <span className="text-white/40 mt-0.5">{i + 1}.</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ol>
 
         {/* CTA */}
         <a
@@ -399,7 +317,7 @@ const MentorshipSeptember = () => {
         </div>
 
         <p className="text-[15px] leading-relaxed text-white/80">
-          P.S. The first applications accepted get first pick of the week 1 surgery slots. If you want me inside your track on day one, apply early.
+          P.S. The moment you're accepted, the setup videos land in your inbox. My sound library system, my speed template, how I really use references. One night's work, and you'll be producing faster before we've even had the first call.
         </p>
 
         {/* Footer */}
