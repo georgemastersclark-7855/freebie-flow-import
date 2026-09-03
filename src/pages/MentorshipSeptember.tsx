@@ -60,14 +60,20 @@ const MentorshipSeptember = () => {
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
           When I worked with Marshmello, we had three studios running in one building. A singer writing toplines in one room. Me producing the track next door. Final takes going down in the third. One song goes in, another comes out. Nobody obsessing. Everyone committing.
+          <br />
+          <br />
+          This is how writing sessions work at all levels. Indie to A-list.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          That work rate is the actual job. The producer who can land the core of a song in the room, that day, is the one who gets the cut.
+          The work rate is the actual job. The producer who can land the core of a song in the room, that day, is the one who gets the cut.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Earlier this year I ran my first mentorship. Sold out. And the results told me everything. The student who wrote and submitted a new track every single week improved more than everyone else. By miles. He did the reps, I corrected them, week after week. That was the whole difference.
+          Earlier this year I ran my first mentorship. It sold out. And the results told me everything. The students who wrote and submitted the most music improved more than everyone else. By miles.
+          <br />
+          <br />
+          They did the reps, I gave them feedback, week after week.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
@@ -75,8 +81,9 @@ const MentorshipSeptember = () => {
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          This page shows you how the six weeks work, who it's for, and what we'll do together. Have a read, and apply at the bottom.
+          This page shows you how the six week mentorship works, who it's for, and what we'll do together. Have a read, and apply at the bottom.
         </p>
+
 
         {/* Signature */}
         <div className="mb-16">
