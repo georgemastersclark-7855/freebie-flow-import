@@ -60,14 +60,20 @@ const MentorshipSeptember = () => {
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
           When I worked with Marshmello, we had three studios running in one building. A singer writing toplines in one room. Me producing the track next door. Final takes going down in the third. One song goes in, another comes out. Nobody obsessing. Everyone committing.
+          <br />
+          <br />
+          This is how writing sessions work at all levels. Indie to A-list.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          That work rate is the actual job. The producer who can land the core of a song in the room, that day, is the one who gets the cut.
+          The work rate is the actual job. The producer who can land the core of a song in the room, that day, is the one who gets the cut.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Earlier this year I ran my first mentorship. Sold out. And the results told me everything. The student who wrote and submitted a new track every single week improved more than everyone else. By miles. He did the reps, I corrected them, week after week. That was the whole difference.
+          Earlier this year I ran my first mentorship. It sold out. And the results told me everything. The students who wrote and submitted the most music improved more than everyone else. By miles.
+          <br />
+          <br />
+          They did the reps, I gave them feedback, week after week.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
@@ -75,8 +81,9 @@ const MentorshipSeptember = () => {
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          This page shows you how the six weeks work, who it's for, and what we'll do together. Have a read, and apply at the bottom.
+          This page shows you how the six week mentorship works, who it's for, and what we'll do together. Have a read, and apply at the bottom.
         </p>
+
 
         {/* Signature */}
         <div className="mb-16">
@@ -99,14 +106,14 @@ const MentorshipSeptember = () => {
           <p className="text-[15px] leading-relaxed text-white/70 italic">
             "Whether you're at the beginner level, the intermediate level, even at the professional level, it's an absolute no-brainer."
           </p>
-          <p className="text-white/40 text-sm mt-2">Griffin, cohort 1</p>
+          <p className="text-white/40 text-sm mt-2">Griffin</p>
         </div>
 
         <div className="border-l-2 border-[#22c55e]/40 pl-6 mb-8">
           <p className="text-[15px] leading-relaxed text-white/70 italic">
             "So far it's been the most useful mentorship that I've done... I've spent much more money on programs that lasted much longer."
           </p>
-          <p className="text-white/40 text-sm mt-2">Austin, cohort 1</p>
+          <p className="text-white/40 text-sm mt-2">Austin</p>
         </div>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
@@ -159,22 +166,31 @@ const MentorshipSeptember = () => {
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          Because here's what I watched happen across the first cohort. Nobody's problem was technical knowledge. Not one person. Everyone arrives overcomplicating everything. Sitting on one idea for months. Polishing sections nobody will ever hear.
+          Because here's what I watched happen across the first cohort. For the most part - technical knowledge wasn't the issue for most producers. Everyone arrives overcomplicating everything. Sitting on one idea for months.
+          <br />
+          <br />
+          Polishing sections nobody will ever hear because the song isn't that interesting in the first place.
         </p>
 
         <div className="border-l-2 border-[#22c55e]/40 pl-6 mb-4">
           <p className="text-[15px] leading-relaxed text-white/70 italic">
             "The biggest change for me from the mentorship was realizing that I'm really overcomplicating the whole process of making music."
           </p>
-          <p className="text-white/40 text-sm mt-2">Austin, cohort 1</p>
+          <p className="text-white/40 text-sm mt-2">Austin</p>
         </div>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          The thing that's missing is reps. Writing at pace, week after week, with someone telling you exactly what to fix each time. It's literally rehearsing the job.
+          The thing that's missing is reps. You need to do the thing to get better at it.
+          <br />
+          <br />
+          Writing at pace, week after week, with someone telling you exactly what to fix each time. It's literally rehearsing the job.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          Quality comes from fast, deliberate repetitions with feedback. Six weeks of those will move you further than six years of tutorials. I've watched it happen.
+          Quality comes from fast, deliberate repetitions with feedback. Six weeks of those will move you further than six years of tutorials.
+          <br />
+          <br />
+          I've watched it happen.
         </p>
 
         {/* Divider */}
@@ -190,13 +206,10 @@ const MentorshipSeptember = () => {
             Phase 1: Set up like a pro, then write (week 1)
           </p>
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            The moment you're in, I send you a short set of videos. How I organise a sound library I trust. The session template I use for speed. How I actually use reference playlists. One evening's work and your studio runs the way mine does. No more scrolling through 4,000 kicks.
+            The moment you're in, we start work making sure everyone is prepped with the right tools as a producer and set up in a professional and efficient way to approach sessions. Session templates, curated sound libraries (you'll get The Master Bundle free, or the price discounted off the metnorship if you've already bought it), solid reference playlists. The goal here is to sharpen the axe, as it were. Get your foundation and toolkit solid.
           </p>
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            Then the first Sunday call. I show you the commercial song shape every professional session aims for, and you write your first track in it that same week.
-          </p>
-          <p className="text-[15px] leading-relaxed text-white/80">
-            That's Phase 1. A real track written in week one, on foundations most producers never build.
+            Then we attack song structure and deep dive on the commercial song shape every professional session aims for, and you write your first track in it that same week.
           </p>
         </div>
 
@@ -205,7 +218,7 @@ const MentorshipSeptember = () => {
             Phase 2: The reps (weeks 2 to 4)
           </p>
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-            Every Friday, you submit a new track. Every Sunday we're live for 90 minutes, and I open submissions up and operate on them in front of everyone. You watch exactly how I think inside a real project. Send your stems with your submission and you're in the draw for me to open yours up that week.
+            Every Friday, you submit a new track. Every Sunday we're live for 90 minutes, and I open submissions up and operate on them in front of everyone. You watch exactly how I think inside real projects. Send your stems with your submission - I'll be doing track surgeries on the live calls each week (along with teaching around topics that the group needs)
           </p>
           <p className="text-[15px] leading-relaxed text-white/80 mb-4">
             I'll also open my actual major-label projects and show you how finished records came from rough ideas that started exactly like yours.
@@ -239,11 +252,14 @@ const MentorshipSeptember = () => {
 
         {/* Price + guarantee, woven - no header */}
         <p className="text-[15px] leading-relaxed text-white/80 mb-4">
-          It's $3,000, or two payments. Your first payment goes in with your application and holds your seat while I review it.
+          It's $2,497, or three payments of $997. Your first payment goes in with your application and holds your seat while I review it.
         </p>
 
         <p className="text-[15px] leading-relaxed text-white/80 mb-12">
-          Then: watch the videos, get your studio set up, come to the first call. If you get to the end of that call and it's not for you, tell me and I'll refund every penny. I only want people in this room who want to be in it. So there's nothing to lose by applying.
+          I only want people in this room who want to be in it and want to level up their approach to producing. If I feel like its not the right moment or best fit for you after reviewing your application, I'll let you know and send your cash right back with some friendly pointers on where I think you should be looking next.
+          <br />
+          <br />
+          So there's nothing to lose by applying.
         </p>
 
         {/* Divider */}
@@ -259,7 +275,7 @@ const MentorshipSeptember = () => {
             "Sunday 13th September to Sunday 18th October",
             "Live calls: Sundays, 90 minutes",
             "A new track from you every Friday",
-            "$3,000 (2-pay available)",
+            "$2,497 (3-pay available)",
             "Applications close Friday 11th September, or when seats are gone",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3 text-[15px] text-white/80">
