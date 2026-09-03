@@ -339,7 +339,7 @@ const MentorshipSeptember = () => {
         </div>
 
         <p className="text-[15px] leading-relaxed text-white/80">
-          P.S. The moment you're accepted, the setup videos land in your inbox. My sound library system, my speed template, how I really use references. One night's work, and you'll be producing faster before we've even had the first call.
+          {"\n"}
         </p>
 
         {/* Footer */}
