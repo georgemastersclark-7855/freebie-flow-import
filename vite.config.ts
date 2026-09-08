@@ -21,6 +21,8 @@ export default defineConfig(({ mode }) => ({
     componentTagger(),
   ].filter(Boolean),
   define: {
+    "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(""),
+    "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(""),
     "import.meta.env.VITE_MENTORSHIP_PREVIEW_VIDEO_KEYS": JSON.stringify(availablePreviewMedia().join(",")),
   },
   resolve: {
