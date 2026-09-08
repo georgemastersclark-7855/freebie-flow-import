@@ -40,6 +40,17 @@ function StaffOnly() {
 }
 
 export default function MentorshipPortal() {
+  usePageMeta({
+    title: "Mentorship Portal — Rob Late Audio",
+    description:
+      "Private portal for Rob Late Audio mentorship students: weekly submissions, feedback and live call resources.",
+    canonical: "https://audio.roblate.com/mentorship-portal",
+    ogType: "website",
+    siteName: "Rob Late Audio",
+    image: "https://audio.roblate.com/og-mentorship-portal.jpg",
+    imageAlt: "Rob Late Audio Mentorship Portal",
+  });
+
   return (
     <PortalStoreProvider>
       <Routes>
