@@ -24,6 +24,7 @@ const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
 const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
 const ThirtyWays = lazy(() => import("./pages/ThirtyWays"));
 const ProductionEmails = lazy(() => import("./pages/ProductionEmails"));
+const MentorshipDemo = lazy(() => import("./mentorshipDemo/MentorshipPortal"));
 const MentorshipPortal = lazy(() => import("./mentorship/MentorshipPortal"));
 const PrivacyPolicy = lazy(() => import("./pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/legal/TermsOfService"));
@@ -38,6 +39,7 @@ const RouteFallback = (
 
 const App = () => {
   useEffect(() => {
+    if (window.location.pathname.startsWith("/mentorship-demo")) return;
     const timer = setTimeout(loadKlaviyo, 3000);
     startZapierQueueAutoFlush();
     return () => clearTimeout(timer);
@@ -69,6 +71,7 @@ const App = () => {
             <Route path="/links" element={<LinkInBio />} />
             <Route path="/mentorship" element={<Mentorship />} />
             <Route path="/mentorship-september" element={<MentorshipSeptember />} />
+            <Route path="/mentorship-demo/*" element={<MentorshipDemo />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
             <Route path="/emails" element={<ProductionEmails />} />
             <Route path="/30-ways" element={<ProductionEmails />} />
