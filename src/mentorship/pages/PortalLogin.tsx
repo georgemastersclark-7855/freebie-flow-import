@@ -1,6 +1,5 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import robWorking from "@/assets/rob-working-3-loop.mp4";
 import signature from "@/assets/rob-late-signature-white.png";
 import { usePortalStore } from "../PortalStore";
@@ -9,27 +8,19 @@ import { cx } from "../utils";
 import { toast } from "sonner";
 
 export function PortalLogin() {
-  const { user, login, backend, authError, requestPasswordReset } = usePortalStore();
-  const navigate = useNavigate();
+  const { login, backend, authError, requestPasswordReset } = usePortalStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [remember, setRemember] = useState(true);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
-  useEffect(() => {
-    if (!user) return;
-    navigate(user.role === "student" ? "/mentorship-portal/submissions" : "/mentorship-portal/admin", { replace: true });
-  }, [user, navigate]);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     setError("");
     setSubmitting(true);
     try {
-      const nextUser = await login(email, password);
-      navigate(nextUser.role === "student" ? "/mentorship-portal/submissions" : "/mentorship-portal/admin");
+      await login(email, password);
     } catch (loginError) {
       setError(loginError instanceof Error ? loginError.message : "Unable to sign in.");
     } finally {
@@ -94,10 +85,7 @@ export function PortalLogin() {
               </span>
             </label>
             <div className="flex items-center justify-between gap-4 py-1 text-xs">
-              <label className="flex cursor-pointer items-center gap-2 text-[#8f8e85]">
-                <input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="h-4 w-4 accent-white" />
-                Keep me signed in
-              </label>
+              <span className="text-[#8f8e85]">Sign out when using a shared device.</span>
               <button type="button" onClick={() => void forgotPassword()} className="mp-focus-ring rounded text-[#c5c1b8] hover:text-white">Forgot password?</button>
             </div>
             {(error || authError) && <div className="rounded-xl border border-red-400/20 bg-red-950/30 px-4 py-3 text-sm text-red-200">{error || authError}</div>}
@@ -106,9 +94,9 @@ export function PortalLogin() {
             </PrimaryButton>
           </form>
 
-          {import.meta.env.DEV && backend === "demo" && (
+          {backend === "demo" && (
             <div className="mt-7 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
-              <div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Local preview</div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Demo access</div>
               <p className="mt-1 text-xs text-[#8f8e85]">Load a demo account, then press Sign in.</p>
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <button type="button" onClick={() => loadDemo("student")} className={cx("mp-focus-ring rounded-lg border px-3 py-2 text-xs font-semibold", email.startsWith("jack") ? "border-white/25 bg-white/[0.08] text-white" : "border-white/[0.08] text-[#aaa99f]")}>Student view</button>

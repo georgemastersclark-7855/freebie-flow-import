@@ -3,7 +3,8 @@
 // is applied and the generated Supabase Database type can be refreshed.
 import type { User } from "@supabase/supabase-js";
 import { Upload } from "tus-js-client";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "./demoSupabaseClient";
+import { formatDeadline } from "./utils";
 import type {
   FileKind,
   OnboardingTask,
@@ -98,12 +99,14 @@ interface TaskRow {
 
 interface ResourceRow {
   id: string;
+  resource_key: string;
   resource_kind: "welcome_video" | "setup_video";
   title: string;
   description: string;
   duration_label: string | null;
   video_url: string | null;
   storage_path: string | null;
+  download_url?: string | null;
 }
 
 interface CallRow {
@@ -135,16 +138,6 @@ const signedUrl = async (bucket: string, path?: string | null) => {
   const { data, error } = await db.storage.from(bucket).createSignedUrl(path, 60 * 60);
   if (error) throw error;
   return data.signedUrl as string;
-};
-
-const deadlineLabel = (deadline: string | null, timezone: string) => {
-  if (!deadline) return "Friday, 6:00pm";
-  return new Intl.DateTimeFormat("en-GB", {
-    weekday: "long",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZone: timezone,
-  }).format(new Date(deadline));
 };
 
 const portalFile = async (row: SubmissionFileRow): Promise<PortalFile> => ({
@@ -195,8 +188,10 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     db.from("mentorship_onboarding_tasks").select("*").eq("cohort_id", enrollment.cohort_id).order("position"),
     db.from("mentorship_onboarding_progress").select("task_id, completed_at").eq("enrollment_id", enrollment.id),
     db.from("mentorship_submissions").select("id, week_id, state, submitted_at").eq("enrollment_id", enrollment.id),
-    db.from("mentorship_resources").select("id, resource_kind, title, description, duration_label, video_url, storage_path").eq("cohort_id", enrollment.cohort_id).eq("published", true).order("position"),
-    db.from("mentorship_calls").select("id, title, starts_at, calendar_url, circle_event_url").eq("cohort_id", enrollment.cohort_id).gte("starts_at", new Date().toISOString()).order("starts_at").limit(1).maybeSingle(),
+    // Select the resource row so older databases without the optional download_url
+    // column can still load lessons before that small migration is applied.
+    db.from("mentorship_resources").select("*").eq("cohort_id", enrollment.cohort_id).eq("published", true).order("position"),
+    db.from("mentorship_calls").select("id, title, starts_at, calendar_url, circle_event_url").eq("cohort_id", enrollment.cohort_id).order("starts_at").limit(1).maybeSingle(),
   ]);
 
   const firstError = [cohortResult, weeksResult, tasksResult, progressResult, submissionsResult, resourcesResult, firstCallResult].find((result) => result.error)?.error;
@@ -233,7 +228,7 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     requiredIdeas: week.required_ideas,
     songRequired: week.song_required,
     stemsRequired: week.stems_required,
-    deadlineLabel: deadlineLabel(week.deadline_at, cohort.timezone),
+    deadlineLabel: formatDeadline(week.deadline_at, cohort.timezone),
     phase: week.week_number < cohort.current_week ? "complete" : week.week_number === cohort.current_week ? "current" : "upcoming",
   }));
 
@@ -275,6 +270,7 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
   const completedTaskIds = new Set(progressRows.filter((row) => row.completed_at).map((row) => row.task_id));
   const onboardingTasks: OnboardingTask[] = taskRows.map((task) => ({
     id: task.id,
+    key: task.task_key,
     title: task.title,
     description: task.description,
     actionLabel: task.action_label ?? undefined,
@@ -289,10 +285,12 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     .filter((resource) => resource.resource_kind === "setup_video")
     .map(async (resource) => ({
       id: resource.id,
+      key: resource.resource_key,
       title: resource.title,
       duration: resource.duration_label ?? "",
       description: resource.description,
       url: resource.video_url ?? await signedUrl(videosBucket, resource.storage_path),
+      downloadUrl: resource.download_url && /^https:\/\//i.test(resource.download_url) ? resource.download_url : undefined,
     })));
   const welcomeVideo = resourceRows.find((resource) => resource.resource_kind === "welcome_video");
   const welcomeVideoUrl = welcomeVideo
@@ -304,6 +302,8 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     startsAt: firstCallRow.starts_at,
     displayTime: new Intl.DateTimeFormat("en-GB", {
       weekday: "long",
+      day: "numeric",
+      month: "short",
       hour: "numeric",
       minute: "2-digit",
       timeZone: cohort.timezone,

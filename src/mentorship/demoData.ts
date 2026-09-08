@@ -8,10 +8,15 @@ import type {
   WeekSubmission,
 } from "./types";
 
+const localSetupVideo = (key: string) => import.meta.env.DEV
+  && import.meta.env.VITE_MENTORSHIP_BACKEND === "demo"
+  && (import.meta.env.VITE_MENTORSHIP_PREVIEW_VIDEO_KEYS ?? "").split(",").includes(key)
+  ? `/__mentorship-preview-media/${key}.mp4` : undefined;
+
 export const demoSetupVideos: SetupVideo[] = [
-  { id: "sound-library", title: "Craft your sound library", duration: "7:34", description: "Build a trusted stash so every session starts with momentum." },
-  { id: "session-template", title: "Build your session template", duration: "6:48", description: "Set up the workhorse project you will use for every weekly rep." },
-  { id: "reference-playlist", title: "Curate your reference playlist", duration: "4:21", description: "Choose the references that keep your structure and decisions honest." },
+  { id: "sound-library", title: "Craft your sound library", duration: "7:34", description: "Build a trusted stash so every session starts with momentum.", url: localSetupVideo("sound-library") },
+  { id: "session-template", title: "Build your session template", duration: "6:48", description: "Set up the workhorse project you will use for every weekly rep.", url: localSetupVideo("session-template") },
+  { id: "reference-playlist", title: "Curate your reference playlist", duration: "4:21", description: "Choose the references that keep your structure and decisions honest.", url: localSetupVideo("reference-playlist") },
   { id: "stems-workflow", title: "Export stems properly", duration: "8 min", description: "Prepare files Rob can open quickly if your track is selected for surgery." },
 ];
 
@@ -48,7 +53,7 @@ export const weekDefinitions: WeekDefinition[] = [
     requiredIdeas: 5,
     songRequired: true,
     stemsRequired: true,
-    deadlineLabel: "Friday, 6:00pm",
+    deadlineLabel: "Friday, time to be confirmed",
     phase: "complete",
   },
   {
@@ -59,7 +64,7 @@ export const weekDefinitions: WeekDefinition[] = [
     requiredIdeas: 3,
     songRequired: true,
     stemsRequired: true,
-    deadlineLabel: "Friday, 6:00pm",
+    deadlineLabel: "Friday, time to be confirmed",
     phase: "current",
   },
   {
@@ -70,7 +75,7 @@ export const weekDefinitions: WeekDefinition[] = [
     requiredIdeas: 3,
     songRequired: true,
     stemsRequired: true,
-    deadlineLabel: "Friday, 6:00pm",
+    deadlineLabel: "Friday, time to be confirmed",
     phase: "upcoming",
   },
   {
@@ -81,7 +86,7 @@ export const weekDefinitions: WeekDefinition[] = [
     requiredIdeas: 3,
     songRequired: true,
     stemsRequired: true,
-    deadlineLabel: "Friday, 6:00pm",
+    deadlineLabel: "Friday, time to be confirmed",
     phase: "upcoming",
   },
   {
@@ -92,7 +97,7 @@ export const weekDefinitions: WeekDefinition[] = [
     requiredIdeas: 0,
     songRequired: true,
     stemsRequired: true,
-    deadlineLabel: "Friday, 6:00pm",
+    deadlineLabel: "Friday, time to be confirmed",
     phase: "upcoming",
   },
   {
@@ -103,7 +108,7 @@ export const weekDefinitions: WeekDefinition[] = [
     requiredIdeas: 0,
     songRequired: true,
     stemsRequired: true,
-    deadlineLabel: "Friday, 6:00pm",
+    deadlineLabel: "Friday, time to be confirmed",
     phase: "upcoming",
   },
 ];
@@ -174,7 +179,7 @@ export const initialOnboardingTasks: OnboardingTask[] = [
   {
     id: "first-call",
     title: "Put the first live call in your calendar",
-    description: "Sunday at 6:00pm UK time. Come live and be ready to work.",
+    description: "The date and calendar invite will appear once confirmed.",
     actionLabel: "Add to calendar",
     complete: false,
   },

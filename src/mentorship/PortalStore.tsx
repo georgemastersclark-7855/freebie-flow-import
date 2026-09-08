@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "./demoSupabaseClient";
 import {
   demoAdmin,
   demoCoach,
@@ -73,7 +73,8 @@ interface PortalStoreValue {
 }
 
 const PortalStore = createContext<PortalStoreValue | null>(null);
-const liveBackend = import.meta.env.VITE_MENTORSHIP_BACKEND === "supabase";
+// This standalone copy is only for reviewing the portal with example data.
+const liveBackend = false;
 const sessionKey = "rla-mentorship-demo-session";
 const submissionKey = "rla-mentorship-demo-submissions";
 const onboardingKey = "rla-mentorship-demo-onboarding-v2";
@@ -120,12 +121,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
   const [authError, setAuthError] = useState<string | undefined>();
   const [setupVideos, setSetupVideos] = useState<SetupVideo[]>(() => liveBackend ? [] : demoSetupVideos);
   const [welcomeVideoUrl, setWelcomeVideoUrl] = useState<string | undefined>();
-  const [firstCall, setFirstCall] = useState<PortalCall | undefined>(() => liveBackend ? undefined : {
-    id: "demo-first-call",
-    title: "First live call",
-    startsAt: "2026-08-09T17:00:00.000Z",
-    displayTime: "Sunday, 6:00pm UK",
-  });
+  const [firstCall, setFirstCall] = useState<PortalCall | undefined>();
 
   const applyLiveBootstrap = useCallback((bootstrap: LivePortalBootstrap) => {
     setUser(bootstrap.user);
@@ -217,6 +213,9 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
         const bootstrap = await signInLivePortal(email, password);
         applyLiveBootstrap(bootstrap);
         return bootstrap.user;
+      } catch (error) {
+        setAuthError(error instanceof Error ? error.message : "Unable to sign in.");
+        throw error;
       } finally {
         setReady(true);
       }
@@ -261,6 +260,17 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
   }, [onboardingTasks, user?.enrollmentId]);
 
   const addFiles = useCallback(async (weekNumber: number, kind: FileKind, files: File[]) => {
+    const definition = weeks.find((week) => week.number === weekNumber);
+    const current = submissions.find((submission) => submission.weekNumber === weekNumber);
+    if (!definition || !current || definition.phase === "upcoming" || current.state === "submitted" || current.state === "late") throw new Error("This week is not open for uploads.");
+    if (!files.length) return;
+    if (kind !== "idea" && files.length > 1) throw new Error("Upload one file at a time for your song or stems.");
+    for (const file of files) {
+      const supported = kind === "stems" ? /\.zip$/i.test(file.name) : /\.(mp3|wav)$/i.test(file.name);
+      if (!supported) throw new Error(kind === "stems" ? "Upload your stems as one ZIP file." : "Upload your audio as an MP3 or WAV file.");
+      if (!file.size) throw new Error(`${file.name} is empty. Export the file again before uploading.`);
+      if (file.size > 2 * 1024 * 1024 * 1024) throw new Error(`${file.name} is larger than the 2 GB upload limit.`);
+    }
     if (liveBackend) {
       if (!user) throw new Error("Sign in before uploading.");
       const week = weeks.find((item) => item.number === weekNumber);
@@ -306,10 +316,12 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     const submission = submissions.find((item) => item.weekNumber === weekNumber);
     if (!definition || !submission) return { ok: false, message: "Week not found." };
 
+    if (definition.phase === "upcoming") return { ok: false, message: "This week has not opened yet." };
+    if (submission.state === "submitted" || submission.state === "late") return { ok: false, message: "This week has already been submitted." };
     const missing: string[] = [];
     if (submission.ideas.length < definition.requiredIdeas) {
       const count = definition.requiredIdeas - submission.ideas.length;
-      missing.push(`${count} more idea${count === 1 ? "" : "s"}`);
+      missing.push(`${count} more song starter loop${count === 1 ? "" : "s"}`);
     }
     if (definition.songRequired && !submission.song) missing.push("your selected song");
     if (definition.stemsRequired && !submission.stems) missing.push("your stems ZIP");

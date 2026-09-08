@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // This adapter stays isolated until the mentorship migration is applied and the
 // generated Supabase Database type can be refreshed.
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "./demoSupabaseClient";
+import { formatDeadline } from "./utils";
 import { Upload } from "tus-js-client";
 import type {
   AdminOverview,
@@ -65,15 +66,7 @@ const submittedLabel = (date?: string | null) => {
   }).format(new Date(date));
 };
 
-const deadlineLabel = (deadline?: string | null, timezone = "Europe/London") => {
-  if (!deadline) return "Friday, 6:00pm";
-  return new Intl.DateTimeFormat("en-GB", {
-    weekday: "long",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZone: timezone,
-  }).format(new Date(deadline));
-};
+
 
 const safeFileName = (name: string) => name
   .normalize("NFKD")
@@ -213,7 +206,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
       cohortId: cohort.id,
       cohortName: cohort.display_name,
       currentWeek: cohort.current_week,
-      deadlineLabel: deadlineLabel(week.deadline_at, cohort.timezone),
+      deadlineLabel: formatDeadline(week.deadline_at, cohort.timezone),
       students: [],
       reviews: [],
     };
@@ -352,7 +345,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
     cohortId: cohort.id,
     cohortName: cohort.display_name,
     currentWeek: cohort.current_week,
-    deadlineLabel: deadlineLabel(week.deadline_at, cohort.timezone),
+    deadlineLabel: formatDeadline(week.deadline_at, cohort.timezone),
     students,
     reviews: reviews.sort((a, b) => a.submittedLabel.localeCompare(b.submittedLabel)),
   };
@@ -397,6 +390,7 @@ async function prepareAudio(review: ReviewItem, input: FeedbackInput) {
 }
 
 export async function saveLiveFeedbackDraft(review: ReviewItem, authorId: string, input: FeedbackInput) {
+  if (review.status === "published") throw new Error("Use Publish to update published feedback. Saving a draft would hide the existing feedback from the student.");
   if (!review.submissionId) throw new Error("The submission is missing from this review.");
   const audio = await prepareAudio(review, input);
   const { error } = await db.from("mentorship_feedback").upsert({
