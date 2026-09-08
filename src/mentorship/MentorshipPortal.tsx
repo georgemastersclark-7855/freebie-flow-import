@@ -9,6 +9,7 @@ import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminReview } from "./pages/AdminReview";
 import { PortalSetPassword } from "./pages/PortalSetPassword";
 import { AdminVideos } from "./pages/AdminVideos";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import "./portal.css";
 
 function ProtectedPortal() {
