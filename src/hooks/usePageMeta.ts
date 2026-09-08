@@ -5,6 +5,9 @@ interface PageMeta {
   description: string;
   canonical: string;
   ogType?: string;
+  image?: string;
+  imageAlt?: string;
+  siteName?: string;
 }
 
 function setMetaTag(property: string, content: string, isName = false) {
@@ -45,5 +48,18 @@ export function usePageMeta(meta: PageMeta) {
     setMetaTag("twitter:card", "summary_large_image", true);
     setMetaTag("twitter:title", meta.title, true);
     setMetaTag("twitter:description", meta.description, true);
-  }, [meta.title, meta.description, meta.canonical, meta.ogType]);
+
+    if (meta.siteName) setMetaTag("og:site_name", meta.siteName);
+
+    if (meta.image) {
+      setMetaTag("og:image", meta.image);
+      setMetaTag("og:image:width", "1200");
+      setMetaTag("og:image:height", "630");
+      setMetaTag("twitter:image", meta.image, true);
+      if (meta.imageAlt) {
+        setMetaTag("og:image:alt", meta.imageAlt);
+        setMetaTag("twitter:image:alt", meta.imageAlt, true);
+      }
+    }
+  }, [meta.title, meta.description, meta.canonical, meta.ogType, meta.image, meta.imageAlt, meta.siteName]);
 }
