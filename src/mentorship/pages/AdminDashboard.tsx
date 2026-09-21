@@ -1,38 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { AlertTriangle, ArrowRight, Check, Clock3, Headphones, LoaderCircle, Search, Sparkles, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import { adminStudents, reviewItems } from "../demoData";
-import { loadLiveAdminOverview } from "../liveAdminApi";
-import { usePortalStore } from "../PortalStore";
-import type { AdminOverview } from "../types";
 import { cx } from "../utils";
+import { useAdminOverview } from "../useAdminOverview";
 
 const feedbackLabels = { awaiting: "Awaiting review", draft: "Draft saved", published: "Published", actioned: "Actioned" } as const;
 
 export function AdminDashboard() {
-  const { backend } = usePortalStore();
-  const [overview, setOverview] = useState<AdminOverview>({
-    cohortId: "demo-cohort",
-    cohortName: "Cohort 2",
-    currentWeek: 2,
-    deadlineLabel: "Friday, time to be confirmed",
-    students: adminStudents,
-    reviews: reviewItems,
-  });
-  const [loading, setLoading] = useState(backend === "supabase");
-  const [error, setError] = useState("");
+  const { overview, loading, error } = useAdminOverview();
   const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    if (backend !== "supabase") return;
-    let active = true;
-    setLoading(true);
-    loadLiveAdminOverview()
-      .then((data) => { if (active) setOverview(data); })
-      .catch((reason) => { if (active) setError(reason instanceof Error ? reason.message : "Unable to load the cohort."); })
-      .finally(() => { if (active) setLoading(false); });
-    return () => { active = false; };
-  }, [backend]);
 
   const visibleStudents = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -44,6 +20,7 @@ export function AdminDashboard() {
   const stemsReady = overview.students.filter((student) => student.stemsSubmitted).length;
   const rescue = overview.students.filter((student) => student.status !== "on_track").length;
   const total = overview.students.length;
+  const pendingReviews = overview.reviews.filter((review) => review.status !== "published");
 
   if (loading) return <div className="grid min-h-[55vh] place-items-center text-xs font-bold uppercase tracking-[0.16em] text-[#77766f]"><span className="inline-flex items-center gap-2"><LoaderCircle size={16} className="animate-spin" />Loading cohort</span></div>;
   if (error) return <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-red-400/20 bg-red-950/20 p-5 text-sm text-red-200">{error}</div>;
@@ -75,8 +52,8 @@ export function AdminDashboard() {
           </div>
         </div>
 
-        <aside id="review-queue" className="scroll-mt-24 space-y-5">
-          <div className="mp-card rounded-3xl p-5"><div className="flex items-center justify-between"><div><div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#77766f]">Rob's queue</div><h2 className="mt-1 text-base font-black text-[#ece9e0]">Submission reviews</h2></div><span className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.05] text-xs font-black text-white">{overview.reviews.length}</span></div><div className="mt-5 space-y-2.5">{overview.reviews.length ? overview.reviews.map((item) => <Link key={item.id} to={`/mentorship-portal/admin/review/${item.id}`} className="mp-focus-ring group block rounded-2xl border border-white/[0.08] bg-black/20 p-4 transition hover:border-white/20 hover:bg-white/[0.025]"><div className="flex items-start justify-between gap-3"><div><div className="text-sm font-bold text-[#e5e1d8]">{item.studentName}</div><div className="mt-0.5 text-[11px] text-[#77766f]">{item.songName}</div></div><ArrowRight size={15} className="text-[#66655f] transition group-hover:translate-x-0.5 group-hover:text-white" /></div><div className="mt-3 flex items-center justify-between border-t border-white/[0.06] pt-3 text-[10px] font-semibold text-[#77766f]"><span>{item.status === "published" ? "Feedback published" : item.status === "draft" ? "Draft saved" : item.submittedLabel}</span><span className={item.stemsReady ? "text-[#8f8e85]" : "text-[#d7bd65]"}>{item.stemsReady ? "Stems ready" : "No stems"}</span></div></Link>) : <div className="rounded-2xl border border-dashed border-white/10 p-4 text-xs leading-5 text-[#77766f]">No completed submissions are waiting for Rob yet.</div>}</div></div>
+        <aside className="space-y-5">
+          <div className="mp-card rounded-3xl p-5"><div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#77766f]">Rob's queue</div><h2 className="mt-2 text-xl font-bold text-[#ece9e0]">{pendingReviews.length} {pendingReviews.length === 1 ? "submission" : "submissions"} to review</h2><p className="mt-3 text-sm leading-6 text-[#8f8e85]">Open the review queue to listen, leave feedback and pick up saved drafts.</p><Link to="/mentorship-portal/admin/reviews" className="mp-focus-ring mt-5 inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">Open review queue <ArrowRight size={16} /></Link></div>
 
           <div className="mp-card rounded-3xl p-5"><div className="flex items-center gap-2 text-sm font-black text-[#dedbd2]"><AlertTriangle size={17} className="text-[#d7bd65]" />Needs a check-in</div><div className="mt-4 space-y-3">{overview.students.filter((student) => student.status !== "on_track").slice(0, 3).map((student) => <div key={student.id} className="flex items-center justify-between gap-3"><div><div className="text-xs font-bold text-[#ddd9d0]">{student.name}</div><div className="text-[10px] text-[#77766f]">{student.lastActivity}</div></div><a href={`mailto:${student.email}`} className="mp-focus-ring rounded-lg border border-white/10 bg-white/[0.035] px-2.5 py-1.5 text-[10px] font-bold text-[#c7c4bb] hover:border-white/20 hover:text-white">Check in</a></div>)}</div></div>
 

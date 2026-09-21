@@ -76,7 +76,7 @@ export function AdminReview() {
 
   if (loading) return <div className="grid min-h-[55vh] place-items-center text-xs font-bold uppercase tracking-[0.16em] text-[#77766f]"><span className="inline-flex items-center gap-2"><LoaderCircle size={16} className="animate-spin" />Loading submission</span></div>;
   if (loadError) return <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-red-400/20 bg-red-950/20 p-5 text-sm text-red-200">{loadError}</div>;
-  if (!review) return <Navigate to="/mentorship-demo/admin" replace />;
+  if (!review) return <Navigate to="/mentorship-demo/admin/reviews" replace />;
 
   const feedbackInput = () => ({
     writtenNotes: notes,
@@ -222,7 +222,7 @@ export function AdminReview() {
 
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-14">
-      <Link to="/mentorship-demo/admin" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-bold text-[#8f8e85] hover:text-white"><ArrowLeft size={15} />Back to cohort overview</Link>
+      <Link to="/mentorship-demo/admin/reviews" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-bold text-[#8f8e85] hover:text-white"><ArrowLeft size={15} />Back to review queue</Link>
 
       <header className="mt-7 flex flex-col justify-between gap-5 lg:flex-row lg:items-end"><div><div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8f8e85]">Week {review.weekNumber} review</div><h1 className="mp-display mt-2 text-[48px] leading-[0.92] text-[#f2efe6] sm:text-[62px]">{review.studentName.toUpperCase()}</h1><p className="mt-3 text-sm text-[#8f8e85]">Submitted {review.submittedLabel}</p></div><div className="flex items-center gap-3"><span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-[#aaa99f]">{published ? "Feedback published" : review.status === "draft" ? "Draft saved" : "Awaiting review"}</span></div></header>
 

@@ -26,7 +26,7 @@ const studentNavigation = [
 const staffNavigation = [
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
   { to: "/mentorship-portal/admin/videos", label: "Manage videos", icon: Video, adminOnly: true },
-  { to: "/mentorship-portal/admin#review-queue", label: "Review queue", icon: ClipboardList, adminOnly: false },
+  { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },
 ];
 
 export function PortalShell() {
@@ -39,7 +39,7 @@ export function PortalShell() {
   const currentWeek = weeks.find((week) => week.phase === "current");
   useEffect(() => {
     const section = location.hash.slice(1);
-    if (["review-queue", "setup-videos", "song-starters", "weekly-song", "stems", "send-to-rob", "feedback"].includes(section)) {
+    if (["setup-videos", "song-starters", "weekly-song", "stems", "send-to-rob", "feedback"].includes(section)) {
       document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
   }, [location]);
@@ -74,6 +74,7 @@ export function PortalShell() {
             <NavLink
               key={`${label}-${index}`}
               to={to}
+              end
               className={() => {
                 const active = `${location.pathname}${location.hash}` === to
                   || (label === "Start here" && (location.pathname === "/mentorship-portal/welcome" || location.pathname.startsWith("/mentorship-portal/setup/")))
@@ -131,7 +132,7 @@ export function PortalShell() {
             </div>
             <nav className="mt-8 space-y-2">
               {navigation.map(({ to, label, icon: Icon }, index) => (
-                <NavLink key={`${label}-mobile-${index}`} to={to} onClick={() => setMobileOpen(false)} className="mp-focus-ring flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-semibold text-[#dedbd2]">
+                <NavLink key={`${label}-mobile-${index}`} to={to} end onClick={() => setMobileOpen(false)} className="mp-focus-ring flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-semibold text-[#dedbd2]">
                   <Icon size={18} /> <span>{label}</span>
                   {label === "Your weekly work" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
                 </NavLink>

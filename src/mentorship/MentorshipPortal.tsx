@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { PortalStoreProvider, usePortalStore } from "./PortalStore";
 import { PortalShell } from "./components/PortalShell";
 import { PortalLogin } from "./pages/PortalLogin";
@@ -7,6 +7,7 @@ import { WelcomeHub } from "./pages/WelcomeHub";
 import { SetupLesson } from "./pages/SetupLesson";
 import { WeekWorkspace } from "./pages/WeekWorkspace";
 import { AdminDashboard } from "./pages/AdminDashboard";
+import { AdminReviewQueue } from "./pages/AdminReviewQueue";
 import { AdminReview } from "./pages/AdminReview";
 import { PortalSetPassword } from "./pages/PortalSetPassword";
 import { AdminVideos } from "./pages/AdminVideos";
@@ -46,6 +47,13 @@ function AdminOnly() {
   return user?.role === "admin" ? <Outlet /> : <Navigate to="/mentorship-portal/admin" replace />;
 }
 
+function AdminHome() {
+  const { hash } = useLocation();
+  return hash === "#review-queue"
+    ? <Navigate to="/mentorship-portal/admin/reviews" replace />
+    : <AdminDashboard />;
+}
+
 export default function MentorshipPortal() {
   usePageMeta({
     title: "Mentorship Portal — Rob Late Audio",
@@ -72,7 +80,8 @@ export default function MentorshipPortal() {
             <Route path="week/:weekNumber" element={<WeekWorkspace />} />
           </Route>
           <Route element={<StaffOnly />}>
-            <Route path="admin" element={<AdminDashboard />} />
+            <Route path="admin" element={<AdminHome />} />
+            <Route path="admin/reviews" element={<AdminReviewQueue />} />
             <Route element={<AdminOnly />}>
               <Route path="admin/videos" element={<AdminVideos />} />
             </Route>
