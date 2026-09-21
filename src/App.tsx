@@ -25,6 +25,7 @@ const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
 const ThirtyWays = lazy(() => import("./pages/ThirtyWays"));
 const ProductionEmails = lazy(() => import("./pages/ProductionEmails"));
 const MentorshipPortal = lazy(() => import("./mentorship/MentorshipPortal"));
+const MentorshipDemo = lazy(() => import("./mentorshipDemo/MentorshipPortal"));
 const PrivacyPolicy = lazy(() => import("./pages/legal/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/legal/TermsOfService"));
 const RefundPolicy = lazy(() => import("./pages/legal/RefundPolicy"));
@@ -38,6 +39,7 @@ const RouteFallback = (
 
 const App = () => {
   useEffect(() => {
+    if (/^\/mentorship-demo(?:\/|$)/.test(window.location.pathname)) return;
     const timer = setTimeout(loadKlaviyo, 3000);
     startZapierQueueAutoFlush();
     return () => clearTimeout(timer);
@@ -70,6 +72,7 @@ const App = () => {
             <Route path="/mentorship" element={<Mentorship />} />
             <Route path="/mentorship-september" element={<MentorshipSeptember />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
+            <Route path="/mentorship-demo/*" element={<MentorshipDemo />} />
             <Route path="/emails" element={<ProductionEmails />} />
             <Route path="/30-ways" element={<ProductionEmails />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
