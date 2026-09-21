@@ -23,6 +23,8 @@ export function AdminReview() {
   const [audioFile, setAudioFile] = useState<File>();
   const [audioPreviewUrl, setAudioPreviewUrl] = useState<string>();
   const [published, setPublished] = useState(demoReview?.status === "published");
+  const [notificationQueued, setNotificationQueued] = useState<boolean>();
+  const hydratedReviewId = useRef<string>();
   const [saving, setSaving] = useState(false);
   const [updatingSurgery, setUpdatingSurgery] = useState(false);
   const recorderRef = useRef<MediaRecorder>();
@@ -39,7 +41,8 @@ export function AdminReview() {
   };
 
   useEffect(() => {
-    if (backend !== "supabase") return;
+    setLoadError("");
+    if (backend !== "supabase") { setReview(demoReview); return; }
     let active = true;
     setLoading(true);
     loadLiveAdminOverview()
@@ -52,10 +55,14 @@ export function AdminReview() {
       .catch((error) => { if (active) setLoadError(error instanceof Error ? error.message : "Unable to load this review."); })
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
-  }, [backend, reviewId]);
+  }, [backend, reviewId, demoReview]);
 
   useEffect(() => {
-    if (!review) return;
+    if (!review || hydratedReviewId.current === review.id) return;
+    hydratedReviewId.current = review.id;
+    setNotificationQueued(undefined);
+    setAudioFile(undefined);
+    setAudioPreviewUrl(undefined);
     setNotes(review.feedback?.writtenNotes ?? "");
     setNextAction(review.feedback?.nextAction ?? "");
     setVideoUrl(review.feedback?.videoUrl ?? "");
@@ -83,6 +90,7 @@ export function AdminReview() {
   const hasFeedback = () => Boolean(notes.trim() || audioFile || review.feedback?.audioStoragePath || videoUrl.trim());
 
   const saveDraft = async () => {
+    if (saving || review.status === "published") return;
     if (!hasFeedback()) {
       toast.error("Add written, audio or video feedback before saving.");
       return;
@@ -96,7 +104,7 @@ export function AdminReview() {
         if (refreshed) setReview(refreshed);
         setAudioFile(undefined);
       } else {
-        setReview({ ...review, status: "draft" });
+        setReview({ ...review, status: "draft", feedback: { status: "draft", writtenNotes: notes, nextAction, videoUrl } });
       }
       setPublished(false);
       toast.success("Feedback draft saved.");
@@ -108,6 +116,7 @@ export function AdminReview() {
   };
 
   const publish = async () => {
+    if (saving || recording) return;
     if (!hasFeedback()) {
       toast.error("Add written, audio or video feedback before publishing.");
       return;
@@ -118,7 +127,7 @@ export function AdminReview() {
     }
     setSaving(true);
     try {
-      let queued = true;
+      let queued: boolean | undefined;
       if (backend === "supabase") {
         const result = await publishLiveFeedback(review, feedbackInput());
         queued = result.notification_queued;
@@ -127,7 +136,10 @@ export function AdminReview() {
         setAudioFile(undefined);
       }
       setPublished(true);
-      toast.success(queued ? `Feedback published to ${review.studentName}.` : "Feedback published. The email hook is not configured yet.");
+      setNotificationQueued(queued);
+      if (backend === "demo") setReview({ ...review, status: "published" });
+      if (queued === false) toast.warning("Feedback published in the portal, but the email notification was not queued. Check the notification connection.");
+      else toast.success(backend === "demo" ? "Preview: feedback published. No email sent." : `Feedback published to ${review.studentName}.`);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Unable to publish this feedback.");
     } finally {
@@ -217,13 +229,13 @@ export function AdminReview() {
       <div className="mt-7 grid gap-6 xl:grid-cols-[1fr_390px]">
         <div className="space-y-6">
           <section className="mp-card rounded-3xl p-5 sm:p-7">
-            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start"><div><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#77766f]">Selected song</div><h2 className="mt-1 text-lg font-black text-[#ece9e0]">{review.songName}</h2></div>{review.song?.objectUrl ? <a href={review.song.objectUrl} download={review.song.name} target="_blank" rel="noreferrer" className="mp-focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-bold text-[#bbb8af]"><Download size={14} />Download WAV</a> : <button type="button" className="mp-focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-bold text-[#bbb8af]"><Download size={14} />Download WAV</button>}</div>
+            <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start"><div><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#77766f]">Selected song</div><h2 className="mt-1 text-lg font-black text-[#ece9e0]">{review.songName}</h2></div>{review.song?.objectUrl ? <a href={review.song.objectUrl} download={review.song.name} target="_blank" rel="noreferrer" className="mp-focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-bold text-[#bbb8af]"><Download size={14} />Download song</a> : <button type="button" disabled className="mp-focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-bold text-[#bbb8af]"><Download size={14} />Download song</button>}</div>
             <div className="mt-5"><MockAudioPlayer file={review.song} label={review.songName} /></div>
-            <div className="mt-4"><CollapsibleFiles files={review.ideaNames} /></div>
+            <div className="mt-4"><CollapsibleFiles files={review.ideas ?? review.ideaNames} /></div>
           </section>
 
           <section className="mp-card rounded-3xl p-5 sm:p-7">
-            <div className="flex items-start justify-between gap-4"><div><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#77766f]">Rob's feedback</div><h2 className="mp-display mt-1 text-[34px] leading-none text-[#ece9e0]">RECORD THE DECISION</h2><p className="mt-2 max-w-2xl text-xs leading-5 text-[#77766f]">Leave written notes, a voice note or a video. The formal feedback stays attached to this exact submission.</p></div><Sparkles size={19} className="shrink-0 text-[#77766f]" /></div>
+            <div className="flex items-start justify-between gap-4"><div><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#77766f]">Rob's feedback</div><h2 className="mp-display mt-1 text-[34px] leading-none text-[#ece9e0]">LEAVE YOUR FEEDBACK</h2><p className="mt-2 max-w-2xl text-xs leading-5 text-[#77766f]">Leave written notes, a voice note or a video. The formal feedback stays attached to this exact submission.</p></div><Sparkles size={19} className="shrink-0 text-[#77766f]" /></div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <button type="button" onClick={() => void toggleRecording()} className={cx("mp-focus-ring flex items-center gap-3 rounded-2xl border p-4 text-left transition", recording ? "border-red-400/30 bg-red-950/25" : audioFile || review.feedback?.audioStoragePath ? "border-white/15 bg-white/[0.035]" : "border-white/10 bg-black/20 hover:border-white/15")}><span className={cx("grid h-10 w-10 place-items-center rounded-full", recording ? "bg-red-500 text-white" : "bg-white text-black")}>{recording ? <Pause size={16} fill="currentColor" /> : audioFile || review.feedback?.audioStoragePath ? <Check size={17} /> : <Mic size={17} />}</span><span><span className="block text-sm font-black text-[#e5e1d8]">{recording ? "Recording… tap to stop" : audioFile || review.feedback?.audioStoragePath ? "Voice note attached" : "Record a voice note"}</span><span className="mt-0.5 block text-[11px] text-[#77766f]">{recording ? "Listening to your microphone" : "Record directly in the browser"}</span></span></button>
@@ -239,12 +251,12 @@ export function AdminReview() {
         </div>
 
         <aside className="space-y-4 xl:sticky xl:top-6 xl:self-start">
-          <div className="mp-card rounded-3xl p-5"><div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#77766f]">Submission details</div><dl className="mt-4 space-y-3 text-xs"><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Ideas</dt><dd className="font-bold text-[#d9d6cd]">{review.ideaNames.length}</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Song</dt><dd className="font-bold text-[#d9d6cd]">Ready</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Stems</dt><dd className={cx("font-bold", review.stemsReady ? "text-[#d9d6cd]" : "text-[#d7bd65]")}>{review.stemsReady ? "Ready" : "Missing"}</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Live surgery</dt><dd className="font-bold text-[#d9d6cd]">{review.surgerySelected ? "Shortlisted" : "Not selected"}</dd></div></dl>{review.stems?.objectUrl ? <a href={review.stems.objectUrl} download={review.stems.name} target="_blank" rel="noreferrer" className="mp-focus-ring mt-5 inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-[#f2efe6]"><Download size={14} />Download stems ZIP</a> : review.stemsReady && <SecondaryButton className="mt-5 w-full"><Download size={14} />Download stems ZIP</SecondaryButton>}<SecondaryButton onClick={() => void toggleSurgery()} className={cx("mt-2 w-full", (!review.stemsReady || updatingSurgery) && "pointer-events-none opacity-45")}>{review.surgerySelected ? "Remove from surgery" : "Shortlist for surgery"}</SecondaryButton></div>
+          <div className="mp-card rounded-3xl p-5"><div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#77766f]">Submission details</div><dl className="mt-4 space-y-3 text-xs"><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Song starter loops</dt><dd className="font-bold text-[#d9d6cd]">{review.ideaNames.length}</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Song</dt><dd className="font-bold text-[#d9d6cd]">Ready</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Stems</dt><dd className={cx("font-bold", review.stemsReady ? "text-[#d9d6cd]" : "text-[#d7bd65]")}>{review.stemsReady ? "Ready" : "Missing"}</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Live surgery</dt><dd className="font-bold text-[#d9d6cd]">{review.surgerySelected ? "Shortlisted" : "Not selected"}</dd></div></dl>{review.stems?.objectUrl ? <a href={review.stems.objectUrl} download={review.stems.name} target="_blank" rel="noreferrer" className="mp-focus-ring mt-5 inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-[#f2efe6]"><Download size={14} />Download stems ZIP</a> : review.stemsReady && <SecondaryButton disabled className="mt-5 w-full"><Download size={14} />Download stems ZIP</SecondaryButton>}<SecondaryButton disabled={!review.stemsReady || updatingSurgery || saving} onClick={() => void toggleSurgery()} className={cx("mt-2 w-full", (!review.stemsReady || updatingSurgery) && "pointer-events-none opacity-45")}>{review.surgerySelected ? "Remove from surgery" : "Shortlist for surgery"}</SecondaryButton></div>
 
-          <div className="mp-card rounded-3xl p-5"><div className="flex items-center gap-2 text-sm font-black text-[#dedbd2]"><Bell size={16} className="text-[#8f8e85]" />When you publish</div><ul className="mt-4 space-y-3 text-xs leading-5 text-[#77766f]"><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />Feedback appears in the student's Week {review.weekNumber} page.</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />They receive an email with a direct link.</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />The tracker records viewed and actioned status.</li></ul></div>
+          <div className="mp-card rounded-3xl p-5"><div className="flex items-center gap-2 text-sm font-black text-[#dedbd2]"><Bell size={16} className="text-[#8f8e85]" />When you publish</div><ul className="mt-4 space-y-3 text-xs leading-5 text-[#77766f]"><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />Feedback appears in the student's Week {review.weekNumber} page.</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />An email notification is requested. Check the result after publishing.</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />The tracker records viewed and actioned status.</li></ul></div>
 
-          <div className="grid grid-cols-2 gap-2"><SecondaryButton onClick={() => void saveDraft()} className={saving ? "pointer-events-none opacity-50" : ""}><Save size={14} />Save draft</SecondaryButton><PrimaryButton onClick={() => void publish()} disabled={saving}><Send size={14} />Publish</PrimaryButton></div>
-          {published && <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"><div className="flex items-center gap-2 text-sm font-bold text-[#dedbd2]"><Check size={16} className="text-[#8f8e85]" />Feedback sent</div><p className="mt-1 text-xs leading-5 text-[#77766f]">The student's email notification has been queued.</p></div>}
+          <div className="grid grid-cols-2 gap-2"><SecondaryButton disabled={saving || recording || review.status === "published"} onClick={() => void saveDraft()}><Save size={14} />Save draft</SecondaryButton><PrimaryButton onClick={() => void publish()} disabled={saving || recording}><Send size={14} />Publish</PrimaryButton></div>
+          {published && <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"><div className="flex items-center gap-2 text-sm font-bold text-[#dedbd2]"><Check size={16} className="text-[#8f8e85]" />Feedback published</div><p className="mt-1 text-xs leading-5 text-[#77766f]">{backend === "demo" ? "Preview only. No email was sent." : notificationQueued === true ? "The notification service accepted the email request." : notificationQueued === false ? "The email notification was not queued. The feedback is available in the portal." : "The feedback is available in the portal. Email status has not been checked."}</p></div>}
         </aside>
       </div>
     </div>

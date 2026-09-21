@@ -17,8 +17,8 @@ import { cx, formatFileSize } from "../utils";
 export function PortalMark({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-white/[0.04] text-[11px] font-black tracking-[-0.08em] text-white">
-        RL
+      <div className="h-10 w-10 shrink-0 rounded-full p-px" style={{ background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}>
+        <img src="/assets/rob-profile.jpg" alt="Rob Late" width={40} height={40} className="h-full w-full rounded-full border border-[#050505] object-cover" />
       </div>
       {!compact && (
         <div>
@@ -87,18 +87,21 @@ export function SecondaryButton({
   onClick,
   type = "button",
   className,
+  disabled = false,
 }: {
   children: ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
   className?: string;
+  disabled?: boolean;
 }) {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={cx(
-        "mp-focus-ring inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-[#f2efe6] transition hover:border-white/20 hover:bg-white/[0.07]",
+        "mp-focus-ring inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-[#f2efe6] transition hover:border-white/20 hover:bg-white/[0.07] disabled:cursor-not-allowed disabled:opacity-45",
         className,
       )}
     >
@@ -127,11 +130,11 @@ interface FileDropProps {
   multiple?: boolean;
   onFiles: (files: File[]) => void;
   compact?: boolean;
+  disabled?: boolean;
 }
 
-export function FileDrop({ label, help, kind, accept, multiple, onFiles, compact }: FileDropProps) {
+export function FileDrop({ label, help, kind, accept, multiple, onFiles, compact, disabled = false }: FileDropProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const Icon = kind === "stems" ? FileArchive : FileAudio;
 
   return (
     <div
@@ -145,6 +148,7 @@ export function FileDrop({ label, help, kind, accept, multiple, onFiles, compact
         type="file"
         accept={accept}
         multiple={multiple}
+        disabled={disabled}
         className="hidden"
         onChange={(event) => {
           const files = Array.from(event.target.files ?? []);
@@ -155,16 +159,18 @@ export function FileDrop({ label, help, kind, accept, multiple, onFiles, compact
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="mp-focus-ring flex w-full items-center gap-4 text-left"
+        disabled={disabled}
+        aria-label={label}
+        className="mp-focus-ring flex w-full flex-wrap items-center gap-4 rounded-lg text-left disabled:cursor-wait disabled:opacity-50"
       >
         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-[#aaa99f] transition group-hover:border-white/20 group-hover:text-white">
           {compact ? <Plus size={19} /> : <UploadCloud size={20} />}
         </span>
-        <span className="min-w-0 flex-1">
+        <span className="min-w-0 flex-1 basis-40">
           <span className="block text-sm font-bold text-[#f2efe6]">{label}</span>
           <span className="mt-0.5 block text-xs text-[#8f8e85]">{help}</span>
         </span>
-        {!compact && <Icon className="hidden text-white/15 sm:block" size={24} />}
+        <span className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-lg bg-white px-4 py-2.5 text-xs font-bold text-black">{disabled ? "Please wait..." : multiple ? "Choose files" : "Choose file"}</span>
       </button>
     </div>
   );
@@ -189,7 +195,7 @@ export function FileRow({
         <span className="block truncate text-sm font-semibold text-[#e9e6de]">{file.name}</span>
         <span className="block text-[11px] text-[#7f7e76]">{formatFileSize(file.size)}</span>
       </span>
-      {showDownload && (
+      {showDownload && file.objectUrl && (
         <a href={file.objectUrl ?? "#"} download={file.name} target={file.objectUrl ? "_blank" : undefined} rel={file.objectUrl ? "noreferrer" : undefined} className="mp-focus-ring rounded-lg p-2 text-[#8f8e85] hover:bg-white/[0.05] hover:text-white" aria-label={`Download ${file.name}`}>
           <Download size={16} />
         </a>
@@ -224,7 +230,6 @@ export function MockAudioPlayer({ file, label }: { file?: PortalFile; label?: st
   const togglePlayback = async () => {
     const audio = audioRef.current;
     if (!audio) {
-      setPlaying((value) => !value);
       return;
     }
     if (audio.paused) {
@@ -255,7 +260,8 @@ export function MockAudioPlayer({ file, label }: { file?: PortalFile; label?: st
         <button
           type="button"
           onClick={() => void togglePlayback()}
-          className="mp-focus-ring grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-black transition hover:scale-[1.03]"
+          disabled={!file?.objectUrl}
+          className="mp-focus-ring grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-black transition hover:scale-[1.03] disabled:opacity-40 disabled:cursor-not-allowed"
           aria-label={playing ? "Pause preview" : "Play preview"}
         >
           {playing ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" className="ml-0.5" />}
@@ -263,7 +269,7 @@ export function MockAudioPlayer({ file, label }: { file?: PortalFile; label?: st
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex items-baseline justify-between gap-3">
             <span className="truncate text-sm font-semibold text-[#eeebe3]">{label ?? file?.name ?? "Audio preview"}</span>
-            <span className="text-[11px] tabular-nums text-[#77766e]">{formatTime(file?.objectUrl ? currentTime : 42)} / {formatTime(duration)}</span>
+            <span className="text-[11px] tabular-nums text-[#77766e]">{file?.objectUrl ? `${formatTime(currentTime)} / ${formatTime(duration)}` : "Preview unavailable"}</span>
           </div>
           <div className="flex h-8 items-center gap-[3px] overflow-hidden">
             {bars.map((height, index) => (
@@ -291,7 +297,7 @@ export function ChecklistRow({
 }) {
   return (
     <div className="flex items-start gap-3">
-      <span className={cx("mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border", complete ? "border-[#9be15d]/40 bg-[#9be15d]/15 text-[#b8ef87]" : "border-white/15 text-transparent")}>
+      <span className={cx("mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border", complete ? "border-white/30 bg-white/10 text-[#f2efe6]" : "border-white/15 text-transparent")}>
         <Check size={12} strokeWidth={3} />
       </span>
       <span>
@@ -302,26 +308,28 @@ export function ChecklistRow({
   );
 }
 
-export function CollapsibleFiles({ files }: { files: string[] }) {
+export function CollapsibleFiles({ files }: { files: (PortalFile | string)[] }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="overflow-hidden rounded-2xl border border-white/[0.08]">
-      <button type="button" onClick={() => setOpen((value) => !value)} className="mp-focus-ring flex w-full items-center justify-between gap-4 bg-white/[0.025] px-4 py-3 text-left">
+      <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} className="mp-focus-ring flex w-full items-center justify-between gap-4 bg-white/[0.025] px-4 py-3 text-left">
         <span>
-          <span className="block text-sm font-semibold text-[#ddd9d0]">Raw ideas</span>
+          <span className="block text-sm font-semibold text-[#ddd9d0]">Song starter loops</span>
           <span className="block text-xs text-[#77766f]">{files.length} uploaded. Available for context, not part of the main review.</span>
         </span>
         <ChevronDown size={17} className={cx("shrink-0 text-[#77766f] transition", open && "rotate-180")} />
       </button>
       {open && (
         <div className="space-y-2 border-t border-white/[0.08] p-3">
-          {files.map((name) => (
-            <div key={name} className="flex items-center gap-3 rounded-xl bg-black/20 px-3 py-2.5">
+          {files.map((file, index) => {
+            const name = typeof file === "string" ? file : file.name;
+            const url = typeof file === "string" ? undefined : file.objectUrl;
+            return <div key={typeof file === "string" ? `${name}-${index}` : file.id} className="flex items-center gap-3 rounded-xl bg-black/20 px-3 py-2.5">
               <FileAudio size={15} className="text-[#77766f]" />
               <span className="min-w-0 flex-1 truncate text-sm text-[#bbb8af]">{name}</span>
-              <button type="button" className="mp-focus-ring rounded-lg p-1.5 text-[#77766f] hover:text-white" aria-label={`Download ${name}`}><Download size={15} /></button>
-            </div>
-          ))}
+              {url ? <a href={url} download={name} target="_blank" rel="noreferrer" className="mp-focus-ring rounded-lg p-1.5 text-[#77766f] hover:text-white" aria-label={`Download ${name}`}><Download size={15} /></a> : <button type="button" disabled className="rounded-lg p-1.5 text-[#77766f] disabled:cursor-not-allowed disabled:opacity-45" aria-label={`Download ${name} unavailable`}><Download size={15} /></button>}
+            </div>;
+          })}
         </div>
       )}
     </div>

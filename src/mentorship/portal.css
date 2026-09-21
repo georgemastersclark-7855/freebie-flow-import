@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "RLA Zurich Black Extended";
+  src: url("./assets/fonts/zurich-black-extended.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 .mentorship-portal {
   --mp-bg: #0b0b0a;
   --mp-panel: #141411;
@@ -6,8 +14,6 @@
   --mp-paper: #f2efe6;
   --mp-muted: #aaa99f;
   --mp-accent: #d3ff02;
-  --mp-accent-soft: #1d2400;
-  --mp-green: #9be15d;
   min-height: 100vh;
   background: var(--mp-bg);
   color: var(--mp-paper);
@@ -26,9 +32,34 @@
 }
 
 .mentorship-portal .mp-display {
-  font-family: "Zurich BT Condensed", "Arial Narrow", sans-serif;
+  font-family: "RLA Zurich Black Extended", Helvetica, Arial, sans-serif;
+  font-size: clamp(28px, 3.4vw, 46px);
   font-weight: 700;
-  letter-spacing: -0.035em;
+  font-synthesis: none;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.mentorship-portal .mp-welcome-copy {
+  container-type: inline-size;
+}
+
+.mentorship-portal .mp-display.mp-welcome-title {
+  font-size: clamp(24px, 9cqw, 44px);
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+.mentorship-portal .mp-display.mp-programme-title {
+  font-size: 23px;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.mentorship-portal .mp-display.mp-lesson-title {
+  font-size: clamp(25px, 3vw, 38px);
+  line-height: 1.2;
 }
 
 .mentorship-portal .mp-card {
@@ -38,7 +69,7 @@
 }
 
 .mentorship-portal .mp-focus-ring:focus-visible {
-  outline: 2px solid var(--mp-accent);
+  outline: 2px solid var(--mp-paper);
   outline-offset: 3px;
 }
 
@@ -53,12 +84,41 @@
 }
 
 @media (max-width: 767px) {
-  .mentorship-portal h1,
+  /* Scope the marketing site's global mobile heading overrides to the portal. */
+  .mentorship-portal h1 {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.015em !important;
+    line-height: 1.12 !important;
+  }
+
   .mentorship-portal h2 {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    letter-spacing: inherit !important;
-    line-height: inherit !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.15 !important;
+  }
+
+  .mentorship-portal h2.mp-display {
+    font-size: 28px !important;
+  }
+
+  .mentorship-portal h1.mp-welcome-title {
+    font-size: clamp(24px, 9cqw, 44px) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.15 !important;
+  }
+
+  .mentorship-portal h1.mp-lesson-title {
+    font-size: 25px !important;
+    line-height: 1.2 !important;
+  }
+
+  .mentorship-portal h2.mp-programme-title {
+    font-size: 23px !important;
+    letter-spacing: 0 !important;
+    line-height: 1.2 !important;
   }
 }
 

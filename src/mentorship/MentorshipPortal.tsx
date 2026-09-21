@@ -4,6 +4,7 @@ import { PortalShell } from "./components/PortalShell";
 import { PortalLogin } from "./pages/PortalLogin";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import { WelcomeHub } from "./pages/WelcomeHub";
+import { SetupLesson } from "./pages/SetupLesson";
 import { WeekWorkspace } from "./pages/WeekWorkspace";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminReview } from "./pages/AdminReview";
@@ -11,6 +12,7 @@ import { PortalSetPassword } from "./pages/PortalSetPassword";
 import { AdminVideos } from "./pages/AdminVideos";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "./portal.css";
+import { portalHome } from "./utils";
 
 function ProtectedPortal() {
   const { user, ready } = usePortalStore();
@@ -19,10 +21,10 @@ function ProtectedPortal() {
 }
 
 function RoleHome() {
-  const { user, ready } = usePortalStore();
+  const { user, ready, onboardingTasks } = usePortalStore();
   if (!ready) return <PortalLoading />;
   if (!user) return <PortalLogin />;
-  return <Navigate to={user.role === "student" ? "/mentorship-portal/submissions" : "/mentorship-portal/admin"} replace />;
+  return <Navigate to={portalHome(user, onboardingTasks)} replace />;
 }
 
 function PortalLoading() {
@@ -37,6 +39,11 @@ function StudentOnly() {
 function StaffOnly() {
   const { user } = usePortalStore();
   return user && user.role !== "student" ? <Outlet /> : <Navigate to="/mentorship-portal/submissions" replace />;
+}
+
+function AdminOnly() {
+  const { user } = usePortalStore();
+  return user?.role === "admin" ? <Outlet /> : <Navigate to="/mentorship-portal/admin" replace />;
 }
 
 export default function MentorshipPortal() {
@@ -61,11 +68,14 @@ export default function MentorshipPortal() {
             <Route path="submissions" element={<StudentDashboard />} />
             <Route path="dashboard" element={<Navigate to="/mentorship-portal/submissions" replace />} />
             <Route path="welcome" element={<WelcomeHub />} />
+            <Route path="setup/:lessonKey" element={<SetupLesson />} />
             <Route path="week/:weekNumber" element={<WeekWorkspace />} />
           </Route>
           <Route element={<StaffOnly />}>
             <Route path="admin" element={<AdminDashboard />} />
-            <Route path="admin/videos" element={<AdminVideos />} />
+            <Route element={<AdminOnly />}>
+              <Route path="admin/videos" element={<AdminVideos />} />
+            </Route>
             <Route path="admin/review/:reviewId" element={<AdminReview />} />
           </Route>
         </Route>

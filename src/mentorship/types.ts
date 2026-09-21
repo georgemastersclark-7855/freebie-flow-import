@@ -68,6 +68,7 @@ export interface WeekSubmission {
 
 export interface OnboardingTask {
   id: string;
+  key?: string;
   title: string;
   description: string;
   actionLabel?: string;
@@ -77,10 +78,12 @@ export interface OnboardingTask {
 
 export interface SetupVideo {
   id: string;
+  key?: string;
   title: string;
   duration: string;
   description: string;
   url?: string;
+  downloadUrl?: string;
 }
 
 export interface PortalCall {

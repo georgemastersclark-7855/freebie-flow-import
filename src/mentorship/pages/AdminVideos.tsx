@@ -107,7 +107,7 @@ export function AdminVideos() {
                   <div className="flex flex-wrap items-center gap-2">
                     <h2 className="text-base font-black text-[#ece9e0]">{resource.title}</h2>
                     {uploaded && <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 text-[10px] font-bold text-[#aaa99f]"><Check size={11} />Uploaded</span>}
-                    {resource.published && <span className="rounded-full border border-[#9be15d]/25 bg-[#9be15d]/10 px-2 py-1 text-[10px] font-bold text-[#b8ef87]">Visible to students</span>}
+                    {resource.published && <span className="rounded-full border border-white/20 bg-white/[0.06] px-2 py-1 text-[10px] font-bold text-[#f2efe6]">Visible to students</span>}
                   </div>
                   <p className="mt-1 text-xs leading-5 text-[#77766f]">{resource.description}</p>
                   {busy && <div className="mt-3 max-w-md"><div className="h-1.5 overflow-hidden rounded-full bg-white/[0.07]"><div className="h-full bg-white/75 transition-all" style={{ width: `${progress}%` }} /></div><div className="mt-1.5 text-[10px] font-bold text-[#8f8e85]">Uploading {progress}%</div></div>}

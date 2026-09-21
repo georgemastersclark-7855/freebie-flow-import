@@ -11,34 +11,45 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePortalStore } from "../PortalStore";
 import { PortalMark } from "./PortalUI";
+import { communityName } from "../onboarding";
+import { toast } from "sonner";
 import { cx } from "../utils";
 
 const studentNavigation = [
   { to: "/mentorship-portal/welcome", label: "Start here", icon: Sparkles },
-  { to: "/mentorship-portal/submissions", label: "Submit your work", icon: FolderClock },
+  { to: "/mentorship-portal/submissions", label: "Your weekly work", icon: FolderClock },
 ];
 
 const staffNavigation = [
-  { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge },
-  { to: "/mentorship-portal/admin/videos", label: "Setup videos", icon: Video },
-  { to: "/mentorship-portal/admin/review/review-maya-w2", label: "Review queue", icon: ClipboardList },
+  { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
+  { to: "/mentorship-portal/admin/videos", label: "Manage videos", icon: Video, adminOnly: true },
+  { to: "/mentorship-portal/admin#review-queue", label: "Review queue", icon: ClipboardList, adminOnly: false },
 ];
 
 export function PortalShell() {
-  const { user, logout, submissions, circleUrl } = usePortalStore();
+  const { user, logout, submissions, circleUrl, weeks, backend } = usePortalStore();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const staff = user?.role === "coach" || user?.role === "admin";
-  const navigation = staff ? staffNavigation : studentNavigation;
+  const navigation = staff ? staffNavigation.filter((item) => !item.adminOnly || user?.role === "admin") : studentNavigation;
+  const currentWeek = weeks.find((week) => week.phase === "current");
+  useEffect(() => {
+    const section = location.hash.slice(1);
+    if (["review-queue", "setup-videos", "song-starters", "weekly-song", "stems", "send-to-rob", "feedback"].includes(section)) {
+      document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location]);
   const pendingFeedback = !staff && submissions.some((submission) => submission.feedback && !submission.feedback.actionConfirmedAt);
 
   const signOut = async () => {
-    await logout();
-    navigate("/mentorship-portal");
+    try {
+      await logout();
+      navigate("/mentorship-portal");
+    } catch { toast.error("Unable to sign out. Please try again."); }
   };
 
   return (
@@ -51,10 +62,10 @@ export function PortalShell() {
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#77766f]">{staff ? "Current cohort" : "Current programme"}</div>
           <div className="mt-2 flex items-center justify-between gap-3">
             <div>
-              <div className="text-sm font-bold text-white">{staff ? "Cohort 2" : "Rob Late"}</div>
+              <div className="text-sm font-bold text-white">{user?.cohortName}</div>
               <div className="text-xs text-[#85847c]">Six-week producer mentorship</div>
             </div>
-            <div className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-xs font-black text-[#aaa99f]">2/6</div>
+            <div className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-xs font-black text-[#aaa99f]">{currentWeek ? `${currentWeek.number}/6` : "6w"}</div>
           </div>
         </div>
 
@@ -64,8 +75,9 @@ export function PortalShell() {
               key={`${label}-${index}`}
               to={to}
               className={() => {
-                const active = location.pathname === to
-                  || (label === "Submit your work" && location.pathname.startsWith("/mentorship-portal/week/"))
+                const active = `${location.pathname}${location.hash}` === to
+                  || (label === "Start here" && (location.pathname === "/mentorship-portal/welcome" || location.pathname.startsWith("/mentorship-portal/setup/")))
+                  || (label === "Your weekly work" && location.pathname.startsWith("/mentorship-portal/week/"))
                   || (label === "Review queue" && location.pathname.startsWith("/mentorship-portal/admin/review/"));
                 return cx(
                   "mp-focus-ring flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition",
@@ -77,15 +89,15 @@ export function PortalShell() {
             >
               <Icon size={17} />
               <span>{label}</span>
-              {label === "Submit your work" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
+              {label === "Your weekly work" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
             </NavLink>
           ))}
         </nav>
 
         <div className="mt-auto">
-          {!staff && (
-            <a href={circleUrl ?? "#circle"} target={circleUrl ? "_blank" : undefined} rel={circleUrl ? "noreferrer" : undefined} className="mp-focus-ring mb-3 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.025] px-3 py-3 text-sm font-semibold text-[#b9b6ad] hover:border-white/15 hover:text-white">
-              Open Circle
+          {!staff && circleUrl && (
+            <a href={circleUrl} target={circleUrl ? "_blank" : undefined} rel={circleUrl ? "noreferrer" : undefined} className="mp-focus-ring mb-3 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.025] px-3 py-3 text-sm font-semibold text-[#b9b6ad] hover:border-white/15 hover:text-white">
+              {communityName(circleUrl)}
               <ArrowUpRight size={16} />
             </a>
           )}
@@ -103,8 +115,8 @@ export function PortalShell() {
       <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-white/[0.08] bg-[#0d0d0b]/95 px-4 backdrop-blur-xl lg:hidden">
         <PortalMark compact />
         <div className="text-center">
-          <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#77766f]">{staff ? "Cohort 2" : "Producer mentorship"}</div>
-          <div className="text-xs font-semibold text-[#d9d6cd]">Week 2 of 6</div>
+          <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#77766f]">{user?.cohortName ?? "Producer mentorship"}</div>
+          <div className="text-xs font-semibold text-[#d9d6cd]">{currentWeek ? `Week ${currentWeek.number} of 6` : "Six-week mentorship"}</div>
         </div>
         <button type="button" onClick={() => setMobileOpen(true)} className="mp-focus-ring rounded-lg p-2 text-white" aria-label="Open navigation"><Menu size={21} /></button>
       </header>
@@ -121,16 +133,18 @@ export function PortalShell() {
               {navigation.map(({ to, label, icon: Icon }, index) => (
                 <NavLink key={`${label}-mobile-${index}`} to={to} onClick={() => setMobileOpen(false)} className="mp-focus-ring flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-semibold text-[#dedbd2]">
                   <Icon size={18} /> <span>{label}</span>
-                  {label === "Submit your work" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
+                  {label === "Your weekly work" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
                 </NavLink>
               ))}
             </nav>
+            {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}
             <button type="button" onClick={() => void signOut()} className="mp-focus-ring mt-8 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-[#8f8e85]"><LogOut size={17} /> Sign out</button>
           </div>
         </div>
       )}
 
       <main className="relative z-10 min-w-0 flex-1 pt-16 lg:ml-[260px] lg:pt-0">
+        {backend === "demo" && <div className="border-b border-white/15 bg-white/5 px-4 py-2 text-center text-xs text-[#b6b3a8]">Preview with example student data. No live submissions or messages.</div>}
         <Outlet />
       </main>
     </div>
