@@ -132,3 +132,7 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+.mentorship-portal .mp-display.mp-overview-title {
+  font-size: clamp(26px, 2.7vw, 36px);
+}
