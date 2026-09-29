@@ -30,10 +30,18 @@ const staffNavigation = [
 ];
 
 export function PortalShell() {
-  const { user, logout, submissions, circleUrl, weeks, backend } = usePortalStore();
+  const { user, logout, submissions, circleUrl, weeks, backend, resetDemo } = usePortalStore();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const clearDemo = async () => {
+    setResetting(true);
+    try { await resetDemo(); setConfirmReset(false); navigate(staff ? "/mentorship-demo/admin/reviews" : "/mentorship-demo/week/2"); toast.success("Demo cleared. Ready for a new submission."); }
+    catch (error) { toast.error(error instanceof Error ? error.message : "Unable to reset the demo."); }
+    finally { setResetting(false); }
+  };
   const staff = user?.role === "coach" || user?.role === "admin";
   const navigation = staff ? staffNavigation.filter((item) => !item.adminOnly || user?.role === "admin") : studentNavigation;
   const currentWeek = weeks.find((week) => week.phase === "current");
@@ -145,7 +153,8 @@ export function PortalShell() {
       )}
 
       <main className="relative z-10 min-w-0 flex-1 pt-16 lg:ml-[260px] lg:pt-0">
-        {backend === "demo" && <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-b border-white/15 bg-white/5 px-4 py-2 text-center text-xs text-[#b6b3a8]"><span>Demo preview · Example student data</span><button type="button" onClick={() => void signOut()} className="mp-focus-ring rounded px-2 py-1 font-semibold text-white underline underline-offset-4">Switch view</button></div>}
+        {backend === "demo" && <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-b border-white/15 bg-white/5 px-4 py-2 text-center text-xs text-[#b6b3a8]"><span>Interactive demo · Saved in this browser</span><button type="button" onClick={() => void signOut()} className="mp-focus-ring rounded px-2 py-1 font-semibold text-white underline underline-offset-4">Switch view</button><button type="button" onClick={() => setConfirmReset(!confirmReset)} className="mp-focus-ring rounded px-2 py-1 text-[#b6b3a8] underline underline-offset-4">Reset demo</button></div>}
+        {confirmReset && <div className="border-b border-white/15 bg-[#23231e] px-5 py-4 text-sm"><p className="font-bold">Clear this demo?</p><p className="mt-1 text-xs text-[#aaa99f]">Remove test uploads, feedback and onboarding progress from this browser. Live student data is unaffected.</p><div className="mt-3 flex gap-3"><button type="button" disabled={resetting} onClick={() => void clearDemo()} className="mp-focus-ring rounded-lg bg-white px-4 py-2 text-xs font-bold text-black">{resetting ? "Clearing..." : "Clear demo data"}</button><button type="button" disabled={resetting} onClick={() => setConfirmReset(false)} className="mp-focus-ring rounded-lg border border-white/20 px-4 py-2 text-xs">Cancel</button></div></div>}
         <Outlet />
       </main>
     </div>

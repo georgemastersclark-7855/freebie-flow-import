@@ -30,7 +30,7 @@ function UploadStatus({ student }: { student: AdminStudent }) {
 }
 
 function FeedbackStatus({ student, review }: { student: AdminStudent; review?: ReviewItem }) {
-  const state = review?.status ?? student.feedbackState;
+  const state = student.feedbackState === "actioned" && (!review || review.status === "published") ? "actioned" : review?.status ?? student.feedbackState;
   // A student can have saved files without sending a submission for review.
   const label = !review && state === "awaiting" ? (student.songSubmitted ? "Not in review queue" : "Waiting for song") : feedbackLabels[state];
   return <span className={cx("inline-flex rounded-md px-2 py-1 text-[11px] font-semibold", review && state !== "published" ? "border border-white/15 bg-white/[0.07] text-[#f2efe6]" : "text-[#aaa99f]")}>{label}</span>;
@@ -80,19 +80,19 @@ export function AdminDashboard() {
   return (
     <div className="mp-admin-overview mx-auto max-w-[1500px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">
       <header className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-        <div><p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#aaa99f]">{overview.cohortName} / {total} {total === 1 ? "producer" : "producers"}</p><h1 className="mp-display mp-overview-title mt-3 text-[#f2efe6]">THIS WEEK, ROB.</h1><p className="mt-3 text-sm text-[#aaa99f]">The music, the feedback and who's keeping up.</p></div>
+        <div><p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#aaa99f]">{overview.cohortName} / {total} {total === 1 ? "producer" : "producers"}</p><h1 className="mp-display mp-overview-title mt-3 text-[#f2efe6]">WEEK {overview.currentWeek} OVERVIEW</h1><p className="mt-3 text-sm text-[#aaa99f]">Review submissions and track student progress.</p></div>
         <div className="flex shrink-0 items-center gap-3 rounded-xl border border-white/10 px-4 py-3"><Clock3 size={17} aria-hidden="true" className="text-[#aaa99f]" /><div><p className="text-xs font-bold text-[#e2dfd6]">Week {overview.currentWeek} submissions</p><p className="mt-1 text-xs text-[#aaa99f]">{overview.deadlineLabel}</p></div></div>
       </header>
 
       <section className="mt-7 grid gap-4 lg:grid-cols-[1.35fr_1fr]" aria-label="Your next actions">
         <div className="flex flex-col justify-between rounded-2xl border border-white/20 bg-gradient-to-br from-[#262621] to-[#171714] p-5 sm:p-7">
           <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#c7c4bb]"><Headphones size={16} aria-hidden="true" />Your feedback</div>
-          <div className="mt-5 flex items-center gap-4"><span className="text-[52px] font-bold leading-none tracking-[-0.05em] text-[#f2efe6]">{pendingReviews.length}</span><div><h2 className="text-xl font-bold text-[#f2efe6]">{pendingReviews.length ? `track${pendingReviews.length === 1 ? "" : "s"} ready to review` : "You're all caught up"}</h2><p className="mt-1.5 text-sm text-[#aaa99f]">{pendingReviews.length ? "Listen in. Leave feedback. Keep them moving." : "New submissions will appear here when they're sent."}</p></div></div>
+          <div className="mt-5 flex items-center gap-4"><span className="text-[52px] font-bold leading-none tracking-[-0.05em] text-[#f2efe6]">{pendingReviews.length}</span><div><h2 className="text-xl font-bold text-[#f2efe6]">{pendingReviews.length ? `track${pendingReviews.length === 1 ? "" : "s"} ready to review` : "You're all caught up"}</h2><p className="mt-1.5 text-sm text-[#aaa99f]">{pendingReviews.length ? "Open a submission to listen and leave feedback." : "New submissions will appear here when they're sent."}</p></div></div>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3"><Link to="/mentorship-portal/admin/reviews" className="mp-focus-ring inline-flex items-center justify-center gap-3 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black transition hover:bg-[#e0ff57]">{pendingReviews.length ? "Open review queue" : "View feedback"}<ArrowRight size={17} aria-hidden="true" /></Link>{drafts > 0 && <span className="text-xs text-[#c7c4bb]">{drafts} saved {drafts === 1 ? "draft" : "drafts"} to pick up</span>}</div>
         </div>
 
         <div className="mp-card flex flex-col justify-between rounded-2xl p-5 sm:p-7">
-          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#aaa99f]"><MessageCircle size={16} aria-hidden="true" />Keep everyone moving</div>
+          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#aaa99f]"><MessageCircle size={16} aria-hidden="true" />Student check-ins</div>
           <div className="mt-5"><h2 className="text-xl font-bold text-[#f2efe6]">{checkIns.length ? `${checkIns.length} ${checkIns.length === 1 ? "producer needs" : "producers need"} a check-in` : "Everyone's on track"}</h2><p className="mt-2 text-sm leading-6 text-[#aaa99f]">{checkIns.length ? checkIns.map((student) => student.name.split(" ")[0]).slice(0, 4).join(", ") + (checkIns.length > 4 ? ` and ${checkIns.length - 4} more.` : ".") : "You can see everyone's uploads and feedback below."}</p></div>
           <div className="mt-5"><button type="button" onClick={showCheckIns} className="mp-focus-ring inline-flex items-center gap-3 rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-sm font-bold text-[#ece9e0] transition hover:bg-white/10">View check-ins<ArrowRight size={16} aria-hidden="true" /></button></div>
         </div>

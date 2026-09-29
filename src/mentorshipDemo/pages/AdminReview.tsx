@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Bell, Check, Download, Link2, LoaderCircle, Mic, Pause, Save, Send, Sparkles, Upload } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
-import { reviewItems } from "../demoData";
 import { loadLiveAdminOverview, publishLiveFeedback, saveLiveFeedbackDraft, setLiveSurgerySelection } from "../liveAdminApi";
 import { usePortalStore } from "../PortalStore";
 import type { PortalFile, ReviewItem } from "../types";
@@ -11,8 +10,8 @@ import { cx } from "../utils";
 
 export function AdminReview() {
   const { reviewId } = useParams();
-  const { backend, user } = usePortalStore();
-  const demoReview = useMemo(() => reviewItems.find((item) => item.id === reviewId), [reviewId]);
+  const { backend, user, demoReviews, saveDemoFeedback, setDemoSurgery } = usePortalStore();
+  const demoReview = useMemo(() => demoReviews.find((item) => item.id === reviewId), [demoReviews, reviewId]);
   const [review, setReview] = useState<ReviewItem | undefined>(backend === "demo" ? demoReview : undefined);
   const [loading, setLoading] = useState(backend === "supabase");
   const [loadError, setLoadError] = useState("");
@@ -104,7 +103,8 @@ export function AdminReview() {
         if (refreshed) setReview(refreshed);
         setAudioFile(undefined);
       } else {
-        setReview({ ...review, status: "draft", feedback: { status: "draft", writtenNotes: notes, nextAction, videoUrl } });
+        setReview(await saveDemoFeedback(review.id, feedbackInput(), false));
+        setAudioFile(undefined);
       }
       setPublished(false);
       toast.success("Feedback draft saved.");
@@ -135,9 +135,12 @@ export function AdminReview() {
         if (refreshed) setReview(refreshed);
         setAudioFile(undefined);
       }
-      setPublished(true);
       setNotificationQueued(queued);
-      if (backend === "demo") setReview({ ...review, status: "published" });
+      if (backend === "demo") {
+        setReview(await saveDemoFeedback(review.id, feedbackInput(), true));
+        setAudioFile(undefined);
+      }
+      setPublished(true);
       if (queued === false) toast.warning("Feedback published in the portal, but the email notification was not queued. Check the notification connection.");
       else toast.success(backend === "demo" ? "Preview: feedback published. No email sent." : `Feedback published to ${review.studentName}.`);
     } catch (error) {
@@ -202,6 +205,7 @@ export function AdminReview() {
         if (!user) throw new Error("Sign in again before changing the surgery queue.");
         await setLiveSurgerySelection(review, user.id, selected);
       }
+      if (backend === "demo") await setDemoSurgery(review.id, selected);
       setReview({ ...review, surgerySelected: selected });
       toast.success(selected ? "Added to the live surgery shortlist." : "Removed from the surgery shortlist.");
     } catch (error) {
@@ -253,10 +257,10 @@ export function AdminReview() {
         <aside className="space-y-4 xl:sticky xl:top-6 xl:self-start">
           <div className="mp-card rounded-3xl p-5"><div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#77766f]">Submission details</div><dl className="mt-4 space-y-3 text-xs"><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Song starter loops</dt><dd className="font-bold text-[#d9d6cd]">{review.ideaNames.length}</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Song</dt><dd className="font-bold text-[#d9d6cd]">Ready</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Stems</dt><dd className={cx("font-bold", review.stemsReady ? "text-[#d9d6cd]" : "text-[#d7bd65]")}>{review.stemsReady ? "Ready" : "Missing"}</dd></div><div className="flex justify-between gap-4"><dt className="text-[#77766f]">Live surgery</dt><dd className="font-bold text-[#d9d6cd]">{review.surgerySelected ? "Shortlisted" : "Not selected"}</dd></div></dl>{review.stems?.objectUrl ? <a href={review.stems.objectUrl} download={review.stems.name} target="_blank" rel="noreferrer" className="mp-focus-ring mt-5 inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-[#f2efe6]"><Download size={14} />Download stems ZIP</a> : review.stemsReady && <SecondaryButton disabled className="mt-5 w-full"><Download size={14} />Download stems ZIP</SecondaryButton>}<SecondaryButton disabled={!review.stemsReady || updatingSurgery || saving} onClick={() => void toggleSurgery()} className={cx("mt-2 w-full", (!review.stemsReady || updatingSurgery) && "pointer-events-none opacity-45")}>{review.surgerySelected ? "Remove from surgery" : "Shortlist for surgery"}</SecondaryButton></div>
 
-          <div className="mp-card rounded-3xl p-5"><div className="flex items-center gap-2 text-sm font-black text-[#dedbd2]"><Bell size={16} className="text-[#8f8e85]" />When you publish</div><ul className="mt-4 space-y-3 text-xs leading-5 text-[#77766f]"><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />Feedback appears in the student's Week {review.weekNumber} page.</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />An email notification is requested. Check the result after publishing.</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />The tracker records viewed and actioned status.</li></ul></div>
+          <div className="mp-card rounded-3xl p-5"><div className="flex items-center gap-2 text-sm font-black text-[#dedbd2]"><Bell size={16} className="text-[#8f8e85]" />When you publish</div><ul className="mt-4 space-y-3 text-xs leading-5 text-[#77766f]"><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />Feedback appears in the student's Week {review.weekNumber} page.</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />{backend === "demo" ? "Demo feedback is saved in this browser. No email is sent." : "An email notification is requested. Check the result after publishing."}</li><li className="flex gap-2"><Check size={14} className="mt-0.5 shrink-0 text-[#8f8e85]" />The tracker records viewed and actioned status.</li></ul></div>
 
           <div className="grid grid-cols-2 gap-2"><SecondaryButton disabled={saving || recording || review.status === "published"} onClick={() => void saveDraft()}><Save size={14} />Save draft</SecondaryButton><PrimaryButton onClick={() => void publish()} disabled={saving || recording}><Send size={14} />Publish</PrimaryButton></div>
-          {published && <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"><div className="flex items-center gap-2 text-sm font-bold text-[#dedbd2]"><Check size={16} className="text-[#8f8e85]" />Feedback published</div><p className="mt-1 text-xs leading-5 text-[#77766f]">{backend === "demo" ? "Preview only. No email was sent." : notificationQueued === true ? "The notification service accepted the email request." : notificationQueued === false ? "The email notification was not queued. The feedback is available in the portal." : "The feedback is available in the portal. Email status has not been checked."}</p></div>}
+          {published && <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4"><div className="flex items-center gap-2 text-sm font-bold text-[#dedbd2]"><Check size={16} className="text-[#8f8e85]" />Feedback published</div><p className="mt-1 text-xs leading-5 text-[#77766f]">{backend === "demo" ? "Saved in this browser. Switch to Student view to see the feedback. No email was sent." : notificationQueued === true ? "The notification service accepted the email request." : notificationQueued === false ? "The email notification was not queued. The feedback is available in the portal." : "The feedback is available in the portal. Email status has not been checked."}</p></div>}
         </aside>
       </div>
     </div>

@@ -51,7 +51,7 @@ export function PortalLogin() {
             </button>
             {error && <p role="alert" className="mp-login-error">{error}</p>}
           </div>
-          <p className="mt-5 text-center text-xs leading-5 text-[#959d97]">Demo preview with example students. Use Switch view to explore both sides.</p>
+          <p className="mt-5 text-center text-xs leading-5 text-[#959d97]">Upload as Jack, review as Rob. Files and feedback are saved in this browser. Use Switch view to try both sides.</p>
         </section>
       </main>
     </div>

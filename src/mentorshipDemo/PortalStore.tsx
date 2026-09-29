@@ -1,403 +1,157 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
-import { supabase } from "./demoSupabaseClient";
-import {
-  demoAdmin,
-  demoCoach,
-  demoStudent,
-  demoSetupVideos,
-  initialOnboardingTasks,
-  initialSubmissions,
-  weekDefinitions,
-} from "./demoData";
-import {
-  confirmLiveFeedbackAction,
-  loadLivePortal,
-  markLiveFeedbackViewed,
-  removeLiveSubmissionFile,
-  requestLivePasswordReset,
-  setLiveOnboardingTask,
-  signInLivePortal,
-  signOutLivePortal,
-  setLivePortalPassword,
-  submitLiveWeek,
-  uploadLiveSubmissionFiles,
-  type LivePortalBootstrap,
-} from "./livePortalApi";
-import type {
-  FileKind,
-  OnboardingTask,
-  PortalFile,
-  PortalCall,
-  PortalUser,
-  SetupVideo,
-  WeekDefinition,
-  WeekSubmission,
-} from "./types";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { demoAdmin, demoCoach, demoStudent, demoSetupVideos, weekDefinitions } from "./demoData";
+import { demoOverview, demoReviewItems, emptyDemoSession, fileMetadata, hydrateDemoSession, readDemoSession, writeDemoSession, type DemoSession } from "./demoSession";
+import type { AdminOverview, FileKind, OnboardingTask, PortalCall, PortalUser, ReviewItem, SetupVideo, WeekDefinition, WeekSubmission } from "./types";
 
-interface SubmitResult {
-  ok: boolean;
-  message: string;
-}
-
+interface FeedbackInput { writtenNotes: string; nextAction: string; videoUrl: string; audioFile?: File }
 interface PortalStoreValue {
-  ready: boolean;
-  backend: "demo" | "supabase";
-  authError?: string;
-  user: PortalUser | null;
-  weeks: WeekDefinition[];
-  submissions: WeekSubmission[];
-  onboardingTasks: OnboardingTask[];
-  setupVideos: SetupVideo[];
-  welcomeVideoUrl?: string;
-  firstCall?: PortalCall;
-  circleUrl?: string;
-  login: (email: string, password: string) => Promise<PortalUser>;
-  logout: () => Promise<void>;
-  requestPasswordReset: (email: string) => Promise<void>;
-  setPassword: (password: string) => Promise<void>;
-  refresh: () => Promise<void>;
+  ready: boolean; backend: "demo" | "supabase"; authError?: string; user: PortalUser | null;
+  weeks: WeekDefinition[]; submissions: WeekSubmission[]; onboardingTasks: OnboardingTask[];
+  setupVideos: SetupVideo[]; welcomeVideoUrl?: string; firstCall?: PortalCall; circleUrl?: string;
+  adminOverview: AdminOverview; demoReviews: ReviewItem[];
+  login: (email: string, password: string) => Promise<PortalUser>; logout: () => Promise<void>;
+  requestPasswordReset: (email: string) => Promise<void>; setPassword: (password: string) => Promise<void>; refresh: () => Promise<void>;
   toggleOnboardingTask: (id: string) => Promise<void>;
-  addFiles: (weekNumber: number, kind: FileKind, files: File[]) => Promise<void>;
-  removeFile: (weekNumber: number, kind: FileKind, fileId: string) => Promise<void>;
-  submitWeek: (weekNumber: number) => Promise<SubmitResult>;
-  markFeedbackViewed: (weekNumber: number) => Promise<void>;
-  confirmFeedbackAction: (weekNumber: number, nextAction: string) => Promise<void>;
+  addFiles: (week: number, kind: FileKind, files: File[]) => Promise<void>;
+  removeFile: (week: number, kind: FileKind, id: string) => Promise<void>;
+  submitWeek: (week: number) => Promise<{ ok: boolean; message: string }>;
+  markFeedbackViewed: (week: number) => Promise<void>;
+  confirmFeedbackAction: (week: number, action: string) => Promise<void>;
+  saveDemoFeedback: (reviewId: string, input: FeedbackInput, publish: boolean) => Promise<ReviewItem>;
+  setDemoSurgery: (reviewId: string, selected: boolean) => Promise<void>;
+  resetDemo: () => Promise<void>;
 }
-
 const PortalStore = createContext<PortalStoreValue | null>(null);
-// This review copy runs on example data only, including in published builds.
-const liveBackend = false;
 const sessionKey = "rla-mentorship-review-demo-session";
-const submissionKey = "rla-mentorship-review-demo-submissions";
-const onboardingKey = "rla-mentorship-review-demo-onboarding-v2";
-
-const readStored = <T,>(key: string, fallback: T): T => {
-  try {
-    const stored = window.localStorage.getItem(key);
-    return stored ? (JSON.parse(stored) as T) : fallback;
-  } catch {
-    return fallback;
-  }
+const storedUser = (): PortalUser | null => {
+  try { return JSON.parse(localStorage.getItem(sessionKey) ?? "null"); } catch { return null; }
 };
-
-const deriveDemoUser = (email: string): PortalUser => {
-  const normalized = email.trim().toLowerCase();
-  if (normalized.startsWith("rob")) return { ...demoCoach, email: normalized };
-  if (normalized.startsWith("george")) return { ...demoAdmin, email: normalized };
-  return { ...demoStudent, email: normalized || demoStudent.email };
-};
-
-const makeDemoFile = (file: File, kind: FileKind): PortalFile => ({
-  id: `${kind}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-  name: file.name,
-  size: file.size,
-  kind,
-  uploadedAt: new Date().toISOString(),
-  objectUrl: URL.createObjectURL(file),
-});
 
 export function PortalStoreProvider({ children }: { children: ReactNode }) {
-  const backend = liveBackend ? "supabase" as const : "demo" as const;
-  const [ready, setReady] = useState(!liveBackend);
-  const [user, setUser] = useState<PortalUser | null>(() =>
-    liveBackend ? null : readStored<PortalUser | null>(sessionKey, null),
-  );
-  const [weeks, setWeeks] = useState<WeekDefinition[]>(() => liveBackend ? [] : weekDefinitions);
-  const [submissions, setSubmissions] = useState<WeekSubmission[]>(() =>
-    liveBackend ? [] : readStored(submissionKey, initialSubmissions),
-  );
-  const [onboardingTasks, setOnboardingTasks] = useState<OnboardingTask[]>(() =>
-    liveBackend ? [] : readStored(onboardingKey, initialOnboardingTasks),
-  );
-  const [circleUrl, setCircleUrl] = useState<string | undefined>();
-  const [authError, setAuthError] = useState<string | undefined>();
-  const [setupVideos, setSetupVideos] = useState<SetupVideo[]>(() => liveBackend ? [] : demoSetupVideos);
-  const [welcomeVideoUrl, setWelcomeVideoUrl] = useState<string | undefined>();
-  const [firstCall, setFirstCall] = useState<PortalCall | undefined>();
-
-  const applyLiveBootstrap = useCallback((bootstrap: LivePortalBootstrap) => {
-    setUser(bootstrap.user);
-    setWeeks(bootstrap.weeks);
-    setSubmissions(bootstrap.submissions);
-    setOnboardingTasks(bootstrap.onboardingTasks);
-    setSetupVideos(bootstrap.setupVideos);
-    setWelcomeVideoUrl(bootstrap.welcomeVideoUrl);
-    setFirstCall(bootstrap.firstCall);
-    setCircleUrl(bootstrap.circleUrl);
-    setAuthError(undefined);
-  }, []);
-
-  const clearLiveState = useCallback(() => {
-    setUser(null);
-    setWeeks([]);
-    setSubmissions([]);
-    setOnboardingTasks([]);
-    setSetupVideos([]);
-    setWelcomeVideoUrl(undefined);
-    setFirstCall(undefined);
-    setCircleUrl(undefined);
-  }, []);
-
-  const refresh = useCallback(async () => {
-    if (!liveBackend) return;
-    const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) {
-      clearLiveState();
-      return;
-    }
-    applyLiveBootstrap(await loadLivePortal(data.user));
-  }, [applyLiveBootstrap, clearLiveState]);
+  const [user, setUser] = useState<PortalUser | null>(storedUser);
+  const [ready, setReady] = useState(false);
+  const [error, setError] = useState("");
+  const [session, setSession] = useState<DemoSession>(emptyDemoSession);
+  const current = useRef(session);
+  const queue = useRef(Promise.resolve());
+  const urls = useRef(new Map<string, string>());
+  const apply = useCallback((next: DemoSession) => { current.current = next; setSession(hydrateDemoSession(next, urls.current)); }, []);
 
   useEffect(() => {
-    if (!liveBackend) return;
     let active = true;
-    const restore = async () => {
-      try {
-        const { data } = await supabase.auth.getSession();
-        if (data.session?.user && active) {
-          const bootstrap = await loadLivePortal(data.session.user);
-          if (active) applyLiveBootstrap(bootstrap);
-        }
-      } catch (error) {
-        if (active) {
-          clearLiveState();
-          setAuthError(error instanceof Error ? error.message : "Unable to restore your mentorship session.");
-        }
-      } finally {
-        if (active) setReady(true);
-      }
-    };
-    void restore();
-    return () => { active = false; };
-  }, [applyLiveBootstrap, clearLiveState]);
+    readDemoSession().then((saved) => { if (active) { apply(saved); setReady(true); } }).catch(() => {
+      if (active) setError("This browser couldn't open the demo storage. Enable site storage, then try again.");
+    });
+    const objectUrls = urls.current;
+    return () => { active = false; objectUrls.forEach((url) => URL.revokeObjectURL(url)); objectUrls.clear(); };
+  }, [apply]);
 
-  useEffect(() => {
-    if (liveBackend) return;
-    if (user) window.localStorage.setItem(sessionKey, JSON.stringify(user));
-    else window.localStorage.removeItem(sessionKey);
-  }, [user]);
+  // Serialize changes and save before reporting success, including audio Blobs.
+  const update = useCallback((change: (previous: DemoSession) => DemoSession) => {
+    const task = queue.current.then(async () => {
+      const next = change(current.current);
+      await writeDemoSession(next);
+      apply(next);
+    });
+    queue.current = task.catch(() => undefined);
+    return task;
+  }, [apply]);
 
-  useEffect(() => {
-    if (liveBackend) return;
-    const serializable = submissions.map((submission) => ({
-      ...submission,
-      ideas: submission.ideas.map(({ objectUrl: _objectUrl, ...file }) => file),
-      song: submission.song
-        ? (({ objectUrl: _objectUrl, ...file }) => file)(submission.song)
-        : undefined,
-      stems: submission.stems
-        ? (({ objectUrl: _objectUrl, ...file }) => file)(submission.stems)
-        : undefined,
-    }));
-    window.localStorage.setItem(submissionKey, JSON.stringify(serializable));
-  }, [submissions]);
-
-  useEffect(() => {
-    if (!liveBackend) window.localStorage.setItem(onboardingKey, JSON.stringify(onboardingTasks));
-  }, [onboardingTasks]);
-
-  const login = useCallback(async (email: string, password: string) => {
-    if (!email.trim() || !password.trim()) throw new Error("Enter your email and password.");
-    if (liveBackend) {
-      setReady(false);
-      setAuthError(undefined);
-      try {
-        const bootstrap = await signInLivePortal(email, password);
-        applyLiveBootstrap(bootstrap);
-        return bootstrap.user;
-      } catch (error) {
-        setAuthError(error instanceof Error ? error.message : "Unable to sign in.");
-        throw error;
-      } finally {
-        setReady(true);
-      }
-    }
-    const nextUser = deriveDemoUser(email);
-    setUser(nextUser);
-    return nextUser;
-  }, [applyLiveBootstrap]);
-
-  const logout = useCallback(async () => {
-    if (liveBackend) await signOutLivePortal();
-    clearLiveState();
-    if (!liveBackend) {
-      setWeeks(weekDefinitions);
-      setSubmissions(readStored(submissionKey, initialSubmissions));
-      setOnboardingTasks(readStored(onboardingKey, initialOnboardingTasks));
-      setSetupVideos(demoSetupVideos);
-    }
-  }, [clearLiveState]);
-
-  const requestPasswordReset = useCallback(async (email: string) => {
-    if (!email.trim()) throw new Error("Enter your email address first.");
-    if (liveBackend) await requestLivePasswordReset(email);
+  const login = useCallback(async (email: string, _password: string) => {
+    const normalized = email.trim().toLowerCase();
+    const next = normalized.startsWith("rob") ? demoCoach : normalized.startsWith("george") ? demoAdmin : demoStudent;
+    localStorage.setItem(sessionKey, JSON.stringify(next)); setUser(next); return next;
   }, []);
+  const logout = useCallback(async () => { localStorage.removeItem(sessionKey); setUser(null); }, []);
+  const refresh = useCallback(async () => { await queue.current; apply(await readDemoSession()); }, [apply]);
+  const toggleOnboardingTask = useCallback((id: string) => update((previous) => ({ ...previous, onboardingTasks: previous.onboardingTasks.map((task) => task.id === id ? { ...task, complete: !task.complete } : task) })), [update]);
 
-  const setPassword = useCallback(async (password: string) => {
-    if (password.length < 8) throw new Error("Use at least 8 characters.");
-    if (!liveBackend) return;
-    await setLivePortalPassword(password);
-    await refresh();
-  }, [refresh]);
+  const addFiles = useCallback((week: number, kind: FileKind, files: File[]) => update((previous) => {
+    const definition = weekDefinitions.find((item) => item.number === week);
+    const submission = previous.submissions.find((item) => item.weekNumber === week);
+    if (!definition || !submission || definition.phase === "upcoming" || ["submitted", "late"].includes(submission.state)) throw new Error("This week is not open for uploads.");
+    if (!["idea", "song", "stems"].includes(kind)) throw new Error("Unsupported upload type.");
+    if (kind !== "idea" && files.length > 1) throw new Error("Choose one file for your song or stems.");
+    const blobs = { ...previous.files };
+    const uploaded = files.map((file) => {
+      if (!(kind === "stems" ? /\.zip$/i : /\.(mp3|wav)$/i).test(file.name)) throw new Error(kind === "stems" ? "Upload your stems as one ZIP file." : "Upload an MP3 or WAV file.");
+      if (!file.size || file.size > 2 * 1024 ** 3) throw new Error("Choose a non-empty file under 2 GB.");
+      const metadata = fileMetadata(file, kind); blobs[metadata.id] = file; return metadata;
+    });
+    if (!uploaded.length) return previous;
+    const next = { ...submission, state: "in_progress" as const };
+    if (kind === "idea") next.ideas = [...submission.ideas, ...uploaded];
+    if (kind === "song") { if (next.song) delete blobs[next.song.id]; next.song = uploaded[0]; }
+    if (kind === "stems") { if (next.stems) delete blobs[next.stems.id]; next.stems = uploaded[0]; }
+    return { ...previous, files: blobs, submissions: previous.submissions.map((item) => item === submission ? next : item) };
+  }), [update]);
 
-  const toggleOnboardingTask = useCallback(async (id: string) => {
-    const task = onboardingTasks.find((item) => item.id === id);
-    if (!task) return;
-    const complete = !task.complete;
-    if (liveBackend) {
-      if (!user?.enrollmentId) throw new Error("Your enrolment is not available.");
-      await setLiveOnboardingTask(user.enrollmentId, id, complete);
-    }
-    setOnboardingTasks((current) => current.map((item) => item.id === id ? { ...item, complete } : item));
-  }, [onboardingTasks, user?.enrollmentId]);
+  const removeFile = useCallback((week: number, kind: FileKind, id: string) => update((previous) => {
+    const submission = previous.submissions.find((item) => item.weekNumber === week);
+    if (!submission || ["submitted", "late"].includes(submission.state)) throw new Error("Submitted files are locked for review.");
+    const files = { ...previous.files }; delete files[id];
+    return { ...previous, files, submissions: previous.submissions.map((item) => item !== submission ? item : {
+      ...item, ideas: kind === "idea" ? item.ideas.filter((file) => file.id !== id) : item.ideas,
+      song: kind === "song" && item.song?.id === id ? undefined : item.song,
+      stems: kind === "stems" && item.stems?.id === id ? undefined : item.stems,
+    }) };
+  }), [update]);
 
-  const addFiles = useCallback(async (weekNumber: number, kind: FileKind, files: File[]) => {
-    const definition = weeks.find((week) => week.number === weekNumber);
-    const current = submissions.find((submission) => submission.weekNumber === weekNumber);
-    if (!definition || !current || definition.phase === "upcoming" || current.state === "submitted" || current.state === "late") throw new Error("This week is not open for uploads.");
-    if (!files.length) return;
-    if (kind !== "idea" && files.length > 1) throw new Error("Upload one file at a time for your song or stems.");
-    for (const file of files) {
-      const supported = kind === "stems" ? /\.zip$/i.test(file.name) : /\.(mp3|wav)$/i.test(file.name);
-      if (!supported) throw new Error(kind === "stems" ? "Upload your stems as one ZIP file." : "Upload your audio as an MP3 or WAV file.");
-      if (!file.size) throw new Error(`${file.name} is empty. Export the file again before uploading.`);
-      if (file.size > 2 * 1024 * 1024 * 1024) throw new Error(`${file.name} is larger than the 2 GB upload limit.`);
-    }
-    if (liveBackend) {
-      if (!user) throw new Error("Sign in before uploading.");
-      const week = weeks.find((item) => item.number === weekNumber);
-      const submission = submissions.find((item) => item.weekNumber === weekNumber);
-      if (!week || !submission) throw new Error("Submission not found.");
-      await uploadLiveSubmissionFiles(user, week, submission, kind, files);
-      await refresh();
-      return;
-    }
-    setSubmissions((current) => current.map((submission) => {
-      if (submission.weekNumber !== weekNumber) return submission;
-      const uploaded = files.map((file) => makeDemoFile(file, kind));
-      const next = { ...submission, state: "in_progress" as const };
-      if (kind === "idea") next.ideas = [...submission.ideas, ...uploaded];
-      if (kind === "song") next.song = uploaded[0];
-      if (kind === "stems") next.stems = uploaded[0];
-      return next;
-    }));
-  }, [refresh, submissions, user, weeks]);
+  const submitWeek = useCallback(async (week: number) => {
+    try {
+      await update((previous) => {
+        const definition = weekDefinitions.find((item) => item.number === week);
+        const submission = previous.submissions.find((item) => item.weekNumber === week);
+        if (!definition || !submission || definition.phase === "upcoming") throw new Error("This week is not open for submissions.");
+        if (["submitted", "late"].includes(submission.state)) throw new Error("This week has already been submitted.");
+        if (submission.ideas.length < definition.requiredIdeas || (definition.songRequired && !submission.song) || (definition.stemsRequired && !submission.stems)) throw new Error("Add your loops, selected song and stems ZIP before submitting.");
+        return { ...previous, submissions: previous.submissions.map((item) => item === submission ? { ...item, state: "submitted", submittedAt: new Date().toISOString() } : item) };
+      });
+      return { ok: true, message: `Week ${week} is submitted to Rob.` };
+    } catch (reason) { return { ok: false, message: reason instanceof Error ? reason.message : "Unable to save this submission." }; }
+  }, [update]);
 
-  const removeFile = useCallback(async (weekNumber: number, kind: FileKind, fileId: string) => {
-    const submission = submissions.find((item) => item.weekNumber === weekNumber);
-    const file = kind === "idea"
-      ? submission?.ideas.find((item) => item.id === fileId)
-      : kind === "song" ? submission?.song : submission?.stems;
-    if (!file) return;
-    if (liveBackend) {
-      await removeLiveSubmissionFile(file);
-      await refresh();
-      return;
-    }
-    setSubmissions((current) => current.map((item) => {
-      if (item.weekNumber !== weekNumber) return item;
-      if (kind === "idea") return { ...item, ideas: item.ideas.filter((candidate) => candidate.id !== fileId) };
-      if (kind === "song" && item.song?.id === fileId) return { ...item, song: undefined };
-      if (kind === "stems" && item.stems?.id === fileId) return { ...item, stems: undefined };
-      return item;
-    }));
-  }, [refresh, submissions]);
-
-  const submitWeek = useCallback(async (weekNumber: number): Promise<SubmitResult> => {
-    const definition = weeks.find((week) => week.number === weekNumber);
-    const submission = submissions.find((item) => item.weekNumber === weekNumber);
-    if (!definition || !submission) return { ok: false, message: "Week not found." };
-
-    if (definition.phase === "upcoming") return { ok: false, message: "This week has not opened yet." };
-    if (submission.state === "submitted" || submission.state === "late") return { ok: false, message: "This week has already been submitted." };
-    const missing: string[] = [];
-    if (submission.ideas.length < definition.requiredIdeas) {
-      const count = definition.requiredIdeas - submission.ideas.length;
-      missing.push(`${count} more song starter loop${count === 1 ? "" : "s"}`);
-    }
-    if (definition.songRequired && !submission.song) missing.push("your selected song");
-    if (definition.stemsRequired && !submission.stems) missing.push("your stems ZIP");
-    if (missing.length) return { ok: false, message: `Add ${missing.join(", ")} before submitting.` };
-
-    if (liveBackend) {
-      if (!submission.id) return { ok: false, message: "Submission not found." };
-      try {
-        await submitLiveWeek(submission.id);
-        await refresh();
-      } catch (error) {
-        return { ok: false, message: error instanceof Error ? error.message : "Unable to submit this week." };
+  const saveDemoFeedback = useCallback(async (reviewId: string, input: FeedbackInput, publish: boolean) => {
+    let savedWeek = 0;
+    await update((previous) => {
+      const review = demoReviewItems(previous).find((item) => item.id === reviewId);
+      if (!review) throw new Error("This submission is no longer in the queue.");
+      if (!publish && review.status === "published") throw new Error("Published feedback cannot be changed to a draft.");
+      if (!input.writtenNotes.trim() && !input.audioFile && !review.feedback?.audioStoragePath && !input.videoUrl.trim()) throw new Error("Add written, audio or video feedback first.");
+      if (publish && !input.nextAction.trim()) throw new Error("Add one clear next action before publishing.");
+      if (input.videoUrl.trim() && !/^https?:\/\//i.test(input.videoUrl.trim())) throw new Error("Use a full https video link.");
+      const files = { ...previous.files };
+      let audioStoragePath = review.feedback?.audioStoragePath;
+      let audioFileName = review.feedback?.audioFileName;
+      if (input.audioFile) {
+        if (!input.audioFile.size || input.audioFile.size > 2 * 1024 ** 3) throw new Error("Choose a non-empty voice note under 2 GB.");
+        if (audioStoragePath) delete files[audioStoragePath];
+        audioStoragePath = crypto.randomUUID(); audioFileName = input.audioFile.name; files[audioStoragePath] = input.audioFile;
       }
-    } else {
-      setSubmissions((current) => current.map((item) => item.weekNumber === weekNumber
-        ? { ...item, state: "submitted", submittedAt: new Date().toISOString() }
-        : item));
-    }
-    return { ok: true, message: `Week ${weekNumber} is submitted to Rob.` };
-  }, [refresh, submissions, weeks]);
+      savedWeek = review.weekNumber;
+      const feedback = { id: `feedback-${review.id}`, status: publish ? "published" as const : "draft" as const, writtenNotes: input.writtenNotes, nextAction: input.nextAction, videoUrl: input.videoUrl.trim(), audioStoragePath, audioFileName };
+      return { ...previous, files, feedback: { ...previous.feedback, [savedWeek]: feedback },
+        submissions: previous.submissions.map((submission) => submission.weekNumber === savedWeek && publish ? { ...submission, feedback: { id: feedback.id, text: feedback.writtenNotes, nextAction: feedback.nextAction, videoUrl: feedback.videoUrl, audioName: audioFileName, publishedAt: new Date().toISOString() } } : submission),
+      };
+    });
+    return demoReviewItems(hydrateDemoSession(current.current, urls.current)).find((review) => review.weekNumber === savedWeek)!;
+  }, [update]);
 
-  const markFeedbackViewed = useCallback(async (weekNumber: number) => {
-    const submission = submissions.find((item) => item.weekNumber === weekNumber);
-    if (!submission?.feedback) return;
-    if (liveBackend) await markLiveFeedbackViewed(submission.feedback.id);
-    setSubmissions((current) => current.map((item) => item.weekNumber === weekNumber && item.feedback
-      ? { ...item, feedback: { ...item.feedback, viewedAt: item.feedback.viewedAt ?? new Date().toISOString() } }
-      : item));
-  }, [submissions]);
-
-  const confirmFeedbackAction = useCallback(async (weekNumber: number, nextAction: string) => {
-    const submission = submissions.find((item) => item.weekNumber === weekNumber);
-    if (!submission?.feedback) return;
-    if (liveBackend) await confirmLiveFeedbackAction(submission.feedback.id, nextAction);
-    setSubmissions((current) => current.map((item) => item.weekNumber === weekNumber && item.feedback
-      ? {
-          ...item,
-          feedback: {
-            ...item.feedback,
-            viewedAt: item.feedback.viewedAt ?? new Date().toISOString(),
-            actionConfirmedAt: new Date().toISOString(),
-            studentNextAction: nextAction,
-          },
-        }
-      : item));
-  }, [submissions]);
-
+  const setDemoSurgery = useCallback((reviewId: string, selected: boolean) => update((previous) => {
+    const review = demoReviewItems(previous).find((item) => item.id === reviewId);
+    if (!review?.stemsReady) throw new Error("Upload stems before shortlisting this song.");
+    return { ...previous, surgeryWeeks: [...previous.surgeryWeeks.filter((week) => week !== review.weekNumber), ...(selected ? [review.weekNumber] : [])] };
+  }), [update]);
+  const markFeedbackViewed = useCallback((week: number) => update((previous) => ({ ...previous, submissions: previous.submissions.map((item) => item.weekNumber === week && item.feedback ? { ...item, feedback: { ...item.feedback, viewedAt: item.feedback.viewedAt ?? new Date().toISOString() } } : item) })), [update]);
+  const confirmFeedbackAction = useCallback((week: number, action: string) => update((previous) => ({ ...previous, submissions: previous.submissions.map((item) => item.weekNumber === week && item.feedback ? { ...item, feedback: { ...item.feedback, viewedAt: item.feedback.viewedAt ?? new Date().toISOString(), actionConfirmedAt: new Date().toISOString(), studentNextAction: action } } : item) })), [update]);
+  const resetDemo = useCallback(() => update(() => emptyDemoSession()), [update]);
   const value = useMemo<PortalStoreValue>(() => ({
-    ready,
-    backend,
-    authError,
-    user,
-    weeks,
-    submissions,
-    onboardingTasks,
-    setupVideos,
-    welcomeVideoUrl,
-    firstCall,
-    circleUrl,
-    login,
-    logout,
-    requestPasswordReset,
-    setPassword,
-    refresh,
-    toggleOnboardingTask,
-    addFiles,
-    removeFile,
-    submitWeek,
-    markFeedbackViewed,
-    confirmFeedbackAction,
-  }), [
-    ready, backend, authError, user, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, circleUrl,
-    login, logout, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
-    submitWeek, markFeedbackViewed, confirmFeedbackAction,
-  ]);
+    ready, backend: "demo", user, weeks: weekDefinitions, submissions: session.submissions, onboardingTasks: session.onboardingTasks, setupVideos: demoSetupVideos,
+    adminOverview: demoOverview(session), demoReviews: demoReviewItems(session), login, logout, refresh,
+    requestPasswordReset: async () => {}, setPassword: async () => {}, toggleOnboardingTask, addFiles, removeFile, submitWeek, markFeedbackViewed, confirmFeedbackAction, saveDemoFeedback, setDemoSurgery, resetDemo,
+  }), [ready, user, session, login, logout, refresh, toggleOnboardingTask, addFiles, removeFile, submitWeek, markFeedbackViewed, confirmFeedbackAction, saveDemoFeedback, setDemoSurgery, resetDemo]);
 
+  if (error) return <div role="alert" className="mentorship-portal grid min-h-screen place-items-center p-8"><div><p>{error}</p><button type="button" className="mt-4 rounded border border-white/20 px-4 py-2" onClick={() => window.location.reload()}>Try again</button></div></div>;
   return <PortalStore.Provider value={value}>{children}</PortalStore.Provider>;
 }
 
