@@ -192,7 +192,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
   const cohort = await findWorkingCohort();
   const [weekResult, enrollmentResult] = await Promise.all([
     db.from("mentorship_weeks").select("id, week_number, required_ideas, song_required, stems_required, deadline_at").eq("cohort_id", cohort.id).eq("week_number", cohort.current_week).single(),
-    db.from("mentorship_enrollments").select("id, user_id, enrolled_at").eq("cohort_id", cohort.id).eq("status", "active").order("enrolled_at"),
+    db.from("mentorship_enrollments").select("id, user_id, enrolled_at, is_walkthrough").eq("cohort_id", cohort.id).eq("status", "active").order("enrolled_at"),
   ]);
   if (weekResult.error) throw weekResult.error;
   if (enrollmentResult.error) throw enrollmentResult.error;
@@ -269,6 +269,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
 
   for (const enrollment of enrollments) {
     const profile = profiles.find((row: any) => row.user_id === enrollment.user_id);
+    const displayName = enrollment.is_walkthrough ? `${profile?.full_name ?? "Staff"} (test student)` : profile?.full_name ?? "Student";
     const submission = submissions.find((row: any) => row.enrollment_id === enrollment.id);
     const rowFiles = submission ? files.filter((row: any) => row.submission_id === submission.id) : [];
     const ideaRows = rowFiles.filter((row: any) => row.kind === "idea");
@@ -291,7 +292,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
 
     students.push({
       id: enrollment.user_id,
-      name: profile?.full_name ?? "Student",
+      name: displayName,
       email: profile?.email ?? "",
       initials: initials(profile?.full_name ?? "Student"),
       ideasSubmitted: ideaRows.length,
@@ -323,7 +324,8 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
         id: submission.id,
         submissionId: submission.id,
         studentId: enrollment.user_id,
-        studentName: profile?.full_name ?? "Student",
+        studentName: displayName,
+        walkthrough: enrollment.is_walkthrough,
         studentEmail: profile?.email ?? "",
         cohortId: cohort.id,
         weekNumber: cohort.current_week,
@@ -416,7 +418,13 @@ export async function saveLiveFeedbackDraft(review: ReviewItem, authorId: string
 export async function publishLiveFeedback(review: ReviewItem, input: FeedbackInput) {
   if (!review.submissionId) throw new Error("The submission is missing from this review.");
   const audio = await prepareAudio(review, input);
-  const { data, error } = await supabase.functions.invoke("publish-mentorship-feedback", {
+  const { data, error } = review.walkthrough
+    ? await db.rpc("publish_mentorship_walkthrough_feedback", {
+        target_submission_id: review.submissionId,
+        notes: input.writtenNotes.trim(), action_text: input.nextAction.trim(),
+        audio_path: audio.path, audio_name: audio.fileName, video_link: input.videoUrl.trim() || null,
+      })
+    : await supabase.functions.invoke("publish-mentorship-feedback", {
     body: {
       submission_id: review.submissionId,
       written_notes: input.writtenNotes.trim(),

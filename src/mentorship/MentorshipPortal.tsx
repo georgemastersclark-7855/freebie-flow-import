@@ -22,9 +22,9 @@ function ProtectedPortal() {
 }
 
 function RoleHome() {
-  const { user, ready, onboardingTasks } = usePortalStore();
+  const { user, staffUser, ready, onboardingTasks } = usePortalStore();
   if (!ready) return <PortalLoading />;
-  if (!user) return <PortalLogin />;
+  if (!user || staffUser) return <PortalLogin />;
   return <Navigate to={portalHome(user, onboardingTasks)} replace />;
 }
 

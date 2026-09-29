@@ -124,6 +124,7 @@ interface ProgressRow {
 
 export interface LivePortalBootstrap {
   user: PortalUser;
+  staffUser?: PortalUser;
   weeks: WeekDefinition[];
   submissions: WeekSubmission[];
   onboardingTasks: OnboardingTask[];
@@ -150,7 +151,7 @@ const portalFile = async (row: SubmissionFileRow): Promise<PortalFile> => ({
   objectUrl: await signedUrl(submissionsBucket, row.storage_path),
 });
 
-export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
+export async function loadLivePortal(user: User, studentView = false): Promise<LivePortalBootstrap> {
   const { data: profileData, error: profileError } = await db
     .from("mentorship_profiles")
     .select("user_id, full_name, email, role")
@@ -167,8 +168,15 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     cohortName: "Rob Late's Producer Mentorship",
   };
 
-  if (profile.role !== "student") {
-    return { user: portalUser, weeks: [], submissions: [], onboardingTasks: [], setupVideos: [] };
+  const staffUser = profile.role !== "student" ? { ...portalUser } : undefined;
+  if (staffUser && !studentView) {
+    return { user: portalUser, staffUser, weeks: [], submissions: [], onboardingTasks: [], setupVideos: [] };
+  }
+  if (staffUser) {
+    const { error } = await db.rpc("open_mentorship_walkthrough");
+    if (error) throw error;
+    portalUser.role = "student";
+    portalUser.name = "Test Student";
   }
 
   const { data: enrollmentData, error: enrollmentError } = await db
@@ -176,6 +184,7 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
     .select("id, cohort_id, user_id")
     .eq("user_id", user.id)
     .eq("status", "active")
+    .eq("is_walkthrough", Boolean(staffUser))
     .order("enrolled_at", { ascending: false })
     .limit(1)
     .single();
@@ -319,6 +328,7 @@ export async function loadLivePortal(user: User): Promise<LivePortalBootstrap> {
 
   return {
     user: portalUser,
+    staffUser,
     weeks,
     submissions,
     onboardingTasks,
@@ -461,4 +471,35 @@ export async function confirmLiveFeedbackAction(feedbackId: string, nextAction: 
     next_action_text: nextAction,
   });
   if (error) throw error;
+}
+
+export async function resetLiveWalkthrough() {
+  const { data: auth, error: authError } = await supabase.auth.getUser();
+  if (authError || !auth.user) throw new Error("Sign in before resetting test uploads.");
+  const { data: enrollments, error } = await db.from("mentorship_enrollments")
+    .select("id").eq("user_id", auth.user.id).eq("is_walkthrough", true).eq("status", "active");
+  if (error) throw error;
+  for (const enrollment of enrollments ?? []) {
+    const { data: rows, error: rowError } = await db.from("mentorship_submissions").select("id").eq("enrollment_id", enrollment.id);
+    if (rowError) throw rowError;
+    const ids = (rows ?? []).map((row: { id: string }) => row.id);
+    if (ids.length) {
+      const [files, feedback] = await Promise.all([
+        db.from("mentorship_submission_files").select("storage_path").in("submission_id", ids),
+        db.from("mentorship_feedback").select("audio_storage_path").in("submission_id", ids),
+      ]);
+      if (files.error || feedback.error) throw files.error ?? feedback.error;
+      for (const [bucket, paths] of [
+        [submissionsBucket, (files.data ?? []).map((row: { storage_path: string }) => row.storage_path)],
+        [feedbackBucket, (feedback.data ?? []).map((row: { audio_storage_path?: string }) => row.audio_storage_path).filter(Boolean)],
+      ] as [string, string[]][]) {
+        if (paths.length) {
+          const { error: deleteError } = await db.storage.from(bucket).remove(paths);
+          if (deleteError) throw deleteError;
+        }
+      }
+    }
+    const { error: resetError } = await db.rpc("reset_mentorship_walkthrough", { target_enrollment_id: enrollment.id });
+    if (resetError) throw resetError;
+  }
 }

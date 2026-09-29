@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -22,6 +23,7 @@ import {
   loadLivePortal,
   markLiveFeedbackViewed,
   removeLiveSubmissionFile,
+  resetLiveWalkthrough,
   requestLivePasswordReset,
   setLiveOnboardingTask,
   signInLivePortal,
@@ -52,6 +54,9 @@ interface PortalStoreValue {
   backend: "demo" | "supabase";
   authError?: string;
   user: PortalUser | null;
+  staffUser?: PortalUser;
+  selectView: (view: "student" | "staff") => Promise<void>;
+  resetTestUploads: () => Promise<void>;
   weeks: WeekDefinition[];
   submissions: WeekSubmission[];
   onboardingTasks: OnboardingTask[];
@@ -107,6 +112,9 @@ const makeDemoFile = (file: File, kind: FileKind): PortalFile => ({
 export function PortalStoreProvider({ children }: { children: ReactNode }) {
   const backend = liveBackend ? "supabase" as const : "demo" as const;
   const [ready, setReady] = useState(!liveBackend);
+  const [staffUser, setStaffUser] = useState<PortalUser>();
+  // Only a view preference is stored locally. Files and feedback always use Supabase.
+  const selectedView = useRef(window.sessionStorage.getItem("rla-portal-view") === "student" ? "student" : "staff");
   const [user, setUser] = useState<PortalUser | null>(() =>
     liveBackend ? null : readStored<PortalUser | null>(sessionKey, null),
   );
@@ -125,6 +133,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
 
   const applyLiveBootstrap = useCallback((bootstrap: LivePortalBootstrap) => {
     setUser(bootstrap.user);
+    setStaffUser(bootstrap.staffUser);
     setWeeks(bootstrap.weeks);
     setSubmissions(bootstrap.submissions);
     setOnboardingTasks(bootstrap.onboardingTasks);
@@ -137,6 +146,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
 
   const clearLiveState = useCallback(() => {
     setUser(null);
+    setStaffUser(undefined);
     setWeeks([]);
     setSubmissions([]);
     setOnboardingTasks([]);
@@ -153,7 +163,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
       clearLiveState();
       return;
     }
-    applyLiveBootstrap(await loadLivePortal(data.user));
+    applyLiveBootstrap(await loadLivePortal(data.user, selectedView.current === "student"));
   }, [applyLiveBootstrap, clearLiveState]);
 
   useEffect(() => {
@@ -163,7 +173,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
       try {
         const { data } = await supabase.auth.getSession();
         if (data.session?.user && active) {
-          const bootstrap = await loadLivePortal(data.session.user);
+          const bootstrap = await loadLivePortal(data.session.user, selectedView.current === "student");
           if (active) applyLiveBootstrap(bootstrap);
         }
       } catch (error) {
@@ -204,6 +214,21 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     if (!liveBackend) window.localStorage.setItem(onboardingKey, JSON.stringify(onboardingTasks));
   }, [onboardingTasks]);
 
+  const selectView = useCallback(async (view: "student" | "staff") => {
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data.user) throw new Error("Sign in before choosing a view.");
+    const bootstrap = await loadLivePortal(data.user, view === "student");
+    if (!bootstrap.staffUser) throw new Error("Staff access required.");
+    selectedView.current = view;
+    window.sessionStorage.setItem("rla-portal-view", view);
+    applyLiveBootstrap(bootstrap);
+  }, [applyLiveBootstrap]);
+
+  const resetTestUploads = useCallback(async () => {
+    await resetLiveWalkthrough();
+    await refresh();
+  }, [refresh]);
+
   const login = useCallback(async (email: string, password: string) => {
     if (!email.trim() || !password.trim()) throw new Error("Enter your email and password.");
     if (liveBackend) {
@@ -211,6 +236,8 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
       setAuthError(undefined);
       try {
         const bootstrap = await signInLivePortal(email, password);
+        selectedView.current = "staff";
+        window.sessionStorage.removeItem("rla-portal-view");
         applyLiveBootstrap(bootstrap);
         return bootstrap.user;
       } catch (error) {
@@ -228,6 +255,8 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(async () => {
     if (liveBackend) await signOutLivePortal();
     clearLiveState();
+    selectedView.current = "staff";
+    window.sessionStorage.removeItem("rla-portal-view");
     if (!liveBackend) {
       setWeeks(weekDefinitions);
       setSubmissions(readStored(submissionKey, initialSubmissions));
@@ -374,6 +403,9 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     backend,
     authError,
     user,
+    staffUser,
+    selectView,
+    resetTestUploads,
     weeks,
     submissions,
     onboardingTasks,
@@ -393,7 +425,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     markFeedbackViewed,
     confirmFeedbackAction,
   }), [
-    ready, backend, authError, user, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, circleUrl,
+    ready, backend, authError, user, staffUser, selectView, resetTestUploads, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, circleUrl,
     login, logout, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
     submitWeek, markFeedbackViewed, confirmFeedbackAction,
   ]);

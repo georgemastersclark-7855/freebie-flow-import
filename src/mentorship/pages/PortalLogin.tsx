@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail } from "lucide-react";
 import robWorking from "@/assets/rob-working-3-loop.mp4";
 import "../login.css";
@@ -8,7 +9,17 @@ import { cx } from "../utils";
 import { toast } from "sonner";
 
 export function PortalLogin() {
-  const { login, backend, authError, requestPasswordReset } = usePortalStore();
+  const { login, backend, authError, requestPasswordReset, staffUser, selectView, logout } = usePortalStore();
+  const navigate = useNavigate();
+  const chooseView = async (view: "student" | "staff") => {
+    setSubmitting(true);
+    setError("");
+    try {
+      await selectView(view);
+      navigate(view === "student" ? "/mentorship-portal/welcome" : "/mentorship-portal/admin");
+    } catch (error) { setError(error instanceof Error ? error.message : "Unable to open this view."); }
+    finally { setSubmitting(false); }
+  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -60,7 +71,21 @@ export function PortalLogin() {
           <h1 className="mp-display mp-login-title"><span>PRODUCER</span><span>MENTORSHIP</span></h1>
         </header>
 
-        <section className="mp-login-card" aria-labelledby="portal-sign-in">
+        {staffUser ? (
+          <section className="mp-login-card" aria-labelledby="portal-choose-view">
+            <div className="mp-login-card-heading">
+              <h2 id="portal-choose-view">Choose your view</h2>
+              <p>Open the cohort dashboard or work through the portal as a test student.</p>
+            </div>
+            <div className="mt-6 grid gap-3">
+              <PrimaryButton disabled={submitting} onClick={() => void chooseView("staff")} className="justify-between">Rob's view <ArrowRight size={18} /></PrimaryButton>
+              <button disabled={submitting} onClick={() => void chooseView("student")} className="mp-focus-ring flex items-center justify-between rounded-xl border border-white/20 bg-white/5 px-5 py-4 font-bold text-white disabled:opacity-50">Student view <ArrowRight size={18} /></button>
+            </div>
+            <p className="mt-5 text-xs leading-5 text-[#aaa99f]">Uploads and feedback are saved online. The test student does not receive emails.</p>
+            {error && <div role="alert" className="mp-login-error">{error}</div>}
+            <button onClick={() => void logout().catch(() => setError("Unable to sign out."))} className="mp-focus-ring mt-4 text-xs text-[#aaa99f] underline underline-offset-4">Sign out</button>
+          </section>
+        ) : <section className="mp-login-card" aria-labelledby="portal-sign-in">
           <div className="mp-login-card-heading">
             <h2 id="portal-sign-in">Sign in</h2>
             <p>Use the email address you joined with.</p>
@@ -90,7 +115,7 @@ export function PortalLogin() {
               {submitting ? "Signing in..." : "Sign in"}<ArrowRight size={18} />
             </PrimaryButton>
           </form>
-        </section>
+        </section>}
 
         {import.meta.env.DEV && backend === "demo" && (
           <details className="mp-login-demo">

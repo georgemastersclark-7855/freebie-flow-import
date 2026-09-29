@@ -30,10 +30,22 @@ const staffNavigation = [
 ];
 
 export function PortalShell() {
-  const { user, logout, submissions, circleUrl, weeks, backend } = usePortalStore();
+  const { user, logout, submissions, circleUrl, weeks, backend, staffUser, resetTestUploads } = usePortalStore();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const reset = async () => {
+    setResetting(true);
+    try {
+      await resetTestUploads();
+      setConfirmReset(false);
+      toast.success("Test uploads and feedback cleared.");
+      navigate("/mentorship-portal");
+    } catch (error) { toast.error(error instanceof Error ? error.message : "Unable to clear test uploads."); }
+    finally { setResetting(false); }
+  };
   const staff = user?.role === "coach" || user?.role === "admin";
   const navigation = staff ? staffNavigation.filter((item) => !item.adminOnly || user?.role === "admin") : studentNavigation;
   const currentWeek = weeks.find((week) => week.phase === "current");
@@ -146,6 +158,24 @@ export function PortalShell() {
 
       <main className="relative z-10 min-w-0 flex-1 pt-16 lg:ml-[260px] lg:pt-0">
         {backend === "demo" && <div className="border-b border-white/15 bg-white/5 px-4 py-2 text-center text-xs text-[#b6b3a8]">Preview with example student data. No live submissions or messages.</div>}
+        {staffUser && (
+          <div className="border-b border-white/10 bg-white/[0.035] px-5 py-3 text-xs text-[#b9b6ad]">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span>{staff ? "Rob's view" : "Student view: Test Student"} · Saved online</span>
+              <div className="flex items-center gap-5">
+                <button type="button" disabled={resetting} onClick={() => navigate("/mentorship-portal")} className="mp-focus-ring font-bold text-white underline underline-offset-4">Switch view</button>
+                <button type="button" disabled={resetting} onClick={() => setConfirmReset(true)} className="mp-focus-ring underline underline-offset-4">Clear test uploads</button>
+              </div>
+            </div>
+            {confirmReset && <div role="alertdialog" aria-label="Clear test uploads" className="mt-4 rounded-xl border border-white/15 p-4">
+              <p>Delete your test uploads and feedback from cloud storage? Student uploads and onboarding progress are kept.</p>
+              <div className="mt-3 flex gap-4">
+                <button type="button" disabled={resetting} onClick={() => void reset()} className="mp-focus-ring font-bold text-white">{resetting ? "Clearing..." : "Delete test uploads"}</button>
+                <button type="button" disabled={resetting} onClick={() => setConfirmReset(false)} className="mp-focus-ring">Cancel</button>
+              </div>
+            </div>}
+          </div>
+        )}
         <Outlet />
       </main>
     </div>
