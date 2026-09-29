@@ -32,7 +32,7 @@ create or replace function public.publish_mentorship_walkthrough_feedback(
   target_submission_id uuid, notes text, action_text text,
   audio_path text default null, audio_name text default null, video_link text default null
 ) returns jsonb language plpgsql security definer set search_path = public as $$
-declare target public.mentorship_submissions; owner_id uuid; feedback_id_value uuid;
+declare target public.mentorship_submissions; v_owner_id uuid; feedback_id_value uuid;
 begin
   if not public.is_mentorship_staff() then raise exception 'Staff access required'; end if;
   select s.* into target from public.mentorship_submissions s
@@ -44,10 +44,10 @@ begin
   if nullif(trim(action_text),'') is null or (
     nullif(trim(notes),'') is null and nullif(audio_path,'') is null and nullif(video_link,'') is null
   ) then raise exception 'Feedback and a next action are required'; end if;
-  select user_id into owner_id from public.mentorship_enrollments where id=target.enrollment_id;
+  select user_id into v_owner_id from public.mentorship_enrollments where id=target.enrollment_id;
   if audio_path is not null and not exists (
     select 1 from storage.objects where bucket_id='mentorship-feedback'
-      and name=audio_path and (storage.foldername(name))[1]=owner_id::text
+      and name=audio_path and (storage.foldername(name))[1]=v_owner_id::text
   ) then raise exception 'Feedback audio not found'; end if;
   if video_link is not null and video_link !~ '^https://' then raise exception 'Use an HTTPS video link'; end if;
   insert into public.mentorship_feedback (
