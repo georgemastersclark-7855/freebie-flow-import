@@ -41,7 +41,7 @@ function LibraryAudioPreview({ fileName, objectUrl, onRefresh }: { fileName: str
           preload="none"
           src={objectUrl}
           aria-label={`Play ${fileName}`}
-          className="h-10 w-full accent-white"
+          className="h-10 w-full accent-white [color-scheme:dark]"
           onPlay={(event) => {
             const current = event.currentTarget;
             if (activePreview && activePreview !== current) activePreview.pause();
