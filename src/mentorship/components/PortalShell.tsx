@@ -8,7 +8,8 @@ import {
   LogOut,
   Menu,
   Video,
-  Sparkles,
+  BookOpen,
+  Library,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -17,10 +18,13 @@ import { PortalMark } from "./PortalUI";
 import { communityName } from "../onboarding";
 import { toast } from "sonner";
 import { cx } from "../utils";
+import { WeekNavigation } from "./WeekNavigation";
 
 const studentNavigation = [
-  { to: "/mentorship-portal/welcome", label: "Start here", icon: Sparkles },
+  { to: "/mentorship-portal/dashboard", label: "Dashboard", icon: Gauge },
+  { to: "/mentorship-portal/setup", label: "Studio Setup", icon: BookOpen },
   { to: "/mentorship-portal/submissions", label: "Your Weekly Submissions", icon: FolderClock },
+  { to: "/mentorship-portal/library", label: "Song Starter Library", icon: Library },
 ];
 
 const staffNavigation = [
@@ -68,7 +72,7 @@ export function PortalShell() {
     <div className="mentorship-portal relative flex min-h-screen">
       <div className="mp-grain fixed inset-0 z-50 opacity-70" />
 
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] flex-col border-r border-white/[0.08] bg-[#0d0d0b]/95 p-5 backdrop-blur-xl lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] flex-col border-r border-white/[0.08] bg-[#0d0d0b]/95 p-5 backdrop-blur-xl lg:flex overflow-y-auto">
         <PortalMark />
         <div className="mt-8 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-3.5">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#77766f]">{staff ? "Current cohort" : "Current programme"}</div>
@@ -83,13 +87,12 @@ export function PortalShell() {
 
         <nav className="mt-7 space-y-1.5" aria-label="Portal navigation">
           {navigation.map(({ to, label, icon: Icon }, index) => (
-            <NavLink
-              key={`${label}-${index}`}
+            <div key={`${label}-${index}`}><NavLink
               to={to}
               end
               className={() => {
                 const active = `${location.pathname}${location.hash}` === to
-                  || (label === "Start here" && (location.pathname === "/mentorship-portal/welcome" || location.pathname.startsWith("/mentorship-portal/setup/")))
+                  || (label === "Studio Setup" && location.pathname.startsWith("/mentorship-portal/setup/"))
                   || (label === "Your Weekly Submissions" && location.pathname.startsWith("/mentorship-portal/week/"))
                   || (label === "Review queue" && location.pathname.startsWith("/mentorship-portal/admin/review/"));
                 return cx(
@@ -100,14 +103,14 @@ export function PortalShell() {
                 );
               }}
             >
-              <Icon size={17} />
+              <Icon size={17} className="shrink-0" />
               <span>{label}</span>
               {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
-            </NavLink>
+            </NavLink>{label === "Your Weekly Submissions" && <WeekNavigation />}</div>
           ))}
         </nav>
 
-        <div className="mt-auto">
+        <div className="mt-auto pt-6">
           {!staff && circleUrl && (
             <a href={circleUrl} target={circleUrl ? "_blank" : undefined} rel={circleUrl ? "noreferrer" : undefined} className="mp-focus-ring mb-3 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.025] px-3 py-3 text-sm font-semibold text-[#b9b6ad] hover:border-white/15 hover:text-white">
               {communityName(circleUrl)}
@@ -137,17 +140,17 @@ export function PortalShell() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden">
           <button type="button" className="absolute inset-0 bg-black/75" onClick={() => setMobileOpen(false)} aria-label="Close navigation" />
-          <div className="absolute inset-y-0 right-0 w-[86%] max-w-[340px] border-l border-white/10 bg-[#11110f] p-5 shadow-2xl">
+          <div className="absolute inset-y-0 right-0 w-[86%] max-w-[340px] border-l border-white/10 bg-[#11110f] p-5 shadow-2xl overflow-y-auto">
             <div className="flex items-center justify-between">
               <PortalMark />
               <button type="button" onClick={() => setMobileOpen(false)} className="mp-focus-ring rounded-lg p-2 text-[#aaa99f]" aria-label="Close navigation"><X size={20} /></button>
             </div>
             <nav className="mt-8 space-y-2">
               {navigation.map(({ to, label, icon: Icon }, index) => (
-                <NavLink key={`${label}-mobile-${index}`} to={to} end onClick={() => setMobileOpen(false)} className="mp-focus-ring flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-semibold text-[#dedbd2]">
-                  <Icon size={18} /> <span>{label}</span>
+                <div key={`${label}-mobile-${index}`}><NavLink to={to} end onClick={() => setMobileOpen(false)} className="mp-focus-ring flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-semibold text-[#dedbd2]">
+                  <Icon size={18} className="shrink-0" /> <span>{label}</span>
                   {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
-                </NavLink>
+                </NavLink>{label === "Your Weekly Submissions" && <WeekNavigation onNavigate={() => setMobileOpen(false)} />}</div>
               ))}
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}

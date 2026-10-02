@@ -21,19 +21,24 @@ export function submissionParts(week: WeekDefinition, submission: WeekSubmission
   return parts;
 }
 
-export const portalHome = (user: PortalUser, tasks: OnboardingTask[]) => {
-  if (user.role !== "student") return "/mentorship-portal/admin";
-  return !tasks.length || tasks.some((task) => !task.complete)
-    ? "/mentorship-portal/welcome"
-    : "/mentorship-portal/submissions";
-};
+export const portalHome = (user: PortalUser, _tasks?: OnboardingTask[]) =>
+  user.role === "student" ? "/mentorship-portal/dashboard" : "/mentorship-portal/admin";
+
+// A configured release time takes precedence; unscheduled weeks follow the cohort.
+export function releasedWeekNumbers(weeks: { number: number; opensAt?: string | null }[], currentWeek: number, now = Date.now()) {
+  return weeks.filter((week) => week.opensAt ? Date.parse(week.opensAt) <= now : week.number <= currentWeek).map((week) => week.number);
+}
+
+export function weekOpeningLabel(week: WeekDefinition) {
+  return week.opensLabel ? `Opens ${week.opensLabel}` : `Opens in week ${week.number}`;
+}
 
 export const songInstructions = (week: WeekDefinition) => week.number >= 5
   ? { title: "Track progress", detail: "Build out and finish the track you selected in week 4. Upload your latest full-track progress and updated stems; no new idea is required.", uploadHelp: "MP3 or WAV. Your latest version of the same selected track." }
   : { title: "Weekly song", detail: "Choose one of your song starter loops and develop it into this week's song: a regular song structure from the intro through the end of the first chorus or drop.", uploadHelp: "MP3 or WAV. Intro through the end of the first chorus or drop." };
 
 export const formatDeadline = (deadline?: string | null, timezone = "Europe/London") => {
-  if (!deadline) return "Friday, time to be confirmed";
+  if (!deadline) return "Date to be confirmed";
   return new Intl.DateTimeFormat("en-GB", {
     weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit",
     timeZone: timezone, timeZoneName: "short",

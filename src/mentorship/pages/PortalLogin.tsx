@@ -16,7 +16,7 @@ export function PortalLogin() {
     setError("");
     try {
       await selectView(view);
-      navigate(view === "student" ? "/mentorship-portal/welcome" : "/mentorship-portal/admin");
+      navigate(view === "student" ? "/mentorship-portal/dashboard" : "/mentorship-portal/admin");
     } catch (error) { setError(error instanceof Error ? error.message : "Unable to open this view."); }
     finally { setSubmitting(false); }
   };

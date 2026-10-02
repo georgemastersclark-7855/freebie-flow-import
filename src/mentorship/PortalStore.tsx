@@ -63,6 +63,7 @@ interface PortalStoreValue {
   setupVideos: SetupVideo[];
   welcomeVideoUrl?: string;
   firstCall?: PortalCall;
+  nextCall?: PortalCall;
   circleUrl?: string;
   login: (email: string, password: string) => Promise<PortalUser>;
   logout: () => Promise<void>;
@@ -129,6 +130,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
   const [authError, setAuthError] = useState<string | undefined>();
   const [setupVideos, setSetupVideos] = useState<SetupVideo[]>(() => liveBackend ? [] : demoSetupVideos);
   const [welcomeVideoUrl, setWelcomeVideoUrl] = useState<string | undefined>();
+  const [nextCall, setNextCall] = useState<PortalCall | undefined>();
   const [firstCall, setFirstCall] = useState<PortalCall | undefined>();
 
   const applyLiveBootstrap = useCallback((bootstrap: LivePortalBootstrap) => {
@@ -140,6 +142,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setSetupVideos(bootstrap.setupVideos);
     setWelcomeVideoUrl(bootstrap.welcomeVideoUrl);
     setFirstCall(bootstrap.firstCall);
+    setNextCall(bootstrap.nextCall);
     setCircleUrl(bootstrap.circleUrl);
     setAuthError(undefined);
   }, []);
@@ -153,6 +156,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setSetupVideos([]);
     setWelcomeVideoUrl(undefined);
     setFirstCall(undefined);
+    setNextCall(undefined);
     setCircleUrl(undefined);
   }, []);
 
@@ -188,6 +192,20 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     void restore();
     return () => { active = false; };
   }, [applyLiveBootstrap, clearLiveState]);
+
+  useEffect(() => {
+    if (!liveBackend || !user?.id) return;
+    // Refresh at the next scheduled release, without restarting audio each minute.
+    const nextRelease = weeks.filter((week) => week.phase === "upcoming" && week.opensAt)
+      .map((week) => Date.parse(week.opensAt!)).filter((time) => time > Date.now()).sort((a, b) => a - b)[0];
+    const timer = nextRelease ? window.setTimeout(() => { void refresh().catch(() => undefined); }, Math.min(nextRelease - Date.now() + 1000, 2_147_000_000)) : undefined;
+    const onFocus = () => {
+      const playing = Array.from(document.querySelectorAll("audio, video")).some((node) => !(node as HTMLMediaElement).paused);
+      if (!playing) void refresh().catch(() => undefined);
+    };
+    window.addEventListener("focus", onFocus);
+    return () => { window.clearTimeout(timer); window.removeEventListener("focus", onFocus); };
+  }, [refresh, user?.id, weeks]);
 
   useEffect(() => {
     if (liveBackend) return;
@@ -412,6 +430,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setupVideos,
     welcomeVideoUrl,
     firstCall,
+    nextCall,
     circleUrl,
     login,
     logout,
@@ -425,7 +444,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     markFeedbackViewed,
     confirmFeedbackAction,
   }), [
-    ready, backend, authError, user, staffUser, selectView, resetTestUploads, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, circleUrl,
+    ready, backend, authError, user, staffUser, selectView, resetTestUploads, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, circleUrl,
     login, logout, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
     submitWeek, markFeedbackViewed, confirmFeedbackAction,
   ]);

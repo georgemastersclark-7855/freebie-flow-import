@@ -39,6 +39,8 @@ export interface WeekDefinition {
   songRequired: boolean;
   stemsRequired: boolean;
   deadlineLabel: string;
+  opensAt?: string;
+  opensLabel?: string;
   phase: "current" | "complete" | "upcoming";
 }
 

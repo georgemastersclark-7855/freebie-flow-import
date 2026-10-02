@@ -11,7 +11,7 @@ import {
   SecondaryButton,
   StatusPill,
 } from "../components/PortalUI";
-import { cx, submissionParts } from "../utils";
+import { cx, submissionParts, weekOpeningLabel } from "../utils";
 
 export function WeekWorkspace() {
   const { weekNumber: weekParam } = useParams();
@@ -36,18 +36,23 @@ export function WeekWorkspace() {
   const feedbackViewedAt = submission?.feedback?.viewedAt;
 
   useEffect(() => {
-    if (feedbackId && !feedbackViewedAt) {
+    if (definition?.phase !== "upcoming" && feedbackId && !feedbackViewedAt) {
       void markFeedbackViewed(weekNumber).catch(() => toast.error("We couldn't mark this feedback as viewed."));
     }
-  }, [weekNumber, feedbackId, feedbackViewedAt, markFeedbackViewed]);
+  }, [weekNumber, definition?.phase, feedbackId, feedbackViewedAt, markFeedbackViewed]);
 
   if (!definition || !submission || !Number.isInteger(weekNumber)) {
     return <Navigate to="/mentorship-portal/submissions" replace />;
   }
 
-  const locked = definition.phase === "upcoming";
+  if (definition.phase === "upcoming") return <div className="mx-auto max-w-2xl px-5 py-16 text-center">
+    <LockKeyhole size={32} className="mx-auto text-[#aaa99f]" />
+    <h1 className="mp-display mt-6">WEEK {weekNumber} IS LOCKED</h1>
+    <p className="mt-4 text-sm text-[#aaa99f]">{weekOpeningLabel(definition)}. Come back when this week begins.</p>
+    <Link to="/mentorship-portal/dashboard" className="mp-focus-ring mt-7 inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">Back to Dashboard<ArrowRight size={16} /></Link>
+  </div>;
   const submitted = submission.state === "submitted" || submission.state === "late";
-  const canEdit = !locked && !submitted;
+  const canEdit = !submitted;
   const parts = submissionParts(definition, submission);
   const readyToSend = parts.length > 0 && parts.every((part) => part.complete);
   const missingParts = parts.filter((part) => !part.complete);
@@ -109,16 +114,16 @@ export function WeekWorkspace() {
 
   return (
     <div className="mx-auto max-w-[1120px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">
-      <Link to="/mentorship-portal/submissions" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[#aaa99f] hover:text-white"><ArrowLeft size={15} />Back to your weekly work</Link>
+      <Link to="/mentorship-portal/submissions" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[#aaa99f] hover:text-white"><ArrowLeft size={15} />Back to your weekly submissions</Link>
 
       <header className="mt-7">
         <div className="flex flex-wrap items-center justify-between gap-4"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">{definition.title}</p><StatusPill state={submission.state} /></div>
-        <h1 className="mp-display mt-4 text-[#f2efe6]">WEEK {weekNumber} {submitted ? "SUBMISSION" : locked ? "PREVIEW" : "UPLOAD"}</h1>
+        <h1 className="mp-display mt-4 text-[#f2efe6]">WEEK {weekNumber} {submitted ? "SUBMISSION" : "UPLOAD"}</h1>
         <p className="mt-4 max-w-2xl text-sm leading-6 text-[#aaa99f]">{submitted ? "Your files are saved below. This is also where you'll find Rob's feedback on this week's work." : weekNumber < 5 ? "Add your song starter loops, the one you've developed into a weekly song, and its matching stems. Send everything to Rob once you're ready." : "Build out the track you selected in week 4. Add your latest full-track version and its matching stems, then send them to Rob."}</p>
         {!submitted && <p className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#d4d0c5]"><Clock3 size={14} />Due {definition.deadlineLabel}</p>}
       </header>
 
-      {locked && <div className="mt-6 flex items-start gap-3 rounded-2xl border border-white/15 bg-white/[0.035] p-5 text-sm text-[#aaa99f]"><LockKeyhole className="mt-0.5 shrink-0 text-white" size={18} /><div><p className="font-bold text-[#eeeae1]">A look ahead at week {weekNumber}</p><p className="mt-1 text-xs leading-5">Uploads open when the cohort reaches this week. For now, you can see what you'll be working on.</p></div></div>}
+
       {submitted && !submission.feedback && <div className="mt-6 flex items-start gap-3 rounded-2xl border border-white/15 bg-white/[0.035] p-5"><CheckCircle2 size={21} className="mt-0.5 shrink-0 text-white" /><div><p className="text-sm font-bold text-[#eeeae1]">Sent to Rob. You're done for this week.</p><p className="mt-1 text-xs leading-5 text-[#aaa99f]">Your song is in the review queue. Your feedback will appear here when it's ready.</p>{submittedLabel && <p className="mt-2 text-[11px] text-[#939187]">Sent {submittedLabel}</p>}</div></div>}
 
       {canEdit && <nav aria-label="Upload steps" className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-3 border-y border-white/10 py-4">{parts.map((part, index) => <a key={part.id} href={`#${part.id}`} className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><span className="grid h-6 w-6 place-items-center rounded-full border border-white/20 text-[10px] text-[#f2efe6]">{part.complete ? <Check size={12} /> : index + 1}</span>{part.title}<ArrowRight size={12} className="ml-1" /></a>)}<a href="#send-to-rob" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><span className="grid h-6 w-6 place-items-center rounded-full border border-white/20 text-[10px] text-[#f2efe6]">{parts.length + 1}</span>Send to Rob</a></nav>}
@@ -141,9 +146,9 @@ export function WeekWorkspace() {
             </section>
           )}
 
-        <div className="flex items-center justify-between gap-4"><h2 className="text-lg font-bold text-[#eeeae1]">{submitted ? "What you sent" : locked ? "This week's uploads" : "Add your files"}</h2>{canEdit && <p className="text-xs text-[#aaa99f]" aria-live="polite">{busy ? "Working on your files..." : "Uploads save as you go"}</p>}</div>
+        <div className="flex items-center justify-between gap-4"><h2 className="text-lg font-bold text-[#eeeae1]">{submitted ? "What you sent" : "Add your files"}</h2>{canEdit && <p className="text-xs text-[#aaa99f]" aria-live="polite">{busy ? "Working on your files..." : "Uploads save as you go"}</p>}</div>
         {parts.map((part, index) => <section key={part.id} id={part.id} className="mp-card scroll-mt-24 rounded-3xl p-5 sm:p-7" aria-labelledby={`${part.id}-title`}>
-          <div className="flex items-start gap-3 sm:gap-4"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 text-xs font-bold text-[#eeeae1]">{submitted && part.complete ? <Check size={16} /> : String(index + 1).padStart(2, "0")}</span><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center justify-between gap-2"><h3 id={`${part.id}-title`} className="text-xl font-bold text-[#eeeae1]">{part.title}</h3><span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-[#b6b3a8]">{part.complete && <Check size={12} />}{locked ? part.format : part.status}</span></div><p className="mt-2 max-w-2xl text-sm leading-6 text-[#aaa99f]">{part.description}</p></div></div>
+          <div className="flex items-start gap-3 sm:gap-4"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 text-xs font-bold text-[#eeeae1]">{submitted && part.complete ? <Check size={16} /> : String(index + 1).padStart(2, "0")}</span><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center justify-between gap-2"><h3 id={`${part.id}-title`} className="text-xl font-bold text-[#eeeae1]">{part.title}</h3><span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-[#b6b3a8]">{part.complete && <Check size={12} />}{part.status}</span></div><p className="mt-2 max-w-2xl text-sm leading-6 text-[#aaa99f]">{part.description}</p></div></div>
 
           {part.id === "song-starters" && <div className="mt-5 space-y-4">
             {canEdit && <FileDrop disabled={busy} label={part.complete ? "Add another loop" : "Choose your loop files"} help="MP3 or WAV. You can select several at once. Up to 2 GB per file." kind="idea" accept="audio/mpeg,audio/wav,audio/x-wav,.mp3,.wav" multiple onFiles={(files) => void uploadFiles("idea", files)} />}
@@ -163,7 +168,7 @@ export function WeekWorkspace() {
           {submissionMessage && <div role="status" className={cx("mt-4 rounded-xl border px-4 py-3 text-xs leading-5", submissionMessage.startsWith("Week") ? "border-white/15 bg-white/[0.035] text-[#d4d0c5]" : "border-red-400/20 bg-red-950/25 text-red-200")}><div className="flex items-start gap-2"><AlertCircle size={14} className="mt-0.5 shrink-0" />{submissionMessage}</div></div>}
         </section>}
       </div>
-      <div className="mt-8 border-t border-white/10 pt-5"><Link to="/mentorship-portal/submissions" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><ArrowLeft size={14} />Back to your weekly work</Link></div>
+      <div className="mt-8 border-t border-white/10 pt-5"><Link to="/mentorship-portal/submissions" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><ArrowLeft size={14} />Back to your weekly submissions</Link></div>
     </div>
   );
 }

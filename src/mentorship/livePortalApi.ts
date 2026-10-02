@@ -4,7 +4,7 @@
 import type { User } from "@supabase/supabase-js";
 import { Upload } from "tus-js-client";
 import { supabase } from "@/integrations/supabase/client";
-import { formatDeadline } from "./utils";
+import { formatDeadline, releasedWeekNumbers } from "./utils";
 import type {
   FileKind,
   OnboardingTask,
@@ -54,6 +54,7 @@ interface WeekRow {
   song_required: boolean;
   stems_required: boolean;
   deadline_at: string | null;
+  opens_at: string | null;
 }
 
 interface SubmissionRow {
@@ -131,6 +132,7 @@ export interface LivePortalBootstrap {
   setupVideos: SetupVideo[];
   welcomeVideoUrl?: string;
   firstCall?: PortalCall;
+  nextCall?: PortalCall;
   circleUrl?: string;
 }
 
@@ -200,7 +202,7 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     // Select the resource row so older databases without the optional download_url
     // column can still load lessons before that small migration is applied.
     db.from("mentorship_resources").select("*").eq("cohort_id", enrollment.cohort_id).eq("published", true).order("position"),
-    db.from("mentorship_calls").select("id, title, starts_at, calendar_url, circle_event_url").eq("cohort_id", enrollment.cohort_id).order("starts_at").limit(1).maybeSingle(),
+    db.from("mentorship_calls").select("id, title, starts_at, calendar_url, circle_event_url").eq("cohort_id", enrollment.cohort_id).order("starts_at"),
   ]);
 
   const firstError = [cohortResult, weeksResult, tasksResult, progressResult, submissionsResult, resourcesResult, firstCallResult].find((result) => result.error)?.error;
@@ -212,7 +214,9 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
   const progressRows = progressResult.data as ProgressRow[];
   const submissionRows = submissionsResult.data as SubmissionRow[];
   const resourceRows = resourcesResult.data as ResourceRow[];
-  const firstCallRow = firstCallResult.data as CallRow | null;
+  const callRows = firstCallResult.data as CallRow[];
+  const firstCallRow = callRows[0];
+  const nextCallRow = callRows.find((call) => Date.parse(call.starts_at) >= Date.now());
   const submissionIds = submissionRows.map((submission) => submission.id);
 
   const [filesResult, feedbackResult] = submissionIds.length
@@ -228,6 +232,8 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
   const feedbackRows = feedbackResult.data as FeedbackRow[];
   const files = await Promise.all(fileRows.map(portalFile));
 
+  const released = releasedWeekNumbers(weekRows.map((week) => ({ number: week.week_number, opensAt: week.opens_at })), cohort.current_week);
+  const activeWeek = Math.max(0, ...released);
   const weeks: WeekDefinition[] = weekRows.map((week) => ({
     id: week.id,
     number: week.week_number,
@@ -238,7 +244,9 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     songRequired: week.song_required,
     stemsRequired: week.stems_required,
     deadlineLabel: formatDeadline(week.deadline_at, cohort.timezone),
-    phase: week.week_number < cohort.current_week ? "complete" : week.week_number === cohort.current_week ? "current" : "upcoming",
+    opensAt: week.opens_at ?? undefined,
+    opensLabel: week.opens_at ? formatDeadline(week.opens_at, cohort.timezone) : undefined,
+    phase: !released.includes(week.week_number) ? "upcoming" : week.week_number === activeWeek ? "current" : "complete",
   }));
 
   const submissions: WeekSubmission[] = weeks.map((week) => {
@@ -305,10 +313,10 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
   const welcomeVideoUrl = welcomeVideo
     ? welcomeVideo.video_url ?? await signedUrl(videosBucket, welcomeVideo.storage_path)
     : undefined;
-  const firstCall: PortalCall | undefined = firstCallRow ? {
-    id: firstCallRow.id,
-    title: firstCallRow.title,
-    startsAt: firstCallRow.starts_at,
+  const mapCall = (row?: CallRow): PortalCall | undefined => row ? {
+    id: row.id,
+    title: row.title,
+    startsAt: row.starts_at,
     displayTime: new Intl.DateTimeFormat("en-GB", {
       weekday: "long",
       day: "numeric",
@@ -317,9 +325,9 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
       minute: "2-digit",
       timeZone: cohort.timezone,
       timeZoneName: "short",
-    }).format(new Date(firstCallRow.starts_at)),
-    calendarUrl: firstCallRow.calendar_url ?? undefined,
-    circleUrl: firstCallRow.circle_event_url ?? undefined,
+    }).format(new Date(row.starts_at)),
+    calendarUrl: row.calendar_url ?? undefined,
+    circleUrl: row.circle_event_url ?? undefined,
   } : undefined;
 
   portalUser.cohortId = cohort.id;
@@ -334,7 +342,8 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     onboardingTasks,
     setupVideos,
     welcomeVideoUrl,
-    firstCall,
+    firstCall: mapCall(firstCallRow),
+    nextCall: mapCall(nextCallRow),
     circleUrl: cohort.circle_url ?? undefined,
   };
 }

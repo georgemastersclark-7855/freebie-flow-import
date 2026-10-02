@@ -22,7 +22,7 @@ export const onboardingTaskCopy = (task: OnboardingTask): OnboardingTask => {
     case "book-call":
       return { ...task, title: "Book your 1:1 with Rob", description: "Let's map out what's holding you back and what you want to get out of these six weeks. Have a track ready to talk through and a note of where you tend to get stuck.", actionLabel: "Book my onboarding", actionUrl: task.actionUrl?.trim() || mentorshipBookingUrl };
     case "prework":
-      return { ...task, title: "Get your session ready", description: "Work through the setup videos below. Build your sound library, session template and reference playlist, then get familiar with exporting stems.", actionLabel: "Go to setup videos", actionUrl: "#setup-videos" };
+      return { ...task, title: "Complete Studio Setup", description: "Get your sound library, session template, references and stems workflow ready for the sessions ahead.", actionLabel: "Open Studio Setup", actionUrl: "/mentorship-portal/setup" };
     case "circle":
       return { ...task, title: "Join the private group", description: "Meet the other producers, say hello and tell us what you're working towards. This is where you can ask Rob questions between calls.", actionLabel: "Join the group" };
     case "first-call":

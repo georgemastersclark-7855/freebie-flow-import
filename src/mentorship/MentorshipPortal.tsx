@@ -4,6 +4,8 @@ import { PortalShell } from "./components/PortalShell";
 import { PortalLogin } from "./pages/PortalLogin";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import { WelcomeHub } from "./pages/WelcomeHub";
+import { StudioSetup } from "./pages/StudioSetup";
+import { SongStarterLibrary } from "./pages/SongStarterLibrary";
 import { SetupLesson } from "./pages/SetupLesson";
 import { WeekWorkspace } from "./pages/WeekWorkspace";
 import { AdminDashboard } from "./pages/AdminDashboard";
@@ -26,6 +28,11 @@ function RoleHome() {
   if (!ready) return <PortalLoading />;
   if (!user || staffUser) return <PortalLogin />;
   return <Navigate to={portalHome(user, onboardingTasks)} replace />;
+}
+
+function LegacyWelcome() {
+  const { hash } = useLocation();
+  return <Navigate to={hash === "#setup-videos" ? "/mentorship-portal/setup" : `/mentorship-portal/dashboard${hash}`} replace />;
 }
 
 function PortalLoading() {
@@ -74,8 +81,10 @@ export default function MentorshipPortal() {
         <Route element={<ProtectedPortal />}>
           <Route element={<StudentOnly />}>
             <Route path="submissions" element={<StudentDashboard />} />
-            <Route path="dashboard" element={<Navigate to="/mentorship-portal/submissions" replace />} />
-            <Route path="welcome" element={<WelcomeHub />} />
+            <Route path="dashboard" element={<WelcomeHub />} />
+            <Route path="welcome" element={<LegacyWelcome />} />
+            <Route path="setup" element={<StudioSetup />} />
+            <Route path="library" element={<SongStarterLibrary />} />
             <Route path="setup/:lessonKey" element={<SetupLesson />} />
             <Route path="week/:weekNumber" element={<WeekWorkspace />} />
           </Route>
