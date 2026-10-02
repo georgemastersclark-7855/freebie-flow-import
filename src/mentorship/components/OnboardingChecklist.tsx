@@ -12,6 +12,7 @@ export function OnboardingChecklist() {
   const [savingTask, setSavingTask] = useState<string>();
   const [bookingOpen, setBookingOpen] = useState(false);
   const tasks = onboardingTasks.map(onboardingTaskCopy);
+  const nextTask = tasks.find((task) => !task.complete);
   const toggle = async (id: string) => {
     setSavingTask(id);
     try { await toggleOnboardingTask(id); }
@@ -19,15 +20,16 @@ export function OnboardingChecklist() {
     finally { setSavingTask(undefined); }
   };
   return <section id="onboarding-steps" className="scroll-mt-24">
-    <h2 className="text-xl font-bold text-[#f2efe6]">Your onboarding checklist</h2>
-    <p className="mt-2 text-sm leading-6 text-[#aaa99f]">Work through these before your first session. Tick each step when you've done it.</p>
+    <h2 className="text-2xl font-bold text-[#f2efe6]">Get ready for your first session</h2>
+    <p className="mt-2 text-sm leading-6 text-[#aaa99f]">Your onboarding checklist. Work through the steps below and tick each one off as you go. Your progress is saved.</p>
     <div className="mt-5 grid items-start gap-4 md:grid-cols-2">
       {tasks.map((task, index) => {
         const key = task.key ?? task.id;
         const isBooking = key === "book-call";
         const isSetup = key === "prework";
         const canComplete = isSetup ? completeSetupOutline(setupVideos).every((video) => Boolean(video.url)) : Boolean(task.actionUrl);
-        return <article key={task.id} id={`onboarding-${task.id}`} className={cx("mp-card scroll-mt-24 rounded-2xl p-5", isBooking && bookingOpen && "md:col-span-2")}>
+        return <article key={task.id} id={`onboarding-${task.id}`} className={cx("mp-card scroll-mt-24 rounded-2xl p-5", task.id === nextTask?.id && "ring-1 ring-white/35", isBooking && bookingOpen && "md:col-span-2")}>
+          {task.id === nextTask?.id && <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#e9e5dc]">Your next step</p>}
           <div className="flex items-start gap-3">
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/20 text-xs font-bold text-[#d4d0c5]">{task.complete ? <Check size={15} /> : `0${index + 1}`}</span>
             <div><h3 className="text-base font-bold text-[#eeeae1]">{task.title}</h3><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{task.description}</p></div>

@@ -5,6 +5,7 @@ import { usePortalStore } from "../PortalStore";
 import { ProgressBar, StatusPill } from "../components/PortalUI";
 import { PortalVideo } from "../components/PortalVideo";
 import { OnboardingChecklist } from "../components/OnboardingChecklist";
+import { onboardingTaskCopy } from "../onboarding";
 import { submissionParts, weekOpeningLabel } from "../utils";
 
 function LoopMethod() {
@@ -32,7 +33,9 @@ export function WelcomeHub() {
   const allComplete = onboardingTasks.length > 0 && completeCount === onboardingTasks.length;
   const currentWeek = weeks.find((week) => week.phase === "current");
   const submission = submissions.find((item) => item.weekNumber === currentWeek?.number);
-  const inProgramme = allComplete || (currentWeek?.number ?? 0) > 1 || submissions.some((item) => item.submittedAt);
+  // Uploads and the cohort calendar must never hide unfinished onboarding.
+  const inProgramme = allComplete;
+  const nextTask = onboardingTasks.map(onboardingTaskCopy).find((task) => !task.complete);
   const feedback = submissions.filter((item) => item.feedback && !item.feedback.actionConfirmedAt && weeks.some((week) => week.number === item.weekNumber && week.phase !== "upcoming"));
   const starterCount = submissions.filter((item) => weeks.some((week) => week.number === item.weekNumber && week.phase !== "upcoming")).reduce((sum, item) => sum + item.ideas.length, 0);
   const starterTarget = weeks.reduce((sum, week) => sum + week.requiredIdeas, 0);
@@ -44,18 +47,21 @@ export function WelcomeHub() {
   const nextWeek = weeks.find((week) => week.phase === "upcoming");
 
   const welcome = <section className="overflow-hidden rounded-[28px] border border-white/10 bg-[#151512]">
-    <div className="grid items-center lg:grid-cols-[0.85fr_1.15fr]">
+    <div className="grid items-center lg:grid-cols-[0.8fr_1.2fr]">
       <div className="mp-welcome-copy min-w-0 p-6 sm:p-9">
-        <p className="text-sm font-semibold">You're in, {firstName}.</p>
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">Watch this first</p>
         {inProgramme ? <h2 className="mp-display mp-welcome-title mt-4">LET'S GET<br />YOU STARTED.</h2> : <h1 className="mp-display mp-welcome-title mt-4">LET'S GET<br />YOU STARTED.</h1>}
-        <p className="mt-5 max-w-md text-sm leading-6 text-[#b6b3a8]">Really glad to have you here. Watch my welcome, get familiar with how we'll work, then get your studio and onboarding sorted. You'll be ready to start making music.</p>
+        <p className="mt-5 max-w-md text-sm leading-6 text-[#b6b3a8]">Really glad to have you here, {firstName}. Start with my welcome video, read through how we'll work, then tick off your onboarding below. Let's get you ready for our first session.</p>
         <p className="mt-4 text-sm font-bold">Rob x</p>
       </div>
       <div className="min-w-0 p-5 pt-0 sm:p-7 sm:pt-0 lg:pl-0 lg:pt-7"><PortalVideo src={welcomeVideoUrl} poster={robOnLaptop} title="A welcome from Rob" description="Your introduction to the next six weeks, the Loop Method and getting ready for your first session." /></div>
     </div>
     {!inProgramme && <div className="flex flex-wrap items-center justify-between gap-5 border-t border-white/10 bg-white/[0.025] p-5 sm:px-9">
-      <div className="w-full max-w-sm"><div className="mb-2 flex justify-between text-xs font-semibold text-[#c5c2b7]"><span>Your setup progress</span><span>{completeCount} / {onboardingTasks.length} steps</span></div><ProgressBar value={completeCount} max={onboardingTasks.length || 1} /></div>
-      <a href="#onboarding-steps" className="mp-focus-ring inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">Continue onboarding<ArrowRight size={16} /></a>
+      <div className="w-full max-w-sm"><div className="mb-2 flex justify-between text-xs font-semibold text-[#c5c2b7]"><span>Your onboarding</span><span>{completeCount} / {onboardingTasks.length} complete</span></div><ProgressBar value={completeCount} max={onboardingTasks.length || 1} /></div>
+      <div className="flex flex-wrap items-center gap-4">
+        {nextTask && <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#aaa99f]">Your next step</p><p className="mt-1 text-sm font-semibold">{nextTask.title}</p></div>}
+        <a href={nextTask ? `#onboarding-${nextTask.id}` : "#onboarding-steps"} className="mp-focus-ring inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">{completeCount ? "Continue onboarding" : "Start onboarding"}<ArrowRight size={16} /></a>
+      </div>
     </div>}
   </section>;
 
