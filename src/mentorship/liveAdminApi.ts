@@ -2,7 +2,7 @@
 // This adapter stays isolated until the mentorship migration is applied and the
 // generated Supabase Database type can be refreshed.
 import { supabase } from "@/integrations/supabase/client";
-import { formatDeadline } from "./utils";
+import { formatDeadline, releasedWeekNumbers } from "./utils";
 import { Upload } from "tus-js-client";
 import type {
   AdminOverview,
@@ -191,13 +191,17 @@ export async function setLiveAdminVideoPublished(resourceId: string, published: 
 export async function loadLiveAdminOverview(): Promise<AdminOverview> {
   const cohort = await findWorkingCohort();
   const [weekResult, enrollmentResult] = await Promise.all([
-    db.from("mentorship_weeks").select("id, week_number, required_ideas, song_required, stems_required, deadline_at").eq("cohort_id", cohort.id).eq("week_number", cohort.current_week).single(),
+    db.from("mentorship_weeks").select("id, week_number, required_ideas, song_required, stems_required, deadline_at, opens_at").eq("cohort_id", cohort.id).order("week_number"),
     db.from("mentorship_enrollments").select("id, user_id, enrolled_at, is_walkthrough").eq("cohort_id", cohort.id).eq("status", "active").order("enrolled_at"),
   ]);
   if (weekResult.error) throw weekResult.error;
   if (enrollmentResult.error) throw enrollmentResult.error;
 
-  const week = weekResult.data;
+  const weekRows = weekResult.data ?? [];
+  const released = releasedWeekNumbers(weekRows.map((row: any) => ({ number: row.week_number, opensAt: row.opens_at })), cohort.current_week);
+  const currentWeek = Math.max(0, ...released);
+  const week = weekRows.find((row: any) => row.week_number === currentWeek) ?? weekRows[0];
+  if (!week) throw new Error("The cohort's weekly schedule has not been set up yet.");
   const enrollments = enrollmentResult.data ?? [];
   const userIds = enrollments.map((row: any) => row.user_id);
   const enrollmentIds = enrollments.map((row: any) => row.id);
@@ -205,7 +209,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
     return {
       cohortId: cohort.id,
       cohortName: cohort.display_name,
-      currentWeek: cohort.current_week,
+      currentWeek: week.week_number,
       deadlineLabel: formatDeadline(week.deadline_at, cohort.timezone),
       students: [],
       reviews: [],
@@ -328,7 +332,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
         walkthrough: enrollment.is_walkthrough,
         studentEmail: profile?.email ?? "",
         cohortId: cohort.id,
-        weekNumber: cohort.current_week,
+        weekNumber: week.week_number,
         songName: songRow.file_name,
         submittedLabel: submittedLabel(submission.submitted_at),
         stemsReady: Boolean(stemsRow),
@@ -346,7 +350,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
   return {
     cohortId: cohort.id,
     cohortName: cohort.display_name,
-    currentWeek: cohort.current_week,
+    currentWeek: week.week_number,
     deadlineLabel: formatDeadline(week.deadline_at, cohort.timezone),
     students,
     reviews: reviews.sort((a, b) => a.submittedLabel.localeCompare(b.submittedLabel)),
