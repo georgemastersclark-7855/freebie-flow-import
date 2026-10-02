@@ -20,7 +20,7 @@ import { cx } from "../utils";
 
 const studentNavigation = [
   { to: "/mentorship-portal/welcome", label: "Start here", icon: Sparkles },
-  { to: "/mentorship-portal/submissions", label: "Your weekly work", icon: FolderClock },
+  { to: "/mentorship-portal/submissions", label: "Your Weekly Submissions", icon: FolderClock },
 ];
 
 const staffNavigation = [
@@ -90,7 +90,7 @@ export function PortalShell() {
               className={() => {
                 const active = `${location.pathname}${location.hash}` === to
                   || (label === "Start here" && (location.pathname === "/mentorship-portal/welcome" || location.pathname.startsWith("/mentorship-portal/setup/")))
-                  || (label === "Your weekly work" && location.pathname.startsWith("/mentorship-portal/week/"))
+                  || (label === "Your Weekly Submissions" && location.pathname.startsWith("/mentorship-portal/week/"))
                   || (label === "Review queue" && location.pathname.startsWith("/mentorship-portal/admin/review/"));
                 return cx(
                   "mp-focus-ring flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition",
@@ -102,7 +102,7 @@ export function PortalShell() {
             >
               <Icon size={17} />
               <span>{label}</span>
-              {label === "Your weekly work" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
+              {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
             </NavLink>
           ))}
         </nav>
@@ -146,7 +146,7 @@ export function PortalShell() {
               {navigation.map(({ to, label, icon: Icon }, index) => (
                 <NavLink key={`${label}-mobile-${index}`} to={to} end onClick={() => setMobileOpen(false)} className="mp-focus-ring flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-semibold text-[#dedbd2]">
                   <Icon size={18} /> <span>{label}</span>
-                  {label === "Your weekly work" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
+                  {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
                 </NavLink>
               ))}
             </nav>
