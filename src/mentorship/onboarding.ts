@@ -24,7 +24,7 @@ export const onboardingTaskCopy = (task: OnboardingTask): OnboardingTask => {
     case "prework":
       return { ...task, title: "Complete Studio Setup", description: "Get your sound library, session template, references and stems workflow ready for the sessions ahead.", actionLabel: "Open Studio Setup", actionUrl: "/mentorship-portal/setup" };
     case "circle":
-      return { ...task, title: "Join the private group", description: "Meet the other producers, say hello and tell us what you're working towards. This is where you can ask Rob questions between calls.", actionLabel: "Join the group" };
+      return { ...task, title: "Join the private group", description: "Meet the other producers, say hello and tell us what you're working towards. This is where you can ask me questions between calls.", actionLabel: "Join the group" };
     case "first-call":
       return { ...task, title: "Save your first group call", description: "Put it in your calendar so you've got the time set aside. Bring your questions and be ready to work.", actionLabel: "Add to my calendar" };
     default:
