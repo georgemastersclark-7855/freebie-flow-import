@@ -61,6 +61,7 @@ declare
   old_path text := current_setting('test.qa_student_enrollment') || '/11111111-1111-4111-8111-111111111111.webp';
   new_path text := current_setting('test.qa_student_enrollment') || '/22222222-2222-4222-8222-222222222222.webp';
   foreign_path text := current_setting('test.qa_walkthrough_enrollment') || '/77777777-7777-4777-8777-777777777777.webp';
+  preflight_path text := current_setting('test.qa_student_enrollment') || '/dddddddd-dddd-4ddd-8ddd-dddddddddddd.webp';
   saved public.mentorship_student_profiles;
   updated public.mentorship_student_profiles;
   error_text text;
@@ -88,6 +89,29 @@ begin
   values ('mentorship-student-avatars', old_path, '{"mimetype":"image/webp","size":512}'::jsonb)
   returning name into error_text;
   if error_text <> old_path then raise exception 'Storage insert did not return the owner''s avatar path'; end if;
+
+  -- Storage's initial INSERT may have no computed metadata yet. Permit only
+  -- this owned, valid path-only preflight, while the save RPC must still reject
+  -- it until final image MIME and size metadata exist.
+  insert into storage.objects (bucket_id, name, metadata)
+  values ('mentorship-student-avatars', preflight_path, null)
+  returning name into error_text;
+  if error_text <> preflight_path then raise exception 'Storage preflight insert did not return the owned avatar path'; end if;
+  rejected := false;
+  begin
+    perform public.save_mentorship_student_profile(student_enrollment, 'Test Producer', null, null, null, null, preflight_path);
+  exception when others then
+    get stacked diagnostics error_text = message_text;
+    rejected := error_text = 'The uploaded profile photo was not found or is not a supported image';
+  end;
+  if not rejected then raise exception 'Profile RPC accepted a metadata-free Storage preflight object'; end if;
+
+  insert into storage.objects (bucket_id, name, metadata)
+  values ('mentorship-student-avatars', student_enrollment::text || '/eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee.webp', '{}'::jsonb)
+  returning name into error_text;
+  if error_text <> student_enrollment::text || '/eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee.webp' then
+    raise exception 'Storage preflight did not accept an empty metadata object';
+  end if;
 
   rejected := false;
   begin
