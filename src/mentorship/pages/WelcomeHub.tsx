@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, CalendarDays, Check, ChevronDown, Headphones, Library } from "lucide-react";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
 import { usePortalStore } from "../PortalStore";
@@ -7,12 +7,12 @@ import { ProgressBar, StatusPill } from "../components/PortalUI";
 import { PortalVideo } from "../components/PortalVideo";
 import { OnboardingChecklist } from "../components/OnboardingChecklist";
 import { LoopMethod } from "../components/LoopMethod";
-import { onboardingTaskCopy } from "../onboarding";
 import { submissionParts, weekOpeningLabel } from "../utils";
 
 export function WelcomeHub() {
   const completedOnboarding = useRef<HTMLDetailsElement>(null);
-  const openOnboarding = () => { if (completedOnboarding.current) completedOnboarding.current.open = true; };
+  const introduction = useRef<HTMLDetailsElement>(null);
+  const location = useLocation();
   const { user, onboardingTasks, welcomeVideoUrl, weeks, submissions, nextCall } = usePortalStore();
   const completeCount = onboardingTasks.filter((task) => task.complete).length;
   const allComplete = onboardingTasks.length > 0 && completeCount === onboardingTasks.length;
@@ -20,7 +20,6 @@ export function WelcomeHub() {
   const submission = submissions.find((item) => item.weekNumber === currentWeek?.number);
   // Uploads and the cohort calendar must never hide unfinished onboarding.
   const inProgramme = allComplete;
-  const nextTask = onboardingTasks.map(onboardingTaskCopy).find((task) => !task.complete);
   const feedback = submissions.filter((item) => item.feedback && !item.feedback.actionConfirmedAt && weeks.some((week) => week.number === item.weekNumber && week.phase !== "upcoming"));
   const starterCount = submissions.filter((item) => weeks.some((week) => week.number === item.weekNumber && week.phase !== "upcoming")).reduce((sum, item) => sum + item.ideas.length, 0);
   const starterTarget = weeks.reduce((sum, week) => sum + week.requiredIdeas, 0);
@@ -31,23 +30,19 @@ export function WelcomeHub() {
   const weekUrl = currentWeek ? `/mentorship-portal/week/${currentWeek.number}` : "/mentorship-portal/submissions";
   const nextWeek = weeks.find((week) => week.phase === "upcoming");
 
-  const welcome = <section className="overflow-hidden rounded-[28px] border border-white/10 bg-[#151512]">
-    <div className="grid items-center lg:grid-cols-[0.8fr_1.2fr]">
-      <div className="mp-welcome-copy min-w-0 p-6 sm:p-9">
-        <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">Watch this first</p>
-        {inProgramme ? <h2 className="mp-display mp-welcome-title mt-4">LET'S GET<br />YOU STARTED.</h2> : <h1 className="mp-display mp-welcome-title mt-4">LET'S GET<br />YOU STARTED.</h1>}
-        <p className="mt-5 max-w-md text-sm leading-6 text-[#b6b3a8]">Good to have you here, {firstName}. Watch my welcome video to see how we'll work over the next six weeks. Then book your 1:1, work through Studio Setup and tick off the checklist below.</p>
-        <p className="mt-4 text-sm font-bold">Rob x</p>
-      </div>
-      <div className="min-w-0 p-5 pt-0 sm:p-7 sm:pt-0 lg:pl-0 lg:pt-7"><PortalVideo src={welcomeVideoUrl} poster={robOnLaptop} title="A welcome from Rob" description="Your introduction to the next six weeks, the Loop Method and getting ready for your first session." /></div>
+  useEffect(() => {
+    if (location.hash.startsWith("#method-") && introduction.current) introduction.current.open = true;
+    if (location.hash.startsWith("#onboarding-") && completedOnboarding.current) completedOnboarding.current.open = true;
+  }, [location.hash, inProgramme]);
+
+  const welcome = <section className="mp-welcome-panel min-w-0 rounded-3xl border border-white/10 bg-[#151512] p-5 sm:p-7">
+    <div className="mp-welcome-copy">
+      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">Watch this first</p>
+      {inProgramme ? <h2 className="mp-display mp-welcome-title mt-3">LET'S GET YOU STARTED.</h2> : <h1 className="mp-display mp-welcome-title mt-3">LET'S GET YOU STARTED.</h1>}
+      <p className="mt-4 text-sm leading-6 text-[#b6b3a8]">Good to have you here, {firstName}. Watch my welcome video to see how we'll work over the next six weeks. Then book your 1:1, work through Studio Setup and tick off your onboarding steps.</p>
+      <p className="mt-3 text-sm font-bold">Rob x</p>
     </div>
-    {!inProgramme && <div className="flex flex-wrap items-center justify-between gap-5 border-t border-white/10 bg-white/[0.025] p-5 sm:px-9">
-      <div className="w-full max-w-sm"><div className="mb-2 flex justify-between text-xs font-semibold text-[#c5c2b7]"><span>Your onboarding</span><span>{completeCount} / {onboardingTasks.length} complete</span></div><ProgressBar value={completeCount} max={onboardingTasks.length || 1} /></div>
-      <div className="flex flex-wrap items-center gap-4">
-        {nextTask && <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#aaa99f]">Your next step</p><p className="mt-1 text-sm font-semibold">{nextTask.title}</p></div>}
-        <a href={nextTask ? `#onboarding-${nextTask.id}` : "#onboarding-steps"} className="mp-focus-ring inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">{completeCount ? "Continue onboarding" : "Start onboarding"}<ArrowRight size={16} /></a>
-      </div>
-    </div>}
+    <div className="mt-5"><PortalVideo src={welcomeVideoUrl} poster={robOnLaptop} title="A welcome from Rob" description="Your introduction to the next six weeks, the Loop Method and getting ready for your first session." /></div>
   </section>;
 
   return <div className="mx-auto max-w-[1400px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">
@@ -80,8 +75,8 @@ export function WelcomeHub() {
         </aside>
       </div>
       <details ref={completedOnboarding} className="group mt-7 rounded-2xl border border-white/10 p-5"><summary className="mp-focus-ring flex cursor-pointer list-none items-center justify-between gap-3 rounded font-bold [&::-webkit-details-marker]:hidden"><span className="inline-flex items-center gap-2">{allComplete && <Check size={16} />}{allComplete ? "Onboarding complete" : `Finish onboarding (${completeCount}/${onboardingTasks.length})`}</span><ChevronDown size={17} className="transition group-open:rotate-180" /></summary><div className="mt-6"><OnboardingChecklist /></div></details>
-      <details className="group mt-4 rounded-2xl border border-white/10 p-5"><summary className="mp-focus-ring flex cursor-pointer list-none items-center justify-between gap-3 rounded font-bold [&::-webkit-details-marker]:hidden">Welcome & how it works<ChevronDown size={17} className="transition group-open:rotate-180" /></summary><div className="mt-6">{welcome}<LoopMethod onOnboardingRequested={openOnboarding} /></div></details>
-    </> : <>{welcome}<LoopMethod onOnboardingRequested={openOnboarding} /><div className="mt-8"><OnboardingChecklist /></div></>}
+      <details ref={introduction} className="group mt-4 rounded-2xl border border-white/10 p-5"><summary className="mp-focus-ring flex cursor-pointer list-none items-center justify-between gap-3 rounded font-bold [&::-webkit-details-marker]:hidden">Welcome & how it works<ChevronDown size={17} className="transition group-open:rotate-180" /></summary><div className="mt-6">{welcome}<LoopMethod /></div></details>
+    </> : <><div className="mp-onboarding-layout">{welcome}<OnboardingChecklist /></div><LoopMethod /></>}
     <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5 text-xs text-[#aaa99f]"><p>Need a hand with your access or setup?</p><a href="mailto:team@roblate.com" className="mp-focus-ring rounded font-semibold text-[#eeeae1]">team@roblate.com</a></footer>
   </div>;
 }

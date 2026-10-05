@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowUpRight,
   Bell,
@@ -32,6 +32,14 @@ const staffNavigation = [
   { to: "/mentorship-portal/admin/videos", label: "Manage videos", icon: Video, adminOnly: true },
   { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },
 ];
+
+function isNavigationActive(to: string, label: string, pathname: string) {
+  if (pathname === to) return true;
+  if (label === "Studio Setup") return pathname.startsWith(`${to}/`);
+  if (label === "Your Weekly Submissions") return pathname.startsWith("/mentorship-portal/week/");
+  if (label === "Review queue") return pathname.startsWith("/mentorship-portal/admin/review/");
+  return false;
+}
 
 export function PortalShell() {
   const { user, logout, submissions, circleUrl, weeks, backend, staffUser, resetTestUploads } = usePortalStore();
@@ -86,28 +94,23 @@ export function PortalShell() {
         </div>
 
         <nav className="mt-7 space-y-1.5" aria-label="Portal navigation">
-          {navigation.map(({ to, label, icon: Icon }, index) => (
-            <div key={`${label}-${index}`}><NavLink
+          {navigation.map(({ to, label, icon: Icon }, index) => {
+            const active = isNavigationActive(to, label, location.pathname);
+            return <div key={`${label}-${index}`}><Link
               to={to}
-              end
-              className={() => {
-                const active = `${location.pathname}${location.hash}` === to
-                  || (label === "Studio Setup" && location.pathname.startsWith("/mentorship-portal/setup/"))
-                  || (label === "Your Weekly Submissions" && location.pathname.startsWith("/mentorship-portal/week/"))
-                  || (label === "Review queue" && location.pathname.startsWith("/mentorship-portal/admin/review/"));
-                return cx(
-                  "mp-focus-ring flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition",
-                  active
-                    ? "bg-white/[0.07] text-white"
-                    : "text-[#8f8e85] hover:bg-white/[0.04] hover:text-[#e5e1d8]",
-                );
-              }}
+              aria-current={active ? "page" : undefined}
+              className={cx(
+                "mp-focus-ring flex items-center gap-3 rounded-xl border px-3 py-2.5 text-sm font-semibold transition",
+                active
+                  ? "border-white/35 bg-white/[0.12] text-white"
+                  : "border-transparent text-[#8f8e85] hover:border-white/10 hover:bg-white/[0.04] hover:text-[#e5e1d8]",
+              )}
             >
               <Icon size={17} className="shrink-0" />
               <span>{label}</span>
               {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
-            </NavLink>{label === "Your Weekly Submissions" && <WeekNavigation />}</div>
-          ))}
+            </Link>{label === "Your Weekly Submissions" && <WeekNavigation />}</div>
+          })}
         </nav>
 
         <div className="mt-auto pt-6">
@@ -146,12 +149,16 @@ export function PortalShell() {
               <button type="button" onClick={() => setMobileOpen(false)} className="mp-focus-ring rounded-lg p-2 text-[#aaa99f]" aria-label="Close navigation"><X size={20} /></button>
             </div>
             <nav className="mt-8 space-y-2">
-              {navigation.map(({ to, label, icon: Icon }, index) => (
-                <div key={`${label}-mobile-${index}`}><NavLink to={to} end onClick={() => setMobileOpen(false)} className="mp-focus-ring flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-sm font-semibold text-[#dedbd2]">
+              {navigation.map(({ to, label, icon: Icon }, index) => {
+                const active = isNavigationActive(to, label, location.pathname);
+                return <div key={`${label}-mobile-${index}`}><Link to={to} onClick={() => setMobileOpen(false)} aria-current={active ? "page" : undefined} className={cx(
+                  "mp-focus-ring flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition",
+                  active ? "border-white/35 bg-white/[0.12] text-white" : "border-white/[0.07] bg-white/[0.025] text-[#dedbd2] hover:border-white/15 hover:bg-white/[0.05]",
+                )}>
                   <Icon size={18} className="shrink-0" /> <span>{label}</span>
                   {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
-                </NavLink>{label === "Your Weekly Submissions" && <WeekNavigation onNavigate={() => setMobileOpen(false)} />}</div>
-              ))}
+                </Link>{label === "Your Weekly Submissions" && <WeekNavigation onNavigate={() => setMobileOpen(false)} />}</div>
+              })}
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}
             <button type="button" onClick={() => void signOut()} className="mp-focus-ring mt-8 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-[#8f8e85]"><LogOut size={17} /> Sign out</button>

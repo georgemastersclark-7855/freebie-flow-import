@@ -1,8 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import * as Tabs from "@radix-ui/react-tabs";
 import { ArrowRight, ListOrdered } from "lucide-react";
 import { usePortalStore } from "../PortalStore";
 
-export function LoopMethod({ onOnboardingRequested }: { onOnboardingRequested?: () => void }) {
+const sections = [
+  { id: "method-story", label: "Rob's approach" },
+  { id: "method-process", label: "Weekly process" },
+  { id: "method-feedback-library", label: "Feedback & your library" },
+];
+
+export function LoopMethod() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const selected = sections.find((section) => `#${section.id}` === location.hash)?.id ?? "method-story";
   const { weeks } = usePortalStore();
   const target = weeks.reduce((sum, week) => sum + week.requiredIdeas, 0);
 
@@ -11,12 +21,12 @@ export function LoopMethod({ onOnboardingRequested }: { onOnboardingRequested?: 
       <p className="mm-overline">How the mentorship works</p>
       <h2 id="loop-method-title" className="mp-display mp-lesson-title">ROB'S LOOP METHOD</h2>
     </header>
-    <nav className="mm-jumps" aria-label="Mentorship introduction sections">
-      <a className="mp-focus-ring" href="#method-story">Rob's approach</a>
-      <a className="mp-focus-ring" href="#method-process">Weekly process</a>
-      <a className="mp-focus-ring" href="#method-feedback-library">Feedback &amp; your library</a>
-      <a className="mp-focus-ring" href="#onboarding-steps" onClick={onOnboardingRequested}>Onboarding ↓</a>
-    </nav>
+    <Tabs.Root value={selected} onValueChange={(value) => navigate({ pathname: location.pathname, search: location.search, hash: `#${value}` }, { replace: true })}>
+      <Tabs.List className="mm-tabs" aria-label="How the mentorship works">
+        {sections.map((section) => <Tabs.Trigger key={section.id} value={section.id} className="mp-focus-ring mm-tab">{section.label}</Tabs.Trigger>)}
+      </Tabs.List>
+
+    <Tabs.Content value="method-story" className="mp-focus-ring mm-tab-panel">
 
     <section id="method-story" className="mm-story" aria-labelledby="method-story-title">
       <div className="mm-story-title">
@@ -31,6 +41,8 @@ export function LoopMethod({ onOnboardingRequested }: { onOnboardingRequested?: 
       </div>
     </section>
 
+    </Tabs.Content>
+    <Tabs.Content value="method-process" className="mp-focus-ring mm-tab-panel">
     <section id="method-process" className="mm-process" aria-labelledby="method-process-title">
       <div className="mm-section-title"><ListOrdered size={21} aria-hidden="true" /><h3 id="method-process-title">What to submit and when</h3></div>
       <div className="mm-phase">
@@ -49,9 +61,13 @@ export function LoopMethod({ onOnboardingRequested }: { onOnboardingRequested?: 
       </div>
     </section>
 
+    </Tabs.Content>
+    <Tabs.Content value="method-feedback-library" className="mp-focus-ring mm-tab-panel">
     <div id="method-feedback-library" className="mm-support">
       <section aria-labelledby="method-feedback-title"><p className="mm-overline">Feedback &amp; live calls</p><h3 id="method-feedback-title">Use my feedback in your next week's work</h3><p>I'll give you personal feedback on the developed song you submit each week. On our group call, I'll produce one student's track live and teach from the things that came up in that week's submissions. Ask questions, watch how I make decisions and put what you learn into your next track.</p></section>
       <section aria-labelledby="method-library-title"><p className="mm-overline">Your song starter library</p><h3 id="method-library-title">Take your song starters into your next session</h3><p>{target ? <>Complete the weekly starters and you'll have <strong>{target} ideas minimum in your folder as well as your finished track.</strong>{" "}</> : "Your weekly starters give you a folder of ideas as well as your finished track. "}Every loop you upload is saved in your Song Starter Library. Listen back, download them and take that folder into a session with an artist, or choose one to start your own next track.</p><Link to="/mentorship-portal/library" className="mp-focus-ring mm-text-link">Open your Song Starter Library<ArrowRight size={16} aria-hidden="true" /></Link></section>
     </div>
+    </Tabs.Content>
+    </Tabs.Root>
   </section>;
 }
