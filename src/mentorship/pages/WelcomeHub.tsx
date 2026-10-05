@@ -38,7 +38,6 @@ export function WelcomeHub() {
   const welcome = <section className="mp-welcome-panel min-w-0 rounded-3xl border border-white/10 bg-[#151512] p-5 sm:p-7">
     <div className="mp-welcome-copy">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">Watch this first</p>
-      {inProgramme ? <h2 className="mp-display mp-welcome-title mt-3">LET'S GET YOU STARTED.</h2> : <h1 className="mp-display mp-welcome-title mt-3">LET'S GET YOU STARTED.</h1>}
       <p className="mt-4 text-sm leading-6 text-[#b6b3a8]">Good to have you here, {firstName}. Watch my welcome video to see how we'll work over the next six weeks. Then book your 1:1, work through Studio Setup and tick off your onboarding steps.</p>
       <p className="mt-3 text-sm font-bold">Rob x</p>
     </div>
@@ -46,6 +45,7 @@ export function WelcomeHub() {
   </section>;
 
   return <div className="mx-auto max-w-[1400px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">
+    {!inProgramme && <h1 className="sr-only">Your mentorship dashboard</h1>}
     <header className="mb-7 flex flex-wrap items-center justify-between gap-3">
       <div className="inline-flex min-w-0 max-w-full items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">
         <svg aria-hidden="true" focusable="false" className="h-4 w-4 shrink-0 fill-[#0095F6]" viewBox="0 0 22 22">

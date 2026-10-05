@@ -4,7 +4,7 @@ import { ArrowRight, ListOrdered } from "lucide-react";
 import { usePortalStore } from "../PortalStore";
 
 const sections = [
-  { id: "method-story", label: "Rob's approach" },
+  { id: "method-story", label: "Why this approach?" },
   { id: "method-process", label: "Weekly process" },
   { id: "method-feedback-library", label: "Feedback & your library" },
 ];

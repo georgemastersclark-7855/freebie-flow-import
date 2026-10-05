@@ -7,6 +7,7 @@ import { usePortalStore } from "../PortalStore";
 import { completeSetupOutline, onboardingTaskCopy } from "../onboarding";
 import { BookingCalendar } from "./BookingCalendar";
 import { ProgressBar } from "./PortalUI";
+import { GroupJoin } from "./GroupJoin";
 import { cx } from "../utils";
 
 export function OnboardingChecklist() {
@@ -74,7 +75,8 @@ export function OnboardingChecklist() {
             <p className="border-t border-white/10 pt-3 text-sm leading-6 text-[#b7b7ad]">{task.description}</p>
             {key === "first-call" && <p className="mt-3 text-xs font-semibold text-[#d4d0c5]">{firstCall?.displayTime ?? "Your call date will appear here once confirmed."}</p>}
             {isBooking && task.actionUrl && <BookingCalendar url={task.actionUrl} open={bookingOpen} onToggle={() => setBookingOpen((value) => !value)} />}
-            {!isBooking && task.actionUrl && (isSetup ? <Link to={task.actionUrl} className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></Link> : <a href={task.actionUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></a>)}
+            {key === "circle" && <GroupJoin url={task.actionUrl} />}
+            {!isBooking && key !== "circle" && task.actionUrl && (isSetup ? <Link to={task.actionUrl} className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></Link> : <a href={task.actionUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></a>)}
             {!canComplete && !task.complete && <p id={`onboarding-waiting-${task.id}`} className="mt-3 text-xs leading-5 text-[#aaa99f]">{unavailableReason}</p>}
             {(canComplete || task.complete) && <div className="mt-4 border-t border-white/10 pt-3">
               <label className={cx("inline-flex items-center gap-2.5 text-xs font-semibold text-[#d4d0c5]", savingTask ? "opacity-50" : "cursor-pointer")}>

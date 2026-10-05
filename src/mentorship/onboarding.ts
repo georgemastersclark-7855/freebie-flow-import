@@ -19,6 +19,14 @@ export const completeSetupOutline = (videos: SetupVideo[]) => [
   ...videos.filter((video) => !setupVideoOutline.some((outline) => outline.key === (video.key ?? video.id))),
 ];
 
+// Generate the QR from the same invite used by the direct join button.
+export const groupInviteUrl = (value?: string) => {
+  try {
+    const url = new URL(value?.trim() ?? "");
+    return url.protocol === "https:" && !url.username && !url.password ? url.href : undefined;
+  } catch { return undefined; }
+};
+
 export const onboardingTaskCopy = (task: OnboardingTask): OnboardingTask => {
   switch (task.key ?? task.id) {
     case "book-call":
@@ -26,7 +34,7 @@ export const onboardingTaskCopy = (task: OnboardingTask): OnboardingTask => {
     case "prework":
       return { ...task, title: "Check your setup before we start", description: studioSetupIntroduction, actionLabel: "Open Studio Setup", actionUrl: "/mentorship-portal/setup" };
     case "circle":
-      return { ...task, title: "Join the private group", description: "Meet the other producers, say hello and tell us what you're working towards. This is where you can ask me questions between calls.", actionLabel: "Join the group" };
+      return { ...task, title: "Join the private group", description: "Meet the other producers, say hello and tell us what you're working towards. This is where you can ask me questions between calls.", actionLabel: "Join the group", actionUrl: groupInviteUrl(task.actionUrl) };
     case "first-call":
       return { ...task, title: "Save your first group call", description: "Put it in your calendar so you've got the time set aside. Bring your questions and be ready to work.", actionLabel: "Add to my calendar" };
     default:
