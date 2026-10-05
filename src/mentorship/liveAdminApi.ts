@@ -3,6 +3,7 @@
 // generated Supabase Database type can be refreshed.
 import { supabase } from "@/integrations/supabase/client";
 import { formatDeadline, releasedWeekNumbers } from "./utils";
+import { loadStudentProfilesForEnrollments } from "./studentProfileApi";
 import { Upload } from "tus-js-client";
 import type {
   AdminOverview,
@@ -189,6 +190,10 @@ export async function setLiveAdminVideoPublished(resourceId: string, published: 
 }
 
 export async function loadLiveAdminOverview(): Promise<AdminOverview> {
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError) throw authError;
+  if (!authData.user) throw new Error("Sign in to view the mentorship overview.");
+  const viewerUserId = authData.user.id;
   const cohort = await findWorkingCohort();
   const [weekResult, enrollmentResult] = await Promise.all([
     db.from("mentorship_weeks").select("id, week_number, required_ideas, song_required, stems_required, deadline_at, opens_at").eq("cohort_id", cohort.id).order("week_number"),
@@ -202,7 +207,9 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
   const currentWeek = Math.max(0, ...released);
   const week = weekRows.find((row: any) => row.week_number === currentWeek) ?? weekRows[0];
   if (!week) throw new Error("The cohort's weekly schedule has not been set up yet.");
-  const enrollments = enrollmentResult.data ?? [];
+  const enrollments = (enrollmentResult.data ?? []).filter((row: any) => (
+    !row.is_walkthrough || row.user_id === viewerUserId
+  ));
   const userIds = enrollments.map((row: any) => row.user_id);
   const enrollmentIds = enrollments.map((row: any) => row.id);
   if (!enrollmentIds.length) {
@@ -232,7 +239,8 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
   const submissionIds = submissions.map((row: any) => row.id);
   const callIds = (callResult.data ?? []).map((row: any) => row.id);
   const allSubmissionIds = (allSubmissionResult.data ?? []).map((row: any) => row.id);
-  const [fileResult, feedbackResult, attendanceResult, surgeryResult] = await Promise.all([
+  const [studentProfiles, fileResult, feedbackResult, attendanceResult, surgeryResult] = await Promise.all([
+    loadStudentProfilesForEnrollments(enrollmentIds),
     submissionIds.length
       ? db.from("mentorship_submission_files").select("*").in("submission_id", submissionIds).order("uploaded_at")
       : Promise.resolve({ data: [], error: null }),
@@ -273,7 +281,9 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
 
   for (const enrollment of enrollments) {
     const profile = profiles.find((row: any) => row.user_id === enrollment.user_id);
-    const displayName = enrollment.is_walkthrough ? `${profile?.full_name ?? "Staff"} (test student)` : profile?.full_name ?? "Student";
+    const studentProfile = studentProfiles.get(enrollment.id);
+    const baseName = studentProfile?.displayName ?? profile?.full_name ?? "Student";
+    const displayName = enrollment.is_walkthrough ? `${baseName} (test student)` : baseName;
     const submission = submissions.find((row: any) => row.enrollment_id === enrollment.id);
     const rowFiles = submission ? files.filter((row: any) => row.submission_id === submission.id) : [];
     const ideaRows = rowFiles.filter((row: any) => row.kind === "idea");
@@ -298,7 +308,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
       id: enrollment.user_id,
       name: displayName,
       email: profile?.email ?? "",
-      initials: initials(profile?.full_name ?? "Student"),
+      initials: initials(baseName),
       ideasSubmitted: ideaRows.length,
       ideasRequired: week.required_ideas,
       songSubmitted: Boolean(songRow),
@@ -311,6 +321,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
         ? "on_track"
         : hasStarted ? "needs_attention" : "not_started",
       lastActivity: relativeTime(mostRecent),
+      profile: studentProfile,
     });
 
     if (submission && songRow && ["submitted", "late"].includes(submission.state)) {
@@ -329,6 +340,7 @@ export async function loadLiveAdminOverview(): Promise<AdminOverview> {
         submissionId: submission.id,
         studentId: enrollment.user_id,
         studentName: displayName,
+        studentProfile,
         walkthrough: enrollment.is_walkthrough,
         studentEmail: profile?.email ?? "",
         cohortId: cohort.id,

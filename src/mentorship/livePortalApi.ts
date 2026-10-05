@@ -5,6 +5,7 @@ import type { User } from "@supabase/supabase-js";
 import { Upload } from "tus-js-client";
 import { supabase } from "@/integrations/supabase/client";
 import { formatDeadline, releasedWeekNumbers } from "./utils";
+import { loadStudentProfile } from "./studentProfileApi";
 import type {
   FileKind,
   OnboardingTask,
@@ -192,6 +193,10 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     .single();
   if (enrollmentError) throw new Error("No active mentorship enrolment was found for this account.");
   const enrollment = enrollmentData as EnrollmentRow;
+  const studentProfile = await loadStudentProfile(enrollment.id);
+  portalUser.enrollmentId = enrollment.id;
+  portalUser.profile = studentProfile;
+  portalUser.name = studentProfile?.displayName ?? (staffUser ? "Test Student" : profile.full_name);
 
   const [cohortResult, weeksResult, tasksResult, progressResult, submissionsResult, resourcesResult, firstCallResult] = await Promise.all([
     db.from("mentorship_cohorts").select("id, display_name, current_week, circle_url, timezone").eq("id", enrollment.cohort_id).single(),
@@ -331,7 +336,6 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
   } : undefined;
 
   portalUser.cohortId = cohort.id;
-  portalUser.enrollmentId = enrollment.id;
   portalUser.cohortName = cohort.display_name;
 
   return {

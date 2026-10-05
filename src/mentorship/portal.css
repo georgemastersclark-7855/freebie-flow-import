@@ -22,6 +22,11 @@
   line-height: 1.5;
 }
 
+.mentorship-portal.mp-profile-dialog {
+  min-height: 0;
+  background: var(--mp-panel);
+}
+
 .mentorship-portal * {
   box-sizing: border-box;
 }

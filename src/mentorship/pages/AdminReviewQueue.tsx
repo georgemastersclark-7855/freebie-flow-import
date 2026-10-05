@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Check, FileAudio, LoaderCircle, Search } from "lucide-react";
 import { useAdminOverview } from "../useAdminOverview";
 import { cx } from "../utils";
+import { StudentAvatar } from "../components/StudentAvatar";
 
 type QueueFilter = "pending" | "draft" | "published";
 
@@ -19,7 +20,7 @@ export function AdminReviewQueue() {
   const normalized = query.trim().toLowerCase();
   const visibleReviews = overview.reviews.filter((review) =>
     (filter === "pending" ? review.status !== "published" : review.status === filter)
-    && (!normalized || `${review.studentName} ${review.songName}`.toLowerCase().includes(normalized)),
+    && (!normalized || `${review.studentName} ${review.studentProfile?.artistName ?? ""} ${review.songName}`.toLowerCase().includes(normalized)),
   );
 
   if (loading) return <div className="grid min-h-[55vh] place-items-center text-xs font-bold uppercase tracking-[0.16em] text-[#77766f]"><span className="inline-flex items-center gap-2"><LoaderCircle size={16} className="animate-spin" />Loading review queue</span></div>;
@@ -50,12 +51,13 @@ export function AdminReviewQueue() {
         <div className="mt-5 space-y-3">
           {visibleReviews.map((review) => <article key={review.id} className="mp-card flex flex-col gap-5 rounded-2xl p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <div className="flex min-w-0 items-start gap-4">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 text-xs font-bold text-[#ddd9d0]" aria-hidden="true">{review.studentName.split(/\s+/).map((part) => part[0]).slice(0, 2).join("")}</div>
+              <StudentAvatar name={review.studentName} src={review.studentProfile?.photoUrl} size={48} member={Boolean(review.studentProfile?.completedAt)} />
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-3">
-                  <h2 className="text-lg font-bold text-[#f2efe6]">{review.studentName}</h2>
+                  <h2 className="break-words text-lg font-bold text-[#f2efe6]">{review.studentName}</h2>
                   <span className="rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold text-[#b6b3a8]">{review.status === "draft" ? "Draft saved" : review.status === "published" ? "Feedback published" : "Awaiting feedback"}</span>
                 </div>
+                {review.studentProfile?.artistName && <p className="mt-1 break-words text-xs text-[#b6b3a8]">{review.studentProfile.artistName}</p>}
                 <p className="mt-2 flex items-start gap-2 text-sm text-[#b6b3a8]"><FileAudio size={16} className="mt-0.5 shrink-0" aria-hidden="true" /><span className="break-all">{review.songName}</span></p>
                 <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#8f8e85]"><span>Week {review.weekNumber}</span><span>{review.submittedLabel}</span><span className="inline-flex items-center gap-1.5">{review.stemsReady && <Check size={13} aria-hidden="true" />}{review.stemsReady ? "Stems ready" : "No stems uploaded"}</span></div>
               </div>

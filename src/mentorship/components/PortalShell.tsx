@@ -19,6 +19,8 @@ import { communityName } from "../onboarding";
 import { toast } from "sonner";
 import { cx } from "../utils";
 import { WeekNavigation } from "./WeekNavigation";
+import { ProfileDialog } from "./ProfileDialog";
+import { StudentAvatar } from "./StudentAvatar";
 
 const studentNavigation = [
   { to: "/mentorship-portal/dashboard", label: "Dashboard", icon: Gauge },
@@ -46,6 +48,7 @@ export function PortalShell() {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [editingProfile, setEditingProfile] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const [resetting, setResetting] = useState(false);
   const reset = async () => {
@@ -59,6 +62,7 @@ export function PortalShell() {
     finally { setResetting(false); }
   };
   const staff = user?.role === "coach" || user?.role === "admin";
+  const profileRequired = user?.role === "student" && !user.profile?.completedAt;
   const navigation = staff ? staffNavigation.filter((item) => !item.adminOnly || user?.role === "admin") : studentNavigation;
   const currentWeek = weeks.find((week) => week.phase === "current");
   useEffect(() => {
@@ -121,11 +125,10 @@ export function PortalShell() {
             </a>
           )}
           <div className="flex items-center gap-3 border-t border-white/[0.08] pt-4">
-            <div className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-xs font-black text-white">{user?.name.slice(0, 1).toUpperCase()}</div>
-            <div className="min-w-0 flex-1">
-              <div className="truncate text-sm font-semibold text-[#e5e1d8]">{user?.name}</div>
-              <div className="truncate text-[11px] capitalize text-[#77766f]">{user?.role}</div>
-            </div>
+            <button type="button" onClick={() => setEditingProfile(true)} disabled={staff} aria-label={staff ? user?.name : "Edit profile"} className="mp-focus-ring flex min-w-0 flex-1 items-center gap-3 rounded-lg text-left disabled:cursor-default">
+              <StudentAvatar name={user?.name ?? "Student"} src={user?.profile?.photoUrl} size={36} member={Boolean(user?.profile?.completedAt)} />
+              <span className="min-w-0 flex-1"><span className="block truncate text-sm font-semibold text-[#e5e1d8]">{user?.name}</span><span className="mt-0.5 block truncate text-[11px] text-[#99978e]">{staff ? user?.role : "Edit profile"}</span></span>
+            </button>
             <button type="button" onClick={() => void signOut()} className="mp-focus-ring rounded-lg p-2 text-[#77766f] hover:bg-white/[0.05] hover:text-white" aria-label="Sign out"><LogOut size={16} /></button>
           </div>
         </div>
@@ -161,6 +164,7 @@ export function PortalShell() {
               })}
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}
+            {!staff && <button type="button" onClick={() => { setMobileOpen(false); setEditingProfile(true); }} className="mp-focus-ring mt-6 flex w-full items-center gap-3 rounded-xl border border-white/15 p-4 text-left"><StudentAvatar name={user?.name ?? "Student"} src={user?.profile?.photoUrl} size={40} member={Boolean(user?.profile?.completedAt)} /><span className="min-w-0"><span className="block truncate text-sm font-bold">{user?.name}</span><span className="mt-1 block text-xs text-[#aaa99f]">Edit profile</span></span></button>}
             <button type="button" onClick={() => void signOut()} className="mp-focus-ring mt-8 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-[#8f8e85]"><LogOut size={17} /> Sign out</button>
           </div>
         </div>
@@ -171,7 +175,7 @@ export function PortalShell() {
         {staffUser && (
           <div className="border-b border-white/10 bg-white/[0.035] px-5 py-3 text-xs text-[#b9b6ad]">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <span>{staff ? "Rob's view" : "Student view: Test Student"} · Saved online</span>
+              <span>{staff ? "Rob's view" : `Student view: ${user?.name ?? "Test Student"}`} · Saved online</span>
               <div className="flex items-center gap-5">
                 <button type="button" disabled={resetting} onClick={() => navigate("/mentorship-portal")} className="mp-focus-ring font-bold text-white underline underline-offset-4">Switch view</button>
                 <button type="button" disabled={resetting} onClick={() => setConfirmReset(true)} className="mp-focus-ring underline underline-offset-4">Clear test uploads</button>
@@ -188,6 +192,7 @@ export function PortalShell() {
         )}
         <Outlet />
       </main>
+      {!staff && (profileRequired || editingProfile) && <ProfileDialog key={user?.enrollmentId ?? user?.id} required={Boolean(profileRequired)} onClose={() => setEditingProfile(false)} />}
     </div>
   );
 }

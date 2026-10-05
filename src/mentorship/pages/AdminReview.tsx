@@ -8,6 +8,8 @@ import { usePortalStore } from "../PortalStore";
 import type { PortalFile, ReviewItem } from "../types";
 import { CollapsibleFiles, MockAudioPlayer, PrimaryButton, SecondaryButton } from "../components/PortalUI";
 import { cx } from "../utils";
+import { StudentAvatar } from "../components/StudentAvatar";
+import { StudentProfileDetails } from "../components/StudentProfileDetails";
 
 export function AdminReview() {
   const { reviewId } = useParams();
@@ -224,7 +226,13 @@ export function AdminReview() {
     <div className="mx-auto max-w-[1280px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-14">
       <Link to="/mentorship-portal/admin/reviews" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-bold text-[#8f8e85] hover:text-white"><ArrowLeft size={15} />Back to review queue</Link>
 
-      <header className="mt-7 flex flex-col justify-between gap-5 lg:flex-row lg:items-end"><div><div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#8f8e85]">Week {review.weekNumber} review</div><h1 className="mp-display mt-2 text-[48px] leading-[0.92] text-[#f2efe6] sm:text-[62px]">{review.studentName.toUpperCase()}</h1><p className="mt-3 text-sm text-[#8f8e85]">Submitted {review.submittedLabel}</p></div><div className="flex items-center gap-3"><span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-[#aaa99f]">{published ? "Feedback published" : review.status === "draft" ? "Draft saved" : "Awaiting review"}</span></div></header>
+      <header className="mt-7 flex flex-wrap items-start justify-between gap-5">
+        <div className="flex min-w-0 flex-1 flex-wrap items-center gap-5">
+          <StudentAvatar name={review.studentName} src={review.studentProfile?.photoUrl} size={104} member={Boolean(review.studentProfile?.completedAt)} />
+          <div className="min-w-0 flex-1 basis-[220px]"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#aaa99f]">Week {review.weekNumber} review</p><h1 className="mp-display mp-lesson-title mt-2 text-[#f2efe6]">{review.studentName.toUpperCase()}</h1><StudentProfileDetails profile={review.studentProfile} /><p className="mt-3 text-xs text-[#aaa99f]">Submitted {review.submittedLabel}</p></div>
+        </div>
+        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-[#aaa99f]">{published ? "Feedback published" : review.status === "draft" ? "Draft saved" : "Awaiting review"}</span>
+      </header>
 
       <div className="mt-7 grid gap-6 xl:grid-cols-[1fr_390px]">
         <div className="space-y-6">

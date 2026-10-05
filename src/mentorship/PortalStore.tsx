@@ -33,7 +33,9 @@ import {
   uploadLiveSubmissionFiles,
   type LivePortalBootstrap,
 } from "./livePortalApi";
+import { normalizeStudentProfileInput, saveLiveStudentProfile } from "./studentProfileApi";
 import type {
+  StudentProfileInput,
   FileKind,
   OnboardingTask,
   PortalFile,
@@ -57,6 +59,7 @@ interface PortalStoreValue {
   staffUser?: PortalUser;
   selectView: (view: "student" | "staff") => Promise<void>;
   resetTestUploads: () => Promise<void>;
+  saveProfile: (input: StudentProfileInput, photo?: File) => Promise<void>;
   weeks: WeekDefinition[];
   submissions: WeekSubmission[];
   onboardingTasks: OnboardingTask[];
@@ -242,6 +245,22 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     applyLiveBootstrap(bootstrap);
   }, [applyLiveBootstrap]);
 
+  const saveProfile = useCallback(async (input: StudentProfileInput, photo?: File) => {
+    if (!user || user.role !== "student") throw new Error("Open your student account before editing your profile.");
+    if (liveBackend) {
+      if (!user.enrollmentId) throw new Error("Your enrolment is not available. Please sign in again.");
+      const profile = await saveLiveStudentProfile(user.enrollmentId, input, photo);
+      setUser((current) => current?.enrollmentId === user.enrollmentId ? { ...current, profile, name: profile.displayName } : current);
+      return;
+    }
+    const { displayName, artistName, instagram, musicUrl, daw } = normalizeStudentProfileInput(input);
+    const photoUrl = photo ? await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader(); reader.onload = () => resolve(String(reader.result)); reader.onerror = () => reject(new Error("Unable to save photo.")); reader.readAsDataURL(photo);
+    }) : user.profile?.photoUrl;
+    if (!photoUrl) throw new Error("Add a profile photo to continue.");
+    setUser({ ...user, name: displayName, profile: { displayName, artistName, instagram, musicUrl, daw, photoUrl, photoPath: "local-preview", completedAt: user.profile?.completedAt ?? new Date().toISOString() } });
+  }, [user]);
+
   const resetTestUploads = useCallback(async () => {
     await resetLiveWalkthrough();
     await refresh();
@@ -424,6 +443,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     staffUser,
     selectView,
     resetTestUploads,
+    saveProfile,
     weeks,
     submissions,
     onboardingTasks,
@@ -444,7 +464,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     markFeedbackViewed,
     confirmFeedbackAction,
   }), [
-    ready, backend, authError, user, staffUser, selectView, resetTestUploads, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, circleUrl,
+    ready, backend, authError, user, staffUser, selectView, resetTestUploads, saveProfile, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, circleUrl,
     login, logout, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
     submitWeek, markFeedbackViewed, confirmFeedbackAction,
   ]);

@@ -3,6 +3,7 @@ import { ArrowRight, Check, Clock3, Headphones, LoaderCircle, Mail, MessageCircl
 import { Link } from "react-router-dom";
 import { cx } from "../utils";
 import { useAdminOverview } from "../useAdminOverview";
+import { StudentAvatar } from "../components/StudentAvatar";
 import type { AdminStudent, ReviewItem } from "../types";
 
 type StudentFilter = "all" | "review" | "checkin" | "missing";
@@ -16,8 +17,8 @@ function checkInReason(student: AdminStudent) {
 
 function StudentIdentity({ student }: { student: AdminStudent }) {
   return <div className="flex items-start gap-3">
-    <span aria-hidden="true" className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 text-xs font-bold text-[#ddd9d0]">{student.initials}</span>
-    <div className="min-w-0"><h3 className="text-sm font-bold text-[#f2efe6]">{student.name}</h3><p className="mt-1 text-xs text-[#939188]">{student.lastActivity}</p>{student.status !== "on_track" && <p className="mt-1.5 max-w-[220px] text-[11px] leading-4 text-[#d7bd65]">{checkInReason(student)}</p>}</div>
+    <StudentAvatar name={student.name} src={student.profile?.photoUrl} member={Boolean(student.profile?.completedAt)} />
+    <div className="min-w-0"><h3 className="max-w-[220px] break-words text-sm font-bold text-[#f2efe6]">{student.name}</h3>{student.profile?.artistName && <p className="mt-1 max-w-[220px] break-words text-xs text-[#b6b3a8]">{student.profile.artistName}</p>}<p className="mt-1 text-xs text-[#939188]">{student.lastActivity}</p>{student.status !== "on_track" && <p className="mt-1.5 max-w-[220px] text-[11px] leading-4 text-[#d7bd65]">{checkInReason(student)}</p>}</div>
   </div>;
 }
 
@@ -66,7 +67,7 @@ export function AdminDashboard() {
   const normalized = query.trim().toLowerCase();
   const visibleStudents = overview.students.filter((student) =>
     (filter === "all" || (filter === "review" && pendingStudentIds.has(student.id)) || (filter === "checkin" && student.status !== "on_track") || (filter === "missing" && !student.songSubmitted))
-    && (!normalized || `${student.name} ${student.email}`.toLowerCase().includes(normalized)),
+    && (!normalized || `${student.name} ${student.profile?.artistName ?? ""} ${student.email}`.toLowerCase().includes(normalized)),
   );
   function showCheckIns() {
     setQuery("");

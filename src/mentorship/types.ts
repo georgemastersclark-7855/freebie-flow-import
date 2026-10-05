@@ -9,6 +9,25 @@ export type WeekState =
 
 export type FileKind = "idea" | "song" | "stems" | "feedback" | "baseline";
 
+export interface StudentProfile {
+  displayName: string;
+  photoPath: string;
+  photoUrl?: string;
+  artistName?: string;
+  instagram?: string;
+  musicUrl?: string;
+  daw?: string;
+  completedAt: string;
+}
+
+export interface StudentProfileInput {
+  displayName: string;
+  artistName?: string;
+  instagram?: string;
+  musicUrl?: string;
+  daw?: string;
+}
+
 export interface PortalUser {
   id: string;
   name: string;
@@ -17,6 +36,7 @@ export interface PortalUser {
   cohortName: string;
   cohortId?: string;
   enrollmentId?: string;
+  profile?: StudentProfile;
 }
 
 export interface PortalFile {
@@ -112,6 +132,7 @@ export interface AdminStudent {
   feedbackState: "awaiting" | "draft" | "published" | "actioned";
   status: "on_track" | "needs_attention" | "not_started";
   lastActivity: string;
+  profile?: StudentProfile;
 }
 
 export interface ReviewFeedback {
@@ -144,6 +165,7 @@ export interface ReviewItem {
   ideas?: PortalFile[];
   feedback?: ReviewFeedback;
   surgerySelected?: boolean;
+  studentProfile?: StudentProfile;
 }
 
 export interface AdminOverview {
