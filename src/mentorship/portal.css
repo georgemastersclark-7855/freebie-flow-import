@@ -46,7 +46,7 @@
 }
 
 .mentorship-portal .mp-display.mp-welcome-title {
-  font-size: clamp(24px, 9cqw, 44px);
+  font-size: clamp(24px, 7cqw, 32px);
   letter-spacing: 0;
   line-height: 1.15;
 }
@@ -103,8 +103,8 @@
     font-size: 28px !important;
   }
 
-  .mentorship-portal h1.mp-welcome-title {
-    font-size: clamp(24px, 9cqw, 44px) !important;
+  .mentorship-portal :is(h1, h2).mp-welcome-title {
+    font-size: clamp(24px, 7cqw, 32px) !important;
     font-weight: 700 !important;
     letter-spacing: 0 !important;
     line-height: 1.15 !important;

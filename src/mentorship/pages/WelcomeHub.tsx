@@ -37,7 +37,7 @@ export function WelcomeHub() {
 
   const welcome = <section className="mp-welcome-panel min-w-0 rounded-3xl border border-white/10 bg-[#151512] p-5 sm:p-7">
     <div className="mp-welcome-copy">
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">Watch this first</p>
+      <h2 className="mp-display mp-welcome-title text-[#f2efe6]">WATCH THIS FIRST</h2>
       <p className="mt-4 text-sm leading-6 text-[#b6b3a8]">Good to have you here, {firstName}. Watch my welcome video to see how we'll work over the next six weeks. Then book your 1:1, work through Studio Setup and tick off your onboarding steps.</p>
       <p className="mt-3 text-sm font-bold">Rob x</p>
     </div>
