@@ -83,29 +83,31 @@ begin
     raise exception 'Avatar MIME or size validator accepted invalid metadata';
   end if;
 
-  -- Exercise the real Storage INSERT RLS policy. A valid owner's metadata is
-  -- accepted; other enrollment paths, null/unsupported MIME and bad sizes fail.
+  -- Exercise Storage's actual canUpload preflight metadata shape. The gateway
+  -- validates MIME/size against bucket settings before running this owner/path policy.
   insert into storage.objects (bucket_id, name, metadata)
   values ('mentorship-student-avatars', old_path, '{"mimetype":"image/webp","size":512}'::jsonb)
   returning name into error_text;
   if error_text <> old_path then raise exception 'Storage insert did not return the owner''s avatar path'; end if;
 
-  -- Storage's initial INSERT may have no computed metadata yet. Permit only
-  -- this owned, valid path-only preflight, while the save RPC must still reject
-  -- it until final image MIME and size metadata exist.
+  -- Supabase Storage's permission dry-run uses mimetype/contentLength, not
+  -- final mimetype/size. It must pass for the owner and later cannot satisfy
+  -- the profile RPC's final-size requirement.
   insert into storage.objects (bucket_id, name, metadata)
-  values ('mentorship-student-avatars', preflight_path, null)
+  values ('mentorship-student-avatars', preflight_path, '{"mimetype":"image/webp","contentLength":512}'::jsonb)
   returning name into error_text;
-  if error_text <> preflight_path then raise exception 'Storage preflight insert did not return the owned avatar path'; end if;
+  if error_text <> preflight_path then raise exception 'Storage preflight metadata shape did not pass the owner path policy'; end if;
   rejected := false;
   begin
     perform public.save_mentorship_student_profile(student_enrollment, 'Test Producer', null, null, null, null, preflight_path);
   exception when others then
     get stacked diagnostics error_text = message_text;
-    rejected := error_text = 'The uploaded profile photo was not found or is not a supported image';
+    rejected := error_text = 'The uploaded profile photo has invalid size metadata';
   end;
-  if not rejected then raise exception 'Profile RPC accepted a metadata-free Storage preflight object'; end if;
+  if not rejected then raise exception 'Profile RPC accepted a preflight-only contentLength field as final image size'; end if;
 
+  -- Empty and absent preflight metadata are also supported by Storage when
+  -- content length is unknown, but still cannot complete a profile by themselves.
   insert into storage.objects (bucket_id, name, metadata)
   values ('mentorship-student-avatars', student_enrollment::text || '/eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee.webp', '{}'::jsonb)
   returning name into error_text;
@@ -120,38 +122,6 @@ begin
   exception when insufficient_privilege then rejected := true;
   end;
   if not rejected then raise exception 'Storage INSERT policy accepted a foreign enrollment path'; end if;
-
-  rejected := false;
-  begin
-    insert into storage.objects (bucket_id, name, metadata)
-    values ('mentorship-student-avatars', student_enrollment::text || '/88888888-8888-4888-8888-888888888888.webp', '{"mimetype":"image/gif","size":512}'::jsonb);
-  exception when insufficient_privilege then rejected := true;
-  end;
-  if not rejected then raise exception 'Storage INSERT policy accepted an unsupported MIME type'; end if;
-
-  rejected := false;
-  begin
-    insert into storage.objects (bucket_id, name, metadata)
-    values ('mentorship-student-avatars', student_enrollment::text || '/99999999-9999-4999-8999-999999999999.webp', '{"size":512}'::jsonb);
-  exception when insufficient_privilege then rejected := true;
-  end;
-  if not rejected then raise exception 'Storage INSERT policy accepted null MIME metadata'; end if;
-
-  rejected := false;
-  begin
-    insert into storage.objects (bucket_id, name, metadata)
-    values ('mentorship-student-avatars', student_enrollment::text || '/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa.webp', '{"mimetype":"image/webp","size":0}'::jsonb);
-  exception when insufficient_privilege then rejected := true;
-  end;
-  if not rejected then raise exception 'Storage INSERT policy accepted zero-byte metadata'; end if;
-
-  rejected := false;
-  begin
-    insert into storage.objects (bucket_id, name, metadata)
-    values ('mentorship-student-avatars', student_enrollment::text || '/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb.webp', '{"mimetype":"image/webp","size":2097153}'::jsonb);
-  exception when insufficient_privilege then rejected := true;
-  end;
-  if not rejected then raise exception 'Storage INSERT policy accepted an oversized avatar'; end if;
 
   select * into saved from public.save_mentorship_student_profile(
     student_enrollment, '  Test Producer  ', '  Loop Artist  ', '@_underscored_',
