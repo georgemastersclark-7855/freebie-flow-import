@@ -32,7 +32,7 @@ export function OnboardingChecklist() {
           {task.id === nextTask?.id && <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#e9e5dc]">Your next step</p>}
           <div className="flex items-start gap-3">
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/20 text-xs font-bold text-[#d4d0c5]">{task.complete ? <Check size={15} /> : `0${index + 1}`}</span>
-            <div><h3 className="text-base font-bold text-[#eeeae1]">{task.title}</h3><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{task.description}</p></div>
+            <div><h3 className="text-base font-bold text-[#eeeae1]">{task.title}</h3><p className="mt-2 text-sm leading-7 text-[#b7b7ad]">{task.description}</p></div>
           </div>
           {key === "first-call" && <p className="mt-4 text-xs font-semibold text-[#d4d0c5]">{firstCall?.displayTime ?? "Your call date will appear here once confirmed."}</p>}
           {isBooking && task.actionUrl && <BookingCalendar url={task.actionUrl} open={bookingOpen} onToggle={() => setBookingOpen((value) => !value)} />}

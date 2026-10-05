@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, Check, ChevronDown, Headphones, Library } from "lucide-react";
 import robOnLaptop from "@/assets/rob-on-laptop.jpg";
@@ -5,38 +6,13 @@ import { usePortalStore } from "../PortalStore";
 import { ProgressBar, StatusPill } from "../components/PortalUI";
 import { PortalVideo } from "../components/PortalVideo";
 import { OnboardingChecklist } from "../components/OnboardingChecklist";
+import { LoopMethod } from "../components/LoopMethod";
 import { onboardingTaskCopy } from "../onboarding";
 import { submissionParts, weekOpeningLabel } from "../utils";
 
-function LoopMethod() {
-  const { weeks } = usePortalStore();
-  const target = weeks.reduce((sum, week) => sum + week.requiredIdeas, 0);
-  return <section aria-labelledby="loop-method-title" className="mt-8 rounded-3xl border border-white/10 bg-white/[0.02] p-5 sm:p-8">
-    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#aaa99f]">How the mentorship works</p>
-    <h2 id="loop-method-title" className="mp-display mp-lesson-title mt-3">ROB'S LOOP METHOD</h2>
-    <div className="mt-5 max-w-3xl space-y-3 text-sm leading-7 text-[#b6b3a8]">
-      <h3 className="text-lg font-bold text-[#eeeae1]">Why I take song starters into writing sessions</h3>
-      <p>The thing that completely changed the game for me was creating song starters. I'd go into a session with 30 or 40 small ideas in a folder. Chord progressions with interesting sounds, rhythms, little seeds of ideas that I could scroll through in front of the artist.</p>
-      <p>After three or four, a writer in the room would say, "Ah, that's cool," and BANG, they'd start writing over it. Then the pressure's off me. I can get into building the drums and producing the song with everyone in the room, knowing that if this song makes it through, my writing and production are already part of it. This is how I got cuts in those writing camps with major artists.</p>
-      <p>If you bring a finished track, someone might like the chords but get put off by the drums or the tempo. Or it's so fully formed that they don't know how to contribute. A song starter leaves room for them. The same approach works in a session with an independent artist, or when you're looking for an idea to develop into your own track.</p>
-    </div>
-    <ol className="mt-7 grid gap-6 md:grid-cols-3">
-      <li><div className="flex items-center gap-3 text-xs font-bold text-[#aaa99f]"><span>01 / WEEKS 1 TO 4</span><ArrowRight size={16} /></div><h3 className="mt-3 text-lg font-bold">Make five song starters each week</h3><p className="mt-2 text-sm leading-6 text-[#aaa99f]">I want five fresh 4, 8 or 16-bar ideas from you. They don't need to be amazing. Make small hooks and ideas you think are cool, then upload them in Your Weekly Submissions.</p></li>
-      <li><div className="flex items-center gap-3 text-xs font-bold text-[#aaa99f]"><span>02 / WEEKS 1 TO 4</span><ArrowRight size={16} /></div><h3 className="mt-3 text-lg font-bold">Develop one through the first chorus or drop</h3><p className="mt-2 text-sm leading-6 text-[#aaa99f]">Choose your favourite and build the intro, verse and first chorus or drop. That's how far we usually work in sessions so the artist can hear the hook and decide what to take forward. Upload an MP3 or WAV of that song and a ZIP of its matching stems, then send your submission to me.</p></li>
-      <li><div className="text-xs font-bold text-[#aaa99f]">03 / WEEKS 5 AND 6</div><h3 className="mt-3 text-lg font-bold">Finish one of your songs in full</h3><p className="mt-2 text-sm leading-6 text-[#aaa99f]">At the end of week 4, choose the song you want to finish. I'll help you develop it from start to finish over the final two weeks. Upload your progress and updated stems. You don't need to make new song starters in these weeks.</p></li>
-    </ol>
-    <div className="mt-7 border-t border-white/10 pt-6">
-      <h3 className="text-base font-bold">Why you're making new ideas every week</h3>
-      <p className="mt-2 max-w-3xl text-sm leading-7 text-[#aaa99f]">This is what I mean by REPS. I could make 10 to 15 of these in the time it took me to finish a full track. I want to get you creating ideas quickly and regularly, then choosing the strongest ones to take further. Even on days when you don't feel inspired or you feel overwhelmed, make a couple of small ideas and save them in your folder.</p>
-    </div>
-    <div className="mt-6 grid gap-6 md:grid-cols-2">
-      <div><h3 className="text-base font-bold">Use my feedback in your next week's work</h3><p className="mt-2 text-sm leading-7 text-[#aaa99f]">I'll give you personal feedback on the developed song you submit each week. On our group call, I'll produce one student's track live and teach from the things that came up in that week's submissions. Ask questions, watch how I make decisions and put what you learn into your next track.</p></div>
-      <div><h3 className="text-base font-bold">Take your song starters into your next session</h3><p className="mt-2 text-sm leading-7 text-[#aaa99f]">{target ? `Complete the weekly starters and you'll have ${target} ideas in your folder as well as your finished track. ` : "Your weekly starters give you a folder of ideas as well as your finished track. "}Every loop you upload is saved in your Song Starter Library. Listen back, download them and take that folder into a session with an artist, or choose one to start your own next track.</p><Link to="/mentorship-portal/library" className="mp-focus-ring mt-3 inline-flex items-center gap-2 rounded text-sm font-bold text-white">Open your Song Starter Library<ArrowRight size={14} /></Link></div>
-    </div>
-  </section>;
-}
-
 export function WelcomeHub() {
+  const completedOnboarding = useRef<HTMLDetailsElement>(null);
+  const openOnboarding = () => { if (completedOnboarding.current) completedOnboarding.current.open = true; };
   const { user, onboardingTasks, welcomeVideoUrl, weeks, submissions, nextCall } = usePortalStore();
   const completeCount = onboardingTasks.filter((task) => task.complete).length;
   const allComplete = onboardingTasks.length > 0 && completeCount === onboardingTasks.length;
@@ -100,12 +76,12 @@ export function WelcomeHub() {
         </div>
         <aside className="space-y-4">
           <section className="mp-card rounded-2xl p-5"><div className="flex items-center gap-2 text-xs font-bold text-[#b6b3a8]"><CalendarDays size={16} />Next group call</div><h2 className="mt-3 text-base font-bold">{nextCall?.title ?? "Your next session"}</h2><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{nextCall?.displayTime ?? "The date and joining link will appear here once confirmed."}</p>{(nextCall?.circleUrl || nextCall?.calendarUrl) && <a href={nextCall.circleUrl ?? nextCall.calendarUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded text-xs font-bold">{nextCall.circleUrl ? "Open call details" : "Add to calendar"}<ArrowRight size={14} /></a>}</section>
-          <Link to="/mentorship-portal/library" className="mp-focus-ring mp-card block rounded-2xl p-5 transition hover:border-white/25"><div className="flex items-center gap-2 text-xs font-bold text-[#b6b3a8]"><Library size={16} />Song Starter Library</div><p className="mt-3 text-3xl font-bold">{starterCount}<span className="ml-2 text-sm font-normal text-[#aaa99f]">song starters</span></p><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{starterTarget ? `${starterTarget}-starter target. ` : ""}Listen back to or download your weekly song starters.</p><span className="mt-4 inline-flex items-center gap-2 text-xs font-bold">Open library<ArrowRight size={14} /></span></Link>
+          <Link to="/mentorship-portal/library" className="mp-focus-ring mp-card block rounded-2xl p-5 transition hover:border-white/25"><div className="flex items-center gap-2 text-xs font-bold text-[#b6b3a8]"><Library size={16} />Song Starter Library</div><p className="mt-3 text-3xl font-bold">{starterCount}<span className="ml-2 text-sm font-normal text-[#aaa99f]">song starters</span></p><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{starterTarget ? `${starterTarget}-starter minimum. ` : ""}Listen back to or download your weekly song starters.</p><span className="mt-4 inline-flex items-center gap-2 text-xs font-bold">Open library<ArrowRight size={14} /></span></Link>
         </aside>
       </div>
-      <details className="group mt-7 rounded-2xl border border-white/10 p-5"><summary className="mp-focus-ring flex cursor-pointer list-none items-center justify-between gap-3 rounded font-bold [&::-webkit-details-marker]:hidden"><span className="inline-flex items-center gap-2">{allComplete && <Check size={16} />}{allComplete ? "Onboarding complete" : `Finish onboarding (${completeCount}/${onboardingTasks.length})`}</span><ChevronDown size={17} className="transition group-open:rotate-180" /></summary><div className="mt-6"><OnboardingChecklist /></div></details>
-      <details className="group mt-4 rounded-2xl border border-white/10 p-5"><summary className="mp-focus-ring flex cursor-pointer list-none items-center justify-between gap-3 rounded font-bold [&::-webkit-details-marker]:hidden">Welcome & how it works<ChevronDown size={17} className="transition group-open:rotate-180" /></summary><div className="mt-6">{welcome}<LoopMethod /></div></details>
-    </> : <>{welcome}<LoopMethod /><div className="mt-8"><OnboardingChecklist /></div></>}
+      <details ref={completedOnboarding} className="group mt-7 rounded-2xl border border-white/10 p-5"><summary className="mp-focus-ring flex cursor-pointer list-none items-center justify-between gap-3 rounded font-bold [&::-webkit-details-marker]:hidden"><span className="inline-flex items-center gap-2">{allComplete && <Check size={16} />}{allComplete ? "Onboarding complete" : `Finish onboarding (${completeCount}/${onboardingTasks.length})`}</span><ChevronDown size={17} className="transition group-open:rotate-180" /></summary><div className="mt-6"><OnboardingChecklist /></div></details>
+      <details className="group mt-4 rounded-2xl border border-white/10 p-5"><summary className="mp-focus-ring flex cursor-pointer list-none items-center justify-between gap-3 rounded font-bold [&::-webkit-details-marker]:hidden">Welcome & how it works<ChevronDown size={17} className="transition group-open:rotate-180" /></summary><div className="mt-6">{welcome}<LoopMethod onOnboardingRequested={openOnboarding} /></div></details>
+    </> : <>{welcome}<LoopMethod onOnboardingRequested={openOnboarding} /><div className="mt-8"><OnboardingChecklist /></div></>}
     <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5 text-xs text-[#aaa99f]"><p>Need a hand with your access or setup?</p><a href="mailto:team@roblate.com" className="mp-focus-ring rounded font-semibold text-[#eeeae1]">team@roblate.com</a></footer>
   </div>;
 }

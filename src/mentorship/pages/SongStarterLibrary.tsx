@@ -132,7 +132,7 @@ export function SongStarterLibrary() {
         <div className="flex items-center gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-[#c7c4bb]"><Library size={18} /></span>
           <div>
-            <p className="text-sm font-bold text-[#eeeae1]">{totalAdded} song starters / {totalRequired}-starter target</p>
+            <p className="text-sm font-bold text-[#eeeae1]">{totalAdded} song starters / {totalRequired}-starter minimum</p>
             <p className="mt-1 text-xs text-[#85847c]">Your uploaded loops from weeks that have opened</p>
           </div>
         </div>
