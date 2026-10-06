@@ -1,7 +1,6 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowUpRight,
-  Bell,
   ClipboardList,
   FolderClock,
   Gauge,
@@ -18,14 +17,14 @@ import { PortalMark } from "./PortalUI";
 import { communityName } from "../onboarding";
 import { toast } from "sonner";
 import { cx } from "../utils";
-import { WeekNavigation } from "./WeekNavigation";
+import { WeeklySubmissionsNavigation } from "./WeeklySubmissionsNavigation";
 import { ProfileDialog } from "./ProfileDialog";
 import { StudentAvatar } from "./StudentAvatar";
 
 const studentNavigation = [
   { to: "/mentorship-portal/dashboard", label: "Dashboard", icon: Gauge },
   { to: "/mentorship-portal/setup", label: "Studio Setup", icon: BookOpen },
-  { to: "/mentorship-portal/submissions", label: "Your Weekly Submissions", icon: FolderClock },
+  { to: null, label: "Your Weekly Submissions", icon: FolderClock },
   { to: "/mentorship-portal/library", label: "Song Starter Library", icon: Library },
 ];
 
@@ -38,13 +37,12 @@ const staffNavigation = [
 function isNavigationActive(to: string, label: string, pathname: string) {
   if (pathname === to) return true;
   if (label === "Studio Setup") return pathname.startsWith(`${to}/`);
-  if (label === "Your Weekly Submissions") return pathname.startsWith("/mentorship-portal/week/");
   if (label === "Review queue") return pathname.startsWith("/mentorship-portal/admin/review/");
   return false;
 }
 
 export function PortalShell() {
-  const { user, logout, submissions, circleUrl, weeks, backend, staffUser, resetTestUploads } = usePortalStore();
+  const { user, logout, circleUrl, weeks, backend, staffUser, resetTestUploads } = usePortalStore();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -71,7 +69,6 @@ export function PortalShell() {
       document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
   }, [location]);
-  const pendingFeedback = !staff && submissions.some((submission) => submission.feedback && !submission.feedback.actionConfirmedAt);
 
   const signOut = async () => {
     try {
@@ -99,6 +96,7 @@ export function PortalShell() {
 
         <nav className="mt-7 space-y-1.5" aria-label="Portal navigation">
           {navigation.map(({ to, label, icon: Icon }, index) => {
+            if (to === null) return <WeeklySubmissionsNavigation key={label} />;
             const active = isNavigationActive(to, label, location.pathname);
             return <div key={`${label}-${index}`}><Link
               to={to}
@@ -112,8 +110,7 @@ export function PortalShell() {
             >
               <Icon size={17} className="shrink-0" />
               <span>{label}</span>
-              {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
-            </Link>{label === "Your Weekly Submissions" && <WeekNavigation />}</div>
+            </Link></div>
           })}
         </nav>
 
@@ -153,14 +150,14 @@ export function PortalShell() {
             </div>
             <nav className="mt-8 space-y-2">
               {navigation.map(({ to, label, icon: Icon }, index) => {
+                if (to === null) return <WeeklySubmissionsNavigation key={label} mobile onNavigate={() => setMobileOpen(false)} />;
                 const active = isNavigationActive(to, label, location.pathname);
                 return <div key={`${label}-mobile-${index}`}><Link to={to} onClick={() => setMobileOpen(false)} aria-current={active ? "page" : undefined} className={cx(
                   "mp-focus-ring flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition",
                   active ? "border-white/35 bg-white/[0.12] text-white" : "border-white/[0.07] bg-white/[0.025] text-[#dedbd2] hover:border-white/15 hover:bg-white/[0.05]",
                 )}>
                   <Icon size={18} className="shrink-0" /> <span>{label}</span>
-                  {label === "Your Weekly Submissions" && pendingFeedback && <Bell size={13} className="ml-auto text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
-                </Link>{label === "Your Weekly Submissions" && <WeekNavigation onNavigate={() => setMobileOpen(false)} />}</div>
+                </Link></div>
               })}
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}

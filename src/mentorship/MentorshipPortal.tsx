@@ -2,7 +2,6 @@ import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { PortalStoreProvider, usePortalStore } from "./PortalStore";
 import { PortalShell } from "./components/PortalShell";
 import { PortalLogin } from "./pages/PortalLogin";
-import { StudentDashboard } from "./pages/StudentDashboard";
 import { WelcomeHub } from "./pages/WelcomeHub";
 import { StudioSetup } from "./pages/StudioSetup";
 import { SongStarterLibrary } from "./pages/SongStarterLibrary";
@@ -35,6 +34,15 @@ function LegacyWelcome() {
   return <Navigate to={hash === "#setup-videos" ? "/mentorship-portal/setup" : `/mentorship-portal/dashboard${hash}`} replace />;
 }
 
+function LegacySubmissions() {
+  const { weeks } = usePortalStore();
+  const { search, hash } = useLocation();
+  const openWeeks = weeks.filter((week) => week.phase !== "upcoming");
+  const week = openWeeks.find((item) => item.phase === "current")
+    ?? [...openWeeks].sort((a, b) => b.number - a.number)[0];
+  return <Navigate to={week ? `/mentorship-portal/week/${week.number}${search}${hash}` : "/mentorship-portal/dashboard"} replace />;
+}
+
 function PortalLoading() {
   return <div className="mentorship-portal grid min-h-screen place-items-center"><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#77766f]">Loading your mentorship…</div></div>;
 }
@@ -46,7 +54,7 @@ function StudentOnly() {
 
 function StaffOnly() {
   const { user } = usePortalStore();
-  return user && user.role !== "student" ? <Outlet /> : <Navigate to="/mentorship-portal/submissions" replace />;
+  return user && user.role !== "student" ? <Outlet /> : <Navigate to="/mentorship-portal/dashboard" replace />;
 }
 
 function AdminOnly() {
@@ -80,7 +88,7 @@ export default function MentorshipPortal() {
         <Route path="set-password" element={<PortalSetPassword />} />
         <Route element={<ProtectedPortal />}>
           <Route element={<StudentOnly />}>
-            <Route path="submissions" element={<StudentDashboard />} />
+            <Route path="submissions" element={<LegacySubmissions />} />
             <Route path="dashboard" element={<WelcomeHub />} />
             <Route path="welcome" element={<LegacyWelcome />} />
             <Route path="setup" element={<StudioSetup />} />

@@ -42,7 +42,7 @@ export function WeekWorkspace() {
   }, [weekNumber, definition?.phase, feedbackId, feedbackViewedAt, markFeedbackViewed]);
 
   if (!definition || !submission || !Number.isInteger(weekNumber)) {
-    return <Navigate to="/mentorship-portal/submissions" replace />;
+    return <Navigate to="/mentorship-portal/dashboard" replace />;
   }
 
   if (definition.phase === "upcoming") return <div className="mx-auto max-w-2xl px-5 py-16 text-center">
@@ -114,7 +114,7 @@ export function WeekWorkspace() {
 
   return (
     <div className="mx-auto max-w-[1120px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">
-      <Link to="/mentorship-portal/submissions" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[#aaa99f] hover:text-white"><ArrowLeft size={15} />Back to your weekly submissions</Link>
+      <Link to="/mentorship-portal/dashboard" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[#aaa99f] hover:text-white"><ArrowLeft size={15} />Back to dashboard</Link>
 
       <header className="mt-7">
         <div className="flex flex-wrap items-center justify-between gap-4"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">{definition.title}</p><StatusPill state={submission.state} /></div>
@@ -168,7 +168,7 @@ export function WeekWorkspace() {
           {submissionMessage && <div role="status" className={cx("mt-4 rounded-xl border px-4 py-3 text-xs leading-5", submissionMessage.startsWith("Week") ? "border-white/15 bg-white/[0.035] text-[#d4d0c5]" : "border-red-400/20 bg-red-950/25 text-red-200")}><div className="flex items-start gap-2"><AlertCircle size={14} className="mt-0.5 shrink-0" />{submissionMessage}</div></div>}
         </section>}
       </div>
-      <div className="mt-8 border-t border-white/10 pt-5"><Link to="/mentorship-portal/submissions" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><ArrowLeft size={14} />Back to your weekly submissions</Link></div>
+      <div className="mt-8 border-t border-white/10 pt-5"><Link to="/mentorship-portal/dashboard" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><ArrowLeft size={14} />Back to dashboard</Link></div>
     </div>
   );
 }
