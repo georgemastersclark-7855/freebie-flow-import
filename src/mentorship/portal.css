@@ -88,6 +88,32 @@
   border-radius: 999px;
 }
 
+.mentorship-portal .mp-week-navigation-chevron {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mentorship-portal .mp-week-navigation-content {
+  overflow: hidden;
+}
+
+.mentorship-portal .mp-week-navigation-content[data-state="open"] {
+  animation: mp-weeks-expand 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mentorship-portal .mp-week-navigation-content[data-state="closed"] {
+  animation: mp-weeks-collapse 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mp-weeks-expand {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-collapsible-content-height); opacity: 1; }
+}
+
+@keyframes mp-weeks-collapse {
+  from { height: var(--radix-collapsible-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
 @media (max-width: 767px) {
   /* Scope the marketing site's global mobile heading overrides to the portal. */
   .mentorship-portal h1 {

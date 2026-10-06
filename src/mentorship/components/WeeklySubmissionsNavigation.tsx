@@ -30,8 +30,8 @@ export function WeeklySubmissionsNavigation({ mobile = false, onNavigate }: { mo
       <FolderClock size={mobile ? 18 : 17} className="shrink-0" aria-hidden="true" />
       <span className="min-w-0 flex-1">Your Weekly Submissions</span>
       {pendingFeedback && <Bell size={13} className="shrink-0 text-[#D3FF02]" fill="currentColor" aria-label="Feedback action required" />}
-      <ChevronDown size={15} aria-hidden="true" className={cx("shrink-0 transition-transform", open && "rotate-180")} />
+      <ChevronDown size={15} aria-hidden="true" className={cx("mp-week-navigation-chevron shrink-0", open && "rotate-180")} />
     </CollapsibleTrigger>
-    <CollapsibleContent><WeekNavigation onNavigate={onNavigate} /></CollapsibleContent>
+    <CollapsibleContent className="mp-week-navigation-content"><WeekNavigation onNavigate={onNavigate} /></CollapsibleContent>
   </Collapsible>;
 }
