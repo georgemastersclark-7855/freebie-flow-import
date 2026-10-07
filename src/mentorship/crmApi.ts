@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { loadStudentProfilesForEnrollments } from './studentProfileApi';
 import type { SuccessEnrollment, StaffPerson } from './studentSuccessApi';
 import { normaliseLead, type Lead, type LeadInput, type OnboardingCall } from './crm';
+import type { LaunchSettings, LeadMilestone, RecordedPayment, PaymentInput } from './crmAnalytics';
 const db = supabase as any;
 async function rows<T>(table: string, select: string, filter: (q:any)=>any = q=>q, order='id'): Promise<T[]> {
   const all:T[]=[];
@@ -10,17 +11,20 @@ async function rows<T>(table: string, select: string, filter: (q:any)=>any = q=>
 }
 export interface CrmStudent extends SuccessEnrollment { call?: OnboardingCall; questionnaire?: unknown; focus: string; openActions: number }
 export interface IntakeConnection { provider: 'gmail'|'typeform'; status: 'setup_needed'|'backfilled'|'connected'|'paused'|'error'; account_label: string; last_checked_at: string|null; last_received_at: string|null; detail: string }
-export interface CrmWorkspace { leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; intake: IntakeConnection[] }
+export interface CrmWorkspace { leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; settings: LaunchSettings; milestones: LeadMilestone[]; payments: RecordedPayment[]; intake: IntakeConnection[] }
 export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
   const {data:auth}=await supabase.auth.getUser(); if(!auth.user)throw new Error('Sign in to open admissions.');
-  const [leads, enrollments, staff, settings, intake]=await Promise.all([
+  const [leads, enrollments, staff, settingsRows, intake, milestones, payments]=await Promise.all([
     rows<Lead>('mentorship_leads','*',q=>q.eq('cohort_id',cohortId)),
     rows<Omit<SuccessEnrollment,'name'|'email'>>('mentorship_enrollments','id,cohort_id,user_id,status,is_walkthrough,enrolled_at',q=>q.eq('cohort_id',cohortId).or(`is_walkthrough.eq.false,user_id.eq.${auth.user!.id}`)),
     rows<StaffPerson>('mentorship_profiles','user_id,full_name',q=>q.in('role',['coach','admin']),'user_id'),
-    rows<{capacity:number}>('mentorship_admissions_settings','capacity',q=>q.eq('cohort_id',cohortId),'cohort_id'),
+    rows<LaunchSettings>('mentorship_admissions_settings','capacity,currency,seat_price_minor,cash_target_minor',q=>q.eq('cohort_id',cohortId),'cohort_id'),
     rows<IntakeConnection>('mentorship_intake_connections','provider,status,account_label,last_checked_at,last_received_at,detail',q=>q.eq('cohort_id',cohortId),'provider'),
+    rows<LeadMilestone>('mentorship_lead_milestones','lead_id,milestone,occurred_at',q=>q.eq('cohort_id',cohortId).order('milestone'),'lead_id'),
+    rows<RecordedPayment>('mentorship_lead_payments','*',q=>q.eq('cohort_id',cohortId)),
   ]);
-  if(!enrollments.length)return {leads,students:[],staff,capacity:settings[0]?.capacity??10,intake};
+  const settings=settingsRows[0]??{capacity:10,currency:null,seat_price_minor:null,cash_target_minor:null};
+  if(!enrollments.length)return {leads,students:[],staff,capacity:settings.capacity,settings,milestones,payments,intake};
   const ids=enrollments.map(e=>e.id);
   const [profiles,identities,calls,notes,contexts,actions]=await Promise.all([
     loadStudentProfilesForEnrollments(ids),
@@ -30,7 +34,7 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
     rows<{enrollment_id:string;current_focus:string}>('mentorship_student_context','enrollment_id,current_focus',q=>q.in('enrollment_id',ids),'enrollment_id'),
     rows<{enrollment_id:string}>('mentorship_student_actions','id,enrollment_id',q=>q.in('enrollment_id',ids).is('completed_at',null)),
   ]);
-  return {leads,staff,intake,capacity:settings[0]?.capacity??10,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
+  return {leads,staff,intake,settings,milestones,payments,capacity:settings.capacity,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
 }
 export async function saveLead(input:LeadInput, previous?:Lead):Promise<Lead> {
   const values=normaliseLead(input);
@@ -49,3 +53,16 @@ export async function saveOnboardingCall(enrollmentId:string,input:Pick<Onboardi
 }
 export async function saveCapacity(cohortId:string,capacity:number) { if(!Number.isInteger(capacity)||capacity<1||capacity>1000)throw new Error('Capacity must be between 1 and 1,000.'); const {error}=await db.from('mentorship_admissions_settings').upsert({cohort_id:cohortId,capacity}); if(error)throw error; }
 export async function loadStudentLead(enrollmentId:string) { return (await rows<Lead>('mentorship_leads','*',q=>q.eq('enrollment_id',enrollmentId)))[0] ?? null; }
+
+export async function saveLaunchSettings(cohortId:string,settings:LaunchSettings) {
+  if(!Number.isInteger(settings.capacity)||settings.capacity<1||settings.capacity>1000)throw new Error('Choose 1 to 1,000 seats.');
+  const {error}=await db.from('mentorship_admissions_settings').upsert({cohort_id:cohortId,...settings});if(error)throw error;
+}
+export async function recordPayment(input:PaymentInput) {
+  const {data,error}=await db.rpc('record_mentorship_payment',{p_lead_id:input.lead_id,p_kind:input.kind,p_amount_minor:input.amount_minor,p_currency:input.currency,p_paid_on:input.paid_on,p_provider:input.provider,p_reference:input.reference,p_note:input.note});
+  if(error?.code==='23505')throw new Error('That transaction reference is already recorded. Check the existing entry before adding another.');
+  if(error)throw error;return data as RecordedPayment;
+}
+export async function voidPayment(id:string,reason:string) {
+  const {error}=await db.rpc('void_mentorship_payment',{p_payment_id:id,p_reason:reason});if(error)throw error;
+}

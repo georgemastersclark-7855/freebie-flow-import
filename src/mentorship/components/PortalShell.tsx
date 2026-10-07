@@ -35,7 +35,7 @@ const studentNavigation = [
 ];
 
 const staffNavigation = [
-  { to: "/mentorship-portal/admin/crm/leads", label: "Leads & onboarding", icon: Contact, adminOnly: false },
+  { to: "/mentorship-portal/admin/crm/overview", label: "Leads & onboarding", icon: Contact, adminOnly: false },
   { to: "/mentorship-portal/admin/cohorts", label: "Cohorts & students", icon: Users, adminOnly: false },
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
   { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },

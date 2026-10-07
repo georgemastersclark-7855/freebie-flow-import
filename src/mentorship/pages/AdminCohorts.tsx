@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Search, Users, ShieldCheck } from 'lucide-react'
 import { StudentAvatar } from '../components/StudentAvatar';
 import { loadSuccessCohorts, loadCohortWorkspace, successRoot } from '../studentSuccessApi';
 import { studentProgress } from '../studentSuccess';
-import { CohortRecordCards } from './AdminCohortRecords';
+import { loadCohortRecordList, recordRoot } from '../cohortRecordsApi';
 import '../studentSuccess.css';
 
 export function SuccessLoading() { return <div className="ss-empty" role="status">Loading student records…</div>; }
@@ -15,12 +15,10 @@ export function SuccessError({ error, retry }: { error: unknown; retry: () => vo
 export function SuccessPrivacy() { return <p className="ss-private"><ShieldCheck size={14} /> Staff workspace · Notes and follow-ups are private</p>; }
 export function AdminCohorts() {
   const query = useQuery({ queryKey: ['success-cohorts'], queryFn: loadSuccessCohorts });
-  return <section className="student-success"><SuccessPrivacy /><header className="ss-heading"><div><h1>Cohorts</h1><p>Find a student, review their work and keep track of follow-ups.</p></div></header>
-    {query.isPending ? <SuccessLoading /> : query.isError ? <SuccessError error={query.error} retry={() => void query.refetch()} /> : <div className="ss-directory">
-      {query.data.map(c => <Link key={c.id} to={`${successRoot}/${c.id}`} className="ss-card ss-cohort"><span className="ss-cohort-icon"><Users size={22}/></span><span className="ss-badge">{c.status}</span><h2>{c.internal_name}</h2><p>{c.display_name}</p><div className="ss-row"><span>{c.starts_at ? new Date(c.starts_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Start date not set'}</span><span className="ss-link">View students <ArrowRight size={16}/></span></div></Link>)}
-      {!query.data.length && <div className="ss-empty">No cohorts have been created yet.</div>}
-      <CohortRecordCards />
-    </div>}
+  const records = useQuery({ queryKey: ['cohort-record-list'], queryFn: loadCohortRecordList });
+  const cohorts = [...(query.data??[]).map(c=>({id:c.id,name:c.internal_name,description:c.display_name,status:c.status,detail:c.starts_at?`Starts ${new Date(c.starts_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}`:'Start date not set',url:`${successRoot}/${c.id}`})),...(records.data??[]).map(c=>({id:c.id,name:c.name,description:"Rob Late's Producer Mentorship",status:'',detail:`${c.student_count} student records`,url:`${recordRoot}/${c.id}`}))].sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+  return <section className="student-success ss-cohort-directory"><SuccessPrivacy /><header className="ss-heading"><div><span className="ss-directory-label">STUDENT MANAGEMENT</span><h1>Cohorts & students</h1><p>Choose a cohort to open student records, music and coaching notes.</p></div><span className="ss-directory-count"><Users size={16}/>{cohorts.length} cohorts</span></header>
+    {query.isPending||records.isPending?<SuccessLoading/>:query.isError||records.isError?<SuccessError error={query.error??records.error} retry={()=>{void query.refetch();void records.refetch();}}/>:<div className="ss-directory ss-cohort-grid">{cohorts.map((c,i)=><Link key={c.id} to={c.url} className={`ss-cohort-tile ${c.status==='draft'?'ss-cohort-upcoming':''}`}><div className="ss-cohort-tile-top"><span className="ss-cohort-number">{String(i+1).padStart(2,'0')}</span>{c.status&&<span className="ss-badge">{c.status}</span>}</div><div className="ss-cohort-tile-body"><h2>{c.name}</h2><p>{c.description}</p><div className="ss-cohort-detail"><Users size={16}/>{c.detail}</div></div><footer><span>Open cohort</span><span className="ss-cohort-open"><ArrowRight size={18}/></span></footer></Link>)}{!cohorts.length&&<div className="ss-empty">No cohorts have been created yet.</div>}</div>}
   </section>;
 }
 export function AdminCohortStudents() {

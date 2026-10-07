@@ -117,7 +117,8 @@ export default function MentorshipPortal() {
             <Route path="week/:weekNumber" element={<WeekWorkspace />} />
           </Route>
           <Route element={<StaffOnly />}>
-            <Route path="admin/crm" element={<Navigate to="/mentorship-portal/admin/crm/leads" replace />} />
+            <Route path="admin/crm" element={<Navigate to="/mentorship-portal/admin/crm/overview" replace />} />
+            <Route path="admin/crm/overview" element={<AdminCrm />} />
             <Route path="admin/crm/leads" element={<AdminCrm />} />
             <Route path="admin/crm/onboarding" element={<AdminCrm />} />
             <Route path="admin" element={<AdminHome />} />

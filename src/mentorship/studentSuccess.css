@@ -106,3 +106,23 @@ a.ss-card:hover { border-color: #8facdf; box-shadow: 0 3px 14px #10182809; }
 @media (max-width:1100px) { .ss-columns { grid-template-columns: 1fr; } .ss-compare-grid { grid-template-columns: 1fr; } }
 @media (max-width:650px) { .student-success { padding: 20px 16px; } .ss-heading { align-items: start; flex-direction: column; } .ss-stats { grid-template-columns: repeat(2,minmax(0,1fr)); } .ss-stats > div { padding: 16px; border-bottom: 1px solid #e8ecf1; } .ss-stats > div:nth-child(2) { border-right: 0; } .ss-stats > div:nth-child(n+3) { border-bottom: 0; } .ss-profile-header { gap: 14px; align-items: start; } .student-success h1 { font-size: 25px; } .ss-profile-links { gap: 8px; } .ss-card { padding: 18px; } .ss-week { padding: 0; } .ss-week > summary .ss-badge { float: none; margin-top: 6px; } .ss-tabs { gap: 20px; } .ss-inline-form { align-items: stretch; flex-direction: column; } }
 @media (prefers-reduced-motion:reduce) { .student-success * { transition: none !important; } }
+/* Cohort directory: ordered, clearly separated cards with a consistent entry point. */
+.ss-cohort-directory { background:#edf1f6; padding:36px; }
+.ss-cohort-directory .ss-heading { max-width:1120px; margin:28px 0 32px; }
+.ss-directory-label { display:block; color:#60738e; font-size:10px; font-weight:700; letter-spacing:.12em; margin-bottom:12px; }
+.ss-directory-count { display:flex; align-items:center; gap:8px; color:#53657f; font-size:12px; white-space:nowrap; }
+.ss-cohort-grid { max-width:1120px; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.ss-cohort-tile { display:flex; flex-direction:column; background:#fff; border:1px solid #cdd6e3; border-radius:16px; overflow:hidden; box-shadow:0 4px 10px #22395206; transition:transform .15s,border-color .15s,box-shadow .15s; }
+.ss-cohort-tile:hover { transform:translateY(-3px); border-color:#668ccb; box-shadow:0 10px 25px #2239520e; }
+.ss-cohort-tile-top { display:flex; align-items:center; justify-content:space-between; background:#e4ebf4; border-bottom:1px solid #d6dfea; padding:21px 26px; }
+.ss-cohort-upcoming .ss-cohort-tile-top { background:#e8edfc; border-color:#d7dff5; }
+.ss-cohort-number { font-size:27px; line-height:1; font-weight:700; color:#687d99; letter-spacing:-.05em; }
+.ss-cohort-upcoming .ss-cohort-number { color:#526fba; }
+.ss-cohort-tile-body { padding:25px 26px; }
+.ss-cohort-tile h2 { font-size:23px; }
+.ss-cohort-tile p { font-size:13px; }
+.ss-cohort-detail { display:flex; align-items:center; gap:9px; margin-top:28px; font-size:13px; color:#54657b; }
+.ss-cohort-tile footer { display:flex; align-items:center; justify-content:space-between; border-top:1px solid #e3e8f0; padding:15px 26px; background:#fafbfd; color:#285ec4; font-weight:650; font-size:13px; }
+.ss-cohort-open { display:grid; place-items:center; border:1px solid #d7e1f0; background:#fff; width:33px; height:33px; border-radius:8px; }
+@media(max-width:700px) { .ss-cohort-grid { grid-template-columns:1fr; } .ss-cohort-directory { padding:24px 18px; } .ss-directory-count { display:none; } }
+@media(prefers-reduced-motion:reduce) { .ss-cohort-tile { transition:none; } .ss-cohort-tile:hover { transform:none; } }

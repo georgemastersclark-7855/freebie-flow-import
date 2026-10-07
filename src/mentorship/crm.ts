@@ -1,8 +1,8 @@
 import { readOnboardingPlan, validateOnboardingPlan } from './onboardingPlan';
 
 export const crmRoot = '/mentorship-portal/admin/crm';
-export const leadStages = { new: 'New enquiry', waitlist: 'Waitlist', applied: 'Applied', offer_sent: 'Offer sent', enrolled: 'Enrolled', closed: 'Closed' } as const;
-export type LeadStage = Exclude<keyof typeof leadStages, 'enrolled'>;
+export const leadStages = { new: 'New enquiry', waitlist: 'Waitlist', applied: 'Application received', approved: 'Approved', offer_sent: 'Offer sent', paid: 'Paid', enrolled: 'Enrolled', closed: 'Closed' } as const;
+export type LeadStage = Exclude<keyof typeof leadStages, 'enrolled' | 'paid'>;
 export const leadSources = ['Newsletter', 'Offer doc', 'Instagram', 'Facebook', 'Paid ads', 'Referral', 'Website', 'Not recorded'];
 export const leadChannels = ['Gmail handraiser', 'Typeform application', 'Direct enquiry', 'Other', 'Not recorded'];
 export interface Lead {
