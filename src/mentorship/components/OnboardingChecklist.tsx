@@ -8,6 +8,8 @@ import { completeSetupOutline, onboardingTaskCopy } from "../onboarding";
 import { BookingCalendar } from "./BookingCalendar";
 import { ProgressBar } from "./PortalUI";
 import { GroupJoin } from "./GroupJoin";
+import { CalendarActions } from "./CalendarActions";
+import { callCalendarEvent, localScheduleTime } from "../schedule";
 import { cx } from "../utils";
 
 export function OnboardingChecklist() {
@@ -16,8 +18,9 @@ export function OnboardingChecklist() {
   const [savingTask, setSavingTask] = useState<string>();
   const [expandedTask, setExpandedTask] = useState<string>();
   const [bookingOpen, setBookingOpen] = useState(false);
+  const firstCallEvent = firstCall ? callCalendarEvent(firstCall) : undefined;
   const tasks = onboardingTasks.map(onboardingTaskCopy);
-  const nextTask = tasks.find((task) => !task.complete && task.actionUrl) ?? tasks.find((task) => !task.complete);
+  const nextTask = tasks.find((task) => !task.complete && (task.actionUrl || ((task.key ?? task.id) === "first-call" && firstCallEvent))) ?? tasks.find((task) => !task.complete);
   const completeCount = tasks.filter((task) => task.complete).length;
   const videos = completeSetupOutline(setupVideos);
   const readyVideos = videos.filter((video) => Boolean(video.url)).length;
@@ -53,9 +56,10 @@ export function OnboardingChecklist() {
         const key = task.key ?? task.id;
         const isBooking = key === "book-call";
         const isSetup = key === "prework";
-        const canComplete = isSetup ? readyVideos === videos.length : Boolean(task.actionUrl);
+        const hasAction = Boolean(task.actionUrl || (key === "first-call" && firstCallEvent));
+        const canComplete = isSetup ? readyVideos === videos.length : hasAction;
         const isNext = task.id === nextTask?.id;
-        const waiting = !task.complete && !task.actionUrl;
+        const waiting = !task.complete && !hasAction;
         const status = task.complete ? "Complete" : waiting ? key === "circle" ? "Awaiting invite" : key === "first-call" ? "Awaiting call details" : "Awaiting details" : isNext ? "Your next step" : "To do";
         const unavailableReason = isSetup
           ? readyVideos ? `${readyVideos} of ${videos.length} lessons available. You can start now and tick this off once all ${videos.length} lessons are available and completed.` : "Your setup videos will appear here when they're ready. You can review the lesson instructions now."
@@ -73,10 +77,11 @@ export function OnboardingChecklist() {
           </Accordion.Header>
           <Accordion.Content className="px-3.5 pb-4">
             <p className="border-t border-white/10 pt-3 text-sm leading-6 text-[#b7b7ad]">{task.description}</p>
-            {key === "first-call" && <p className="mt-3 text-xs font-semibold text-[#d4d0c5]">{firstCall?.displayTime ?? "Your call date will appear here once confirmed."}</p>}
+            {key === "first-call" && <p className="mt-3 text-xs font-semibold text-[#d4d0c5]">{firstCall ? localScheduleTime(firstCall.startsAt) : "Your call date will appear here once confirmed."}</p>}
             {isBooking && task.actionUrl && <BookingCalendar url={task.actionUrl} open={bookingOpen} onToggle={() => setBookingOpen((value) => !value)} />}
             {key === "circle" && <GroupJoin url={task.actionUrl} />}
-            {!isBooking && key !== "circle" && task.actionUrl && (isSetup ? <Link to={task.actionUrl} className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></Link> : <a href={task.actionUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></a>)}
+            {key === "first-call" && firstCallEvent && <div className="mt-4"><CalendarActions event={firstCallEvent} prominent /></div>}
+            {!isBooking && key !== "circle" && !(key === "first-call" && firstCallEvent) && task.actionUrl && (isSetup ? <Link to={task.actionUrl} className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></Link> : <a href={task.actionUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black">{task.actionLabel}<ArrowRight size={16} /></a>)}
             {!canComplete && !task.complete && <p id={`onboarding-waiting-${task.id}`} className="mt-3 text-xs leading-5 text-[#aaa99f]">{unavailableReason}</p>}
             {(canComplete || task.complete) && <div className="mt-4 border-t border-white/10 pt-3">
               <label className={cx("inline-flex items-center gap-2.5 text-xs font-semibold text-[#d4d0c5]", savingTask ? "opacity-50" : "cursor-pointer")}>

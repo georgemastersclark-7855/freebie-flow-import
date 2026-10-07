@@ -1,3 +1,5 @@
+import { CalendarActions } from "../components/CalendarActions";
+import { callCalendarEvent, localScheduleTime } from "../schedule";
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, CalendarDays, Check, ChevronDown, Headphones, Library } from "lucide-react";
@@ -70,7 +72,7 @@ export function WelcomeHub() {
           </section>
         </div>
         <aside className="space-y-4">
-          <section className="mp-card rounded-2xl p-5"><div className="flex items-center gap-2 text-xs font-bold text-[#b6b3a8]"><CalendarDays size={16} />Next group call</div><h2 className="mt-3 text-base font-bold">{nextCall?.title ?? "Your next session"}</h2><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{nextCall?.displayTime ?? "The date and joining link will appear here once confirmed."}</p>{(nextCall?.circleUrl || nextCall?.calendarUrl) && <a href={nextCall.circleUrl ?? nextCall.calendarUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded text-xs font-bold">{nextCall.circleUrl ? "Open call details" : "Add to calendar"}<ArrowRight size={14} /></a>}</section>
+          <section className="mp-card rounded-2xl p-5"><div className="flex items-center gap-2 text-xs font-bold text-[#b6b3a8]"><CalendarDays size={16} />Next group call</div><h2 className="mt-3 text-base font-bold">{nextCall?.title ?? "Your next session"}</h2><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{nextCall ? localScheduleTime(nextCall.startsAt) : "The date and joining link will appear here once confirmed."}</p>{nextCall && callCalendarEvent(nextCall) && <div className="mt-4"><CalendarActions event={callCalendarEvent(nextCall)!} /></div>}{nextCall?.circleUrl && <a href={nextCall.circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded text-xs font-bold">Open joining link<ArrowRight size={14} /></a>}</section>
           <Link to="/mentorship-portal/library" className="mp-focus-ring mp-card block rounded-2xl p-5 transition hover:border-white/25"><div className="flex items-center gap-2 text-xs font-bold text-[#b6b3a8]"><Library size={16} />Song Starter Library</div><p className="mt-3 text-3xl font-bold">{starterCount}<span className="ml-2 text-sm font-normal text-[#aaa99f]">song starters</span></p><p className="mt-2 text-xs leading-6 text-[#aaa99f]">{starterTarget ? `${starterTarget}-starter minimum. ` : ""}Listen back to or download your weekly song starters.</p><span className="mt-4 inline-flex items-center gap-2 text-xs font-bold">Open library<ArrowRight size={14} /></span></Link>
         </aside>
       </div>

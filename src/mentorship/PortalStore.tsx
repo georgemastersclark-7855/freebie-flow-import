@@ -8,6 +8,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePortalClock } from "./usePortalClock";
+import { nextScheduledCall } from "./schedule";
 import { supabase } from "@/integrations/supabase/client";
 import {
   demoAdmin,
@@ -67,6 +69,7 @@ interface PortalStoreValue {
   welcomeVideoUrl?: string;
   firstCall?: PortalCall;
   nextCall?: PortalCall;
+  calls: PortalCall[];
   circleUrl?: string;
   login: (email: string, password: string) => Promise<PortalUser>;
   logout: () => Promise<void>;
@@ -133,7 +136,9 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
   const [authError, setAuthError] = useState<string | undefined>();
   const [setupVideos, setSetupVideos] = useState<SetupVideo[]>(() => liveBackend ? [] : demoSetupVideos);
   const [welcomeVideoUrl, setWelcomeVideoUrl] = useState<string | undefined>();
-  const [nextCall, setNextCall] = useState<PortalCall | undefined>();
+  const [calls, setCalls] = useState<PortalCall[]>([]);
+  const scheduleNow = usePortalClock();
+  const nextCall = useMemo(() => nextScheduledCall(calls, scheduleNow), [calls, scheduleNow]);
   const [firstCall, setFirstCall] = useState<PortalCall | undefined>();
 
   const applyLiveBootstrap = useCallback((bootstrap: LivePortalBootstrap) => {
@@ -145,7 +150,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setSetupVideos(bootstrap.setupVideos);
     setWelcomeVideoUrl(bootstrap.welcomeVideoUrl);
     setFirstCall(bootstrap.firstCall);
-    setNextCall(bootstrap.nextCall);
+    setCalls(bootstrap.calls ?? []);
     setCircleUrl(bootstrap.circleUrl);
     setAuthError(undefined);
   }, []);
@@ -159,7 +164,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setSetupVideos([]);
     setWelcomeVideoUrl(undefined);
     setFirstCall(undefined);
-    setNextCall(undefined);
+    setCalls([]);
     setCircleUrl(undefined);
   }, []);
 
@@ -451,6 +456,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     welcomeVideoUrl,
     firstCall,
     nextCall,
+    calls,
     circleUrl,
     login,
     logout,
@@ -464,7 +470,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     markFeedbackViewed,
     confirmFeedbackAction,
   }), [
-    ready, backend, authError, user, staffUser, selectView, resetTestUploads, saveProfile, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, circleUrl,
+    ready, backend, authError, user, staffUser, selectView, resetTestUploads, saveProfile, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, calls, circleUrl,
     login, logout, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
     submitWeek, markFeedbackViewed, confirmFeedbackAction,
   ]);

@@ -78,6 +78,48 @@
   outline-offset: 3px;
 }
 
+/* The schedule remains visible without displacing the onboarding hierarchy. */
+.mentorship-portal .mp-deadline-strip {
+  position: sticky;
+  top: 64px;
+  z-index: 30;
+  border-bottom: 1px solid rgba(255, 255, 255, .13);
+  background: rgba(23, 23, 20, .96);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .15);
+}
+.mentorship-portal .mp-deadline-strip-inner { display: grid; max-width: 1400px; margin: auto; }
+.mentorship-portal .mp-deadline-item { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 13px 20px; transition: background 180ms ease; }
+.mentorship-portal :is(a, button).mp-deadline-item:hover { background: rgba(255, 255, 255, .035); }
+.mentorship-portal .mp-deadline-call { border-top: 1px solid rgba(255, 255, 255, .08); }
+.mentorship-portal .mp-milestone-icon { display: grid; place-items: center; flex-shrink: 0; width: 34px; height: 34px; border: 1px solid rgba(255, 255, 255, .12); border-radius: 10px; color: #d7d4cb; }
+.mentorship-portal .mp-milestone-label { color: #c3c1b7; font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.mentorship-portal .mp-clock-value { display: inline-block; color: #f2efe6; font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; animation: mp-clock-change 250ms ease-out; }
+.mentorship-portal .mp-deadline-urgent .mp-clock-value { color: #e3c276; }
+.mentorship-portal .mp-milestone-complete { color: #d3ff02; animation: mp-completion 420ms cubic-bezier(.2,.8,.3,1); }
+.mentorship-portal .mp-time-track { height: 4px; border-radius: 20px; overflow: hidden; background: rgba(255,255,255,.1); }
+.mentorship-portal .mp-time-fill { height: 100%; transition: width 800ms cubic-bezier(.22,1,.36,1); }
+.mentorship-portal .mp-time-fill-inner { display: block; height: 100%; width: 100%; transform-origin: left; border-radius: 20px; background: #dfddd4; animation: mp-time-enter 900ms cubic-bezier(.22,1,.36,1); }
+.mentorship-portal .mp-time-track-urgent .mp-time-fill-inner { background: #e3c276; }
+.mentorship-portal .mp-week-deadline { padding: 22px; border: 1px solid rgba(255,255,255,.16); border-radius: 18px; background: linear-gradient(120deg, rgba(255,255,255,.055), rgba(255,255,255,.015)); animation: mp-panel-enter 320ms ease-out; }
+.mentorship-portal .mp-deadline-headline .mp-clock-value { font-size: clamp(20px, 2.2vw, 28px); letter-spacing: -.025em; }
+.mentorship-portal .mp-week-deadline .mp-time-track { height: 6px; }
+.mentorship-portal.mp-calendar-menu { min-height: 0; background: #20201c; animation: mp-panel-enter 160ms ease-out; }
+.mentorship-portal :is(.scroll-mt-24, [id^="onboarding-"], #method-story, #method-process, #method-feedback) { scroll-margin-top: 245px; }
+@keyframes mp-clock-change { from { opacity: .45; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mp-time-enter { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes mp-completion { 0% { opacity: .4; transform: scale(.85); } 65% { transform: scale(1.08); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes mp-panel-enter { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-width: 768px) {
+  .mentorship-portal .mp-deadline-strip-inner { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .mentorship-portal .mp-deadline-call { border-top: 0; border-left: 1px solid rgba(255,255,255,.1); }
+}
+@media (min-width: 1024px) {
+  .mentorship-portal .mp-deadline-strip { top: 0; }
+  .mentorship-portal .mp-deadline-item { padding: 16px 28px; }
+  .mentorship-portal :is(.scroll-mt-24, [id^="onboarding-"], #method-story, #method-process, #method-feedback) { scroll-margin-top: 135px; }
+}
+
 .mentorship-portal .mp-scrollbar::-webkit-scrollbar {
   height: 8px;
   width: 8px;

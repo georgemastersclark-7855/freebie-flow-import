@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AlertCircle, ArrowLeft, ArrowRight, Check, CheckCircle2, Clock3, ExternalLink, Headphones, LockKeyhole, Send } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, Check, CheckCircle2, ExternalLink, Headphones, LockKeyhole, Send } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { usePortalStore } from "../PortalStore";
@@ -11,6 +11,7 @@ import {
   SecondaryButton,
   StatusPill,
 } from "../components/PortalUI";
+import { WeekDeadlinePanel } from "../components/DeadlineStrip";
 import { cx, submissionParts, weekOpeningLabel } from "../utils";
 
 export function WeekWorkspace() {
@@ -120,8 +121,9 @@ export function WeekWorkspace() {
         <div className="flex flex-wrap items-center justify-between gap-4"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">{definition.title}</p><StatusPill state={submission.state} /></div>
         <h1 className="mp-display mt-4 text-[#f2efe6]">WEEK {weekNumber} {submitted ? "SUBMISSION" : "UPLOAD"}</h1>
         <p className="mt-4 max-w-2xl text-sm leading-6 text-[#aaa99f]">{submitted ? "Your files are saved below. This is also where you'll find Rob's feedback on this week's work." : weekNumber < 5 ? "Add your song starter loops, the one you've developed into a weekly song, and its matching stems. Send everything to Rob once you're ready." : "Build out the track you selected in week 4. Add your latest full-track version and its matching stems, then send them to Rob."}</p>
-        {!submitted && <p className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#d4d0c5]"><Clock3 size={14} />Due {definition.deadlineLabel}</p>}
+
       </header>
+      <WeekDeadlinePanel week={definition} submission={submission} />
 
 
       {submitted && !submission.feedback && <div className="mt-6 flex items-start gap-3 rounded-2xl border border-white/15 bg-white/[0.035] p-5"><CheckCircle2 size={21} className="mt-0.5 shrink-0 text-white" /><div><p className="text-sm font-bold text-[#eeeae1]">Sent to Rob. You're done for this week.</p><p className="mt-1 text-xs leading-5 text-[#aaa99f]">Your song is in the review queue. Your feedback will appear here when it's ready.</p>{submittedLabel && <p className="mt-2 text-[11px] text-[#939187]">Sent {submittedLabel}</p>}</div></div>}

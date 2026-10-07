@@ -115,6 +115,8 @@ interface CallRow {
   id: string;
   title: string;
   starts_at: string;
+  ends_at: string | null;
+  week_id: string | null;
   calendar_url: string | null;
   circle_event_url: string | null;
 }
@@ -134,6 +136,7 @@ export interface LivePortalBootstrap {
   welcomeVideoUrl?: string;
   firstCall?: PortalCall;
   nextCall?: PortalCall;
+  calls?: PortalCall[];
   circleUrl?: string;
 }
 
@@ -207,7 +210,7 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     // Select the resource row so older databases without the optional download_url
     // column can still load lessons before that small migration is applied.
     db.from("mentorship_resources").select("*").eq("cohort_id", enrollment.cohort_id).eq("published", true).order("position"),
-    db.from("mentorship_calls").select("id, title, starts_at, calendar_url, circle_event_url").eq("cohort_id", enrollment.cohort_id).order("starts_at"),
+    db.from("mentorship_calls").select("id, title, starts_at, ends_at, week_id, calendar_url, circle_event_url").eq("cohort_id", enrollment.cohort_id).eq("call_type", "group").order("starts_at"),
   ]);
 
   const firstError = [cohortResult, weeksResult, tasksResult, progressResult, submissionsResult, resourcesResult, firstCallResult].find((result) => result.error)?.error;
@@ -249,6 +252,8 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     songRequired: week.song_required,
     stemsRequired: week.stems_required,
     deadlineLabel: formatDeadline(week.deadline_at, cohort.timezone),
+    deadlineAt: week.deadline_at ?? undefined,
+    timezone: cohort.timezone,
     opensAt: week.opens_at ?? undefined,
     opensLabel: week.opens_at ? formatDeadline(week.opens_at, cohort.timezone) : undefined,
     phase: !released.includes(week.week_number) ? "upcoming" : week.week_number === activeWeek ? "current" : "complete",
@@ -322,6 +327,9 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     id: row.id,
     title: row.title,
     startsAt: row.starts_at,
+    endsAt: row.ends_at ?? undefined,
+    weekId: row.week_id ?? undefined,
+    timezone: cohort.timezone,
     displayTime: new Intl.DateTimeFormat("en-GB", {
       weekday: "long",
       day: "numeric",
@@ -346,6 +354,7 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     onboardingTasks,
     setupVideos,
     welcomeVideoUrl,
+    calls: callRows.map((row) => mapCall(row)!),
     firstCall: mapCall(firstCallRow),
     nextCall: mapCall(nextCallRow),
     circleUrl: cohort.circle_url ?? undefined,

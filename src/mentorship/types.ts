@@ -59,6 +59,8 @@ export interface WeekDefinition {
   songRequired: boolean;
   stemsRequired: boolean;
   deadlineLabel: string;
+  deadlineAt?: string;
+  timezone?: string;
   opensAt?: string;
   opensLabel?: string;
   phase: "current" | "complete" | "upcoming";
@@ -112,6 +114,9 @@ export interface PortalCall {
   id: string;
   title: string;
   startsAt: string;
+  endsAt?: string;
+  weekId?: string;
+  timezone?: string;
   displayTime: string;
   calendarUrl?: string;
   circleUrl?: string;

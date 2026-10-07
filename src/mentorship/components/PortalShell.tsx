@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowUpRight,
+  CalendarDays,
   ClipboardList,
   FolderClock,
   Gauge,
@@ -19,6 +20,7 @@ import { toast } from "sonner";
 import { cx } from "../utils";
 import { WeeklySubmissionsNavigation } from "./WeeklySubmissionsNavigation";
 import { ProfileDialog } from "./ProfileDialog";
+import { DeadlineStrip } from "./DeadlineStrip";
 import { StudentAvatar } from "./StudentAvatar";
 
 const studentNavigation = [
@@ -32,6 +34,7 @@ const staffNavigation = [
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
   { to: "/mentorship-portal/admin/videos", label: "Manage videos", icon: Video, adminOnly: true },
   { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },
+  { to: "/mentorship-portal/admin/schedule", label: "Calendar", icon: CalendarDays, adminOnly: false },
 ];
 
 function isNavigationActive(to: string, label: string, pathname: string) {
@@ -187,6 +190,7 @@ export function PortalShell() {
             </div>}
           </div>
         )}
+        {!staff && <DeadlineStrip />}
         <Outlet />
       </main>
       {!staff && (profileRequired || editingProfile) && <ProfileDialog key={user?.enrollmentId ?? user?.id} required={Boolean(profileRequired)} onClose={() => setEditingProfile(false)} />}

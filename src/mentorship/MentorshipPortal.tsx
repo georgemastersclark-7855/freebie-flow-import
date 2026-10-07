@@ -7,6 +7,7 @@ import { StudioSetup } from "./pages/StudioSetup";
 import { SongStarterLibrary } from "./pages/SongStarterLibrary";
 import { SetupLesson } from "./pages/SetupLesson";
 import { WeekWorkspace } from "./pages/WeekWorkspace";
+import { AdminSchedule } from "./pages/AdminSchedule";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminReviewQueue } from "./pages/AdminReviewQueue";
 import { AdminReview } from "./pages/AdminReview";
@@ -98,6 +99,7 @@ export default function MentorshipPortal() {
           </Route>
           <Route element={<StaffOnly />}>
             <Route path="admin" element={<AdminHome />} />
+            <Route path="admin/schedule" element={<AdminSchedule />} />
             <Route path="admin/reviews" element={<AdminReviewQueue />} />
             <Route element={<AdminOnly />}>
               <Route path="admin/videos" element={<AdminVideos />} />
