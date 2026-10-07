@@ -358,3 +358,7 @@
   .mentorship-portal :is(.mp-time-progress > span, .mp-upload-milestone-node) { transition: none; }
   .mentorship-portal .mp-time-progress i { animation: none; }
 }
+.mentorship-portal .mp-timezone-row { display:flex; justify-content:flex-end; max-width:1400px; margin:auto; padding:0 20px 6px; }
+.mentorship-portal .mp-timezone-picker { display:flex; align-items:center; gap:5px; color:#b1b5bf; font-size:10px; max-width:100%; }
+.mentorship-portal .mp-timezone-picker select { background:transparent; border:0; color:inherit; max-width:300px; min-width:0; padding:2px; cursor:pointer; }
+.mentorship-portal .mp-timezone-picker option { background:#202227; color:#f4f5f7; }

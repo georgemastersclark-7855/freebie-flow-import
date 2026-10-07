@@ -26,10 +26,10 @@ export function countdownParts(target: number | undefined, now: number) {
   return { days: Math.floor(seconds / 86400), hours: Math.floor(seconds % 86400 / 3600), minutes: Math.floor(seconds % 3600 / 60), seconds: seconds % 60 };
 }
 
-export function localScheduleTime(value?: string) {
+export function localScheduleTime(value?: string, timezone?: string) {
   if (timestamp(value) === undefined) return "Date to be confirmed";
   return new Intl.DateTimeFormat("en-GB", {
-    weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZoneName: "short",
+    weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZoneName: "short", timeZone: timezone,
   }).format(new Date(value!));
 }
 

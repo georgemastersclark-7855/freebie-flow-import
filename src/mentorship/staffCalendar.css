@@ -102,3 +102,34 @@
   .mentorship-portal .staff-calendar .sc-month-controls h2 { font-size: 17px !important; line-height: 1.4 !important; letter-spacing: normal !important; }
   .mentorship-portal .staff-calendar .sc-weeks-heading h2 { font-size: 14px !important; line-height: 1.5 !important; letter-spacing: normal !important; }
 }
+.sc-header-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.sc-event[draggable=true] { cursor:grab; }
+.sc-event.sc-dragging { opacity:.35; }
+.sc-day.sc-drop-target { background:#eaf1ff; box-shadow:inset 0 0 0 2px #265ed7; }
+.staff-calendar.sc-pattern-editor { max-width:690px; }
+.sc-pattern-preview { border:1px solid #dfe4eb; border-radius:8px; padding:12px; }
+.sc-pattern-preview > strong { font-size:13px; }
+.sc-pattern-preview > p { color:#667085; font-size:11px; margin-top:4px; }
+.sc-preview-scroll { overflow-x:auto; }
+.sc-pattern-preview table { width:100%; min-width:360px; margin-top:10px; font-size:12px; text-align:left; border-collapse:collapse; }
+.sc-pattern-preview :is(th,td) { padding:8px 7px; border-bottom:1px solid #eaecf0; }
+.sc-pattern-preview th { font-weight:600; }
+.sc-pattern-preview small { display:block; color:#667085; font-size:10px; }
+.sc-timezone-reference { margin-top:16px; padding-top:16px; border-top:1px solid #e4e7ec; min-width:0; }
+.sc-weeks > .sc-timezone-reference { grid-column:1 / -1; }
+.sc-timezone-reference > div { display:flex; gap:7px; align-items:center; }
+.sc-timezone-reference h3 { font-size:12px; font-weight:650; }
+.sc-timezone-reference p { font-size:11px; color:#667085; margin:6px 0 12px; }
+.sc-timezone-reference dl { display:grid; gap:9px; margin-bottom:14px; }
+.sc-timezone-reference dl > div { display:flex; justify-content:space-between; gap:12px; font-size:12px; }
+.sc-timezone-reference dd { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+.sc-timezone-reference small { display:block; color:#667085; font-size:10px; font-weight:400; }
+.sc-zone-details { border:1px solid #e4e7ec; border-radius:7px; padding:10px 12px; }
+.sc-zone-details summary { cursor:pointer; font-size:12px; font-weight:600; color:#265ed7; }
+.sc-zone-details .sc-timezone-reference { border-top:0; margin-top:10px; padding-top:0; }
+.sc-editor .sc-timezone-reference dl { grid-template-columns:1fr 1fr; column-gap:24px; }
+.sc-editor .sc-form-actions { position:sticky; bottom:-24px; padding:14px 0; background:white; border-top:1px solid #e4e7ec; z-index:1; }
+@media (max-width:639px) { .sc-editor .sc-form-actions { bottom:-20px; } }
+.sc-event { cursor:grab; touch-action:none; user-select:none; }
+.sc-drag-label { position:fixed; z-index:100; pointer-events:none; padding:9px 12px; border:1px solid #b7c9ed; border-radius:7px; background:white; color:#182230; box-shadow:0 4px 16px #10182820; font-size:12px; font-weight:600; }
+.sc-drag-label small { display:block; color:#667085; font-size:10px; font-weight:400; }

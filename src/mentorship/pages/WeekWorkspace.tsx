@@ -1,3 +1,4 @@
+import { useScheduleTimezone } from "../useScheduleTimezone";
 import { useEffect, useState } from "react";
 import { AlertCircle, ArrowLeft, ArrowRight, Check, CheckCircle2, ExternalLink, Headphones, LockKeyhole, Send } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
@@ -15,6 +16,7 @@ import { WeekDeadlinePanel } from "../components/DeadlineStrip";
 import { cx, submissionParts, weekOpeningLabel } from "../utils";
 
 export function WeekWorkspace() {
+  const { timezone } = useScheduleTimezone();
   const { weekNumber: weekParam } = useParams();
   const weekNumber = Number(weekParam);
   const {
@@ -49,7 +51,7 @@ export function WeekWorkspace() {
   if (definition.phase === "upcoming") return <div className="mx-auto max-w-2xl px-5 py-16 text-center">
     <LockKeyhole size={32} className="mx-auto text-[#aaa99f]" />
     <h1 className="mp-display mt-6">WEEK {weekNumber} IS LOCKED</h1>
-    <p className="mt-4 text-sm text-[#aaa99f]">{weekOpeningLabel(definition)}. Come back when this week begins.</p>
+    <p className="mt-4 text-sm text-[#aaa99f]">{weekOpeningLabel(definition, timezone)}. Come back when this week begins.</p>
     <Link to="/mentorship-portal/dashboard" className="mp-focus-ring mt-7 inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">Back to Dashboard<ArrowRight size={16} /></Link>
   </div>;
   const submitted = submission.state === "submitted" || submission.state === "late";
@@ -61,6 +63,7 @@ export function WeekWorkspace() {
     weekday: "short",
     hour: "numeric",
     minute: "2-digit",
+    timeZone: timezone,
   }).format(new Date(submission.submittedAt)) : "";
 
   const uploadFiles = async (kind: "idea" | "song" | "stems", files: File[]) => {

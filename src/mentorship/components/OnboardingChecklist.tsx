@@ -1,3 +1,4 @@
+import { useScheduleTimezone } from "../useScheduleTimezone";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import * as Accordion from "@radix-ui/react-accordion";
@@ -9,10 +10,11 @@ import { BookingCalendar } from "./BookingCalendar";
 import { ProgressBar } from "./PortalUI";
 import { GroupJoin } from "./GroupJoin";
 import { CalendarActions } from "./CalendarActions";
-import { callCalendarEvent, localScheduleTime } from "../schedule";
+import { callCalendarEvent } from "../schedule";
 import { cx } from "../utils";
 
 export function OnboardingChecklist() {
+  const { formatTime: localScheduleTime } = useScheduleTimezone();
   const { onboardingTasks, toggleOnboardingTask, setupVideos, firstCall } = usePortalStore();
   const location = useLocation();
   const [savingTask, setSavingTask] = useState<string>();
@@ -77,7 +79,7 @@ export function OnboardingChecklist() {
           </Accordion.Header>
           <Accordion.Content className="px-3.5 pb-4">
             <p className="border-t border-white/10 pt-3 text-sm leading-6 text-[#b7b7ad]">{task.description}</p>
-            {key === "first-call" && <p className="mt-3 text-xs font-semibold text-[#d4d0c5]">{firstCall ? localScheduleTime(firstCall.startsAt) : "Your call date will appear here once confirmed."}</p>}
+            {key === "first-call" && <p className="mt-3 text-xs font-semibold text-[#d4d0c5]">{firstCall ? `${firstCall.title} · ${localScheduleTime(firstCall.startsAt)}` : "Your call date will appear here once confirmed."}</p>}
             {isBooking && task.actionUrl && <BookingCalendar url={task.actionUrl} open={bookingOpen} onToggle={() => setBookingOpen((value) => !value)} />}
             {key === "circle" && <GroupJoin url={task.actionUrl} />}
             {key === "first-call" && firstCallEvent && <div className="mt-4"><CalendarActions event={firstCallEvent} prominent /></div>}

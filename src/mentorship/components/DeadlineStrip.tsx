@@ -1,16 +1,19 @@
+import { ScheduleTimezonePicker } from "./ScheduleTimezone";
+import { useScheduleTimezone } from "../useScheduleTimezone";
 import { Link } from "react-router-dom";
 import * as Popover from "@radix-ui/react-popover";
 import { CalendarDays, Check, ChevronRight, Clock3, Headphones, Video, X } from "lucide-react";
 import type { PortalCall, WeekDefinition, WeekSubmission } from "../types";
 import { usePortalStore } from "../PortalStore";
 import { usePortalClock } from "../usePortalClock";
-import { callCalendarEvent, callEnd, countdown, deadlineCalendarEvent, localScheduleTime, nextScheduledCall, safeScheduleUrl, timestamp, weekTiming } from "../schedule";
+import { callCalendarEvent, callEnd, countdown, deadlineCalendarEvent, nextScheduledCall, safeScheduleUrl, timestamp, weekTiming } from "../schedule";
 import { CalendarActions } from "./CalendarActions";
 import { TimeBar, SubmissionMilestones } from "./DeadlineVisuals";
 import { cx } from "../utils";
 
 
 function CallDetails({ call, now }: { call: PortalCall; now: number }) {
+  const { formatTime: localScheduleTime } = useScheduleTimezone();
   const event = callCalendarEvent(call);
   const joiningUrl = safeScheduleUrl(call.circleUrl);
   const started = Date.parse(call.startsAt) <= now;
@@ -33,6 +36,7 @@ function ScheduleBadge({ text, urgent = false }: { text: string; urgent?: boolea
 }
 
 export function DeadlineStrip() {
+  const { formatTime: localScheduleTime } = useScheduleTimezone();
   const { weeks, submissions, calls } = usePortalStore();
   const now = usePortalClock();
   const week = weeks.find((item) => item.phase === "current") ?? weeks.find((item) => item.phase === "upcoming");
@@ -58,14 +62,15 @@ export function DeadlineStrip() {
         {scheduled && !feedback && !submitted && timing?.state !== "upcoming" && <TimeBar elapsed={timing?.elapsed} urgent={urgent} />}
       </Link>
       {call ? <CallDetailsButton call={call} now={now} className="mp-deadline-item mp-deadline-call">
-        <CalendarDays size={16} className="mp-schedule-icon" /><span className="mp-schedule-copy"><strong>{callLive ? "Group call in progress" : "Next group call"}</strong><span>{localScheduleTime(call.startsAt)}</span></span>
+        <CalendarDays size={16} className="mp-schedule-icon" /><span className="mp-schedule-copy"><strong>{callLive ? "Group call in progress" : call.title}</strong><span>{localScheduleTime(call.startsAt)}</span></span>
         <ScheduleBadge text={callLive ? "Live now" : `In ${countdown(Date.parse(call.startsAt), now)}`} /><ChevronRight size={14} className="mp-schedule-chevron" />
       </CallDetailsButton> : <div className="mp-deadline-item mp-deadline-call"><CalendarDays size={16} className="mp-schedule-icon" /><span className="mp-schedule-copy"><strong>Next group call</strong><span>Date to be confirmed</span></span></div>}
-    </div>
+    </div><div className="mp-timezone-row"><ScheduleTimezonePicker /></div>
   </section>;
 }
 
 export function WeekDeadlinePanel({ week, submission }: { week: WeekDefinition; submission: WeekSubmission }) {
+  const { formatTime: localScheduleTime } = useScheduleTimezone();
   const { calls, user } = usePortalStore();
   const now = usePortalClock();
   const timing = weekTiming(week, submission, now);

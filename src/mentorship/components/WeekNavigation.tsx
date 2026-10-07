@@ -1,9 +1,11 @@
+import { useScheduleTimezone } from "../useScheduleTimezone";
 import { NavLink } from "react-router-dom";
 import { Check, LockKeyhole, Bell } from "lucide-react";
 import { usePortalStore } from "../PortalStore";
 import { cx, weekOpeningLabel } from "../utils";
 
 export function WeekNavigation({ onNavigate }: { onNavigate?: () => void }) {
+  const { timezone } = useScheduleTimezone();
   const { weeks, submissions } = usePortalStore();
   return <ol className="my-2 ml-5 space-y-1 border-l border-white/10 pl-3" aria-label="Mentorship weeks">
     {weeks.map((week) => {
@@ -11,8 +13,8 @@ export function WeekNavigation({ onNavigate }: { onNavigate?: () => void }) {
       const feedback = submission?.feedback && !submission.feedback.actionConfirmedAt;
       const submitted = ["submitted", "late"].includes(submission?.state ?? "");
       if (week.phase === "upcoming") return <li key={week.number}>
-        <div aria-disabled="true" className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-xs text-[#85847c]" title={weekOpeningLabel(week)}>
-          <span>Week {week.number}{week.opensLabel && <span className="mt-1 block text-[10px]">{weekOpeningLabel(week)}</span>}</span>
+        <div aria-disabled="true" className="flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-xs text-[#85847c]" title={weekOpeningLabel(week, timezone)}>
+          <span>Week {week.number}{week.opensLabel && <span className="mt-1 block text-[10px]">{weekOpeningLabel(week, timezone)}</span>}</span>
           <LockKeyhole size={12} aria-label="Locked" className="shrink-0" />
         </div>
       </li>;

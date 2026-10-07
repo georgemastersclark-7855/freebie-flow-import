@@ -1,5 +1,6 @@
+import { useScheduleTimezone } from "../useScheduleTimezone";
 import { CalendarActions } from "../components/CalendarActions";
-import { callCalendarEvent, localScheduleTime } from "../schedule";
+import { callCalendarEvent } from "../schedule";
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, CalendarDays, Check, ChevronDown, Headphones, Library } from "lucide-react";
@@ -12,6 +13,7 @@ import { LoopMethod } from "../components/LoopMethod";
 import { submissionParts, weekOpeningLabel } from "../utils";
 
 export function WelcomeHub() {
+  const { formatTime: localScheduleTime, timezone } = useScheduleTimezone();
   const completedOnboarding = useRef<HTMLDetailsElement>(null);
   const introduction = useRef<HTMLDetailsElement>(null);
   const location = useLocation();
@@ -66,8 +68,8 @@ export function WelcomeHub() {
           <section className="mp-card rounded-3xl p-6 sm:p-8">
             <div className="flex items-center justify-between gap-3"><p className="text-xs font-bold uppercase tracking-widest text-[#aaa99f]">{currentWeek ? `Week ${currentWeek.number}` : "Weekly submissions"}</p>{submission && <StatusPill state={submission.state} />}</div>
             <h2 className="mt-4 text-2xl font-bold">{submitted ? "Your music is with Rob" : currentWeek ? currentWeek.number >= 5 ? "Finish your selected track" : "Upload your song starters, song and stems" : "Your first week opens soon"}</h2>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-[#aaa99f]">{submitted ? "Your submission is saved. Open it to review your files and read my feedback when it's published." : currentWeek ? currentWeek.number >= 5 ? "Build out the song you chose in week 4. Upload the latest full-track version and its matching stems." : `Make ${currentWeek.requiredIdeas} song starters, develop one from the intro through the first chorus or drop, then send it with the matching stems.` : nextWeek ? weekOpeningLabel(nextWeek) : "Your weekly schedule will appear here when confirmed."}</p>
-            {currentWeek && !submitted && <><p className="mt-4 text-xs font-semibold text-[#d4d0c5]">Due {currentWeek.deadlineLabel}</p><div className="mt-5"><ProgressBar value={parts.filter((part) => part.complete).length} max={parts.length || 1} /><p className="mt-2 text-xs text-[#aaa99f]">{parts.filter((part) => part.complete).length} / {parts.length} upload sections ready</p></div></>}
+            <p className="mt-3 max-w-xl text-sm leading-7 text-[#aaa99f]">{submitted ? "Your submission is saved. Open it to review your files and read my feedback when it's published." : currentWeek ? currentWeek.number >= 5 ? "Build out the song you chose in week 4. Upload the latest full-track version and its matching stems." : `Make ${currentWeek.requiredIdeas} song starters, develop one from the intro through the first chorus or drop, then send it with the matching stems.` : nextWeek ? weekOpeningLabel(nextWeek, timezone) : "Your weekly schedule will appear here when confirmed."}</p>
+            {currentWeek && !submitted && <><p className="mt-4 text-xs font-semibold text-[#d4d0c5]">Due {localScheduleTime(currentWeek.deadlineAt)}</p><div className="mt-5"><ProgressBar value={parts.filter((part) => part.complete).length} max={parts.length || 1} /><p className="mt-2 text-xs text-[#aaa99f]">{parts.filter((part) => part.complete).length} / {parts.length} upload sections ready</p></div></>}
             {currentWeek && <Link to={`${weekUrl}${submitted ? "" : `#${nextPart?.id ?? "send-to-rob"}`}`} className="mp-focus-ring mt-6 inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">{submitted ? "View my submission" : `Open week ${currentWeek.number}`}<ArrowRight size={16} /></Link>}
           </section>
         </div>

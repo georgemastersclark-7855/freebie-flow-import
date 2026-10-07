@@ -1,3 +1,4 @@
+import { localScheduleTime } from "./schedule";
 import type { OnboardingTask, PortalUser, WeekDefinition, WeekSubmission } from "./types";
 
 export function submissionParts(week: WeekDefinition, submission: WeekSubmission) {
@@ -29,7 +30,8 @@ export function releasedWeekNumbers(weeks: { number: number; opensAt?: string | 
   return weeks.filter((week) => week.opensAt ? Date.parse(week.opensAt) <= now : week.number <= currentWeek).map((week) => week.number);
 }
 
-export function weekOpeningLabel(week: WeekDefinition) {
+export function weekOpeningLabel(week: WeekDefinition, timezone?: string) {
+  if (week.opensAt) return `Opens ${localScheduleTime(week.opensAt, timezone)}`;
   return week.opensLabel ? `Opens ${week.opensLabel}` : `Opens in week ${week.number}`;
 }
 
