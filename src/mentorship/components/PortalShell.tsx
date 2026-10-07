@@ -87,9 +87,8 @@ export function PortalShell() {
 
   return (
     <div className="mentorship-portal relative flex min-h-screen">
-      {location.pathname !== "/mentorship-portal/admin/schedule" && <div className="mp-grain fixed inset-0 z-50 opacity-70" />}
 
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] flex-col border-r border-white/[0.08] bg-[#0d0d0b]/95 p-5 backdrop-blur-xl lg:flex overflow-y-auto">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] flex-col border-r border-white/[0.08] bg-[#151619] p-5 backdrop-blur-xl lg:flex overflow-y-auto">
         <PortalMark />
         <div className="mt-8 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-3.5">
           <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#77766f]">{staff ? "Current cohort" : "Current programme"}</div>
@@ -140,7 +139,7 @@ export function PortalShell() {
         </div>
       </aside>
 
-      <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-white/[0.08] bg-[#0d0d0b]/95 px-4 backdrop-blur-xl lg:hidden">
+      <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-white/[0.08] bg-[#151619] px-4 backdrop-blur-xl lg:hidden">
         <PortalMark compact />
         <div className="text-center">
           <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#77766f]">{user?.cohortName ?? "Producer mentorship"}</div>

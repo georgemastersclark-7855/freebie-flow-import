@@ -119,7 +119,7 @@ export function WeekWorkspace() {
 
       <header className="mt-7">
         <div className="flex flex-wrap items-center justify-between gap-4"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">{definition.title}</p><StatusPill state={submission.state} /></div>
-        <h1 className="mp-display mt-4 text-[#f2efe6]">WEEK {weekNumber} {submitted ? "SUBMISSION" : "UPLOAD"}</h1>
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#f4f4f5]">Week {weekNumber} {submitted ? "submission" : "uploads"}</h1>
         <p className="mt-4 max-w-2xl text-sm leading-6 text-[#aaa99f]">{submitted ? "Your files are saved below. This is also where you'll find Rob's feedback on this week's work." : weekNumber < 5 ? "Add your song starter loops, the one you've developed into a weekly song, and its matching stems. Send everything to Rob once you're ready." : "Build out the track you selected in week 4. Add your latest full-track version and its matching stems, then send them to Rob."}</p>
 
       </header>
@@ -148,7 +148,7 @@ export function WeekWorkspace() {
           )}
 
         <div className="flex items-center justify-between gap-4"><h2 className="text-lg font-bold text-[#eeeae1]">{submitted ? "What you sent" : "Add your files"}</h2>{canEdit && <p className="text-xs text-[#aaa99f]" aria-live="polite">{busy ? "Working on your files..." : "Uploads save as you go"}</p>}</div>
-        {parts.map((part, index) => <section key={part.id} id={part.id} className="mp-card scroll-mt-24 rounded-3xl p-5 sm:p-7" aria-labelledby={`${part.id}-title`}>
+        {parts.map((part, index) => <section key={part.id} id={part.id} className="mp-card scroll-mt-24 rounded-xl p-5 sm:p-6" aria-labelledby={`${part.id}-title`}>
           <div className="flex items-start gap-3 sm:gap-4"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 text-xs font-bold text-[#eeeae1]">{submitted && part.complete ? <Check size={16} /> : String(index + 1).padStart(2, "0")}</span><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center justify-between gap-2"><h3 id={`${part.id}-title`} className="text-xl font-bold text-[#eeeae1]">{part.title}</h3><span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-[#b6b3a8]">{part.complete && <Check size={12} />}{part.status}</span></div><p className="mt-2 max-w-2xl text-sm leading-6 text-[#aaa99f]">{part.description}</p></div></div>
 
           {part.id === "song-starters" && <div className="mt-5 space-y-4">

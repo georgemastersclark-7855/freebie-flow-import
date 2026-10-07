@@ -58,7 +58,6 @@ export function PortalLogin() {
       <div className="mp-login-backdrop" aria-hidden="true">
         <video autoPlay muted loop playsInline tabIndex={-1} src={robWorking} className="mp-login-film" />
       </div>
-      <div className="mp-grain mp-login-grain" aria-hidden="true" />
 
       <main className="mp-login-content">
         <header className="mp-login-brand">
