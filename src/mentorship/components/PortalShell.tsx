@@ -7,7 +7,6 @@ import {
   Gauge,
   LogOut,
   Menu,
-  Video,
   BookOpen,
   Library,
   Package,
@@ -25,6 +24,7 @@ import { ProfileDialog } from "./ProfileDialog";
 import { DeadlineStrip } from "./DeadlineStrip";
 import { MasterBundleDialog } from "./MasterBundleCard";
 import { StudentAvatar } from "./StudentAvatar";
+import { StaffSettingsNavigation } from "./StaffSettingsNavigation";
 
 const studentNavigation = [
   { to: "/mentorship-portal/dashboard", label: "Dashboard", icon: Gauge },
@@ -36,7 +36,6 @@ const studentNavigation = [
 const staffNavigation = [
   { to: "/mentorship-portal/admin/cohorts", label: "Cohorts & students", icon: Users, adminOnly: false },
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
-  { to: "/mentorship-portal/admin/videos", label: "Manage videos", icon: Video, adminOnly: true },
   { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },
   { to: "/mentorship-portal/admin/schedule", label: "Calendar", icon: CalendarDays, adminOnly: false },
 ];
@@ -126,6 +125,7 @@ export function PortalShell() {
         </nav>
 
         <div className="mt-auto pt-6">
+          {user?.role === "admin" && <div className="mb-4"><StaffSettingsNavigation /></div>}
           {!staff && circleUrl && (
             <a href={circleUrl} target={circleUrl ? "_blank" : undefined} rel={circleUrl ? "noreferrer" : undefined} className="mp-focus-ring mb-3 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.025] px-3 py-3 text-sm font-semibold text-[#b9b6ad] hover:border-white/15 hover:text-white">
               {communityName(circleUrl)}
@@ -154,7 +154,7 @@ export function PortalShell() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden">
           <button type="button" className="absolute inset-0 bg-black/75" onClick={() => setMobileOpen(false)} aria-label="Close navigation" />
-          <div className="absolute inset-y-0 right-0 w-[86%] max-w-[340px] border-l border-white/10 bg-[#11110f] p-5 shadow-2xl overflow-y-auto">
+          <div className="absolute inset-y-0 right-0 flex w-[86%] max-w-[340px] flex-col border-l border-white/10 bg-[#11110f] p-5 shadow-2xl overflow-y-auto">
             <div className="flex items-center justify-between">
               <PortalMark />
               <button type="button" onClick={() => setMobileOpen(false)} className="mp-focus-ring rounded-lg p-2 text-[#aaa99f]" aria-label="Close navigation"><X size={20} /></button>
@@ -174,7 +174,10 @@ export function PortalShell() {
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}
             {!staff && <button type="button" onClick={() => { setMobileOpen(false); setEditingProfile(true); }} className="mp-focus-ring mt-6 flex w-full items-center gap-3 rounded-xl border border-white/15 p-4 text-left"><StudentAvatar name={user?.name ?? "Student"} src={user?.profile?.photoUrl} size={40} member={Boolean(user?.profile?.completedAt)} /><span className="min-w-0"><span className="block truncate text-sm font-bold">{user?.name}</span><span className="mt-1 block text-xs text-[#aaa99f]">Edit profile</span></span></button>}
-            <button type="button" onClick={() => void signOut()} className="mp-focus-ring mt-8 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-[#8f8e85]"><LogOut size={17} /> Sign out</button>
+            <div className="mt-auto pt-8">
+              {user?.role === "admin" && <StaffSettingsNavigation mobile onNavigate={() => setMobileOpen(false)} />}
+              <button type="button" onClick={() => void signOut()} className="mp-focus-ring mt-4 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-[#8f8e85]"><LogOut size={17} /> Sign out</button>
+            </div>
           </div>
         </div>
       )}
