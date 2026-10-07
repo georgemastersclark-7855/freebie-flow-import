@@ -1,3 +1,5 @@
+import { useState, type ReactNode } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { PortalStoreProvider, usePortalStore } from "./PortalStore";
 import { PortalShell } from "./components/PortalShell";
@@ -18,6 +20,17 @@ import { AdminVideos } from "./pages/AdminVideos";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "./portal.css";
 import { portalHome } from "./utils";
+
+function QueryScope({ children }: { children: ReactNode }) {
+  const [client] = useState(() => new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: 10000 } } }));
+  return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
+}
+
+function PortalQueryBoundary({ children }: { children: ReactNode }) {
+  const { user } = usePortalStore();
+  // A different account or view gets a fresh cache, including after sign-out.
+  return <QueryScope key={`${user?.id ?? "guest"}:${user?.role ?? "none"}`}>{children}</QueryScope>;
+}
 
 function ProtectedPortal() {
   const { user, ready } = usePortalStore();
@@ -86,6 +99,7 @@ export default function MentorshipPortal() {
 
   return (
     <PortalStoreProvider>
+      <PortalQueryBoundary>
       <Routes>
         <Route index element={<RoleHome />} />
         <Route path="set-password" element={<PortalSetPassword />} />
@@ -114,6 +128,7 @@ export default function MentorshipPortal() {
         </Route>
         <Route path="*" element={<RoleHome />} />
       </Routes>
+      </PortalQueryBoundary>
     </PortalStoreProvider>
   );
 }
