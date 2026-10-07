@@ -20,3 +20,46 @@ assert.equal(studentProgress({...data,feedback:[{submission_id:'s1',status:'publ
 assert.deepEqual(audioOptions(data).map(f=>f.id),['f1','f2']);
 assert.equal(studentProgress({...data,weeks:[],submissions:[],actions:[],files:[],surgeries:[]},student).needsAttention,false);
 console.log('Student progress: cohort/student isolation, deadlines, review state, completed surgeries, follow-ups and comparison ordering passed.');
+
+// Regression: historical/published work must open independently of the current
+// week's queue, while another staff account's walkthrough remains unavailable.
+const tables = {
+  mentorship_cohorts:[{id:'cohort',current_week:1}],
+  mentorship_enrollments:[{id:'enrollment',cohort_id:'cohort',user_id:'student',status:'active',is_walkthrough:false}],
+  mentorship_profiles:[{user_id:'student',full_name:'Producer',email:'producer@example.com'}],
+  mentorship_weeks:[{id:'oldweek',week_number:6,cohort_id:'cohort'}],
+  mentorship_submissions:[{id:'oldsubmission',enrollment_id:'enrollment',week_id:'oldweek',state:'submitted',submitted_at:'2026-08-01T18:00:00Z'}],
+  mentorship_submission_files:[{id:'song',submission_id:'oldsubmission',kind:'song',file_name:'Week 6.wav',storage_path:'student/old/song.wav',size_bytes:100,uploaded_at:'2026-08-01'}],
+  mentorship_feedback:[{id:'feedback',submission_id:'oldsubmission',status:'published',written_notes:'Keep the chorus hook.',next_action:'Tighten the verse.',audio_storage_path:null}],
+  mentorship_student_actions:[],mentorship_surgeries:[],
+};
+const mockDb = {
+  auth:{getUser:async()=>({data:{user:{id:'staff'}}})},
+  storage:{from:()=>({createSignedUrl:async path=>({data:{signedUrl:`https://test.invalid/${path}`}})})},
+  from(name) {
+    let found = [...(tables[name] ?? [])];
+    return {
+      select(){return this;},
+      eq(key,value){found=found.filter(row=>row[key]===value);return this;},
+      in(key,values){found=found.filter(row=>values.includes(row[key]));return this;},
+      or(){found=found.filter(row=>!row.is_walkthrough||row.user_id==='staff');return this;},
+      order(){return this;},
+      range(start,end){return Promise.resolve({data:found.slice(start,end+1),error:null});},
+    };
+  },
+};
+globalThis.__successTestDb=mockDb;
+const apiJs = ts.transpileModule(readFileSync('src/mentorship/studentSuccessApi.ts','utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+  .replace(/import \{ supabase \} from [^;]+;/, 'const supabase = globalThis.__successTestDb;')
+  .replace(/import \{ loadStudentProfilesForEnrollments \} from [^;]+;/, 'const loadStudentProfilesForEnrollments = async () => new Map();');
+const api = await import(`data:text/javascript;base64,${Buffer.from(apiJs).toString('base64')}`);
+const review=await api.loadSuccessReview('oldsubmission');
+assert.equal(review.weekNumber,6); assert.equal(review.status,'published'); assert.equal(review.enrollmentId,'enrollment'); assert.equal(review.feedback.writtenNotes,'Keep the chorus hook.'); assert.equal(review.song.storagePath,'student/old/song.wav');
+tables.mentorship_enrollments[0].is_walkthrough=true;
+await assert.rejects(api.loadSuccessReview('oldsubmission'),/not available to your account/);
+tables.mentorship_submissions[0].submitted_at=null;
+await assert.rejects(api.loadSuccessReview('oldsubmission'),/not been sent for review/);
+assert.equal(api.safeSourceUrl('javascript:alert(1)'),undefined);
+assert.equal(api.safeSourceUrl('https://user:password@example.com'),undefined);
+delete globalThis.__successTestDb;
+console.log('Historical review loading, published feedback, walkthrough isolation, draft rejection and recording-link validation passed.');
