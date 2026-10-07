@@ -3,6 +3,7 @@
 import { supabase } from '@/integrations/supabase/client';
 import { loadStudentProfilesForEnrollments } from './studentProfileApi';
 import type { StudentProfile, PortalFile, ReviewItem } from './types';
+import { onboardingNoteBody, type OnboardingPlan } from './onboardingPlan';
 const db = supabase as any;
 export const successRoot = '/mentorship-portal/admin/cohorts';
 
@@ -15,7 +16,7 @@ export interface SuccessFeedback { id: string; submission_id: string; status: st
 export interface SuccessSurgery { id: string; submission_id: string; selected_at: string; delivered_at: string | null }
 export interface SuccessAction { id: string; enrollment_id: string; title: string; owner_id: string | null; due_on: string | null; completed_at: string | null; updated_at: string }
 export interface SuccessContext { enrollment_id: string; goals: string; current_focus: string; updated_at: string }
-export interface SuccessNote { id: string; enrollment_id: string; kind: 'note' | 'onboarding' | 'group'; title: string; body: string; transcript: string; source_url: string | null; occurred_on: string; call_id: string | null; created_by: string; created_at: string; updated_at: string }
+export interface SuccessNote { id: string; enrollment_id: string; kind: 'note' | 'onboarding' | 'group'; title: string; body: string; transcript: string; source_url: string | null; occurred_on: string; call_id: string | null; created_by: string; created_at: string; updated_at: string; questionnaire?: unknown }
 export interface SuccessCall { id: string; title: string; call_type: string; starts_at: string; ends_at: string | null }
 export interface SuccessAttendance { call_id: string; enrollment_id: string; attended: boolean; minutes_attended: number | null }
 export interface SuccessExample { id: string; enrollment_id: string; title: string; before_file_id: string; after_file_id: string; created_at: string }
@@ -100,6 +101,19 @@ export async function saveStaffNote(enrollmentId: string, input: Pick<SuccessNot
   const values = { ...input, title: input.title.trim(), body: input.body.trim(), transcript: input.transcript.trim() };
   await written(previous ? db.from('mentorship_staff_notes').update(values).eq('id', previous.id).eq('updated_at', previous.updated_at)
     : db.from('mentorship_staff_notes').insert({ enrollment_id: enrollmentId, ...values }));
+}
+export async function saveOnboardingQuestionnaire(enrollmentId: string, plan: OnboardingPlan, date: string, source: string, transcript: string, previous?: SuccessNote): Promise<SuccessNote> {
+  if (source.trim() && !safeSourceUrl(source.trim())) throw new Error('Use an HTTPS recording link without login details.');
+  const values = { kind: 'onboarding', title: 'Onboarding call & week-one plan', body: onboardingNoteBody(plan), questionnaire: plan,
+    occurred_on: date, source_url: source.trim() || null, transcript: transcript.trim() };
+  const query = previous
+    ? db.from('mentorship_staff_notes').update(values).eq('id', previous.id).eq('enrollment_id', enrollmentId).eq('updated_at', previous.updated_at)
+    : db.from('mentorship_staff_notes').insert({ enrollment_id: enrollmentId, ...values });
+  const { data, error } = await query.select().maybeSingle();
+  if (error?.code === '23505') throw new Error('An onboarding questionnaire was just added by another staff member. Refresh to open it.');
+  if (error) throw error;
+  if (!data) throw new Error('This questionnaire changed or access was removed. Refresh before trying again. Your unsaved answers are still on screen.');
+  return data as SuccessNote;
 }
 export async function addStudentAction(enrollmentId: string, title: string, ownerId: string, dueOn: string) {
   if (!title.trim()) throw new Error('Enter a follow-up action.');

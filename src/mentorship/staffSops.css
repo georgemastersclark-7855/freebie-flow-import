@@ -1,0 +1,26 @@
+.sop-workspace { padding-bottom: 60px; }
+.sop-guide-card { display: flex; flex-direction: column; align-items: flex-start; position: relative; }
+.sop-guide-card > .ss-badge { position: absolute; right: 22px; top: 22px; }
+.sop-guide-card p { flex: 1; margin-bottom: 24px; }
+.sop-start { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 28px; }
+.sop-start p { max-width: 650px; }
+.sop-start .ss-button { flex-shrink: 0; }
+.sop-layout { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 26px; align-items: start; }
+.sop-step { scroll-margin-top: 90px; }
+.sop-step-heading { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+.sop-step-heading > span { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 8px; background: #edf3ff; color: #2857b6; font-size: 12px; font-weight: 700; }
+.sop-step ul { list-style: disc; padding-left: 20px; display: grid; gap: 14px; color: #475467; max-width: 78ch; }
+.sop-outline { position: sticky; top: 24px; }
+.sop-outline nav { display: grid; gap: 4px; margin: 16px 0 24px; }
+.sop-outline nav a { display: flex; align-items: baseline; gap: 10px; padding: 9px 5px; border-radius: 5px; color: #475467; font-size: 12px; }
+.sop-outline nav a:hover { background: #f1f5fb; color: #265ed7; }
+.sop-outline nav a span { color: #667085; font-size: 11px; }
+.sop-questionnaire { display: grid; gap: 20px; }
+.sop-questionnaire .ss-field + .ss-field { margin-top: 17px; }
+.sop-questionnaire .ss-field > span { font-weight: 400; color: #667085; }
+.sop-save-bar { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; position: sticky; bottom: 0; z-index: 5; background: #fff; border: 1px solid #ccd7e9; border-radius: 9px; padding: 14px 18px; box-shadow: 0 -4px 20px #18223008; }
+.sop-save-bar .ss-row { justify-content: flex-start; }
+.sop-check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: #344054; margin: 13px 0; }
+.sop-check input { margin-top: 4px; accent-color: #265ed7; }
+@media (max-width:1200px) { .sop-layout { grid-template-columns: 1fr; } .sop-outline { position: static; } .sop-layout > .sop-outline { order: -1; } .sop-outline nav { display: none; } }
+@media (max-width:650px) { .sop-start { flex-direction: column; align-items: stretch; } .sop-save-bar { position: static; } }

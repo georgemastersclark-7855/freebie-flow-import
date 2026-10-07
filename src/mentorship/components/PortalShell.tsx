@@ -38,11 +38,13 @@ const staffNavigation = [
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
   { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },
   { to: "/mentorship-portal/admin/schedule", label: "Calendar", icon: CalendarDays, adminOnly: false },
+  { to: "/mentorship-portal/admin/sops", label: "SOP library", icon: BookOpen, adminOnly: false },
 ];
 
 function isNavigationActive(to: string, label: string, pathname: string) {
   if (pathname === to) return true;
   if (label === "Cohorts & students") return pathname.startsWith(`${to}/`);
+  if (label === "SOP library") return pathname.startsWith(`${to}/`);
   if (label === "Studio Setup") return pathname.startsWith(`${to}/`);
   if (label === "Review queue") return pathname.startsWith("/mentorship-portal/admin/review/");
   return false;

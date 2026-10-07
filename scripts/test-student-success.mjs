@@ -49,8 +49,11 @@ const mockDb = {
   },
 };
 globalThis.__successTestDb=mockDb;
+const planJs = ts.transpileModule(readFileSync('src/mentorship/onboardingPlan.ts','utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+globalThis.__successOnboarding=await import(`data:text/javascript;base64,${Buffer.from(planJs).toString('base64')}`);
 const apiJs = ts.transpileModule(readFileSync('src/mentorship/studentSuccessApi.ts','utf8'), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
   .replace(/import \{ supabase \} from [^;]+;/, 'const supabase = globalThis.__successTestDb;')
+  .replace(/import \{ onboardingNoteBody \} from [^;]+;/, 'const { onboardingNoteBody } = globalThis.__successOnboarding;')
   .replace(/import \{ loadStudentProfilesForEnrollments \} from [^;]+;/, 'const loadStudentProfilesForEnrollments = async () => new Map();');
 const api = await import(`data:text/javascript;base64,${Buffer.from(apiJs).toString('base64')}`);
 const review=await api.loadSuccessReview('oldsubmission');
@@ -62,4 +65,5 @@ await assert.rejects(api.loadSuccessReview('oldsubmission'),/not been sent for r
 assert.equal(api.safeSourceUrl('javascript:alert(1)'),undefined);
 assert.equal(api.safeSourceUrl('https://user:password@example.com'),undefined);
 delete globalThis.__successTestDb;
+delete globalThis.__successOnboarding;
 console.log('Historical review loading, published feedback, walkthrough isolation, draft rejection and recording-link validation passed.');
