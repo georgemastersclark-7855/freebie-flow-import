@@ -9,6 +9,7 @@ import {
 } from "../scheduleAdminApi";
 import { calendarDayLabel, calendarEvents, calendarMonthDays, shiftCalendarMonth, type CalendarEvent } from "../staffCalendar";
 import { buildWeeklyPattern, editWeekDates, editCallDates, shiftLocal, shiftInstant, localDifference, restorePatternDate, type SchedulePlan, type PatternInput } from "../schedulePattern";
+import { timezoneLabel } from "../timezoneLabels";
 import { TimezoneReference } from "../components/ScheduleTimezone";
 import "../staffCalendar.css";
 
@@ -204,7 +205,7 @@ export function AdminSchedule() {
     </header>
     <div className="sc-context">
       <label className="sc-cohort">Cohort<select aria-label="Cohort" value={cohortId} disabled={loading} onChange={(event) => setCohortId(event.target.value)}>{cohorts.map((item) => <option key={item.id} value={item.id}>{item.displayName}</option>)}</select></label>
-      <span className="sc-timezone"><Globe2 size={15} />{timezone}<span>All times shown in this timezone</span></span>
+      <span className="sc-timezone"><Globe2 size={15} />{timezoneLabel(timezone)}<span>All times shown in this time zone</span></span>
     </div>
     {error && <div className="sc-error" role="alert">{error}<button className="sc-button" onClick={() => setRetry((value) => value + 1)}>Try again</button></div>}
     {loading ? <div className="sc-empty"><LoaderCircle size={22} className="animate-spin" />Loading calendar...</div> : !cohort ? <div className="sc-empty">No active or draft cohorts are available.</div> : !error && <div className="sc-layout">
@@ -251,7 +252,7 @@ export function AdminSchedule() {
       <DialogContent className={`staff-calendar sc-editor ${editor?.kind === "pattern" ? "sc-pattern-editor" : ""}`} onInteractOutside={(event) => event.preventDefault()}>
         <DialogTitle>{editor?.kind === "pattern" ? "Weekly pattern" : editor?.kind === "week" ? `Week ${editor.week.number} dates` : editor?.kind === "call" && editor.call ? "Edit group call" : "Add group call"}</DialogTitle>
         <DialogDescription className="sc-dialog-description">{editor?.kind === "pattern" ? "Set the first week and call. The remaining weeks follow every seven days, at the same local time." : editor?.kind === "week" ? "Control when students can access this week and when their work is due." : "Set the time and joining link for your live session."}</DialogDescription>
-        <div className="sc-editor-zone"><Globe2 size={15} />All times in {timezone}</div>
+        <div className="sc-editor-zone"><Globe2 size={15} />All times in {timezoneLabel(timezone)}</div>
         <form onSubmit={(event) => { event.preventDefault(); void save(); }}>
           <fieldset disabled={saving} className="sc-form">
             {editor?.kind === "call" && <Field label="Call topic" placeholder="e.g. Commercial Song Structure" value={draft.title} required onChange={(value) => change("title", value)} />}
@@ -270,7 +271,7 @@ export function AdminSchedule() {
             {editor?.kind === "week" && <p className="sc-hint">Leave a date blank if it's not confirmed yet.</p>}
             {editor?.kind !== "pattern" && draft.start && <p className="sc-hint">{(() => { try { return scheduleLocalPreview(draft.start, timezone); } catch { return "Check the date and time before saving."; } })()}</p>}
             {(editor?.kind === "call" || editor?.kind === "pattern") && <details className="sc-zone-details"><summary>Compare this call across time zones</summary><TimezoneReference timezone={timezone} value={editor.kind === "pattern" ? patternDraft?.callStartsAt : (() => { try { return keepInstant(draft.start, editor.call?.startsAt ?? null, timezone); } catch { return null; } })()} /></details>}
-            {(editor?.kind === "pattern" || seriesEligible && scope === "series") && <div className="sc-pattern-preview"><strong>Schedule preview</strong><p>One-off dates are kept. All times are in {timezone}.</p>{preview.plan && <div className="sc-preview-scroll"><table><thead><tr><th>Week</th><th>Opens</th><th>Deadline</th><th>Group call</th></tr></thead><tbody>{preview.plan.weeks.map((w) => { const c = preview.plan!.calls.find((c) => c.id === preview.plan!.pattern?.callIds[w.number]); return <tr key={w.id}><th>{w.number}</th><td>{shortDate(w.opensAt)}<small>{toLocal(w.opensAt, timezone).slice(11)}{preview.plan!.pattern?.weekExceptions[w.id]?.opensAt && " · One-off"}</small></td><td>{shortDate(w.deadlineAt)}<small>{toLocal(w.deadlineAt, timezone).slice(11)}{preview.plan!.pattern?.weekExceptions[w.id]?.deadlineAt && " · One-off"}</small></td><td>{shortDate(c?.startsAt ?? null)}<small>{toLocal(c?.startsAt ?? null, timezone).slice(11)}{c && preview.plan!.pattern?.callExceptions.includes(c.id) && " · One-off"}</small></td></tr>; })}</tbody></table></div>}</div>}
+            {(editor?.kind === "pattern" || seriesEligible && scope === "series") && <div className="sc-pattern-preview"><strong>Schedule preview</strong><p>One-off dates are kept. All times are in {timezoneLabel(timezone)}.</p>{preview.plan && <div className="sc-preview-scroll"><table><thead><tr><th>Week</th><th>Opens</th><th>Deadline</th><th>Group call</th></tr></thead><tbody>{preview.plan.weeks.map((w) => { const c = preview.plan!.calls.find((c) => c.id === preview.plan!.pattern?.callIds[w.number]); return <tr key={w.id}><th>{w.number}</th><td>{shortDate(w.opensAt)}<small>{toLocal(w.opensAt, timezone).slice(11)}{preview.plan!.pattern?.weekExceptions[w.id]?.opensAt && " · One-off"}</small></td><td>{shortDate(w.deadlineAt)}<small>{toLocal(w.deadlineAt, timezone).slice(11)}{preview.plan!.pattern?.weekExceptions[w.id]?.deadlineAt && " · One-off"}</small></td><td>{shortDate(c?.startsAt ?? null)}<small>{toLocal(c?.startsAt ?? null, timezone).slice(11)}{c && preview.plan!.pattern?.callExceptions.includes(c.id) && " · One-off"}</small></td></tr>; })}</tbody></table></div>}</div>}
             {preview.error && <p className="sc-error" role="alert">{preview.error}</p>}
             <p className="sc-save-note">Saving updates the schedule students see in the portal.</p>
             {editorError && <div className="sc-error" role="alert">{editorError}{saveUncertain && <button type="button" className="sc-button" onClick={() => { setEditor(undefined); setRetry((n) => n + 1); }}>Reload calendar</button>}</div>}

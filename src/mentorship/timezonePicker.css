@@ -1,0 +1,28 @@
+.tz-trigger { display:flex; align-items:center; gap:6px; min-width:0; max-width:100%; border:1px solid #393d46; border-radius:6px; background:#25282e; color:#e3e5e9; padding:5px 8px; font-size:11px; cursor:pointer; text-align:left; }
+.tz-trigger > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.tz-trigger > svg { flex-shrink:0; }
+.tz-trigger:focus-visible { outline:2px solid #9bbdfc; outline-offset:2px; }
+.tz-trigger.tz-light { background:#fff; border-color:#d0d5dd; color:#344054; font-size:12px; }
+.tz-popover { width:430px; max-width:calc(100vw - 24px); padding:0; z-index:100; background:#202227; border-color:#424650; color:#f3f4f6; font-family:Arial,sans-serif; --tz-muted:#adb4c0; --tz-line:#3b4049; --tz-selected:#343944; }
+.tz-popover.tz-light { background:#fff; border-color:#d0d5dd; color:#1d2939; --tz-muted:#667085; --tz-line:#e4e7ec; --tz-selected:#eef4ff; }
+.tz-popover [cmdk-root] { background:transparent; color:inherit; }
+.tz-popover [cmdk-input-wrapper] { border-color:var(--tz-line); }
+.tz-popover [cmdk-input] { font-size:13px; color:inherit; }
+.tz-popover [cmdk-input]::placeholder { color:var(--tz-muted); }
+.tz-popover [cmdk-list] { max-height:min(370px,50vh); }
+.tz-popover [cmdk-group] { color:inherit; padding:4px 6px; }
+.tz-popover [cmdk-group-heading] { color:var(--tz-muted); font-size:10px; text-transform:uppercase; letter-spacing:.06em; }
+.tz-popover [cmdk-item] { gap:10px; padding:8px; cursor:pointer; color:inherit; }
+.tz-popover [cmdk-item][data-selected=true] { background:var(--tz-selected); color:inherit; }
+.tz-option-text { flex:1; min-width:0; }
+.tz-option-text strong { display:block; font-size:12px; font-weight:600; }
+.tz-option-text small { display:block; color:var(--tz-muted); font-size:11px; margin-top:2px; line-height:1.4; }
+.tz-option-time { white-space:nowrap; font-size:11px; font-variant-numeric:tabular-nums; }
+.tz-list-hint { display:flex; justify-content:space-between; gap:10px; padding:9px 14px; color:var(--tz-muted); border-bottom:1px solid var(--tz-line); font-size:10px; }
+.tz-list-hint > span { white-space:nowrap; }
+.tz-show-all { padding:11px 14px; text-align:left; border-top:1px solid var(--tz-line); color:inherit; background:transparent; font-size:12px; cursor:pointer; }
+.tz-show-all:hover { background:var(--tz-selected); }
+.sc-timezone-reference dt { min-width:0; line-height:1.4; }
+.sc-timezone-reference dd { flex-shrink:0; white-space:nowrap; }
+.sc-timezone-reference > .sc-field { display:grid; gap:6px; }
+@media (max-width:639px) { .sc-editor .sc-timezone-reference dl { grid-template-columns:1fr; } }

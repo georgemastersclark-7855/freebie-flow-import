@@ -24,8 +24,3 @@ export function useScheduleTimezone() {
   };
   return { preference, timezone, setTimezone, formatTime: (value?: string) => localScheduleTime(value, timezone) };
 }
-export const referenceZones = ["Europe/London", "America/New_York", "America/Los_Angeles", "Europe/Berlin", "Asia/Dubai", "Asia/Kolkata", "Australia/Sydney"];
-export function timezoneOptions() {
-  const intl = Intl as typeof Intl & { supportedValuesOf?: (key: string) => string[] };
-  return [...new Set([deviceTimezone(), ...referenceZones, "UTC", ...intl.supportedValuesOf?.("timeZone") ?? []])].sort();
-}
