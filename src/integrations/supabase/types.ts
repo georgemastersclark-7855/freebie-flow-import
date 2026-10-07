@@ -14,6 +14,76 @@ export type Database = {
   }
   public: {
     Tables: {
+      mentorship_admissions_settings: {
+        Row: {
+          capacity: number
+          cash_target_minor: number | null
+          cohort_id: string
+          currency: string | null
+          seat_price_minor: number | null
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          cash_target_minor?: number | null
+          cohort_id: string
+          currency?: string | null
+          seat_price_minor?: number | null
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          cash_target_minor?: number | null
+          cohort_id?: string
+          currency?: string | null
+          seat_price_minor?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_admissions_settings_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: true
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_applications: {
+        Row: {
+          answers: Json
+          form_id: string
+          id: string
+          lead_id: string
+          response_id: string
+          submitted_at: string
+        }
+        Insert: {
+          answers: Json
+          form_id: string
+          id?: string
+          lead_id: string
+          response_id: string
+          submitted_at: string
+        }
+        Update: {
+          answers?: Json
+          form_id?: string
+          id?: string
+          lead_id?: string
+          response_id?: string
+          submitted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_applications_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mentorship_baselines: {
         Row: {
           enrollment_id: string
@@ -218,6 +288,30 @@ export type Database = {
           },
         ]
       }
+      mentorship_cohort_records: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          payload: Json
+          student_count: number | null
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          name: string
+          payload: Json
+          student_count?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          payload?: Json
+          student_count?: number | null
+        }
+        Relationships: []
+      }
       mentorship_cohorts: {
         Row: {
           circle_url: string | null
@@ -227,6 +321,8 @@ export type Database = {
           ends_at: string | null
           id: string
           internal_name: string
+          schedule_pattern: Json | null
+          schedule_revision: number
           slug: string
           starts_at: string | null
           status: string
@@ -241,6 +337,8 @@ export type Database = {
           ends_at?: string | null
           id?: string
           internal_name: string
+          schedule_pattern?: Json | null
+          schedule_revision?: number
           slug: string
           starts_at?: string | null
           status?: string
@@ -255,6 +353,8 @@ export type Database = {
           ends_at?: string | null
           id?: string
           internal_name?: string
+          schedule_pattern?: Json | null
+          schedule_revision?: number
           slug?: string
           starts_at?: string | null
           status?: string
@@ -270,6 +370,7 @@ export type Database = {
           created_at: string
           enrolled_at: string
           id: string
+          is_walkthrough: boolean
           onboarding_completed_at: string | null
           shopify_order_id: string | null
           status: Database["public"]["Enums"]["mentorship_enrollment_status"]
@@ -282,6 +383,7 @@ export type Database = {
           created_at?: string
           enrolled_at?: string
           id?: string
+          is_walkthrough?: boolean
           onboarding_completed_at?: string | null
           shopify_order_id?: string | null
           status?: Database["public"]["Enums"]["mentorship_enrollment_status"]
@@ -294,6 +396,7 @@ export type Database = {
           created_at?: string
           enrolled_at?: string
           id?: string
+          is_walkthrough?: boolean
           onboarding_completed_at?: string | null
           shopify_order_id?: string | null
           status?: Database["public"]["Enums"]["mentorship_enrollment_status"]
@@ -419,6 +522,405 @@ export type Database = {
           },
         ]
       }
+      mentorship_intake_connections: {
+        Row: {
+          account_label: string
+          cohort_id: string
+          detail: string
+          last_checked_at: string | null
+          last_received_at: string | null
+          provider: string
+          status: string
+        }
+        Insert: {
+          account_label?: string
+          cohort_id: string
+          detail?: string
+          last_checked_at?: string | null
+          last_received_at?: string | null
+          provider: string
+          status?: string
+        }
+        Update: {
+          account_label?: string
+          cohort_id?: string
+          detail?: string
+          last_checked_at?: string | null
+          last_received_at?: string | null
+          provider?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_intake_connections_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_intake_events: {
+        Row: {
+          cohort_id: string
+          external_id: string
+          id: string
+          lead_id: string
+          occurred_at: string
+          provider: string
+          received_at: string
+          source_url: string | null
+          summary: string
+        }
+        Insert: {
+          cohort_id: string
+          external_id: string
+          id?: string
+          lead_id: string
+          occurred_at: string
+          provider: string
+          received_at?: string
+          source_url?: string | null
+          summary: string
+        }
+        Update: {
+          cohort_id?: string
+          external_id?: string
+          id?: string
+          lead_id?: string
+          occurred_at?: string
+          provider?: string
+          received_at?: string
+          source_url?: string | null
+          summary?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_intake_events_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_intake_events_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_lead_activity: {
+        Row: {
+          actor_id: string | null
+          body: string
+          created_at: string
+          id: string
+          kind: string
+          lead_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          body: string
+          created_at?: string
+          id?: string
+          kind: string
+          lead_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          lead_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_lead_activity_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "mentorship_lead_activity_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_lead_milestones: {
+        Row: {
+          cohort_id: string
+          evidence: string
+          lead_id: string
+          milestone: string
+          occurred_at: string
+        }
+        Insert: {
+          cohort_id: string
+          evidence: string
+          lead_id: string
+          milestone: string
+          occurred_at: string
+        }
+        Update: {
+          cohort_id?: string
+          evidence?: string
+          lead_id?: string
+          milestone?: string
+          occurred_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_lead_milestones_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_lead_milestones_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_lead_payments: {
+        Row: {
+          amount_minor: number
+          cohort_id: string
+          created_at: string
+          created_by: string | null
+          currency: string
+          id: string
+          kind: string
+          lead_id: string
+          note: string
+          paid_on: string
+          provider: string
+          reference: string
+          void_reason: string | null
+          voided_at: string | null
+        }
+        Insert: {
+          amount_minor: number
+          cohort_id: string
+          created_at?: string
+          created_by?: string | null
+          currency: string
+          id?: string
+          kind: string
+          lead_id: string
+          note?: string
+          paid_on: string
+          provider: string
+          reference: string
+          void_reason?: string | null
+          voided_at?: string | null
+        }
+        Update: {
+          amount_minor?: number
+          cohort_id?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          id?: string
+          kind?: string
+          lead_id?: string
+          note?: string
+          paid_on?: string
+          provider?: string
+          reference?: string
+          void_reason?: string | null
+          voided_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_lead_payments_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_lead_payments_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "mentorship_lead_payments_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_leads: {
+        Row: {
+          application_url: string | null
+          cohort_id: string
+          created_at: string
+          created_by: string | null
+          due_on: string | null
+          email: string
+          email_thread_url: string | null
+          enrollment_id: string | null
+          first_contact_channel: string
+          full_name: string
+          goals: string
+          id: string
+          music_url: string | null
+          next_action: string
+          owner_id: string | null
+          payment_on: string | null
+          payment_reference: string
+          payment_status: string
+          source: string
+          source_detail: string
+          stage: string
+          updated_at: string
+        }
+        Insert: {
+          application_url?: string | null
+          cohort_id: string
+          created_at?: string
+          created_by?: string | null
+          due_on?: string | null
+          email: string
+          email_thread_url?: string | null
+          enrollment_id?: string | null
+          first_contact_channel?: string
+          full_name: string
+          goals?: string
+          id?: string
+          music_url?: string | null
+          next_action?: string
+          owner_id?: string | null
+          payment_on?: string | null
+          payment_reference?: string
+          payment_status?: string
+          source?: string
+          source_detail?: string
+          stage?: string
+          updated_at?: string
+        }
+        Update: {
+          application_url?: string | null
+          cohort_id?: string
+          created_at?: string
+          created_by?: string | null
+          due_on?: string | null
+          email?: string
+          email_thread_url?: string | null
+          enrollment_id?: string | null
+          first_contact_channel?: string
+          full_name?: string
+          goals?: string
+          id?: string
+          music_url?: string | null
+          next_action?: string
+          owner_id?: string | null
+          payment_on?: string | null
+          payment_reference?: string
+          payment_status?: string
+          source?: string
+          source_detail?: string
+          stage?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_leads_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_leads_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "mentorship_leads_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: true
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_leads_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      mentorship_onboarding_calls: {
+        Row: {
+          booked_at: string | null
+          completed_at: string | null
+          enrollment_id: string
+          notes: string
+          owner_id: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          booked_at?: string | null
+          completed_at?: string | null
+          enrollment_id: string
+          notes?: string
+          owner_id?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          booked_at?: string | null
+          completed_at?: string | null
+          enrollment_id?: string
+          notes?: string
+          owner_id?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_onboarding_calls_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: true
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_onboarding_calls_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "mentorship_onboarding_calls_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       mentorship_onboarding_progress: {
         Row: {
           completed_at: string | null
@@ -532,6 +1034,65 @@ export type Database = {
         }
         Relationships: []
       }
+      mentorship_progress_examples: {
+        Row: {
+          after_file_id: string
+          before_file_id: string
+          created_at: string
+          created_by: string
+          enrollment_id: string
+          id: string
+          title: string
+        }
+        Insert: {
+          after_file_id: string
+          before_file_id: string
+          created_at?: string
+          created_by?: string
+          enrollment_id: string
+          id?: string
+          title: string
+        }
+        Update: {
+          after_file_id?: string
+          before_file_id?: string
+          created_at?: string
+          created_by?: string
+          enrollment_id?: string
+          id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_progress_examples_after_file_id_fkey"
+            columns: ["after_file_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_submission_files"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_progress_examples_before_file_id_fkey"
+            columns: ["before_file_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_submission_files"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_progress_examples_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "mentorship_progress_examples_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mentorship_resources: {
         Row: {
           cohort_id: string
@@ -584,6 +1145,217 @@ export type Database = {
             columns: ["cohort_id"]
             isOneToOne: false
             referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_staff_notes: {
+        Row: {
+          body: string
+          call_id: string | null
+          created_at: string
+          created_by: string
+          enrollment_id: string
+          id: string
+          kind: string
+          occurred_on: string
+          questionnaire: Json | null
+          source_url: string | null
+          title: string
+          transcript: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          call_id?: string | null
+          created_at?: string
+          created_by?: string
+          enrollment_id: string
+          id?: string
+          kind: string
+          occurred_on?: string
+          questionnaire?: Json | null
+          source_url?: string | null
+          title: string
+          transcript?: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          call_id?: string | null
+          created_at?: string
+          created_by?: string
+          enrollment_id?: string
+          id?: string
+          kind?: string
+          occurred_on?: string
+          questionnaire?: Json | null
+          source_url?: string | null
+          title?: string
+          transcript?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_staff_notes_call_id_fkey"
+            columns: ["call_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_calls"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_staff_notes_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "mentorship_staff_notes_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_student_actions: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          created_by: string
+          due_on: string | null
+          enrollment_id: string
+          id: string
+          owner_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string
+          due_on?: string | null
+          enrollment_id: string
+          id?: string
+          owner_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string
+          due_on?: string | null
+          enrollment_id?: string
+          id?: string
+          owner_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_student_actions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "mentorship_student_actions_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_student_actions_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      mentorship_student_context: {
+        Row: {
+          current_focus: string
+          enrollment_id: string
+          goals: string
+          updated_at: string
+          updated_by: string
+        }
+        Insert: {
+          current_focus?: string
+          enrollment_id: string
+          goals?: string
+          updated_at?: string
+          updated_by?: string
+        }
+        Update: {
+          current_focus?: string
+          enrollment_id?: string
+          goals?: string
+          updated_at?: string
+          updated_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_student_context_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: true
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_student_context_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      mentorship_student_profiles: {
+        Row: {
+          artist_name: string | null
+          completed_at: string
+          daw: string | null
+          display_name: string
+          enrollment_id: string
+          instagram: string | null
+          music_url: string | null
+          photo_path: string
+          updated_at: string
+        }
+        Insert: {
+          artist_name?: string | null
+          completed_at?: string
+          daw?: string | null
+          display_name: string
+          enrollment_id: string
+          instagram?: string | null
+          music_url?: string | null
+          photo_path: string
+          updated_at?: string
+        }
+        Update: {
+          artist_name?: string | null
+          completed_at?: string
+          daw?: string | null
+          display_name?: string
+          enrollment_id?: string
+          instagram?: string | null
+          music_url?: string | null
+          photo_path?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_student_profiles_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: true
+            referencedRelation: "mentorship_enrollments"
             referencedColumns: ["id"]
           },
         ]
@@ -732,6 +1504,47 @@ export type Database = {
           },
         ]
       }
+      mentorship_typeform_routes: {
+        Row: {
+          accepts_from: string
+          cohort_id: string
+          connected_at: string | null
+          enabled: boolean
+          field_map: Json
+          form_id: string
+          form_title: string
+          secret_id: string
+        }
+        Insert: {
+          accepts_from?: string
+          cohort_id: string
+          connected_at?: string | null
+          enabled?: boolean
+          field_map?: Json
+          form_id: string
+          form_title?: string
+          secret_id: string
+        }
+        Update: {
+          accepts_from?: string
+          cohort_id?: string
+          connected_at?: string | null
+          enabled?: boolean
+          field_map?: Json
+          form_id?: string
+          form_title?: string
+          secret_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_typeform_routes_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mentorship_weeks: {
         Row: {
           brief: string
@@ -793,9 +1606,39 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_manage_mentorship_student: {
+        Args: { target_enrollment: string }
+        Returns: boolean
+      }
       confirm_mentorship_feedback_action: {
         Args: { next_action_text: string; target_feedback_id: string }
         Returns: string
+      }
+      get_mentorship_typeform_route: {
+        Args: { p_form_id: string }
+        Returns: Json
+      }
+      ingest_mentorship_lead: {
+        Args: {
+          p_cohort_id: string
+          p_external_id: string
+          p_lead: Json
+          p_occurred_at: string
+          p_provider: string
+          p_summary: string
+        }
+        Returns: Json
+      }
+      ingest_mentorship_typeform: {
+        Args: {
+          p_answers: Json
+          p_form_id: string
+          p_lead: Json
+          p_response_id: string
+          p_submitted_at: string
+          p_summary: string
+        }
+        Returns: Json
       }
       is_mentorship_member: {
         Args: { target_cohort_id: string }
@@ -806,9 +1649,127 @@ export type Database = {
         Args: { target_feedback_id: string }
         Returns: string
       }
+      mentorship_student_avatar_can_read: {
+        Args: { object_name: string }
+        Returns: boolean
+      }
+      mentorship_student_avatar_can_upload: {
+        Args: { object_name: string }
+        Returns: boolean
+      }
+      mentorship_student_avatar_metadata_is_allowed: {
+        Args: { object_metadata: Json; object_name: string }
+        Returns: boolean
+      }
+      mentorship_submission_object_is_released: {
+        Args: { object_name: string }
+        Returns: boolean
+      }
+      mentorship_week_is_released: {
+        Args: { target_week_id: string }
+        Returns: boolean
+      }
+      open_mentorship_walkthrough: { Args: never; Returns: string }
       owns_mentorship_enrollment: {
         Args: { target_enrollment_id: string }
         Returns: boolean
+      }
+      prepare_mentorship_typeform: {
+        Args: {
+          p_cohort_id: string
+          p_field_map: Json
+          p_form_id: string
+          p_form_title: string
+        }
+        Returns: Json
+      }
+      publish_mentorship_walkthrough_feedback: {
+        Args: {
+          action_text: string
+          audio_name?: string
+          audio_path?: string
+          notes: string
+          target_submission_id: string
+          video_link?: string
+        }
+        Returns: Json
+      }
+      record_mentorship_payment: {
+        Args: {
+          p_amount_minor: number
+          p_currency: string
+          p_kind: string
+          p_lead_id: string
+          p_note?: string
+          p_paid_on: string
+          p_provider: string
+          p_reference: string
+        }
+        Returns: {
+          amount_minor: number
+          cohort_id: string
+          created_at: string
+          created_by: string | null
+          currency: string
+          id: string
+          kind: string
+          lead_id: string
+          note: string
+          paid_on: string
+          provider: string
+          reference: string
+          void_reason: string | null
+          voided_at: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "mentorship_lead_payments"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      reset_mentorship_walkthrough: {
+        Args: { target_enrollment_id: string }
+        Returns: undefined
+      }
+      save_mentorship_schedule: {
+        Args: {
+          p_calls: Json
+          p_cohort_id: string
+          p_expected: Json
+          p_pattern: Json
+          p_revision: number
+          p_weeks: Json
+        }
+        Returns: undefined
+      }
+      save_mentorship_student_profile: {
+        Args: {
+          artist_name_value?: string
+          daw_value?: string
+          display_name_value: string
+          instagram_value?: string
+          music_url_value?: string
+          photo_path_value?: string
+          target_enrollment_id: string
+        }
+        Returns: {
+          artist_name: string | null
+          completed_at: string
+          daw: string | null
+          display_name: string
+          enrollment_id: string
+          instagram: string | null
+          music_url: string | null
+          photo_path: string
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "mentorship_student_profiles"
+          isOneToOne: true
+          isSetofReturn: false
+        }
       }
       start_mentorship_submission: {
         Args: { target_submission_id: string }
@@ -817,6 +1778,10 @@ export type Database = {
       submit_mentorship_week: {
         Args: { target_submission_id: string }
         Returns: string
+      }
+      void_mentorship_payment: {
+        Args: { p_payment_id: string; p_reason: string }
+        Returns: undefined
       }
     }
     Enums: {

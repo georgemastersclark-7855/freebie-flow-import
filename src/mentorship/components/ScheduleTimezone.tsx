@@ -19,7 +19,7 @@ function TimezoneSelect({ value, onChange, label, automatic = false, date, light
   const groups = [...new Set(filtered.map((item) => item.group))];
   const choose = (zone: string) => { onChange(zone); setOpen(false); setQuery(""); setShowAll(false); };
   return <Popover open={open} onOpenChange={(next) => { setOpen(next); if (!next) { setQuery(""); setShowAll(false); } }}>
-    <PopoverTrigger asChild><button type="button" className={`tz-trigger${light ? " tz-light" : ""}`} aria-label={`${label}: ${value === "auto" ? "Automatic, " : ""}${timezoneLabel(selected)}`}><Globe2 size={14} /><span>{value === "auto" ? `Your local time · ${timezoneLocation(selected).places.split(" · ").at(-1)}` : timezoneLabel(selected)}</span><ChevronDown size={13} /></button></PopoverTrigger>
+    <PopoverTrigger asChild><button type="button" className={`tz-trigger${light ? " tz-light" : ""}`} aria-label={`${label}: ${value === "auto" ? "Automatic, " : ""}${timezoneLabel(selected)}`}><Globe2 size={14} /><span>{value === "auto" ? `Your local time · ${timezoneLocation(selected).places.split(" · ").slice(-1)[0]}` : timezoneLabel(selected)}</span><ChevronDown size={13} /></button></PopoverTrigger>
     <PopoverContent align="end" className={`tz-popover${light ? " tz-light" : ""}`}>
       <Command shouldFilter={false}>
         <CommandInput aria-label="Search time zones" placeholder="Search city, country or time zone…" value={query} onValueChange={setQuery} />
