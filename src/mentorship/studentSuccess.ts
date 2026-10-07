@@ -14,7 +14,7 @@ export function studentProgress(data: CohortWorkspace, student: SuccessEnrollmen
     starters: data.files.filter(f => ids.has(f.submission_id) && f.kind === 'idea').length,
     surgeries: data.surgeries.filter(s => ids.has(s.submission_id) && s.delivered_at).length,
     missingWeeks, reviews, actions, needsAttention,
-    lastActivity: submissions.map(s => s.updated_at).sort().at(-1),
+    lastActivity: submissions.map(s => s.updated_at).sort().slice(-1)[0],
   };
 }
 export function fileWeek(data: Pick<StudentWorkspace, 'submissions' | 'weeks'>, file: SuccessFile) {
