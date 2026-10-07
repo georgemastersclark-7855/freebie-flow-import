@@ -49,9 +49,28 @@ export type Database = {
           },
         ]
       }
+      mentorship_application_rate_limits: {
+        Row: {
+          hit_at: string
+          key_hash: string
+          key_type: string
+        }
+        Insert: {
+          hit_at?: string
+          key_hash: string
+          key_type: string
+        }
+        Update: {
+          hit_at?: string
+          key_hash?: string
+          key_type?: string
+        }
+        Relationships: []
+      }
       mentorship_applications: {
         Row: {
           answers: Json
+          attribution: Json
           form_id: string
           id: string
           lead_id: string
@@ -60,6 +79,7 @@ export type Database = {
         }
         Insert: {
           answers: Json
+          attribution?: Json
           form_id: string
           id?: string
           lead_id: string
@@ -68,6 +88,7 @@ export type Database = {
         }
         Update: {
           answers?: Json
+          attribution?: Json
           form_id?: string
           id?: string
           lead_id?: string
@@ -121,6 +142,123 @@ export type Database = {
             columns: ["enrollment_id"]
             isOneToOne: true
             referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_booking_events: {
+        Row: {
+          cohort_id: string
+          email: string
+          event_type: string
+          external_event_id: string
+          id: string
+          invitee_uri: string
+          provider_updated_at: string
+          received_at: string
+          rescheduled_at: string | null
+          rescheduled_to_invitee_uri: string | null
+          scheduled_at: string | null
+        }
+        Insert: {
+          cohort_id: string
+          email: string
+          event_type: string
+          external_event_id: string
+          id?: string
+          invitee_uri: string
+          provider_updated_at: string
+          received_at?: string
+          rescheduled_at?: string | null
+          rescheduled_to_invitee_uri?: string | null
+          scheduled_at?: string | null
+        }
+        Update: {
+          cohort_id?: string
+          email?: string
+          event_type?: string
+          external_event_id?: string
+          id?: string
+          invitee_uri?: string
+          provider_updated_at?: string
+          received_at?: string
+          rescheduled_at?: string | null
+          rescheduled_to_invitee_uri?: string | null
+          scheduled_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_booking_events_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_booking_inbox: {
+        Row: {
+          cohort_id: string
+          email: string
+          enrollment_id: string | null
+          id: string
+          invitee_uri: string
+          lead_id: string | null
+          provider_updated_at: string
+          received_at: string
+          rescheduled_to_invitee_uri: string | null
+          scheduled_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          cohort_id: string
+          email: string
+          enrollment_id?: string | null
+          id?: string
+          invitee_uri: string
+          lead_id?: string | null
+          provider_updated_at: string
+          received_at?: string
+          rescheduled_to_invitee_uri?: string | null
+          scheduled_at?: string | null
+          status: string
+          updated_at?: string
+        }
+        Update: {
+          cohort_id?: string
+          email?: string
+          enrollment_id?: string | null
+          id?: string
+          invitee_uri?: string
+          lead_id?: string | null
+          provider_updated_at?: string
+          received_at?: string
+          rescheduled_to_invitee_uri?: string | null
+          scheduled_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_booking_inbox_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_booking_inbox_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_booking_inbox_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
             referencedColumns: ["id"]
           },
         ]
@@ -869,9 +1007,40 @@ export type Database = {
           },
         ]
       }
+      mentorship_native_application_routes: {
+        Row: {
+          cohort_id: string
+          created_at: string
+          enabled: boolean
+          form_id: string
+        }
+        Insert: {
+          cohort_id: string
+          created_at?: string
+          enabled?: boolean
+          form_id: string
+        }
+        Update: {
+          cohort_id?: string
+          created_at?: string
+          enabled?: boolean
+          form_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_native_application_routes_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mentorship_onboarding_calls: {
         Row: {
           booked_at: string | null
+          calendly_invitee_uri: string | null
+          calendly_updated_at: string | null
           completed_at: string | null
           enrollment_id: string
           notes: string
@@ -881,6 +1050,8 @@ export type Database = {
         }
         Insert: {
           booked_at?: string | null
+          calendly_invitee_uri?: string | null
+          calendly_updated_at?: string | null
           completed_at?: string | null
           enrollment_id: string
           notes?: string
@@ -890,6 +1061,8 @@ export type Database = {
         }
         Update: {
           booked_at?: string | null
+          calendly_invitee_uri?: string | null
+          calendly_updated_at?: string | null
           completed_at?: string | null
           enrollment_id?: string
           notes?: string
@@ -1618,6 +1791,20 @@ export type Database = {
         Args: { p_form_id: string }
         Returns: Json
       }
+      ingest_calendly_booking_event: {
+        Args: {
+          p_cohort_id: string
+          p_email: string
+          p_event_type: string
+          p_external_event_id: string
+          p_invitee_uri: string
+          p_provider_updated_at: string
+          p_rescheduled_at?: string
+          p_rescheduled_to_invitee_uri?: string
+          p_scheduled_at: string
+        }
+        Returns: Json
+      }
       ingest_mentorship_lead: {
         Args: {
           p_cohort_id: string
@@ -1775,9 +1962,25 @@ export type Database = {
         Args: { target_submission_id: string }
         Returns: Database["public"]["Enums"]["mentorship_submission_state"]
       }
+      submit_mentorship_application: {
+        Args: {
+          p_answers: Json
+          p_attribution: Json
+          p_email_hash: string
+          p_form_id: string
+          p_ip_hash: string
+          p_lead: Json
+          p_submission_id: string
+        }
+        Returns: Json
+      }
       submit_mentorship_week: {
         Args: { target_submission_id: string }
         Returns: string
+      }
+      sync_mentorship_booking_for_enrollment: {
+        Args: { p_enrollment_id: string }
+        Returns: undefined
       }
       void_mentorship_payment: {
         Args: { p_payment_id: string; p_reason: string }
