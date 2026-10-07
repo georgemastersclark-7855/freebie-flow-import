@@ -120,3 +120,9 @@
 .crm-calendar-outside { opacity:.4; }
 .crm-date-shortcuts { display:flex; padding:11px; justify-content:space-between; border-top:1px solid #e9edf5; }
 .crm-date-shortcuts button { padding:4px 8px; font-size:11px; border-radius:5px; background:#f2f5fa; }
+.crm-intake-status{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0;color:#64748b;font-size:12px}
+.crm-intake-status button{display:flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #dce2eb;border-radius:7px;background:#fff;text-align:left}
+.crm-intake-status button:hover{border-color:#94a3b8}
+.crm-connection-dot{width:7px;height:7px;border-radius:50%;background:#d69a26;flex-shrink:0}
+.crm-dot-connected{background:#15905b}
+.crm-source-links{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}

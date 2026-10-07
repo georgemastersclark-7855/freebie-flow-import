@@ -9,16 +9,18 @@ async function rows<T>(table: string, select: string, filter: (q:any)=>any = q=>
   for(let offset=0;;offset+=500) { const {data,error}=await filter(db.from(table).select(select)).order(order).range(offset,offset+499); if(error)throw error; all.push(...data); if(data.length<500)return all; }
 }
 export interface CrmStudent extends SuccessEnrollment { call?: OnboardingCall; questionnaire?: unknown; focus: string; openActions: number }
-export interface CrmWorkspace { leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number }
+export interface IntakeConnection { provider: 'gmail'|'typeform'; status: 'setup_needed'|'backfilled'|'connected'|'paused'|'error'; account_label: string; last_checked_at: string|null; last_received_at: string|null; detail: string }
+export interface CrmWorkspace { leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; intake: IntakeConnection[] }
 export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
   const {data:auth}=await supabase.auth.getUser(); if(!auth.user)throw new Error('Sign in to open admissions.');
-  const [leads, enrollments, staff, settings]=await Promise.all([
+  const [leads, enrollments, staff, settings, intake]=await Promise.all([
     rows<Lead>('mentorship_leads','*',q=>q.eq('cohort_id',cohortId)),
     rows<Omit<SuccessEnrollment,'name'|'email'>>('mentorship_enrollments','id,cohort_id,user_id,status,is_walkthrough,enrolled_at',q=>q.eq('cohort_id',cohortId).or(`is_walkthrough.eq.false,user_id.eq.${auth.user!.id}`)),
     rows<StaffPerson>('mentorship_profiles','user_id,full_name',q=>q.in('role',['coach','admin']),'user_id'),
     rows<{capacity:number}>('mentorship_admissions_settings','capacity',q=>q.eq('cohort_id',cohortId),'cohort_id'),
+    rows<IntakeConnection>('mentorship_intake_connections','provider,status,account_label,last_checked_at,last_received_at,detail',q=>q.eq('cohort_id',cohortId),'provider'),
   ]);
-  if(!enrollments.length)return {leads,students:[],staff,capacity:settings[0]?.capacity??10};
+  if(!enrollments.length)return {leads,students:[],staff,capacity:settings[0]?.capacity??10,intake};
   const ids=enrollments.map(e=>e.id);
   const [profiles,identities,calls,notes,contexts,actions]=await Promise.all([
     loadStudentProfilesForEnrollments(ids),
@@ -28,7 +30,7 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
     rows<{enrollment_id:string;current_focus:string}>('mentorship_student_context','enrollment_id,current_focus',q=>q.in('enrollment_id',ids),'enrollment_id'),
     rows<{enrollment_id:string}>('mentorship_student_actions','id,enrollment_id',q=>q.in('enrollment_id',ids).is('completed_at',null)),
   ]);
-  return {leads,staff,capacity:settings[0]?.capacity??10,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
+  return {leads,staff,intake,capacity:settings[0]?.capacity??10,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
 }
 export async function saveLead(input:LeadInput, previous?:Lead):Promise<Lead> {
   const values=normaliseLead(input);
