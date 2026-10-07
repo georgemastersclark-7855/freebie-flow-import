@@ -8,3 +8,9 @@ verify_jwt = false
 
 [functions.publish-mentorship-feedback]
 verify_jwt = true
+
+[functions.connect-mentorship-typeform]
+verify_jwt = false
+
+[functions.mentorship-typeform-webhook]
+verify_jwt = false
