@@ -11,6 +11,7 @@ import {
   Library,
   Package,
   Users,
+  Contact,
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -34,6 +35,7 @@ const studentNavigation = [
 ];
 
 const staffNavigation = [
+  { to: "/mentorship-portal/admin/crm/leads", label: "Leads & onboarding", icon: Contact, adminOnly: false },
   { to: "/mentorship-portal/admin/cohorts", label: "Cohorts & students", icon: Users, adminOnly: false },
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
   { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },
@@ -43,6 +45,7 @@ const staffNavigation = [
 
 function isNavigationActive(to: string, label: string, pathname: string) {
   if (pathname === to) return true;
+  if (label === "Leads & onboarding") return pathname.startsWith('/mentorship-portal/admin/crm/');
   if (label === "Cohorts & students") return pathname.startsWith(`${to}/`);
   if (label === "SOP library") return pathname.startsWith(`${to}/`);
   if (label === "Studio Setup") return pathname.startsWith(`${to}/`);

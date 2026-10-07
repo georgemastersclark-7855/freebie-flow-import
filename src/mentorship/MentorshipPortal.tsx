@@ -19,6 +19,7 @@ import { AdminStudentRecord } from "./pages/AdminStudentRecord";
 import { AdminCohortRecords } from "./pages/AdminCohortRecords";
 import { AdminVideos } from "./pages/AdminVideos";
 import { AdminSops } from "./pages/AdminSops";
+import { AdminCrm } from "./pages/AdminCrm";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "./portal.css";
 import { portalHome } from "./utils";
@@ -116,6 +117,9 @@ export default function MentorshipPortal() {
             <Route path="week/:weekNumber" element={<WeekWorkspace />} />
           </Route>
           <Route element={<StaffOnly />}>
+            <Route path="admin/crm" element={<Navigate to="/mentorship-portal/admin/crm/leads" replace />} />
+            <Route path="admin/crm/leads" element={<AdminCrm />} />
+            <Route path="admin/crm/onboarding" element={<AdminCrm />} />
             <Route path="admin" element={<AdminHome />} />
             <Route path="admin/cohorts" element={<AdminCohorts />} />
             <Route path="admin/cohorts/records/:recordCohortId" element={<AdminCohortRecords />} />
