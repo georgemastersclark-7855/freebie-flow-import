@@ -71,6 +71,7 @@ const App = () => {
             <Route path="/links" element={<LinkInBio />} />
             <Route path="/mentorship" element={<Mentorship />} />
             <Route path="/mentorship/apply" element={<MentorshipApplication />} />
+            <Route path="/mentorship/apply/:slug" element={<MentorshipApplication />} />
             <Route path="/mentorship-september" element={<MentorshipSeptember />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
             <Route path="/mentorship-demo/*" element={<Navigate to="/mentorship-portal" replace />} />

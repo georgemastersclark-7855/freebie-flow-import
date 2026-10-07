@@ -15,6 +15,8 @@ const preloadMap: Record<string, () => Promise<unknown>> = {
 };
 if (window.location.pathname.startsWith('/mentorship-portal')) {
   import('./mentorship/MentorshipPortal');
+} else if (window.location.pathname.startsWith('/mentorship/apply/')) {
+  import('./pages/MentorshipApplication');
 } else {
   preloadMap[window.location.pathname]?.();
 }

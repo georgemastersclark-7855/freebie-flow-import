@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Settings, Video } from "lucide-react";
+import { ChevronDown, Settings, Video, FileText } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cx } from "../utils";
 
+const formsPath = "/mentorship-portal/admin/application-forms";
 const videosPath = "/mentorship-portal/admin/videos";
 
 export function StaffSettingsNavigation({ mobile = false, onNavigate }: { mobile?: boolean; onNavigate?: () => void }) {
   const { pathname } = useLocation();
-  const active = pathname === videosPath;
+  const formsActive = pathname.startsWith(formsPath);
+  const active = pathname === videosPath || formsActive;
   const [open, setOpen] = useState(active);
 
   useEffect(() => {
-    if (pathname === videosPath) setOpen(true);
+    if (pathname === videosPath || pathname.startsWith(formsPath)) setOpen(true);
   }, [pathname]);
 
   return <nav aria-label="Portal settings">
@@ -28,9 +30,10 @@ export function StaffSettingsNavigation({ mobile = false, onNavigate }: { mobile
       </CollapsibleTrigger>
       <CollapsibleContent className="mp-week-navigation-content">
         <div className="ml-5 mt-1 border-l border-white/10 pl-3">
-          <Link to={videosPath} onClick={onNavigate} aria-current={active ? "page" : undefined} className={cx(
+          <Link to={formsPath} onClick={onNavigate} aria-current={formsActive ? "page" : undefined} className={cx("mp-focus-ring flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm transition", formsActive ? "bg-white/10 font-semibold text-white" : "text-[#aaa99f] hover:bg-white/[0.04] hover:text-white")}><FileText size={16} aria-hidden="true" />Application forms</Link>
+          <Link to={videosPath} onClick={onNavigate} aria-current={pathname === videosPath ? "page" : undefined} className={cx(
             "mp-focus-ring flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm transition",
-            active ? "bg-white/10 font-semibold text-white" : "text-[#aaa99f] hover:bg-white/[0.04] hover:text-white",
+            pathname === videosPath ? "bg-white/10 font-semibold text-white" : "text-[#aaa99f] hover:bg-white/[0.04] hover:text-white",
           )}><Video size={16} aria-hidden="true" />Manage videos</Link>
         </div>
       </CollapsibleContent>

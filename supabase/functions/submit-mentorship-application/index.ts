@@ -1,16 +1,23 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { MENTORSHIP_APPLICATION_FORM_ID, parseMentorshipApplication, type ParsedMentorshipApplication } from '../_shared/mentorshipApplication.ts';
+import {
+  buildApplicationLead,
+  validateApplicationAnswers,
+  validateApplicationAttribution,
+  validateFormConfig,
+  type ApplicationAttribution,
+  type ApplicationFormConfig,
+  type ValidatedApplication,
+} from '../_shared/applicationFormSchema.ts';
 
-const allowedOrigins = new Set([
-  'https://audio.roblate.com',
-  'https://freebie-finder-friend.lovable.app',
-]);
-const MAX_BODY_BYTES = 16_000;
+const DEFAULT_FORM_ID = 'cohort-2-v1';
+const LEGACY_FORM_VERSION = 'cohort-2-v1';
+const MAX_BODY_BYTES = 160_000;
+const allowedOrigins = new Set(['https://audio.roblate.com', 'https://freebie-finder-friend.lovable.app']);
 
 function corsHeaders(origin: string | null): HeadersInit {
   return {
     'Access-Control-Allow-Origin': origin ?? 'null',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'authorization, apikey, content-type, x-client-info',
     'Access-Control-Max-Age': '600',
     'Vary': 'Origin',
@@ -27,9 +34,7 @@ function originAllowed(origin: string | null): boolean {
   try {
     const parsed = new URL(origin);
     return parsed.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(parsed.hostname) && Boolean(parsed.port);
-  } catch {
-    return false;
-  }
+  } catch { return false; }
 }
 
 async function hashRateKey(secret: string, kind: 'ip' | 'email', value: string): Promise<string> {
@@ -54,10 +59,7 @@ async function readLimitedBody(req: Request): Promise<string | null> {
     const { done, value } = await reader.read();
     if (done) break;
     size += value.byteLength;
-    if (size > MAX_BODY_BYTES) {
-      await reader.cancel();
-      return null;
-    }
+    if (size > MAX_BODY_BYTES) { await reader.cancel(); return null; }
     chunks.push(value);
   }
   const bytes = new Uint8Array(size);
@@ -66,35 +68,92 @@ async function readLimitedBody(req: Request): Promise<string | null> {
   return new TextDecoder().decode(bytes);
 }
 
+function makeDb() {
+  const url = Deno.env.get('SUPABASE_URL');
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  if (!url || !serviceKey) throw new Error('Service unavailable');
+  return { db: createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } }), serviceKey };
+}
+
+async function loadRevision(db: ReturnType<typeof createClient>, formId: string, revision: number): Promise<ApplicationFormConfig> {
+  const { data, error } = await db.rpc('get_mentorship_application_form_revision', { p_form_id: formId, p_revision: revision });
+  if (error) throw Object.assign(new Error('Unable to load application form'), { code: error.code });
+  if (!data || data.form_id !== formId || data.revision !== revision || typeof data.cohort_id !== 'string') throw new Error('Application form unavailable');
+  return validateFormConfig(data.config);
+}
+
 Deno.serve(async (req) => {
   const origin = req.headers.get('origin');
   if (!originAllowed(origin)) return response({ error: 'Origin not allowed' }, 403, null);
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(origin) });
-  if (req.method !== 'POST') return response({ error: 'Method not allowed' }, 405, origin);
-  const length = Number(req.headers.get('content-length') ?? 0);
-  if (Number.isFinite(length) && length > MAX_BODY_BYTES) return response({ error: 'Payload too large' }, 413, origin);
+  if (req.method !== 'GET' && req.method !== 'POST') return response({ error: 'Method not allowed' }, 405, origin);
+
   try {
+    const { db } = makeDb();
+    if (req.method === 'GET') {
+      const requestedSlug = new URL(req.url).searchParams.get('slug');
+      const slug = requestedSlug?.trim() || null;
+      if (slug && (slug.length > 80 || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug))) return response({ error: 'Form not found' }, 404, origin);
+      const { data, error } = await db.rpc('get_public_mentorship_application_form', { p_slug: slug });
+      if (error) {
+        if (error.code === 'P0404') return response({ error: 'Applications are closed' }, 410, origin);
+        return response({ error: 'Temporarily unavailable' }, 503, origin);
+      }
+      if (!data?.id || !Number.isInteger(data.revision) || !data.config) return response({ error: 'Temporarily unavailable' }, 503, origin);
+      return response({ form: data }, 200, origin);
+    }
+
+    const contentLength = Number(req.headers.get('content-length') ?? 0);
+    if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) return response({ error: 'Payload too large' }, 413, origin);
     const raw = await readLimitedBody(req);
     if (raw === null) return response({ error: 'Payload too large' }, 413, origin);
     let body: unknown;
     try { body = JSON.parse(raw); } catch { return response({ error: 'Invalid application' }, 400, origin); }
-    let application: ParsedMentorshipApplication;
-    try { application = parseMentorshipApplication(body); } catch { return response({ error: 'Invalid application' }, 400, origin); }
+    if (!body || typeof body !== 'object' || Array.isArray(body)) return response({ error: 'Invalid application' }, 400, origin);
+    const input = body as Record<string, unknown>;
+    const legacy = input.form_version === LEGACY_FORM_VERSION;
+    const allowedKeys = legacy
+      ? ['form_version', 'submission_id', 'answers', 'attribution', 'website']
+      : ['form_id', 'form_revision', 'submission_id', 'answers', 'attribution', 'website'];
+    if (Object.keys(input).some((key) => !allowedKeys.includes(key))) return response({ error: 'Invalid application' }, 400, origin);
+    if (typeof input.website !== 'string' || input.website.length !== 0) return response({ error: 'Invalid application' }, 400, origin);
+    const formId = legacy ? DEFAULT_FORM_ID : input.form_id;
+    const revision = legacy ? 1 : input.form_revision;
+    if (typeof formId !== 'string' || formId.length < 1 || formId.length > 100 || !Number.isInteger(revision) || (revision as number) < 1) return response({ error: 'Invalid application' }, 400, origin);
+    if (typeof input.submission_id !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(input.submission_id)) return response({ error: 'Invalid application' }, 400, origin);
+
+    let validated: ValidatedApplication;
+    let attribution: ApplicationAttribution;
+    let config: ApplicationFormConfig;
+    try {
+      config = await loadRevision(db, formId, revision as number);
+    } catch (error) {
+      const code = (error as { code?: string })?.code;
+      if (code === 'P0404') return response({ error: 'Applications are closed' }, 410, origin);
+      return response({ error: 'Temporarily unavailable' }, 503, origin);
+    }
+    try {
+      validated = validateApplicationAnswers(config, input.answers);
+      attribution = validateApplicationAttribution(input.attribution);
+    } catch {
+      return response({ error: 'Invalid application' }, 400, origin);
+    }
+
     const ip = clientIp(req);
-    const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    if (!ip || !supabaseUrl || !serviceKey) return response({ error: 'Temporarily unavailable' }, 503, origin);
+    if (!ip || !serviceKey) return response({ error: 'Temporarily unavailable' }, 503, origin);
     const ipHash = await hashRateKey(serviceKey, 'ip', ip);
-    const emailHash = await hashRateKey(serviceKey, 'email', application.email);
-    const db = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
+    const emailHash = await hashRateKey(serviceKey, 'email', validated.email);
+    const lead = buildApplicationLead(validated, attribution as Record<string, string>);
     const { data, error } = await db.rpc('submit_mentorship_application', {
-      p_form_id: MENTORSHIP_APPLICATION_FORM_ID,
-      p_submission_id: application.submission_id,
-      p_lead: application.lead,
-      p_answers: application.answers,
-      p_attribution: application.attribution,
+      p_form_id: formId,
+      p_submission_id: input.submission_id,
+      p_lead: lead,
+      p_answers: validated.answers,
+      p_attribution: attribution,
       p_ip_hash: ipHash,
       p_email_hash: emailHash,
+      p_form_revision: revision,
     });
     if (error) {
       if (error.code === 'P0408') return response({ error: 'Please try again later' }, 429, origin);
@@ -102,8 +161,8 @@ Deno.serve(async (req) => {
       if (error.code === '22000') return response({ error: 'This submission could not be accepted' }, 409, origin);
       return response({ error: 'Temporarily unavailable' }, 503, origin);
     }
-    if (!data?.success || data?.submission_id !== application.submission_id) return response({ error: 'Temporarily unavailable' }, 503, origin);
-    return response({ success: true, submission_id: application.submission_id }, 200, origin);
+    if (!data?.success || data?.submission_id !== input.submission_id) return response({ error: 'Temporarily unavailable' }, 503, origin);
+    return response({ success: true, submission_id: input.submission_id }, 200, origin);
   } catch {
     return response({ error: 'Temporarily unavailable' }, 503, origin);
   }

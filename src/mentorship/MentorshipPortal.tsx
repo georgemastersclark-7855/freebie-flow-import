@@ -17,6 +17,7 @@ import { PortalSetPassword } from "./pages/PortalSetPassword";
 import { AdminCohorts, AdminCohortStudents } from "./pages/AdminCohorts";
 import { AdminStudentRecord } from "./pages/AdminStudentRecord";
 import { AdminCohortRecords } from "./pages/AdminCohortRecords";
+import { AdminApplicationForms } from "./pages/AdminApplicationForms";
 import { AdminVideos } from "./pages/AdminVideos";
 import { AdminSops } from "./pages/AdminSops";
 import { AdminCrm } from "./pages/AdminCrm";
@@ -133,6 +134,8 @@ export default function MentorshipPortal() {
             <Route path="admin/reviews" element={<AdminReviewQueue />} />
             <Route element={<AdminOnly />}>
               <Route path="admin/videos" element={<AdminVideos />} />
+              <Route path="admin/application-forms" element={<AdminApplicationForms />} />
+              <Route path="admin/application-forms/:formId" element={<AdminApplicationForms />} />
             </Route>
             <Route path="admin/review/:reviewId" element={<AdminReview />} />
           </Route>
