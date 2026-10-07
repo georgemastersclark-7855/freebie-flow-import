@@ -11,6 +11,7 @@ const preloadMap: Record<string, () => Promise<unknown>> = {
   '/finish-more-tracks': () => import('./pages/TheProducerBlueprint005Workflow'),
   '/links': () => import('./pages/LinkInBio'),
   '/mentorship': () => import('./pages/Mentorship'),
+  '/mentorship/apply': () => import('./pages/MentorshipApplication'),
 };
 if (window.location.pathname.startsWith('/mentorship-portal')) {
   import('./mentorship/MentorshipPortal');

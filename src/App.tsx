@@ -19,6 +19,7 @@ const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBl
 const LinkInBio = lazy(() => import("./pages/LinkInBio"));
 const Mentorship = lazy(() => import("./pages/Mentorship"));
 const MentorshipSeptember = lazy(() => import("./pages/MentorshipSeptember"));
+const MentorshipApplication = lazy(() => import("./pages/MentorshipApplication"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
 const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
@@ -38,7 +39,7 @@ const RouteFallback = (
 
 const App = () => {
   useEffect(() => {
-    if (/^\/mentorship-(?:demo|portal)(?:\/|$)/.test(window.location.pathname)) return;
+    if (/^\/mentorship-(?:demo|portal)(?:\/|$)/.test(window.location.pathname) || window.location.pathname.startsWith('/mentorship/apply')) return;
     const timer = setTimeout(loadKlaviyo, 3000);
     startZapierQueueAutoFlush();
     return () => clearTimeout(timer);
@@ -69,6 +70,7 @@ const App = () => {
             <Route path="/legal/earnings-disclaimer" element={<EarningsDisclaimer />} />
             <Route path="/links" element={<LinkInBio />} />
             <Route path="/mentorship" element={<Mentorship />} />
+            <Route path="/mentorship/apply" element={<MentorshipApplication />} />
             <Route path="/mentorship-september" element={<MentorshipSeptember />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
             <Route path="/mentorship-demo/*" element={<Navigate to="/mentorship-portal" replace />} />

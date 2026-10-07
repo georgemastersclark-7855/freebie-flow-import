@@ -10,7 +10,7 @@ async function rows<T>(table: string, select: string, filter: (q:any)=>any = q=>
   for(let offset=0;;offset+=500) { const {data,error}=await filter(db.from(table).select(select)).order(order).range(offset,offset+499); if(error)throw error; all.push(...data); if(data.length<500)return all; }
 }
 export interface CrmStudent extends SuccessEnrollment { call?: OnboardingCall; questionnaire?: unknown; focus: string; openActions: number }
-export interface IntakeConnection { provider: 'gmail'|'typeform'; status: 'setup_needed'|'backfilled'|'connected'|'paused'|'error'; account_label: string; last_checked_at: string|null; last_received_at: string|null; detail: string }
+export interface IntakeConnection { provider: 'gmail'|'typeform'|'native'; status: 'setup_needed'|'backfilled'|'connected'|'paused'|'error'; account_label: string; last_checked_at: string|null; last_received_at: string|null; detail: string }
 export interface CrmWorkspace { leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; settings: LaunchSettings; milestones: LeadMilestone[]; payments: RecordedPayment[]; intake: IntakeConnection[] }
 export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
   const {data:auth}=await supabase.auth.getUser(); if(!auth.user)throw new Error('Sign in to open admissions.');
