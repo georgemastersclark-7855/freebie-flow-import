@@ -49,6 +49,105 @@ export type Database = {
           },
         ]
       }
+      mentorship_application_form_revisions: {
+        Row: {
+          cohort_id: string
+          config: Json
+          form_id: string
+          published_at: string
+          published_by: string | null
+          revision: number
+        }
+        Insert: {
+          cohort_id: string
+          config: Json
+          form_id: string
+          published_at?: string
+          published_by?: string | null
+          revision: number
+        }
+        Update: {
+          cohort_id?: string
+          config?: Json
+          form_id?: string
+          published_at?: string
+          published_by?: string | null
+          revision?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_application_form_revisions_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_application_form_revisions_form_id_fkey"
+            columns: ["form_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_application_forms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_application_form_revisions_published_by_fkey"
+            columns: ["published_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      mentorship_application_forms: {
+        Row: {
+          cohort_id: string
+          created_at: string
+          draft_config: Json
+          draft_version: number
+          id: string
+          is_open: boolean
+          name: string
+          published_draft_version: number | null
+          published_revision: number | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          cohort_id: string
+          created_at?: string
+          draft_config: Json
+          draft_version?: number
+          id: string
+          is_open?: boolean
+          name: string
+          published_draft_version?: number | null
+          published_revision?: number | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          cohort_id?: string
+          created_at?: string
+          draft_config?: Json
+          draft_version?: number
+          id?: string
+          is_open?: boolean
+          name?: string
+          published_draft_version?: number | null
+          published_revision?: number | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_application_forms_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mentorship_application_rate_limits: {
         Row: {
           hit_at: string
@@ -72,6 +171,7 @@ export type Database = {
           answers: Json
           attribution: Json
           form_id: string
+          form_revision: number
           id: string
           lead_id: string
           response_id: string
@@ -81,6 +181,7 @@ export type Database = {
           answers: Json
           attribution?: Json
           form_id: string
+          form_revision?: number
           id?: string
           lead_id: string
           response_id: string
@@ -90,6 +191,7 @@ export type Database = {
           answers?: Json
           attribution?: Json
           form_id?: string
+          form_revision?: number
           id?: string
           lead_id?: string
           response_id?: string
@@ -1787,8 +1889,25 @@ export type Database = {
         Args: { next_action_text: string; target_feedback_id: string }
         Returns: string
       }
+      create_mentorship_application_form: {
+        Args: {
+          p_cohort_id: string
+          p_config: Json
+          p_name: string
+          p_slug: string
+        }
+        Returns: Json
+      }
+      get_mentorship_application_form_revision: {
+        Args: { p_form_id: string; p_revision: number }
+        Returns: Json
+      }
       get_mentorship_typeform_route: {
         Args: { p_form_id: string }
+        Returns: Json
+      }
+      get_public_mentorship_application_form: {
+        Args: { p_slug?: string }
         Returns: Json
       }
       ingest_calendly_booking_event: {
@@ -1827,6 +1946,7 @@ export type Database = {
         }
         Returns: Json
       }
+      is_mentorship_application_form_admin: { Args: never; Returns: boolean }
       is_mentorship_member: {
         Args: { target_cohort_id: string }
         Returns: boolean
@@ -1868,6 +1988,10 @@ export type Database = {
           p_form_id: string
           p_form_title: string
         }
+        Returns: Json
+      }
+      publish_mentorship_application_form: {
+        Args: { p_expected_version: number; p_form_id: string }
         Returns: Json
       }
       publish_mentorship_walkthrough_feedback: {
@@ -1919,6 +2043,15 @@ export type Database = {
         Args: { target_enrollment_id: string }
         Returns: undefined
       }
+      save_mentorship_application_form: {
+        Args: {
+          p_config: Json
+          p_expected_version: number
+          p_form_id: string
+          p_name: string
+        }
+        Returns: Json
+      }
       save_mentorship_schedule: {
         Args: {
           p_calls: Json
@@ -1958,6 +2091,10 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      set_mentorship_application_form_open: {
+        Args: { p_form_id: string; p_open: boolean }
+        Returns: Json
+      }
       start_mentorship_submission: {
         Args: { target_submission_id: string }
         Returns: Database["public"]["Enums"]["mentorship_submission_state"]
@@ -1968,6 +2105,7 @@ export type Database = {
           p_attribution: Json
           p_email_hash: string
           p_form_id: string
+          p_form_revision?: number
           p_ip_hash: string
           p_lead: Json
           p_submission_id: string
@@ -1980,6 +2118,10 @@ export type Database = {
       }
       sync_mentorship_booking_for_enrollment: {
         Args: { p_enrollment_id: string }
+        Returns: undefined
+      }
+      validate_mentorship_application_form_config: {
+        Args: { p_config: Json }
         Returns: undefined
       }
       void_mentorship_payment: {
