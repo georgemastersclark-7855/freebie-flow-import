@@ -15,6 +15,7 @@ export function OnboardingQuestionnaire({ data, save, onDirty, openFollowUps }: 
   const [date, setDate] = useState(existing?.occurred_on ?? localDateInput());
   const [source, setSource] = useState(existing?.source_url ?? '');
   const [transcript, setTranscript] = useState(existing?.transcript ?? '');
+  const [formError, setFormError] = useState('');
   const snapshot = JSON.stringify({ plan, date, source, transcript });
   const [savedSnapshot, setSavedSnapshot] = useState(snapshot);
   const dirty = snapshot !== savedSnapshot;
@@ -34,15 +35,19 @@ export function OnboardingQuestionnaire({ data, save, onDirty, openFollowUps }: 
   const answer = (key: AnswerKey, value: string) => setPlan(p => ({ ...p, answers: { ...p.answers, [key]: value } }));
   const field = (key: AnswerKey, hint?: string, rows = 3) => <label className="ss-field" key={key}>{answerLabels[key]}{hint && <span>{hint}</span>}<textarea value={plan.answers[key]} rows={rows} maxLength={2000} onChange={e => answer(key, e.target.value)}/></label>;
   const persist = async () => {
+    setFormError('');
     let stored: SuccessNote | undefined;
-    if (await save(async () => { stored = await saveOnboardingQuestionnaire(data.student.id, plan, date, source, transcript, previous); }, 'Onboarding questionnaire saved.')) {
+    if (await save(async () => {
+      try { stored = await saveOnboardingQuestionnaire(data.student.id, plan, date, source, transcript, previous); }
+      catch (error) { setFormError(error instanceof Error ? error.message : 'Could not save. Please try again.'); throw error; }
+    }, 'Onboarding questionnaire saved.')) {
       setPrevious(stored); setSavedSnapshot(snapshot);
     }
   };
   const focusText = [plan.answers.focus, `Week-one practice: ${plan.answers.practice}`, `Listen for: ${plan.answers.listenFor}`].join('\n\n');
   const focusMatches = data.context?.goals === plan.answers.goal.trim() && data.context?.current_focus === focusText.trim();
   if (unsupported) return <div className="ss-error">This student has a questionnaire version this screen cannot edit. Open Calls & notes to read it.</div>;
-  return <div className="sop-layout"><form className="sop-questionnaire" onSubmit={e => { e.preventDefault(); void persist(); }}>
+  return <div className="sop-layout sop-call-layout"><form className="sop-questionnaire" onSubmit={e => { e.preventDefault(); void persist(); }}>
     <div className="ss-row"><div><h2>Onboarding call & week-one plan</h2><p className="ss-muted">Save notes as you go. These answers are visible to staff.</p></div><span className="ss-badge">{previous ? readOnboardingPlan(previous.questionnaire)?.status === 'agreed' ? 'Plan agreed' : 'Draft saved' : 'Not saved yet'}</span></div>
     <section className="ss-card sop-step"><div className="sop-step-heading"><span>1</span><h2>Prepare and listen</h2></div>
       <label className="ss-field">Call date<input type="date" required value={date} onChange={e => setDate(e.target.value)}/></label>
@@ -58,7 +63,7 @@ export function OnboardingQuestionnaire({ data, save, onDirty, openFollowUps }: 
       {field('handover', 'Include any promised check-in, resource or demonstration, with an owner and date where agreed.')}
     </section>
     <section className="ss-card"><h2>Close the call</h2><p>Recap the plan with the student. Check they know what to practise, how to get help and what Rob will listen for.</p><label className="ss-field mt-4">Plan status<select value={plan.status} onChange={e => setPlan(p => ({ ...p, status: e.target.value as OnboardingPlan['status'] }))}><option value="draft">Draft / still discussing</option><option value="agreed">Agreed with the student</option></select></label><details className="ss-transcript"><summary>Recording link and transcript</summary><div className="ss-form"><label className="ss-field">Recording link (optional)<input type="url" value={source} onChange={e => setSource(e.target.value)} maxLength={2048} placeholder="https://…"/></label><label className="ss-field">Transcript or relevant excerpt (optional)<textarea rows={6} maxLength={500000} value={transcript} onChange={e => setTranscript(e.target.value)}/></label></div></details></section>
-    <div className="sop-save-bar"><span role="status" className="ss-muted">{dirty ? 'Unsaved changes' : previous ? 'Saved to student record' : 'Ready to take notes'}</span><button className="ss-button ss-primary" type="submit"><Save size={15}/> Save questionnaire</button></div>
+    <div className="sop-save-bar">{formError && <div role="alert" className="ss-error w-full mb-0">{formError}</div>}<span role="status" className="ss-muted">{dirty ? 'Unsaved changes' : previous ? 'Saved to student record' : 'Ready to take notes'}</span><button className="ss-button ss-primary" type="submit"><Save size={15}/> Save questionnaire</button></div>
   </form><aside className="ss-card sop-outline"><h2>Onboarding call</h2><p>Leave the student with a clear first step they know how to take.</p><a href={`${sopRoot}/onboarding`} target="_blank" rel="noreferrer" className="ss-link mt-4">Open the call guide <ExternalLink size={14}/></a>
     <h3 className="ss-section-label">After saving</h3><p className="ss-muted">Use the agreed goal and week-one plan in the coaching summary. Review this before replacing an existing focus.</p>
     <button className="ss-button mt-3" type="button" disabled={dirty || !previous || plan.status !== 'agreed' || focusMatches} onClick={() => { if (data.context && !window.confirm('Replace the current goals and coaching focus with this onboarding plan?')) return; void save(() => saveStudentContext(data.student.id, plan.answers.goal, focusText, data.context), 'Goals & current focus updated.'); }}>{focusMatches ? 'Coaching focus is up to date' : 'Use as coaching focus'}</button>
