@@ -3,7 +3,8 @@ import { ArrowLeft, Bell, Check, Download, Link2, LoaderCircle, Mic, Pause, Save
 import { Link, Navigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { reviewItems } from "../demoData";
-import { loadLiveAdminOverview, publishLiveFeedback, saveLiveFeedbackDraft, setLiveSurgerySelection } from "../liveAdminApi";
+import { publishLiveFeedback, saveLiveFeedbackDraft, setLiveSurgerySelection } from "../liveAdminApi";
+import { loadSuccessReview, successRoot } from "../studentSuccessApi";
 import { usePortalStore } from "../PortalStore";
 import type { PortalFile, ReviewItem } from "../types";
 import { CollapsibleFiles, MockAudioPlayer, PrimaryButton, SecondaryButton } from "../components/PortalUI";
@@ -35,9 +36,7 @@ export function AdminReview() {
 
   const loadReview = async () => {
     if (backend !== "supabase" || !reviewId) return;
-    const overview = await loadLiveAdminOverview();
-    const found = overview.reviews.find((item) => item.id === reviewId);
-    if (!found) throw new Error("This submission is no longer in Rob's review queue.");
+    const found = await loadSuccessReview(reviewId);
     setReview(found);
     return found;
   };
@@ -47,11 +46,9 @@ export function AdminReview() {
     if (backend !== "supabase") { setReview(demoReview); return; }
     let active = true;
     setLoading(true);
-    loadLiveAdminOverview()
-      .then((overview) => {
+    loadSuccessReview(reviewId ?? "")
+      .then((found) => {
         if (!active) return;
-        const found = overview.reviews.find((item) => item.id === reviewId);
-        if (!found) throw new Error("This submission is no longer in Rob's review queue.");
         setReview(found);
       })
       .catch((error) => { if (active) setLoadError(error instanceof Error ? error.message : "Unable to load this review."); })
@@ -229,7 +226,7 @@ export function AdminReview() {
       <header className="mt-7 flex flex-wrap items-start justify-between gap-5">
         <div className="flex min-w-0 flex-1 flex-wrap items-center gap-5">
           <StudentAvatar name={review.studentName} src={review.studentProfile?.photoUrl} size={104} member={Boolean(review.studentProfile?.completedAt)} />
-          <div className="min-w-0 flex-1 basis-[220px]"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#aaa99f]">Week {review.weekNumber} review</p><h1 className="mp-display mp-lesson-title mt-2 text-[#f2efe6]">{review.studentName.toUpperCase()}</h1><StudentProfileDetails profile={review.studentProfile} /><p className="mt-3 text-xs text-[#aaa99f]">Submitted {review.submittedLabel}</p></div>
+          <div className="min-w-0 flex-1 basis-[220px]"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#aaa99f]">Week {review.weekNumber} review</p><h1 className="mp-display mp-lesson-title mt-2 text-[#f2efe6]">{review.studentName.toUpperCase()}</h1><StudentProfileDetails profile={review.studentProfile} />{review.enrollmentId && <Link className="mt-3 inline-flex text-sm font-semibold text-white underline" to={`${successRoot}/${review.cohortId}/students/${review.enrollmentId}`}>Open student record</Link>}<p className="mt-3 text-xs text-[#aaa99f]">Submitted {review.submittedLabel}</p></div>
         </div>
         <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-[#aaa99f]">{published ? "Feedback published" : review.status === "draft" ? "Draft saved" : "Awaiting review"}</span>
       </header>

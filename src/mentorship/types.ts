@@ -152,6 +152,7 @@ export interface ReviewFeedback {
 }
 
 export interface ReviewItem {
+  enrollmentId?: string;
   id: string;
   walkthrough?: boolean;
   submissionId?: string;
