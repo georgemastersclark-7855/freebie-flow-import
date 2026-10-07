@@ -10,6 +10,7 @@ import {
   Video,
   BookOpen,
   Library,
+  Package,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -37,7 +38,8 @@ const staffNavigation = [
   { to: "/mentorship-portal/admin/schedule", label: "Calendar", icon: CalendarDays, adminOnly: false },
 ];
 
-function isNavigationActive(to: string, label: string, pathname: string) {
+function isNavigationActive(to: string, label: string, pathname: string, hash: string) {
+  if (label === "Studio Setup" && pathname === to && hash === "#master-bundle") return false;
   if (pathname === to) return true;
   if (label === "Studio Setup") return pathname.startsWith(`${to}/`);
   if (label === "Review queue") return pathname.startsWith("/mentorship-portal/admin/review/");
@@ -68,7 +70,7 @@ export function PortalShell() {
   const currentWeek = weeks.find((week) => week.phase === "current");
   useEffect(() => {
     const section = location.hash.slice(1);
-    if (["setup-videos", "song-starters", "weekly-song", "stems", "send-to-rob", "feedback"].includes(section)) {
+    if (["master-bundle", "setup-videos", "song-starters", "weekly-song", "stems", "send-to-rob", "feedback"].includes(section)) {
       document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
   }, [location]);
@@ -82,7 +84,7 @@ export function PortalShell() {
 
   return (
     <div className="mentorship-portal relative flex min-h-screen">
-      <div className="mp-grain fixed inset-0 z-50 opacity-70" />
+      {location.pathname !== "/mentorship-portal/admin/schedule" && <div className="mp-grain fixed inset-0 z-50 opacity-70" />}
 
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] flex-col border-r border-white/[0.08] bg-[#0d0d0b]/95 p-5 backdrop-blur-xl lg:flex overflow-y-auto">
         <PortalMark />
@@ -100,7 +102,7 @@ export function PortalShell() {
         <nav className="mt-7 space-y-1.5" aria-label="Portal navigation">
           {navigation.map(({ to, label, icon: Icon }, index) => {
             if (to === null) return <WeeklySubmissionsNavigation key={label} />;
-            const active = isNavigationActive(to, label, location.pathname);
+            const active = isNavigationActive(to, label, location.pathname, location.hash);
             return <div key={`${label}-${index}`}><Link
               to={to}
               aria-current={active ? "page" : undefined}
@@ -115,6 +117,7 @@ export function PortalShell() {
               <span>{label}</span>
             </Link></div>
           })}
+          {!staff && <MasterBundleShortcut active={location.pathname === "/mentorship-portal/setup" && location.hash === "#master-bundle"} />}
         </nav>
 
         <div className="mt-auto pt-6">
@@ -154,7 +157,7 @@ export function PortalShell() {
             <nav className="mt-8 space-y-2">
               {navigation.map(({ to, label, icon: Icon }, index) => {
                 if (to === null) return <WeeklySubmissionsNavigation key={label} mobile onNavigate={() => setMobileOpen(false)} />;
-                const active = isNavigationActive(to, label, location.pathname);
+                const active = isNavigationActive(to, label, location.pathname, location.hash);
                 return <div key={`${label}-mobile-${index}`}><Link to={to} onClick={() => setMobileOpen(false)} aria-current={active ? "page" : undefined} className={cx(
                   "mp-focus-ring flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition",
                   active ? "border-white/35 bg-white/[0.12] text-white" : "border-white/[0.07] bg-white/[0.025] text-[#dedbd2] hover:border-white/15 hover:bg-white/[0.05]",
@@ -162,6 +165,7 @@ export function PortalShell() {
                   <Icon size={18} className="shrink-0" /> <span>{label}</span>
                 </Link></div>
               })}
+              {!staff && <MasterBundleShortcut active={location.pathname === "/mentorship-portal/setup" && location.hash === "#master-bundle"} onNavigate={() => setMobileOpen(false)} />}
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}
             {!staff && <button type="button" onClick={() => { setMobileOpen(false); setEditingProfile(true); }} className="mp-focus-ring mt-6 flex w-full items-center gap-3 rounded-xl border border-white/15 p-4 text-left"><StudentAvatar name={user?.name ?? "Student"} src={user?.profile?.photoUrl} size={40} member={Boolean(user?.profile?.completedAt)} /><span className="min-w-0"><span className="block truncate text-sm font-bold">{user?.name}</span><span className="mt-1 block text-xs text-[#aaa99f]">Edit profile</span></span></button>}
@@ -196,4 +200,8 @@ export function PortalShell() {
       {!staff && (profileRequired || editingProfile) && <ProfileDialog key={user?.enrollmentId ?? user?.id} required={Boolean(profileRequired)} onClose={() => setEditingProfile(false)} />}
     </div>
   );
+}
+
+function MasterBundleShortcut({ active, onNavigate }: { active: boolean; onNavigate?: () => void }) {
+  return <div className="!mt-5 border-t border-white/10 pt-4"><Link to="/mentorship-portal/setup#master-bundle" onClick={onNavigate} aria-current={active ? "location" : undefined} className={cx("mp-focus-ring flex items-center gap-2.5 rounded-xl border px-3 py-3 text-sm font-semibold transition", active ? "border-white/35 bg-white/[0.12] text-white" : "border-white/10 bg-white/[0.025] text-[#d4d0c5] hover:border-white/25 hover:bg-white/[0.06]")}><Package size={17} className="shrink-0" /><span className="flex-1">Master Bundle</span><span className="rounded border border-white/15 bg-white/[0.06] px-1.5 py-0.5 text-[9px] font-semibold text-[#b6b3a8]">Included</span></Link></div>;
 }

@@ -51,3 +51,17 @@ assert.throws(()=>zone.scheduleLocalInputToIso('2026-02-30T12:00','Europe/London
 assert.equal(zone.scheduleLocalInputToIso('2026-10-18T19:00','Asia/Kolkata'), '2026-10-18T13:30:00.000Z');
 assert.equal(zone.scheduleLocalInputToIso('','Europe/London'), null);
 console.log('Passed: cohort timezone conversion, BST/GMT transition, nonexistent/repeated DST hours, invalid date rejection and half-hour offsets.');
+const gridBuild = await build({ entryPoints: ['src/mentorship/staffCalendar.ts'], bundle: true, platform: 'node', format: 'esm', write: false, plugins: [{name:'stub-client',setup(build){build.onResolve({filter:/^@\/integrations\/supabase\/client$/},()=>({path:'supabase-client',namespace:'stub'}));build.onLoad({filter:/.*/,namespace:'stub'},()=>({contents:'export const supabase = {};',loader:'js'}));}}] });
+const grid = await import(`data:text/javascript;base64,${Buffer.from(gridBuild.outputFiles[0].text).toString('base64')}`);
+assert.equal(grid.shiftCalendarMonth('2026-12',1),'2027-01');
+assert.equal(grid.shiftCalendarMonth('2026-01',-1),'2025-12');
+assert.equal(grid.calendarMonthDays('2026-10')[0],'2026-09-28');
+assert.equal(grid.calendarMonthDays('2026-10').at(-1),'2026-11-01');
+assert.equal(grid.calendarMonthDays('2028-02').filter(day=>day.startsWith('2028-02')).length,29);
+assert.equal(grid.calendarMonthDays('2026-03').length,42);
+const mapped = grid.calendarEvents([{id:'w1',number:1,opensAt:null,deadlineAt:'2026-10-18T23:30:00Z'}],[{id:'c1',title:'DST call',startsAt:'2026-10-25T19:00:00Z'}],'Europe/London');
+assert.equal(mapped.length,2);
+assert.equal(mapped[0].local,'2026-10-19T00:30');
+assert.equal(mapped[1].local,'2026-10-25T19:00');
+assert.equal(mapped[0].kind,'deadline');
+console.log('Passed: Monday-first calendar, year rollover, leap day, six-row month, cohort-local event dates and missing-date exclusion.');

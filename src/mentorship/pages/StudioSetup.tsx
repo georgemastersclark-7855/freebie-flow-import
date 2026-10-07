@@ -4,6 +4,7 @@ import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { usePortalStore } from "../PortalStore";
 import { completeSetupOutline, studioSetupIntroduction } from "../onboarding";
+import { MasterBundleCard } from "../components/MasterBundleCard";
 import { SetupVideoCard } from "../components/SetupVideoCard";
 
 export function StudioSetup() {
@@ -26,6 +27,7 @@ export function StudioSetup() {
       <p className="mt-3 text-base leading-7 text-[#b7b7ad]">{studioSetupIntroduction}</p>
       <p className="mt-4 text-sm font-bold">Rob x</p>
     </header>
+    <div className="mt-8"><MasterBundleCard /></div>
     <section id="setup-videos" className="mt-8 scroll-mt-24" aria-label="Studio Setup lessons">
       <div className="mb-4 flex items-center justify-between gap-3"><h2 className="text-xl font-bold">Your four setup lessons</h2><span className="text-xs text-[#aaa99f]">Work through in order</span></div>
       <div className="grid gap-4 sm:grid-cols-2">{videos.map((video, index) => <SetupVideoCard key={video.id} video={video} index={index} />)}</div>
