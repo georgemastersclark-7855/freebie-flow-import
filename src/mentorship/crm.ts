@@ -3,23 +3,27 @@ import { readOnboardingPlan, validateOnboardingPlan } from './onboardingPlan';
 export const crmRoot = '/mentorship-portal/admin/crm';
 export const leadStages = { new: 'New enquiry', waitlist: 'Waitlist', applied: 'Applied', offer_sent: 'Offer sent', enrolled: 'Enrolled', closed: 'Closed' } as const;
 export type LeadStage = Exclude<keyof typeof leadStages, 'enrolled'>;
-export const leadSources = ['Email reply', 'Instagram', 'Facebook', 'Paid ads', 'Referral', 'Typeform', 'Website', 'Not recorded'];
+export const leadSources = ['Newsletter', 'Offer doc', 'Instagram', 'Facebook', 'Paid ads', 'Referral', 'Website', 'Not recorded'];
+export const leadChannels = ['Gmail handraiser', 'Typeform application', 'Direct enquiry', 'Other', 'Not recorded'];
 export interface Lead {
   id: string; cohort_id: string; full_name: string; email: string; stage: LeadStage; source: string; source_detail: string;
+  first_contact_channel: string; email_thread_url: string | null;
   goals: string; music_url: string | null; application_url: string | null; owner_id: string | null; next_action: string; due_on: string | null;
   payment_status: 'unconfirmed' | 'confirmed' | 'refunded'; payment_reference: string; payment_on: string | null;
   enrollment_id: string | null; created_at: string; updated_at: string;
 }
 export type LeadInput = Omit<Lead, 'id' | 'created_at' | 'updated_at' | 'enrollment_id'>;
 export interface OnboardingCall { enrollment_id: string; booked_at: string | null; completed_at: string | null; owner_id: string | null; notes: string; updated_at: string }
-export const blankLead = (cohortId: string): LeadInput => ({cohort_id:cohortId, full_name:'', email:'', stage:'new', source:'Not recorded', source_detail:'', goals:'', music_url:null, application_url:null, owner_id:null, next_action:'', due_on:null, payment_status:'unconfirmed', payment_reference:'', payment_on:null});
+export const blankLead = (cohortId: string): LeadInput => ({cohort_id:cohortId, full_name:'', email:'', stage:'new', source:'Not recorded', source_detail:'', first_contact_channel:'Not recorded', email_thread_url:null, goals:'', music_url:null, application_url:null, owner_id:null, next_action:'', due_on:null, payment_status:'unconfirmed', payment_reference:'', payment_on:null});
 export function normaliseLead(input: LeadInput): LeadInput {
   const result = {...input, full_name:input.full_name.trim(), email:input.email.trim().toLowerCase(), next_action:input.next_action.trim()};
   if (!result.full_name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(result.email)) throw new Error('Enter a name and valid email address.');
-  for (const key of ['music_url','application_url'] as const) {
+  if (!leadChannels.includes(result.first_contact_channel)) throw new Error('Choose how they first got in touch.');
+  for (const key of ['music_url','application_url','email_thread_url'] as const) {
     const value = input[key]?.trim(); result[key] = value || null;
     if (value) { let url: URL; try { url = new URL(value); } catch { throw new Error('Use valid HTTPS links.'); }
-      if (url.protocol !== 'https:' || url.username || url.password) throw new Error('Use HTTPS links without login details.'); }
+      if (url.protocol !== 'https:' || url.username || url.password) throw new Error('Use HTTPS links without login details.');
+      if (key === 'email_thread_url' && url.hostname !== 'mail.google.com') throw new Error('Use the Gmail link to their email conversation.'); }
   }
   if (result.due_on && !result.next_action) throw new Error('Add a next action for the follow-up date.');
   if (result.payment_status !== 'unconfirmed' && (!result.payment_reference.trim() || !result.payment_on)) throw new Error('Add the payment reference and date before confirming a payment or refund.');

@@ -46,4 +46,4 @@ export async function saveOnboardingCall(enrollmentId:string,input:Pick<Onboardi
   const {data,error}=await query.select().maybeSingle(); if(error?.code==='23505')throw new Error('This booking was just added. Close and reopen it to see the latest details.'); if(error)throw error; if(!data)throw new Error('This booking changed. Close and reopen it before saving.'); return data as OnboardingCall;
 }
 export async function saveCapacity(cohortId:string,capacity:number) { if(!Number.isInteger(capacity)||capacity<1||capacity>1000)throw new Error('Capacity must be between 1 and 1,000.'); const {error}=await db.from('mentorship_admissions_settings').upsert({cohort_id:cohortId,capacity}); if(error)throw error; }
-export async function loadStudentLead(enrollmentId:string) { return (await rows<Lead>('mentorship_leads','*',q=>q.eq('enrollment_id',enrollmentId)))[0]; }
+export async function loadStudentLead(enrollmentId:string) { return (await rows<Lead>('mentorship_leads','*',q=>q.eq('enrollment_id',enrollmentId)))[0] ?? null; }

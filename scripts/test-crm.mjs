@@ -8,6 +8,8 @@ const {emptyOnboardingPlan}=await import(planUrl);
 const {normaliseLead,blankLead,onboardingState,leadStage,dueState}=await import(url(compile('src/mentorship/crm.ts').replace("'./onboardingPlan'",JSON.stringify(planUrl))));
 const input={...blankLead('cohort'),full_name:' Name ',email:' NAME@EXAMPLE.COM '};
 assert.equal(normaliseLead(input).email,'name@example.com');
+assert.throws(()=>normaliseLead({...input,email_thread_url:'https://mail.google.com.example.com/thread'}),/Gmail/);
+assert.equal(normaliseLead({...input,first_contact_channel:'Gmail handraiser',source:'Newsletter',stage:'applied',email_thread_url:'https://mail.google.com/mail/u/0/#all/thread',application_url:'https://admin.typeform.com/form/example/results'}).source,'Newsletter');
 assert.throws(()=>normaliseLead({...input,due_on:'2026-10-12'}),/next action/);
 assert.throws(()=>normaliseLead({...input,payment_status:'confirmed'}),/payment reference/);
 assert.throws(()=>normaliseLead({...input,music_url:'javascript:alert(1)'}),/HTTPS/);
