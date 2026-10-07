@@ -1,7 +1,7 @@
 import soundLibraryThumbnail from "./assets/thumbnails/sound-library.jpg";
 import sessionTemplateThumbnail from "./assets/thumbnails/session-template.jpg";
 import referencePlaylistThumbnail from "./assets/thumbnails/reference-playlist.jpg";
-import stemsThumbnail from "@/assets/ableton-session.webp";
+import stemsThumbnail from "./assets/thumbnails/stems-workflow.jpg";
 
 export const setupLessonThumbnails: Record<string, string> = {
   "sound-library": soundLibraryThumbnail,

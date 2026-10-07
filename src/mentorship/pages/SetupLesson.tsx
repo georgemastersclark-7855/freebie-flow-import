@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, Check, Download, FileText, Play } from "lucide-r
 import { usePortalStore } from "../PortalStore";
 import { completeSetupOutline } from "../onboarding";
 import { PortalVideo } from "../components/PortalVideo";
-import { setupLessons, setupLessonPath } from "../setupLessons";
+import { setupLessons, setupLessonPath, setupLessonThumbnails } from "../setupLessons";
 import { MasterBundleCard } from "../components/MasterBundleCard";
 import { cx } from "../utils";
 
@@ -29,7 +29,7 @@ export function SetupLesson() {
 
       <div className="grid items-start gap-7 xl:grid-cols-[minmax(0,1fr)_260px]">
         <div className="min-w-0 space-y-6">
-          <PortalVideo key={lesson.key} src={video.url} title={video.title} />
+          <PortalVideo key={lesson.key} src={video.url} poster={setupLessonThumbnails[lesson.key]} title={video.title} />
           <section className="mp-card rounded-2xl p-5 sm:p-7"><h2 className="text-xl font-bold text-[#eeeae1]">Put this into practice</h2><div className="mt-5 space-y-6">{lesson.notes.map((note) => <div key={note.title}><h3 className="text-sm font-bold text-[#e9e5dc]">{note.title}</h3><p className="mt-2 text-sm leading-7 text-[#aaa99f]">{note.text}</p></div>)}</div></section>
           <section className="mp-card rounded-2xl p-5 sm:p-7"><h2 className="text-xl font-bold text-[#eeeae1]">Before you move on</h2><ol className="mt-5 space-y-4">{lesson.actions.map((action, actionIndex) => <li key={action} className="flex gap-3"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/15 text-xs font-semibold text-[#b6b3a8]">{actionIndex + 1}</span><p className="pt-0.5 text-sm leading-6 text-[#b6b3a8]">{action}</p></li>)}</ol><p className="mt-6 flex gap-2.5 rounded-xl bg-white/5 p-4 text-sm leading-6 text-[#d4d0c5]"><Check size={17} className="mt-1 shrink-0 text-[#f2efe6]" />{lesson.outcome}</p></section>
           <section className="mp-card rounded-2xl p-5 sm:p-7"><h2 className="text-xl font-bold text-[#eeeae1]">Your downloads</h2><div className="mt-5 space-y-3"><div className="flex flex-wrap items-center gap-4 rounded-xl border border-white/10 p-4"><FileText size={23} className="shrink-0 text-[#f2efe6]" /><div className="min-w-0 flex-1 basis-48"><h3 className="text-sm font-bold text-[#e9e5dc]">{lesson.worksheet.title}</h3><p className="mt-1 text-xs leading-5 text-[#aaa99f]">{lesson.worksheet.description}</p></div><a href={worksheetUrl} download={lesson.worksheet.filename} className="mp-focus-ring inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2.5 text-xs font-bold text-[#f2efe6]"><Download size={14} />Download worksheet</a></div>

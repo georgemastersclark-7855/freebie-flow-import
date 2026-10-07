@@ -3,7 +3,7 @@ import { callCalendarEvent, localScheduleTime } from "../schedule";
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, CalendarDays, Check, ChevronDown, Headphones, Library } from "lucide-react";
-import robOnLaptop from "@/assets/rob-on-laptop.jpg";
+import welcomePoster from "../assets/thumbnails/welcome-video.jpg";
 import { usePortalStore } from "../PortalStore";
 import { ProgressBar, StatusPill } from "../components/PortalUI";
 import { PortalVideo } from "../components/PortalVideo";
@@ -43,7 +43,7 @@ export function WelcomeHub() {
       <p className="mt-4 text-sm leading-6 text-[#b6b3a8]">Good to have you here, {firstName}. Watch my welcome video to see how we'll work over the next six weeks. Then book your 1:1, work through Studio Setup and tick off your onboarding steps.</p>
       <p className="mt-3 text-sm font-bold">Rob x</p>
     </div>
-    <div className="mt-5"><PortalVideo src={welcomeVideoUrl} poster={robOnLaptop} title="A welcome from Rob" description="Your introduction to the next six weeks, the Loop Method and getting ready for your first session." /></div>
+    <div className="mt-5"><PortalVideo src={welcomeVideoUrl} poster={welcomePoster} title="A welcome from Rob" description="Your introduction to the next six weeks, the Loop Method and getting ready for your first session." /></div>
   </section>;
 
   return <div className="mx-auto max-w-[1400px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">

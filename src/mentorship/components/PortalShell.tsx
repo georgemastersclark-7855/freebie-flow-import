@@ -13,7 +13,7 @@ import {
   Package,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePortalStore } from "../PortalStore";
 import { PortalMark } from "./PortalUI";
 import { communityName } from "../onboarding";
@@ -22,6 +22,7 @@ import { cx } from "../utils";
 import { WeeklySubmissionsNavigation } from "./WeeklySubmissionsNavigation";
 import { ProfileDialog } from "./ProfileDialog";
 import { DeadlineStrip } from "./DeadlineStrip";
+import { MasterBundleDialog } from "./MasterBundleCard";
 import { StudentAvatar } from "./StudentAvatar";
 
 const studentNavigation = [
@@ -38,8 +39,7 @@ const staffNavigation = [
   { to: "/mentorship-portal/admin/schedule", label: "Calendar", icon: CalendarDays, adminOnly: false },
 ];
 
-function isNavigationActive(to: string, label: string, pathname: string, hash: string) {
-  if (label === "Studio Setup" && pathname === to && hash === "#master-bundle") return false;
+function isNavigationActive(to: string, label: string, pathname: string) {
   if (pathname === to) return true;
   if (label === "Studio Setup") return pathname.startsWith(`${to}/`);
   if (label === "Review queue") return pathname.startsWith("/mentorship-portal/admin/review/");
@@ -52,6 +52,9 @@ export function PortalShell() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [editingProfile, setEditingProfile] = useState(false);
+  const [bundleOpen, setBundleOpen] = useState(false);
+  const bundleTrigger = useRef<HTMLButtonElement | null>(null);
+  const mobileMenuButton = useRef<HTMLButtonElement | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [resetting, setResetting] = useState(false);
   const reset = async () => {
@@ -102,7 +105,7 @@ export function PortalShell() {
         <nav className="mt-7 space-y-1.5" aria-label="Portal navigation">
           {navigation.map(({ to, label, icon: Icon }, index) => {
             if (to === null) return <WeeklySubmissionsNavigation key={label} />;
-            const active = isNavigationActive(to, label, location.pathname, location.hash);
+            const active = isNavigationActive(to, label, location.pathname);
             return <div key={`${label}-${index}`}><Link
               to={to}
               aria-current={active ? "page" : undefined}
@@ -117,7 +120,7 @@ export function PortalShell() {
               <span>{label}</span>
             </Link></div>
           })}
-          {!staff && <MasterBundleShortcut active={location.pathname === "/mentorship-portal/setup" && location.hash === "#master-bundle"} />}
+          {!staff && <MasterBundleShortcut open={bundleOpen} onClick={(button) => { bundleTrigger.current = button; setBundleOpen(true); }} />}
         </nav>
 
         <div className="mt-auto pt-6">
@@ -143,7 +146,7 @@ export function PortalShell() {
           <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#77766f]">{user?.cohortName ?? "Producer mentorship"}</div>
           <div className="text-xs font-semibold text-[#d9d6cd]">{currentWeek ? `Week ${currentWeek.number} of 6` : "Six-week mentorship"}</div>
         </div>
-        <button type="button" onClick={() => setMobileOpen(true)} className="mp-focus-ring rounded-lg p-2 text-white" aria-label="Open navigation"><Menu size={21} /></button>
+        <button ref={mobileMenuButton} type="button" onClick={() => setMobileOpen(true)} className="mp-focus-ring rounded-lg p-2 text-white" aria-label="Open navigation"><Menu size={21} /></button>
       </header>
 
       {mobileOpen && (
@@ -157,7 +160,7 @@ export function PortalShell() {
             <nav className="mt-8 space-y-2">
               {navigation.map(({ to, label, icon: Icon }, index) => {
                 if (to === null) return <WeeklySubmissionsNavigation key={label} mobile onNavigate={() => setMobileOpen(false)} />;
-                const active = isNavigationActive(to, label, location.pathname, location.hash);
+                const active = isNavigationActive(to, label, location.pathname);
                 return <div key={`${label}-mobile-${index}`}><Link to={to} onClick={() => setMobileOpen(false)} aria-current={active ? "page" : undefined} className={cx(
                   "mp-focus-ring flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition",
                   active ? "border-white/35 bg-white/[0.12] text-white" : "border-white/[0.07] bg-white/[0.025] text-[#dedbd2] hover:border-white/15 hover:bg-white/[0.05]",
@@ -165,7 +168,7 @@ export function PortalShell() {
                   <Icon size={18} className="shrink-0" /> <span>{label}</span>
                 </Link></div>
               })}
-              {!staff && <MasterBundleShortcut active={location.pathname === "/mentorship-portal/setup" && location.hash === "#master-bundle"} onNavigate={() => setMobileOpen(false)} />}
+              {!staff && <MasterBundleShortcut open={bundleOpen} onClick={(button) => { bundleTrigger.current = button; setMobileOpen(false); setBundleOpen(true); }} />}
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}
             {!staff && <button type="button" onClick={() => { setMobileOpen(false); setEditingProfile(true); }} className="mp-focus-ring mt-6 flex w-full items-center gap-3 rounded-xl border border-white/15 p-4 text-left"><StudentAvatar name={user?.name ?? "Student"} src={user?.profile?.photoUrl} size={40} member={Boolean(user?.profile?.completedAt)} /><span className="min-w-0"><span className="block truncate text-sm font-bold">{user?.name}</span><span className="mt-1 block text-xs text-[#aaa99f]">Edit profile</span></span></button>}
@@ -197,11 +200,12 @@ export function PortalShell() {
         {!staff && <DeadlineStrip />}
         <Outlet />
       </main>
+      {!staff && <MasterBundleDialog open={bundleOpen} onOpenChange={setBundleOpen} onReturnFocus={() => { if (bundleTrigger.current?.isConnected) bundleTrigger.current.focus(); else mobileMenuButton.current?.focus(); }} />}
       {!staff && (profileRequired || editingProfile) && <ProfileDialog key={user?.enrollmentId ?? user?.id} required={Boolean(profileRequired)} onClose={() => setEditingProfile(false)} />}
     </div>
   );
 }
 
-function MasterBundleShortcut({ active, onNavigate }: { active: boolean; onNavigate?: () => void }) {
-  return <div className="!mt-5 border-t border-white/10 pt-4"><Link to="/mentorship-portal/setup#master-bundle" onClick={onNavigate} aria-current={active ? "location" : undefined} className={cx("mp-focus-ring flex items-center gap-2.5 rounded-xl border px-3 py-3 text-sm font-semibold transition", active ? "border-white/35 bg-white/[0.12] text-white" : "border-white/10 bg-white/[0.025] text-[#d4d0c5] hover:border-white/25 hover:bg-white/[0.06]")}><Package size={17} className="shrink-0" /><span className="flex-1">Master Bundle</span><span className="rounded border border-white/15 bg-white/[0.06] px-1.5 py-0.5 text-[9px] font-semibold text-[#b6b3a8]">Included</span></Link></div>;
+function MasterBundleShortcut({ open, onClick }: { open: boolean; onClick: (button: HTMLButtonElement) => void }) {
+  return <div className="!mt-5 border-t border-white/10 pt-4"><button type="button" onClick={(event) => onClick(event.currentTarget)} aria-haspopup="dialog" aria-expanded={open} className="mp-focus-ring flex w-full items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.025] px-3 py-3 text-left text-sm font-semibold text-[#d4d0c5] transition hover:border-white/25 hover:bg-white/[0.06]"><Package size={17} className="shrink-0" /><span className="flex-1">Master Bundle</span><span className="rounded border border-white/15 bg-white/[0.06] px-1.5 py-0.5 text-[9px] font-semibold text-[#b6b3a8]">Included</span></button></div>;
 }

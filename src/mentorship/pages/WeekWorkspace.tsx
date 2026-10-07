@@ -128,7 +128,6 @@ export function WeekWorkspace() {
 
       {submitted && !submission.feedback && <div className="mt-6 flex items-start gap-3 rounded-2xl border border-white/15 bg-white/[0.035] p-5"><CheckCircle2 size={21} className="mt-0.5 shrink-0 text-white" /><div><p className="text-sm font-bold text-[#eeeae1]">Sent to Rob. You're done for this week.</p><p className="mt-1 text-xs leading-5 text-[#aaa99f]">Your song is in the review queue. Your feedback will appear here when it's ready.</p>{submittedLabel && <p className="mt-2 text-[11px] text-[#939187]">Sent {submittedLabel}</p>}</div></div>}
 
-      {canEdit && <nav aria-label="Upload steps" className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-3 border-y border-white/10 py-4">{parts.map((part, index) => <a key={part.id} href={`#${part.id}`} className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><span className="grid h-6 w-6 place-items-center rounded-full border border-white/20 text-[10px] text-[#f2efe6]">{part.complete ? <Check size={12} /> : index + 1}</span>{part.title}<ArrowRight size={12} className="ml-1" /></a>)}<a href="#send-to-rob" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><span className="grid h-6 w-6 place-items-center rounded-full border border-white/20 text-[10px] text-[#f2efe6]">{parts.length + 1}</span>Send to Rob</a></nav>}
 
       <div className="mt-7 space-y-5">
           {submission.feedback && (

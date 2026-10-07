@@ -20,6 +20,12 @@ export function countdown(target: number, now: number) {
   return `${minutes} min`;
 }
 
+export function countdownParts(target: number | undefined, now: number) {
+  if (target === undefined || !Number.isFinite(target)) return undefined;
+  const seconds = Math.max(0, Math.ceil((target - now) / 1000));
+  return { days: Math.floor(seconds / 86400), hours: Math.floor(seconds % 86400 / 3600), minutes: Math.floor(seconds % 3600 / 60), seconds: seconds % 60 };
+}
+
 export function localScheduleTime(value?: string) {
   if (timestamp(value) === undefined) return "Date to be confirmed";
   return new Intl.DateTimeFormat("en-GB", {
