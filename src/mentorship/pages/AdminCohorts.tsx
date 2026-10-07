@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Search, Users, ShieldCheck } from 'lucide-react'
 import { StudentAvatar } from '../components/StudentAvatar';
 import { loadSuccessCohorts, loadCohortWorkspace, successRoot } from '../studentSuccessApi';
 import { studentProgress } from '../studentSuccess';
+import { CohortRecordCards } from './AdminCohortRecords';
 import '../studentSuccess.css';
 
 export function SuccessLoading() { return <div className="ss-empty" role="status">Loading student records…</div>; }
@@ -18,6 +19,7 @@ export function AdminCohorts() {
     {query.isPending ? <SuccessLoading /> : query.isError ? <SuccessError error={query.error} retry={() => void query.refetch()} /> : <div className="ss-directory">
       {query.data.map(c => <Link key={c.id} to={`${successRoot}/${c.id}`} className="ss-card ss-cohort"><span className="ss-cohort-icon"><Users size={22}/></span><span className="ss-badge">{c.status}</span><h2>{c.internal_name}</h2><p>{c.display_name}</p><div className="ss-row"><span>{c.starts_at ? new Date(c.starts_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Start date not set'}</span><span className="ss-link">View students <ArrowRight size={16}/></span></div></Link>)}
       {!query.data.length && <div className="ss-empty">No cohorts have been created yet.</div>}
+      <CohortRecordCards />
     </div>}
   </section>;
 }
