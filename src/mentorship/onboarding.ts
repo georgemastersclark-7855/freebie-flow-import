@@ -10,7 +10,7 @@ export const setupVideoOutline: SetupVideo[] = [
   { id: "sound-library", key: "sound-library", title: "Craft your sound library", duration: "", description: "Build a collection of sounds you can reach for straight away." },
   { id: "session-template", key: "session-template", title: "Build your session template", duration: "", description: "Get your project ready so you can open your DAW and start writing." },
   { id: "reference-playlist", key: "reference-playlist", title: "Curate your reference playlist", duration: "", description: "Choose the tracks that will guide your sound and production decisions." },
-  { id: "stems-workflow", key: "stems-workflow", title: "Export stems properly", duration: "", description: "Get your weekly song ready for Rob to open in a live session." },
+  { id: "stems-workflow", key: "stems-workflow", title: "Export stems properly", duration: "", description: "Send me stems in the format I need, and learn how to make a professional first impression." },
 ];
 
 // Keep the expected setup visible even when a recording is still being prepared.

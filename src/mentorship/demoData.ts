@@ -17,7 +17,7 @@ export const demoSetupVideos: SetupVideo[] = [
   { id: "sound-library", title: "Craft your sound library", duration: "7:34", description: "Build a trusted stash so every session starts with momentum.", url: localSetupVideo("sound-library") },
   { id: "session-template", title: "Build your session template", duration: "6:48", description: "Set up the workhorse project you will use for every weekly rep.", url: localSetupVideo("session-template") },
   { id: "reference-playlist", title: "Curate your reference playlist", duration: "4:21", description: "Choose the references that keep your structure and decisions honest.", url: localSetupVideo("reference-playlist") },
-  { id: "stems-workflow", title: "Export stems properly", duration: "8 min", description: "Prepare files Rob can open quickly if your track is selected for surgery." },
+  { id: "stems-workflow", title: "Export stems properly", duration: "8 min", description: "Send me stems in the format I need, and learn how to make a professional first impression." },
 ];
 
 export const demoStudent: PortalUser = {
