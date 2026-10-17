@@ -152,7 +152,7 @@ const VideoBlock = () => (
   </div>
 );
 
-/* Seat counter: SEATS_TOTAL = cohort size, SEATS_LEFT = seats remaining (shown with the total struck through). */
+/* Seat counter: SEATS_TOTAL = cohort size, SEATS_LEFT = seats remaining. */
 const SEATS_TOTAL = 12;
 const SEATS_LEFT = 11;
 
@@ -194,10 +194,17 @@ const MentorshipCohort2Draft = () => {
         <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 17th October 2026</p>
 
         {/* Banner */}
-        <p className="text-[17px] leading-snug font-bold text-white mb-6" style={tightSpacing}>
-          Cohort 2. <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats</span>{" "}
-          <span className="text-[#22c55e]">{SEATS_LEFT} seats remaining.</span> Applications close 29 October or when every seat is taken. <span className="text-[#22c55e]">First cohort sold out.</span>
-        </p>
+        <div className="mb-6 space-y-2">
+          <p className="flex flex-wrap items-baseline gap-x-1.5 text-[17px] leading-snug font-bold text-white" style={tightSpacing}>
+            <span>{SEATS_TOTAL} seats total</span>
+            <span aria-hidden="true" className="text-white/40">·</span>
+            <span className="text-[#22c55e]">{SEATS_LEFT} remaining</span>
+          </p>
+          <p className="text-[13px] leading-relaxed text-white/65">
+            Applications close 29 October, or sooner if full.
+          </p>
+          <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
+        </div>
         <div className="mb-4">
           <CtaButton />
         </div>
