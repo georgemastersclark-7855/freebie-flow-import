@@ -40,12 +40,6 @@ const Quote = ({ children, name }: { children: ReactNode; name: string }) => (
   </figure>
 );
 
-const Tbc = ({ children }: { children: ReactNode }) => (
-  <span className="inline-block border border-white/25 bg-white/[0.06] text-white rounded px-1.5 text-[0.92em] leading-snug">
-    {children}
-  </span>
-);
-
 const PlaceholderTag = ({ children }: { children: ReactNode }) => (
   <span className="absolute top-3 left-3 z-10 bg-white text-[#050505] text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
     {children}
@@ -202,7 +196,7 @@ const MentorshipCohort2Draft = () => {
         {/* Banner */}
         <p className="text-[17px] leading-snug font-bold text-white mb-6" style={tightSpacing}>
           Cohort 2. <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats</span>{" "}
-          <span className="text-[#22c55e]">{SEATS_LEFT} seats remaining.</span> Applications close <Tbc>[DATE]</Tbc> or when every seat is taken. <span className="text-[#22c55e]">First cohort sold out.</span>
+          <span className="text-[#22c55e]">{SEATS_LEFT} seats remaining.</span> Applications close 29 October or when every seat is taken. <span className="text-[#22c55e]">First cohort sold out.</span>
         </p>
         <div className="mb-4">
           <CtaButton />
@@ -467,13 +461,13 @@ const MentorshipCohort2Draft = () => {
           tone="green"
           items={[
             <>
-              <Strong>12 producers, 6 weeks.</Strong> <Tbc>[START DATE]</Tbc> to <Tbc>[END DATE]</Tbc>
+              <Strong>12 producers, 6 weeks.</Strong> Sunday 1 November to Sunday 6 December 2026.
             </>,
             <>
               <Strong>A 1:1 call with me to review your music.</Strong> Before we start, I’ll pinpoint exactly what’s holding your tracks back and what to focus on first.
             </>,
             <>
-              <Strong>Live with me every Sunday,</Strong> 90 minutes, <Tbc>[TIME AND TIME ZONE]</Tbc>. A lesson built around what the group needs, then I open up selected tracks and produce on them live.
+              <Strong>Live with me every Sunday,</Strong> 7pm to 8:30pm UK time (GMT). A lesson built around what the group needs, then I open up selected tracks and produce on them live.
             </>,
             <>
               <Strong>My personal feedback on every song you submit.</Strong> What needs work, why, and what to do next.
@@ -494,7 +488,7 @@ const MentorshipCohort2Draft = () => {
         />
 
         <P>
-          We kick off <Tbc>[START DATE]</Tbc>. If you’re ready for this:
+          We kick off Sunday 1 November at 7pm UK time (GMT). If you’re ready for this:
         </P>
 
         <P>
@@ -514,7 +508,7 @@ const MentorshipCohort2Draft = () => {
         </div>
 
         <P className="mt-6">
-          Doors close <Tbc>[DAY, DATE, TIME AND TIME ZONE]</Tbc> or when the 12 seats are gone. Whichever comes first.
+          Doors close Thursday 29 October at 11:59pm UK time (GMT) or when the 12 seats are gone. Whichever comes first.
         </P>
 
         <Signature className="mt-10" />
