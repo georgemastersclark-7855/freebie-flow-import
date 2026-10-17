@@ -31,7 +31,7 @@ const Big = ({ children }: { children: ReactNode }) => (
 
 const Quote = ({ children, name }: { children: ReactNode; name: string }) => (
   <figure className="my-8 border-l-[3px] border-[#22c55e] pl-5">
-    <blockquote className="text-[19px] sm:text-[20px] leading-[1.5] font-medium text-white" style={tightSpacing}>
+    <blockquote className="text-[19px] sm:text-[20px] leading-[1.5] font-medium italic text-white" style={tightSpacing}>
       {children}
     </blockquote>
     <figcaption className="mt-3 text-[13px] text-white/50">
