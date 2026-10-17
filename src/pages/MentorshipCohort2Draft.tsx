@@ -152,7 +152,7 @@ const VideoBlock = () => (
   </div>
 );
 
-/* Seat counter: SEATS_TOTAL = cohort size, SEATS_LEFT = seats remaining. */
+/* Seat counter: show the original availability crossed out beside the remaining seats. */
 const SEATS_TOTAL = 12;
 const SEATS_LEFT = 11;
 
@@ -196,8 +196,7 @@ const MentorshipCohort2Draft = () => {
         {/* Banner */}
         <div className="mb-6 space-y-2">
           <p className="flex flex-wrap items-baseline gap-x-1.5 text-[17px] leading-snug font-bold text-white" style={tightSpacing}>
-            <span>{SEATS_TOTAL} seats total</span>
-            <span aria-hidden="true" className="text-white/40">·</span>
+            <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
             <span className="text-[#22c55e]">{SEATS_LEFT} remaining</span>
           </p>
           <p className="text-[13px] leading-relaxed text-white/65">
