@@ -20,6 +20,7 @@ const LinkInBio = lazy(() => import("./pages/LinkInBio"));
 const Mentorship = lazy(() => import("./pages/Mentorship"));
 const MentorshipSeptember = lazy(() => import("./pages/MentorshipSeptember"));
 const MentorshipCohort2Draft = lazy(() => import("./pages/MentorshipCohort2Draft"));
+const MentorshipRobVersion = lazy(() => import("./pages/MentorshipRobVersion"));
 const MentorshipApplication = lazy(() => import("./pages/MentorshipApplication"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
@@ -75,6 +76,7 @@ const App = () => {
             <Route path="/mentorship/apply/:slug" element={<MentorshipApplication />} />
             <Route path="/mentorship-september" element={<MentorshipSeptember />} />
             <Route path="/mentorship-preview-8049a1" element={<MentorshipCohort2Draft />} />
+            <Route path="/mentorship-rob-0af716" element={<MentorshipRobVersion />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
             <Route path="/mentorship-demo/*" element={<Navigate to="/mentorship-portal" replace />} />
             <Route path="/emails" element={<ProductionEmails />} />
