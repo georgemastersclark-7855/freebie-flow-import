@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from "react";
-const robSignature = "/assets/mentorship-draft/rob-signature-bold.png";
+const robSignature = "/assets/mentorship-rob/web/rob-signature.webp";
 
 const robProfile = "/assets/rob-profile.jpg";
 
@@ -51,16 +51,22 @@ const Receipt = ({
   alt,
   caption,
   className = "my-10",
+  width,
+  height,
 }: {
   src: string;
   alt: string;
   caption?: string;
   className?: string;
+  width?: number;
+  height?: number;
 }) => (
   <figure className={`mx-auto ${className} max-w-[340px]`}>
     <img
       src={src}
       alt={alt}
+      width={width}
+      height={height}
       loading="lazy"
       className="w-full rounded-[28px] border border-white/10 shadow-2xl shadow-black/60"
     />
@@ -73,7 +79,7 @@ const CtaButton = ({ id }: { id?: string }) => (
   <a
     id={id}
     href="#apply"
-    className="inline-block px-8 py-3.5 bg-white text-[#050505] font-bold text-sm rounded-lg hover:bg-white/90 transition-colors"
+    className="block w-full text-center sm:inline-block sm:w-auto px-8 py-[15px] bg-white text-[#050505] font-bold text-[15px] leading-[22px] rounded-lg hover:bg-white/90 transition-colors"
     style={tightSpacing}
   >
     APPLY FOR THE MENTORSHIP
@@ -274,7 +280,10 @@ const MentorshipRobVersion = () => {
 
         <figure className="my-10">
           <img
-            src="/assets/mentorship-draft/live-call-gallery.jpg"
+            src="/assets/mentorship-rob/web/live-call-gallery.webp"
+            width={1200}
+            height={753}
+            loading="lazy"
             alt="Zoom call with Rob and the cohort 1 producers, Ableton on screen"
             className="w-full rounded-2xl border border-white/10"
           />
@@ -296,24 +305,24 @@ const MentorshipRobVersion = () => {
 
         <P>And a huge part of that journey has been developing a workflow that allows me to create better music, faster.</P>
 
-        <div className="grid grid-cols-3 gap-2 my-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 my-8">
           <img
-            src="/assets/rob-chainsmokers.jpg"
+            src="/assets/mentorship-rob/web/rob-chainsmokers.webp"
             alt="Rob with The Chainsmokers"
             loading="lazy"
             className="w-full aspect-[3/4] object-cover rounded-xl border border-white/10 object-top"
           />
           <img
-            src="/assets/rob-marshmello.jpg"
+            src="/assets/mentorship-rob/web/rob-marshmello.webp"
             alt="Rob with Marshmello"
             loading="lazy"
             className="w-full aspect-[3/4] object-cover rounded-xl border border-white/10"
           />
           <img
-            src="/assets/mentorship-rob/rob-session.jpg"
+            src="/assets/mentorship-rob/web/rob-session.webp"
             alt="Rob in a writing session"
             loading="lazy"
-            className="w-full aspect-[3/4] object-cover rounded-xl border border-white/10"
+            className="col-span-2 sm:col-span-1 w-full aspect-[16/10] sm:aspect-[3/4] object-cover rounded-xl border border-white/10"
           />
         </div>
 
@@ -331,7 +340,7 @@ const MentorshipRobVersion = () => {
 
         <P>I'd flick through these ideas in sessions until something caught someone's attention, and suddenly we'd have the starting point for a new track.</P>
 
-        <PhotoWide src="/assets/rob-writing-session.jpg" alt="Rob in a writing session" className="object-[center_30%]" />
+        <PhotoWide src="/assets/mentorship-rob/web/rob-writing-session.webp" alt="Rob in a writing session" className="object-top" />
 
         <P>We'd build the idea into a verse, chorus or drop, then move on to the next one. At the end, we'd choose the strongest tracks to finish.</P>
 
@@ -371,7 +380,10 @@ const MentorshipRobVersion = () => {
 
         <figure className="my-8">
           <img
-            src="/assets/mentorship-rob/portal-onboarding.jpg"
+            src="/assets/mentorship-rob/web/portal-onboarding.webp"
+            width={1004}
+            height={811}
+            loading="lazy"
             alt="Student portal onboarding"
             className="w-full max-w-[520px] mx-auto rounded-2xl border border-white/10"
           />
@@ -397,7 +409,9 @@ const MentorshipRobVersion = () => {
 
         <figure className="my-10">
           <img
-            src="/assets/mentorship-draft/live-call-rob-ableton.jpg"
+            src="/assets/mentorship-rob/web/live-call-rob-ableton.webp"
+            width={1200}
+            height={674}
             alt="Rob inside a project on a cohort 1 call, students on Zoom down the side"
             className="w-full rounded-2xl border border-white/10"
             loading="lazy"
@@ -405,14 +419,18 @@ const MentorshipRobVersion = () => {
         </figure>
 
         <Receipt
-          src="/assets/mentorship-draft/rob-stems-surgery.png"
+          src="/assets/mentorship-rob/web/rob-stems-surgery.webp"
+          width={900}
+          height={701}
           alt="WhatsApp: Rob asks a cohort 1 student for stems to work on live"
         />
 
         <P>We'll also cover the areas the group needs help with, break down real major-label projects, and finish with a Q&A.</P>
 
         <Receipt
-          src="/assets/mentorship-draft/rob-project-sunday.png"
+          src="/assets/mentorship-rob/web/rob-project-sunday.webp"
+          width={900}
+          height={870}
           alt="WhatsApp: Rob offers to open a project on the Sunday call"
         />
 
@@ -444,19 +462,25 @@ const MentorshipRobVersion = () => {
 
         <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory my-8 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 sm:overflow-visible">
           <img
-            src="/assets/mentorship-draft/rob-reps-folders.png"
+            src="/assets/mentorship-rob/web/rob-reps-folders.webp"
+            width={800}
+            height={1434}
             alt="WhatsApp: Rob's project folders"
             loading="lazy"
             className="snap-start shrink-0 w-[72%] sm:w-auto rounded-[20px] border border-white/10"
           />
           <img
-            src="/assets/mentorship-draft/austin-chat.png"
+            src="/assets/mentorship-rob/web/austin-chat.webp"
+            width={800}
+            height={1320}
             alt="WhatsApp: Austin's message to Rob"
             loading="lazy"
             className="snap-start shrink-0 w-[72%] sm:w-auto rounded-[20px] border border-white/10"
           />
           <img
-            src="/assets/mentorship-draft/aaron-video-breakdown.png"
+            src="/assets/mentorship-rob/web/aaron-video-breakdown.webp"
+            width={800}
+            height={1499}
             alt="WhatsApp: Rob's video breakdown for Aaron"
             loading="lazy"
             className="snap-start shrink-0 w-[72%] sm:w-auto rounded-[20px] border border-white/10"
@@ -467,7 +491,7 @@ const MentorshipRobVersion = () => {
           You'll also get my complete <B>Master Bundle sample and preset collection</B> included for free. If you've already purchased it, I'll refund that purchase when you join.
         </P>
 
-        <img src="/assets/master-bundle.webp" alt="The Master Bundle" loading="lazy" className="w-full max-w-[340px] mx-auto my-8 rounded-xl" />
+        <img src="/assets/mentorship-rob/web/master-bundle.webp" alt="The Master Bundle" width={840} height={840} loading="lazy" className="w-full max-w-[280px] mx-auto my-8 rounded-xl" />
 
         <H2>Real producers. Real progress.</H2>
 
