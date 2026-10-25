@@ -180,8 +180,18 @@ const MentorshipRobVersion = () => {
     robots.name = "robots";
     robots.content = "noindex, nofollow";
     document.head.appendChild(robots);
+
+    /* One video at a time: starting one pauses the rest ("play" doesn't bubble, so listen in the capture phase). */
+    const pauseOthers = (e: Event) => {
+      document.querySelectorAll("video").forEach((v) => {
+        if (v !== e.target) v.pause();
+      });
+    };
+    document.addEventListener("play", pauseOthers, true);
+
     return () => {
       robots.remove();
+      document.removeEventListener("play", pauseOthers, true);
     };
   }, []);
 
