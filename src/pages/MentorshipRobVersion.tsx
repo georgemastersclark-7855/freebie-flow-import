@@ -129,14 +129,13 @@ const Tbc = ({ children }: { children: ReactNode }) => <span className="inline-b
 
 /* ---------- New small components ---------- */
 
-const H1 = ({ children }: { children: ReactNode }) => (
-  <p role="heading" aria-level={1} className="text-[34px] sm:text-[40px] leading-[1.1] font-bold text-white mt-4 mb-4" style={tightSpacing}>
-    {children}
-  </p>
-);
-
-const Lead = ({ children }: { children: ReactNode }) => (
-  <p className="text-[18px] leading-[1.6] font-semibold text-white mb-5">{children}</p>
+const PhotoWide = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => (
+  <img
+    src={src}
+    alt={alt}
+    loading="lazy"
+    className={`w-full aspect-[16/10] object-cover rounded-xl my-8 border border-white/10 ${className}`.trim()}
+  />
 );
 
 const Section = ({ eyebrow, title }: { eyebrow: string; title: string }) => (
@@ -221,11 +220,17 @@ const MentorshipRobVersion = () => {
           <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
         </div>
 
-        <H1>Make better music, faster.</H1>
+        <div className="mb-4">
+          <CtaButton />
+        </div>
 
-        <Lead>
+        <VideoBlock />
+
+        <Big>Make better music, faster.</Big>
+
+        <P className="-mt-4">
           Six weeks of hands-on production mentorship to help you build a stronger creative workflow, improve your music, and start finishing tracks you're genuinely proud of.
-        </Lead>
+        </P>
 
         <P>
           I'm taking on just 12 producers, working directly with you through weekly feedback, live co-production sessions and a creative process that's completely changed the way I make music.
@@ -253,11 +258,17 @@ const MentorshipRobVersion = () => {
 
         <P>And I'll be guiding you through the entire process.</P>
 
-        <VideoBlock />
+        <P>Everything’s below: how it works, who it’s for and what we’ll do together. Have a read and apply at the bottom when you’re ready.</P>
 
-        <div className="mt-8 mb-4">
-          <CtaButton />
-        </div>
+        <Signature className="mt-8 mb-4" />
+
+        <figure className="my-10">
+          <img
+            src="/assets/mentorship-draft/live-call-gallery.jpg"
+            alt="Zoom call with Rob and the cohort 1 producers, Ableton on screen"
+            className="w-full rounded-2xl border border-white/10"
+          />
+        </figure>
 
         <H2>Stop overthinking. Start creating.</H2>
 
@@ -309,6 +320,8 @@ const MentorshipRobVersion = () => {
         <P>Instead of making five full tracks, I could make 50 songstarters in roughly the same amount of time.</P>
 
         <P>I'd flick through these ideas in sessions until something caught someone's attention, and suddenly we'd have the starting point for a new track.</P>
+
+        <PhotoWide src="/assets/rob-writing-session.jpg" alt="Rob in a writing session" className="object-[center_30%]" />
 
         <P>We'd build the idea into a verse, chorus or drop, then move on to the next one. At the end, we'd choose the strongest tracks to finish.</P>
 
@@ -372,21 +385,32 @@ const MentorshipRobVersion = () => {
 
         <P>I'll open up a selected student's project and co-produce it live, walking everyone through my decisions, techniques and thought process as we improve the track together.</P>
 
+        <figure className="my-10">
+          <img
+            src="/assets/mentorship-draft/live-call-rob-ableton.jpg"
+            alt="Rob inside a project on a cohort 1 call, students on Zoom down the side"
+            className="w-full rounded-2xl border border-white/10"
+            loading="lazy"
+          />
+        </figure>
+
+        <Receipt
+          src="/assets/mentorship-draft/rob-stems-surgery.png"
+          alt="WhatsApp: Rob asks a cohort 1 student for stems to work on live"
+        />
+
         <P>We'll also cover the areas the group needs help with, break down real major-label projects, and finish with a Q&A.</P>
+
+        <Receipt
+          src="/assets/mentorship-draft/rob-project-sunday.png"
+          alt="WhatsApp: Rob offers to open a project on the Sunday call"
+        />
 
         <P>You'll see exactly how I approach music in real-world situations, and how to apply those techniques to your own productions.</P>
 
         <P>
           <B>By the end of week four, you'll have at least 20 songstarters, four developed track ideas, and a much clearer understanding of what makes your music work.</B>
         </P>
-
-        <figure className="my-8">
-          <img
-            src="/assets/mentorship-draft/live-call-gallery.jpg"
-            alt="Zoom call with Rob and cohort 1, Ableton on screen"
-            className="w-full rounded-2xl border border-white/10"
-          />
-        </figure>
 
         <Section eyebrow="Weeks 5–6" title="Finishing Your Strongest Track" />
 
@@ -432,6 +456,8 @@ const MentorshipRobVersion = () => {
         <P>
           You'll also get my complete <B>Master Bundle sample and preset collection</B> included for free. If you've already purchased it, I'll refund that purchase when you join.
         </P>
+
+        <img src="/assets/master-bundle.webp" alt="The Master Bundle" loading="lazy" className="w-full max-w-[340px] mx-auto my-8 rounded-xl" />
 
         <H2>Real producers. Real progress.</H2>
 
