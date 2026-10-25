@@ -236,11 +236,11 @@ const MentorshipRobVersion = () => {
           <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
         </div>
 
-        <div className="mb-4">
+        <VideoBlock />
+
+        <div className="-mt-4 mb-4">
           <CtaButton />
         </div>
-
-        <VideoBlock />
 
         <Big>Make better music, faster.</Big>
 
