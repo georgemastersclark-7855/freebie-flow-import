@@ -236,17 +236,18 @@ const MentorshipRobVersion = () => {
           <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
         </div>
 
-        <VideoBlock />
-
-        <div className="-mt-4 mb-4">
-          <CtaButton />
-        </div>
-
         <Big>Make better music, faster.</Big>
 
         <P className="-mt-4">
           Six weeks of hands-on production mentorship to help you build a stronger creative workflow, improve your music, and start finishing tracks you're genuinely proud of.
         </P>
+
+        <VideoBlock />
+
+        {/* relative so the button paints above the video's drop shadow */}
+        <div className="relative -mt-2 mb-8">
+          <CtaButton />
+        </div>
 
         <P>
           I'm taking on just 12 producers, working directly with you through weekly feedback, live co-production sessions and a creative process that's completely changed the way I make music.
