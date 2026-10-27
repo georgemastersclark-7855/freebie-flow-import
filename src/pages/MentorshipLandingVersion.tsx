@@ -801,36 +801,26 @@ const MentorshipLandingVersion = () => {
         </div>
       </section>
 
-      {/* ================= BONUS ================= */}
+      {/* ================= ONE MORE THING (Master Bundle as a quiet aside, not a bonus card) ================= */}
       <section className="relative bg-[#050505] pt-20 md:pt-28 pb-16 md:pb-28 px-5 md:px-6 overflow-hidden">
         {/* Visual connector */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 md:h-24 bg-gradient-to-b from-zinc-800 to-transparent" />
 
-        <div className="max-w-4xl mx-auto relative z-10">
-          <SectionHeader eyebrow="BONUS" lime className="mb-8 md:mb-12" />
+        <div className="max-w-[640px] mx-auto relative z-10 text-center">
+          <SectionHeader eyebrow="One more thing..." className="mb-6 md:mb-8" />
 
-          <div className="group relative rounded-2xl md:rounded-3xl border border-zinc-800 bg-[#0A0A0A] overflow-hidden hover:border-[#D3FF02]/40 transition-all duration-300 hover:shadow-2xl hover:shadow-[#D3FF02]/10">
-            <div className="flex flex-col md:flex-row">
-              <div className="relative bg-zinc-900 p-6 md:p-8 flex items-center justify-center md:w-[320px] shrink-0">
-                <img
-                  src={webAsset("master-bundle.webp")}
-                  alt="The Master Bundle"
-                  width={840}
-                  height={840}
-                  loading="lazy"
-                  className="w-full max-w-[260px] rounded-xl"
-                />
-              </div>
-              <div className="flex-1 p-6 md:p-10 flex flex-col justify-center">
-                <span className="self-start bg-[#D3FF02] text-black text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded mb-4">
-                  Free
-                </span>
-                <p className="text-[18px] md:text-[20px] leading-[1.6] text-zinc-300">
-                  You'll also get my complete <B>Master Bundle sample and preset collection</B> included for free. If you've already purchased it, I'll refund that purchase when you join.
-                </p>
-              </div>
-            </div>
-          </div>
+          <p className="text-[18px] md:text-[20px] leading-[1.6] text-zinc-300">
+            You'll also get my complete <B>Master Bundle sample and preset collection</B> included for free. If you've already purchased it, I'll refund that purchase when you join.
+          </p>
+
+          <img
+            src={webAsset("master-bundle.webp")}
+            alt="The Master Bundle"
+            width={840}
+            height={840}
+            loading="lazy"
+            className="w-full max-w-[280px] mx-auto mt-8 md:mt-10 rounded-xl border border-white/10"
+          />
         </div>
       </section>
 
