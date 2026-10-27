@@ -905,7 +905,7 @@ const MentorshipLandingVersion = () => {
       <section className="relative py-16 md:py-28 px-5 md:px-6 bg-[#050505] border-t border-zinc-900">
         <div className="max-w-4xl mx-auto">
           <SectionHeader
-            eyebrow="IS IT FOR YOU?"
+            eyebrow="Before you apply"
             className="mb-10 md:mb-14"
             sub="I'm keeping this group small because I want to work closely with producers who are serious about improving."
           >
