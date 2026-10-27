@@ -109,30 +109,42 @@ const FACES = {
   aaron: { src: "/assets/mentorship-rob/testimonial-aaron-poster.jpg", x: 45, oy: 56, s: 1.5 },
 } as const;
 
+/* The zoom is done by oversizing the image rather than a CSS transform, so iPhone Safari clips it to the circle. */
 const FaceAvatar = ({ who, className = "" }: { who: keyof typeof FACES; className?: string }) => {
   const f = FACES[who];
   return (
-    <span className={`relative inline-block shrink-0 overflow-hidden rounded-full bg-zinc-800 ${className}`}>
+    <span className={`relative block shrink-0 overflow-hidden rounded-full bg-zinc-800 ${className}`}>
       <img
         src={f.src}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute max-w-none object-cover"
         style={{
+          width: `${f.s * 100}%`,
+          height: `${f.s * 100}%`,
+          left: `${f.x * (1 - f.s)}%`,
+          top: `${f.oy * (1 - f.s)}%`,
           objectPosition: `${f.x}% 50%`,
-          transformOrigin: `${f.x}% ${f.oy}%`,
-          transform: `scale(${f.s})`,
         }}
       />
     </span>
   );
 };
 
+const IG_RING = "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)";
+
+/* Student face inside the same IG-style gradient ring as Rob's avatar. */
+const RingedFace = ({ who, className = "w-10 h-10" }: { who: keyof typeof FACES; className?: string }) => (
+  <span className={`block shrink-0 rounded-full p-[2px] ${className}`} style={{ background: IG_RING }}>
+    <FaceAvatar who={who} className="w-full h-full border-2 border-black" />
+  </span>
+);
+
 /* Rob's round avatar with the IG-style gradient ring. */
 const RobAvatar = ({ className = "w-11 h-11" }: { className?: string }) => (
   <div
     className={`rounded-full p-[2px] shrink-0 ${className}`}
-    style={{ background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}
+    style={{ background: IG_RING }}
   >
     <div className="w-full h-full rounded-full overflow-hidden border-2 border-[#050505]">
       <img src={robProfile} alt="Rob Late" className="w-full h-full object-cover" />
@@ -303,9 +315,7 @@ const TestimonialVideo = ({
       className="w-full aspect-video bg-black object-cover"
     />
     <figcaption className="p-4 flex items-center gap-3">
-      <span className="p-[2px] rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
-        <FaceAvatar who={who} className="w-9 h-9 border-2 border-black" />
-      </span>
+      <RingedFace who={who} />
       <span className="text-[13px] text-zinc-500">
         <span className="text-white font-bold text-[14px] tracking-tight">{name}</span> · Cohort 1
       </span>
