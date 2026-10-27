@@ -403,10 +403,10 @@ const MentorshipLandingVersion = () => {
   ];
 
   const wontWork = [
+    "You can't take honest feedback on your music.",
     "You're looking for shortcuts, secret plugins or a magic formula for making great music.",
     "You don't have time to create and submit music consistently.",
     "You'd rather collect more tutorials than put what you've learned into practice.",
-    "You don't need to be an advanced producer or have aspirations to work with major artists.",
   ];
 
   return (
@@ -949,7 +949,7 @@ const MentorshipLandingVersion = () => {
         <div className="max-w-xl mx-auto px-5 md:px-6">
           <div className="text-center mb-10 md:mb-14">
             <div className="mb-4">
-              <Eyebrow>EVERYTHING INCLUDED</Eyebrow>
+              <Eyebrow>The quick facts</Eyebrow>
             </div>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter leading-[1.05]">
               Everything included in <Serif>your mentorship</Serif>
