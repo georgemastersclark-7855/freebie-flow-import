@@ -520,18 +520,19 @@ const MentorshipLandingVersion = () => {
       {/* ================= THE OUTCOME ================= */}
       <section className="relative bg-[#050505] border-t border-white/5 py-16 md:py-28 px-5 md:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <div className="mb-6">
-              <Eyebrow>THE OUTCOME</Eyebrow>
-            </div>
-            <p className="text-[18px] md:text-[21px] text-zinc-300 font-medium leading-relaxed">
+          {/* Headline (Taki's lead-in), Rob's line as the subheadline, then the lead-in to the cards */}
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-white">
+              Here's what <Serif>we're doing...</Serif>
+            </h2>
+            <p className="mt-5 md:mt-6 text-[17px] md:text-[19px] leading-relaxed text-zinc-400">
               I'm taking on just 12 producers, working directly with you through weekly feedback, live co-production sessions and a creative process that's completely changed the way I make music.
             </p>
           </div>
 
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-[1.05] text-white text-center max-w-3xl mx-auto mb-10 md:mb-14">
-            By the end of the six weeks, <Serif>you'll have:</Serif>
-          </h2>
+          <p className="text-center text-[20px] md:text-[24px] font-semibold text-white tracking-tight mb-6 md:mb-8">
+            By the end of the six weeks, you'll have:
+          </p>
 
           {/* Feature cards with isolated lighting */}
           <div className="relative isolate mb-14 md:mb-20">
@@ -568,23 +569,13 @@ const MentorshipLandingVersion = () => {
         </div>
       </section>
 
-      {/* ================= MEET YOUR MENTOR ================= */}
+      {/* ================= STOP OVERTHINKING (Rob's story; credits stay inline, as in Taki's doc) ================= */}
       <section className="relative w-full bg-black py-16 md:py-28 px-5 md:px-6 overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-zinc-800/30 blur-[120px] rounded-full pointer-events-none z-0" />
 
         <div className="relative z-10 max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10 md:mb-14">
-            <div className="mb-5">
-              <Eyebrow>MEET YOUR MENTOR</Eyebrow>
-            </div>
-            <p className="text-[26px] md:text-[34px] font-bold text-white tracking-tighter mb-4">
-              <span className="inline-flex items-center">
-                Rob Late.
-                <VerifiedBadge className="ml-2 h-[0.62em] w-[0.62em] drop-shadow-[0_0_8px_rgba(0,149,246,0.3)]" />
-              </span>{" "}
-              <span className="text-zinc-400">Producer.</span>
-            </p>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.05] text-white">
               Stop overthinking.
               <br />
