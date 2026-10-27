@@ -684,7 +684,7 @@ const MentorshipLandingVersion = () => {
       {/* ================= THE SIX WEEKS ================= */}
       <section className="relative bg-[#050505] border-t border-white/5 py-16 md:py-28 px-5 md:px-6">
         <div className="max-w-5xl mx-auto">
-          <SectionHeader eyebrow="THE SIX WEEKS" className="mb-10 md:mb-14">
+          <SectionHeader eyebrow="So how do we get you there?" className="mb-10 md:mb-14">
             Here's how the six weeks <Serif>work.</Serif>
           </SectionHeader>
 
