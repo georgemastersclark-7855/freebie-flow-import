@@ -1011,8 +1011,8 @@ const MentorshipLandingVersion = () => {
           }}
         />
         <div className="relative z-10 max-w-5xl mx-auto">
-          <SectionHeader eyebrow="HOW TO APPLY" className="mb-8 md:mb-10">
-            How to <Serif>apply</Serif>
+          <SectionHeader eyebrow="How to apply" className="mb-8 md:mb-10">
+            Secure <Serif>your spot</Serif>
           </SectionHeader>
 
           <div className="text-center max-w-[640px] mx-auto mb-10 md:mb-12">
