@@ -823,6 +823,10 @@ const MentorshipLandingVersion = () => {
             You'll also get my complete <B>Master Bundle sample and preset collection</B> included for free. If you've already purchased it, I'll refund that purchase when you join.
           </p>
 
+          <p className="mt-5 text-[18px] md:text-[20px] leading-[1.6] text-zinc-300">
+            So you've got a war chest of quality sounds to work with throughout the mentorship. <B>More on that in your onboarding...</B>
+          </p>
+
           <img
             src={webAsset("master-bundle.webp")}
             alt="The Master Bundle"
