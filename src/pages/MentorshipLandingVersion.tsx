@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, AudioLines, Check, Disc3, Layers, MessageCircle, Repeat, Users, X } from "lucide-react";
+import { ArrowRight, AudioLines, Check, Disc3, Layers, MessageCircle, Repeat, Users, Video, X } from "lucide-react";
 
 /* Mentorship cohort 2 as a conventional landing page (mock-up for Rob).
    Same offer and same copy as MentorshipRobVersion.tsx, laid out like the Producer Blueprint sales pages.
@@ -449,7 +449,7 @@ const MentorshipLandingVersion = () => {
           {/* Eyebrow: who's mentoring you, then his credits */}
           <div className="relative mb-5 md:mb-8">
             <p className="text-[14px] md:text-[15px] font-semibold text-white/90 tracking-tight">Get mentored by Rob Late</p>
-            <p className="mt-1 text-[12px] md:text-[13px] text-zinc-500 whitespace-nowrap">The Chainsmokers · Clean Bandit · Illenium</p>
+            <p className="mt-1 text-[12px] md:text-[13px] italic text-zinc-500 whitespace-nowrap">The Chainsmokers · Clean Bandit · Illenium</p>
           </div>
 
           {/* Headline */}
@@ -472,11 +472,12 @@ const MentorshipLandingVersion = () => {
             </div>
 
             {/* Callout tiles - order-3 on mobile (after CTA), order-2 on desktop (before VSL) */}
-            <div className="order-3 md:order-2 grid grid-cols-3 gap-2 md:gap-3 max-w-xl w-full mx-auto mb-8 md:mb-12">
+            <div className="order-3 md:order-2 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 max-w-3xl w-full mx-auto mb-8 md:mb-12">
               {[
                 { icon: <Users className="w-4 h-4" />, label: "First cohort sold out" },
-                { icon: <MessageCircle className="w-4 h-4" />, label: "Direct access to Rob" },
                 { icon: <AudioLines className="w-4 h-4" />, label: "Weekly feedback on your music" },
+                { icon: <Video className="w-4 h-4" />, label: "Live calls every Sunday" },
+                { icon: <MessageCircle className="w-4 h-4" />, label: "Private WhatsApp group" },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-white/10 bg-white/[0.03] px-2 py-3 flex flex-col items-center gap-1.5">
                   <span className="text-[#D3FF02]">{item.icon}</span>
