@@ -140,7 +140,6 @@ const VideoBlock = () => {
   );
 };
 
-const Tbc = ({ children }: { children: ReactNode }) => <span className="inline-block border border-white/25 bg-white/[0.06] text-white rounded px-1.5 text-[0.92em] leading-snug">{children}</span>;
 
 /* ---------- New small components ---------- */
 
@@ -228,14 +227,14 @@ const MentorshipRobVersion = () => {
               <svg className="w-3.5 h-3.5 text-[#3897f0]" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.7 14.5L6 12.2l1.4-1.4 2.9 2.9 6.3-6.3 1.4 1.4-7.7 7.7z" />
               </svg>
-              <span>· Updated: 17th October 2026</span>
+              <span>· Updated: 29th October 2026</span>
             </p>
             <p className="flex flex-wrap items-baseline gap-x-1.5 text-[17px] leading-snug font-bold text-white" style={tightSpacing}>
               <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
               <span className="text-[#22c55e]">{SEATS_LEFT} remaining</span>
             </p>
             <p className="text-[13px] leading-relaxed text-white/65">
-              Applications close 29 October, or sooner if full.
+              Applications close Wednesday 11 November, or sooner if full.
             </p>
             <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
           </div>
@@ -643,14 +642,14 @@ const MentorshipRobVersion = () => {
 
         <P>
           <B>
-            Cohort 2 starts Sunday <Tbc>[DATE TBC]</Tbc>.
+            Cohort 2 starts Sunday 15 November.
           </B>
         </P>
 
         <P>
           Applications close{" "}
           <B>
-            <Tbc>[DATE TBC]</Tbc> at 11:59 PM UK time
+            Wednesday 11 November at 11:59 PM UK time
           </B>
           , or as soon as all 12 places are filled.
         </P>

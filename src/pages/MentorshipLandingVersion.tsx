@@ -71,9 +71,6 @@ const Standout = ({ children }: { children: ReactNode }) => (
   </p>
 );
 
-const Tbc = ({ children }: { children: ReactNode }) => (
-  <span className="inline-block border border-white/25 bg-white/[0.06] text-white rounded px-1.5 text-[0.92em] leading-snug">{children}</span>
-);
 
 const LimeCta = ({ id, className = "" }: { id?: string; className?: string }) => (
   <a
@@ -184,7 +181,7 @@ const StickyBar = () => (
         <p className="mt-1 text-[12.5px] font-semibold text-white">
           <SeatLine />
         </p>
-        <p className="text-[11.5px] text-white/50 mt-0.5">Applications close 29 October</p>
+        <p className="text-[11.5px] text-white/50 mt-0.5">Applications close 11 November</p>
       </div>
       <ApplyPill />
     </div>
@@ -1020,12 +1017,12 @@ const MentorshipLandingVersion = () => {
           {/* Dates */}
           <div className="max-w-[640px] mx-auto rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 md:p-7 mb-10 md:mb-12">
             <p className="text-[17px] md:text-[18px] leading-[1.6] text-white font-bold mb-4">
-              Cohort 2 starts Sunday <Tbc>[DATE TBC]</Tbc>.
+              Cohort 2 starts Sunday 15 November.
             </p>
             <p className="text-[16px] md:text-[17px] leading-[1.65] text-zinc-300">
               Applications close{" "}
               <B>
-                <Tbc>[DATE TBC]</Tbc> at 11:59 PM UK time
+                Wednesday 11 November at 11:59 PM UK time
               </B>
               , or as soon as all 12 places are filled.
             </p>
