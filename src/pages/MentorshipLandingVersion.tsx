@@ -176,15 +176,15 @@ const SeatLine = () => (
 );
 
 /* Sticky top bar: the name with the seat count and close date under it, Apply Now on the right. */
+/* Sticky top bar: seat count and close date on the left, Apply Now on the right. Rob's name lives in the eyebrow below. */
 const StickyBar = () => (
   <header className="sticky top-0 z-50 bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.06]">
     <div className="flex items-center justify-between gap-3 px-5 md:px-12 py-2.5 md:py-3 max-w-7xl mx-auto">
       <div className="min-w-0 leading-tight">
-        <div className="text-[17px] md:text-xl font-bold tracking-tight">Rob Late Mentorship</div>
-        <p className="mt-1 text-[12.5px] font-semibold text-white">
+        <p className="text-[14px] font-bold text-white">
           <SeatLine />
         </p>
-        <p className="text-[11.5px] text-white/50 mt-0.5">Applications close 11 November</p>
+        <p className="text-[11.5px] text-white/50 mt-1">Applications close 11 November</p>
       </div>
       <ApplyPill />
     </div>
