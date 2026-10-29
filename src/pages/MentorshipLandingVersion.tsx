@@ -449,12 +449,7 @@ const MentorshipLandingVersion = () => {
           {/* Eyebrow: who's mentoring you, then his credits */}
           <div className="relative mb-5 md:mb-8">
             <p className="text-[14px] md:text-[15px] font-semibold text-white/90 tracking-tight">Get mentored by Rob Late</p>
-            {/* Credits: two balanced lines on phones, one line from sm up */}
-            <p className="mt-1 text-[12px] md:text-[13px] text-zinc-500">
-              <span className="block sm:inline">The Chainsmokers · Marshmello</span>
-              <span className="hidden sm:inline"> · </span>
-              <span className="block sm:inline">Macklemore · Clean Bandit</span>
-            </p>
+            <p className="mt-1 text-[12px] md:text-[13px] text-zinc-500 whitespace-nowrap">The Chainsmokers · Clean Bandit · Illenium</p>
           </div>
 
           {/* Headline */}
