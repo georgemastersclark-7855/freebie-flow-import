@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, AudioLines, Check, Disc3, Layers, Repeat, Star, X } from "lucide-react";
+import { ArrowRight, AudioLines, Check, Disc3, Layers, MessageCircle, Repeat, Users, X } from "lucide-react";
 
 /* Mentorship cohort 2 as a conventional landing page (mock-up for Rob).
    Same offer and same copy as MentorshipRobVersion.tsx, laid out like the Producer Blueprint sales pages.
@@ -446,21 +446,15 @@ const MentorshipLandingVersion = () => {
           {/* HERO AMBIENT GLOW */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0" />
 
-          {/* Social Proof Eyebrow */}
-          <div className="relative flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-10">
-            <div className="flex -space-x-3 relative">
-              <FaceAvatar who="griffin" className="w-[34px] h-[34px] md:w-10 md:h-10 border-2 border-[#050505]" />
-              <FaceAvatar who="austin" className="w-[34px] h-[34px] md:w-10 md:h-10 border-2 border-[#050505]" />
-              <FaceAvatar who="aaron" className="w-[34px] h-[34px] md:w-10 md:h-10 border-2 border-[#050505]" />
-            </div>
-            <div className="text-left">
-              <div className="flex gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
-                ))}
-              </div>
-              <p className="text-zinc-400 text-[13px]">First cohort sold out</p>
-            </div>
+          {/* Eyebrow: who's mentoring you, then his credits */}
+          <div className="relative mb-5 md:mb-8">
+            <p className="text-[14px] md:text-[15px] font-semibold text-white/90 tracking-tight">Get mentored by Rob Late</p>
+            {/* Credits: two balanced lines on phones, one line from sm up */}
+            <p className="mt-1 text-[12px] md:text-[13px] text-zinc-500">
+              <span className="block sm:inline">The Chainsmokers · Marshmello</span>
+              <span className="hidden sm:inline"> · </span>
+              <span className="block sm:inline">Macklemore · Clean Bandit</span>
+            </p>
           </div>
 
           {/* Headline */}
@@ -482,12 +476,16 @@ const MentorshipLandingVersion = () => {
               <LimeCta className="md:text-lg" />
             </div>
 
-            {/* Benefit Bullets - order-3 on mobile (after CTA), order-2 on desktop (before VSL) */}
-            <div className="order-3 md:order-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] text-zinc-400 mb-8 md:mb-12">
-              {["12 producers only", "6 weeks, live with Rob", "1 finished track"].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#D3FF02]" />
-                  {item}
+            {/* Callout tiles - order-3 on mobile (after CTA), order-2 on desktop (before VSL) */}
+            <div className="order-3 md:order-2 grid grid-cols-3 gap-2 md:gap-3 max-w-xl w-full mx-auto mb-8 md:mb-12">
+              {[
+                { icon: <Users className="w-4 h-4" />, label: "First cohort sold out" },
+                { icon: <MessageCircle className="w-4 h-4" />, label: "Direct access to Rob" },
+                { icon: <AudioLines className="w-4 h-4" />, label: "Weekly feedback on your music" },
+              ].map((item) => (
+                <div key={item.label} className="rounded-xl border border-white/10 bg-white/[0.03] px-2 py-3 flex flex-col items-center gap-1.5">
+                  <span className="text-[#D3FF02]">{item.icon}</span>
+                  <span className="text-[12.5px] md:text-[13px] leading-snug text-zinc-300 font-medium">{item.label}</span>
                 </div>
               ))}
             </div>
