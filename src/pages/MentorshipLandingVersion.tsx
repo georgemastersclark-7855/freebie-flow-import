@@ -19,15 +19,6 @@ const SOFT_GLOW = "radial-gradient(ellipse at center, rgba(255,255,255,0.10) 0%,
 
 /* ---------- Small shared pieces ---------- */
 
-const VerifiedBadge = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 22 22" className={className} aria-label="Verified">
-    <path
-      fill="#0095F6"
-      d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z"
-    />
-  </svg>
-);
-
 const Eyebrow = ({ children }: { children: ReactNode }) => (
   <span className="inline-block py-1.5 px-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-300 text-[11px] font-bold uppercase tracking-widest">
     {children}
@@ -181,26 +172,95 @@ const VslPlayer = () => {
   );
 };
 
-/* A quiet personal note from Rob pinned above the page: the offer doc's scarcity block. */
-const RobNote = () => (
-  <div className="relative mx-auto mb-7 md:mb-10 max-w-[460px] text-left rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 flex items-start gap-3">
-    <RobAvatar className="w-11 h-11 mt-0.5" />
-    <div className="min-w-0">
-      <div className="flex items-center gap-1.5">
-        <span className="text-[14px] font-bold text-white" style={{ letterSpacing: "-0.02em" }}>
-          @roblate
-        </span>
-        <VerifiedBadge className="w-3.5 h-3.5" />
+/* Sticky top bar carrying the seat count. Four mock-up layouts, picked with ?bar=1|2|3|4 (default 1). */
+const readBarVariant = () => {
+  const v = new URLSearchParams(window.location.search).get("bar");
+  return v === "2" || v === "3" || v === "4" ? v : "1";
+};
+
+const ApplyPill = () => (
+  <a
+    href="#apply"
+    className="shrink-0 bg-white text-black px-4 md:px-5 py-2 rounded-full text-[13px] font-semibold hover:bg-zinc-200 transition-colors"
+  >
+    Apply Now
+  </a>
+);
+
+const SeatLine = ({ short = false }: { short?: boolean }) => (
+  <span className="inline-flex flex-wrap items-baseline gap-x-1.5" style={{ letterSpacing: "-0.02em" }}>
+    <span className="line-through decoration-2 text-white/40">
+      {SEATS_TOTAL} seats{short ? "" : " available"}
+    </span>
+    <span className="text-[#D3FF02]">{SEATS_LEFT} remaining</span>
+  </span>
+);
+
+/* One dot per seat: taken seats dim, open seats lit. */
+const SeatDots = () => (
+  <span className="flex gap-[3px]" aria-hidden="true">
+    {Array.from({ length: SEATS_TOTAL }, (_, i) => (
+      <span
+        key={i}
+        className={`w-[7px] h-[7px] rounded-full ${
+          i < SEATS_TOTAL - SEATS_LEFT ? "bg-white/20" : "bg-[#D3FF02] shadow-[0_0_6px_rgba(211,255,2,0.6)]"
+        }`}
+      />
+    ))}
+  </span>
+);
+
+const StickyBar = ({ variant }: { variant: string }) => (
+  <header className="sticky top-0 z-50 bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.06]">
+    {variant === "1" && (
+      <div className="flex items-center justify-between gap-3 px-5 md:px-12 py-2.5 md:py-3 max-w-7xl mx-auto">
+        <div className="min-w-0 leading-tight">
+          <div className="text-[17px] md:text-xl font-bold tracking-tight">Rob Late Mentorship</div>
+          <p className="mt-1 text-[12.5px] font-semibold text-white">
+            <SeatLine />
+          </p>
+          <p className="text-[11.5px] text-white/50 mt-0.5">Applications close 29 October</p>
+        </div>
+        <ApplyPill />
       </div>
-      <p className="text-[11px] text-white/35 tracking-wider mb-2">Updated: 17th October 2026</p>
-      <p className="flex flex-wrap items-baseline gap-x-1.5 text-[16px] leading-snug font-bold text-white" style={{ letterSpacing: "-0.02em" }}>
-        <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
-        <span className="text-[#D3FF02]">{SEATS_LEFT} remaining</span>
-      </p>
-      <p className="mt-1 text-[13px] leading-relaxed text-white/65">Applications close 29 October, or sooner if full.</p>
-      <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
-    </div>
-  </div>
+    )}
+    {variant === "2" && (
+      <>
+        <div className="flex items-center justify-between px-5 md:px-12 py-3 md:py-4 max-w-7xl mx-auto">
+          <div className="text-[17px] md:text-xl font-bold tracking-tight">Rob Late Mentorship</div>
+          <ApplyPill />
+        </div>
+        <div className="border-t border-white/[0.06] bg-white/[0.03]">
+          <p className="px-5 py-2 text-center text-[12.5px] font-semibold text-white">
+            <SeatLine /> <span className="text-white/50 font-normal">· Closes 29 Oct</span>
+          </p>
+        </div>
+      </>
+    )}
+    {variant === "3" && (
+      <div className="flex items-center gap-3 px-5 md:px-12 py-2.5 md:py-3 max-w-7xl mx-auto">
+        <RobAvatar className="w-10 h-10" />
+        <div className="min-w-0 flex-1 leading-tight">
+          <p className="text-[14px] font-bold text-white">
+            <SeatLine short />
+          </p>
+          <p className="text-[11.5px] text-white/55 mt-0.5">Applications close 29 October</p>
+        </div>
+        <ApplyPill />
+      </div>
+    )}
+    {variant === "4" && (
+      <div className="flex items-center gap-3 px-5 md:px-12 py-3 max-w-7xl mx-auto">
+        <div className="min-w-0 flex-1">
+          <SeatDots />
+          <p className="mt-1.5 text-[12px] font-semibold text-white leading-tight">
+            <SeatLine short /> <span className="text-white/50 font-normal">· Closes 29 Oct</span>
+          </p>
+        </div>
+        <ApplyPill />
+      </div>
+    )}
+  </header>
 );
 
 const Phone = ({
@@ -375,6 +435,7 @@ const QuoteCard = ({ children, name, who }: { children: ReactNode; name: string;
 /* ---------- Page ---------- */
 
 const MentorshipLandingVersion = () => {
+  const [bar] = useState(readBarVariant);
   useEffect(() => {
     document.title = "Rob Late - Producer Mentorship";
     const robots = document.createElement("meta");
@@ -440,6 +501,8 @@ const MentorshipLandingVersion = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans relative overflow-x-clip">
+      <StickyBar variant={bar} />
+
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden">
         {/* Aurora Glow Effect */}
@@ -451,24 +514,10 @@ const MentorshipLandingVersion = () => {
           }}
         />
 
-        {/* Navigation Bar */}
-        <nav className="relative z-10 flex items-center justify-between px-5 md:px-12 py-4 md:py-5 max-w-7xl mx-auto">
-          <div className="text-xl font-bold tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">Rob Late Mentorship</div>
-          <a
-            href="#apply"
-            className="bg-white text-black px-5 py-2 rounded-full text-[13px] font-medium hover:bg-zinc-200 transition-colors"
-          >
-            Apply Now
-          </a>
-        </nav>
-
         {/* Hero Content */}
-        <main className="relative z-10 px-5 md:px-12 pt-3 md:pt-14 pb-4 md:pb-28 max-w-5xl mx-auto text-center">
+        <main className="relative z-10 px-5 md:px-12 pt-8 md:pt-16 pb-4 md:pb-28 max-w-5xl mx-auto text-center">
           {/* HERO AMBIENT GLOW */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D3FF02]/10 blur-[120px] rounded-full pointer-events-none z-0" />
-
-          {/* Rob's note */}
-          <RobNote />
 
           {/* Social Proof Eyebrow */}
           <div className="relative flex items-center justify-center gap-3 md:gap-4 mb-6 md:mb-10">
@@ -483,7 +532,7 @@ const MentorshipLandingVersion = () => {
                   <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
                 ))}
               </div>
-              <p className="text-zinc-500 text-[13px]">Cohort 1 producers</p>
+              <p className="text-zinc-400 text-[13px]">First cohort sold out</p>
             </div>
           </div>
 
