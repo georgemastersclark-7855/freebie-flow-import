@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 const robSignature = "/assets/mentorship-rob/web/rob-signature.webp";
 
 const robProfile = "/assets/rob-profile.jpg";
@@ -111,25 +111,34 @@ const Signature = ({ className }: { className: string }) => (
   </div>
 );
 
-const VideoBlock = () => (
-  <div className="relative aspect-video rounded-2xl overflow-hidden bg-black my-10 ring-1 ring-white/20 shadow-2xl shadow-black/70">
-    <img src="/assets/mentorship-draft/video-thumb.jpg" alt="Rob on camera" className="w-full h-full object-cover" />
-    <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/70 to-transparent" />
-    <div className="absolute inset-0 grid place-items-center">
-      <div className="w-[76px] h-[76px] rounded-full bg-white/25 backdrop-blur-md border border-white/50 grid place-items-center shadow-xl">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" className="text-white ml-1" aria-hidden="true">
-          <path d="M8 5v14l11-7z" />
-        </svg>
-      </div>
+/* Rob's sales video: poster with a big play button, native controls once it's playing. */
+const VideoBlock = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+  return (
+    <div className="relative aspect-video rounded-2xl overflow-hidden bg-black my-10 ring-1 ring-white/20 shadow-2xl shadow-black/70">
+      <video
+        ref={videoRef}
+        src="/assets/mentorship-rob/vsl.mp4"
+        poster="/assets/mentorship-rob/vsl-poster.jpg"
+        playsInline
+        preload="metadata"
+        controls={started}
+        onPlay={() => setStarted(true)}
+        className="w-full h-full object-cover"
+      />
+      {!started && (
+        <button type="button" onClick={() => videoRef.current?.play()} aria-label="Play video" className="absolute inset-0 grid place-items-center">
+          <span className="w-[76px] h-[76px] rounded-full bg-white/25 backdrop-blur-md border border-white/50 grid place-items-center shadow-xl">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" className="text-white ml-1" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </button>
+      )}
     </div>
-    <div className="absolute inset-x-4 bottom-3 flex items-center gap-3">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white/90 shrink-0" aria-hidden="true">
-        <path d="M8 5v14l11-7z" />
-      </svg>
-      <div className="h-1 flex-1 rounded-full bg-white/30" />
-    </div>
-  </div>
-);
+  );
+};
 
 const Tbc = ({ children }: { children: ReactNode }) => <span className="inline-block border border-white/25 bg-white/[0.06] text-white rounded px-1.5 text-[0.92em] leading-snug">{children}</span>;
 
@@ -204,36 +213,32 @@ const MentorshipRobVersion = () => {
   return (
     <div className="min-h-screen bg-[#050505] text-white/90">
       <div className="max-w-[640px] mx-auto px-4 sm:px-6 py-14 font-sans">
-        {/* IG-style header */}
-        <div className="flex flex-col items-center mb-10">
-          <div className="w-16 h-16 rounded-full p-[2px] mb-3" style={{
+        {/* Note from Rob: avatar beside the update stamp and seat line, like Taki's doc */}
+        <div className="flex items-start gap-3.5 mb-6">
+          <div className="w-12 h-12 rounded-full p-[2px] shrink-0" style={{
             background: "linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)"
           }}>
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-[#050505]">
               <img src={robProfile} alt="Rob Late" className="w-full h-full object-cover" />
             </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm font-bold text-white" style={{ letterSpacing: "-0.02em" }}>@roblate</span>
-            <svg className="w-3.5 h-3.5 text-[#3897f0]" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.7 14.5L6 12.2l1.4-1.4 2.9 2.9 6.3-6.3 1.4 1.4-7.7 7.7z" />
-            </svg>
+          <div className="min-w-0 space-y-1.5">
+            <p className="flex flex-wrap items-center gap-x-1.5 text-xs text-white/40 tracking-wider">
+              <span className="text-sm font-bold text-white tracking-normal" style={{ letterSpacing: "-0.02em" }}>@roblate</span>
+              <svg className="w-3.5 h-3.5 text-[#3897f0]" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.7 14.5L6 12.2l1.4-1.4 2.9 2.9 6.3-6.3 1.4 1.4-7.7 7.7z" />
+              </svg>
+              <span>· Updated: 17th October 2026</span>
+            </p>
+            <p className="flex flex-wrap items-baseline gap-x-1.5 text-[17px] leading-snug font-bold text-white" style={tightSpacing}>
+              <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
+              <span className="text-[#22c55e]">{SEATS_LEFT} remaining</span>
+            </p>
+            <p className="text-[13px] leading-relaxed text-white/65">
+              Applications close 29 October, or sooner if full.
+            </p>
+            <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
           </div>
-        </div>
-
-        {/* Stamp */}
-        <p className="text-xs text-white/30 mb-3 tracking-wider">Updated: 17th October 2026</p>
-
-        {/* Banner (same as our version) */}
-        <div className="mb-6 space-y-2">
-          <p className="flex flex-wrap items-baseline gap-x-1.5 text-[17px] leading-snug font-bold text-white" style={tightSpacing}>
-            <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
-            <span className="text-[#22c55e]">{SEATS_LEFT} remaining</span>
-          </p>
-          <p className="text-[13px] leading-relaxed text-white/65">
-            Applications close 29 October, or sooner if full.
-          </p>
-          <p className="text-[13px] leading-relaxed font-medium text-white/80">First cohort sold out.</p>
         </div>
 
         <Big>Make better music, faster.</Big>

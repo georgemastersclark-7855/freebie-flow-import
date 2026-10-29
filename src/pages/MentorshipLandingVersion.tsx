@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, AudioLines, Check, Disc3, Layers, Repeat, Star, X } from "lucide-react";
 
 /* Mentorship cohort 2 as a conventional landing page (mock-up for Rob).
@@ -151,6 +151,35 @@ const RobAvatar = ({ className = "w-11 h-11" }: { className?: string }) => (
     </div>
   </div>
 );
+
+/* Rob's sales video: poster with a big play button, native controls once it's playing. */
+const VslPlayer = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+  return (
+    <div className="relative z-10 w-full aspect-video bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
+      <video
+        ref={videoRef}
+        src="/assets/mentorship-rob/vsl.mp4"
+        poster="/assets/mentorship-rob/vsl-poster.jpg"
+        playsInline
+        preload="metadata"
+        controls={started}
+        onPlay={() => setStarted(true)}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {!started && (
+        <button type="button" onClick={() => videoRef.current?.play()} aria-label="Play video" className="absolute inset-0 grid place-items-center">
+          <span className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-lg grid place-items-center">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 md:w-8 md:h-8 text-white ml-1" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </button>
+      )}
+    </div>
+  );
+};
 
 /* A quiet personal note from Rob pinned above the page: the offer doc's scarcity block. */
 const RobNote = () => (
@@ -504,24 +533,8 @@ const MentorshipLandingVersion = () => {
                 <span className="text-white text-[12px] font-bold tracking-tight">Watch: Inside the mentorship</span>
               </div>
 
-              {/* Video Container (placeholder poster until the VSL exists) */}
-              <div className="relative z-10 w-full aspect-video bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
-                <img
-                  src="/assets/mentorship-draft/video-thumb.jpg"
-                  alt="Rob on camera"
-                  width={960}
-                  height={540}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute inset-0 grid place-items-center">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-lg grid place-items-center">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 md:w-8 md:h-8 text-white ml-1" aria-hidden="true">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+              {/* Video Container */}
+              <VslPlayer />
             </div>
           </div>
         </main>
