@@ -472,10 +472,9 @@ const MentorshipLandingVersion = () => {
             </div>
 
             {/* Callout tiles - order-3 on mobile (after CTA), order-2 on desktop (before VSL) */}
-            <div className="order-3 md:order-2 grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 max-w-3xl w-full mx-auto mb-8 md:mb-12">
+            <div className="order-3 md:order-2 grid grid-cols-3 gap-2 md:gap-3 max-w-xl w-full mx-auto mb-8 md:mb-12">
               {[
                 { icon: <Users className="w-4 h-4" />, label: "First cohort sold out" },
-                { icon: <AudioLines className="w-4 h-4" />, label: "Weekly feedback on your music" },
                 { icon: <Video className="w-4 h-4" />, label: "Live calls every Sunday" },
                 { icon: <MessageCircle className="w-4 h-4" />, label: "Private WhatsApp group" },
               ].map((item) => (
