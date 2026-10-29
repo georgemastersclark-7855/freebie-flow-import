@@ -479,7 +479,7 @@ const MentorshipLandingVersion = () => {
                 { icon: <MessageCircle className="w-4 h-4" />, label: "Private WhatsApp group" },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-white/10 bg-white/[0.03] px-2 py-3 flex flex-col items-center gap-1.5">
-                  <span className="text-[#D3FF02]">{item.icon}</span>
+                  <span className="text-white">{item.icon}</span>
                   <span className="text-[12.5px] md:text-[13px] leading-snug text-zinc-300 font-medium">{item.label}</span>
                 </div>
               ))}
