@@ -6,7 +6,6 @@ import { ArrowRight, AudioLines, Check, Disc3, Layers, Repeat, Star, X } from "l
    No tracking, no checkout, no Vidalytics. */
 
 const robSignature = "/assets/mentorship-rob/web/rob-signature.webp";
-const robProfile = "/assets/rob-profile.jpg";
 const webAsset = (name: string) => `/assets/mentorship-rob/web/${name}`;
 
 /* Seat counter: SEATS_TOTAL = cohort size, SEATS_LEFT = seats remaining (shown with the total struck through). */
@@ -131,18 +130,6 @@ const RingedFace = ({ who, className = "w-10 h-10" }: { who: keyof typeof FACES;
   </span>
 );
 
-/* Rob's round avatar with the IG-style gradient ring. */
-const RobAvatar = ({ className = "w-11 h-11" }: { className?: string }) => (
-  <div
-    className={`rounded-full p-[2px] shrink-0 ${className}`}
-    style={{ background: IG_RING }}
-  >
-    <div className="w-full h-full rounded-full overflow-hidden border-2 border-[#050505]">
-      <img src={robProfile} alt="Rob Late" className="w-full h-full object-cover" />
-    </div>
-  </div>
-);
-
 /* Rob's sales video: poster with a big play button, native controls once it's playing. */
 const VslPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -172,12 +159,6 @@ const VslPlayer = () => {
   );
 };
 
-/* Sticky top bar carrying the seat count. Four mock-up layouts, picked with ?bar=1|2|3|4 (default 1). */
-const readBarVariant = () => {
-  const v = new URLSearchParams(window.location.search).get("bar");
-  return v === "2" || v === "3" || v === "4" ? v : "1";
-};
-
 const ApplyPill = () => (
   <a
     href="#apply"
@@ -187,79 +168,26 @@ const ApplyPill = () => (
   </a>
 );
 
-const SeatLine = ({ short = false }: { short?: boolean }) => (
+const SeatLine = () => (
   <span className="inline-flex flex-wrap items-baseline gap-x-1.5" style={{ letterSpacing: "-0.02em" }}>
-    <span className="line-through decoration-2 text-white/40">
-      {SEATS_TOTAL} seats{short ? "" : " available"}
-    </span>
+    <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
     <span className="text-[#D3FF02]">{SEATS_LEFT} remaining</span>
   </span>
 );
 
-/* One dot per seat: taken seats dim, open seats lit. */
-const SeatDots = () => (
-  <span className="flex gap-[3px]" aria-hidden="true">
-    {Array.from({ length: SEATS_TOTAL }, (_, i) => (
-      <span
-        key={i}
-        className={`w-[7px] h-[7px] rounded-full ${
-          i < SEATS_TOTAL - SEATS_LEFT ? "bg-white/20" : "bg-[#D3FF02] shadow-[0_0_6px_rgba(211,255,2,0.6)]"
-        }`}
-      />
-    ))}
-  </span>
-);
-
-const StickyBar = ({ variant }: { variant: string }) => (
+/* Sticky top bar: the name with the seat count and close date under it, Apply Now on the right. */
+const StickyBar = () => (
   <header className="sticky top-0 z-50 bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.06]">
-    {variant === "1" && (
-      <div className="flex items-center justify-between gap-3 px-5 md:px-12 py-2.5 md:py-3 max-w-7xl mx-auto">
-        <div className="min-w-0 leading-tight">
-          <div className="text-[17px] md:text-xl font-bold tracking-tight">Rob Late Mentorship</div>
-          <p className="mt-1 text-[12.5px] font-semibold text-white">
-            <SeatLine />
-          </p>
-          <p className="text-[11.5px] text-white/50 mt-0.5">Applications close 29 October</p>
-        </div>
-        <ApplyPill />
+    <div className="flex items-center justify-between gap-3 px-5 md:px-12 py-2.5 md:py-3 max-w-7xl mx-auto">
+      <div className="min-w-0 leading-tight">
+        <div className="text-[17px] md:text-xl font-bold tracking-tight">Rob Late Mentorship</div>
+        <p className="mt-1 text-[12.5px] font-semibold text-white">
+          <SeatLine />
+        </p>
+        <p className="text-[11.5px] text-white/50 mt-0.5">Applications close 29 October</p>
       </div>
-    )}
-    {variant === "2" && (
-      <>
-        <div className="flex items-center justify-between px-5 md:px-12 py-3 md:py-4 max-w-7xl mx-auto">
-          <div className="text-[17px] md:text-xl font-bold tracking-tight">Rob Late Mentorship</div>
-          <ApplyPill />
-        </div>
-        <div className="border-t border-white/[0.06] bg-white/[0.03]">
-          <p className="px-5 py-2 text-center text-[12.5px] font-semibold text-white">
-            <SeatLine /> <span className="text-white/50 font-normal">· Closes 29 Oct</span>
-          </p>
-        </div>
-      </>
-    )}
-    {variant === "3" && (
-      <div className="flex items-center gap-3 px-5 md:px-12 py-2.5 md:py-3 max-w-7xl mx-auto">
-        <RobAvatar className="w-10 h-10" />
-        <div className="min-w-0 flex-1 leading-tight">
-          <p className="text-[14px] font-bold text-white">
-            <SeatLine short />
-          </p>
-          <p className="text-[11.5px] text-white/55 mt-0.5">Applications close 29 October</p>
-        </div>
-        <ApplyPill />
-      </div>
-    )}
-    {variant === "4" && (
-      <div className="flex items-center gap-3 px-5 md:px-12 py-3 max-w-7xl mx-auto">
-        <div className="min-w-0 flex-1">
-          <SeatDots />
-          <p className="mt-1.5 text-[12px] font-semibold text-white leading-tight">
-            <SeatLine short /> <span className="text-white/50 font-normal">· Closes 29 Oct</span>
-          </p>
-        </div>
-        <ApplyPill />
-      </div>
-    )}
+      <ApplyPill />
+    </div>
   </header>
 );
 
@@ -435,7 +363,6 @@ const QuoteCard = ({ children, name, who }: { children: ReactNode; name: string;
 /* ---------- Page ---------- */
 
 const MentorshipLandingVersion = () => {
-  const [bar] = useState(readBarVariant);
   useEffect(() => {
     document.title = "Rob Late - Producer Mentorship";
     const robots = document.createElement("meta");
@@ -501,7 +428,7 @@ const MentorshipLandingVersion = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans relative overflow-x-clip">
-      <StickyBar variant={bar} />
+      <StickyBar />
 
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden">
@@ -661,11 +588,9 @@ const MentorshipLandingVersion = () => {
 
             <Standout>It was learning to make more ideas, more often.</Standout>
 
-            <div className="my-8 rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5 md:p-6">
-              <p className="text-[17px] md:text-[18px] leading-[1.6] text-zinc-200">
-                I've spent the last few years writing and producing with artists like The Chainsmokers, Marshmello, Macklemore, Clean Bandit and many more, alongside working in film, TV, gaming and building my own music production businesses.
-              </p>
-            </div>
+            <P>
+              I've spent the last few years writing and producing with artists like The Chainsmokers, Marshmello, Macklemore, Clean Bandit and many more, alongside working in film, TV, gaming and building my own music production businesses.
+            </P>
 
             <P>And a huge part of that journey has been developing a workflow that allows me to create better music, faster.</P>
 
