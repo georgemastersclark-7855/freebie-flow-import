@@ -17,10 +17,6 @@ const TheProducerBlueprint005Workflow = lazy(() => import("./pages/TheProducerBl
 
 // Lazy-loaded secondary pages
 const LinkInBio = lazy(() => import("./pages/LinkInBio"));
-const Mentorship = lazy(() => import("./pages/Mentorship"));
-const MentorshipSeptember = lazy(() => import("./pages/MentorshipSeptember"));
-const MentorshipCohort2Draft = lazy(() => import("./pages/MentorshipCohort2Draft"));
-const MentorshipRobVersion = lazy(() => import("./pages/MentorshipRobVersion"));
 const MentorshipLandingVersion = lazy(() => import("./pages/MentorshipLandingVersion"));
 const MentorshipApplication = lazy(() => import("./pages/MentorshipApplication"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -72,13 +68,14 @@ const App = () => {
             <Route path="/legal/refund-policy" element={<RefundPolicy />} />
             <Route path="/legal/earnings-disclaimer" element={<EarningsDisclaimer />} />
             <Route path="/links" element={<LinkInBio />} />
-            <Route path="/mentorship" element={<Mentorship />} />
+            <Route path="/mentorship" element={<MentorshipLandingVersion />} />
             <Route path="/mentorship/apply" element={<MentorshipApplication />} />
             <Route path="/mentorship/apply/:slug" element={<MentorshipApplication />} />
-            <Route path="/mentorship-september" element={<MentorshipSeptember />} />
-            <Route path="/mentorship-preview-8049a1" element={<MentorshipCohort2Draft />} />
-            <Route path="/mentorship-rob-0af716" element={<MentorshipRobVersion />} />
-            <Route path="/mentorship-lp-110dd7" element={<MentorshipLandingVersion />} />
+            {/* Old cohort pages and the cohort 2 drafts all point at the live sales page */}
+            <Route path="/mentorship-september" element={<Navigate to="/mentorship" replace />} />
+            <Route path="/mentorship-preview-8049a1" element={<Navigate to="/mentorship" replace />} />
+            <Route path="/mentorship-rob-0af716" element={<Navigate to="/mentorship" replace />} />
+            <Route path="/mentorship-lp-110dd7" element={<Navigate to="/mentorship" replace />} />
             <Route path="/mentorship-portal/*" element={<MentorshipPortal />} />
             <Route path="/mentorship-demo/*" element={<Navigate to="/mentorship-portal" replace />} />
             <Route path="/emails" element={<ProductionEmails />} />

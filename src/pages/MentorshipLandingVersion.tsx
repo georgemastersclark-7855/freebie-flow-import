@@ -72,10 +72,13 @@ const Standout = ({ children }: { children: ReactNode }) => (
 );
 
 
+/* Every apply button opens the application form, carrying UTM/referral params through so the CRM can attribute the lead. */
+const applyHref = () => `/mentorship/apply${window.location.search}`;
+
 const LimeCta = ({ id, className = "" }: { id?: string; className?: string }) => (
   <a
     id={id}
-    href="#apply"
+    href={applyHref()}
     className={`w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-[17px] md:text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)] ${className}`.trim()}
   >
     Apply For The Mentorship
@@ -158,7 +161,7 @@ const VslPlayer = () => {
 
 const ApplyPill = () => (
   <a
-    href="#apply"
+    href={applyHref()}
     className="shrink-0 bg-white text-black px-4 md:px-5 py-2 rounded-full text-[13px] font-semibold hover:bg-zinc-200 transition-colors"
   >
     Apply Now
@@ -362,10 +365,6 @@ const QuoteCard = ({ children, name, who }: { children: ReactNode; name: string;
 const MentorshipLandingVersion = () => {
   useEffect(() => {
     document.title = "Rob Late - Producer Mentorship";
-    const robots = document.createElement("meta");
-    robots.name = "robots";
-    robots.content = "noindex, nofollow";
-    document.head.appendChild(robots);
 
     /* One video at a time: starting one pauses the rest ("play" doesn't bubble, so listen in the capture phase). */
     const pauseOthers = (e: Event) => {
@@ -376,7 +375,6 @@ const MentorshipLandingVersion = () => {
     document.addEventListener("play", pauseOthers, true);
 
     return () => {
-      robots.remove();
       document.removeEventListener("play", pauseOthers, true);
     };
   }, []);
@@ -967,7 +965,7 @@ const MentorshipLandingVersion = () => {
               </div>
 
               <a
-                href="#apply"
+                href={applyHref()}
                 className="w-full bg-[#D3FF02] hover:bg-[#b8e000] text-black font-bold py-4 px-8 rounded-xl text-[17px] transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-[#D3FF02]/25 flex items-center justify-center gap-2"
               >
                 Apply For The Mentorship

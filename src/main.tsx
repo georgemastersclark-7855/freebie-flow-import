@@ -10,7 +10,7 @@ const preloadMap: Record<string, () => Promise<unknown>> = {
   '/produce-without-expensive-gear': () => import('./pages/TheProducerBlueprint004Gear'),
   '/finish-more-tracks': () => import('./pages/TheProducerBlueprint005Workflow'),
   '/links': () => import('./pages/LinkInBio'),
-  '/mentorship': () => import('./pages/Mentorship'),
+  '/mentorship': () => import('./pages/MentorshipLandingVersion'),
   '/mentorship/apply': () => import('./pages/MentorshipApplication'),
 };
 if (window.location.pathname.startsWith('/mentorship-portal')) {
