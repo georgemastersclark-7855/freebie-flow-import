@@ -662,6 +662,13 @@ const MentorshipLandingVersion = () => {
             </p>
           </div>
 
+          {/* Austin's words as proof of the method, right where Rob's story lands */}
+          <div className="max-w-[640px] mx-auto mt-12 md:mt-16">
+            <QuoteCard name="Austin" who="austin">
+              "The biggest change for me from the mentorship was realising that I'm really overcomplicating the whole process of making music. I’m shocked at how simple and effective Rob’s workflow was."
+            </QuoteCard>
+          </div>
+
           <BridgeCta />
         </div>
       </section>
@@ -867,8 +874,8 @@ const MentorshipLandingVersion = () => {
             <QuoteCard name="Austin" who="austin">
               "So far it's been the most useful mentorship that I've done... and I've spent much more money on other programs that lasted much longer."
             </QuoteCard>
-            <QuoteCard name="Austin" who="austin">
-              "The biggest change for me from the mentorship was realising that I'm really overcomplicating the whole process of making music. I’m shocked at how simple and effective Rob’s workflow was."
+            <QuoteCard name="Aaron" who="aaron">
+              "Having someone with actual industry experience… it really helps."
             </QuoteCard>
           </div>
 
