@@ -630,12 +630,12 @@ const MentorshipLandingVersion = () => {
             <div className="relative my-10">
               <div className="absolute inset-0 -m-6 pointer-events-none" style={{ background: SOFT_GLOW }} />
               <img
-                src={webAsset("rob-writing-session.webp")}
-                alt="Rob in a writing session"
-                width={990}
-                height={1156}
+                src={webAsset("rob-studio-portrait.webp")}
+                alt="Rob in his studio"
+                width={1067}
+                height={1600}
                 loading="lazy"
-                className={`relative w-full aspect-[16/10] object-cover object-top rounded-2xl border border-white/10 ${GLOW_SHADOW}`}
+                className={`relative w-full max-w-[440px] mx-auto aspect-[4/5] object-cover object-[center_40%] rounded-2xl border border-white/10 ${GLOW_SHADOW}`}
               />
             </div>
 
