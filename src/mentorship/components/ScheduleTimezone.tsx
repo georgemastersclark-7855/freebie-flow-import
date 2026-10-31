@@ -7,7 +7,7 @@ import { deviceTimezone, useScheduleTimezone } from "../useScheduleTimezone";
 import { allTimezoneLocations, timezoneClock, timezoneLabel, timezoneLocation } from "../timezoneLabels";
 import "../timezonePicker.css";
 
-function TimezoneSelect({ value, onChange, label, automatic = false, date, light = false }: { value: string; onChange: (zone: string) => void; label: string; automatic?: boolean; date: Date; light?: boolean }) {
+export function TimezoneSelect({ value, onChange, label, automatic = false, date, light = false }: { value: string; onChange: (zone: string) => void; label: string; automatic?: boolean; date: Date; light?: boolean }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [showAll, setShowAll] = useState(false);
