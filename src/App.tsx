@@ -20,8 +20,6 @@ const LinkInBio = lazy(() => import("./pages/LinkInBio"));
 const MentorshipLandingVersion = lazy(() => import("./pages/MentorshipLandingVersion"));
 const MentorshipApplication = lazy(() => import("./pages/MentorshipApplication"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const ClaudeTest = lazy(() => import("./pages/ClaudeTest"));
-const ProducerAccelerator = lazy(() => import("./pages/ProducerAccelerator"));
 const ThirtyWays = lazy(() => import("./pages/ThirtyWays"));
 const ProductionEmails = lazy(() => import("./pages/ProductionEmails"));
 const MentorshipPortal = lazy(() => import("./mentorship/MentorshipPortal"));
@@ -60,8 +58,8 @@ const App = () => {
             <Route path="/make-money-with-music" element={<TheProducerBlueprint003Career />} />
             <Route path="/produce-without-expensive-gear" element={<TheProducerBlueprint004Gear />} />
             <Route path="/finish-more-tracks" element={<TheProducerBlueprint005Workflow />} />
-            <Route path="/claudetest" element={<ClaudeTest />} />
-            <Route path="/produceraccellerator" element={<ProducerAccelerator />} />
+            <Route path="/claudetest" element={<Navigate to="/producer-blueprint" replace />} />
+            <Route path="/produceraccellerator" element={<Navigate to="/mentorship" replace />} />
             {/* Legal Pages */}
             <Route path="/legal/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/legal/terms-of-service" element={<TermsOfService />} />
