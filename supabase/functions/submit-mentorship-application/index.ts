@@ -75,6 +75,40 @@ function makeDb() {
   return { db: createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } }), serviceKey };
 }
 
+// Tells Klaviyo about a new application so the "got your application" flow can send. Needs the KLAVIYO_PRIVATE_KEY secret;
+// KLAVIYO_APPLICANT_LIST_ID also subscribes the applicant, which the form's consent line covers. Never blocks the application.
+async function notifyKlaviyo(lead: ValidatedApplication['lead'], submissionId: string): Promise<void> {
+  const key = Deno.env.get('KLAVIYO_PRIVATE_KEY');
+  if (!key) return;
+  const headers = { 'Authorization': `Klaviyo-API-Key ${key}`, 'revision': '2024-10-15', 'accept': 'application/vnd.api+json', 'content-type': 'application/vnd.api+json' };
+  const firstName = lead.full_name.trim().split(/\s+/)[0] ?? '';
+  const listId = Deno.env.get('KLAVIYO_APPLICANT_LIST_ID');
+  const calls: Promise<Response>[] = [];
+  if (listId) {
+    calls.push(fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
+      method: 'POST', headers, signal: AbortSignal.timeout(4000),
+      body: JSON.stringify({ data: { type: 'profile-subscription-bulk-create-job', attributes: {
+        custom_source: 'Mentorship application',
+        profiles: { data: [{ type: 'profile', attributes: { email: lead.email, subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } } }] },
+      }, relationships: { list: { data: { type: 'list', id: listId } } } } }),
+    }));
+  }
+  calls.push(fetch('https://a.klaviyo.com/api/events/', {
+    method: 'POST', headers, signal: AbortSignal.timeout(4000),
+    body: JSON.stringify({ data: { type: 'event', attributes: {
+      properties: { first_name: firstName, music_url: lead.music_url ?? '', goals: lead.goals, cohort: 'c2', submission_id: submissionId },
+      metric: { data: { type: 'metric', attributes: { name: 'Mentorship Application Submitted' } } },
+      profile: { data: { type: 'profile', attributes: { email: lead.email, first_name: firstName } } },
+      unique_id: submissionId,
+    } } }),
+  }));
+  const results = await Promise.allSettled(calls);
+  results.forEach((result) => {
+    if (result.status === 'rejected') console.error('Klaviyo call failed', String(result.reason));
+    else if (!result.value.ok) console.error('Klaviyo call refused', result.value.status);
+  });
+}
+
 async function loadRevision(db: ReturnType<typeof createClient>, formId: string, revision: number): Promise<ApplicationFormConfig> {
   const { data, error } = await db.rpc('get_mentorship_application_form_revision', { p_form_id: formId, p_revision: revision });
   if (error) throw Object.assign(new Error('Unable to load application form'), { code: error.code });
@@ -162,6 +196,9 @@ Deno.serve(async (req) => {
       return response({ error: 'Temporarily unavailable' }, 503, origin);
     }
     if (!data?.success || data?.submission_id !== input.submission_id) return response({ error: 'Temporarily unavailable' }, 503, origin);
+    const klaviyo = notifyKlaviyo(lead, input.submission_id).catch((error) => console.error('Klaviyo notify failed', String(error)));
+    const runtime = (globalThis as { EdgeRuntime?: { waitUntil?: (promise: Promise<unknown>) => void } }).EdgeRuntime;
+    if (runtime?.waitUntil) runtime.waitUntil(klaviyo); else await klaviyo;
     return response({ success: true, submission_id: input.submission_id }, 200, origin);
   } catch {
     return response({ error: 'Temporarily unavailable' }, 503, origin);
