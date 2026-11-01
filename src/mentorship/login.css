@@ -7,6 +7,7 @@
   overflow: hidden;
   padding: 36px 20px;
   background: #080909;
+  color-scheme: dark;
 }
 
 .mp-login-backdrop,
@@ -85,6 +86,7 @@
   box-shadow: 0 24px 80px rgba(0, 0, 0, .25);
   backdrop-filter: blur(20px);
 }
+.mentorship-portal.mp-login .mp-login-card-heading h1,
 .mentorship-portal.mp-login .mp-login-card-heading h2 {
   margin: 0;
   color: #f3f2ed;
@@ -118,10 +120,10 @@
 .mp-login-input:focus { background: rgba(255, 255, 255, .06); }
 .mp-login-input-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #858c87; pointer-events: none; }
 .mp-login-password { padding-right: 48px; }
-.mp-login-password-label { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.mp-login-password-label { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: -12px 0 -12px; }
 .mp-login-forgot { color: #b9beba; font-size: 13px; border-radius: 3px; }
 .mp-login-forgot:hover { color: white; }
-.mp-login-reveal { position: absolute; right: 7px; top: 50%; transform: translateY(-50%); padding: 10px; border-radius: 7px; color: #8c948e; }
+.mp-login-reveal { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); padding: 13px; border-radius: 7px; color: #8c948e; }
 .mp-login-reveal:hover { color: white; }
 .mp-login-submit { width: 100%; min-height: 50px; margin-top: 2px; border-radius: 10px; font-size: 15px; }
 .mp-login-error { padding: 12px 14px; border: 1px solid rgba(248, 113, 113, .25); border-radius: 10px; background: rgba(127, 29, 29, .2); font-size: 14px; color: #fecaca; }
@@ -130,8 +132,69 @@
 .mp-login-demo summary:hover { color: white; }
 .mp-login-demo p { margin: 12px 0; }
 .mp-login-demo-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.mp-login-demo-buttons button { padding: 10px 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px; background: rgba(10, 12, 11, .65); color: #c2c8c2; font-size: 13px; }
+.mp-login-demo-buttons button,
+.mp-login-demo-buttons a { display: block; padding: 10px 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px; background: rgba(10, 12, 11, .65); color: #c2c8c2; font-size: 13px; text-decoration: none; }
 .mp-login-demo-buttons button.is-selected { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.1); color: white; }
+
+/* Sign-in flow: codes, notices and links. Tap targets stay at 44px or more. */
+.mp-login-card-heading h1:focus { outline: none; }
+.mp-login-sent-to { word-break: break-word; }
+.mp-login-sent-to strong { color: #f3f2ed; font-weight: 600; }
+.mp-login-checking { display: flex; align-items: center; gap: 8px; }
+.mp-login-help { display: block; margin-top: 8px; color: #9ea39f; font-size: 13px; line-height: 1.5; }
+.mp-login-input:-webkit-autofill,
+.mp-login-input:-webkit-autofill:hover,
+.mp-login-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px #1b1d1d inset;
+  transition: background-color 9999s ease-out;
+}
+.mp-login-code-input {
+  height: 64px;
+  padding-right: 44px;
+  font-size: 28px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .32em;
+  text-align: center;
+  text-indent: .32em;
+}
+.mp-login-code-input::placeholder { color: #4b504d; letter-spacing: .32em; }
+.mp-login-notice { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 10px; font-size: 14px; line-height: 1.5; }
+.mp-login-notice-icon { flex-shrink: 0; margin-top: 2px; }
+.mp-login-notice.is-error { border: 1px solid rgba(248, 113, 113, .3); background: rgba(127, 29, 29, .24); color: #fecaca; }
+.mp-login-notice.is-success { border: 1px solid rgba(211, 255, 2, .22); background: rgba(211, 255, 2, .06); color: #e8f5b8; }
+.mp-login-first-time { margin: 24px 0 0; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, .1); color: #a9aca9; font-size: 14px; line-height: 1.6; }
+.mentorship-portal.mp-login .mp-login-first-time h2 { margin: 0 0 4px; color: #f3f2ed; font-family: inherit; font-size: 16px !important; font-weight: 650 !important; line-height: 1.4 !important; letter-spacing: -.01em !important; }
+.mp-login-first-time p { margin: 0; }
+.mp-login-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin-top: 14px; }
+.mp-login-actions.is-single { justify-content: center; }
+.mp-login-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 4px;
+  border-radius: 6px;
+  color: #d5d7d3;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, .3);
+  text-underline-offset: 4px;
+}
+.mp-login-link:hover:not(:disabled) { color: #fff; text-decoration-color: #fff; }
+.mp-login-link:disabled { color: #7d827f; cursor: default; text-decoration: none; }
+.mp-login-inline-link { color: #f3f2ed; text-decoration: underline; text-underline-offset: 3px; border-radius: 3px; }
+.mp-login-forgot { min-height: 44px; padding: 0 4px; margin-right: -4px; }
+.mp-login-forgot:disabled { color: #7d827f; }
+.mp-login-secondary { width: 100%; min-height: 50px; border-radius: 10px; font-size: 15px; }
+.mp-login-support { width: 100%; max-width: 420px; margin: 18px 0 0; color: #b4b9b5; font-size: 14px; text-align: center; text-shadow: 0 1px 12px rgba(0, 0, 0, .6); }
+.mp-login-support-email { color: #f3f2ed; font-weight: 600; user-select: all; -webkit-user-select: all; }
+.mp-login-back { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; padding: 0 6px; border-radius: 6px; color: #b4b9b5; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+.mp-login-back:hover { color: #fff; }
+.mp-login-demo-hint { margin: 12px 0 0; color: #8b918d; font-size: 12px; text-align: center; }
 @media (max-width: 520px) {
   .mentorship-portal.mp-login { padding: 28px 20px; }
   .mp-login-portrait { width: 46px; height: 46px; }
