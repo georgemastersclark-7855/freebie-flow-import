@@ -1010,7 +1010,7 @@ const MentorshipLandingVersion = () => {
               <P className="!mb-0">It takes around five minutes, and there's nothing to pay at this stage.</P>
             </StepCard>
             <StepCard num="2" label="STEP 2:" title="I'll review your music">
-              <P className="!mb-0">I personally review every application within 72 hours. If I think we're a good fit, I'll offer you a place in the mentorship and send over the payment details.</P>
+              <P className="!mb-0">I personally review every application within 24 hours. If I think we're a good fit, I'll offer you a place in the mentorship and send over the payment details.</P>
             </StepCard>
             <StepCard num="3" label="STEP 3:" title="Secure your place">
               <P className="!mb-0">Once you've completed your payment, you'll get access to the student portal, your onboarding information and can book your private one-to-one call with me.</P>
