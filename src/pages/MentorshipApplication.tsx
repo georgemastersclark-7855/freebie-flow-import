@@ -224,7 +224,7 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
           <p className="ma-submit-note"><LockKeyhole size={16}/>Your answers are shared with Rob’s mentorship team to review your application. <a href="/legal/privacy-policy" target="_blank" rel="noreferrer">Privacy policy</a></p>
           {error && <p className="ma-error" role="alert">{error}</p>}
           <button className="ma-primary" disabled={submitting} onClick={()=>void submit()}>{submitting?<><Loader2 size={18} className="ma-spinner"/>Sending your application…</>:<>Send application<ArrowRight size={20}/></>}</button>
-          <p className="ma-small-print">Applying doesn’t take a payment or reserve a place.</p>
+          <p className="ma-small-print">Applying doesn’t take a payment or reserve a place. We’ll email you about your application.</p>
         </div>}
         {screen==='success' && <div className="ma-success ma-enter">
           <span className="ma-success-icon"><CheckCircle2 size={35}/></span>
