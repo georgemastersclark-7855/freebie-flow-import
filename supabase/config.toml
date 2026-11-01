@@ -17,3 +17,9 @@ verify_jwt = false
 
 [functions.submit-mentorship-application]
 verify_jwt = false
+
+[functions.shopify-order-paid]
+verify_jwt = false
+
+[functions.grant-mentorship-access]
+verify_jwt = true
