@@ -1,6 +1,6 @@
 import { useScheduleTimezone } from "../useScheduleTimezone";
 import { useEffect, useState } from "react";
-import { AlertCircle, ArrowLeft, ArrowRight, Check, CheckCircle2, ExternalLink, Headphones, LockKeyhole, Send } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, CalendarDays, Check, CheckCircle2, ExternalLink, Headphones, LockKeyhole, Send, Video } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { usePortalStore } from "../PortalStore";
@@ -13,7 +13,41 @@ import {
   StatusPill,
 } from "../components/PortalUI";
 import { WeekDeadlinePanel } from "../components/DeadlineStrip";
-import { cx, submissionParts, weekOpeningLabel } from "../utils";
+import { CalendarActions } from "../components/CalendarActions";
+import { usePortalClock } from "../usePortalClock";
+import { callCalendarEvent, callEnd, nextScheduledCall, safeScheduleUrl } from "../schedule";
+import type { WeekDefinition } from "../types";
+import { cx, submissionParts, weekHasUploads, weekOpeningLabel } from "../utils";
+
+/** A week with nothing to upload (week 6): the final call, not upload boxes. */
+function FinalCallWeek({ week }: { week: WeekDefinition }) {
+  const { formatTime } = useScheduleTimezone();
+  const { calls, weeks } = usePortalStore();
+  const now = usePortalClock();
+  const linked = calls.filter((call) => Boolean(week.id) && call.weekId === week.id).sort((a, b) => a.startsAt.localeCompare(b.startsAt));
+  const call = nextScheduledCall(linked, now) ?? linked[linked.length - 1] ?? nextScheduledCall(calls, now);
+  const event = call ? callCalendarEvent(call) : undefined;
+  const joiningUrl = safeScheduleUrl(call?.circleUrl);
+  const live = call ? Date.parse(call.startsAt) <= now && callEnd(call) > now : false;
+  const previous = weeks.filter((item) => item.number < week.number && weekHasUploads(item)).at(-1);
+  return <div className="mx-auto max-w-[1120px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">
+    <Link to="/mentorship-portal/dashboard" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[#aaa99f] hover:text-white"><ArrowLeft size={15} />Back to dashboard</Link>
+    <header className="mt-7">
+      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">{week.title}</p>
+      <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#f4f4f5]">Week {week.number}: {week.title}</h1>
+      <p className="mt-4 max-w-2xl text-sm leading-6 text-[#aaa99f]">{week.brief || "Join Rob for the final group call. Nothing to upload this week."}</p>
+    </header>
+    <section className="mp-card mt-6 rounded-3xl p-6 sm:p-8" aria-labelledby="final-call-title">
+      <div className="flex items-center gap-2 text-xs font-bold text-[#b6b3a8]"><CalendarDays size={16} />{live ? "In progress" : "Group call"}</div>
+      <h2 id="final-call-title" className="mt-3 text-2xl font-bold text-[#eeeae1]">{call?.title ?? week.title}</h2>
+      <p className="mt-2 text-sm font-semibold text-[#d4d0c5]">{call ? formatTime(call.startsAt) : "The date and joining link will appear here once confirmed."}</p>
+      {(event || joiningUrl) && <div className="mt-5 flex flex-wrap gap-3">{event && <CalendarActions event={event} />}{joiningUrl && <a href={joiningUrl} target="_blank" rel="noreferrer" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg bg-[#D3FF02] px-3 py-2.5 text-xs font-bold text-black"><Video size={15} />{live ? "Join call" : "Open joining link"}</a>}</div>}
+      <p className="mt-5 max-w-xl text-sm leading-6 text-[#aaa99f]">There's nothing to upload this week. Bring your finished track and your questions.</p>
+      {previous && <Link to={`/mentorship-portal/week/${previous.number}`} className="mp-focus-ring mt-4 inline-flex items-center gap-2 rounded text-xs font-bold text-[#eeeae1]">Open your week {previous.number} submission<ArrowRight size={14} /></Link>}
+    </section>
+    <div className="mt-8 border-t border-white/10 pt-5"><Link to="/mentorship-portal/dashboard" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]"><ArrowLeft size={14} />Back to dashboard</Link></div>
+  </div>;
+}
 
 export function WeekWorkspace() {
   const { timezone } = useScheduleTimezone();
@@ -54,6 +88,7 @@ export function WeekWorkspace() {
     <p className="mt-4 text-sm text-[#aaa99f]">{weekOpeningLabel(definition, timezone)}. Come back when this week begins.</p>
     <Link to="/mentorship-portal/dashboard" className="mp-focus-ring mt-7 inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">Back to Dashboard<ArrowRight size={16} /></Link>
   </div>;
+  if (!weekHasUploads(definition)) return <FinalCallWeek week={definition} />;
   const submitted = submission.state === "submitted" || submission.state === "late";
   const canEdit = !submitted;
   const parts = submissionParts(definition, submission);
@@ -123,7 +158,7 @@ export function WeekWorkspace() {
       <header className="mt-7">
         <div className="flex flex-wrap items-center justify-between gap-4"><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#b6b3a8]">{definition.title}</p><StatusPill state={submission.state} /></div>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#f4f4f5]">Week {weekNumber} {submitted ? "submission" : "uploads"}</h1>
-        <p className="mt-4 max-w-2xl text-sm leading-6 text-[#aaa99f]">{submitted ? "Your files are saved below. This is also where you'll find Rob's feedback on this week's work." : weekNumber < 5 ? "Add your song starter loops, the one you've developed into a weekly song, and its matching stems. Send everything to Rob once you're ready." : "Build out the track you selected in week 4. Add your latest full-track version and its matching stems, then send them to Rob."}</p>
+        <p className="mt-4 max-w-2xl text-sm leading-6 text-[#aaa99f]">{submitted ? "Your files are saved below. This is also where you'll find Rob's feedback on this week's work." : weekNumber < 5 ? "Add your song starter loops, the one you've developed into a weekly song, and its matching stems. Send everything to Rob once you're ready." : "Finish the track you chose in week 4. Add the finished version and its matching stems, then send them to Rob by the deadline."}</p>
 
       </header>
       <WeekDeadlinePanel week={definition} submission={submission} />
@@ -160,7 +195,7 @@ export function WeekWorkspace() {
             {!canEdit && !submission.ideas.length && <p className="text-xs text-[#939187]">No loops uploaded.</p>}
           </div>}
 
-          {part.id === "weekly-song" && <div className="mt-5">{submission.song ? <div className="space-y-3">{submission.song.objectUrl && <MockAudioPlayer file={submission.song} label="Play your song" />}<FileRow file={submission.song} onRemove={canEdit && !busy ? () => void removeUploadedFile("song", submission.song!.id) : undefined} showDownload={submitted} /></div> : canEdit ? <FileDrop disabled={busy} label={weekNumber < 5 ? "Choose your weekly song" : "Choose your track progress"} help="One MP3 or WAV. Up to 2 GB." kind="song" accept="audio/mpeg,audio/wav,audio/x-wav,.mp3,.wav" onFiles={(files) => void uploadFiles("song", files)} /> : <p className="text-xs text-[#939187]">No song uploaded.</p>}</div>}
+          {part.id === "weekly-song" && <div className="mt-5">{submission.song ? <div className="space-y-3">{submission.song.objectUrl && <MockAudioPlayer file={submission.song} label="Play your song" />}<FileRow file={submission.song} onRemove={canEdit && !busy ? () => void removeUploadedFile("song", submission.song!.id) : undefined} showDownload={submitted} /></div> : canEdit ? <FileDrop disabled={busy} label={weekNumber < 5 ? "Choose your weekly song" : "Choose your finished track"} help="One MP3 or WAV. Up to 2 GB." kind="song" accept="audio/mpeg,audio/wav,audio/x-wav,.mp3,.wav" onFiles={(files) => void uploadFiles("song", files)} /> : <p className="text-xs text-[#939187]">No song uploaded.</p>}</div>}
 
           {part.id === "stems" && <div className="mt-5 space-y-4">{submission.stems ? <FileRow file={submission.stems} onRemove={canEdit && !busy ? () => void removeUploadedFile("stems", submission.stems!.id) : undefined} showDownload={submitted} /> : canEdit ? <FileDrop disabled={busy} label="Choose your stems ZIP" help="One ZIP containing your exported audio stems. Up to 2 GB." kind="stems" accept=".zip,application/zip" onFiles={(files) => void uploadFiles("stems", files)} /> : <p className="text-xs text-[#939187]">No stems uploaded.</p>}<Link to="/mentorship-portal/setup/stems-workflow" className="mp-focus-ring inline-flex items-center gap-2 rounded text-xs font-semibold text-[#b6b3a8]">Need help exporting stems?<ArrowRight size={13} /></Link></div>}
         </section>)}

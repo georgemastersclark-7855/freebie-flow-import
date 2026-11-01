@@ -65,50 +65,41 @@ have been applied.
    `coach` and `admin` respectively.
 3. Add cohort dates, deadlines, Circle/booking/calendar links and calls.
 4. Add the five video URLs to `mentorship_resources` and set `published=true`.
-5. Deploy `provision-mentorship-student` and
+5. Deploy `shopify-order-paid`, `grant-mentorship-access` and
    `publish-mentorship-feedback`.
 6. Set the Edge Function secrets listed below.
-7. In Zapier, send a successful Shopify order to the provisioning function,
-   then send the returned `account_action_link` in the existing welcome email.
+7. In Shopify, Settings > Notifications > Webhooks, create an "Order payment"
+   webhook in JSON format pointing at
+   `https://owjcahmjbsksoctgfhzo.supabase.co/functions/v1/shopify-order-paid`,
+   and copy the signing secret shown on that page into `SHOPIFY_WEBHOOK_SECRET`.
 8. Point the feedback webhook at a Zap that sends the student a direct link to
    their week page.
 9. Enable `VITE_MENTORSHIP_BACKEND=supabase`, build and test with one staff and
    one student account before inviting the cohort.
 
-Required secrets:
+Secrets:
 
 ```text
-MENTORSHIP_ZAPIER_SECRET
-MENTORSHIP_INVITE_REDIRECT_URL=https://YOUR-DOMAIN/mentorship-portal/set-password
-MENTORSHIP_PORTAL_URL=https://YOUR-DOMAIN/mentorship-portal
+SHOPIFY_WEBHOOK_SECRET                 required for shopify-order-paid
+MENTORSHIP_CURRENT_COHORT_SLUG=cohort-2 optional, the cohort a paid order enrols into
+KLAVIYO_PRIVATE_KEY                    optional, sends "Mentorship Access Granted"
+MENTORSHIP_PORTAL_URL=https://audio.roblate.com/mentorship-portal  optional, sent to Klaviyo
 MENTORSHIP_FEEDBACK_ZAPIER_URL=https://hooks.zapier.com/...
 ```
 
-### Shopify/Zapier provisioning request
+### From Shopify payment to portal access
 
-`POST /functions/v1/provision-mentorship-student`
+A paid order containing the "Rob Late - 6 Week Mentorship" product creates a
+confirmed account for the order email (no password, no link), enrols it in the
+current cohort, links and updates the CRM lead (by the order's `application_id`
+note attribute, then by email), records the payment in the lead's ledger and
+stores the order in `mentorship_shopify_orders`. Students sign in with a code
+emailed to them. Anything unusual (a second payment, an email with no
+application, a test order) appears under "Shopify orders to check" in the CRM.
+Staff can also give access by hand with "Grant portal access" on a lead.
 
-Header:
-
-```text
-x-mentorship-secret: <MENTORSHIP_ZAPIER_SECRET>
-```
-
-Body:
-
-```json
-{
-  "email": "student@example.com",
-  "full_name": "Student Name",
-  "cohort_slug": "cohort-2",
-  "shopify_order_id": "123456789",
-  "application_id": "typeform-response-id"
-}
-```
-
-The function is idempotent for a student/cohort pair. It returns an account
-link for new users and preserves an existing account if that email has already
-used another Rob Late product.
+`provision-mentorship-student` is deprecated and no longer returns a link.
+Delete it and remove `MENTORSHIP_ZAPIER_SECRET` when convenient.
 
 ## Current external blocker
 
