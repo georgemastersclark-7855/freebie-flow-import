@@ -14,7 +14,17 @@ existing mentorship sales page or any current marketing route.
 
 ## Student experience
 
-- Email/password account with password reset and persistent Supabase session.
+- Email and password sign-in at `/mentorship-portal`. First-timers tap "Set up
+  your login": a one-time 6-digit emailed code proves they own the email they
+  paid with, then they choose a password. Forgot password uses the same code,
+  then a new password. Messages never reveal whether an email is enrolled.
+- Emailed links land on `/mentorship-portal/auth/confirm` and only use their
+  token when the student taps Continue, so email scanners can't spend them.
+  Expired or used links offer a fresh code instead of a dead end.
+- Signed in with no active enrolment shows a "can't find your place" screen
+  with Check again, Try another email and Sign out.
+- Sign out is this device only; "Sign out of all devices" is in profile
+  settings (students) or Account (staff).
 - A focused Start Here page with Rob's welcome, the four setup videos, the
   onboarding checklist and the first-call date.
 - Six weekly workspaces for ideas, the selected song and a stems ZIP.
@@ -26,6 +36,11 @@ existing mentorship sales page or any current marketing route.
 - A notification bell remains until the student confirms what they will do.
 
 ## Rob and staff experience
+
+- Separate team entrance at `/mentorship-portal/staff` (password; the step
+  structure in `src/mentorship/staffAuth.ts` leaves room for MFA). Staff who
+  sign in on the student page go straight to the staff dashboard, and "Preview
+  as student" sits in the staff header. Server-side role checks are unchanged.
 
 - Live cohort KPI board and rescue queue.
 - Private in-browser song playback plus idea/stems downloads.

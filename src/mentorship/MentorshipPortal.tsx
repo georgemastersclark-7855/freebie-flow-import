@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { PortalStoreProvider, usePortalStore } from "./PortalStore";
@@ -14,6 +14,12 @@ import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminReviewQueue } from "./pages/AdminReviewQueue";
 import { AdminReview } from "./pages/AdminReview";
 import { PortalSetPassword } from "./pages/PortalSetPassword";
+import { PortalAuthConfirm } from "./pages/PortalAuthConfirm";
+import { PortalStaffLogin } from "./pages/PortalStaffLogin";
+import { PortalNoAccess } from "./pages/PortalNoAccess";
+import { PortalLoading } from "./components/AuthLayout";
+import { SignedInHome } from "./components/SignedInHome";
+import { hasAuthPayload, rememberReturnTo } from "./auth";
 import { AdminCohorts, AdminCohortStudents } from "./pages/AdminCohorts";
 import { AdminStudentRecord } from "./pages/AdminStudentRecord";
 import { AdminCohortRecords } from "./pages/AdminCohortRecords";
@@ -23,7 +29,6 @@ import { AdminSops } from "./pages/AdminSops";
 import { AdminCrm } from "./pages/AdminCrm";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "./portal.css";
-import { portalHome } from "./utils";
 
 function QueryScope({ children }: { children: ReactNode }) {
   const [client] = useState(() => new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: 10000 } } }));
@@ -36,17 +41,28 @@ function PortalQueryBoundary({ children }: { children: ReactNode }) {
   return <QueryScope key={`${user?.id ?? "guest"}:${user?.role ?? "none"}`}>{children}</QueryScope>;
 }
 
+function SignInFirst() {
+  const { pathname, search, hash } = useLocation();
+  // Remember the deep link (for example a feedback email) to reopen after sign-in.
+  useEffect(() => { rememberReturnTo(`${pathname}${search}${hash}`); }, [pathname, search, hash]);
+  return <Navigate to="/mentorship-portal" replace />;
+}
+
 function ProtectedPortal() {
   const { user, ready } = usePortalStore();
   if (!ready) return <PortalLoading />;
-  return user ? <PortalShell /> : <Navigate to="/mentorship-portal" replace />;
+  return user ? <PortalShell /> : <SignInFirst />;
 }
 
 function RoleHome() {
-  const { user, staffUser, ready, onboardingTasks } = usePortalStore();
+  const { user, ready, accessIssue } = usePortalStore();
+  const { search, hash } = useLocation();
+  // Email links that fall back to the Site URL still finish on the confirm page.
+  if (hasAuthPayload(search, hash)) return <Navigate to={`/mentorship-portal/auth/confirm${search}${hash}`} replace />;
   if (!ready) return <PortalLoading />;
-  if (!user || staffUser) return <PortalLogin />;
-  return <Navigate to={portalHome(user, onboardingTasks)} replace />;
+  if (accessIssue) return <PortalNoAccess />;
+  if (!user) return <PortalLogin />;
+  return <SignedInHome />;
 }
 
 function LegacyWelcome() {
@@ -61,10 +77,6 @@ function LegacySubmissions() {
   const week = openWeeks.find((item) => item.phase === "current")
     ?? [...openWeeks].sort((a, b) => b.number - a.number)[0];
   return <Navigate to={week ? `/mentorship-portal/week/${week.number}${search}${hash}` : "/mentorship-portal/dashboard"} replace />;
-}
-
-function PortalLoading() {
-  return <div className="mentorship-portal grid min-h-screen place-items-center"><div className="text-xs font-bold uppercase tracking-[0.18em] text-[#77766f]">Loading your mentorship…</div></div>;
 }
 
 function StudentOnly() {
@@ -107,6 +119,8 @@ export default function MentorshipPortal() {
       <Routes>
         <Route index element={<RoleHome />} />
         <Route path="set-password" element={<PortalSetPassword />} />
+        <Route path="auth/confirm" element={<PortalAuthConfirm />} />
+        <Route path="staff" element={<PortalStaffLogin />} />
         <Route element={<ProtectedPortal />}>
           <Route element={<StudentOnly />}>
             <Route path="submissions" element={<LegacySubmissions />} />

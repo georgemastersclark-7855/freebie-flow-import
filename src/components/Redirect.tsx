@@ -10,18 +10,25 @@ const Redirect = ({ to }: RedirectProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Auth links (invite / recovery / magic link) can land on "/" — keep them in the portal
+    // Auth links (invite, recovery, sign-in code) can fall back to the Site URL and
+    // land on "/". Keep them in the portal: invite and recovery sessions finish on
+    // set-password, everything else (including expired links) on the confirm page.
     const hash = window.location.hash || '';
     const search = window.location.search || '';
+    const hashParams = new URLSearchParams(hash.replace(/^#/, ''));
+    const searchParams = new URLSearchParams(search);
+    const type = hashParams.get('type') ?? searchParams.get('type');
+    const hasSession = hashParams.has('access_token');
     const hasAuthPayload =
-      hash.includes('access_token=') ||
-      hash.includes('type=invite') ||
-      hash.includes('type=recovery') ||
-      hash.includes('error_code=') ||
-      new URLSearchParams(search).has('code');
+      hasSession ||
+      hashParams.has('error_code') ||
+      searchParams.has('error_code') ||
+      searchParams.has('token_hash') ||
+      searchParams.has('code');
 
     if (hasAuthPayload) {
-      window.location.replace(`/mentorship-portal/set-password${search}${hash}`);
+      const target = hasSession && (type === 'invite' || type === 'recovery') ? 'set-password' : 'auth/confirm';
+      window.location.replace(`/mentorship-portal/${target}${search}${hash}`);
       return;
     }
 

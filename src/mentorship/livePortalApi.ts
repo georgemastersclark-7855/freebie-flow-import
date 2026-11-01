@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // This adapter is intentionally isolated until the additive mentorship migration
 // is applied and the generated Supabase Database type can be refreshed.
-import type { User } from "@supabase/supabase-js";
+import type { EmailOtpType, User } from "@supabase/supabase-js";
 import { Upload } from "tus-js-client";
 import { supabase } from "@/integrations/supabase/client";
 import { formatDeadline, releasedWeekNumbers } from "./utils";
 import { loadStudentProfile } from "./studentProfileApi";
+import { AUTH_CONFIRM_URL, SET_PASSWORD_URL, normalizeEmail, type CodeChannel } from "./auth";
 import type {
   FileKind,
   OnboardingTask,
@@ -126,6 +127,14 @@ interface ProgressRow {
   completed_at: string | null;
 }
 
+/** The account signed in, but has no mentorship profile or active enrolment. */
+export class PortalAccessError extends Error {
+  constructor(public kind: "no-profile" | "no-enrolment", message: string) {
+    super(message);
+    this.name = "PortalAccessError";
+  }
+}
+
 export interface LivePortalBootstrap {
   user: PortalUser;
   staffUser?: PortalUser;
@@ -162,8 +171,9 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     .from("mentorship_profiles")
     .select("user_id, full_name, email, role")
     .eq("user_id", user.id)
-    .single();
-  if (profileError) throw new Error("Your mentorship profile has not been provisioned yet.");
+    .maybeSingle();
+  if (profileError) throw profileError;
+  if (!profileData) throw new PortalAccessError("no-profile", "Your mentorship profile has not been provisioned yet.");
   const profile = profileData as ProfileRow;
 
   const portalUser: PortalUser = {
@@ -193,8 +203,9 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     .eq("is_walkthrough", Boolean(staffUser))
     .order("enrolled_at", { ascending: false })
     .limit(1)
-    .single();
-  if (enrollmentError) throw new Error("No active mentorship enrolment was found for this account.");
+    .maybeSingle();
+  if (enrollmentError) throw enrollmentError;
+  if (!enrollmentData) throw new PortalAccessError("no-enrolment", "No active mentorship enrolment was found for this account.");
   const enrollment = enrollmentData as EnrollmentRow;
   const studentProfile = await loadStudentProfile(enrollment.id);
   portalUser.enrollmentId = enrollment.id;
@@ -362,20 +373,64 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
 }
 
 export async function signInLivePortal(email: string, password: string) {
-  const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+  const { data, error } = await supabase.auth.signInWithPassword({ email: normalizeEmail(email), password });
   if (error) throw error;
   if (!data.user) throw new Error("Unable to sign in.");
-  return loadLivePortal(data.user);
+  return data.user;
 }
 
-export async function signOutLivePortal() {
-  const { error } = await supabase.auth.signOut();
+/**
+ * Login setup: emails a one-time 6-digit code (and a scanner-proof link) to an
+ * existing account, only to prove the student owns the email before they choose
+ * a password. Never creates accounts: unknown emails error, and the caller shows
+ * the same neutral message either way. Returns how the code was sent.
+ */
+export async function sendLiveSetupCode(email: string): Promise<CodeChannel> {
+  const address = normalizeEmail(email);
+  const { error } = await supabase.auth.signInWithOtp({
+    email: address,
+    options: { shouldCreateUser: false, emailRedirectTo: AUTH_CONFIRM_URL },
+  });
+  if (!error) return "email";
+  // An invited student who never opened the invite is still unconfirmed, and with
+  // sign-ups off Supabase refuses them a sign-in code ("signup_disabled"). The
+  // reset email carries the same kind of 6-digit code and confirms the address.
+  if (error.code === "signup_disabled") {
+    await requestLivePasswordReset(address);
+    return "recovery";
+  }
+  throw error;
+}
+
+/** Checks a 6-digit code and signs the student in, ready to choose a password. */
+export async function verifyLiveEmailCode(email: string, token: string, channel: CodeChannel) {
+  const { data, error } = await supabase.auth.verifyOtp({ email: normalizeEmail(email), token, type: channel });
+  if (error) throw error;
+  if (!data.user) throw new Error("Unable to sign in.");
+  return data.user;
+}
+
+export async function verifyLiveEmailLink(tokenHash: string, type: EmailOtpType) {
+  const { data, error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
+  if (error) throw error;
+  if (!data.user) throw new Error("Unable to sign in.");
+  return data.user;
+}
+
+export async function hasLiveSession() {
+  const { data } = await supabase.auth.getSession();
+  return Boolean(data.session);
+}
+
+/** "local" signs out this browser only; "global" ends every session for the account. */
+export async function signOutLivePortal(scope: "local" | "global" = "local") {
+  const { error } = await supabase.auth.signOut({ scope });
   if (error) throw error;
 }
 
+/** Forgot password: emails a 6-digit reset code (and a link), checked as type "recovery". */
 export async function requestLivePasswordReset(email: string) {
-  const redirectTo = `${window.location.origin}/mentorship-portal/set-password`;
-  const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo });
+  const { error } = await supabase.auth.resetPasswordForEmail(normalizeEmail(email), { redirectTo: SET_PASSWORD_URL });
   if (error) throw error;
 }
 

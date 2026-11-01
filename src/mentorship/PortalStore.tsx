@@ -10,7 +10,19 @@ import {
 } from "react";
 import { usePortalClock } from "./usePortalClock";
 import { nextScheduledCall } from "./schedule";
+import type { EmailOtpType, User } from "@supabase/supabase-js";
+import { isAuthSessionMissingError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  demoAuthError,
+  MIN_PASSWORD_LENGTH,
+  normalizeEmail,
+  purposeForLink,
+  readPasswordStep,
+  writePasswordStep,
+  type CodeChannel,
+  type PasswordPurpose,
+} from "./auth";
 import {
   demoAdmin,
   demoCoach,
@@ -22,17 +34,22 @@ import {
 } from "./demoData";
 import {
   confirmLiveFeedbackAction,
+  hasLiveSession,
   loadLivePortal,
+  PortalAccessError,
   markLiveFeedbackViewed,
   removeLiveSubmissionFile,
   resetLiveWalkthrough,
   requestLivePasswordReset,
+  sendLiveSetupCode,
   setLiveOnboardingTask,
   signInLivePortal,
   signOutLivePortal,
   setLivePortalPassword,
   submitLiveWeek,
   uploadLiveSubmissionFiles,
+  verifyLiveEmailCode,
+  verifyLiveEmailLink,
   type LivePortalBootstrap,
 } from "./livePortalApi";
 import { normalizeStudentProfileInput, saveLiveStudentProfile } from "./studentProfileApi";
@@ -53,11 +70,20 @@ interface SubmitResult {
   message: string;
 }
 
+/** Signed in, but the portal can't open: no place found, or it failed to load. */
+export interface PortalAccessIssue {
+  kind: "no-enrolment" | "load-failed";
+  email?: string;
+}
+
+export type SignOutScope = "local" | "global";
+
 interface PortalStoreValue {
   ready: boolean;
   backend: "demo" | "supabase";
-  authError?: string;
+  accessIssue?: PortalAccessIssue;
   user: PortalUser | null;
+  /** Set for coaches and admins, including while they preview the student portal. */
   staffUser?: PortalUser;
   selectView: (view: "student" | "staff") => Promise<void>;
   resetTestUploads: () => Promise<void>;
@@ -71,8 +97,19 @@ interface PortalStoreValue {
   nextCall?: PortalCall;
   calls: PortalCall[];
   circleUrl?: string;
-  login: (email: string, password: string) => Promise<PortalUser>;
-  logout: () => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
+  /** Emails a 6-digit code to set up or reset a login. Resolves with how it was sent. */
+  sendEmailCode: (email: string, purpose: PasswordPurpose) => Promise<CodeChannel>;
+  /** Checks the code, signs in, and queues the choose-a-password screen. */
+  verifyEmailCode: (email: string, code: string, channel: CodeChannel, purpose: PasswordPurpose) => Promise<void>;
+  verifyEmailLink: (tokenHash: string, type: EmailOtpType) => Promise<void>;
+  /** Set after a code or link signs someone in, until they've chosen a password. */
+  passwordStep?: PasswordPurpose;
+  queuePasswordStep: (purpose: PasswordPurpose) => void;
+  finishPasswordStep: () => void;
+  hasAuthSession: () => Promise<boolean>;
+  logout: (scope?: SignOutScope) => Promise<void>;
+  retryAccess: () => Promise<void>;
   requestPasswordReset: (email: string) => Promise<void>;
   setPassword: (password: string) => Promise<void>;
   refresh: () => Promise<void>;
@@ -100,12 +137,27 @@ const readStored = <T,>(key: string, fallback: T): T => {
   }
 };
 
-const deriveDemoUser = (email: string): PortalUser => {
-  const normalized = email.trim().toLowerCase();
+const viewKey = "rla-portal-view";
+const readStoredView = (): "student" | "staff" => {
+  try { return window.sessionStorage.getItem(viewKey) === "student" ? "student" : "staff"; } catch { return "staff"; }
+};
+const writeStoredView = (view: "student" | "staff") => {
+  try {
+    if (view === "student") window.sessionStorage.setItem(viewKey, view);
+    else window.sessionStorage.removeItem(viewKey);
+  } catch { /* storage unavailable */ }
+};
+
+// Demo emails: rob... opens the staff dashboard as a coach, george... as admin,
+// nobody... shows the "no place found" screen, anything else is a student.
+const deriveDemoUser = (email: string): PortalUser | null => {
+  const normalized = normalizeEmail(email);
+  if (normalized.startsWith("nobody")) return null;
   if (normalized.startsWith("rob")) return { ...demoCoach, email: normalized };
   if (normalized.startsWith("george")) return { ...demoAdmin, email: normalized };
   return { ...demoStudent, email: normalized || demoStudent.email };
 };
+const demoPreviewStudent = (): PortalUser => ({ ...demoStudent, id: "walkthrough-student", name: "Test Student" });
 
 const makeDemoFile = (file: File, kind: FileKind): PortalFile => ({
   id: `${kind}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
@@ -119,11 +171,14 @@ const makeDemoFile = (file: File, kind: FileKind): PortalFile => ({
 export function PortalStoreProvider({ children }: { children: ReactNode }) {
   const backend = liveBackend ? "supabase" as const : "demo" as const;
   const [ready, setReady] = useState(!liveBackend);
-  const [staffUser, setStaffUser] = useState<PortalUser>();
   // Only a view preference is stored locally. Files and feedback always use Supabase.
-  const selectedView = useRef(window.sessionStorage.getItem("rla-portal-view") === "student" ? "student" : "staff");
+  const selectedView = useRef<"student" | "staff">(readStoredView());
+  const [demoStored] = useState(() => liveBackend ? null : readStored<PortalUser | null>(sessionKey, null));
+  const [staffUser, setStaffUser] = useState<PortalUser | undefined>(() =>
+    demoStored && demoStored.role !== "student" ? demoStored : undefined,
+  );
   const [user, setUser] = useState<PortalUser | null>(() =>
-    liveBackend ? null : readStored<PortalUser | null>(sessionKey, null),
+    demoStored && demoStored.role !== "student" && selectedView.current === "student" ? demoPreviewStudent() : demoStored,
   );
   const [weeks, setWeeks] = useState<WeekDefinition[]>(() => liveBackend ? [] : weekDefinitions);
   const [submissions, setSubmissions] = useState<WeekSubmission[]>(() =>
@@ -133,7 +188,12 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     liveBackend ? [] : readStored(onboardingKey, initialOnboardingTasks),
   );
   const [circleUrl, setCircleUrl] = useState<string | undefined>();
-  const [authError, setAuthError] = useState<string | undefined>();
+  const [accessIssue, setAccessIssue] = useState<PortalAccessIssue | undefined>();
+  const [passwordStep, setPasswordStepState] = useState<PasswordPurpose | undefined>(() => readPasswordStep());
+  const setPasswordStep = useCallback((step?: PasswordPurpose) => {
+    writePasswordStep(step);
+    setPasswordStepState(step);
+  }, []);
   const [setupVideos, setSetupVideos] = useState<SetupVideo[]>(() => liveBackend ? [] : demoSetupVideos);
   const [welcomeVideoUrl, setWelcomeVideoUrl] = useState<string | undefined>();
   const [calls, setCalls] = useState<PortalCall[]>([]);
@@ -152,7 +212,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setFirstCall(bootstrap.firstCall);
     setCalls(bootstrap.calls ?? []);
     setCircleUrl(bootstrap.circleUrl);
-    setAuthError(undefined);
+    setAccessIssue(undefined);
   }, []);
 
   const clearLiveState = useCallback(() => {
@@ -168,38 +228,99 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setCircleUrl(undefined);
   }, []);
 
+  // Every sign-in, sign-out and tab change goes through one load path. A sequence
+  // number drops results that arrive after the session has moved on.
+  const loadSeq = useRef(0);
+  const sessionUserId = useRef<string | null>(null);
+  const currentLoad = useRef<Promise<boolean> | null>(null);
+
+  const resetSession = useCallback(() => {
+    loadSeq.current += 1;
+    sessionUserId.current = null;
+    currentLoad.current = null;
+    selectedView.current = "staff";
+    writeStoredView("staff");
+    clearLiveState();
+    setAccessIssue(undefined);
+    setPasswordStep(undefined);
+  }, [clearLiveState, setPasswordStep]);
+
+  /** Resolves true when the portal opened, false when it found a problem. */
+  const loadSession = useCallback((authUser: User): Promise<boolean> => {
+    const seq = ++loadSeq.current;
+    sessionUserId.current = authUser.id;
+    const run = (async () => {
+      try {
+        let bootstrap: LivePortalBootstrap;
+        try {
+          bootstrap = await loadLivePortal(authUser, selectedView.current === "student");
+        } catch (error) {
+          if (selectedView.current !== "student") throw error;
+          // A staff preview that can't open falls back to the staff dashboard.
+          selectedView.current = "staff";
+          writeStoredView("staff");
+          bootstrap = await loadLivePortal(authUser, false);
+        }
+        if (seq === loadSeq.current) applyLiveBootstrap(bootstrap);
+        return true;
+      } catch (error) {
+        if (seq !== loadSeq.current) return false;
+        clearLiveState();
+        setAccessIssue({
+          kind: error instanceof PortalAccessError ? "no-enrolment" : "load-failed",
+          email: authUser.email ?? undefined,
+        });
+        return false;
+      }
+    })();
+    currentLoad.current = run;
+    return run;
+  }, [applyLiveBootstrap, clearLiveState]);
+
+  const ensureLoaded = useCallback((authUser: User) => (
+    sessionUserId.current === authUser.id && currentLoad.current ? currentLoad.current : loadSession(authUser)
+  ), [loadSession]);
+
   const refresh = useCallback(async () => {
     if (!liveBackend) return;
+    const seq = loadSeq.current;
     const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) {
-      clearLiveState();
+    if (!data.user) {
+      // Only a missing or rejected session signs the student out; a dropped
+      // connection keeps them where they are.
+      const signedOut = !error || isAuthSessionMissingError(error) || [401, 403].includes(Number((error as { status?: number }).status));
+      if (signedOut && seq === loadSeq.current) resetSession();
+      if (!signedOut) throw error;
       return;
     }
-    applyLiveBootstrap(await loadLivePortal(data.user, selectedView.current === "student"));
-  }, [applyLiveBootstrap, clearLiveState]);
+    const bootstrap = await loadLivePortal(data.user, selectedView.current === "student");
+    if (seq !== loadSeq.current || sessionUserId.current !== data.user.id) return;
+    applyLiveBootstrap(bootstrap);
+  }, [applyLiveBootstrap, resetSession]);
 
   useEffect(() => {
     if (!liveBackend) return;
     let active = true;
-    const restore = async () => {
-      try {
-        const { data } = await supabase.auth.getSession();
-        if (data.session?.user && active) {
-          const bootstrap = await loadLivePortal(data.session.user, selectedView.current === "student");
-          if (active) applyLiveBootstrap(bootstrap);
+    // Every tab hears sign-ins and sign-outs, including those made in another tab.
+    // Supabase callbacks must not await auth calls directly, so work is deferred.
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      window.setTimeout(() => {
+        if (!active) return;
+        if (event === "INITIAL_SESSION") {
+          const restore = session?.user ? ensureLoaded(session.user) : Promise.resolve(false);
+          void restore.finally(() => { if (active) setReady(true); });
+        } else if ((event === "SIGNED_IN" || event === "PASSWORD_RECOVERY") && session?.user) {
+          if (session.user.id !== sessionUserId.current) void ensureLoaded(session.user);
+        } else if (event === "SIGNED_OUT") {
+          resetSession();
         }
-      } catch (error) {
-        if (active) {
-          clearLiveState();
-          setAuthError(error instanceof Error ? error.message : "Unable to restore your mentorship session.");
-        }
-      } finally {
-        if (active) setReady(true);
-      }
+      }, 0);
+    });
+    return () => {
+      active = false;
+      subscription.unsubscribe();
     };
-    void restore();
-    return () => { active = false; };
-  }, [applyLiveBootstrap, clearLiveState]);
+  }, [ensureLoaded, resetSession]);
 
   useEffect(() => {
     if (!liveBackend || !user?.id) return;
@@ -217,9 +338,10 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (liveBackend) return;
-    if (user) window.localStorage.setItem(sessionKey, JSON.stringify(user));
+    const signedIn = staffUser ?? user;
+    if (signedIn) window.localStorage.setItem(sessionKey, JSON.stringify(signedIn));
     else window.localStorage.removeItem(sessionKey);
-  }, [user]);
+  }, [staffUser, user]);
 
   useEffect(() => {
     if (liveBackend) return;
@@ -241,14 +363,23 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
   }, [onboardingTasks]);
 
   const selectView = useCallback(async (view: "student" | "staff") => {
+    if (!liveBackend) {
+      if (!staffUser) throw new Error("Staff access required.");
+      selectedView.current = view;
+      writeStoredView(view);
+      setUser(view === "student" ? demoPreviewStudent() : staffUser);
+      return;
+    }
     const { data, error } = await supabase.auth.getUser();
     if (error || !data.user) throw new Error("Sign in before choosing a view.");
     const bootstrap = await loadLivePortal(data.user, view === "student");
     if (!bootstrap.staffUser) throw new Error("Staff access required.");
+    loadSeq.current += 1;
+    sessionUserId.current = data.user.id;
     selectedView.current = view;
-    window.sessionStorage.setItem("rla-portal-view", view);
+    writeStoredView(view);
     applyLiveBootstrap(bootstrap);
-  }, [applyLiveBootstrap]);
+  }, [applyLiveBootstrap, staffUser]);
 
   const saveProfile = useCallback(async (input: StudentProfileInput, photo?: File) => {
     if (!user || user.role !== "student") throw new Error("Open your student account before editing your profile.");
@@ -271,53 +402,110 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     await refresh();
   }, [refresh]);
 
-  const login = useCallback(async (email: string, password: string) => {
-    if (!email.trim() || !password.trim()) throw new Error("Enter your email and password.");
-    if (liveBackend) {
-      setReady(false);
-      setAuthError(undefined);
-      try {
-        const bootstrap = await signInLivePortal(email, password);
-        selectedView.current = "staff";
-        window.sessionStorage.removeItem("rla-portal-view");
-        applyLiveBootstrap(bootstrap);
-        return bootstrap.user;
-      } catch (error) {
-        setAuthError(error instanceof Error ? error.message : "Unable to sign in.");
-        throw error;
-      } finally {
-        setReady(true);
-      }
-    }
+  const demoSignIn = useCallback((email: string, step?: PasswordPurpose) => {
     const nextUser = deriveDemoUser(email);
-    setUser(nextUser);
-    return nextUser;
-  }, [applyLiveBootstrap]);
-
-  const logout = useCallback(async () => {
-    if (liveBackend) await signOutLivePortal();
-    clearLiveState();
     selectedView.current = "staff";
-    window.sessionStorage.removeItem("rla-portal-view");
+    writeStoredView("staff");
+    if (!nextUser) {
+      setPasswordStep(undefined);
+      setUser(null);
+      setStaffUser(undefined);
+      setAccessIssue({ kind: "no-enrolment", email: normalizeEmail(email) });
+      return;
+    }
+    setPasswordStep(step);
+    setAccessIssue(undefined);
+    setStaffUser(nextUser.role === "student" ? undefined : nextUser);
+    setUser(nextUser);
+  }, [setPasswordStep]);
+
+  // Each sign-in waits until the portal has loaded (or found a problem), so the
+  // page that asked can keep its button busy until there's somewhere to go. A
+  // code or link sign-in queues the password screen first, so nothing routes
+  // past it while the portal loads.
+  const completeSignIn = useCallback(async (authUser: User, step?: PasswordPurpose) => {
+    selectedView.current = "staff";
+    writeStoredView("staff");
+    setPasswordStep(step);
+    const opened = await loadSession(authUser);
+    if (!opened) setPasswordStep(undefined);
+  }, [loadSession, setPasswordStep]);
+
+  const login = useCallback(async (email: string, password: string) => {
+    if (!email.trim() || !password) throw new Error("Enter your email and password.");
+    if (liveBackend) {
+      await completeSignIn(await signInLivePortal(email, password));
+      return;
+    }
+    demoSignIn(email);
+  }, [completeSignIn, demoSignIn]);
+
+  const sendEmailCode = useCallback(async (email: string, purpose: PasswordPurpose): Promise<CodeChannel> => {
+    if (liveBackend) {
+      if (purpose === "setup") return sendLiveSetupCode(email);
+      await requestLivePasswordReset(email);
+      return "recovery";
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, 450));
+    return purpose === "setup" ? "email" : "recovery";
+  }, []);
+
+  const verifyEmailCode = useCallback(async (email: string, code: string, channel: CodeChannel, purpose: PasswordPurpose) => {
+    if (liveBackend) {
+      await completeSignIn(await verifyLiveEmailCode(email, code, channel), purpose);
+      return;
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, 450));
+    if (code === "000000") throw demoAuthError("otp_expired", "Token has expired or is invalid", 403);
+    demoSignIn(email, purpose);
+  }, [completeSignIn, demoSignIn]);
+
+  const verifyEmailLink = useCallback(async (tokenHash: string, type: EmailOtpType) => {
+    if (liveBackend) {
+      await completeSignIn(await verifyLiveEmailLink(tokenHash, type), purposeForLink(type));
+      return;
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, 450));
+    if (tokenHash === "expired") throw demoAuthError("otp_expired", "Email link is invalid or has expired", 403);
+    demoSignIn(demoStudent.email, purposeForLink(type));
+  }, [completeSignIn, demoSignIn]);
+
+  const queuePasswordStep = useCallback((purpose: PasswordPurpose) => setPasswordStep(purpose), [setPasswordStep]);
+  const finishPasswordStep = useCallback(() => setPasswordStep(undefined), [setPasswordStep]);
+
+  const hasAuthSession = useCallback(async () => liveBackend ? hasLiveSession() : Boolean(user), [user]);
+
+  const retryAccess = useCallback(async () => {
+    if (!liveBackend) return;
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) { await loadSession(data.session.user); }
+    else resetSession();
+  }, [loadSession, resetSession]);
+
+  const logout = useCallback(async (scope: SignOutScope = "local") => {
+    if (liveBackend) await signOutLivePortal(scope);
+    resetSession();
     if (!liveBackend) {
+      setStaffUser(undefined);
       setWeeks(weekDefinitions);
       setSubmissions(readStored(submissionKey, initialSubmissions));
       setOnboardingTasks(readStored(onboardingKey, initialOnboardingTasks));
       setSetupVideos(demoSetupVideos);
     }
-  }, [clearLiveState]);
+  }, [resetSession]);
 
   const requestPasswordReset = useCallback(async (email: string) => {
     if (!email.trim()) throw new Error("Enter your email address first.");
     if (liveBackend) await requestLivePasswordReset(email);
+    else await new Promise((resolve) => window.setTimeout(resolve, 450));
   }, []);
 
   const setPassword = useCallback(async (password: string) => {
-    if (password.length < 8) throw new Error("Use at least 8 characters.");
+    // Supabase checks its own minimum too; this keeps the message friendly.
+    if (password.length < MIN_PASSWORD_LENGTH) throw new Error(`Use at least ${MIN_PASSWORD_LENGTH} characters.`);
     if (!liveBackend) return;
     await setLivePortalPassword(password);
-    await refresh();
-  }, [refresh]);
+  }, []);
 
   const toggleOnboardingTask = useCallback(async (id: string) => {
     const task = onboardingTasks.find((item) => item.id === id);
@@ -443,7 +631,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
   const value = useMemo<PortalStoreValue>(() => ({
     ready,
     backend,
-    authError,
+    accessIssue,
     user,
     staffUser,
     selectView,
@@ -459,7 +647,15 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     calls,
     circleUrl,
     login,
+    sendEmailCode,
+    verifyEmailCode,
+    verifyEmailLink,
+    passwordStep,
+    queuePasswordStep,
+    finishPasswordStep,
+    hasAuthSession,
     logout,
+    retryAccess,
     requestPasswordReset,
     setPassword,
     refresh,
@@ -470,8 +666,8 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     markFeedbackViewed,
     confirmFeedbackAction,
   }), [
-    ready, backend, authError, user, staffUser, selectView, resetTestUploads, saveProfile, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, calls, circleUrl,
-    login, logout, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
+    ready, backend, accessIssue, user, staffUser, selectView, resetTestUploads, saveProfile, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, calls, circleUrl,
+    login, sendEmailCode, verifyEmailCode, verifyEmailLink, passwordStep, queuePasswordStep, finishPasswordStep, hasAuthSession, logout, retryAccess, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
     submitWeek, markFeedbackViewed, confirmFeedbackAction,
   ]);
 

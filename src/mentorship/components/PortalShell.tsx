@@ -26,6 +26,7 @@ import { DeadlineStrip } from "./DeadlineStrip";
 import { MasterBundleDialog } from "./MasterBundleCard";
 import { StudentAvatar } from "./StudentAvatar";
 import { StaffSettingsNavigation } from "./StaffSettingsNavigation";
+import { StaffAccountDialog } from "./AccountControls";
 
 const studentNavigation = [
   { to: "/mentorship-portal/dashboard", label: "Dashboard", icon: Gauge },
@@ -54,7 +55,7 @@ function isNavigationActive(to: string, label: string, pathname: string) {
 }
 
 export function PortalShell() {
-  const { user, logout, circleUrl, weeks, backend, staffUser, resetTestUploads } = usePortalStore();
+  const { user, logout, circleUrl, weeks, backend, staffUser, resetTestUploads, selectView } = usePortalStore();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -64,6 +65,8 @@ export function PortalShell() {
   const mobileMenuButton = useRef<HTMLButtonElement | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [resetting, setResetting] = useState(false);
+  const [switching, setSwitching] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
   const reset = async () => {
     setResetting(true);
     try {
@@ -85,11 +88,22 @@ export function PortalShell() {
     } else if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
   }, [location]);
 
+  // Signs out this browser only. Every device at once lives in settings.
   const signOut = async () => {
     try {
-      await logout();
-      navigate("/mentorship-portal");
-    } catch { toast.error("Unable to sign out. Please try again."); }
+      await logout("local");
+      navigate("/mentorship-portal", { replace: true, state: { signedOut: true } });
+    } catch { toast.error("We couldn't sign you out. Check your connection and try again."); }
+  };
+
+  const switchView = async (view: "student" | "staff") => {
+    setSwitching(true);
+    try {
+      await selectView(view);
+      navigate(view === "student" ? "/mentorship-portal/dashboard" : "/mentorship-portal/admin");
+    } catch {
+      toast.error(view === "student" ? "We couldn't open the student preview. Please try again." : "We couldn't open the staff dashboard. Please try again.");
+    } finally { setSwitching(false); }
   };
 
   return (
@@ -138,9 +152,9 @@ export function PortalShell() {
             </a>
           )}
           <div className="flex items-center gap-3 border-t border-white/[0.08] pt-4">
-            <button type="button" onClick={() => setEditingProfile(true)} disabled={staff} aria-label={staff ? user?.name : "Edit profile"} className="mp-focus-ring flex min-w-0 flex-1 items-center gap-3 rounded-lg text-left disabled:cursor-default">
+            <button type="button" onClick={() => staff ? setAccountOpen(true) : setEditingProfile(true)} aria-label={staff ? `${user?.name}: account` : "Edit profile"} className="mp-focus-ring flex min-w-0 flex-1 items-center gap-3 rounded-lg text-left">
               <StudentAvatar name={user?.name ?? "Student"} src={user?.profile?.photoUrl} size={36} member={Boolean(user?.profile?.completedAt)} />
-              <span className="min-w-0 flex-1"><span className="block truncate text-sm font-semibold text-[#e5e1d8]">{user?.name}</span><span className="mt-0.5 block truncate text-[11px] text-[#99978e]">{staff ? user?.role : "Edit profile"}</span></span>
+              <span className="min-w-0 flex-1"><span className="block truncate text-sm font-semibold text-[#e5e1d8]">{user?.name}</span><span className="mt-0.5 block truncate text-[11px] text-[#99978e]">{staff ? "Account" : "Edit profile"}</span></span>
             </button>
             <button type="button" onClick={() => void signOut()} className="mp-focus-ring rounded-lg p-2 text-[#77766f] hover:bg-white/[0.05] hover:text-white" aria-label="Sign out"><LogOut size={16} /></button>
           </div>
@@ -178,6 +192,7 @@ export function PortalShell() {
               {!staff && <MasterBundleShortcut open={bundleOpen} onClick={(button) => { bundleTrigger.current = button; setMobileOpen(false); setBundleOpen(true); }} />}
             </nav>
             {!staff && circleUrl && <a href={circleUrl} target="_blank" rel="noreferrer" className="mp-focus-ring mt-4 flex items-center justify-between rounded-xl border border-white/10 p-4 text-sm text-[#d4d0c5]">{communityName(circleUrl)}<ArrowUpRight size={16} /></a>}
+            {staff && <button type="button" onClick={() => { setMobileOpen(false); setAccountOpen(true); }} className="mp-focus-ring mt-6 flex w-full items-center gap-3 rounded-xl border border-white/15 p-4 text-left"><StudentAvatar name={user?.name ?? "Staff"} size={40} /><span className="min-w-0"><span className="block truncate text-sm font-bold">{user?.name}</span><span className="mt-1 block text-xs text-[#aaa99f]">Account</span></span></button>}
             {!staff && <button type="button" onClick={() => { setMobileOpen(false); setEditingProfile(true); }} className="mp-focus-ring mt-6 flex w-full items-center gap-3 rounded-xl border border-white/15 p-4 text-left"><StudentAvatar name={user?.name ?? "Student"} src={user?.profile?.photoUrl} size={40} member={Boolean(user?.profile?.completedAt)} /><span className="min-w-0"><span className="block truncate text-sm font-bold">{user?.name}</span><span className="mt-1 block text-xs text-[#aaa99f]">Edit profile</span></span></button>}
             <div className="mt-auto pt-8">
               {user?.role === "admin" && <StaffSettingsNavigation mobile onNavigate={() => setMobileOpen(false)} />}
@@ -192,10 +207,10 @@ export function PortalShell() {
         {staffUser && (
           <div className="border-b border-white/10 bg-white/[0.035] px-5 py-3 text-xs text-[#b9b6ad]">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <span>{staff ? "Rob's view" : `Student view: ${user?.name ?? "Test Student"}`} · Saved online</span>
-              <div className="flex items-center gap-5">
-                <button type="button" disabled={resetting} onClick={() => navigate("/mentorship-portal")} className="mp-focus-ring font-bold text-white underline underline-offset-4">Switch view</button>
-                <button type="button" disabled={resetting} onClick={() => setConfirmReset(true)} className="mp-focus-ring underline underline-offset-4">Clear test uploads</button>
+              <span><span className="font-bold text-[#eeeae1]">{staff ? "Staff dashboard" : "Student preview"}</span>{staff ? "" : `: ${user?.name ?? "Test Student"}`} · {backend === "demo" ? "Demo data" : "Saved online"}</span>
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+                <button type="button" disabled={resetting || switching} onClick={() => void switchView(staff ? "student" : "staff")} className="mp-focus-ring min-h-10 font-bold text-white underline underline-offset-4 disabled:opacity-60">{switching ? "Opening..." : staff ? "Preview as student" : "Back to staff dashboard"}</button>
+                {backend === "supabase" && <button type="button" disabled={resetting || switching} onClick={() => setConfirmReset(true)} className="mp-focus-ring min-h-10 underline underline-offset-4">Clear test uploads</button>}
               </div>
             </div>
             {confirmReset && <div role="alertdialog" aria-label="Clear test uploads" className="mt-4 rounded-xl border border-white/15 p-4">
@@ -211,6 +226,7 @@ export function PortalShell() {
         <Outlet />
       </main>
       {!staff && <MasterBundleDialog open={bundleOpen} onOpenChange={setBundleOpen} onReturnFocus={() => { if (bundleTrigger.current?.isConnected) bundleTrigger.current.focus(); else mobileMenuButton.current?.focus(); }} />}
+      {staff && <StaffAccountDialog open={accountOpen} onOpenChange={setAccountOpen} onSignOut={() => { setAccountOpen(false); void signOut(); }} />}
       {!staff && (profileRequired || editingProfile) && <ProfileDialog key={user?.enrollmentId ?? user?.id} required={Boolean(profileRequired)} onClose={() => setEditingProfile(false)} />}
     </div>
   );

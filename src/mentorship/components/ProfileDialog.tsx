@@ -7,12 +7,13 @@ import { usePortalStore } from "../PortalStore";
 import { cropProfilePhoto, photoCrop, readProfilePhoto, type ProfilePhoto } from "../profilePhoto";
 import { StudentAvatar } from "./StudentAvatar";
 import { PrimaryButton, SecondaryButton } from "./PortalUI";
+import { SignOutEverywhere } from "./AccountControls";
 
 const inputClass = "mp-focus-ring mt-2 h-11 w-full rounded-xl border border-white/20 bg-black/20 px-3 text-sm text-[#f2efe6] placeholder:text-[#828278] disabled:opacity-50";
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 
 export function ProfileDialog({ required, onClose }: { required: boolean; onClose: () => void }) {
-  const { user, staffUser, saveProfile, logout } = usePortalStore();
+  const { user, staffUser, saveProfile, logout, selectView } = usePortalStore();
   const navigate = useNavigate();
   const profile = user?.profile;
   const [displayName, setDisplayName] = useState(profile?.displayName ?? user?.name ?? "");
@@ -70,9 +71,13 @@ export function ProfileDialog({ required, onClose }: { required: boolean; onClos
   };
 
   const leave = async () => {
-    if (staffUser) { navigate("/mentorship-portal"); return; }
-    try { await logout(); navigate("/mentorship-portal"); }
-    catch { setError("Unable to sign out. Please try again."); }
+    if (staffUser) {
+      try { await selectView("staff"); navigate("/mentorship-portal/admin"); }
+      catch { setError("We couldn't open the staff dashboard. Please try again."); }
+      return;
+    }
+    try { await logout("local"); navigate("/mentorship-portal", { replace: true, state: { signedOut: true } }); }
+    catch { setError("We couldn't sign you out. Check your connection and try again."); }
   };
 
   return <Dialog.Root open onOpenChange={(open) => { if (!open && !required && !saving) onClose(); }}>
@@ -115,11 +120,15 @@ export function ProfileDialog({ required, onClose }: { required: boolean; onClos
           <div className="mt-6 border-t border-white/10 pt-4">
             <p className="text-xs leading-5 text-[#aaa99f]">Your profile is visible to you and mentorship staff. You can edit it later.</p>
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-              {required ? <button type="button" onClick={() => void leave()} disabled={saving} className="mp-focus-ring rounded-lg px-1 py-2 text-sm font-semibold text-[#b7b7ad]">{staffUser ? "Back to view selection" : "Sign out"}</button> : <SecondaryButton onClick={onClose} disabled={saving}>Cancel</SecondaryButton>}
+              {required ? <button type="button" onClick={() => void leave()} disabled={saving} className="mp-focus-ring rounded-lg px-1 py-2 text-sm font-semibold text-[#b7b7ad]">{staffUser ? "Back to staff dashboard" : "Sign out"}</button> : <SecondaryButton onClick={onClose} disabled={saving}>Cancel</SecondaryButton>}
               <PrimaryButton type="submit" disabled={saving || loadingPhoto}>{saving && <LoaderCircle size={16} className="animate-spin" />}{saving ? "Saving..." : required ? "Save and continue" : "Save changes"}</PrimaryButton>
             </div>
           </div>
         </form>
+        {!required && !staffUser && <div className="mt-6 border-t border-white/10 pt-5">
+          <p className="mb-3 text-xs font-semibold text-[#aaa99f]">Account{user?.email ? ` · ${user.email}` : ""}</p>
+          <SignOutEverywhere />
+        </div>}
       </Dialog.Content>
     </Dialog.Portal>
   </Dialog.Root>;
