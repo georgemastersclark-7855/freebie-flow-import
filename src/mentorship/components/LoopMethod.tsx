@@ -54,9 +54,15 @@ export function LoopMethod() {
         <section className="mm-reps" aria-labelledby="method-reps-title"><h4 id="method-reps-title">Why you're making new ideas every week</h4><p>This is what I mean by REPS. I could make 10 to 15 of these in the time it took me to finish a full track. I want to get you creating ideas quickly and regularly, then choosing the strongest ones to take further. Even on days when you don't feel inspired or you feel overwhelmed, make a couple of small ideas and save them in your folder.</p></section>
       </div>
       <div className="mm-phase">
-        <header className="mm-phase-heading"><h4>Weeks 5 and 6</h4><span>Work on your selected track</span></header>
+        <header className="mm-phase-heading"><h4>Week 5</h4><span>Finish your track</span></header>
         <ol className="mm-step-list" start={3}>
-          <li className="mm-step"><span className="mm-step-number" aria-hidden="true">03</span><div><h5>Finish one of your songs in full</h5><p>At the end of week 4, choose the song you want to finish. You'll develop it from start to finish over the final two weeks, <strong>with my support and guidance.</strong> Upload your progress and updated stems. <strong>You don't need to make new song starters in these weeks.</strong></p></div></li>
+          <li className="mm-step"><span className="mm-step-number" aria-hidden="true">03</span><div><h5>Finish one of your songs in full</h5><p>At the end of week 4, choose the song you want to finish. You'll take it from start to finish in week 5, <strong>with my support and guidance.</strong> Upload the finished track and its stems by the week 5 deadline. <strong>You don't need to make new song starters this week.</strong></p></div></li>
+        </ol>
+      </div>
+      <div className="mm-phase">
+        <header className="mm-phase-heading"><h4>Week 6</h4><span>Final call</span></header>
+        <ol className="mm-step-list" start={4}>
+          <li className="mm-step"><span className="mm-step-number" aria-hidden="true">04</span><div><h5>Join the final call</h5><p>On our last group call, we play and review the finished tracks together. <strong>There's nothing to upload in week 6.</strong> Bring your track and your questions.</p></div></li>
         </ol>
       </div>
     </section>

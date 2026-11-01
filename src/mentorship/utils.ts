@@ -11,7 +11,7 @@ export function submissionParts(week: WeekDefinition, submission: WeekSubmission
   });
   if (week.songRequired) parts.push({
     id: "weekly-song", title: songInstructions(week).title,
-    description: week.number < 5 ? "Develop one loop from the intro through the end of the first chorus or drop." : "The latest full-track version of the song you selected in week 4.",
+    description: week.number < 5 ? "Develop one loop from the intro through the end of the first chorus or drop." : "The finished version of the track you chose in week 4.",
     format: "One MP3 or WAV", complete: Boolean(submission.song), status: submission.song ? "Added" : "Not added yet",
   });
   if (week.stemsRequired) parts.push({
@@ -22,7 +22,11 @@ export function submissionParts(week: WeekDefinition, submission: WeekSubmission
   return parts;
 }
 
-export const portalHome = (user: PortalUser, _tasks?: OnboardingTask[]) =>
+/** False for a week with nothing to upload, such as week 6's final call. */
+export const weekHasUploads = (week: Pick<WeekDefinition, "requiredIdeas" | "songRequired" | "stemsRequired">) =>
+  week.requiredIdeas > 0 || week.songRequired || week.stemsRequired;
+
+export const portalHome =(user: PortalUser, _tasks?: OnboardingTask[]) =>
   user.role === "student" ? "/mentorship-portal/dashboard" : "/mentorship-portal/admin";
 
 // A configured release time takes precedence; unscheduled weeks follow the cohort.
@@ -36,7 +40,7 @@ export function weekOpeningLabel(week: WeekDefinition, timezone?: string) {
 }
 
 export const songInstructions = (week: WeekDefinition) => week.number >= 5
-  ? { title: "Track progress", detail: "Build out and finish the track you selected in week 4. Upload your latest full-track progress and updated stems; no new idea is required.", uploadHelp: "MP3 or WAV. Your latest version of the same selected track." }
+  ? { title: "Finished track", detail: "Finish the track you chose in week 4. Upload the finished version and its matching stems by the deadline. You don't need any new song starters.", uploadHelp: "MP3 or WAV. The finished version of the track you chose in week 4." }
   : { title: "Weekly song", detail: "Choose one of your song starter loops and develop it into this week's song: a regular song structure from the intro through the end of the first chorus or drop.", uploadHelp: "MP3 or WAV. Intro through the end of the first chorus or drop." };
 
 export const formatDeadline = (deadline?: string | null, timezone = "Europe/London") => {

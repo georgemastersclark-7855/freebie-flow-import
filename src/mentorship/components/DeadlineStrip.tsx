@@ -9,7 +9,7 @@ import { usePortalClock } from "../usePortalClock";
 import { callCalendarEvent, callEnd, countdown, deadlineCalendarEvent, nextScheduledCall, safeScheduleUrl, timestamp, weekTiming } from "../schedule";
 import { CalendarActions } from "./CalendarActions";
 import { TimeBar, SubmissionMilestones } from "./DeadlineVisuals";
-import { cx } from "../utils";
+import { cx, weekHasUploads } from "../utils";
 
 
 function CallDetails({ call, now }: { call: PortalCall; now: number }) {
@@ -51,16 +51,22 @@ export function DeadlineStrip() {
   const to = week ? `/mentorship-portal/week/${week.number}${feedback ? "#feedback" : ""}` : "/mentorship-portal/dashboard";
   const detail = feedback ? "Feedback ready" : submitted ? "Submitted" : scheduled ? timing?.state === "upcoming" ? localScheduleTime(week?.opensAt) : localScheduleTime(week?.deadlineAt) : "Date to be confirmed";
   const callLive = call && Date.parse(call.startsAt) <= now;
+  // Week 6 has nothing to upload, so there is no submission deadline to count down to.
+  const nothingDue = week && !weekHasUploads(week);
 
   return <section aria-label="Your upcoming deadlines and calls" className="mp-deadline-strip">
     <div className="mp-deadline-strip-inner">
-      <Link to={to} className="mp-focus-ring mp-deadline-item">
+      {nothingDue ? <Link to={to} className="mp-focus-ring mp-deadline-item">
+        <Check size={16} className="mp-schedule-icon" />
+        <span className="mp-schedule-copy"><strong>Week {week.number}: {week.title}</strong><span>Nothing to upload</span></span>
+        <ChevronRight size={14} className="mp-schedule-chevron" />
+      </Link> : <Link to={to} className="mp-focus-ring mp-deadline-item">
         <Icon size={16} className="mp-schedule-icon" />
         <span className="mp-schedule-copy"><strong>{week ? `Week ${week.number} submission` : "Weekly submissions"}</strong><span>{detail}</span></span>
         {scheduled && !feedback && !submitted && timing && <ScheduleBadge text={timing.label} urgent={urgent} />}
         <ChevronRight size={14} className="mp-schedule-chevron" />
         {scheduled && !feedback && !submitted && timing?.state !== "upcoming" && <TimeBar elapsed={timing?.elapsed} urgent={urgent} />}
-      </Link>
+      </Link>}
       {call ? <CallDetailsButton call={call} now={now} className="mp-deadline-item mp-deadline-call">
         <CalendarDays size={16} className="mp-schedule-icon" /><span className="mp-schedule-copy"><strong>{callLive ? "Group call in progress" : call.title}</strong><span>{localScheduleTime(call.startsAt)}</span></span>
         <ScheduleBadge text={callLive ? "Live now" : `In ${countdown(Date.parse(call.startsAt), now)}`} /><ChevronRight size={14} className="mp-schedule-chevron" />

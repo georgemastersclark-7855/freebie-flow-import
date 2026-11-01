@@ -10,14 +10,14 @@ import { ProgressBar, StatusPill } from "../components/PortalUI";
 import { PortalVideo } from "../components/PortalVideo";
 import { OnboardingChecklist } from "../components/OnboardingChecklist";
 import { LoopMethod } from "../components/LoopMethod";
-import { submissionParts, weekOpeningLabel } from "../utils";
+import { submissionParts, weekHasUploads, weekOpeningLabel } from "../utils";
 
 export function WelcomeHub() {
   const { formatTime: localScheduleTime, timezone } = useScheduleTimezone();
   const completedOnboarding = useRef<HTMLDetailsElement>(null);
   const introduction = useRef<HTMLDetailsElement>(null);
   const location = useLocation();
-  const { user, onboardingTasks, welcomeVideoUrl, weeks, submissions, nextCall } = usePortalStore();
+  const { user, onboardingTasks, welcomeVideoUrl, weeks, submissions, nextCall, calls } = usePortalStore();
   const completeCount = onboardingTasks.filter((task) => task.complete).length;
   const allComplete = onboardingTasks.length > 0 && completeCount === onboardingTasks.length;
   const currentWeek = weeks.find((week) => week.phase === "current");
@@ -33,6 +33,9 @@ export function WelcomeHub() {
   const nextPart = parts.find((part) => !part.complete);
   const weekUrl = currentWeek ? `/mentorship-portal/week/${currentWeek.number}` : "/mentorship-portal/submissions";
   const nextWeek = weeks.find((week) => week.phase === "upcoming");
+  // Week 6 has nothing to upload: show its final call instead of upload progress.
+  const finalCallWeek = Boolean(currentWeek && !weekHasUploads(currentWeek));
+  const finalCall = finalCallWeek ? calls.filter((call) => Boolean(currentWeek?.id) && call.weekId === currentWeek?.id).sort((a, b) => a.startsAt.localeCompare(b.startsAt)).at(-1) ?? nextCall : undefined;
 
   useEffect(() => {
     if (location.hash.startsWith("#method-") && introduction.current) introduction.current.open = true;
@@ -66,11 +69,17 @@ export function WelcomeHub() {
         <div className="space-y-4">
           {feedback.map((item) => <Link key={item.weekNumber} to={`/mentorship-portal/week/${item.weekNumber}#feedback`} className="mp-focus-ring flex items-center gap-4 rounded-2xl border border-white/20 bg-white/[0.05] p-5"><Headphones size={23} className="shrink-0" /><div className="flex-1"><h2 className="text-base font-bold">Feedback on week {item.weekNumber}</h2><p className="mt-1 text-xs text-[#aaa99f]">Read Rob's notes and confirm your next action.</p></div><ArrowRight size={18} /></Link>)}
           <section className="mp-card rounded-3xl p-6 sm:p-8">
-            <div className="flex items-center justify-between gap-3"><p className="text-xs font-bold uppercase tracking-widest text-[#aaa99f]">{currentWeek ? `Week ${currentWeek.number}` : "Weekly submissions"}</p>{submission && <StatusPill state={submission.state} />}</div>
-            <h2 className="mt-4 text-2xl font-bold">{submitted ? "Your music is with Rob" : currentWeek ? currentWeek.number >= 5 ? "Finish your selected track" : "Upload your song starters, song and stems" : "Your first week opens soon"}</h2>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-[#aaa99f]">{submitted ? "Your submission is saved. Open it to review your files and read my feedback when it's published." : currentWeek ? currentWeek.number >= 5 ? "Build out the song you chose in week 4. Upload the latest full-track version and its matching stems." : `Make ${currentWeek.requiredIdeas} song starters, develop one from the intro through the first chorus or drop, then send it with the matching stems.` : nextWeek ? weekOpeningLabel(nextWeek, timezone) : "Your weekly schedule will appear here when confirmed."}</p>
+            <div className="flex items-center justify-between gap-3"><p className="text-xs font-bold uppercase tracking-widest text-[#aaa99f]">{currentWeek ? `Week ${currentWeek.number}` : "Weekly submissions"}</p>{submission && !finalCallWeek && <StatusPill state={submission.state} />}</div>
+            {finalCallWeek ? <>
+              <h2 className="mt-4 text-2xl font-bold">Final call with Rob</h2>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-[#aaa99f]">There's nothing to upload this week. Join the final group call, where we play and review the finished tracks together.</p>
+              <p className="mt-4 text-xs font-semibold text-[#d4d0c5]">{finalCall ? localScheduleTime(finalCall.startsAt) : "The date and joining link will appear here once confirmed."}</p>
+            </> : <>
+            <h2 className="mt-4 text-2xl font-bold">{submitted ? "Your music is with Rob" : currentWeek ? currentWeek.number >= 5 ? "Finish your track" : "Upload your song starters, song and stems" : "Your first week opens soon"}</h2>
+            <p className="mt-3 max-w-xl text-sm leading-7 text-[#aaa99f]">{submitted ? "Your submission is saved. Open it to review your files and read my feedback when it's published." : currentWeek ? currentWeek.number >= 5 ? "Finish the song you chose in week 4. Upload the finished version and its matching stems by the deadline." : `Make ${currentWeek.requiredIdeas} song starters, develop one from the intro through the first chorus or drop, then send it with the matching stems.` : nextWeek ? weekOpeningLabel(nextWeek, timezone) : "Your weekly schedule will appear here when confirmed."}</p>
             {currentWeek && !submitted && <><p className="mt-4 text-xs font-semibold text-[#d4d0c5]">Due {localScheduleTime(currentWeek.deadlineAt)}</p><div className="mt-5"><ProgressBar value={parts.filter((part) => part.complete).length} max={parts.length || 1} /><p className="mt-2 text-xs text-[#aaa99f]">{parts.filter((part) => part.complete).length} / {parts.length} upload sections ready</p></div></>}
-            {currentWeek && <Link to={`${weekUrl}${submitted ? "" : `#${nextPart?.id ?? "send-to-rob"}`}`} className="mp-focus-ring mt-6 inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">{submitted ? "View my submission" : `Open week ${currentWeek.number}`}<ArrowRight size={16} /></Link>}
+            </>}
+            {currentWeek && <Link to={finalCallWeek ? weekUrl : `${weekUrl}${submitted ? "" : `#${nextPart?.id ?? "send-to-rob"}`}`} className="mp-focus-ring mt-6 inline-flex items-center gap-2 rounded-xl bg-[#D3FF02] px-5 py-3 text-sm font-bold text-black">{finalCallWeek ? `Open week ${currentWeek.number}` : submitted ? "View my submission" : `Open week ${currentWeek.number}`}<ArrowRight size={16} /></Link>}
           </section>
         </div>
         <aside className="space-y-4">
