@@ -12,6 +12,27 @@ export interface SchedulePattern {
   callIds: Record<string, string>;
   weekExceptions: Record<string, { opensAt?: boolean; deadlineAt?: boolean }>;
   callExceptions: string[];
+  /** Written by the cohort planner. Optional, so older patterns keep loading and older clients keep it intact. */
+  planner?: CohortPlannerSettings;
+}
+/** Minutes moved from the planned slot, in UK wall-clock time, so a one-off travels with the sales week. */
+export interface PlannerOneOffs {
+  calls: Record<string, { start: number; end: number }>;
+  weeks: Record<string, { opens?: number; deadline?: number }>;
+}
+/**
+ * The cohort planner's own record, stored inside schedule_pattern. It has its own version so the
+ * outer pattern can stay at version 1, which is the only version save_mentorship_schedule accepts.
+ */
+export interface CohortPlannerSettings {
+  version: 1;
+  zone: string;
+  applicationsOpenOn: string;
+  publishedAt: string | null;
+  oneOffs: PlannerOneOffs;
+  sales: { waitlistOn: string; opensOn: string; closesAt: string };
+  onboarding: { from: string; to: string };
+  emails: { id: string; subject: string; sendOn: string; daysFromOpen: number }[];
 }
 export interface SchedulePlan { weeks: ScheduleWeek[]; calls: ScheduleCall[]; pattern: SchedulePattern | null }
 export type PatternInput = Pick<SchedulePattern, "opensAt" | "deadlineAt" | "callStartsAt" | "callEndsAt" | "callTitle" | "joinUrl">;
