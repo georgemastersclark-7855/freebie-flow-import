@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import type { ApplicationFormConfig, ApplicationQuestion } from '../../supabase/functions/_shared/applicationFormSchema';
 import { MembershipBadge } from '@/mentorship/components/StudentAvatar';
 import { clearDraft, emptyAnswers, readAttribution, readDraft, saveDraft, type Answers, type ApplicationDraft } from '@/application/applicationDraft';
+import { usePlacesLeft } from '@/mentorship/placesLeft';
 import './mentorship-application.css';
 
 type Screen = 'welcome'|'question'|'review'|'success';
@@ -31,8 +32,9 @@ function Brand() {
   </div>;
 }
 
-function IdentityCard({identity, className=''}:{identity:ApplicationFormConfig['identity'];className?:string}) {
-  const facts=[identity.cohortLabel,...identity.details].filter(Boolean);
+// {places_left} in a detail shows the live places count; the detail is hidden until it loads.
+function IdentityCard({identity, placesLeft, className=''}:{identity:ApplicationFormConfig['identity'];placesLeft?:number|null;className?:string}) {
+  const facts=[identity.cohortLabel,...identity.details].map(fact=>!fact.includes('{places_left}')?fact:typeof placesLeft!=='number'?'':placesLeft>0?fact.replace('{places_left}',String(placesLeft)):'Sold out').filter(Boolean);
   return <div className={'ma-identity-card '+className}>
     <img src="/assets/mentorship-rob/web/rob-studio-portrait.webp" alt="Rob Late in his studio" width="1067" height="1600"/>
     <strong>{identity.title}</strong>
@@ -64,6 +66,7 @@ export default function MentorshipApplication() {
 
 export function ApplicationExperience({form,preview=false}:{form:PublicApplicationForm;preview?:boolean}) {
   const fields=form.config.questions;
+  const placesLeft=usePlacesLeft(form.slug);
   const keys=fields.map(field=>field.key);
   const sections=[...new Set(fields.map(field=>field.section).filter(Boolean))];
   const [initial] = useState(()=>preview?null:readDraft(form.id,form.revision,keys));
@@ -176,7 +179,7 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
   };
 
   return <div className={'mentorship-application ma-screen-'+screen} onKeyDown={keyDown}>
-    <aside className="ma-identity" aria-label={form.config.identity.title}><IdentityCard identity={form.config.identity}/></aside>
+    <aside className="ma-identity" aria-label={form.config.identity.title}><IdentityCard identity={form.config.identity} placesLeft={placesLeft}/></aside>
     <div className="ma-workspace">{preview&&<div className="ma-preview-label">Preview only · no application will be sent</div>}
       <header className="ma-topbar">
         <div className="ma-mobile-brand"><Brand/></div>
@@ -185,7 +188,7 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
       </header>
       <main className="ma-main">
         {screen==='welcome' && <div className="ma-intro ma-enter">
-          <IdentityCard identity={form.config.identity} className="ma-identity-inline"/>
+          <IdentityCard identity={form.config.identity} placesLeft={placesLeft} className="ma-identity-inline"/>
           {form.config.welcome.eyebrow&&<p className="ma-kicker">{form.config.welcome.eyebrow}</p>}
           <h1>{form.config.welcome.title}</h1>
           <p className="ma-intro-copy">{form.config.welcome.description}</p>

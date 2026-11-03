@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, AudioLines, Check, Disc3, Layers, MessageCircle, Repeat, Users, Video, X } from "lucide-react";
+import { usePlacesLeft } from "@/mentorship/placesLeft";
 
 /* Mentorship cohort 2 as a conventional landing page (mock-up for Rob).
    Same offer and same copy as MentorshipRobVersion.tsx, laid out like the Producer Blueprint sales pages.
@@ -8,7 +9,8 @@ import { ArrowRight, AudioLines, Check, Disc3, Layers, MessageCircle, Repeat, Us
 const robSignature = "/assets/mentorship-rob/web/rob-signature.webp";
 const webAsset = (name: string) => `/assets/mentorship-rob/web/${name}`;
 
-/* Seat counter: SEATS_TOTAL = cohort size, SEATS_LEFT = seats remaining (shown with the total struck through). */
+/* Seat counter: SEATS_TOTAL = cohort size, SEATS_LEFT = seats remaining (shown with the total struck through).
+   SEATS_LEFT is the fallback; the live count comes from get_mentorship_places_left. */
 const SEATS_TOTAL = 12;
 const SEATS_LEFT = 11;
 
@@ -168,12 +170,16 @@ const ApplyPill = () => (
   </a>
 );
 
-const SeatLine = () => (
-  <span className="inline-flex flex-wrap items-baseline gap-x-1.5" style={{ letterSpacing: "-0.02em" }}>
-    <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
-    <span className="text-[#D3FF02]">{SEATS_LEFT} remaining</span>
-  </span>
-);
+const SeatLine = () => {
+  const live = usePlacesLeft("cohort-2");
+  const left = typeof live === "number" ? live : SEATS_LEFT;
+  return (
+    <span className="inline-flex flex-wrap items-baseline gap-x-1.5" style={{ letterSpacing: "-0.02em" }}>
+      <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
+      <span className="text-[#D3FF02]">{left > 0 ? `${left} remaining` : "Sold out"}</span>
+    </span>
+  );
+};
 
 /* Sticky top bar: the name with the seat count and close date under it, Apply Now on the right. */
 /* Sticky top bar: seat count and close date on the left, Apply Now on the right. Rob's name lives in the eyebrow below. */
