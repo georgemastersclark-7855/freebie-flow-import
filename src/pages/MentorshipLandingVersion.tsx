@@ -140,14 +140,15 @@ const VslPlayer = () => {
     <div className="relative z-10 w-full aspect-video bg-zinc-900 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl">
       <video
         ref={videoRef}
-        src="/assets/mentorship-rob/vsl.mp4"
         poster="/assets/mentorship-rob/vsl-poster.jpg"
         playsInline
         preload="metadata"
         controls={started}
         onPlay={() => setStarted(true)}
         className="absolute inset-0 w-full h-full object-cover"
-      />
+      >
+        <VideoSources src="/assets/mentorship-rob/vsl.mp4" />
+      </video>
       {!started && (
         <button type="button" onClick={() => videoRef.current?.play()} aria-label="Play video" className="absolute inset-0 grid place-items-center">
           <span className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-lg grid place-items-center">
@@ -168,6 +169,21 @@ const ApplyPill = () => (
   >
     Apply Now
   </a>
+);
+
+/* iPhones (Safari and in-app browsers) only play video from servers that honour byte-range requests, which the
+   site's static hosting doesn't. Each video plays from Shopify's video CDN as HLS first, then the original file. */
+const SHOPIFY_HLS: Record<string, string> = {
+  "/assets/mentorship-rob/vsl.mp4": "https://cdn.shopify.com/videos/c/vp/a10348714803467186e58b8a2ffd7c17/a10348714803467186e58b8a2ffd7c17.m3u8",
+  "/assets/mentorship-rob/testimonial-aaron.mp4": "https://cdn.shopify.com/videos/c/vp/26be849fdb8e4ef4a5bf370563c95933/26be849fdb8e4ef4a5bf370563c95933.m3u8",
+  "/assets/mentorship-rob/testimonial-austin.mp4": "https://cdn.shopify.com/videos/c/vp/d1c0d536b8aa4f73af9890d035d0d2c6/d1c0d536b8aa4f73af9890d035d0d2c6.m3u8",
+  "/assets/mentorship-rob/testimonial-griffin.mp4": "https://cdn.shopify.com/videos/c/vp/e2a53dfe4a8445f5b30ba21a40603248/e2a53dfe4a8445f5b30ba21a40603248.m3u8",
+};
+const VideoSources = ({ src }: { src: string }) => (
+  <>
+    {SHOPIFY_HLS[src] && <source src={SHOPIFY_HLS[src]} type="application/vnd.apple.mpegurl" />}
+    <source src={src} type="video/mp4" />
+  </>
 );
 
 const SeatLine = () => {
@@ -330,13 +346,14 @@ const TestimonialVideo = ({
 }) => (
   <figure className="snap-center shrink-0 w-[85vw] max-w-[340px] md:w-auto md:max-w-none bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors">
     <video
-      src={src}
       poster={poster}
       controls
       playsInline
       preload="metadata"
       className="w-full aspect-video bg-black object-cover"
-    />
+    >
+      <VideoSources src={src} />
+    </video>
     <figcaption className="p-4 flex items-center gap-3">
       <RingedFace who={who} />
       <span className="text-[13px] text-zinc-500">

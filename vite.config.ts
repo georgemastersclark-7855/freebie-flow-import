@@ -22,6 +22,13 @@ const sharePages = [
     url: "https://audio.roblate.com/mentorship/apply",
     image: "https://audio.roblate.com/og-mentorship-apply.jpg",
   },
+  {
+    paths: ["mentorship-portal"],
+    title: "Rob Late's Producer Mentorship · Student portal",
+    description: "Sign in to your mentorship portal for your weekly submissions, Rob's feedback and the call details.",
+    url: "https://audio.roblate.com/mentorship-portal",
+    image: "https://audio.roblate.com/og-mentorship-portal.jpg",
+  },
 ];
 
 const escapeHtml = (value: string) => value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");

@@ -103,7 +103,7 @@ function AdminHome() {
 
 export default function MentorshipPortal() {
   usePageMeta({
-    title: "Mentorship Portal — Rob Late Audio",
+    title: "Mentorship Portal · Rob Late Audio",
     description:
       "Private portal for Rob Late Audio mentorship students: weekly submissions, feedback and live call resources.",
     canonical: "https://audio.roblate.com/mentorship-portal",

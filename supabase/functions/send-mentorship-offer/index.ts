@@ -98,7 +98,7 @@ Deno.serve(async (request) => {
   const { error: updateError } = await caller.from("mentorship_leads")
     .update({ stage: "offer_sent", next_action: "Check they have paid", due_on: due }).eq("id", lead.id);
   await caller.from("mentorship_lead_activity").insert({ lead_id: lead.id, kind: "note",
-    body: `${resend ? "Offer email sent again" : "Offer email sent"} through Klaviyo. The payment link is held for ${OFFER_HOURS} hours.` });
+    body: `Approved. Personal payment link created for the offer email (held for ${OFFER_HOURS} hours): ${link}` });
   if (updateError) return json({ ok: true, payment_url: link, warning: "The offer was sent, but the lead could not be moved to Offer sent. Move it by hand." });
   return json({ ok: true, payment_url: link });
 });
