@@ -15,6 +15,13 @@
       "when": 1793664002663,
       "tag": "0001_cohort_planner_application_close",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793664100125,
+      "tag": "0002_portal_prelaunch_fixes",
+      "breakpoints": true
     }
   ]
 }
