@@ -100,6 +100,7 @@ export type Database = {
       }
       mentorship_application_forms: {
         Row: {
+          closes_at: string | null
           cohort_id: string
           created_at: string
           draft_config: Json
@@ -113,6 +114,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          closes_at?: string | null
           cohort_id: string
           created_at?: string
           draft_config: Json
@@ -126,6 +128,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          closes_at?: string | null
           cohort_id?: string
           created_at?: string
           draft_config?: Json
@@ -2090,6 +2093,10 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      set_mentorship_application_close: {
+        Args: { p_closes_at: string; p_cohort_id: string }
+        Returns: number
       }
       set_mentorship_application_form_open: {
         Args: { p_form_id: string; p_open: boolean }
