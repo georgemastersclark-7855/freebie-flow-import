@@ -8,12 +8,19 @@ import fs from "fs";
 // their own preview get a copy of index.html with the share tags baked in at build time.
 const sharePages = [
   {
-    paths: ["mentorship", "mentorship/apply"],
+    paths: ["mentorship"],
     title: "Rob Late Mentorship · Make better music, faster.",
     description:
       "Six weeks of hands-on production mentorship to help you build a stronger creative workflow, improve your music, and start finishing tracks you're genuinely proud of.",
     url: "https://audio.roblate.com/mentorship",
     image: "https://audio.roblate.com/og-mentorship.jpg",
+  },
+  {
+    paths: ["mentorship/apply"],
+    title: "Apply for Rob Late's Producer Mentorship",
+    description: "Tell me about your music and what you want to work on. You'll hear back from me within 24 hours.",
+    url: "https://audio.roblate.com/mentorship/apply",
+    image: "https://audio.roblate.com/og-mentorship-apply.jpg",
   },
 ];
 

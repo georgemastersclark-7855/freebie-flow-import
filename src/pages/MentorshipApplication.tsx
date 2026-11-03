@@ -91,7 +91,7 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
 
   useEffect(()=>{
     if(preview)return;
-    document.title="Apply — Rob Late's Producer Mentorship";
+    document.title="Apply for Rob Late's Producer Mentorship";
     const meta=document.createElement('meta'); meta.name='robots';meta.content='noindex,follow';document.head.appendChild(meta);
     return ()=>meta.remove();
   },[preview]);
