@@ -1,6 +1,14 @@
 import { readOnboardingPlan, validateOnboardingPlan } from './onboardingPlan';
 
 export const crmRoot = '/mentorship-portal/admin/crm';
+// The applicant's own checkout link: email filled in, lead id saved on the order so the payment matches back to them.
+// Keep in step with send-mentorship-offer.
+export const paymentLink = (email: string, leadId: string) => {
+  const url = new URL('https://roblate.com/cart/57784130732419:1');
+  url.searchParams.set('checkout[email]', email.toLowerCase());
+  url.searchParams.set('attributes[application_id]', leadId);
+  return url.toString();
+};
 export const leadStages = { new: 'New enquiry', waitlist: 'Waitlist', applied: 'Application received', approved: 'Approved', offer_sent: 'Offer sent', paid: 'Paid', enrolled: 'Enrolled', closed: 'Closed' } as const;
 export type LeadStage = Exclude<keyof typeof leadStages, 'enrolled' | 'paid'>;
 export const leadSources = ['Newsletter', 'Offer doc', 'Instagram', 'Facebook', 'Paid ads', 'Referral', 'Website', 'Not recorded'];

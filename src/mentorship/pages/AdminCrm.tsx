@@ -9,7 +9,7 @@ import { usePortalStore } from '../PortalStore';
 import { StudentAvatar } from '../components/StudentAvatar';
 import { SuccessError, SuccessLoading } from './AdminCohorts';
 import { loadSuccessCohorts, successRoot, type StaffPerson } from '../studentSuccessApi';
-import { crmRoot, leadStages, leadSources, leadChannels, blankLead, dueState, leadStage, localDay, localDateTime, onboardingState, readableDate, type Lead, type LeadInput, type LeadStage } from '../crm';
+import { crmRoot, paymentLink, leadStages, leadSources, leadChannels, blankLead, dueState, leadStage, localDay, localDateTime, onboardingState, readableDate, type Lead, type LeadInput, type LeadStage } from '../crm';
 import { loadCrm, saveLead, leadInput, loadLeadActivity, addLeadNote, saveOnboardingCall, grantPortalAccess, sendOffer, markShopifyOrderChecked, type CrmStudent, type CrmWorkspace, type ShopifyOrderRecord } from '../crmApi';
 import '../studentSuccess.css';
 import '../crm.css';
@@ -115,16 +115,18 @@ function LeadPanel({lead,cohortId,staff,activeIds,data,refresh,onClose,onSaved}:
 }
 function SendOffer({lead,dirty,refresh}:{lead:Lead;dirty:boolean;refresh:()=>Promise<void>}) {
   const [busy,setBusy]=useState(false);
-  const resend=lead.stage==='offer_sent';
-  const send=async()=>{
+  const [link,setLink]=useState(lead.stage==='offer_sent'?paymentLink(lead.email,lead.id):'');
+  const copy=async(value:string)=>{try{await navigator.clipboard.writeText(value);toast.success('Payment link copied. Paste it into your offer email.');}catch{toast.error('Copy did not work. Select the link and copy it by hand.');}};
+  const approve=async()=>{
     if(busy)return;
     if(dirty){toast.error('Save or discard your changes to this lead first.');return;}
-    if(!window.confirm(resend?`Send ${lead.email} the offer email again?\n\nThey get a fresh email with their payment link.`:`Approve ${lead.full_name} and email them the offer now?\n\nKlaviyo sends the offer email with their own payment link, held for 24 hours, and this lead moves to Offer sent.`))return;
+    if(!window.confirm(`Approve ${lead.full_name}?\n\nThis moves them to Offer sent and gives you their own payment link to paste into your offer email. The link is held for 24 hours.`))return;
     setBusy(true);
-    try{const result=await sendOffer(lead.id,resend);await refresh();if(result.warning)toast.warning(result.warning);else toast.success(resend?'Offer sent again.':'Offer sent.');}
+    try{const result=await sendOffer(lead.id);setLink(result.payment_url);await copy(result.payment_url);await refresh();if(result.warning)toast.warning(result.warning);}
     catch(e){toast.error(errorText(e));}finally{setBusy(false);}
   };
-  return <div className="crm-access"><button type="button" className={'ss-button'+(resend?'':' ss-primary')} disabled={busy} onClick={()=>void send()}><Send size={14}/>{busy?'Sending…':resend?'Send the offer again':'Approve and send offer'}</button><small>{resend?'The first offer email has gone. This sends another with the same payment link.':'Emails them the offer with their own payment link.'}</small></div>;
+  if(link)return <div className="crm-access crm-payment-link"><button type="button" className="ss-button" onClick={()=>void copy(link)}><Link2 size={14}/>Copy payment link</button><small>Their own checkout link, with their email filled in. Paste it into your offer email.</small><input readOnly value={link} aria-label="Payment link" onFocus={e=>e.currentTarget.select()}/></div>;
+  return <div className="crm-access"><button type="button" className="ss-button ss-primary" disabled={busy} onClick={()=>void approve()}><Send size={14}/>{busy?'Approving…':'Approve and get payment link'}</button><small>Moves them to Offer sent and gives you their payment link for your offer email.</small></div>;
 }
 function PortalAccess({lead,paid,refresh}:{lead:Lead;paid:boolean;refresh:()=>Promise<void>}) {
   const [busy,setBusy]=useState(false);
