@@ -31,6 +31,16 @@ function Brand() {
   </div>;
 }
 
+function IdentityCard({identity, className=''}:{identity:ApplicationFormConfig['identity'];className?:string}) {
+  const facts=[identity.cohortLabel,...identity.details].filter(Boolean);
+  return <div className={'ma-identity-card '+className}>
+    <img src="/assets/mentorship-rob/web/rob-studio-portrait.webp" alt="Rob Late in his studio" width="1067" height="1600"/>
+    <strong>{identity.title}</strong>
+    {identity.description&&<p>{identity.description}</p>}
+    <div className="ma-photo-meta">{facts.map((fact,index)=><span key={index}>{fact}</span>)}</div>
+  </div>;
+}
+
 export default function MentorshipApplication() {
   const {slug}=useParams();
   const [form,setForm]=useState<PublicApplicationForm|null>(null);
@@ -166,17 +176,7 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
   };
 
   return <div className={'mentorship-application ma-screen-'+screen} onKeyDown={keyDown}>
-    <aside className="ma-identity" aria-label="Rob Late's Producer Mentorship">
-      <img className="ma-studio-photo" src="/assets/rob-home-studio-wide.jpg" alt="Rob in his music studio"/>
-      <div className="ma-photo-shade"/>
-      <div className="ma-identity-top"><Brand/></div>
-      <div className="ma-identity-bottom">
-        <span className="ma-photo-label">{form.config.identity.cohortLabel}</span>
-        <h2>{form.config.identity.title}</h2>
-        <p>{form.config.identity.description}</p>
-        <div className="ma-photo-meta">{form.config.identity.details.map((detail,index)=><span key={index}>{detail}</span>)}</div>
-      </div>
-    </aside>
+    <aside className="ma-identity" aria-label={form.config.identity.title}><IdentityCard identity={form.config.identity}/></aside>
     <div className="ma-workspace">{preview&&<div className="ma-preview-label">Preview only · no application will be sent</div>}
       <header className="ma-topbar">
         <div className="ma-mobile-brand"><Brand/></div>
@@ -185,13 +185,13 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
       </header>
       <main className="ma-main">
         {screen==='welcome' && <div className="ma-intro ma-enter">
-          <p className="ma-kicker">{form.config.welcome.eyebrow}</p>
+          <IdentityCard identity={form.config.identity} className="ma-identity-inline"/>
+          {form.config.welcome.eyebrow&&<p className="ma-kicker">{form.config.welcome.eyebrow}</p>}
           <h1>{form.config.welcome.title}</h1>
           <p className="ma-intro-copy">{form.config.welcome.description}</p>
-          <div className="ma-signoff"><img src="/assets/rob-profile.jpg" alt="" width="28" height="28"/><span>Rob Late</span><MembershipBadge className="ma-badge"/></div>
           {hasDraft && <div className="ma-resume"><RotateCcw size={18}/><div><strong>Your application is saved</strong><span>{initial?.updatedForm?"The form has changed. Your saved answers are here—please review them.":`${answered} of ${fields.length} questions answered. Pick up where you left off.`}</span></div></div>}
           <button className="ma-primary" onClick={start}>{hasDraft?'Continue application':form.config.welcome.buttonText}<ArrowRight size={20}/></button>
-          <div className="ma-time"><Clock3 size={15}/><span>About {Math.max(1,Math.ceil(fields.length/2))} minutes</span><span aria-hidden="true">·</span><span>No payment taken</span></div>
+          <div className="ma-time"><Clock3 size={15}/><span>About {Math.max(1,Math.ceil(fields.length/2))} minutes</span></div>
           {hasDraft && <button className="ma-text-button ma-start-over" onClick={()=>setConfirmReset(true)}>Start again</button>}
           {confirmReset && <div className="ma-reset-confirm" role="alert"><p>Clear your saved answers and start a new application?</p><button className="ma-secondary" onClick={reset}>Clear and start again</button><button className="ma-text-button" onClick={()=>setConfirmReset(false)}>Keep my answers</button></div>}
         </div>}
