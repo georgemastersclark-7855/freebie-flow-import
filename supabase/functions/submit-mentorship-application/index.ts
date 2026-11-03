@@ -109,7 +109,7 @@ async function notifyKlaviyo(lead: ValidatedApplication['lead'], submissionId: s
   });
 }
 
-async function loadRevision(db: ReturnType<typeof createClient>, formId: string, revision: number): Promise<ApplicationFormConfig> {
+async function loadRevision(db: ReturnType<typeof makeDb>['db'], formId: string, revision: number): Promise<ApplicationFormConfig> {
   const { data, error } = await db.rpc('get_mentorship_application_form_revision', { p_form_id: formId, p_revision: revision });
   if (error) throw Object.assign(new Error('Unable to load application form'), { code: error.code });
   if (!data || data.form_id !== formId || data.revision !== revision || typeof data.cohort_id !== 'string') throw new Error('Application form unavailable');
