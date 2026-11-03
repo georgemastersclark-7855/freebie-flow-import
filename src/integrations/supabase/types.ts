@@ -100,6 +100,7 @@ export type Database = {
       }
       mentorship_application_forms: {
         Row: {
+          closes_at: string | null
           cohort_id: string
           created_at: string
           draft_config: Json
@@ -113,6 +114,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          closes_at?: string | null
           cohort_id: string
           created_at?: string
           draft_config: Json
@@ -126,6 +128,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          closes_at?: string | null
           cohort_id?: string
           created_at?: string
           draft_config?: Json
@@ -1373,6 +1376,7 @@ export type Database = {
           cohort_id: string
           created_at: string
           description: string
+          download_url: string | null
           duration_label: string | null
           id: string
           position: number
@@ -1388,6 +1392,7 @@ export type Database = {
           cohort_id: string
           created_at?: string
           description?: string
+          download_url?: string | null
           duration_label?: string | null
           id?: string
           position?: number
@@ -1403,6 +1408,7 @@ export type Database = {
           cohort_id?: string
           created_at?: string
           description?: string
+          download_url?: string | null
           duration_label?: string | null
           id?: string
           position?: number
@@ -1421,6 +1427,111 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "mentorship_cohorts"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_shopify_orders: {
+        Row: {
+          amount_minor: number | null
+          attempts: number
+          cohort_id: string | null
+          currency: string | null
+          email: string | null
+          enrollment_id: string | null
+          flags: string[]
+          last_error: string | null
+          lead_id: string | null
+          order_name: string | null
+          outcome: string | null
+          payment_id: string | null
+          processed_at: string | null
+          received_at: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          shop_domain: string | null
+          shopify_order_id: string
+          status: string
+          test_order: boolean
+        }
+        Insert: {
+          amount_minor?: number | null
+          attempts?: number
+          cohort_id?: string | null
+          currency?: string | null
+          email?: string | null
+          enrollment_id?: string | null
+          flags?: string[]
+          last_error?: string | null
+          lead_id?: string | null
+          order_name?: string | null
+          outcome?: string | null
+          payment_id?: string | null
+          processed_at?: string | null
+          received_at?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          shop_domain?: string | null
+          shopify_order_id: string
+          status?: string
+          test_order?: boolean
+        }
+        Update: {
+          amount_minor?: number | null
+          attempts?: number
+          cohort_id?: string | null
+          currency?: string | null
+          email?: string | null
+          enrollment_id?: string | null
+          flags?: string[]
+          last_error?: string | null
+          lead_id?: string | null
+          order_name?: string | null
+          outcome?: string | null
+          payment_id?: string | null
+          processed_at?: string | null
+          received_at?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          shop_domain?: string | null
+          shopify_order_id?: string
+          status?: string
+          test_order?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_shopify_orders_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_cohorts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_shopify_orders_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_shopify_orders_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_shopify_orders_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_lead_payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentorship_shopify_orders_reviewed_by_fkey"
+            columns: ["reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "mentorship_profiles"
+            referencedColumns: ["user_id"]
           },
         ]
       }
@@ -1881,6 +1992,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      apply_mentorship_shopify_order: {
+        Args: { p_order: Json; p_user_id: string }
+        Returns: Json
+      }
       can_manage_mentorship_student: {
         Args: { target_enrollment: string }
         Returns: boolean
@@ -1898,6 +2013,7 @@ export type Database = {
         }
         Returns: Json
       }
+      find_mentorship_auth_user: { Args: { p_email: string }; Returns: Json }
       get_mentorship_application_form_revision: {
         Args: { p_form_id: string; p_revision: number }
         Returns: Json
@@ -1908,6 +2024,10 @@ export type Database = {
       }
       get_public_mentorship_application_form: {
         Args: { p_slug?: string }
+        Returns: Json
+      }
+      grant_mentorship_portal_access: {
+        Args: { p_lead_id: string }
         Returns: Json
       }
       ingest_calendly_booking_event: {
@@ -1946,12 +2066,17 @@ export type Database = {
         }
         Returns: Json
       }
+      is_mentorship_admin: { Args: never; Returns: boolean }
       is_mentorship_application_form_admin: { Args: never; Returns: boolean }
       is_mentorship_member: {
         Args: { target_cohort_id: string }
         Returns: boolean
       }
       is_mentorship_staff: { Args: never; Returns: boolean }
+      log_mentorship_shopify_failure: {
+        Args: { p_error: string; p_order: Json }
+        Returns: undefined
+      }
       mark_mentorship_feedback_viewed: {
         Args: { target_feedback_id: string }
         Returns: string
@@ -2043,6 +2168,10 @@ export type Database = {
         Args: { target_enrollment_id: string }
         Returns: undefined
       }
+      review_mentorship_shopify_order: {
+        Args: { p_order_id: string }
+        Returns: undefined
+      }
       save_mentorship_application_form: {
         Args: {
           p_config: Json
@@ -2090,6 +2219,10 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      set_mentorship_application_close: {
+        Args: { p_closes_at: string; p_cohort_id: string }
+        Returns: number
       }
       set_mentorship_application_form_open: {
         Args: { p_form_id: string; p_open: boolean }

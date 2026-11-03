@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793663981670,
+      "tag": "0000_mentorship_reapply_review_queue",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793664002663,
+      "tag": "0001_cohort_planner_application_close",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793664100125,
+      "tag": "0002_portal_prelaunch_fixes",
+      "breakpoints": true
+    }
+  ]
+}

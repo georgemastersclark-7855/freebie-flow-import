@@ -35,7 +35,8 @@ export function WelcomeHub() {
   const nextWeek = weeks.find((week) => week.phase === "upcoming");
   // Week 6 has nothing to upload: show its final call instead of upload progress.
   const finalCallWeek = Boolean(currentWeek && !weekHasUploads(currentWeek));
-  const finalCall = finalCallWeek ? calls.filter((call) => Boolean(currentWeek?.id) && call.weekId === currentWeek?.id).sort((a, b) => a.startsAt.localeCompare(b.startsAt)).at(-1) ?? nextCall : undefined;
+  const finalCallCandidates = finalCallWeek ? calls.filter((call) => Boolean(currentWeek?.id) && call.weekId === currentWeek?.id).sort((a, b) => a.startsAt.localeCompare(b.startsAt)) : [];
+  const finalCall = finalCallWeek ? (finalCallCandidates.length > 0 ? finalCallCandidates[finalCallCandidates.length - 1] : nextCall) : undefined;
 
   useEffect(() => {
     if (location.hash.startsWith("#method-") && introduction.current) introduction.current.open = true;
