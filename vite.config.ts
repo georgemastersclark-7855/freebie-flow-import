@@ -9,11 +9,10 @@ import fs from "fs";
 const sharePages = [
   {
     paths: ["mentorship"],
-    title: "Rob Late Mentorship · Make better music, faster.",
-    description:
-      "Six weeks of hands-on production mentorship to help you build a stronger creative workflow, improve your music, and start finishing tracks you're genuinely proud of.",
+    title: "Rob Late Mentorship",
+    description: "6 weeks. 12 producers. Direct mentorship from Rob Late.",
     url: "https://audio.roblate.com/mentorship",
-    image: "https://audio.roblate.com/og-mentorship.jpg",
+    image: "https://audio.roblate.com/og-mentorship-sales.jpg",
   },
   {
     paths: ["mentorship/apply"],
