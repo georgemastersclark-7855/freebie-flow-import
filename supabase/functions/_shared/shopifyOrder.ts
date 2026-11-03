@@ -65,6 +65,7 @@ export interface ShopifyOrder {
   created_at?: string | null;
   test?: boolean | null;
   cancelled_at?: string | null;
+  discount_codes?: { code?: string | null }[] | null;
 }
 
 export interface MentorshipOrder {
@@ -144,6 +145,13 @@ export function readMentorshipOrder(order: ShopifyOrder, ids: MentorshipProductI
     }
   }
   const currency = clean(order.total_price_set?.shop_money?.currency_code || order.currency, 3).toUpperCase() || null;
+  // No discount code should work on the mentorship, but store-wide codes still do, so flag any that got through.
+  const lineDiscount = mentorshipLines.some((line) => (line.discount_allocations ?? []).some((item) => (shopMoney(item?.amount_set, item?.amount) ?? 0) > 0));
+  const codes = (order.discount_codes ?? []).map((item) => clean(item?.code, 60)).filter(Boolean);
+  if (lineDiscount || (codes.length > 0 && mentorshipLines.length === lines.length)) {
+    const paidText = amountMinor === null ? "less than the full price" : `${(amountMinor / 100).toFixed(2)} ${currency ?? ""}`.trim();
+    flags.push(`A discount code was used${codes.length ? ` (${codes.join(", ")})` : ""}, so they paid ${paidText}. Decide whether to keep the place or refund it.`);
+  }
 
   const customerName = [clean(order.customer?.first_name, 80), clean(order.customer?.last_name, 80)].filter(Boolean).join(" ");
   const fullName = (customerName || clean(order.billing_address?.name, 160) || clean(order.shipping_address?.name, 160)).slice(0, 160);

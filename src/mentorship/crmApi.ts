@@ -87,4 +87,16 @@ export async function grantPortalAccess(leadId:string):Promise<{already_active:b
   if(!data?.ok)throw new Error('Access could not be granted. Please try again.');
   return data;
 }
+// "Approve and send offer": Klaviyo emails the lead their own payment link, then the lead moves to Offer sent.
+export async function sendOffer(leadId:string,resend=false):Promise<{payment_url:string;warning?:string}> {
+  const {data,error}=await supabase.functions.invoke('send-mentorship-offer',{body:{lead_id:leadId,resend}});
+  if(error){
+    let message='The offer could not be sent. Please try again.';
+    const context=(error as {context?:unknown}).context;
+    if(context instanceof Response){ try{ const body=await context.clone().json(); if(typeof body?.error==='string'&&body.error.trim())message=body.error.trim(); }catch{ /* keep the generic message */ } }
+    throw new Error(message);
+  }
+  if(!data?.ok)throw new Error('The offer could not be sent. Please try again.');
+  return data;
+}
 export async function markShopifyOrderChecked(orderId:string) { const {error}=await db.rpc('review_mentorship_shopify_order',{p_order_id:orderId}); if(error)throw error; }

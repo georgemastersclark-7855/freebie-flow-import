@@ -89,7 +89,7 @@ Deno.test("Order: other products, several seats, discounts and line-item applica
   if (result.kind !== "mentorship") throw new Error("expected a mentorship order");
   assertEquals(result.order.amountMinor, 249700 * 2 - 49700, "mentorship lines only, after discounts");
   assertEquals(result.order.applicationId, "lead-9");
-  assertEquals(result.order.flags.length, 2, "seats and other products flagged");
+  assertEquals(result.order.flags.length, 3, "seats, other products and the discount flagged");
 });
 
 Deno.test("Order: missing email or cancelled is flagged, not processed", () => {
@@ -107,4 +107,21 @@ Deno.test("Order: the exact GraphQL order id wins over a rounded JSON number", (
   const result = readMentorshipOrder(baseOrder({ id: 9007199254740992, admin_graphql_api_id: "gid://shopify/Order/9007199254740993" }));
   if (result.kind !== "mentorship") throw new Error("expected a mentorship order");
   assertEquals(result.order.orderId, "9007199254740993");
+});
+
+Deno.test("Discount code on the mentorship is flagged for staff", () => {
+  const base: ShopifyOrder = {
+    id: 9001, admin_graphql_api_id: "gid://shopify/Order/9001", email: "student@example.com", currency: "USD",
+    total_price: "2247.30", total_price_set: { shop_money: { amount: "2247.30", currency_code: "USD" } },
+    line_items: [{ product_id: MENTORSHIP_PRODUCT_ID, variant_id: MENTORSHIP_VARIANT_ID, quantity: 1, price: "2497.00",
+      discount_allocations: [{ amount: "249.70", amount_set: { shop_money: { amount: "249.70", currency_code: "USD" } } }] }],
+    discount_codes: [{ code: "LXZ-TEST10" }],
+  };
+  const read = readMentorshipOrder(base, mentorshipProductIds());
+  if (read.kind !== "mentorship") throw new Error("expected a mentorship order");
+  assertEquals(read.order.flags.some((flag) => flag.includes("LXZ-TEST10") && flag.includes("2247.30 USD")), true, "discount flag");
+  const full = readMentorshipOrder({ ...base, total_price: "2497.00", total_price_set: { shop_money: { amount: "2497.00", currency_code: "USD" } },
+    discount_codes: [], line_items: [{ ...base.line_items![0], discount_allocations: [] }] }, mentorshipProductIds());
+  if (full.kind !== "mentorship") throw new Error("expected a mentorship order");
+  assertEquals(full.order.flags.length, 0, "no flag at full price");
 });
