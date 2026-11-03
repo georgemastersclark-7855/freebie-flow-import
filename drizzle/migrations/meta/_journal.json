@@ -29,6 +29,13 @@
       "when": 1793669294156,
       "tag": "0003_mentorship_places_left",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793671125334,
+      "tag": "0004_20261103100000_mentorship_places_left_allow_twelve",
+      "breakpoints": true
     }
   ]
 }
