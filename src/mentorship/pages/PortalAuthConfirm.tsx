@@ -19,11 +19,7 @@ export function PortalAuthConfirm() {
   const navigate = useNavigate();
   const { verifyEmailLink, hasAuthSession, queuePasswordStep } = usePortalStore();
   const [link] = useState(() => readAuthUrl(location.search, location.hash));
-  const [phase, setPhase] = useState<Phase>(() => {
-    if (link.error) return "expired";
-    if (link.tokenHash) return "ready";
-    return "checking";
-  });
+  const [phase, setPhase] = useState<Phase>(() => (link.tokenHash && !link.error ? "ready" : "checking"));
   const purpose = purposeForLink(link.type);
 
   // Error details stay out of the address bar once read.
@@ -33,19 +29,21 @@ export function PortalAuthConfirm() {
   }, []);
 
   // Older links arrive already signed in (#access_token=...), and Supabase reads
-  // them on load: those go on to choose a password. Anyone else can ask for a code.
+  // them on load: those go on to choose a password. A used or expired link from
+  // someone who is already signed in (a second tap) just opens the portal.
+  // Anyone else can ask for a fresh email.
   useEffect(() => {
     if (phase !== "checking") return;
     let active = true;
     void hasAuthSession().then((signedIn) => {
       if (!active) return;
-      if (signedIn && link.hasSessionTokens) {
+      if (signedIn && link.hasSessionTokens && !link.error) {
         queuePasswordStep(purpose);
         navigate("/mentorship-portal/set-password", { replace: true });
       } else if (signedIn) {
         navigate("/mentorship-portal", { replace: true });
       } else {
-        setPhase(link.hasSessionTokens ? "expired" : "request");
+        setPhase(link.error || link.hasSessionTokens ? "expired" : "request");
       }
     }).catch(() => { if (active) setPhase("request"); });
     return () => { active = false; };
@@ -99,8 +97,8 @@ export function PortalAuthConfirm() {
       <EmailCodeFlow
         purpose={purpose}
         title={expired ? "That link has expired" : undefined}
-        intro={expired ? <p>That link has expired or was already used. Enter your email and we'll send a fresh code.</p> : undefined}
-        notice={expired ? <AuthNotice tone="success">Once you've entered the code, you can choose your password straight away.</AuthNotice> : undefined}
+        intro={expired ? <p>That link has expired or was already used. Enter your email and we'll send a fresh one.</p> : undefined}
+        notice={expired ? <AuthNotice tone="success">Once you've used the new link, you can choose your password straight away.</AuthNotice> : undefined}
         onVerified={() => navigate("/mentorship-portal", { replace: true })}
       />
     </AuthLayout>

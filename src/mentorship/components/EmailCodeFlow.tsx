@@ -18,8 +18,8 @@ import { PrimaryButton } from "./PortalUI";
 import { AuthHeading, AuthNotice, TextButton } from "./AuthLayout";
 
 const copy: Record<PasswordPurpose, { title: string; intro: string }> = {
-  setup: { title: "Set up your login", intro: "Enter the email you paid with. We'll email you a code to confirm it's you, then you choose a password." },
-  reset: { title: "Reset your password", intro: "Enter the email you paid with. We'll email you a code, then you choose a new password." },
+  setup: { title: "Set up your login", intro: "Enter the email you paid with. We'll email you a link to confirm it's you, then you choose a password." },
+  reset: { title: "Reset your password", intro: "Enter the email you paid with. We'll email you a link, then you choose a new password." },
 };
 
 interface EmailCodeFlowProps {
@@ -186,7 +186,7 @@ export function EmailCodeFlow({ purpose, title, intro, notice, initialEmail = ""
   if (step === "email" && sending && sendOnStart && !error) {
     return (
       <AuthHeading title={copy[purpose].title}>
-        <p className="mp-login-checking"><LoaderCircle size={16} className="animate-spin" aria-hidden="true" />Sending your code...</p>
+        <p className="mp-login-checking"><LoaderCircle size={16} className="animate-spin" aria-hidden="true" />Sending your email...</p>
       </AuthHeading>
     );
   }
@@ -197,10 +197,11 @@ export function EmailCodeFlow({ purpose, title, intro, notice, initialEmail = ""
         <AuthHeading title="Check your email">
           <p>{NEUTRAL_CODE_MESSAGE}</p>
           <p className="mp-login-sent-to">Sent to <strong>{normalizeEmail(email)}</strong></p>
+          <p>Tap the button in that email to carry on. It works once.</p>
         </AuthHeading>
         <form onSubmit={(event: FormEvent) => { event.preventDefault(); void verify(code); }} className="mp-login-form" noValidate>
           <label className="mp-login-field">
-            <span className="mp-login-label">{CODE_LENGTH}-digit code</span>
+            <span className="mp-login-label">Does your email show a {CODE_LENGTH}-digit code instead? Enter it here</span>
             <span className="mp-login-input-wrap">
               <KeyRound className="mp-login-input-icon" size={18} aria-hidden="true" />
               <input
@@ -225,14 +226,14 @@ export function EmailCodeFlow({ purpose, title, intro, notice, initialEmail = ""
             <span id="portal-code-help" className="mp-login-help">Can't see it? Check spam or promotions. It can take a minute to arrive.</span>
           </label>
           {error && <AuthNotice tone="error">{error}</AuthNotice>}
-          {resent && !error && <AuthNotice tone="success">We've sent a new code. Use the one in the newest email.</AuthNotice>}
+          {resent && !error && <AuthNotice tone="success">We've sent a new email. Use the newest one.</AuthNotice>}
           <PrimaryButton type="submit" disabled={verifying} className="mp-login-submit">
             {verifying ? <><LoaderCircle size={18} className="animate-spin" aria-hidden="true" />Checking your code...</> : <>Continue<ArrowRight size={18} aria-hidden="true" /></>}
           </PrimaryButton>
         </form>
         <div className="mp-login-actions">
           <TextButton onClick={() => void send("resend")} disabled={sending || verifying || secondsLeft > 0}>
-            {sending ? "Sending..." : secondsLeft > 0 ? <>Resend code in <span className="tabular-nums">{secondsLeft}s</span></> : "Resend code"}
+            {sending ? "Sending..." : secondsLeft > 0 ? <>Resend email in <span className="tabular-nums">{secondsLeft}s</span></> : "Resend email"}
           </TextButton>
           <TextButton onClick={changeEmail} disabled={verifying}>Use a different email</TextButton>
         </div>
@@ -272,7 +273,7 @@ export function EmailCodeFlow({ purpose, title, intro, notice, initialEmail = ""
         </label>
         {error && <AuthNotice tone="error">{error}</AuthNotice>}
         <PrimaryButton type="submit" disabled={sending} className="mp-login-submit">
-          {sending ? <><LoaderCircle size={18} className="animate-spin" aria-hidden="true" />Sending your code...</> : <>Email me a code<ArrowRight size={18} aria-hidden="true" /></>}
+          {sending ? <><LoaderCircle size={18} className="animate-spin" aria-hidden="true" />Sending your email...</> : <>Email me a link<ArrowRight size={18} aria-hidden="true" /></>}
         </PrimaryButton>
       </form>
       {back}

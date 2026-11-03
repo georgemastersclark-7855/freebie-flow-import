@@ -89,8 +89,8 @@ export function PortalSetPassword() {
         <EmailCodeFlow
           purpose={purpose}
           title="That link has expired"
-          intro={<p>That link has expired or was already used. Enter your email and we'll send a fresh code.</p>}
-          notice={<AuthNotice tone="success">Once you've entered the code, you can choose your password straight away.</AuthNotice>}
+          intro={<p>That link has expired or was already used. Enter your email and we'll send a fresh one.</p>}
+          notice={<AuthNotice tone="success">Once you've used the new link, you can choose your password straight away.</AuthNotice>}
           onVerified={() => { setError(""); setPhase("form"); }}
         />
       </AuthLayout>

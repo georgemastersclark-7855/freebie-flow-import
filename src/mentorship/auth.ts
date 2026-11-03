@@ -14,7 +14,7 @@ export const normalizeEmail = (email: string) => email.trim().toLowerCase();
 export const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
 export const digitsOnly = (value: string) => value.replace(/\D/g, "").slice(0, CODE_LENGTH);
 
-export const NEUTRAL_CODE_MESSAGE = "If that email has a place in the mentorship, we've sent you a code.";
+export const NEUTRAL_CODE_MESSAGE = "If that email has a place in the mentorship, we've sent you an email with a sign-in link.";
 
 export type AuthContext = "send-code" | "verify-code" | "password" | "reset" | "set-password" | "link" | "sign-out";
 

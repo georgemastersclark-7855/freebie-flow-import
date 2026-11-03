@@ -61,7 +61,7 @@ export function PortalLogin() {
             {signedOutNotice && <div className="mt-4"><AuthNotice tone="success">You're signed out. See you next time.</AuthNotice></div>}
             <div className="mp-login-first-time">
               <h2>First time here?</h2>
-              <p>New to the portal? Set up your login in a minute: we'll email you a code to confirm it's you, then you choose a password.</p>
+              <p>New to the portal? Set up your login in a minute: we'll email you a link to confirm it's you, then you choose a password.</p>
               <SecondaryButton onClick={() => open({ kind: "code", purpose: "setup", sendOnStart: false }, email)} className="mp-login-secondary mt-4">Set up your login<ArrowRight size={18} aria-hidden="true" /></SecondaryButton>
             </div>
           </>}
