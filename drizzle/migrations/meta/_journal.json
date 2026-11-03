@@ -22,6 +22,13 @@
       "when": 1793664100125,
       "tag": "0002_portal_prelaunch_fixes",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793669294156,
+      "tag": "0003_mentorship_places_left",
+      "breakpoints": true
     }
   ]
 }

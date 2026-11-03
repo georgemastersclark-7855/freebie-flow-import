@@ -2018,6 +2018,7 @@ export type Database = {
         Args: { p_form_id: string; p_revision: number }
         Returns: Json
       }
+      get_mentorship_places_left: { Args: { p_slug: string }; Returns: number }
       get_mentorship_typeform_route: {
         Args: { p_form_id: string }
         Returns: Json
