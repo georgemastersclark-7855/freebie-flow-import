@@ -29,7 +29,8 @@ function FinalCallWeek({ week }: { week: WeekDefinition }) {
   const event = call ? callCalendarEvent(call) : undefined;
   const joiningUrl = safeScheduleUrl(call?.circleUrl);
   const live = call ? Date.parse(call.startsAt) <= now && callEnd(call) > now : false;
-  const previous = weeks.filter((item) => item.number < week.number && weekHasUploads(item)).at(-1);
+  const previousWeeks = weeks.filter((item) => item.number < week.number && weekHasUploads(item));
+  const previous = previousWeeks.length > 0 ? previousWeeks[previousWeeks.length - 1] : undefined;
   return <div className="mx-auto max-w-[1120px] px-4 py-8 sm:px-7 lg:px-10 lg:py-10 xl:px-12">
     <Link to="/mentorship-portal/dashboard" className="mp-focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-semibold text-[#aaa99f] hover:text-white"><ArrowLeft size={15} />Back to dashboard</Link>
     <header className="mt-7">
