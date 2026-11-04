@@ -21,6 +21,7 @@ function fieldError(field:Field, answers:Answers):string {
     const links=(value.match(/https:\/\/[^\s<>"']+/gi) || []).map(link=>link.replace(/[),.;!?\]}]+$/g,''));
     if (/\bhttp:\/\//i.test(value) || links.some(link=>{try {const u=new URL(link);return u.protocol!=='https:'||!u.hostname||!!u.username||!!u.password;}catch{return true;}})) return 'Use a full HTTPS link, for example https://soundcloud.com/your-track.';
     if (links.length>8) return 'Please include up to 8 music links.';
+    if (!links.length && !/(^|[\s(])(www\.|[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}\/\S)/i.test(value)) return 'Paste a link so Rob can hear your music. Spotify, SoundCloud, YouTube, Dropbox or Instagram all work.';
   }
   return '';
 }

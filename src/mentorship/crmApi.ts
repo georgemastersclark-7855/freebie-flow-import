@@ -2,7 +2,7 @@
 import { supabase } from '@/integrations/supabase/client';
 import { loadStudentProfilesForEnrollments } from './studentProfileApi';
 import type { SuccessEnrollment, StaffPerson } from './studentSuccessApi';
-import { normaliseLead, type Lead, type LeadInput, type OnboardingCall } from './crm';
+import { isTestLead, normaliseLead, type Lead, type LeadInput, type OnboardingCall } from './crm';
 import type { LaunchSettings, LeadMilestone, RecordedPayment, PaymentInput } from './crmAnalytics';
 const db = supabase as any;
 async function rows<T>(table: string, select: string, filter: (q:any)=>any = q=>q, order='id'): Promise<T[]> {
@@ -20,7 +20,7 @@ async function loadShopifyOrders(cohortId: string): Promise<ShopifyOrderRecord[]
 }
 export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
   const {data:auth}=await supabase.auth.getUser(); if(!auth.user)throw new Error('Sign in to open admissions.');
-  const [leads, enrollments, staff, settingsRows, intake, milestones, payments, shopifyOrders]=await Promise.all([
+  const [allLeads, enrollments, staff, settingsRows, intake, milestones, payments, shopifyOrders]=await Promise.all([
     rows<Lead>('mentorship_leads','*',q=>q.eq('cohort_id',cohortId)),
     rows<Omit<SuccessEnrollment,'name'|'email'>>('mentorship_enrollments','id,cohort_id,user_id,status,is_walkthrough,enrolled_at',q=>q.eq('cohort_id',cohortId).or(`is_walkthrough.eq.false,user_id.eq.${auth.user!.id}`)),
     rows<StaffPerson>('mentorship_profiles','user_id,full_name',q=>q.in('role',['coach','admin']),'user_id'),
@@ -30,6 +30,7 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
     rows<RecordedPayment>('mentorship_lead_payments','*',q=>q.eq('cohort_id',cohortId)),
     loadShopifyOrders(cohortId),
   ]);
+  const leads=allLeads.filter(l=>!isTestLead(l));
   const settings=settingsRows[0]??{capacity:10,currency:null,seat_price_minor:null,cash_target_minor:null};
   if(!enrollments.length)return {leads,students:[],staff,capacity:settings.capacity,settings,milestones,payments,intake,shopifyOrders};
   const ids=enrollments.map(e=>e.id);
