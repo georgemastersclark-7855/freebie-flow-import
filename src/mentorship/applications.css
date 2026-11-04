@@ -13,12 +13,12 @@
 .ca-stats { display:grid; grid-template-columns:repeat(2,minmax(0,.8fr)) minmax(0,1.25fr) minmax(0,1.6fr); gap:12px; margin-bottom:12px; }
 .ca-time { background:#2d4934; border-color:#2d4934; display:flex; flex-direction:column; }
 .ca-time>small { color:#cfdcc9; }
-.ca-time>strong { color:#d3ff02; }
+.ca-time>strong { color:#fff; }
 .ca-time p { margin:8px 0 0; color:#fff; font-size:12px; font-weight:600; line-height:1.4; }
 .ca-time p em { display:block; font-style:normal; font-weight:400; color:#cfdcc9; }
 .ca-clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin-top:7px; }
 .ca-clock span { display:flex; flex-direction:column; align-items:center; background:#3c5941; border-radius:8px; padding:6px 2px 5px; }
-.ca-clock b { font-size:26px; line-height:1.1; font-weight:700; color:#d3ff02; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.ca-clock b { font-size:26px; line-height:1.1; font-weight:700; color:#fff; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
 .ca-clock i { font-style:normal; font-size:11px; color:#cfdcc9; }
 .ca-chart { display:flex; flex-direction:column; justify-content:space-between; gap:6px; }
 .ca-chart>small { display:block; font-size:12px; color:#68716a; font-weight:600; }
