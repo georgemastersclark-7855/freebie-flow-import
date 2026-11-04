@@ -2,6 +2,7 @@
 // tried without a live account. Nothing here talks to Supabase.
 import type { SchedulePlan } from "./schedulePattern";
 import type { ScheduleCohort, ScheduleSnapshot } from "./scheduleAdminApi";
+import type { SalesEmail } from "./salesEmailsApi";
 
 const storageKey = "rla-mentorship-demo-schedule";
 const stamp = () => new Date().toISOString();
@@ -57,4 +58,21 @@ export async function demoSaveCohortDates(startsAt: string, endsAt: string) {
   const state = read();
   state.cohort = { ...state.cohort, startsAt, endsAt };
   write(state);
+}
+
+// Sample copy only, so the calendar's email details can be tried without Klaviyo.
+export function demoLoadSalesEmails(): Promise<SalesEmail[]> {
+  const body = (subject: string) => [
+    [{ text: "Sample copy for ", bold: false }, { text: subject, bold: true }, { text: ".", bold: false }],
+    [{ text: "The live calendar shows the real email from Klaviyo here, paragraph by paragraph.", bold: false }],
+    [{ text: "Rob", bold: false }],
+  ];
+  const email = (key: string, status: string, sendAt: string | null, subject: string): SalesEmail => ({ key, status, sendAt, subject, previewText: `Sample preview text for ${key}`, paragraphs: body(subject) });
+  return Promise.resolve([
+    email("Warm Up 1", "Sent", "2026-11-01T19:00:00Z", "sample warm-up one"),
+    email("Warm Up 2", "Sent", "2026-11-02T19:00:00Z", "sample warm-up two"),
+    email("Sales 1", "Sent", "2026-11-03T19:00:00Z", "sample sales one"),
+    email("Sales 2", "Scheduled", "2026-11-04T19:00:00Z", "sample sales two"),
+    email("Sales 3", "Draft", null, "sample sales three"),
+  ]);
 }

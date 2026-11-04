@@ -4,8 +4,10 @@ import {
   addDays, dayLabel, daysBetween, clockLabel, ukLocal, ukMoment, PLANNED_CALLS, PLANNED_SUBMISSIONS,
   type BuiltPlan, type Day, type Phase, type PlannerEvent, type PlannerEventType,
 } from "../cohortPlan";
+import type { SalesEmail } from "../salesEmailsApi";
 
 export type PlannerZone = { zone: string; city: string };
+export type EmailCopyStatus = { loading: boolean; error: string; retry: () => void };
 
 const DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 // Phone width: the full phase names don't fit a seventh of the screen.
@@ -41,9 +43,10 @@ interface CalendarProps {
   onOpensOnChange: (day: Day) => void;
   onDragChange: (dragging: boolean) => void;
   editing: PlannerEditing;
+  emailCopy: EmailCopyStatus;
 }
 
-export function CohortPlannerCalendar({ built, events, range, today, filters, selected, onSelect, zones, opensOn, onOpensOnChange, onDragChange, editing }: CalendarProps) {
+export function CohortPlannerCalendar({ built, events, range, today, filters, selected, onSelect, zones, opensOn, onOpensOnChange, onDragChange, editing, emailCopy }: CalendarProps) {
   const t = built.resolved.timeline;
   const [frozen, setFrozen] = useState<{ from: Day; to: Day }>();
   const [dragLabel, setDragLabel] = useState<{ x: number; y: number; day: Day }>();
@@ -159,7 +162,7 @@ export function CohortPlannerCalendar({ built, events, range, today, filters, se
     });
     if (selected && row.includes(selected)) {
       grid.push(<DayDetails key={`detail-${selected}`} day={selected} phase={phaseOf(selected)} events={events.filter((event) => event.day === selected)}
-        built={built} zones={zones} editing={editing} onClose={() => { const day = selected; onSelect(null); requestAnimationFrame(() => document.querySelector<HTMLElement>(`[data-day="${day}"]`)?.focus({ preventScroll: true })); }} />);
+        built={built} zones={zones} editing={editing} emailCopy={emailCopy} onClose={() => { const day = selected; onSelect(null); requestAnimationFrame(() => document.querySelector<HTMLElement>(`[data-day="${day}"]`)?.focus({ preventScroll: true })); }} />);
     }
   });
 
@@ -216,7 +219,33 @@ function WeekEditor({ number, built, onApply, onReset, onDone }: { number: numbe
   </form>;
 }
 
-function DayDetails({ day, phase, events, built, zones, editing, onClose }: { day: Day; phase?: Phase; events: PlannerEvent[]; built: BuiltPlan; zones: PlannerZone[]; editing: PlannerEditing; onClose: () => void }) {
+function sendLine(copy: SalesEmail) {
+  if (copy.status === "Draft") return "Draft in Klaviyo, not scheduled yet. The copy could still change.";
+  if (!copy.sendAt) return `${copy.status} in Klaviyo.`;
+  return `${copy.status === "Sent" ? "Sent" : "Scheduled for"} ${ukMoment(copy.sendAt)} UK time.`;
+}
+
+function EmailDetails({ copy, status }: { copy?: SalesEmail; status: EmailCopyStatus }) {
+  const [open, setOpen] = useState(false);
+  if (!copy) {
+    if (status.loading) return <span>Checking Klaviyo for this email...</span>;
+    if (status.error) return <span>{status.error} <button type="button" className="cp-link" onClick={status.retry}>Try again</button></span>;
+    return <span>Not in Klaviyo yet. The copy will show here once it's added.</span>;
+  }
+  return <>
+    <span>{sendLine(copy)}</span>
+    <div className="cp-row-actions"><button type="button" className="cp-link" aria-expanded={open} onClick={() => setOpen((value) => !value)}>{open ? "Hide email" : "Show email"}</button></div>
+    {open && <div className="cp-email">
+      <dl>
+        <div><dt>Subject</dt><dd>{copy.subject}</dd></div>
+        {copy.previewText && <div><dt>Preview text</dt><dd>{copy.previewText}</dd></div>}
+      </dl>
+      <div className="cp-email-body">{copy.paragraphs.map((runs, index) => <p key={index}>{runs.map((run, part) => run.bold ? <strong key={part}>{run.text}</strong> : <span key={part}>{run.text}</span>)}</p>)}</div>
+    </div>}
+  </>;
+}
+
+function DayDetails({ day, phase, events, built, zones, editing, emailCopy, onClose }: { day: Day; phase?: Phase; events: PlannerEvent[]; built: BuiltPlan; zones: PlannerZone[]; editing: PlannerEditing; emailCopy: EmailCopyStatus; onClose: () => void }) {
   const [open, setOpen] = useState<{ kind: "call" | "week"; number: number }>();
   const timed = events.find((event) => event.type === "call" && event.at) ?? events.find((event) => event.type === "due" && event.at) ?? events.find((event) => event.at);
   const week6 = built.resolved.weeks[PLANNED_CALLS - 1];
@@ -229,10 +258,11 @@ function DayDetails({ day, phase, events, built, zones, editing, onClose }: { da
       const movedCall = number ? built.resolved.calls[number - 1]?.moved : false;
       const movedWeek = event.week ? built.resolved.weeks[event.week - 1]?.moved : false;
       return <div className="cp-drow" key={event.key}>
-        <div className="tm">{event.time ? clockLabel(event.time) : "All day"}</div>
+        <div className="tm">{event.time ? clockLabel(event.time) : event.type === "email" ? "" : "All day"}</div>
         <div className="what">
           <b><span className="cp-dot" style={{ background: `var(--cp-${event.type})` }} />{event.type === "email" ? `Email: ${event.title}` : event.title}{(movedCall || movedWeek) && <em className="cp-tag">One-off</em>}</b>
           {event.note && <span>{event.note}</span>}
+          {event.type === "email" && <EmailDetails copy={event.copy} status={emailCopy} />}
           {call && <span>Topic students see: {call.title}{call.joinUrl ? " · Zoom link set" : " · No Zoom link yet"}</span>}
           {number && open?.kind === "call" && open.number === number && <CallEditor key={`call-${number}-${built.plan.pattern?.planner?.applicationsOpenOn}`} number={number} built={built} onApply={editing.onApplyCall} onReset={editing.onResetCall} onDone={() => setOpen(undefined)} />}
           {event.week && open?.kind === "week" && open.number === event.week && <WeekEditor key={`week-${event.week}`} number={event.week} built={built} onApply={editing.onApplyWeek} onReset={editing.onResetWeek} onDone={() => setOpen(undefined)} />}

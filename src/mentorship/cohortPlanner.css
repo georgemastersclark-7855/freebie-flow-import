@@ -142,6 +142,14 @@
 .cp-tag { font-style: normal; font-size: 11px; font-weight: 600; color: var(--cp-amber); background: var(--cp-amber-bg); border-radius: 4px; padding: 1px 6px; }
 .cp-row-actions { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 2px; }
 .cp-empty { color: var(--cp-muted); font-size: 13px; margin: 0; }
+.cp-email { margin-top: 6px; padding: 12px 14px; border: 1px solid var(--cp-line); border-radius: 8px; background: var(--cp-bg); display: grid; gap: 12px; min-width: 0; }
+.cp-email dl { margin: 0; display: grid; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid var(--cp-line); }
+.cp-email dl > div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 8px; font-size: 13px; }
+.cp-email dt { color: var(--cp-muted); }
+.cp-email dd { margin: 0; font-weight: 600; min-width: 0; overflow-wrap: break-word; }
+.cp-email-body { display: grid; gap: 10px; max-width: 65ch; font-size: 14px; line-height: 1.55; overflow-wrap: break-word; }
+.cp-email-body p { margin: 0; }
+.cp-email-body strong { font-weight: 700; }
 .cp-zones { border-top: 1px solid var(--cp-line); padding-top: 10px; display: grid; gap: 8px; }
 .cp-zones h3 { margin: 0; font-size: 13px; font-weight: 600; }
 .cp-zl { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }

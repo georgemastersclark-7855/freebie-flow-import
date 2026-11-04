@@ -11,6 +11,7 @@ import {
   type Day, type PlannerDraft, type PlannerEventType,
 } from "../cohortPlan";
 import { editCallDates, editWeekDates, localDifference } from "../schedulePattern";
+import { loadSalesEmails, type SalesEmail } from "../salesEmailsApi";
 import { CohortPlannerCalendar, type CallEditValues, type PlannerZone, type WeekEditValues } from "../components/CohortPlannerCalendar";
 import { TimezoneSelect } from "../components/ScheduleTimezone";
 import { timezoneLocation } from "../timezoneLabels";
@@ -65,6 +66,9 @@ export function AdminSchedule() {
   const [pendingDiscard, setPendingDiscard] = useState<{ cohortId?: string }>();
   const [appClose, setAppClose] = useState<ApplicationCloseStatus>({ state: "unknown" });
   const [extraZone, setExtraZone] = useState(PLAN_ZONE);
+  const [salesEmails, setSalesEmails] = useState<SalesEmail[]>();
+  const [salesEmailsError, setSalesEmailsError] = useState("");
+  const [salesEmailsRetry, setSalesEmailsRetry] = useState(0);
   const ids = useRef<Record<number, string>>({});
   const idFor = useCallback((number: number) => ids.current[number] ??= crypto.randomUUID(), []);
   const now = usePortalClock();
@@ -97,15 +101,25 @@ export function AdminSchedule() {
     return () => { live = false; };
   }, [cohortId, retry]);
 
+  // The calendar doesn't wait for Klaviyo: planned subjects show until the real ones arrive.
+  useEffect(() => {
+    if (!cohortId) return;
+    let live = true;
+    setSalesEmails(undefined); setSalesEmailsError("");
+    loadSalesEmails(cohortId).then((rows) => { if (live) setSalesEmails(rows); })
+      .catch((reason: unknown) => { if (live) setSalesEmailsError(message(reason, "The emails couldn't be loaded from Klaviyo.")); });
+    return () => { live = false; };
+  }, [cohortId, retry, salesEmailsRetry]);
+
   const result = useMemo(() => {
     if (!snapshot || !draft) return undefined;
     try { return { built: buildPlannerPlan(snapshot, draft, idFor, snapshot.pattern?.planner?.publishedAt ?? null), error: "" }; }
     catch (reason) { return { built: undefined, error: message(reason, "These dates don't fit together. Undo the last change.") }; }
   }, [snapshot, draft, idFor]);
   const built = result?.built;
-  const events = useMemo(() => built ? plannerEvents(built) : [], [built]);
+  const events = useMemo(() => built ? plannerEvents(built, salesEmails) : [], [built, salesEmails]);
   const range = built ? plannerRange(built.resolved) : undefined;
-  const warnings = built ? planWarnings(built.resolved, today) : [];
+  const warnings = built ? planWarnings(built.resolved, today, snapshot?.pattern?.planner?.applicationsOpenOn) : [];
   const changes = built && snapshot ? planChanges(snapshot, built.plan) : undefined;
   const dirty = Boolean(changes?.any);
   const touched = Boolean(draft && baseDraft && !sameDraft(draft, baseDraft));
@@ -310,8 +324,9 @@ export function AdminSchedule() {
 
           <CohortPlannerCalendar built={built} events={events} range={range} today={today} filters={filters} selected={selected} onSelect={setSelected} zones={zones}
             opensOn={draft.opensOn} onOpensOnChange={moveOpen} onDragChange={setDragging}
-            editing={{ onApplyCall: applyCall, onResetCall: resetCall, onApplyWeek: applyWeek, onResetWeek: resetWeek }} />
-          <p className="cp-foot">Scroll down for later weeks. Hover the envelope to see that day's emails, or click a day for its details under that week. Each row is one mentorship week: Sunday call (blue bar along the top of the square), work due Thursday 11:59pm, Rob reviews Friday and Saturday, then the next Sunday call reviews it. Uploads open as soon as the previous deadline closes. The final call on {dayLabel(ukDay(finalCall.startsAt), { weekday: "long", day: "numeric", month: "long" })} is the last touchpoint, and nothing is due after it.</p>
+            editing={{ onApplyCall: applyCall, onResetCall: resetCall, onApplyWeek: applyWeek, onResetWeek: resetWeek }}
+            emailCopy={{ loading: !salesEmails && !salesEmailsError, error: salesEmailsError, retry: () => setSalesEmailsRetry((value) => value + 1) }} />
+          <p className="cp-foot">Scroll down for later weeks. Hover the envelope to see that day's emails, or click a day for its details and the full email copy, under that week. Each row is one mentorship week: Sunday call (blue bar along the top of the square), work due Thursday 11:59pm, Rob reviews Friday and Saturday, then the next Sunday call reviews it. Uploads open as soon as the previous deadline closes. The final call on {dayLabel(ukDay(finalCall.startsAt), { weekday: "long", day: "numeric", month: "long" })} is the last touchpoint, and nothing is due after it.</p>
         </>}
     </div>
   </div>;

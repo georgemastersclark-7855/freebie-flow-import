@@ -1,4 +1,5 @@
 import type { ScheduleCall, ScheduleWeek } from "./scheduleAdminApi";
+import type { SalesEmail } from "./salesEmailsApi";
 import { scheduleIsoToLocalInput, scheduleLocalInputToIso } from "./scheduleTimezone";
 import { shiftInstant, validatePlan, type CohortPlannerSettings, type PlannerOneOffs, type SchedulePattern, type SchedulePlan } from "./schedulePattern";
 
@@ -16,21 +17,22 @@ export type PhaseKey = "warm" | "sales" | "onb" | "w1" | "w2" | "w3" | "w4" | "w
 export type PlannerEventType = "sales" | "email" | "onb" | "call" | "due" | "rev";
 export interface Phase { key: PhaseKey; label: string; from: Day; to: Day }
 export interface PlannedSlot { number: number; startsAt: string; endsAt: string }
-export interface PlannedEmail { id: string; daysFromOpen: number; subject: string; note: string }
+export interface PlannedEmail { id: string; daysFromOpen: number; subject: string; note: string; campaign: string }
 
-// Rob's subject lines, relative to the day applications open. They move with the sales week.
-// TODO(klaviyo): a live Klaviyo sync needs a Klaviyo private key stored as a backend secret, which
-// only George can add. Until then these are a plan only; nothing is sent or scheduled from here.
+// The sales emails, relative to the day applications open. They move with the sales week. Each one
+// is matched to its Klaviyo campaign by name ("C2 Sales 1 - ..."), and the real subject and copy
+// come from there. The subjects here only show if Klaviyo can't be reached. Nothing is sent or
+// scheduled from the calendar.
 export const PLANNED_EMAILS: PlannedEmail[] = [
-  { id: "warm-up-1", daysFromOpen: -3, subject: "Warm-up email 1", note: "A production lesson. No pitch." },
-  { id: "warm-up-2", daysFromOpen: -2, subject: "Warm-up email 2", note: "Value, then the waitlist sign-up: the mentorship opens this week, click for first access." },
-  { id: "priority-access", daysFromOpen: -1, subject: "you're getting priority access", note: "To the waitlist and everyone who clicked warm-up email 2." },
-  { id: "raising-the-standard", daysFromOpen: 0, subject: "i'm raising the standard", note: "Full list. Rob posts on Instagram stories." },
-  { id: "practising", daysFromOpen: 2, subject: "what are you actually practising?", note: "" },
-  { id: "bass", daysFromOpen: 3, subject: "his bass wasn't the problem", note: "" },
-  { id: "folder", daysFromOpen: 5, subject: "the folder i take into writing sessions", note: "" },
-  { id: "work-on-together", daysFromOpen: 6, subject: "here's what we'll work on together", note: "Includes the price." },
-  { id: "last-call", daysFromOpen: 7, subject: "Last call", note: "Applications close at 11:59pm UK time." },
+  { id: "warm-up-1", daysFromOpen: -3, campaign: "Warm Up 1", subject: "Warm-up email 1", note: "A production lesson. No pitch." },
+  { id: "warm-up-2", daysFromOpen: -2, campaign: "Warm Up 2", subject: "Warm-up email 2", note: "Value, then the waitlist sign-up: the mentorship opens this week, reply WAITLIST for first access." },
+  { id: "priority-access", daysFromOpen: -1, campaign: "Sales 1", subject: "you're getting priority access", note: "To the waitlist." },
+  { id: "raising-the-standard", daysFromOpen: 0, campaign: "Sales 2", subject: "i'm raising the standard", note: "Full list. Rob posts on Instagram stories." },
+  { id: "practising", daysFromOpen: 2, campaign: "Sales 3", subject: "what are you actually practising?", note: "" },
+  { id: "bass", daysFromOpen: 3, campaign: "Sales 4", subject: "his bass wasn't the problem", note: "" },
+  { id: "folder", daysFromOpen: 5, campaign: "Sales 5", subject: "the folder i take into writing sessions", note: "" },
+  { id: "work-on-together", daysFromOpen: 6, campaign: "Sales 6", subject: "here's what we'll work on together", note: "Includes the price." },
+  { id: "last-call", daysFromOpen: 7, campaign: "Last Call", subject: "Last call", note: "Applications close at 11:59pm UK time." },
 ];
 
 const CALL_NOTES = [
@@ -281,7 +283,7 @@ function defaultOpensOn(snapshot: Snapshot, cohortId: string, today: Day) {
 const listJoin = (items: string[]) => items.length <= 1 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
 const inChristmasWeek = (day: Day) => day.slice(5) >= "12-21" && day.slice(5) <= "12-31";
 
-export function planWarnings(resolved: ResolvedPlan, today: Day) {
+export function planWarnings(resolved: ResolvedPlan, today: Day, publishedOpensOn?: Day) {
   const warnings: string[] = [];
   const finalCall = resolved.calls[PLANNED_CALLS - 1];
   const finalDay = ukDay(finalCall.startsAt);
@@ -291,7 +293,8 @@ export function planWarnings(resolved: ResolvedPlan, today: Day) {
   ];
   if (inChristmasWeek(finalDay)) warnings.push(`The final call falls in Christmas week (21 to 31 December), on ${dayLabel(finalDay, { weekday: "long", day: "numeric", month: "long" })}.${festive.length ? ` So ${festive.length === 1 ? "does" : "do"} ${listJoin(festive)}.` : ""}`);
   else if (festive.length) warnings.push(`${listJoin(festive).replace(/^./, (letter) => letter.toUpperCase())} ${festive.length === 1 ? "falls" : "fall"} in Christmas week (21 to 31 December).`);
-  if (resolved.timeline.waitlistOn < today) warnings.push(`The waitlist day, ${dayLabel(resolved.timeline.waitlistOn, { weekday: "long", day: "numeric", month: "long" })}, is in the past.`);
+  // Only when choosing new dates: a published sales week that has started is meant to be in the past.
+  if (resolved.timeline.waitlistOn < today && resolved.timeline.opensOn !== publishedOpensOn) warnings.push(`The waitlist day, ${dayLabel(resolved.timeline.waitlistOn, { weekday: "long", day: "numeric", month: "long" })}, is in the past.`);
   const late = [
     ...resolved.weeks.slice(0, PLANNED_SUBMISSIONS).filter((week) => Date.parse(week.deadlineAt) > Date.parse(finalCall.startsAt)).map((week) => `Submission ${week.number}`),
     ...resolved.weeks.slice(PLANNED_SUBMISSIONS).filter((week) => Date.parse(week.deadlineAt) > Date.parse(finalCall.startsAt)).map((week) => `Week ${week.number} in the portal`),
@@ -310,16 +313,24 @@ export interface PlannerEvent {
   at?: string;
   call?: { number?: number; id: string };
   week?: number;
+  /** The email as it is in Klaviyo, when it has been found there. */
+  copy?: SalesEmail;
 }
 
-export function plannerEvents(built: BuiltPlan): PlannerEvent[] {
+const copyFor = (email: PlannedEmail, copies: SalesEmail[]) => copies.find((copy) => copy.key.toLowerCase() === email.campaign.toLowerCase());
+
+export function plannerEvents(built: BuiltPlan, copies: SalesEmail[] = []): PlannerEvent[] {
   const { resolved, plan, callIds } = built;
   const t = resolved.timeline;
   const events: PlannerEvent[] = [
     { key: "waitlist", day: t.waitlistOn, type: "sales", time: "", title: "Waitlist early access", note: "24-hour head start for the waitlist." },
     { key: "open", day: t.opensOn, type: "sales", time: "", title: "Applications open", note: "Open to the full list." },
     { key: "close", day: t.closesOn, type: "sales", time: "23:59", title: "Applications close", note: "", at: t.closesAt },
-    ...t.emails.map((email) => ({ key: `email:${email.id}`, day: email.day, type: "email" as const, time: "", title: email.subject, note: email.note })),
+    ...t.emails.map((email) => {
+      const copy = copyFor(email, copies);
+      const sends = copy?.sendAt && copy.status !== "Draft" ? ukLocal(copy.sendAt).slice(11) : "";
+      return { key: `email:${email.id}`, day: email.day, type: "email" as const, time: sends, title: copy?.subject || email.subject, note: email.note, copy };
+    }),
   ];
   for (let day = t.onboarding.from; day <= t.onboarding.to; day = addDays(day, 1)) {
     events.push({ key: `onb:${day}`, day, type: "onb", time: "", title: "Onboarding 1:1s", note: day === t.onboarding.from ? "Rob's one-to-one call with each student." : "" });
