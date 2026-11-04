@@ -2038,6 +2038,7 @@ export type Database = {
         Args: { p_form_id: string }
         Returns: Json
       }
+      get_my_onboarding_plan: { Args: never; Returns: Json }
       get_public_mentorship_application_form: {
         Args: { p_slug?: string }
         Returns: Json
