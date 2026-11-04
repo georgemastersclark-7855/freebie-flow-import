@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Clock3, Link2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -6,6 +7,18 @@ import { crmRoot, leadStages, onboardingState, paymentLink, readableDate, type L
 import { hasPaid } from '../crmAnalytics';
 import type { CrmWorkspace } from '../crmApi';
 import { answerLinks, answerOf, applicationChannel, applicationsPerDay, closesDate, closesTime, deadline, latestApplications, namedLinks, pipelineStages, timeLeft, type ApplicationRecord, type PipelineKey } from '../crmPipeline';
+
+/** Asks before a step that changes someone's record, and says what will happen next. */
+export function ConfirmStep({ title, steps, confirmLabel, cancelLabel, onConfirm, onCancel }: { title: string; steps: string[]; confirmLabel: string; cancelLabel: string; onConfirm: () => void; onCancel: () => void }) {
+  return <AlertDialog.Root open onOpenChange={open => { if (!open) onCancel(); }}><AlertDialog.Portal>
+    <AlertDialog.Overlay className="ca-confirm-overlay"/>
+    <AlertDialog.Content className="ca-confirm">
+      <AlertDialog.Title>{title}</AlertDialog.Title>
+      <AlertDialog.Description asChild><div><p>What happens next:</p><ul>{steps.map(step => <li key={step}>{step}</li>)}</ul></div></AlertDialog.Description>
+      <div className="ca-confirm-actions"><AlertDialog.Cancel className="ss-button">{cancelLabel}</AlertDialog.Cancel><AlertDialog.Action className="ss-button ss-primary" onClick={onConfirm}>{confirmLabel}</AlertDialog.Action></div>
+    </AlertDialog.Content>
+  </AlertDialog.Portal></AlertDialog.Root>;
+}
 
 /** The current time, refreshed each minute so countdowns stay right while the page is open. */
 export function useNow(every = 60_000) {

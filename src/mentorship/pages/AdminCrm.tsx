@@ -15,7 +15,7 @@ import '../crm.css';
 import '../applications.css';
 import { hasPaid } from '../crmAnalytics';
 import { deadline, latestApplications, pipelineStages } from '../crmPipeline';
-import { ApplicationAnswers, Chip, CrmStats, InterestedList, LeadLinks, OfferList, PaidList, PeopleList, PipelineStrip, ReviewList, placesFilled, useNow } from './AdminCrmPipeline';
+import { ApplicationAnswers, Chip, ConfirmStep, CrmStats, InterestedList, LeadLinks, OfferList, PaidList, PeopleList, PipelineStrip, ReviewList, placesFilled, useNow } from './AdminCrmPipeline';
 import { LaunchOverview, LaunchTargetsPanel, LeadPayments } from './AdminCrmOverview';
 
 const errorText=(e:unknown)=>e instanceof Error?e.message:'Unable to save. Please try again.';
@@ -113,7 +113,7 @@ function LeadPanel({lead,cohortId,staff,activeIds,data,refresh,onClose,onSaved}:
   const close=()=>{if(!busy&&!paymentBusy&&(!dirty||window.confirm('Discard unsaved changes to this lead?')))onClose();};
   const submit=async(e:React.FormEvent)=>{e.preventDefault();setError('');setBusy(true);try{const record=await saveLead(input,previous);setPrevious(record);setInput(leadInput(record));setSaved(JSON.stringify(leadInput(record)));await onSaved(record);toast.success('Lead saved.');}catch(e){setError(errorText(e));}finally{setBusy(false);}};
   const addNote=async()=>{setError('');setBusy(true);try{await addLeadNote(lead!.id,note);setNote('');await history.refetch();toast.success('Note added.');}catch(e){setError(errorText(e));}finally{setBusy(false);}};
-  return <Sheet open onOpenChange={open=>{if(!open)close();}}><SheetContent className="student-success crm-drawer" onEscapeKeyDown={e=>{e.preventDefault();close();}} onInteractOutside={e=>{e.preventDefault();close();}}><div className="crm-drawer-head"><SheetTitle>{lead?lead.full_name:'Add person'}</SheetTitle><SheetDescription>{lead?lead.email:'Add someone who has shown interest, for example from a DM or an email.'}</SheetDescription>{lead&&<div className="crm-inline"><StageBadge stage={leadStage(lead,activeIds)==='enrolled'?'enrolled':lead.stage!=='closed'&&hasPaid(lead,data.payments)?'paid':lead.stage}/>{lead.stage==='applied'&&latestApplications(applications).get(lead.id)&&(()=>{const due=deadline(latestApplications(applications).get(lead.id)!.submitted_at,data.settings.reply_target_hours,now);return <Chip tone={due.tone}>{due.label}</Chip>;})()}{lead.enrollment_id&&<Link className="ss-link" to={`${successRoot}/${lead.cohort_id}/students/${lead.enrollment_id}?tab=Onboarding`} onClick={e=>{if(dirty&&!window.confirm('Discard unsaved changes and open the student record?'))e.preventDefault();}}>Student record <ArrowRight size={14}/></Link>}</div>}{lead&&!lead.enrollment_id&&!hasPaid(lead,data.payments)&&['applied','approved','offer_sent'].includes(lead.stage)&&<LeadActions lead={lead} dirty={dirty} offerHours={data.settings.offer_hold_hours} onClosed={onClose} refresh={async()=>{await refresh();await history.refetch();}}/>}</div>
+  return <Sheet open onOpenChange={open=>{if(!open)close();}}><SheetContent className="student-success crm-drawer" onEscapeKeyDown={e=>{e.preventDefault();close();}} onInteractOutside={e=>{e.preventDefault();close();}}><div className="crm-drawer-head"><SheetTitle>{lead?lead.full_name:'Add person'}</SheetTitle><SheetDescription>{lead?lead.email:'Add someone who has shown interest, for example from a DM or an email.'}</SheetDescription>{lead&&<div className="crm-inline"><StageBadge stage={leadStage(lead,activeIds)==='enrolled'?'enrolled':lead.stage!=='closed'&&hasPaid(lead,data.payments)?'paid':lead.stage}/>{lead.stage==='applied'&&latestApplications(applications).get(lead.id)&&(()=>{const due=deadline(latestApplications(applications).get(lead.id)!.submitted_at,data.settings.reply_target_hours,now);return <Chip tone={due.tone}>{due.label}</Chip>;})()}{lead.enrollment_id&&<Link className="ss-link" to={`${successRoot}/${lead.cohort_id}/students/${lead.enrollment_id}?tab=Onboarding`} onClick={e=>{if(dirty&&!window.confirm('Discard unsaved changes and open the student record?'))e.preventDefault();}}>Student record <ArrowRight size={14}/></Link>}</div>}{lead&&!lead.enrollment_id&&!hasPaid(lead,data.payments)&&['applied','approved','offer_sent'].includes(lead.stage)&&<LeadActions lead={lead} dirty={dirty} offerHours={data.settings.offer_hold_hours} replyHours={data.settings.reply_target_hours} onClosed={onClose} refresh={async()=>{await refresh();await history.refetch();}}/>}</div>
     {lead&&<LeadLinks application={latestApplications(applications).get(lead.id)} data={data}/>}
     {lead&&(lead.email_thread_url||lead.application_url)&&<div className="crm-source-links">{lead.email_thread_url&&<a className="ss-button" href={lead.email_thread_url} target="_blank" rel="noopener noreferrer"><Link2 size={14}/> Open Gmail conversation</a>}{lead.application_url&&<a className="ss-button" href={lead.application_url} target="_blank" rel="noopener noreferrer"><Link2 size={14}/> Open application</a>}</div>}
     {lead&&<div className="crm-tabs">{applications.length>0&&<button type="button" aria-current={tab==='application'?'page':undefined} onClick={()=>setTab('application')}>Application</button>}<button type="button" aria-current={tab==='details'?'page':undefined} onClick={()=>setTab('details')}>Details</button><button type="button" aria-current={tab==='activity'?'page':undefined} onClick={()=>setTab('activity')}>Activity</button><button type="button" aria-current={tab==='payments'?'page':undefined} onClick={()=>setTab('payments')}>Payments</button></div>}
@@ -130,43 +130,41 @@ function LeadPanel({lead,cohortId,staff,activeIds,data,refresh,onClose,onSaved}:
     {tab==='activity'&&lead&&<div className="crm-activity"><label className="ss-field">Add a note<textarea value={note} maxLength={6000} onChange={e=>setNote(e.target.value)} placeholder="What was discussed? What needs to happen next?"/></label><button className="ss-button ss-primary" disabled={busy||!note.trim()} onClick={()=>void addNote()}><Plus size={15}/> Add note</button>{error&&<p className="ss-error" role="alert">{error}</p>}{history.isPending?<SuccessLoading/>:history.isError?<SuccessError error={history.error} retry={()=>void history.refetch()}/>:<ol className="crm-timeline">{[...(history.data??[])].reverse().map(a=><li key={a.id}><span className="crm-timeline-dot"/><div><strong>{a.kind==='note'?'Note':a.kind==='created'?'Lead added':'Record updated'}</strong><p>{a.body}</p><small>{readableDate(a.created_at,true)} · {staff.find(s=>s.user_id===a.actor_id)?.full_name??'System'}</small></div></li>)}</ol>}</div>}
   </SheetContent></Sheet>;
 }
-function LeadActions({lead,dirty,offerHours,refresh,onClosed}:{lead:Lead;dirty:boolean;offerHours:number;refresh:()=>Promise<void>;onClosed:()=>void}) {
-  const [busy,setBusy]=useState(false);
+function LeadActions({lead,dirty,offerHours,replyHours,refresh,onClosed}:{lead:Lead;dirty:boolean;offerHours:number;replyHours:number;refresh:()=>Promise<void>;onClosed:()=>void}) {
+  const [busy,setBusy]=useState(false); const [asking,setAsking]=useState<'approve'|'close'|null>(null);
+  const ask=(step:'approve'|'close')=>{if(busy)return;if(dirty){toast.error('Save or discard your changes first.');return;}setAsking(step);};
   const [link,setLink]=useState(lead.stage==='offer_sent'?paymentLink(lead.email,lead.id):'');
   const copy=async(value:string)=>{try{await navigator.clipboard.writeText(value);toast.success('Payment link copied. Paste it into your offer email.');}catch{toast.error('Copy did not work. Select the link and copy it by hand.');}};
   const approve=async()=>{
-    if(busy)return;
-    if(dirty){toast.error('Save or discard your changes first.');return;}
-    if(!window.confirm(`Approve ${lead.full_name}?\n\nThis moves them to Offer sent and gives you their own payment link to paste into your offer email. The link is held for ${offerHours} hours.`))return;
-    setBusy(true);
+    setAsking(null);setBusy(true);
     try{const result=await sendOffer(lead.id);setLink(result.payment_url);await refresh();void copy(result.payment_url);if(result.warning)toast.warning(result.warning);}
     catch(e){toast.error(errorText(e));}finally{setBusy(false);}
   };
   const notAFit=async()=>{
-    if(busy)return;
-    if(dirty){toast.error('Save or discard your changes first.');return;}
-    if(!window.confirm(`Mark ${lead.full_name} as not a fit?\n\nThis closes them. No email is sent, so reply to them yourself if you want to. You can reopen them from Details.`))return;
-    setBusy(true);
+    setAsking(null);setBusy(true);
     try{await saveLead({...leadInput(lead),stage:'closed',next_action:'',due_on:null},lead);await addLeadNote(lead.id,'Marked as not a fit.');await refresh();toast.success(`${lead.full_name} closed.`);onClosed();}
     catch(e){toast.error(errorText(e));}finally{setBusy(false);}
   };
   return <div className="ca-actions"><div className="crm-inline">
-      {link?<button type="button" className="ss-button ss-primary" onClick={()=>void copy(link)}><Link2 size={14}/>Copy payment link</button>:<button type="button" className="ss-button ss-primary" disabled={busy} onClick={()=>void approve()}><Send size={14}/>{busy?'Working…':'Approve and get payment link'}</button>}
-      <button type="button" className="ss-button" disabled={busy} onClick={()=>void notAFit()}>Not a fit</button>
+      {link?<button type="button" className="ss-button ss-primary" onClick={()=>void copy(link)}><Link2 size={14}/>Copy payment link</button>:<button type="button" className="ss-button ss-primary" disabled={busy} onClick={()=>ask('approve')}><Send size={14}/>{busy?'Working…':'Approve and get payment link'}</button>}
+      <button type="button" className="ss-button" disabled={busy} onClick={()=>ask('close')}>Not a fit</button>
     </div>
     <small>{link?'Their own checkout link, with their email filled in. Paste it into your offer email.':'Approve moves them to Offer sent. Not a fit closes them and sends no email.'}</small>
     {link&&<input readOnly value={link} aria-label="Payment link" onFocus={e=>e.currentTarget.select()}/>}
+    {asking==='approve'&&<ConfirmStep title={`Approve ${lead.full_name}?`} confirmLabel="Approve and get link" cancelLabel="Not yet" onCancel={()=>setAsking(null)} onConfirm={()=>void approve()} steps={[`They move to Offer sent, and a ${offerHours}-hour countdown starts as your reminder to follow up.`,'You get their own payment link, with their email already filled in.',"They aren't emailed yet. You send them the link in your offer email.",'Once they pay, they get portal access and move to Paid on their own.']}/>}
+    {asking==='close'&&<ConfirmStep title={`Mark ${lead.full_name} as not a fit?`} confirmLabel="Mark as not a fit" cancelLabel="Keep reviewing" onCancel={()=>setAsking(null)} onConfirm={()=>void notAFit()} steps={['They move to Closed and leave To review.',`They aren't emailed. They were told they'd hear back within ${replyHours} hours, so reply to them yourself.`,'Their application stays on file, and you can reopen them from Closed at any time.']}/>}
   </div>;
 }
 function PortalAccess({lead,paid,refresh}:{lead:Lead;paid:boolean;refresh:()=>Promise<void>}) {
-  const [busy,setBusy]=useState(false);
+  const [busy,setBusy]=useState(false); const [asking,setAsking]=useState(false);
   const grant=async()=>{
-    if(busy||!window.confirm(`Give ${lead.email} access to the student portal?${paid?'':'\n\nNo payment is recorded for this lead yet.'}\n\nThey sign in with a code sent to that email. The welcome email sends too if it is set up in Klaviyo.`))return;
-    setBusy(true);
+    setAsking(false);setBusy(true);
     try{const result=await grantPortalAccess(lead.id);await refresh();toast.success(result.already_active?'They already had portal access.':result.reactivated?'Portal access switched back on.':'Portal access granted.');}
     catch(e){toast.error(errorText(e));}finally{setBusy(false);}
   };
-  return <div className="crm-access"><button type="button" className="ss-button" disabled={busy} onClick={()=>void grant()}><KeyRound size={14}/>{busy?'Granting access…':'Grant portal access'}</button><small>For payments outside Shopify, or if automatic access did not arrive.</small></div>;
+  return <div className="crm-access"><button type="button" className="ss-button" disabled={busy} onClick={()=>setAsking(true)}><KeyRound size={14}/>{busy?'Granting access…':'Grant portal access'}</button><small>For payments outside Shopify, or if automatic access did not arrive.</small>
+    {asking&&<ConfirmStep title={`Give ${lead.full_name} portal access?`} confirmLabel="Give access" cancelLabel="Not yet" onCancel={()=>setAsking(false)} onConfirm={()=>void grant()} steps={[...(paid?[]:['No payment is recorded for them yet, so check they have paid first.']),`${lead.email} can open the student portal, signing in with a code sent to that email.`,'The welcome email sends too, if it is switched on in Klaviyo.']}/>}
+  </div>;
 }
 function ShopifyOrderAlerts({orders,leads,openLead,refresh}:{orders:ShopifyOrderRecord[];leads:Lead[];openLead:(id:string)=>void;refresh:()=>Promise<void>}) {
   const [busy,setBusy]=useState('');
