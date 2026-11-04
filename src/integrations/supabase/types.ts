@@ -20,6 +20,11 @@ export type Database = {
           cash_target_minor: number | null
           cohort_id: string
           currency: string | null
+          links_label: string
+          links_question_key: string | null
+          list_columns: Json
+          offer_hold_hours: number
+          reply_target_hours: number
           seat_price_minor: number | null
           updated_at: string
         }
@@ -28,6 +33,11 @@ export type Database = {
           cash_target_minor?: number | null
           cohort_id: string
           currency?: string | null
+          links_label?: string
+          links_question_key?: string | null
+          list_columns?: Json
+          offer_hold_hours?: number
+          reply_target_hours?: number
           seat_price_minor?: number | null
           updated_at?: string
         }
@@ -36,6 +46,11 @@ export type Database = {
           cash_target_minor?: number | null
           cohort_id?: string
           currency?: string | null
+          links_label?: string
+          links_question_key?: string | null
+          list_columns?: Json
+          offer_hold_hours?: number
+          reply_target_hours?: number
           seat_price_minor?: number | null
           updated_at?: string
         }
