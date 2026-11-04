@@ -1,31 +1,15 @@
 /* Cohort planner (staff calendar). Plain SaaS look, ported from the approved cohort 2 reference page.
    One continuous Sunday-first calendar, so each mentorship week (Sunday call to Saturday) is one row in
-   its own tint. Colours are tokens: light by default, dark when the device prefers it or html[data-theme=dark]. */
+   its own tint. Colours are tokens. Staff pages use the application form look, so this stays light. */
 .cp-theme {
-  --cp-bg: #ffffff; --cp-panel: #f7f8fa; --cp-line: #e2e5ea; --cp-fg: #1d2129; --cp-muted: #6b7280; --cp-today: #2563eb; --cp-hover: rgba(0,0,0,.035);
-  --cp-p-warm: #f1f2f4; --cp-p-sales: #efe9ff; --cp-p-onb: #dff5f1; --cp-p-w1: #e4eeff; --cp-p-w2: #fff2d9; --cp-p-w3: #e3f7e3; --cp-p-w4: #fde6f0; --cp-p-w5: #ffe8d9; --cp-p-w6: #d9e6ff;
-  --cp-l-warm: #6b7280; --cp-l-sales: #6d28d9; --cp-l-onb: #0f766e; --cp-l-w1: #1d4ed8; --cp-l-w2: #b45309; --cp-l-w3: #15803d; --cp-l-w4: #be185d; --cp-l-w5: #c2410c; --cp-l-w6: #1d4ed8;
-  --cp-green: #16a34a; --cp-green-bg: #dcfce7; --cp-red: #dc2626; --cp-red-bg: #fee2e2; --cp-here: #111827; --cp-amber: #b45309; --cp-amber-bg: #fff7e6; --cp-ok: #15803d; --cp-ok-bg: #ecfdf3;
-  --cp-call: #1d4ed8; --cp-on-call: #ffffff; --cp-due: #c2410c; --cp-sales: #6d28d9; --cp-on-sales: #ffffff; --cp-onb: #0f766e; --cp-email: #6b7280; --cp-rev: #9ca3af;
-  --cp-primary: #1d4ed8; --cp-primary-hover: #1e40af; --cp-shadow: 0 6px 20px rgba(0,0,0,.18);
+  --cp-bg: #fbfbf8; --cp-panel: #f3f4ec; --cp-line: #dfe3db; --cp-fg: #222521; --cp-muted: #747972; --cp-today: #78a868; --cp-hover: rgba(0,0,0,.035);
+  --cp-p-warm: #f2f3f2; --cp-p-sales: #f2f7f1; --cp-p-onb: #dff5f1; --cp-p-w1: #f0f5ee; --cp-p-w2: #fff2d9; --cp-p-w3: #e3f7e3; --cp-p-w4: #fde6f0; --cp-p-w5: #ffe8d9; --cp-p-w6: #e9f1e7;
+  --cp-l-warm: #747972; --cp-l-sales: #729d64; --cp-l-onb: #0f766e; --cp-l-w1: #6c985d; --cp-l-w2: #b45309; --cp-l-w3: #15803d; --cp-l-w4: #be185d; --cp-l-w5: #c2410c; --cp-l-w6: #6c985d;
+  --cp-green: #16a34a; --cp-green-bg: #dcfce7; --cp-red: #dc2626; --cp-red-bg: #fee2e2; --cp-here: #1a2018; --cp-amber: #b45309; --cp-amber-bg: #fff7e6; --cp-ok: #15803d; --cp-ok-bg: #ecfdf3;
+  --cp-call: #6c985d; --cp-on-call: #ffffff; --cp-due: #c2410c; --cp-sales: #729d64; --cp-on-sales: #ffffff; --cp-onb: #0f766e; --cp-email: #747972; --cp-rev: #a4a9a2;
+  --cp-primary: #2d4934; --cp-primary-hover: #3c5941; --cp-shadow: 0 6px 20px rgba(0,0,0,.18);
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cp-theme {
-  --cp-bg: #15171c; --cp-panel: #1b1e25; --cp-line: #2c3038; --cp-fg: #e8eaee; --cp-muted: #9aa1ad; --cp-today: #7aa7ff; --cp-hover: rgba(255,255,255,.04);
-  --cp-p-warm: #1e2128; --cp-p-sales: #261f3d; --cp-p-onb: #15302d; --cp-p-w1: #182540; --cp-p-w2: #33281a; --cp-p-w3: #182e1c; --cp-p-w4: #36192a; --cp-p-w5: #3a2216; --cp-p-w6: #1c2c4f;
-  --cp-l-warm: #9aa1ad; --cp-l-sales: #c4b5fd; --cp-l-onb: #7fe0d2; --cp-l-w1: #93b4ff; --cp-l-w2: #f4c27a; --cp-l-w3: #86d99a; --cp-l-w4: #f49ac1; --cp-l-w5: #ffb27f; --cp-l-w6: #93b4ff;
-  --cp-green: #4ade80; --cp-green-bg: #12321f; --cp-red: #f87171; --cp-red-bg: #3b1616; --cp-here: #f3f4f6; --cp-amber: #f4c27a; --cp-amber-bg: #33281a; --cp-ok: #86d99a; --cp-ok-bg: #16291b;
-  --cp-call: #3b6fe0; --cp-on-call: #ffffff; --cp-due: #ff9a5c; --cp-sales: #b9a2ff; --cp-on-sales: #1b1530; --cp-onb: #6fd6c7; --cp-email: #9aa1ad; --cp-rev: #6b7280;
-  --cp-primary: #3b6fe0; --cp-primary-hover: #5684ea; --cp-shadow: 0 6px 20px rgba(0,0,0,.5);
-  color-scheme: dark; } }
-:root[data-theme="dark"] .cp-theme {
-  --cp-bg: #15171c; --cp-panel: #1b1e25; --cp-line: #2c3038; --cp-fg: #e8eaee; --cp-muted: #9aa1ad; --cp-today: #7aa7ff; --cp-hover: rgba(255,255,255,.04);
-  --cp-p-warm: #1e2128; --cp-p-sales: #261f3d; --cp-p-onb: #15302d; --cp-p-w1: #182540; --cp-p-w2: #33281a; --cp-p-w3: #182e1c; --cp-p-w4: #36192a; --cp-p-w5: #3a2216; --cp-p-w6: #1c2c4f;
-  --cp-l-warm: #9aa1ad; --cp-l-sales: #c4b5fd; --cp-l-onb: #7fe0d2; --cp-l-w1: #93b4ff; --cp-l-w2: #f4c27a; --cp-l-w3: #86d99a; --cp-l-w4: #f49ac1; --cp-l-w5: #ffb27f; --cp-l-w6: #93b4ff;
-  --cp-green: #4ade80; --cp-green-bg: #12321f; --cp-red: #f87171; --cp-red-bg: #3b1616; --cp-here: #f3f4f6; --cp-amber: #f4c27a; --cp-amber-bg: #33281a; --cp-ok: #86d99a; --cp-ok-bg: #16291b;
-  --cp-call: #3b6fe0; --cp-on-call: #ffffff; --cp-due: #ff9a5c; --cp-sales: #b9a2ff; --cp-on-sales: #1b1530; --cp-onb: #6fd6c7; --cp-email: #9aa1ad; --cp-rev: #6b7280;
-  --cp-primary: #3b6fe0; --cp-primary-hover: #5684ea; --cp-shadow: 0 6px 20px rgba(0,0,0,.5);
-  color-scheme: dark; }
 
 .cohort-planner { --cp-sticky-top: 0px; container-type: inline-size; min-height: calc(100vh - 50px); background: var(--cp-bg); color: var(--cp-fg); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.45; padding: 24px 32px 48px; }
 .cohort-planner * { box-sizing: border-box; }

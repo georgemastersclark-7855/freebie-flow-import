@@ -69,7 +69,9 @@ Deno.serve(async (request) => {
   const email = String(lead.email).toLowerCase();
   const name = firstName(String(lead.full_name ?? ""));
   const link = paymentUrl(Deno.env.get("MENTORSHIP_CHECKOUT_URL")?.trim() || DEFAULT_CHECKOUT_URL, email, lead.id);
-  const expires = new Date(Date.now() + OFFER_HOURS * 3600_000).toISOString();
+  const { data: settings } = await caller.from("mentorship_admissions_settings").select("offer_hold_hours").eq("cohort_id", lead.cohort_id).maybeSingle();
+  const offerHours = Number(settings?.offer_hold_hours) || OFFER_HOURS;
+  const expires = new Date(Date.now() + offerHours * 3600_000).toISOString();
 
   try {
     const response = await fetch("https://a.klaviyo.com/api/events/", {
@@ -78,7 +80,7 @@ Deno.serve(async (request) => {
       headers: { "Authorization": `Klaviyo-API-Key ${klaviyoKey}`, "revision": "2024-10-15", "accept": "application/vnd.api+json", "content-type": "application/vnd.api+json" },
       body: JSON.stringify({ data: { type: "event", attributes: {
         properties: { first_name: name, cohort: cohort?.slug ?? "", cohort_name: cohort?.display_name ?? "", payment_url: link,
-          offer_expires_at: expires, offer_hours: OFFER_HOURS, lead_id: lead.id, resend },
+          offer_expires_at: expires, offer_hours: offerHours, lead_id: lead.id, resend },
         metric: { data: { type: "metric", attributes: { name: "Mentorship Application Approved" } } },
         profile: { data: { type: "profile", attributes: { email, ...(name ? { first_name: name } : {}) } } },
         // One offer per lead; a deliberate resend gets its own id so Klaviyo sends it again.
@@ -98,7 +100,7 @@ Deno.serve(async (request) => {
   const { error: updateError } = await caller.from("mentorship_leads")
     .update({ stage: "offer_sent", next_action: "Check they have paid", due_on: due }).eq("id", lead.id);
   await caller.from("mentorship_lead_activity").insert({ lead_id: lead.id, kind: "note",
-    body: `Approved. Personal payment link created for the offer email (held for ${OFFER_HOURS} hours): ${link}` });
+    body: `Approved. Personal payment link created for the offer email (held for ${offerHours} hours): ${link}` });
   if (updateError) return json({ ok: true, payment_url: link, warning: "The offer was sent, but the lead could not be moved to Offer sent. Move it by hand." });
   return json({ ok: true, payment_url: link });
 });

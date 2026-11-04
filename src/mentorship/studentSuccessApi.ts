@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { loadStudentProfilesForEnrollments } from './studentProfileApi';
 import type { StudentProfile, PortalFile, ReviewItem } from './types';
 import { onboardingNoteBody, type OnboardingPlan } from './onboardingPlan';
+import { scheduleDemoBackend } from './scheduleAdminApi';
 const db = supabase as any;
 export const successRoot = '/mentorship-portal/admin/cohorts';
 
@@ -35,6 +36,7 @@ async function rows<T>(table: string, select: string, filter: (q: any) => any = 
   }
 }
 export async function loadSuccessCohorts() {
+  if (scheduleDemoBackend) return (await import('./crmDemo')).demoCohorts as SuccessCohort[];
   return rows<SuccessCohort>('mentorship_cohorts', 'id,internal_name,display_name,status,starts_at,current_week,timezone', q => q, 'created_at');
 }
 export async function loadCohortWorkspace(cohortId: string, enrollmentId?: string): Promise<CohortWorkspace> {

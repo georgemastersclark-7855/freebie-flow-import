@@ -1,15 +1,16 @@
 import { onboardingState, type Lead } from './crm';
 import type { CrmStudent } from './crmApi';
+import type { ListColumn } from './crmPipeline';
 
 export const currencies = ['USD', 'GBP', 'EUR', 'CAD', 'AUD', 'AED'] as const;
-export interface LaunchSettings { capacity: number; currency: string | null; seat_price_minor: number | null; cash_target_minor: number | null }
+export interface LaunchSettings { capacity: number; currency: string | null; seat_price_minor: number | null; cash_target_minor: number | null; reply_target_hours: number; offer_hold_hours: number; list_columns: ListColumn[]; links_question_key: string | null; links_label: string }
 export interface LeadMilestone { lead_id: string; milestone: 'waitlist' | 'applied' | 'approved' | 'offer_sent'; occurred_at: string }
 export interface RecordedPayment {
   id: string; lead_id: string; cohort_id: string; kind: 'payment'|'refund'; amount_minor: number; currency: string;
   paid_on: string; provider: string; reference: string; note: string; created_at: string; voided_at: string|null; void_reason: string|null;
 }
 export type PaymentInput = Pick<RecordedPayment,'lead_id'|'kind'|'amount_minor'|'currency'|'paid_on'|'provider'|'reference'|'note'>;
-export const funnelLabels = { interest:'Known contacts', applied:'Applications received', approved:'Applications approved', offer_sent:'Offers sent', paid:'First payment received', onboarded:'Onboarding complete' } as const;
+export const funnelLabels = { interest:'Everyone we know about', applied:'Applied', approved:'Approved', offer_sent:'Offered a place', paid:'Paid', onboarded:'Set up and ready to start' } as const;
 export type FunnelStep = keyof typeof funnelLabels;
 export function parseMoney(value: string): number {
   if (!/^\d+(\.\d{1,2})?$/.test(value.trim())) throw new Error('Enter an amount with up to two decimal places.');

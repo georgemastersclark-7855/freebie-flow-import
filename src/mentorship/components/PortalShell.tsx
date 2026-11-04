@@ -27,6 +27,7 @@ import { MasterBundleDialog } from "./MasterBundleCard";
 import { StudentAvatar } from "./StudentAvatar";
 import { StaffSettingsNavigation } from "./StaffSettingsNavigation";
 import { StaffAccountDialog } from "./AccountControls";
+import "../staffSkin.css";
 
 const studentNavigation = [
   { to: "/mentorship-portal/dashboard", label: "Dashboard", icon: Gauge },
@@ -36,7 +37,7 @@ const studentNavigation = [
 ];
 
 const staffNavigation = [
-  { to: "/mentorship-portal/admin/crm/overview", label: "Leads & onboarding", icon: Contact, adminOnly: false },
+  { to: "/mentorship-portal/admin/crm/leads", label: "Applications", icon: Contact, adminOnly: false },
   { to: "/mentorship-portal/admin/cohorts", label: "Cohorts & students", icon: Users, adminOnly: false },
   { to: "/mentorship-portal/admin", label: "Cohort overview", icon: Gauge, adminOnly: false },
   { to: "/mentorship-portal/admin/reviews", label: "Review queue", icon: ClipboardList, adminOnly: false },
@@ -46,7 +47,7 @@ const staffNavigation = [
 
 function isNavigationActive(to: string, label: string, pathname: string) {
   if (pathname === to) return true;
-  if (label === "Leads & onboarding") return pathname.startsWith('/mentorship-portal/admin/crm/');
+  if (label === "Applications") return pathname.startsWith('/mentorship-portal/admin/crm/');
   if (label === "Cohorts & students") return pathname.startsWith(`${to}/`);
   if (label === "SOP library") return pathname.startsWith(`${to}/`);
   if (label === "Studio Setup") return pathname.startsWith(`${to}/`);
@@ -107,7 +108,7 @@ export function PortalShell() {
   };
 
   return (
-    <div className="mentorship-portal relative flex min-h-screen">
+    <div className={cx("mentorship-portal relative flex min-h-screen", staff && "mp-staff")}>
 
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] flex-col border-r border-white/[0.08] bg-[#151619] p-5 backdrop-blur-xl lg:flex overflow-y-auto">
         <PortalMark />

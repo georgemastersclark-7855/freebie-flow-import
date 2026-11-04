@@ -11,7 +11,7 @@ export const paymentLink = (email: string, leadId: string) => {
 };
 // Test records are closed with this next action. They stay in the database but never show in the CRM or its numbers.
 export const isTestLead = (lead: { next_action: string }) => lead.next_action === 'Test record, ignore';
-export const leadStages = { new: 'New enquiry', waitlist: 'Waitlist', applied: 'Application received', approved: 'Approved', offer_sent: 'Offer sent', paid: 'Paid', enrolled: 'Enrolled', closed: 'Closed' } as const;
+export const leadStages = { new: 'Interested (new enquiry)', waitlist: 'Interested (waitlist)', applied: 'To review', approved: 'Approved', offer_sent: 'Offer sent', paid: 'Paid', enrolled: 'Enrolled', closed: 'Closed' } as const;
 export type LeadStage = Exclude<keyof typeof leadStages, 'enrolled' | 'paid'>;
 export const leadSources = ['Newsletter', 'Offer doc', 'Instagram', 'Facebook', 'Paid ads', 'Referral', 'Website', 'Not recorded'];
 export const leadChannels = ['Gmail handraiser', 'Native application', 'Typeform application', 'Direct enquiry', 'Other', 'Not recorded'];
