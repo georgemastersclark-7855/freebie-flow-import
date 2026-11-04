@@ -139,7 +139,7 @@ function LeadActions({lead,dirty,offerHours,refresh,onClosed}:{lead:Lead;dirty:b
     if(dirty){toast.error('Save or discard your changes first.');return;}
     if(!window.confirm(`Approve ${lead.full_name}?\n\nThis moves them to Offer sent and gives you their own payment link to paste into your offer email. The link is held for ${offerHours} hours.`))return;
     setBusy(true);
-    try{const result=await sendOffer(lead.id);setLink(result.payment_url);await copy(result.payment_url);await refresh();if(result.warning)toast.warning(result.warning);}
+    try{const result=await sendOffer(lead.id);setLink(result.payment_url);await refresh();void copy(result.payment_url);if(result.warning)toast.warning(result.warning);}
     catch(e){toast.error(errorText(e));}finally{setBusy(false);}
   };
   const notAFit=async()=>{

@@ -25,7 +25,6 @@ import { AdminStudentRecord } from "./pages/AdminStudentRecord";
 import { AdminCohortRecords } from "./pages/AdminCohortRecords";
 import { AdminApplicationForms } from "./pages/AdminApplicationForms";
 import { AdminVideos } from "./pages/AdminVideos";
-import { AdminSops } from "./pages/AdminSops";
 import { AdminCrm } from "./pages/AdminCrm";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "./portal.css";
@@ -143,8 +142,6 @@ export default function MentorshipPortal() {
             <Route path="admin/cohorts/:cohortId" element={<AdminCohortStudents />} />
             <Route path="admin/cohorts/:cohortId/students/:enrollmentId" element={<AdminStudentRecord />} />
             <Route path="admin/schedule" element={<AdminSchedule />} />
-            <Route path="admin/sops" element={<AdminSops />} />
-            <Route path="admin/sops/:sopId" element={<AdminSops />} />
             <Route path="admin/reviews" element={<AdminReviewQueue />} />
             <Route element={<AdminOnly />}>
               <Route path="admin/videos" element={<AdminVideos />} />

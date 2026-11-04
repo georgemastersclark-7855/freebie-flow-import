@@ -13,6 +13,11 @@
 .ca-stats { display:grid; grid-template-columns:repeat(2,minmax(0,.8fr)) minmax(0,1.25fr) minmax(0,1.6fr); gap:12px; margin-bottom:12px; }
 .ca-time { background:#2d4934; border-color:#2d4934; display:flex; flex-direction:column; }
 .ca-time>small { color:#cfdcc9; }
+.ca-time-title { display:flex!important; align-items:center; gap:6px; }
+.ca-drain { margin-top:9px; }
+.ca-drain-bar { height:10px; border-radius:6px; background:#ffffff26; overflow:hidden; }
+.ca-drain-bar i { display:block; height:100%; border-radius:6px; background:#fff; transition:width .4s ease; }
+.ca-drain span { display:block; margin-top:4px; font-size:11px; color:#cfdcc9; }
 .ca-time>strong { color:#fff; }
 .ca-time p { margin:8px 0 0; color:#fff; font-size:12px; font-weight:600; line-height:1.4; }
 .ca-time p em { display:block; font-style:normal; font-weight:400; color:#cfdcc9; }

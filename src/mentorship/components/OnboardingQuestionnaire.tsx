@@ -4,7 +4,6 @@ import { ArrowRight, ExternalLink, Save } from 'lucide-react';
 import { answerLabels, emptyOnboardingPlan, extraReviewLabels, readOnboardingPlan, type AnswerKey, type ExtraReview, type OnboardingPlan } from '../onboardingPlan';
 import { saveOnboardingQuestionnaire, saveStudentContext, type StudentWorkspace, type SuccessNote } from '../studentSuccessApi';
 import { localDateInput } from '../studentSuccess';
-import { sopRoot } from '../staffSops';
 import '../staffSops.css';
 import { StudentLeadContext } from './StudentLeadContext';
 
@@ -66,10 +65,10 @@ export function OnboardingQuestionnaire({ data, save, onDirty, openFollowUps }: 
     </section>
     <section className="ss-card"><h2>Close the call</h2><p>Recap the plan with the student. Check they know what to practise, how to get help and what Rob will listen for.</p><label className="ss-field mt-4">Plan status<select value={plan.status} onChange={e => setPlan(p => ({ ...p, status: e.target.value as OnboardingPlan['status'] }))}><option value="draft">Draft / still discussing</option><option value="agreed">Agreed with the student</option></select></label><details className="ss-transcript"><summary>Recording link and transcript</summary><div className="ss-form"><label className="ss-field">Recording link (optional)<input type="url" value={source} onChange={e => setSource(e.target.value)} maxLength={2048} placeholder="https://…"/></label><label className="ss-field">Transcript or relevant excerpt (optional)<textarea rows={6} maxLength={500000} value={transcript} onChange={e => setTranscript(e.target.value)}/></label></div></details></section>
     <div className="sop-save-bar">{formError && <div role="alert" className="ss-error w-full mb-0">{formError}</div>}<span role="status" className="ss-muted">{dirty ? 'Unsaved changes' : previous ? 'Saved to student record' : 'Ready to take notes'}</span><button className="ss-button ss-primary" type="submit"><Save size={15}/> Save questionnaire</button></div>
-  </form><aside className="ss-card sop-outline"><h2>Onboarding call</h2><p>Leave the student with a clear first step they know how to take.</p><a href={`${sopRoot}/onboarding`} target="_blank" rel="noreferrer" className="ss-link mt-4">Open the call guide <ExternalLink size={14}/></a>
+  </form><aside className="ss-card sop-outline"><h2>Onboarding call</h2><p>Leave the student with a clear first step they know how to take.</p>
     <h3 className="ss-section-label">After saving</h3><p className="ss-muted">Use the agreed goal and week-one plan in the coaching summary. Review this before replacing an existing focus.</p>
     <button className="ss-button mt-3" type="button" disabled={dirty || !previous || plan.status !== 'agreed' || focusMatches} onClick={() => { if (data.context && !window.confirm('Replace the current goals and coaching focus with this onboarding plan?')) return; void save(() => saveStudentContext(data.student.id, plan.answers.goal, focusText, data.context), 'Goals & current focus updated.'); }}>{focusMatches ? 'Coaching focus is up to date' : 'Use as coaching focus'}</button>
     <h3 className="ss-section-label">Follow through</h3><p className="ss-muted">Add any promised extra review or check-in with an owner and date. Share the agreed plan with the student through your agreed channel.</p><button type="button" onClick={openFollowUps} className="ss-link mt-3">Open follow-ups <ArrowRight size={14}/></button>
-    <Link className="ss-link mt-5" to={sopRoot}>Browse SOP library <ArrowRight size={14}/></Link>
+    
   </aside></div>;
 }

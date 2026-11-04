@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Link2 } from 'lucide-react';
+import { ChevronRight, Clock3, Link2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { crmRoot, leadStages, onboardingState, paymentLink, readableDate, type Lead } from '../crm';
 import { hasPaid } from '../crmAnalytics';
@@ -26,13 +26,18 @@ export function placesFilled(data: CrmWorkspace) {
   return paidLeads.length + enrolledOnly.length;
 }
 
-function TimeLeftCard({ data, now }: { data: CrmWorkspace; now: number }) {
-  if (!data.closesAt) return <div className="ca-card ca-time ca-time-open"><small>Time left</small><strong>Open</strong><p>No close date set</p></div>;
+function TimeLeftCard({ data, days, now }: { data: CrmWorkspace; days: { key: string; today: boolean }[]; now: number }) {
+  const title = <small className="ca-time-title"><Clock3 size={14} aria-hidden="true"/>Time left</small>;
+  if (!data.closesAt) return <div className="ca-card ca-time ca-time-open">{title}<strong>Open</strong><p>No close date set</p></div>;
   const left = timeLeft(data.closesAt, now);
-  return <div className="ca-card ca-time"><small>Time left</small>
+  const closes = new Date(data.closesAt).getTime(); const start = Date.parse(`${days[0]?.key}T00:00:00Z`);
+  const remaining = closes > start ? Math.min(1, Math.max(0, (closes - now) / (closes - start))) : 0;
+  const dayNumber = days.findIndex(d => d.today) + 1;
+  return <div className="ca-card ca-time">{title}
     {left ? <div className="ca-clock" role="timer" aria-label={`${left.days} days, ${left.hours} hours and ${left.minutes} minutes left`}>
       <span><b>{pad(left.days)}</b><i>days</i></span><span><b>{pad(left.hours)}</b><i>hrs</i></span><span><b>{pad(left.minutes)}</b><i>mins</i></span>
     </div> : <strong>Closed</strong>}
+    {left && <div className="ca-drain"><div className="ca-drain-bar" role="progressbar" aria-label="Time remaining" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(remaining * 100)}><i style={{ width: `${remaining * 100}%` }}/></div>{dayNumber > 0 && <span>Day {dayNumber} of {days.length}</span>}</div>}
     <p>{left ? 'Closes' : 'Closed'} {closesDate(data.closesAt, data.timezone)}<em>{closesTime(data.closesAt, data.timezone)}</em></p>
   </div>;
 }
@@ -46,7 +51,7 @@ export function CrmStats({ data, now }: { data: CrmWorkspace; now: number }) {
   return <div className="ca-stats">
     <div className="ca-card"><small>Applications</small><strong>{applications.length}</strong><span>{today} today</span></div>
     <div className="ca-card"><small>Places filled</small><strong>{filled} <em>of {data.capacity}</em></strong><span>{left > 0 ? `${left} left` : left === 0 ? 'Full' : `${-left} over`}</span></div>
-    <TimeLeftCard data={data} now={now}/>
+    <TimeLeftCard data={data} days={days} now={now}/>
     <div className="ca-card ca-chart"><small>Applications per day</small><div className="ca-bars" role="img" aria-label={days.map(d => `${d.label}: ${d.count}`).join(', ')}>{days.map(d => <div key={d.key} className={`ca-bar${d.future ? ' ca-bar-future' : ''}${d.today ? ' ca-bar-today' : ''}`}><b>{d.count || ''}</b><i style={{ height: d.count ? Math.round(d.count / tallest * 52) + 6 : 4 }}/>{d.label}</div>)}</div></div>
   </div>;
 }
