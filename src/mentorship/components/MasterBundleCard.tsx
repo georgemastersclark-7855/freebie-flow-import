@@ -1,11 +1,25 @@
+import { useState } from "react";
 import { Download, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { toast } from "sonner";
 import { usePortalStore } from "../PortalStore";
+import { signedDownloadUrl, type PortalDownload } from "../livePortalApi";
 import masterBundleImage from "../assets/master-bundle.webp";
 
 function BundleDownload() {
-  const { setupVideos } = usePortalStore();
+  const { setupVideos, downloads } = usePortalStore();
+  const [starting, setStarting] = useState("");
   const downloadUrl = setupVideos.find((video) => (video.key ?? video.id) === "sound-library")?.downloadUrl;
+  const start = async (download: PortalDownload) => {
+    setStarting(download.id);
+    try { window.location.assign(await signedDownloadUrl(download)); }
+    catch { toast.error("That download didn't start. Please try again."); }
+    finally { setStarting(""); }
+  };
+  if (downloads.length) return <div className="flex flex-col gap-2">
+    {downloads.map((download) => <button key={download.id} type="button" disabled={Boolean(starting)} onClick={() => void start(download)} className="mp-focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black disabled:opacity-60"><Download size={16} />Download {download.title.replace(/^Master Bundle /, "")}{download.size ? ` (${download.size})` : ""}</button>)}
+    {downloads.length > 1 && <span className="text-xs leading-5 text-[#aaa99f]">It comes in {downloads.length} parts because it's a big one. Download them all on your computer, then unzip.</span>}
+  </div>;
   return <div className="flex flex-col gap-2">
     {downloadUrl ? <a href={downloadUrl} target="_blank" rel="noreferrer" className="mp-focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-[#D3FF02] px-4 py-3 text-sm font-bold text-black"><Download size={16} />Download Master Bundle</a>
       : <><button type="button" disabled className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 text-sm font-semibold text-[#aaa99f]"><Download size={16} />Download Master Bundle</button><span className="text-xs text-[#aaa99f]">Download file not added yet.</span></>}

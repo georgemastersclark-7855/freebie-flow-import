@@ -30,7 +30,7 @@ export const groupInviteUrl = (value?: string) => {
 export const onboardingTaskCopy = (task: OnboardingTask): OnboardingTask => {
   switch (task.key ?? task.id) {
     case "book-call":
-      return { ...task, title: "Book your 1:1 with Rob", description: "Already working on a track? Bring it to our onboarding call. Send me the section you want help with and tell me where you're getting stuck. We'll listen together and work out what you should focus on.", actionLabel: "Book my onboarding", actionUrl: task.actionUrl?.trim() || mentorshipBookingUrl };
+      return { ...task, title: "Book your 1:1 with Rob", description: "Already working on a track? Bring it to our onboarding call. Have the section you want help with ready, and tell me where you're getting stuck. We'll listen together and work out what you should focus on.", actionLabel: "Book my onboarding", actionUrl: task.actionUrl?.trim() || mentorshipBookingUrl };
     case "prework":
       return { ...task, title: "Check your setup before we start", description: studioSetupIntroduction, actionLabel: "Open Studio Setup", actionUrl: "/mentorship-portal/setup" };
     case "circle":

@@ -103,7 +103,7 @@ interface TaskRow {
 interface ResourceRow {
   id: string;
   resource_key: string;
-  resource_kind: "welcome_video" | "setup_video";
+  resource_kind: "welcome_video" | "setup_video" | "download";
   title: string;
   description: string;
   duration_label: string | null;
@@ -135,6 +135,16 @@ export class PortalAccessError extends Error {
   }
 }
 
+export interface PortalDownload { id: string; title: string; size: string; storagePath: string }
+export interface StudentPlan { goal?: string; focus?: string; practice?: string }
+
+/** A short-lived link made at the moment of the click, so a forwarded link soon stops working. */
+export async function signedDownloadUrl(download: PortalDownload) {
+  const { data, error } = await db.storage.from(videosBucket).createSignedUrl(download.storagePath, 10 * 60, { download: `${download.title}.zip` });
+  if (error) throw error;
+  return data.signedUrl as string;
+}
+
 export interface LivePortalBootstrap {
   user: PortalUser;
   staffUser?: PortalUser;
@@ -142,6 +152,8 @@ export interface LivePortalBootstrap {
   submissions: WeekSubmission[];
   onboardingTasks: OnboardingTask[];
   setupVideos: SetupVideo[];
+  downloads: PortalDownload[];
+  plan?: StudentPlan;
   welcomeVideoUrl?: string;
   firstCall?: PortalCall;
   nextCall?: PortalCall;
@@ -186,7 +198,7 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
 
   const staffUser = profile.role !== "student" ? { ...portalUser } : undefined;
   if (staffUser && !studentView) {
-    return { user: portalUser, staffUser, weeks: [], submissions: [], onboardingTasks: [], setupVideos: [] };
+    return { user: portalUser, staffUser, weeks: [], submissions: [], onboardingTasks: [], setupVideos: [], downloads: [] };
   }
   if (staffUser) {
     const { error } = await db.rpc("open_mentorship_walkthrough");
@@ -330,6 +342,12 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
       url: resource.video_url ?? await signedUrl(videosBucket, resource.storage_path),
       downloadUrl: resource.download_url && /^https:\/\//i.test(resource.download_url) ? resource.download_url : undefined,
     })));
+  const downloads: PortalDownload[] = resourceRows
+    .filter((resource) => resource.resource_kind === "download" && resource.storage_path)
+    .map((resource) => ({ id: resource.id, title: resource.title, size: resource.duration_label ?? "", storagePath: resource.storage_path as string }));
+  // A failure here only hides the plan card. It must never stop the portal loading.
+  const planResult = await db.rpc("get_my_onboarding_plan").then((result: any) => result, () => ({ data: null }));
+  const plan = (planResult?.data ?? undefined) as StudentPlan | undefined;
   const welcomeVideo = resourceRows.find((resource) => resource.resource_kind === "welcome_video");
   const welcomeVideoUrl = welcomeVideo
     ? welcomeVideo.video_url ?? await signedUrl(videosBucket, welcomeVideo.storage_path)
@@ -364,6 +382,8 @@ export async function loadLivePortal(user: User, studentView = false): Promise<L
     submissions,
     onboardingTasks,
     setupVideos,
+    downloads,
+    plan,
     welcomeVideoUrl,
     calls: callRows.map((row) => mapCall(row)!),
     firstCall: mapCall(firstCallRow),

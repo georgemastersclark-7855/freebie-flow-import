@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import {
   loadLiveAdminVideoResources,
   setLiveAdminVideoPublished,
+  uploadLiveAdminDownload,
   uploadLiveAdminVideo,
   type AdminVideoResource,
 } from "../liveAdminApi";
@@ -62,11 +63,12 @@ export function AdminVideos() {
         toast.success(`${resource.title} is ready in the preview.`);
         return;
       }
-      await uploadLiveAdminVideo(resource, file, setProgress);
+      if (resource.kind === "download") await uploadLiveAdminDownload(resource, file, setProgress);
+      else await uploadLiveAdminVideo(resource, file, setProgress);
       await refresh();
       toast.success(`${resource.title} is live.`);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "The video could not be uploaded.");
+      toast.error(error instanceof Error ? error.message : "The file could not be uploaded.");
     } finally {
       setUploadingId(undefined);
       setProgress(0);
@@ -91,7 +93,7 @@ export function AdminVideos() {
       <div className="max-w-2xl">
         <div className="text-[10px] font-bold uppercase tracking-[0.17em] text-[#77766f]">Start Here content</div>
         <h1 className="mp-display mt-2 text-[46px] leading-none text-[#f1eee6] sm:text-[58px]">SETUP VIDEOS</h1>
-        <p className="mt-4 text-sm leading-6 text-[#8f8e85]">Upload the videos students watch before the first call. Use high-quality 4K MP4 files.</p>
+        <p className="mt-4 text-sm leading-6 text-[#8f8e85]">Upload the videos students watch before the first call, using high-quality 4K MP4 files, and the zips they download.</p>
       </div>
 
       <div className="mt-8 space-y-3">
@@ -116,8 +118,8 @@ export function AdminVideos() {
               <div className="flex flex-wrap items-center gap-2 md:justify-end">
                 {uploaded && <button type="button" onClick={() => void togglePublished(resource)} disabled={busy} className="mp-focus-ring inline-flex min-h-10 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-2 text-sm font-semibold text-[#d9d6cd] disabled:opacity-45">{resource.published ? <EyeOff size={15} /> : <Eye size={15} />}{resource.published ? "Hide" : "Show"}</button>}
                 <label className="mp-focus-ring inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-black text-[#11110f] has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-45">
-                  <UploadCloud size={15} />{busy ? "Uploading…" : uploaded ? "Replace" : "Upload video"}
-                  <input type="file" accept="video/mp4,.mp4" disabled={Boolean(uploadingId)} className="sr-only" onChange={(event) => void upload(resource, event.target.files?.[0])} />
+                  <UploadCloud size={15} />{busy ? "Uploading…" : uploaded ? "Replace" : resource.kind === "download" ? "Upload zip" : "Upload video"}
+                  <input type="file" accept={resource.kind === "download" ? ".zip,application/zip" : "video/mp4,.mp4"} disabled={Boolean(uploadingId)} className="sr-only" onChange={(event) => void upload(resource, event.target.files?.[0])} />
                 </label>
               </div>
             </div>

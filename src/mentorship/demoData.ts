@@ -203,3 +203,13 @@ export const reviewItems: ReviewItem[] = [
   { id: "review-theo-w2", studentId: "student-theo", studentName: "Theo Brooks", weekNumber: 2, songName: "After Hours 120bpm.wav", submittedLabel: "Yesterday, 8:14pm", stemsReady: false, ideaNames: ["Bell loop.mp3", "After Hours idea.mp3", "Low vocal.mp3"], status: "awaiting" },
   { id: "review-nico-w2", studentId: "student-nico", studentName: "Nico Hayes", weekNumber: 2, songName: "Slow Burn intro-drop.wav", submittedLabel: "Today, 11:06am", stemsReady: true, ideaNames: ["Slow Burn.mp3", "Muted piano.mp3", "Perc idea.mp3"], status: "draft" },
 ];
+
+export const demoDownloads = [
+  { id: "demo-bundle-1", title: "Master Bundle part 1 of 2", size: "1.3 GB", storagePath: "" },
+  { id: "demo-bundle-2", title: "Master Bundle part 2 of 2", size: "1.2 GB", storagePath: "" },
+];
+export const demoPlan = {
+  goal: "Finish three tracks I'm proud of and get them in front of artists.",
+  focus: "Stronger hooks first, then cleaner low end.",
+  practice: "Write five 8-bar ideas, then pick one and take it to a full first chorus.",
+};

@@ -31,6 +31,8 @@ import {
   initialOnboardingTasks,
   initialSubmissions,
   weekDefinitions,
+  demoDownloads,
+  demoPlan,
 } from "./demoData";
 import {
   confirmLiveFeedbackAction,
@@ -51,6 +53,8 @@ import {
   verifyLiveEmailCode,
   verifyLiveEmailLink,
   type LivePortalBootstrap,
+  type PortalDownload,
+  type StudentPlan,
 } from "./livePortalApi";
 import { normalizeStudentProfileInput, saveLiveStudentProfile } from "./studentProfileApi";
 import type {
@@ -92,6 +96,8 @@ interface PortalStoreValue {
   submissions: WeekSubmission[];
   onboardingTasks: OnboardingTask[];
   setupVideos: SetupVideo[];
+  downloads: PortalDownload[];
+  plan?: StudentPlan;
   welcomeVideoUrl?: string;
   firstCall?: PortalCall;
   nextCall?: PortalCall;
@@ -195,6 +201,8 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setPasswordStepState(step);
   }, []);
   const [setupVideos, setSetupVideos] = useState<SetupVideo[]>(() => liveBackend ? [] : demoSetupVideos);
+  const [downloads, setDownloads] = useState<PortalDownload[]>(() => liveBackend ? [] : demoDownloads);
+  const [plan, setPlan] = useState<StudentPlan | undefined>(() => liveBackend ? undefined : demoPlan);
   const [welcomeVideoUrl, setWelcomeVideoUrl] = useState<string | undefined>();
   const [calls, setCalls] = useState<PortalCall[]>([]);
   const scheduleNow = usePortalClock();
@@ -208,6 +216,8 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     setSubmissions(bootstrap.submissions);
     setOnboardingTasks(bootstrap.onboardingTasks);
     setSetupVideos(bootstrap.setupVideos);
+    setDownloads(bootstrap.downloads);
+    setPlan(bootstrap.plan);
     setWelcomeVideoUrl(bootstrap.welcomeVideoUrl);
     setFirstCall(bootstrap.firstCall);
     setCalls(bootstrap.calls ?? []);
@@ -641,6 +651,8 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     submissions,
     onboardingTasks,
     setupVideos,
+    downloads,
+    plan,
     welcomeVideoUrl,
     firstCall,
     nextCall,
@@ -666,7 +678,7 @@ export function PortalStoreProvider({ children }: { children: ReactNode }) {
     markFeedbackViewed,
     confirmFeedbackAction,
   }), [
-    ready, backend, accessIssue, user, staffUser, selectView, resetTestUploads, saveProfile, weeks, submissions, onboardingTasks, setupVideos, welcomeVideoUrl, firstCall, nextCall, calls, circleUrl,
+    ready, backend, accessIssue, user, staffUser, selectView, resetTestUploads, saveProfile, weeks, submissions, onboardingTasks, setupVideos, downloads, plan, welcomeVideoUrl, firstCall, nextCall, calls, circleUrl,
     login, sendEmailCode, verifyEmailCode, verifyEmailLink, passwordStep, queuePasswordStep, finishPasswordStep, hasAuthSession, logout, retryAccess, requestPasswordReset, setPassword, refresh, toggleOnboardingTask, addFiles, removeFile,
     submitWeek, markFeedbackViewed, confirmFeedbackAction,
   ]);

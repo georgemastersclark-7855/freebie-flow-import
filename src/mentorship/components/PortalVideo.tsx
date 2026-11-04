@@ -8,7 +8,7 @@ interface PortalVideoProps {
   description?: string;
 }
 
-export function PortalVideo({ src, poster, title, description = "Watch the lesson, then work through the steps and downloads below." }: PortalVideoProps) {
+export function PortalVideo({ src, poster, title, description = "Watch the lesson, then work through the steps below." }: PortalVideoProps) {
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [src]);
 

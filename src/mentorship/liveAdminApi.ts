@@ -22,7 +22,7 @@ export interface AdminVideoResource {
   id: string;
   cohortId: string;
   key: string;
-  kind: "welcome_video" | "setup_video";
+  kind: "welcome_video" | "setup_video" | "download";
   title: string;
   description: string;
   duration: string;
@@ -125,6 +125,7 @@ const resumableVideoUpload = async (
   file: File,
   objectPath: string,
   onProgress?: (percentage: number) => void,
+  contentType = "video/mp4",
 ) => {
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
   const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
@@ -137,13 +138,18 @@ const resumableVideoUpload = async (
       endpoint: `${supabaseUrl}/storage/v1/upload/resumable`,
       retryDelays: [0, 1_000, 3_000, 5_000, 10_000],
       headers: { authorization: `Bearer ${accessToken}`, apikey: publishableKey },
+      // Large files can outlast the sign-in token, so each chunk uses a fresh one.
+      onBeforeRequest: async (request) => {
+        const { data } = await supabase.auth.getSession();
+        if (data.session?.access_token) request.setHeader("authorization", `Bearer ${data.session.access_token}`);
+      },
       uploadDataDuringCreation: true,
       removeFingerprintOnSuccess: true,
       chunkSize: 6 * 1024 * 1024,
       metadata: {
         bucketName: videosBucket,
         objectName: objectPath,
-        contentType: "video/mp4",
+        contentType,
         cacheControl: "3600",
       },
       onError: (error) => reject(error),
@@ -173,6 +179,29 @@ export async function uploadLiveAdminVideo(
   const { error } = await db.from("mentorship_resources").update({
     storage_path: path,
     video_url: null,
+    published: true,
+  }).eq("id", resource.id);
+  if (error) {
+    await db.storage.from(videosBucket).remove([path]);
+    throw error;
+  }
+  if (resource.storagePath && resource.storagePath !== path) {
+    await db.storage.from(videosBucket).remove([resource.storagePath]);
+  }
+}
+
+export async function uploadLiveAdminDownload(
+  resource: AdminVideoResource,
+  file: File,
+  onProgress?: (percentage: number) => void,
+) {
+  if (!file.name.toLowerCase().endsWith(".zip")) throw new Error("Upload a .zip file.");
+  if (file.size > 2 * 1024 * 1024 * 1024) throw new Error("This file is over 2 GB. Split it into smaller zips and try again.");
+  const path = `${resource.cohortId}/${resource.key}/${crypto.randomUUID()}-${safeFileName(file.name)}`;
+  await resumableVideoUpload(file, path, onProgress, "application/zip");
+  const { error } = await db.from("mentorship_resources").update({
+    storage_path: path,
+    duration_label: `${(file.size / 1_000_000_000).toFixed(1)} GB`,
     published: true,
   }).eq("id", resource.id);
   if (error) {

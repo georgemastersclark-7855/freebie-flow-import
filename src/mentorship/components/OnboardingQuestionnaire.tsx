@@ -48,7 +48,7 @@ export function OnboardingQuestionnaire({ data, save, onDirty, openFollowUps }: 
   const focusMatches = data.context?.goals === plan.answers.goal.trim() && data.context?.current_focus === focusText.trim();
   if (unsupported) return <div className="ss-error">This student has a questionnaire version this screen cannot edit. Open Calls & notes to read it.</div>;
   return <div className="sop-layout sop-call-layout"><form className="sop-questionnaire" onSubmit={e => { e.preventDefault(); void persist(); }}>
-    <div className="ss-row"><div><h2>Onboarding call & week-one plan</h2><p className="ss-muted">Save notes as you go. These answers are visible to staff.</p></div><span className="ss-badge">{previous ? readOnboardingPlan(previous.questionnaire)?.status === 'agreed' ? 'Plan agreed' : 'Draft saved' : 'Not saved yet'}</span></div>
+    <div className="ss-row"><div><h2>Onboarding call & week-one plan</h2><p className="ss-muted">Save notes as you go. These answers are visible to staff. Once you mark the plan agreed, the student sees their goal, coaching priorities and week-one practice on their dashboard.</p></div><span className="ss-badge">{previous ? readOnboardingPlan(previous.questionnaire)?.status === 'agreed' ? 'Plan agreed' : 'Draft saved' : 'Not saved yet'}</span></div>
     <StudentLeadContext enrollmentId={data.student.id}/>
     <section className="ss-card sop-step"><div className="sop-step-heading"><span>1</span><h2>Prepare and listen</h2></div>
       <label className="ss-field">Call date<input type="date" required value={date} onChange={e => setDate(e.target.value)}/></label>

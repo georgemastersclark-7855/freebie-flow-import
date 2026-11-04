@@ -17,7 +17,7 @@ export function WelcomeHub() {
   const completedOnboarding = useRef<HTMLDetailsElement>(null);
   const introduction = useRef<HTMLDetailsElement>(null);
   const location = useLocation();
-  const { user, onboardingTasks, welcomeVideoUrl, weeks, submissions, nextCall, calls } = usePortalStore();
+  const { user, onboardingTasks, welcomeVideoUrl, weeks, submissions, nextCall, calls, plan } = usePortalStore();
   const completeCount = onboardingTasks.filter((task) => task.complete).length;
   const allComplete = onboardingTasks.length > 0 && completeCount === onboardingTasks.length;
   const currentWeek = weeks.find((week) => week.phase === "current");
@@ -63,6 +63,13 @@ export function WelcomeHub() {
       </div>
       <span className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-[#aaa99f]">{user?.cohortName} · {currentWeek ? `Week ${currentWeek.number} of 6` : "Six weeks with Rob"}</span>
     </header>
+
+    {plan && (plan.goal || plan.focus || plan.practice) && <section aria-labelledby="your-plan-title" className="mp-card mt-6 rounded-2xl p-5 sm:p-6">
+      <h2 id="your-plan-title" className="text-lg font-bold">Your plan from your 1:1 with Rob</h2>
+      <dl className="mt-4 grid gap-4 sm:grid-cols-3">
+        {[["Your goal", plan.goal], ["What we're focusing on", plan.focus], ["What to practise in week one", plan.practice]].filter(([, text]) => text).map(([label, text]) => <div key={label}><dt className="text-xs font-bold text-[#b6b3a8]">{label}</dt><dd className="mt-1 whitespace-pre-line text-sm leading-6 text-[#f2efe6]">{text}</dd></div>)}
+      </dl>
+    </section>}
 
     {inProgramme ? <>
       <h1 className="mp-display">DASHBOARD</h1>
