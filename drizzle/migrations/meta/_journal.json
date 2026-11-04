@@ -43,6 +43,13 @@
       "when": 1793719793983,
       "tag": "0005_mentorship_places_left_paid_only",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793775685915,
+      "tag": "0006_crm_programme_settings",
+      "breakpoints": true
     }
   ]
 }
