@@ -15,11 +15,18 @@ export interface CrmStudent extends SuccessEnrollment { call?: OnboardingCall; q
 export interface IntakeConnection { provider: 'gmail'|'typeform'|'native'; status: 'setup_needed'|'backfilled'|'connected'|'paused'|'error'; account_label: string; last_checked_at: string|null; last_received_at: string|null; detail: string }
 export interface ShopifyOrderRecord { shopify_order_id: string; order_name: string|null; email: string|null; lead_id: string|null; enrollment_id: string|null; status: 'processed'|'failed'; outcome: string|null; flags: string[]; last_error: string|null; test_order: boolean; received_at: string; reviewed_at: string|null; cohort_id: string|null }
 export interface LeadReview { lead_id: string; reviewer: string; verdict: 'yes'|'no'|null }
-export interface CrmWorkspace { reviews: LeadReview[]; placesShownAt: string|null; leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; settings: LaunchSettings; milestones: LeadMilestone[]; payments: RecordedPayment[]; intake: IntakeConnection[]; shopifyOrders: ShopifyOrderRecord[]; applications: ApplicationRecord[]; closesAt: string | null; timezone: string }
+export interface CrmWorkspace { reviews: LeadReview[]; placesShownAt: string|null; answerOrder: Record<string,string[]>; leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; settings: LaunchSettings; milestones: LeadMilestone[]; payments: RecordedPayment[]; intake: IntakeConnection[]; shopifyOrders: ShopifyOrderRecord[]; applications: ApplicationRecord[]; closesAt: string | null; timezone: string }
 // Paid Shopify orders written by the shopify-order-paid webhook. Empty until that migration is applied.
 async function loadShopifyOrders(cohortId: string): Promise<ShopifyOrderRecord[]> {
   try { return await rows<ShopifyOrderRecord>('mentorship_shopify_orders','shopify_order_id,order_name,email,lead_id,enrollment_id,status,outcome,flags,last_error,test_order,received_at,reviewed_at,cohort_id',q=>q.or(`cohort_id.eq.${cohortId},cohort_id.is.null`),'received_at'); }
   catch (error: any) { if (['42P01','PGRST205'].includes(error?.code) || /mentorship_shopify_orders/.test(error?.message ?? '')) return []; throw error; }
+}
+// The order each choice question offers its answers, so sorting reads Yes, then Questions, then Not right now. Coaches can't read forms, and get A to Z.
+async function loadAnswerOrder(cohortId:string) {
+  const {data}=await db.from('mentorship_application_forms').select('draft_config').eq('cohort_id',cohortId);
+  const order:Record<string,string[]>={};
+  for(const form of data??[])for(const question of form.draft_config?.questions??[])if(question.options)order[question.key]=question.options;
+  return order;
 }
 export const defaultSettings:LaunchSettings={capacity:10,currency:null,seat_price_minor:null,cash_target_minor:null,reply_target_hours:24,offer_hold_hours:24,list_columns:[],links_question_key:null,links_label:'Their links'};
 export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
@@ -42,8 +49,9 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
   const applications=leads.length?await rows<ApplicationRecord>('mentorship_applications','id,lead_id,submitted_at,answers,attribution',q=>q.in('lead_id',leads.map(l=>l.id))):[];
   const reviews=leads.length?await rows<LeadReview>('mentorship_lead_reviews','lead_id,reviewer,verdict',q=>q.in('lead_id',leads.map(l=>l.id)),'lead_id'):[];
   const {data:placesShownAt,error:placesError}=await db.rpc('get_mentorship_places_updated_at',{p_slug:cohortRows[0]?.slug}); if(placesError)throw placesError;
+  const answerOrder=await loadAnswerOrder(cohortId);
   const closesAt=close.state==='ready'?close.closesAt:null; const timezone=cohortRows[0]?.timezone||'Europe/London';
-  if(!enrollments.length)return {reviews,placesShownAt,leads,students:[],staff,capacity:settings.capacity,settings,milestones,payments,intake,shopifyOrders,applications,closesAt,timezone};
+  if(!enrollments.length)return {reviews,placesShownAt,answerOrder,leads,students:[],staff,capacity:settings.capacity,settings,milestones,payments,intake,shopifyOrders,applications,closesAt,timezone};
   const ids=enrollments.map(e=>e.id);
   const [profiles,identities,calls,notes,contexts,actions]=await Promise.all([
     loadStudentProfilesForEnrollments(ids),
@@ -53,7 +61,7 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
     rows<{enrollment_id:string;current_focus:string}>('mentorship_student_context','enrollment_id,current_focus',q=>q.in('enrollment_id',ids),'enrollment_id'),
     rows<{enrollment_id:string}>('mentorship_student_actions','id,enrollment_id',q=>q.in('enrollment_id',ids).is('completed_at',null)),
   ]);
-  return {reviews,placesShownAt,leads,staff,intake,settings,milestones,payments,shopifyOrders,applications,closesAt,timezone,capacity:settings.capacity,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
+  return {reviews,placesShownAt,answerOrder,leads,staff,intake,settings,milestones,payments,shopifyOrders,applications,closesAt,timezone,capacity:settings.capacity,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
 }
 export async function saveLead(input:LeadInput, previous?:Lead):Promise<Lead> {
   const values=normaliseLead(input);

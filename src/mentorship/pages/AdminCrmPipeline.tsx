@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Check, ChevronRight, Clock3, Link2, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, Check, ChevronRight, Clock3, Link2, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { crmRoot, leadStages, onboardingState, paymentLink, readableDate, type Lead } from '../crm';
 import { hasPaid } from '../crmAnalytics';
@@ -112,14 +112,33 @@ function ReviewMark({ lead, reviewer, verdict }: { lead: Lead; reviewer: string;
   </td>;
 }
 
+type ListSort = { key: string; reverse: boolean };
+const SortHead = ({ id, sort, onSort, className, children }: { id: string; sort: ListSort; onSort: (id: string) => void; className?: string; children: React.ReactNode }) => {
+  const on = sort.key === id;
+  return <th className={className} aria-sort={on ? (sort.reverse ? 'descending' : 'ascending') : undefined}><button type="button" className={`ca-sort${on ? ' ca-sort-on' : ''}`} onClick={() => onSort(id)}>{children}{on && (sort.reverse ? <ArrowUp size={12} aria-hidden="true"/> : <ArrowDown size={12} aria-hidden="true"/>)}</button></th>;
+};
+
 export function ReviewList({ leads, data, now, openLead }: { leads: Lead[]; data: CrmWorkspace; now: number; openLead: (id: string) => void }) {
+  const [sort, setSort] = useState<ListSort>({ key: 'due', reverse: false });
+  const onSort = (key: string) => setSort(current => ({ key, reverse: current.key === key && !current.reverse }));
   if (!leads.length) return <Empty title="All caught up">New applications appear here the moment they come in.</Empty>;
   const latest = latestApplications(data.applications);
   const appliedAt = (l: Lead) => latest.get(l.id)?.submitted_at ?? l.created_at;
   const { list_columns: columns, links_question_key: linksKey, links_label: linksLabel, reply_target_hours: replyHours, reviewers = [] } = data.settings;
   const verdictOf = (leadId: string, reviewer: string) => data.reviews.find(r => r.lead_id === leadId && r.reviewer === reviewer)?.verdict ?? null;
-  return <div className="ca-panel"><table className="ca-table"><thead><tr><th>Applicant</th>{columns.map(c => <th key={c.key}>{c.label}</th>)}{linksKey && <th>{linksHeading(linksLabel)}</th>}{reviewers.map(r => <th key={r} className="ca-mark-head">{r}</th>)}<th>Reply due</th><th><span className="sr-only">Open</span></th></tr></thead><tbody>
-    {[...leads].sort((a, b) => appliedAt(a).localeCompare(appliedAt(b))).map(l => {
+  /* Answers sort in the order the form offers them, and anyone without one goes last. */
+  const sortValue = (l: Lead): string | number => {
+    if (sort.key === 'due') return appliedAt(l);
+    if (sort.key === 'name') return l.full_name.toLowerCase();
+    if (sort.key === 'links') return namedLinks(answerLinks(answerOf(latest.get(l.id), linksKey)))[0]?.name.toLowerCase() ?? '\uffff';
+    if (sort.key.startsWith('review:')) return ['yes', 'no', null].indexOf(verdictOf(l.id, sort.key.slice(7)));
+    const answer = answerOf(latest.get(l.id), sort.key.slice(7)); const options = data.answerOrder[sort.key.slice(7)];
+    if (!answer) return '\uffff';
+    return options?.includes(answer) ? String(options.indexOf(answer)).padStart(3, '0') : answer.toLowerCase();
+  };
+  const compare = (a: string | number, b: string | number) => typeof a === 'number' && typeof b === 'number' ? a - b : String(a).localeCompare(String(b));
+  return <div className="ca-panel"><table className="ca-table"><thead><tr><SortHead id="name" sort={sort} onSort={onSort}>Applicant</SortHead>{columns.map(c => <SortHead key={c.key} id={`answer:${c.key}`} sort={sort} onSort={onSort}>{c.label}</SortHead>)}{linksKey && <SortHead id="links" sort={sort} onSort={onSort}>{linksHeading(linksLabel)}</SortHead>}{reviewers.map(r => <SortHead key={r} id={`review:${r}`} sort={sort} onSort={onSort} className="ca-mark-head">{r}</SortHead>)}<SortHead id="due" sort={sort} onSort={onSort}>Reply due</SortHead><th><span className="sr-only">Open</span></th></tr></thead><tbody>
+    {[...leads].sort((a, b) => compare(sortValue(a), sortValue(b)) * (sort.reverse ? -1 : 1) || appliedAt(a).localeCompare(appliedAt(b))).map(l => {
       const application = latest.get(l.id); const due = deadline(appliedAt(l), replyHours, now);
       const links = namedLinks(answerLinks(answerOf(application, linksKey)));
       return <tr key={l.id} {...rowProps(l, openLead)}><td><Person lead={l}/></td>
