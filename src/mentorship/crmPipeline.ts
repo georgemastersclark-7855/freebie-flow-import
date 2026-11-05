@@ -24,6 +24,12 @@ export function latestApplications(applications: ApplicationRecord[]) {
 export const answerOf = (application: ApplicationRecord | undefined, key: string | null) =>
   (key && application?.answers.find(a => a.key === key)?.answer?.trim()) || '';
 
+/** The Instagram handle in an answer, typed as @name, name or a profile link. Null if it isn't one. */
+export function instagramHandle(text: string) {
+  const handle = text.trim().replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i, '').replace(/^@/, '').replace(/[/?].*$/, '');
+  return /^[a-z0-9._]{1,30}$/i.test(handle) ? handle : null;
+}
+
 /** Web links in an answer. A link pasted without https:// still counts. */
 export function answerLinks(text: string): string[] {
   const links: string[] = [];

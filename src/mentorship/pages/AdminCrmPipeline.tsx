@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { crmRoot, leadStages, onboardingState, paymentLink, readableDate, type Lead } from '../crm';
 import { hasPaid } from '../crmAnalytics';
 import { markPlacesUpdated, saveLeadReview, type CrmWorkspace, type LeadReview } from '../crmApi';
-import { answerLinks, answerOf, applicationChannel, applicationsPerDay, closesDate, closesTime, deadline, latestApplications, namedLinks, pipelineStages, timeLeft, type ApplicationRecord, type PipelineKey } from '../crmPipeline';
+import { answerLinks, answerOf, applicationChannel, applicationsPerDay, closesDate, closesTime, deadline, instagramHandle, latestApplications, namedLinks, pipelineStages, timeLeft, type ApplicationRecord, type PipelineKey } from '../crmPipeline';
 
 /** Asks before a step that changes someone's record, and says what will happen next. */
 export function ConfirmStep({ title, steps, confirmLabel, cancelLabel, onConfirm, onCancel }: { title: string; steps: string[]; confirmLabel: string; cancelLabel: string; onConfirm: () => void; onCancel: () => void }) {
@@ -125,14 +125,18 @@ const STEP_PICKS = ['Waiting on their reply', 'Waiting on their music'];
 /** What happens next with this person, and each reviewer's grade. Saves straight away and sends nothing. */
 export function NextStep({ lead, data, save, onDirty }: { lead: Lead; data: CrmWorkspace; save: (nextStep: string) => Promise<void>; onDirty: (dirty: boolean) => void }) {
   const [draft, setDraft] = useState(lead.next_action); const [busy, setBusy] = useState(false);
-  useEffect(() => setDraft(lead.next_action), [lead.next_action]);
-  const typed = draft.trim() !== lead.next_action.trim();
+  /* Shows a click straight away, until the refreshed record catches up with it. */
+  const [shown, setShown] = useState<string | null>(null);
+  const current = shown ?? lead.next_action;
+  useEffect(() => { if (shown === null || shown === lead.next_action) { setShown(null); setDraft(lead.next_action); } }, [lead.next_action, shown]);
+  const typed = draft.trim() !== current.trim();
   useEffect(() => onDirty(typed), [typed, onDirty]);
   const applied = lead.stage === 'applied';
+  const noStep = applied ? 'Review application' : '';
   const set = async (value: string) => {
-    setBusy(true);
+    setBusy(true); setShown(value); setDraft(value);
     try { await save(value); toast.success('Next step saved.'); }
-    catch (error) { toast.error(error instanceof Error ? error.message : 'Could not save that. Please try again.'); }
+    catch (error) { setShown(null); setDraft(lead.next_action); toast.error(error instanceof Error ? error.message : 'Could not save that. Please try again.'); }
     finally { setBusy(false); }
   };
   const reviewers = data.settings.reviewers ?? [];
@@ -143,8 +147,8 @@ export function NextStep({ lead, data, save, onDirty }: { lead: Lead; data: CrmW
       {typed && <button type="submit" className="ss-button ss-primary" disabled={busy}>Save</button>}
     </form>
     <div className="ca-next-step-picks">
-      {STEP_PICKS.map(pick => <button key={pick} type="button" className="ca-pick" aria-pressed={lead.next_action === pick} disabled={busy} onClick={() => void set(pick)}>{pick}</button>)}
-      {waitingOn(lead) && <button type="button" className="ca-pick ca-pick-back" disabled={busy} onClick={() => void set(applied ? 'Review application' : '')}>{applied ? 'Back to review' : 'Clear'}</button>}
+      {STEP_PICKS.map(pick => <button key={pick} type="button" className="ca-pick" aria-pressed={current === pick} disabled={busy} onClick={() => void set(current === pick ? noStep : pick)}>{pick}</button>)}
+      {waitingOn({ ...lead, next_action: current }) && <button type="button" className="ca-pick ca-pick-back" disabled={busy} onClick={() => void set(noStep)}>{applied ? 'Back to review' : 'Clear'}</button>}
     </div>
     {applied && reviewers.length > 0 && <div className="ca-grades">
       {reviewers.map(r => <span key={r}>{r}<GradeButton lead={lead} reviewer={r} verdict={verdictOn(data, lead.id, r)}/></span>)}
@@ -240,9 +244,14 @@ export function LeadLinks({ application, data }: { application: ApplicationRecor
   const key = data.settings.links_question_key;
   if (!key || !application) return null;
   const text = answerOf(application, key); const links = namedLinks(answerLinks(text));
-  const instagram = answerOf(application, 'social').replace(/^@/, '');
+  const instagram = instagramHandle(answerOf(application, 'social'));
   return <div className="ca-links"><h3>{data.settings.links_label}</h3>{links.length ? <div className="ca-link-pills">{links.map(link => <a key={link.url} className="ca-pill" href={link.url} target="_blank" rel="noreferrer">▶ {link.name}</a>)}</div> : <p className="ca-warn">No link.{text ? ` They wrote "${text}".` : ''}{instagram ? <> <a href={`https://instagram.com/${encodeURIComponent(instagram)}`} target="_blank" rel="noreferrer">Check @{instagram} on Instagram</a></> : null}</p>}</div>;
 }
+
+const ShortAnswer = ({ answer }: { answer: ApplicationRecord['answers'][number] }) => {
+  const handle = answer.key === 'social' ? instagramHandle(answer.answer) : null;
+  return handle ? <a href={`https://instagram.com/${encodeURIComponent(handle)}`} target="_blank" rel="noreferrer">@{handle}</a> : <>{answer.answer}</>;
+};
 
 /** Their application: short answers as facts, long answers written out. Skips what's already shown above. */
 export function ApplicationAnswers({ applications, data }: { applications: ApplicationRecord[]; data: CrmWorkspace }) {
@@ -252,7 +261,7 @@ export function ApplicationAnswers({ applications, data }: { applications: Appli
   const answers = latest.answers.filter(a => a.answer?.trim() && !hidden.has(a.key));
   const short = answers.filter(a => a.answer.length <= 40 && !a.answer.includes('\n')); const long = answers.filter(a => !short.includes(a));
   return <div className="ca-answers">
-    {short.length > 0 && <div className="ca-facts">{short.map(a => <div key={a.key}><small>{a.question}</small><strong>{a.answer}</strong></div>)}</div>}
+    {short.length > 0 && <div className="ca-facts">{short.map(a => <div key={a.key}><small>{a.question}</small><strong><ShortAnswer answer={a}/></strong></div>)}</div>}
     {long.map(a => <div key={a.key} className="ca-qa"><small>{a.question}</small><p>{a.answer}</p></div>)}
     <p className="ca-applied">Applied {readableDate(latest.submitted_at, true)} · Came from {applicationChannel(latest.attribution).toLowerCase()}</p>
     {earlier.map(application => <details key={application.id} className="ca-earlier"><summary>Earlier application · {readableDate(application.submitted_at, true)}</summary>{application.answers.filter(a => a.answer?.trim()).map(a => <div key={a.key} className="ca-qa"><small>{a.question}</small><p>{a.answer}</p></div>)}</details>)}

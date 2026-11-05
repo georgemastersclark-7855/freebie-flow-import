@@ -80,12 +80,14 @@ export function PortalShell() {
   const profileRequired = user?.role === "student" && !user.profile?.completedAt;
   const navigation = staff ? staffNavigation.filter((item) => !item.adminOnly || user?.role === "admin") : studentNavigation;
   const currentWeek = weeks.find((week) => week.phase === "current");
+  // Tabs and the applicant drawer only change the query, so they keep your place on the page.
+  const sectionVisit = location.hash ? location.key : "";
   useEffect(() => {
     const section = location.hash.slice(1);
     if (["master-bundle", "setup-videos", "song-starters", "weekly-song", "stems", "send-to-rob", "feedback"].includes(section)) {
       document.getElementById(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" });
-  }, [location]);
+  }, [location.pathname, location.hash, sectionVisit]);
 
   // Signs out this browser only. Every device at once lives in settings.
   const signOut = async () => {

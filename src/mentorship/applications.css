@@ -115,6 +115,7 @@
 .ca-facts>div { background:#eaede6; border-radius:8px; padding:10px 12px; min-width:0; }
 .ca-facts small { display:block; font-size:12px; line-height:1.35; color:#68716a; margin-bottom:3px; }
 .ca-facts strong { font-weight:600; color:#202521; overflow-wrap:anywhere; }
+.ca-facts a { color:#2d4934; text-decoration:underline; text-underline-offset:2px; }
 .ca-qa { margin-bottom:16px; }
 .ca-qa small { display:block; font-size:12px; color:#8a938b; margin-bottom:3px; }
 .ca-qa p { margin:0; white-space:pre-line; font-size:14px; color:#202521; }
