@@ -167,10 +167,10 @@ export function ReviewList({ leads, data, now, openLead }: { leads: Lead[]; data
   const appliedAt = (l: Lead) => latest.get(l.id)?.submitted_at ?? l.created_at;
   const { list_columns: columns, links_question_key: linksKey, links_label: linksLabel, reply_target_hours: replyHours, reviewers = [] } = data.settings;
   const verdictOf = (leadId: string, reviewer: string) => verdictOn(data, leadId, reviewer);
-  /* As first, then anyone not graded yet, then Bs and Cs. Two As beat one. */
+  /* As, then Bs, then Cs, then anyone not graded yet. Two As beat one. */
   const gradeScore = (leadId: string) => {
     const marks = reviewers.flatMap(r => { const verdict = verdictOf(leadId, r); return verdict ? [GRADE_RANK[verdict]] : []; });
-    return marks.length ? marks.reduce((sum, mark) => sum + mark, 0) / marks.length - marks.length / 100 : 1;
+    return marks.length ? marks.reduce((sum, mark) => sum + mark, 0) / marks.length - marks.length / 100 : 9;
   };
   /* Answers sort in the order the form offers them, and anyone without one goes last. */
   const sortValue = (l: Lead): string | number => {
