@@ -14,7 +14,7 @@ async function rows<T>(table: string, select: string, filter: (q:any)=>any = q=>
 export interface CrmStudent extends SuccessEnrollment { call?: OnboardingCall; questionnaire?: unknown; focus: string; openActions: number }
 export interface IntakeConnection { provider: 'gmail'|'typeform'|'native'; status: 'setup_needed'|'backfilled'|'connected'|'paused'|'error'; account_label: string; last_checked_at: string|null; last_received_at: string|null; detail: string }
 export interface ShopifyOrderRecord { shopify_order_id: string; order_name: string|null; email: string|null; lead_id: string|null; enrollment_id: string|null; status: 'processed'|'failed'; outcome: string|null; flags: string[]; last_error: string|null; test_order: boolean; received_at: string; reviewed_at: string|null; cohort_id: string|null }
-export interface LeadReview { lead_id: string; reviewer: string; verdict: 'yes'|'no'|null }
+export interface LeadReview { lead_id: string; reviewer: string; verdict: 'yes'|'maybe'|'no'|null }
 export interface CrmWorkspace { reviews: LeadReview[]; placesShownAt: string|null; answerOrder: Record<string,string[]>; leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; settings: LaunchSettings; milestones: LeadMilestone[]; payments: RecordedPayment[]; intake: IntakeConnection[]; shopifyOrders: ShopifyOrderRecord[]; applications: ApplicationRecord[]; closesAt: string | null; timezone: string }
 // Paid Shopify orders written by the shopify-order-paid webhook. Empty until that migration is applied.
 async function loadShopifyOrders(cohortId: string): Promise<ShopifyOrderRecord[]> {
@@ -81,7 +81,7 @@ export async function saveOnboardingCall(enrollmentId:string,input:Pick<Onboardi
 export async function saveCapacity(cohortId:string,capacity:number) { if(!Number.isInteger(capacity)||capacity<1||capacity>1000)throw new Error('Capacity must be between 1 and 1,000.'); const {error}=await db.from('mentorship_admissions_settings').upsert({cohort_id:cohortId,capacity}); if(error)throw error; }
 export async function loadStudentLead(enrollmentId:string) { return (await rows<Lead>('mentorship_leads','*',q=>q.eq('enrollment_id',enrollmentId)))[0] ?? null; }
 
-// Rob's and George's read on an applicant. Only ever a signal between them: it sends nothing and changes no stage.
+// Rob's and George's grade on an applicant. Only ever a signal between them: it sends nothing and changes no stage.
 export async function saveLeadReview(lead_id:string,reviewer:string,verdict:LeadReview['verdict']) {
   if(scheduleDemoBackend){const {demoWrites}=await import('./crmDemo');demoWrites.reviews=[...demoWrites.reviews.filter(r=>!(r.lead_id===lead_id&&r.reviewer===reviewer)),{lead_id,reviewer,verdict}];return;}
   const {error}=await db.from('mentorship_lead_reviews').upsert({lead_id,reviewer,verdict});if(error)throw error;

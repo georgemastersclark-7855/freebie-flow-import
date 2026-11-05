@@ -6,7 +6,7 @@ export interface ListColumn { key: string; label: string }
 
 export const pipelineStages: { key: PipelineKey; label: string; hint: string; about: string }[] = [
   { key: 'interested', label: 'Interested', hint: "haven't applied yet", about: "People who've shown interest but haven't applied yet." },
-  { key: 'review', label: 'To review', hint: 'applied, waiting on you', about: 'Applied and waiting on your decision. Nearest deadline first, or click a heading to sort.' },
+  { key: 'review', label: 'To review', hint: 'applied, waiting on you', about: 'Applied and waiting on your decision. Grade each one A (offer now), B (reserve) or C (only to fill a place). Best first, or click a heading to sort.' },
   { key: 'offer', label: 'Offer sent', hint: 'approved, waiting on payment', about: 'Approved. Waiting on their payment.' },
   { key: 'paid', label: 'Paid', hint: 'place secured', about: 'Paid and got their place.' },
   { key: 'onboarding', label: 'Onboarding', hint: 'paid, getting set up', about: 'Paid and getting set up: call, profile and coaching focus.' },

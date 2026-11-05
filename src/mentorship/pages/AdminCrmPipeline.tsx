@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { Link } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { ArrowDown, ArrowUp, Check, ChevronRight, Clock3, Link2, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, ChevronRight, Clock3, Link2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { crmRoot, leadStages, onboardingState, paymentLink, readableDate, type Lead } from '../crm';
 import { hasPaid } from '../crmAnalytics';
@@ -94,21 +94,26 @@ const Empty = ({ title, children }: { title: string; children: React.ReactNode }
 const Arrow = ({ name }: { name: string }) => <td className="ca-arrow"><span className="sr-only">Open {name}</span><ChevronRight size={17} aria-hidden="true"/></td>;
 const rowProps = (lead: Lead, openLead: (id: string) => void) => ({ tabIndex: 0, onClick: () => openLead(lead.id), onKeyDown: (e: React.KeyboardEvent) => { if (e.key === 'Enter') openLead(lead.id); } });
 
-const nextVerdict: Record<string, LeadReview['verdict']> = { none: 'yes', yes: 'no', no: null };
+/* Each reviewer's grade, stored as yes, maybe or no and shown as A, B or C. */
+const GRADES: Record<string, { letter: string; means: string; next: LeadReview['verdict'] }> = {
+  none: { letter: '', means: 'not graded yet', next: 'yes' },
+  yes: { letter: 'A', means: 'A, offer now', next: 'maybe' },
+  maybe: { letter: 'B', means: 'B, reserve', next: 'no' },
+  no: { letter: 'C', means: 'C, only to fill a place', next: null },
+};
+const GRADE_RANK = { yes: 0, maybe: 2, no: 3 };
 
-/** One person's read on an applicant: blank, tick or cross. Only a signal between the reviewers, it sends nothing. */
+/** One person's grade on an applicant. Only a signal between the reviewers, it sends nothing. */
 function ReviewMark({ lead, reviewer, verdict }: { lead: Lead; reviewer: string; verdict: LeadReview['verdict'] }) {
   const cache = useQueryClient();
+  const grade = GRADES[verdict ?? 'none'];
   const show = (value: LeadReview['verdict']) => cache.setQueryData<CrmWorkspace>(['crm', lead.cohort_id], current => current && { ...current, reviews: [...current.reviews.filter(r => !(r.lead_id === lead.id && r.reviewer === reviewer)), { lead_id: lead.id, reviewer, verdict: value }] });
   const change = async () => {
-    const next = nextVerdict[verdict ?? 'none'];
-    show(next);
-    try { await saveLeadReview(lead.id, reviewer, next); } catch { show(verdict); toast.error('Could not save that. Please try again.'); }
+    show(grade.next);
+    try { await saveLeadReview(lead.id, reviewer, grade.next); } catch { show(verdict); toast.error('Could not save that. Please try again.'); }
   };
   return <td className="ca-mark-cell" onClick={e => e.stopPropagation()} onKeyDown={e => e.stopPropagation()}>
-    <button type="button" className={`ca-mark${verdict ? ` ca-mark-${verdict}` : ''}`} aria-label={`${reviewer} on ${lead.full_name}: ${verdict === 'yes' ? 'good fit' : verdict === 'no' ? 'not a fit' : 'no answer yet'}. Change.`} title={verdict === 'yes' ? `${reviewer}: good fit` : verdict === 'no' ? `${reviewer}: not a fit` : `${reviewer}: no answer yet`} onClick={() => void change()}>
-      {verdict === 'yes' ? <Check size={15} strokeWidth={3} aria-hidden="true"/> : verdict === 'no' ? <X size={15} strokeWidth={3} aria-hidden="true"/> : null}
-    </button>
+    <button type="button" className={`ca-mark${verdict ? ` ca-mark-${verdict}` : ''}`} aria-label={`${reviewer} on ${lead.full_name}: ${grade.means}. Change.`} title={`${reviewer}: ${grade.means}`} onClick={() => void change()}>{grade.letter}</button>
   </td>;
 }
 
@@ -116,25 +121,32 @@ function ReviewMark({ lead, reviewer, verdict }: { lead: Lead; reviewer: string;
 const waitingOn = (lead: Lead) => { const action = lead.next_action.trim(); return action && action !== 'Review application' ? action : null; };
 
 type ListSort = { key: string; reverse: boolean };
+const BEST_FIRST: ListSort = { key: 'best', reverse: false };
 const SortHead = ({ id, sort, onSort, className, children }: { id: string; sort: ListSort; onSort: (id: string) => void; className?: string; children: React.ReactNode }) => {
   const on = sort.key === id;
   return <th className={className} aria-sort={on ? (sort.reverse ? 'descending' : 'ascending') : undefined}><button type="button" className={`ca-sort${on ? ' ca-sort-on' : ''}`} onClick={() => onSort(id)}>{children}{on && (sort.reverse ? <ArrowUp size={12} aria-hidden="true"/> : <ArrowDown size={12} aria-hidden="true"/>)}</button></th>;
 };
 
 export function ReviewList({ leads, data, now, openLead }: { leads: Lead[]; data: CrmWorkspace; now: number; openLead: (id: string) => void }) {
-  const [sort, setSort] = useState<ListSort>({ key: 'due', reverse: false });
-  const onSort = (key: string) => setSort(current => ({ key, reverse: current.key === key && !current.reverse }));
+  const [sort, setSort] = useState<ListSort>(BEST_FIRST);
+  const onSort = (key: string) => setSort(current => current.key !== key ? { key, reverse: false } : current.reverse ? BEST_FIRST : { key, reverse: true });
   if (!leads.length) return <Empty title="All caught up">New applications appear here the moment they come in.</Empty>;
   const latest = latestApplications(data.applications);
   const appliedAt = (l: Lead) => latest.get(l.id)?.submitted_at ?? l.created_at;
   const { list_columns: columns, links_question_key: linksKey, links_label: linksLabel, reply_target_hours: replyHours, reviewers = [] } = data.settings;
   const verdictOf = (leadId: string, reviewer: string) => data.reviews.find(r => r.lead_id === leadId && r.reviewer === reviewer)?.verdict ?? null;
+  /* As first, then anyone not graded yet, then Bs and Cs. Two As beat one. */
+  const gradeScore = (leadId: string) => {
+    const marks = reviewers.flatMap(r => { const verdict = verdictOf(leadId, r); return verdict ? [GRADE_RANK[verdict]] : []; });
+    return marks.length ? marks.reduce((sum, mark) => sum + mark, 0) / marks.length - marks.length / 100 : 1;
+  };
   /* Answers sort in the order the form offers them, and anyone without one goes last. */
   const sortValue = (l: Lead): string | number => {
+    if (sort.key === 'best') return gradeScore(l.id);
     if (sort.key === 'due') return appliedAt(l);
     if (sort.key === 'name') return l.full_name.toLowerCase();
     if (sort.key === 'links') return namedLinks(answerLinks(answerOf(latest.get(l.id), linksKey)))[0]?.name.toLowerCase() ?? '\uffff';
-    if (sort.key.startsWith('review:')) return ['yes', 'no', null].indexOf(verdictOf(l.id, sort.key.slice(7)));
+    if (sort.key.startsWith('review:')) return ['yes', 'maybe', 'no', null].indexOf(verdictOf(l.id, sort.key.slice(7)));
     const answer = answerOf(latest.get(l.id), sort.key.slice(7)); const options = data.answerOrder[sort.key.slice(7)];
     if (!answer) return '\uffff';
     return options?.includes(answer) ? String(options.indexOf(answer)).padStart(3, '0') : answer.toLowerCase();
