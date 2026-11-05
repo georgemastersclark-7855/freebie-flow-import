@@ -24,7 +24,9 @@ export type Database = {
           links_question_key: string | null
           list_columns: Json
           offer_hold_hours: number
+          places_updated_at: string | null
           reply_target_hours: number
+          reviewers: Json
           seat_price_minor: number | null
           updated_at: string
         }
@@ -37,7 +39,9 @@ export type Database = {
           links_question_key?: string | null
           list_columns?: Json
           offer_hold_hours?: number
+          places_updated_at?: string | null
           reply_target_hours?: number
+          reviewers?: Json
           seat_price_minor?: number | null
           updated_at?: string
         }
@@ -50,7 +54,9 @@ export type Database = {
           links_question_key?: string | null
           list_columns?: Json
           offer_hold_hours?: number
+          places_updated_at?: string | null
           reply_target_hours?: number
+          reviewers?: Json
           seat_price_minor?: number | null
           updated_at?: string
         }
@@ -1016,6 +1022,35 @@ export type Database = {
           },
           {
             foreignKeyName: "mentorship_lead_payments_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "mentorship_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentorship_lead_reviews: {
+        Row: {
+          lead_id: string
+          reviewer: string
+          updated_at: string
+          verdict: string | null
+        }
+        Insert: {
+          lead_id: string
+          reviewer: string
+          updated_at?: string
+          verdict?: string | null
+        }
+        Update: {
+          lead_id?: string
+          reviewer?: string
+          updated_at?: string
+          verdict?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentorship_lead_reviews_lead_id_fkey"
             columns: ["lead_id"]
             isOneToOne: false
             referencedRelation: "mentorship_leads"
@@ -2034,6 +2069,10 @@ export type Database = {
         Returns: Json
       }
       get_mentorship_places_left: { Args: { p_slug: string }; Returns: number }
+      get_mentorship_places_updated_at: {
+        Args: { p_slug: string }
+        Returns: string
+      }
       get_mentorship_typeform_route: {
         Args: { p_form_id: string }
         Returns: Json
