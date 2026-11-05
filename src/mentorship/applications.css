@@ -68,6 +68,9 @@
 .ca-sort { display:inline-flex; align-items:center; gap:4px; padding:0; border:0; background:none; color:inherit; font:inherit; cursor:pointer; white-space:nowrap; }
 .ca-sort:hover,.ca-sort-on { color:#202521; }
 .ca-sort:focus-visible { outline:2px solid #2d4934; outline-offset:2px; border-radius:3px; }
+.ca-row-waiting { background:#f4f5f1; }
+.ca-row-waiting>td:not(.ca-mark-cell):not(.ca-due-cell) { opacity:.5; }
+.ca-waiting { display:inline-block; max-width:170px; overflow:hidden; text-overflow:ellipsis; vertical-align:middle; }
 .ca-table th.ca-mark-head { text-align:center; padding-left:8px; padding-right:8px; }
 .ca-table td.ca-mark-cell { width:56px; text-align:center; padding-left:8px; padding-right:8px; cursor:default; }
 .ca-mark { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:7px; border:1.5px solid #cfd5ca; background:#fff; cursor:pointer; vertical-align:middle; }

@@ -112,6 +112,9 @@ function ReviewMark({ lead, reviewer, verdict }: { lead: Lead; reviewer: string;
   </td>;
 }
 
+/* A next action other than the default means we're waiting on them. Clearing it brings them back up the list. */
+const waitingOn = (lead: Lead) => { const action = lead.next_action.trim(); return action && action !== 'Review application' ? action : null; };
+
 type ListSort = { key: string; reverse: boolean };
 const SortHead = ({ id, sort, onSort, className, children }: { id: string; sort: ListSort; onSort: (id: string) => void; className?: string; children: React.ReactNode }) => {
   const on = sort.key === id;
@@ -138,14 +141,14 @@ export function ReviewList({ leads, data, now, openLead }: { leads: Lead[]; data
   };
   const compare = (a: string | number, b: string | number) => typeof a === 'number' && typeof b === 'number' ? a - b : String(a).localeCompare(String(b));
   return <div className="ca-panel"><table className="ca-table"><thead><tr><SortHead id="name" sort={sort} onSort={onSort}>Applicant</SortHead>{columns.map(c => <SortHead key={c.key} id={`answer:${c.key}`} sort={sort} onSort={onSort}>{c.label}</SortHead>)}{linksKey && <SortHead id="links" sort={sort} onSort={onSort}>{linksHeading(linksLabel)}</SortHead>}{reviewers.map(r => <SortHead key={r} id={`review:${r}`} sort={sort} onSort={onSort} className="ca-mark-head">{r}</SortHead>)}<SortHead id="due" sort={sort} onSort={onSort}>Reply due</SortHead><th><span className="sr-only">Open</span></th></tr></thead><tbody>
-    {[...leads].sort((a, b) => compare(sortValue(a), sortValue(b)) * (sort.reverse ? -1 : 1) || appliedAt(a).localeCompare(appliedAt(b))).map(l => {
-      const application = latest.get(l.id); const due = deadline(appliedAt(l), replyHours, now);
+    {[...leads].sort((a, b) => Number(!!waitingOn(a)) - Number(!!waitingOn(b)) || compare(sortValue(a), sortValue(b)) * (sort.reverse ? -1 : 1) || appliedAt(a).localeCompare(appliedAt(b))).map(l => {
+      const application = latest.get(l.id); const due = deadline(appliedAt(l), replyHours, now); const waiting = waitingOn(l);
       const links = namedLinks(answerLinks(answerOf(application, linksKey)));
-      return <tr key={l.id} {...rowProps(l, openLead)}><td><Person lead={l}/></td>
+      return <tr key={l.id} className={waiting ? 'ca-row-waiting' : undefined} {...rowProps(l, openLead)}><td><Person lead={l}/></td>
         {columns.map(c => { const answer = answerOf(application, c.key); return <td key={c.key}>{/^yes\b/i.test(answer) ? <Chip tone="green">Yes</Chip> : answer || '—'}</td>; })}
         {linksKey && <td>{links.length === 1 ? <a className="ca-link" href={links[0].url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>{links[0].name}</a> : links.length ? <span className="ca-link">{links.length} links</span> : <Chip tone="red">No link</Chip>}</td>}
         {reviewers.map(r => <ReviewMark key={r} lead={l} reviewer={r} verdict={verdictOf(l.id, r)}/>)}
-        <td><Chip tone={due.tone}>{due.label}</Chip></td><Arrow name={l.full_name}/></tr>;
+        <td className="ca-due-cell">{waiting ? <span className="ca-chip ca-chip-gray ca-waiting" title={waiting}>{waiting}</span> : <Chip tone={due.tone}>{due.label}</Chip>}</td><Arrow name={l.full_name}/></tr>;
     })}</tbody></table></div>;
 }
 
