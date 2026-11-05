@@ -1,0 +1,2 @@
+alter table public.mentorship_lead_reviews drop constraint if exists mentorship_lead_reviews_verdict_check;
+alter table public.mentorship_lead_reviews add constraint mentorship_lead_reviews_verdict_check check (verdict in ('yes','maybe','no'));
