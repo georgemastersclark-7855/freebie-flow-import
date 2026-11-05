@@ -3,7 +3,7 @@ import type { CrmStudent } from './crmApi';
 import type { ListColumn } from './crmPipeline';
 
 export const currencies = ['USD', 'GBP', 'EUR', 'CAD', 'AUD', 'AED'] as const;
-export interface LaunchSettings { capacity: number; currency: string | null; seat_price_minor: number | null; cash_target_minor: number | null; reply_target_hours: number; offer_hold_hours: number; list_columns: ListColumn[]; links_question_key: string | null; links_label: string }
+export interface LaunchSettings { capacity: number; currency: string | null; seat_price_minor: number | null; cash_target_minor: number | null; reply_target_hours: number; offer_hold_hours: number; list_columns: ListColumn[]; links_question_key: string | null; links_label: string; places_updated_at?: string | null; reviewers?: string[] }
 export interface LeadMilestone { lead_id: string; milestone: 'waitlist' | 'applied' | 'approved' | 'offer_sent'; occurred_at: string }
 export interface RecordedPayment {
   id: string; lead_id: string; cohort_id: string; kind: 'payment'|'refund'; amount_minor: number; currency: string;

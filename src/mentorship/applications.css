@@ -65,6 +65,16 @@
 .ca-chip-gray { color:#68716a; background:#eaede6; } .ca-chip-amber { color:#8a5a0b; background:#f8efd9; } .ca-chip-red { color:#a8392c; background:#fcebe5; } .ca-chip-green { color:#2d4934; background:#e7eedd; }
 .ca-link { color:#2d4934; font-weight:600; text-decoration:underline; text-underline-offset:2px; }
 .ca-arrow { color:#8a938b; text-align:right; width:44px; }
+.ca-table th.ca-mark-head { text-align:center; padding-left:8px; padding-right:8px; }
+.ca-table td.ca-mark-cell { width:56px; text-align:center; padding-left:8px; padding-right:8px; cursor:default; }
+.ca-mark { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:7px; border:1.5px solid #cfd5ca; background:#fff; cursor:pointer; vertical-align:middle; }
+.ca-mark:hover { border-color:#68716a; }
+.ca-mark:focus-visible { outline:2px solid #2d4934; outline-offset:2px; }
+.ca-mark-yes { background:#2d4934; border-color:#2d4934; color:#fff; }
+.ca-mark-no { background:#fcebe5; border-color:#e7bdb3; color:#a8392c; }
+.ca-places-time { margin-top:8px; padding-top:8px; border-top:1px solid #e9ece5; }
+.ca-places-time span { display:block; font-size:11.5px; line-height:1.35; color:#68716a; }
+.ca-places-time .ca-text-link { margin-top:3px; font-size:12px; }
 .ca-empty { padding:40px 20px; text-align:center; color:#68716a; }
 .ca-empty strong { display:block; color:#202521; font-size:15px; font-weight:600; }
 .ca-empty p { margin:4px 0 0; color:#68716a; }

@@ -1,9 +1,10 @@
 // Dev preview only (VITE_MENTORSHIP_BACKEND=demo): made-up people, so the Applications screen can be checked without signing in.
-import { defaultSettings, type CrmWorkspace } from './crmApi';
+import { defaultSettings, type CrmWorkspace, type LeadReview } from './crmApi';
 import type { Lead } from './crm';
 import type { ApplicationRecord } from './crmPipeline';
 
 const cohortId = 'demo-cohort';
+export const demoWrites = { reviews: [] as LeadReview[], placesUpdatedAt: null as string | null };
 export const demoCohorts = [{ id: cohortId, internal_name: 'Cohort 2', display_name: 'Demo programme', status: 'draft', starts_at: null, current_week: 1, timezone: 'Europe/London' }];
 const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600_000).toISOString();
 const lead = (id: string, full_name: string, stage: Lead['stage'], source: string, created_at: string): Lead => ({ id, cohort_id: cohortId, full_name, email: `${full_name.split(' ')[0].toLowerCase()}@example.com`, stage, source, source_detail: '', first_contact_channel: 'Not recorded', email_thread_url: null, goals: '', music_url: null, application_url: null, owner_id: null, next_action: '', due_on: null, payment_status: 'unconfirmed', payment_reference: '', payment_on: null, enrollment_id: null, created_at, updated_at: created_at });
@@ -17,7 +18,7 @@ export function demoCrm(): CrmWorkspace {
   const applications = [application('a1', 'a1', 11, 'https://on.soundcloud.com/one\nhttps://on.soundcloud.com/two', '10+ years', '$0', "Yes, I'm ready", 'Become a touring artist', 'Original production, unique sound design'),
     application('a2', 'a2', 9, '', '1–3 years', '$0', "Yes, I'm ready", 'Improve my production, learn to make sounds from scratch and improve my mixing', 'Playing synths in a modern way, mixing and layering'),
     application('a3', 'a3', 5, 'https://open.spotify.com/playlist/demo', '5–10 years', '$1–5k/month', 'I have questions first', "I already work as a producer, and my biggest goal is to take my productions to a truly world-class level.\n\nI want records that stand next to the ones I look up to.", '1. Closing the gap between my work and the records I look up to.\n\n2. Trusting my creative instincts instead of second-guessing every decision.\n\n3. A faster workflow without losing creativity.')];
-  const settings = { ...defaultSettings, capacity: 12, currency: 'USD', seat_price_minor: 249700, list_columns: [{ key: 'experience', label: 'Producing' }, { key: 'income', label: 'Making from music' }, { key: 'investment', label: 'Ready to invest' }], links_question_key: 'music', links_label: 'Their music' };
+  const settings = { ...defaultSettings, reviewers: ['Rob', 'George'], places_updated_at: demoWrites.placesUpdatedAt, capacity: 12, currency: 'USD', seat_price_minor: 249700, list_columns: [{ key: 'experience', label: 'Producing' }, { key: 'income', label: 'Making from music' }, { key: 'investment', label: 'Ready to invest' }], links_question_key: 'music', links_label: 'Their music' };
   const closes = new Date(Date.now() + 7.7 * 86_400_000); closes.setUTCHours(23, 59, 0, 0);
-  return { leads, students: [], staff: [], capacity: 12, settings, milestones: [], payments: [], intake: [], shopifyOrders: [], applications, closesAt: closes.toISOString(), timezone: 'Europe/London' };
+  return { reviews: demoWrites.reviews, placesShownAt: demoWrites.placesUpdatedAt, leads, students: [], staff: [], capacity: 12, settings, milestones: [], payments: [], intake: [], shopifyOrders: [], applications, closesAt: closes.toISOString(), timezone: 'Europe/London' };
 }

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { ArrowRight, AudioLines, Check, Disc3, Layers, MessageCircle, Repeat, Users, Video, X } from "lucide-react";
-import { usePlacesLeft } from "@/mentorship/placesLeft";
+import { usePlacesLeft, usePlacesUpdatedAt } from "@/mentorship/placesLeft";
 
 /* Mentorship cohort 2 as a conventional landing page (mock-up for Rob).
    Same offer and same copy as MentorshipRobVersion.tsx, laid out like the Producer Blueprint sales pages.
@@ -67,20 +67,36 @@ const P = ({ children, className = "" }: { children: ReactNode; className?: stri
 const B = ({ children }: { children: ReactNode }) => <strong className="text-white font-semibold">{children}</strong>;
 
 /* Rob's bold lines (whole-paragraph <B> in the offer doc) as highlighted standout lines. */
-const Standout = ({ children }: { children: ReactNode }) => (
-  <p className="my-8 border-l-[3px] border-[#D3FF02] pl-4 text-[19px] md:text-[21px] leading-[1.4] font-bold text-white tracking-tight">
+const Standout = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
+  <p className={`my-8 border-l-[3px] border-[#D3FF02] pl-4 text-[19px] md:text-[21px] leading-[1.4] font-bold text-white tracking-tight ${className}`.trim()}>
     {children}
   </p>
 );
 
 
-/* Every apply button opens the application form, carrying UTM/referral params through so the CRM can attribute the lead. */
+/* The apply buttons in the price card and the final section open the form, carrying UTM/referral params through so the CRM
+   can attribute the lead. Every button above the price scrolls down to it first, so nobody applies without seeing it. */
 const applyHref = () => `/mentorship/apply${window.location.search}`;
+const PRICE_ANCHOR = "#pricing";
 
-const LimeCta = ({ id, className = "" }: { id?: string; className?: string }) => (
+/* Lazy images above the price grow as the page scrolls past them, which moves the target, so keep re-aiming until it lands. */
+const scrollToPrice = (event: MouseEvent<HTMLAnchorElement>) => {
+  const target = document.getElementById("pricing");
+  if (!target) return;
+  event.preventDefault();
+  const reaim = new ResizeObserver(() => target.scrollIntoView({ behavior: "smooth", block: "start" }));
+  const stop = () => reaim.disconnect();
+  reaim.observe(document.body);
+  window.setTimeout(stop, 4000);
+  window.addEventListener("wheel", stop, { once: true, passive: true });
+  window.addEventListener("touchstart", stop, { once: true, passive: true });
+};
+
+const LimeCta = ({ id, className = "", toForm = false }: { id?: string; className?: string; toForm?: boolean }) => (
   <a
     id={id}
-    href={applyHref()}
+    href={toForm ? applyHref() : PRICE_ANCHOR}
+    onClick={toForm ? undefined : scrollToPrice}
     className={`w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#D3FF02] text-black px-6 md:px-8 py-4 rounded-2xl text-[17px] md:text-lg font-black hover:bg-[#b8e000] transition-all shadow-[0_0_40px_rgba(211,255,2,0.4)] hover:shadow-[0_0_50px_rgba(211,255,2,0.5)] ${className}`.trim()}
   >
     Apply For The Mentorship
@@ -162,9 +178,11 @@ const VslPlayer = () => {
   );
 };
 
-const ApplyPill = () => (
+const ApplyPill = ({ hidden = false }: { hidden?: boolean }) => (
   <a
-    href={applyHref()}
+    href={PRICE_ANCHOR}
+    onClick={scrollToPrice}
+    tabIndex={hidden ? -1 : undefined}
     className="shrink-0 bg-white text-black px-4 md:px-5 py-2 rounded-full text-[13px] font-semibold hover:bg-zinc-200 transition-colors"
   >
     Apply Now
@@ -186,29 +204,61 @@ const VideoSources = ({ src }: { src: string }) => (
   </>
 );
 
-const SeatLine = () => {
-  const live = usePlacesLeft("cohort-2");
-  const left = typeof live === "number" ? live : SEATS_LEFT;
-  return (
-    <span className="inline-flex flex-wrap items-baseline gap-x-1.5" style={{ letterSpacing: "-0.02em" }}>
-      <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
-      <span className="text-[#D3FF02]">{left > 0 ? `${left} remaining` : "Sold out"}</span>
-    </span>
-  );
+type Seats = { left: number; updatedAt: string | null };
+
+/* A real time, in the visitor's own clock, with the date once it isn't today. */
+const lastUpdated = (iso: string | null) => {
+  if (!iso) return null;
+  const at = new Date(iso);
+  const time = new Intl.DateTimeFormat("en-GB", { hour: "numeric", minute: "2-digit", hour12: true }).format(at).replace(/\s/g, "").toLowerCase();
+  return at.toDateString() === new Date().toDateString() ? time : `${time}, ${new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long" }).format(at)}`;
 };
+
+/* The live count, and the time staff last pressed Update places or a place last sold. No time shows until the first press. */
+const useSeats = (): Seats => {
+  const live = usePlacesLeft("cohort-2");
+  const updatedAt = usePlacesUpdatedAt("cohort-2");
+  return useMemo(() => ({
+    left: typeof live === "number" ? live : SEATS_LEFT,
+    updatedAt: lastUpdated(updatedAt),
+  }), [live, updatedAt]);
+};
+
+const SeatLine = ({ seats }: { seats: Seats }) => (
+  <span className="inline-flex flex-wrap items-baseline gap-x-1.5" style={{ letterSpacing: "-0.02em" }}>
+    <span className="line-through decoration-2 text-white/40">{SEATS_TOTAL} seats available</span>
+    <span className="text-[#D3FF02]">{seats.left > 0 ? `${seats.left} remaining` : "Sold out"}</span>
+  </span>
+);
+
+/* The same scarcity cues as the sticky bar, for the sections where the bar has gone. */
+const SeatNote = ({ seats, className = "", showClose = true }: { seats: Seats; className?: string; showClose?: boolean }) => (
+  <div className={`text-center leading-tight ${className}`}>
+    <p className="text-[14px] font-bold text-white"><SeatLine seats={seats} /></p>
+    {(showClose || seats.updatedAt) && (
+      <p className="text-[12px] text-white/50 mt-1.5">
+        {showClose && "Applications close 11 November"}
+        {showClose && seats.updatedAt && " · "}
+        {seats.updatedAt && `Last updated ${seats.updatedAt}`}
+      </p>
+    )}
+  </div>
+);
 
 /* Sticky top bar: the name with the seat count and close date under it, Apply Now on the right. */
 /* Sticky top bar: seat count and close date on the left, Apply Now on the right. Rob's name lives in the eyebrow below. */
-const StickyBar = () => (
-  <header className="sticky top-0 z-50 bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.06]">
+const StickyBar = ({ seats, hidden }: { seats: Seats; hidden: boolean }) => (
+  <header className={`sticky top-0 z-50 bg-[#050505]/85 backdrop-blur-md border-b border-white/[0.06] transition-transform duration-300 ${hidden ? "-translate-y-full" : ""}`}>
     <div className="flex items-center justify-between gap-3 px-5 md:px-12 py-2.5 md:py-3 max-w-7xl mx-auto">
       <div className="min-w-0 leading-tight">
         <p className="text-[14px] font-bold text-white">
-          <SeatLine />
+          <SeatLine seats={seats} />
         </p>
-        <p className="text-[11.5px] text-white/50 mt-1">Applications close 11 November</p>
+        <p className="text-[11.5px] text-white/50 mt-1">
+          Applications close 11 November{seats.updatedAt && <span className="block mt-0.5 md:inline md:mt-0"><span className="hidden md:inline"> · </span>Last updated {seats.updatedAt}</span>}
+        </p>
       </div>
-      <ApplyPill />
+      <ApplyPill hidden={hidden} />
     </div>
   </header>
 );
@@ -265,34 +315,42 @@ const Wide = ({
   </figure>
 );
 
+/* Below desktop the aside follows the words. On desktop it sits beside them, so the card fits on a screen or so. */
 const PhaseCard = ({
   num,
   eyebrow,
   title,
+  aside,
+  cols = "lg:grid-cols-2",
   children,
 }: {
   num: string;
   eyebrow: string;
   title: string;
+  aside: ReactNode;
+  cols?: string;
   children: ReactNode;
 }) => (
-  <article className={`${CARD} relative overflow-hidden p-5 md:p-10`}>
+  <article className={`${CARD} relative overflow-hidden p-5 md:p-10 lg:p-12`}>
     <div
       aria-hidden="true"
       className="absolute top-2 right-4 md:top-6 md:right-10 font-black text-7xl md:text-9xl text-white/[0.03] select-none pointer-events-none"
     >
       {num}
     </div>
-    <div className="relative z-10 max-w-3xl mx-auto">
-      <p className="text-[#D3FF02] text-[12px] font-bold uppercase tracking-[0.18em] mb-2">{eyebrow}</p>
-      <h3 className="text-[26px] md:text-[34px] font-bold text-white tracking-tight leading-tight mb-6">{title}</h3>
-      {children}
+    <div className={`relative z-10 max-w-3xl mx-auto lg:max-w-none lg:grid lg:gap-x-12 ${cols}`}>
+      <div>
+        <p className="text-[#D3FF02] text-[12px] font-bold uppercase tracking-[0.18em] mb-2">{eyebrow}</p>
+        <h3 className="text-[26px] md:text-[34px] font-bold text-white tracking-tight leading-tight mb-6">{title}</h3>
+        {children}
+      </div>
+      {aside}
     </div>
   </article>
 );
 
-const IncludedItem = ({ label, children, free = false }: { label: string; children: ReactNode; free?: boolean }) => (
-  <li className="flex items-start gap-3">
+const IncludedItem = ({ label, children, free = false, className = "" }: { label: string; children: ReactNode; free?: boolean; className?: string }) => (
+  <li className={`flex items-start gap-3 ${className}`}>
     <Check className="w-5 h-5 text-[#D3FF02] shrink-0 mt-0.5" />
     <span className="text-zinc-300 text-[15px] leading-relaxed flex-1">
       <strong className="text-white font-semibold">{label}:</strong> {children}
@@ -386,6 +444,22 @@ const QuoteCard = ({ children, name, who }: { children: ReactNode; name: string;
 /* ---------- Page ---------- */
 
 const MentorshipLandingVersion = () => {
+  const seats = useSeats();
+  const pricingRef = useRef<HTMLElement>(null);
+  const [reachedPricing, setReachedPricing] = useState(false);
+
+  /* The sticky bar leaves once the price section arrives: it would cover the top of it, and the section has its own count. */
+  useEffect(() => {
+    const check = () => setReachedPricing((pricingRef.current?.getBoundingClientRect().top ?? Infinity) <= 80);
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, []);
+
   useEffect(() => {
     document.title = "Rob Late - Producer Mentorship";
 
@@ -446,7 +520,7 @@ const MentorshipLandingVersion = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans relative overflow-x-clip">
-      <StickyBar />
+      <StickyBar seats={seats} hidden={reachedPricing} />
 
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden">
@@ -583,7 +657,7 @@ const MentorshipLandingVersion = () => {
       <section className="relative w-full bg-black py-16 md:py-28 px-5 md:px-6 overflow-x-clip">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-zinc-800/30 blur-[120px] rounded-full pointer-events-none z-0" />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
+        <div className="relative z-10 max-w-3xl lg:max-w-[1100px] mx-auto">
           {/* Header */}
           <div className="text-center mb-10 md:mb-14">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.05] text-white">
@@ -593,8 +667,9 @@ const MentorshipLandingVersion = () => {
             </h2>
           </div>
 
-          {/* Story column */}
-          <div className="max-w-[640px] mx-auto">
+          {/* Story column, with the photos down the side on desktop instead of between the paragraphs */}
+          <div className="lg:grid lg:grid-cols-[minmax(0,600px)_minmax(0,1fr)] lg:gap-x-14">
+          <div className="max-w-[640px] mx-auto lg:mx-0">
             <P>One of the biggest things that changed the trajectory of my career as a producer wasn't a new plugin, mixing technique or some secret production trick.</P>
 
             <Standout>It was learning to make more ideas, more often.</Standout>
@@ -606,7 +681,7 @@ const MentorshipLandingVersion = () => {
             <P>And a huge part of that journey has been developing a workflow that allows me to create better music, faster.</P>
 
             {/* Photos near the credits line */}
-            <div className="relative my-10">
+            <div className="relative my-10 lg:hidden">
               <div className="absolute inset-0 -m-6 pointer-events-none" style={{ background: SOFT_GLOW }} />
               <div className="relative grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-3">
                 <img
@@ -650,7 +725,7 @@ const MentorshipLandingVersion = () => {
 
             <P>I'd flick through these ideas in sessions until something caught someone's attention, and suddenly we'd have the starting point for a new track.</P>
 
-            <div className="relative my-10">
+            <div className="relative my-10 lg:hidden">
               <div className="absolute inset-0 -m-6 pointer-events-none" style={{ background: SOFT_GLOW }} />
               <img
                 src={webAsset("rob-studio-portrait.webp")}
@@ -685,6 +760,45 @@ const MentorshipLandingVersion = () => {
             </p>
           </div>
 
+          <div className="hidden lg:flex flex-col justify-between gap-5 relative">
+            <div className="absolute inset-0 -m-6 pointer-events-none" style={{ background: SOFT_GLOW }} />
+            <div className="relative grid grid-cols-2 gap-3">
+              <img
+                src={webAsset("rob-chainsmokers.webp")}
+                alt="Rob with The Chainsmokers"
+                width={600}
+                height={799}
+                loading="lazy"
+                className={`w-full aspect-[3/4] object-cover object-top rounded-2xl border border-white/10 ${GLOW_SHADOW}`}
+              />
+              <img
+                src={webAsset("rob-marshmello.webp")}
+                alt="Rob with Marshmello"
+                width={600}
+                height={923}
+                loading="lazy"
+                className={`w-full aspect-[3/4] object-cover rounded-2xl border border-white/10 ${GLOW_SHADOW}`}
+              />
+            </div>
+            <img
+              src={webAsset("rob-session.webp")}
+              alt="Rob in a writing session"
+              width={1050}
+              height={1442}
+              loading="lazy"
+              className={`relative w-full aspect-[4/5] object-cover rounded-2xl border border-white/10 ${GLOW_SHADOW}`}
+            />
+            <img
+              src={webAsset("rob-studio-portrait.webp")}
+              alt="Rob in his studio"
+              width={1067}
+              height={1600}
+              loading="lazy"
+              className={`relative w-full aspect-[4/5] object-cover object-[center_40%] rounded-2xl border border-white/10 ${GLOW_SHADOW}`}
+            />
+          </div>
+          </div>
+
           {/* Austin's words as proof of the method, right where Rob's story lands */}
           <div className="max-w-[640px] mx-auto mt-12 md:mt-16">
             <QuoteCard name="Austin" who="austin">
@@ -698,7 +812,7 @@ const MentorshipLandingVersion = () => {
 
       {/* ================= THE SIX WEEKS ================= */}
       <section className="relative bg-[#050505] border-t border-white/5 py-16 md:py-28 px-5 md:px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl lg:max-w-[1180px] mx-auto">
           <SectionHeader eyebrow="So how do we get you there?" className="mb-10 md:mb-14">
             Here's how the six weeks <Serif>work.</Serif>
           </SectionHeader>
@@ -713,22 +827,57 @@ const MentorshipLandingVersion = () => {
 
           <div className="flex flex-col gap-5 md:gap-8">
             {/* Before we start */}
-            <PhaseCard num="01" eyebrow="Before we start" title="Your 1:1 production assessment">
+            <PhaseCard
+              num="01"
+              eyebrow="Before we start"
+              title="Your 1:1 production assessment"
+              aside={
+                <Wide
+                  src={webAsset("portal-onboarding.webp")}
+                  alt="Student portal onboarding"
+                  width={1004}
+                  height={811}
+                  className="mt-8 mb-0 max-w-[520px] mx-auto lg:my-0 lg:max-w-none lg:self-center"
+                />
+              }
+            >
               <P>We'll kick things off with a private one-to-one call.</P>
               <P>Play me your music, tell me what you're working towards, and we'll identify the biggest things holding you back.</P>
               <P>I'll help you figure out exactly what you need to focus on throughout the mentorship, and we'll use that to track your progress.</P>
               <P>You'll also get access to your personal student portal, including session templates, reference playlists and sound libraries designed to help you work faster and more efficiently.</P>
-              <Wide
-                src={webAsset("portal-onboarding.webp")}
-                alt="Student portal onboarding"
-                width={1004}
-                height={811}
-                className="mt-8 mb-0 max-w-[520px] mx-auto"
-              />
             </PhaseCard>
 
             {/* Weeks 1-4 */}
-            <PhaseCard num="02" eyebrow="Weeks 1–4" title="Doing The Reps">
+            <PhaseCard
+              num="02"
+              eyebrow="Weeks 1–4"
+              title="Doing The Reps"
+              aside={
+                <div className="hidden lg:flex flex-col justify-between gap-8">
+                  <Wide
+                    src={webAsset("live-call-rob-ableton.webp")}
+                    alt="Rob inside a project on a cohort 1 call, students on Zoom down the side"
+                    width={1200}
+                    height={674}
+                    className="my-0"
+                  />
+                  <Phone
+                    src={webAsset("rob-stems-surgery.webp")}
+                    width={900}
+                    height={701}
+                    alt="WhatsApp: Rob asks a cohort 1 student for stems to work on live"
+                    className="my-0"
+                  />
+                  <Phone
+                    src={webAsset("rob-project-sunday.webp")}
+                    width={900}
+                    height={870}
+                    alt="WhatsApp: Rob offers to open a project on the Sunday call"
+                    className="my-0"
+                  />
+                </div>
+              }
+            >
               <P>This is where we get to work.</P>
               <P>
                 Every week, you'll create a minimum of <B>five new songstarters</B> and choose your favourite to develop into a larger musical idea, up to a first chorus or drop.
@@ -745,7 +894,7 @@ const MentorshipLandingVersion = () => {
                 alt="Rob inside a project on a cohort 1 call, students on Zoom down the side"
                 width={1200}
                 height={674}
-                className="my-8"
+                className="my-8 lg:hidden"
               />
 
               <Phone
@@ -753,6 +902,7 @@ const MentorshipLandingVersion = () => {
                 width={900}
                 height={701}
                 alt="WhatsApp: Rob asks a cohort 1 student for stems to work on live"
+                className="my-8 lg:hidden"
               />
 
               <P>We'll also cover the areas the group needs help with, break down real major-label projects, and finish with a Q&A.</P>
@@ -762,6 +912,7 @@ const MentorshipLandingVersion = () => {
                 width={900}
                 height={870}
                 alt="WhatsApp: Rob offers to open a project on the Sunday call"
+                className="my-8 lg:hidden"
               />
 
               <P>You'll see exactly how I approach music in real-world situations, and how to apply those techniques to your own productions.</P>
@@ -772,45 +923,55 @@ const MentorshipLandingVersion = () => {
             </PhaseCard>
 
             {/* Weeks 5-6 */}
-            <PhaseCard num="03" eyebrow="Weeks 5–6" title="Finishing Your Strongest Track">
+            <PhaseCard
+              num="03"
+              eyebrow="Weeks 5–6"
+              title="Finishing Your Strongest Track"
+              aside={<Standout className="lg:my-0 lg:self-center">It's to understand the process well enough to keep doing it yourself.</Standout>}
+            >
               <P>Now we take everything you've learned and put it into practice.</P>
               <P>We'll choose your strongest track and dedicate the final two weeks to taking it all the way to a finished production, with my guidance and feedback throughout.</P>
               <P>The goal isn't just to walk away with one finished piece of music.</P>
-              <Standout>It's to understand the process well enough to keep doing it yourself.</Standout>
             </PhaseCard>
 
             {/* Throughout */}
-            <PhaseCard num="04" eyebrow="Throughout" title="Direct Access & Accountability">
+            <PhaseCard
+              num="04"
+              eyebrow="Throughout"
+              title="Direct Access & Accountability"
+              cols="lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+              aside={
+                <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory mt-8 lg:mt-0 lg:self-center -mx-5 px-5 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 sm:overflow-visible scrollbar-hide items-start">
+                  <img
+                    src={webAsset("rob-reps-folders.webp")}
+                    width={800}
+                    height={1434}
+                    alt="WhatsApp: Rob's project folders"
+                    loading="lazy"
+                    className="snap-start shrink-0 w-[72%] sm:w-auto h-auto rounded-[20px] border border-white/10"
+                  />
+                  <img
+                    src={webAsset("austin-chat.webp")}
+                    width={800}
+                    height={1320}
+                    alt="WhatsApp: Austin's message to Rob"
+                    loading="lazy"
+                    className="snap-start shrink-0 w-[72%] sm:w-auto h-auto rounded-[20px] border border-white/10"
+                  />
+                  <img
+                    src={webAsset("aaron-video-breakdown.webp")}
+                    width={800}
+                    height={1499}
+                    alt="WhatsApp: Rob's video breakdown for Aaron"
+                    loading="lazy"
+                    className="snap-start shrink-0 w-[72%] sm:w-auto h-auto rounded-[20px] border border-white/10"
+                  />
+                </div>
+              }
+            >
               <P>Between our weekly sessions, you'll have access to a private WhatsApp group with me and the other producers.</P>
               <P>Ask questions, share your progress, get advice, and be part of a small group of producers working towards the same goal.</P>
               <P>I'll also be sharing insights into my daily life as a full-time producer, my projects, and how I approach the creative and business sides of the industry.</P>
-
-              <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory mt-8 -mx-5 px-5 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 sm:overflow-visible scrollbar-hide items-start">
-                <img
-                  src={webAsset("rob-reps-folders.webp")}
-                  width={800}
-                  height={1434}
-                  alt="WhatsApp: Rob's project folders"
-                  loading="lazy"
-                  className="snap-start shrink-0 w-[72%] sm:w-auto h-auto rounded-[20px] border border-white/10"
-                />
-                <img
-                  src={webAsset("austin-chat.webp")}
-                  width={800}
-                  height={1320}
-                  alt="WhatsApp: Austin's message to Rob"
-                  loading="lazy"
-                  className="snap-start shrink-0 w-[72%] sm:w-auto h-auto rounded-[20px] border border-white/10"
-                />
-                <img
-                  src={webAsset("aaron-video-breakdown.webp")}
-                  width={800}
-                  height={1499}
-                  alt="WhatsApp: Rob's video breakdown for Aaron"
-                  loading="lazy"
-                  className="snap-start shrink-0 w-[72%] sm:w-auto h-auto rounded-[20px] border border-white/10"
-                />
-              </div>
             </PhaseCard>
           </div>
         </div>
@@ -821,8 +982,9 @@ const MentorshipLandingVersion = () => {
         {/* Visual connector */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 md:h-24 bg-gradient-to-b from-zinc-800 to-transparent" />
 
-        <div className="max-w-[640px] mx-auto relative z-10 text-center">
-          <SectionHeader eyebrow="One more thing..." className="mb-6 md:mb-8" />
+        <div className="max-w-[640px] lg:max-w-[900px] mx-auto relative z-10 text-center lg:text-left lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-x-14 lg:items-center">
+          <div>
+          <SectionHeader eyebrow="One more thing..." className="mb-6 md:mb-8 lg:text-left" />
 
           <p className="text-[18px] md:text-[20px] leading-[1.6] text-zinc-300">
             You'll also get my complete <B>Master Bundle sample and preset collection</B> included for free. If you've already purchased it, I'll refund that purchase when you join.
@@ -831,6 +993,7 @@ const MentorshipLandingVersion = () => {
           <p className="mt-5 text-[18px] md:text-[20px] leading-[1.6] text-zinc-300">
             So you've got a war chest of quality sounds to work with throughout the mentorship. <B>More on that in your onboarding...</B>
           </p>
+          </div>
 
           <img
             src={webAsset("master-bundle.webp")}
@@ -838,7 +1001,7 @@ const MentorshipLandingVersion = () => {
             width={840}
             height={840}
             loading="lazy"
-            className="w-full max-w-[280px] mx-auto mt-8 md:mt-10 rounded-xl border border-white/10"
+            className="w-full max-w-[280px] mx-auto mt-8 md:mt-10 lg:mt-0 rounded-xl border border-white/10"
           />
         </div>
       </section>
@@ -950,13 +1113,13 @@ const MentorshipLandingVersion = () => {
       </section>
 
       {/* ================= EVERYTHING INCLUDED + PRICE ================= */}
-      <section id="pricing" className="relative py-16 md:py-28 scroll-mt-20">
-        <div className="max-w-xl mx-auto px-5 md:px-6">
-          <div className="text-center mb-10 md:mb-14">
+      <section ref={pricingRef} className="relative py-16 md:py-28">
+        <div id="pricing" className="max-w-xl lg:max-w-5xl mx-auto px-5 md:px-6 scroll-mt-8">
+          <div className="text-center mb-10 md:mb-14 lg:mb-8">
             <div className="mb-4">
               <Eyebrow>The quick facts</Eyebrow>
             </div>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tighter leading-[1.05]">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 lg:mb-3 tracking-tighter leading-[1.05]">
               Everything included in <Serif>your mentorship</Serif>
             </h2>
             <p className="text-zinc-300 text-[17px] md:text-xl max-w-2xl mx-auto font-bold leading-snug">6 weeks. 12 producers. Direct mentorship from me, Rob Late.</p>
@@ -964,7 +1127,7 @@ const MentorshipLandingVersion = () => {
 
           {/* Pricing card */}
           <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-            <ul className="space-y-5">
+            <ul className="grid lg:grid-cols-2 gap-y-5 lg:gap-x-10">
               <IncludedItem label="Private 1:1 onboarding call">
                 I'll review your music, identify where you need to improve, and help set your goals.
               </IncludedItem>
@@ -983,13 +1146,13 @@ const MentorshipLandingVersion = () => {
               <IncludedItem label="Production resources">
                 Access to session templates, reference material and sound libraries.
               </IncludedItem>
-              <IncludedItem label="The Master Bundle" free>
+              <IncludedItem label="The Master Bundle" free className="lg:col-span-2">
                 My full sample and preset collection, included at no extra cost.
               </IncludedItem>
             </ul>
 
-            <div className="pt-6 mt-7 border-t border-zinc-800">
-              <div className="flex justify-between items-baseline mb-5">
+            <div className="pt-6 mt-7 border-t border-zinc-800 lg:grid lg:grid-cols-2 lg:gap-x-10 lg:items-start">
+              <div className="flex justify-between items-baseline mb-5 lg:mb-0 lg:pt-1.5">
                 <span className="text-zinc-400 text-[16px]">Your investment:</span>
                 <span className="text-4xl font-bold text-white tracking-tight">$2,497</span>
               </div>
@@ -1001,6 +1164,7 @@ const MentorshipLandingVersion = () => {
                 Apply For The Mentorship
                 <ArrowRight className="w-5 h-5" />
               </a>
+              <SeatNote seats={seats} className="mt-4 lg:col-start-2" />
             </div>
           </div>
         </div>
@@ -1057,7 +1221,8 @@ const MentorshipLandingVersion = () => {
           </div>
 
           <div className="flex flex-col items-center">
-            <LimeCta id="apply" className="scroll-mt-24" />
+            <LimeCta id="apply" className="scroll-mt-24" toForm />
+            <SeatNote seats={seats} className="mt-4" showClose={false} />
             <p className="mt-10 text-[19px] text-zinc-300">See you inside.</p>
             <img src={robSignature} alt="Rob Late" className="h-16 sm:h-20 w-auto mt-3" loading="lazy" />
           </div>

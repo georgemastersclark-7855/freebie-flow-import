@@ -14,7 +14,8 @@ async function rows<T>(table: string, select: string, filter: (q:any)=>any = q=>
 export interface CrmStudent extends SuccessEnrollment { call?: OnboardingCall; questionnaire?: unknown; focus: string; openActions: number }
 export interface IntakeConnection { provider: 'gmail'|'typeform'|'native'; status: 'setup_needed'|'backfilled'|'connected'|'paused'|'error'; account_label: string; last_checked_at: string|null; last_received_at: string|null; detail: string }
 export interface ShopifyOrderRecord { shopify_order_id: string; order_name: string|null; email: string|null; lead_id: string|null; enrollment_id: string|null; status: 'processed'|'failed'; outcome: string|null; flags: string[]; last_error: string|null; test_order: boolean; received_at: string; reviewed_at: string|null; cohort_id: string|null }
-export interface CrmWorkspace { leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; settings: LaunchSettings; milestones: LeadMilestone[]; payments: RecordedPayment[]; intake: IntakeConnection[]; shopifyOrders: ShopifyOrderRecord[]; applications: ApplicationRecord[]; closesAt: string | null; timezone: string }
+export interface LeadReview { lead_id: string; reviewer: string; verdict: 'yes'|'no'|null }
+export interface CrmWorkspace { reviews: LeadReview[]; placesShownAt: string|null; leads: Lead[]; students: CrmStudent[]; staff: StaffPerson[]; capacity: number; settings: LaunchSettings; milestones: LeadMilestone[]; payments: RecordedPayment[]; intake: IntakeConnection[]; shopifyOrders: ShopifyOrderRecord[]; applications: ApplicationRecord[]; closesAt: string | null; timezone: string }
 // Paid Shopify orders written by the shopify-order-paid webhook. Empty until that migration is applied.
 async function loadShopifyOrders(cohortId: string): Promise<ShopifyOrderRecord[]> {
   try { return await rows<ShopifyOrderRecord>('mentorship_shopify_orders','shopify_order_id,order_name,email,lead_id,enrollment_id,status,outcome,flags,last_error,test_order,received_at,reviewed_at,cohort_id',q=>q.or(`cohort_id.eq.${cohortId},cohort_id.is.null`),'received_at'); }
@@ -33,14 +34,16 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
     rows<LeadMilestone>('mentorship_lead_milestones','lead_id,milestone,occurred_at',q=>q.eq('cohort_id',cohortId).order('milestone'),'lead_id'),
     rows<RecordedPayment>('mentorship_lead_payments','*',q=>q.eq('cohort_id',cohortId)),
     loadShopifyOrders(cohortId),
-    rows<{timezone:string}>('mentorship_cohorts','timezone',q=>q.eq('id',cohortId)),
+    rows<{timezone:string;slug:string}>('mentorship_cohorts','timezone,slug',q=>q.eq('id',cohortId)),
     loadApplicationClose(cohortId),
   ]);
   const leads=allLeads.filter(l=>!isTestLead(l));
   const settings:LaunchSettings={...defaultSettings,...settingsRows[0]};
   const applications=leads.length?await rows<ApplicationRecord>('mentorship_applications','id,lead_id,submitted_at,answers,attribution',q=>q.in('lead_id',leads.map(l=>l.id))):[];
+  const reviews=leads.length?await rows<LeadReview>('mentorship_lead_reviews','lead_id,reviewer,verdict',q=>q.in('lead_id',leads.map(l=>l.id)),'lead_id'):[];
+  const {data:placesShownAt,error:placesError}=await db.rpc('get_mentorship_places_updated_at',{p_slug:cohortRows[0]?.slug}); if(placesError)throw placesError;
   const closesAt=close.state==='ready'?close.closesAt:null; const timezone=cohortRows[0]?.timezone||'Europe/London';
-  if(!enrollments.length)return {leads,students:[],staff,capacity:settings.capacity,settings,milestones,payments,intake,shopifyOrders,applications,closesAt,timezone};
+  if(!enrollments.length)return {reviews,placesShownAt,leads,students:[],staff,capacity:settings.capacity,settings,milestones,payments,intake,shopifyOrders,applications,closesAt,timezone};
   const ids=enrollments.map(e=>e.id);
   const [profiles,identities,calls,notes,contexts,actions]=await Promise.all([
     loadStudentProfilesForEnrollments(ids),
@@ -50,7 +53,7 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
     rows<{enrollment_id:string;current_focus:string}>('mentorship_student_context','enrollment_id,current_focus',q=>q.in('enrollment_id',ids),'enrollment_id'),
     rows<{enrollment_id:string}>('mentorship_student_actions','id,enrollment_id',q=>q.in('enrollment_id',ids).is('completed_at',null)),
   ]);
-  return {leads,staff,intake,settings,milestones,payments,shopifyOrders,applications,closesAt,timezone,capacity:settings.capacity,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
+  return {reviews,placesShownAt,leads,staff,intake,settings,milestones,payments,shopifyOrders,applications,closesAt,timezone,capacity:settings.capacity,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
 }
 export async function saveLead(input:LeadInput, previous?:Lead):Promise<Lead> {
   const values=normaliseLead(input);
@@ -70,6 +73,17 @@ export async function saveOnboardingCall(enrollmentId:string,input:Pick<Onboardi
 export async function saveCapacity(cohortId:string,capacity:number) { if(!Number.isInteger(capacity)||capacity<1||capacity>1000)throw new Error('Capacity must be between 1 and 1,000.'); const {error}=await db.from('mentorship_admissions_settings').upsert({cohort_id:cohortId,capacity}); if(error)throw error; }
 export async function loadStudentLead(enrollmentId:string) { return (await rows<Lead>('mentorship_leads','*',q=>q.eq('enrollment_id',enrollmentId)))[0] ?? null; }
 
+// Rob's and George's read on an applicant. Only ever a signal between them: it sends nothing and changes no stage.
+export async function saveLeadReview(lead_id:string,reviewer:string,verdict:LeadReview['verdict']) {
+  if(scheduleDemoBackend){const {demoWrites}=await import('./crmDemo');demoWrites.reviews=[...demoWrites.reviews.filter(r=>!(r.lead_id===lead_id&&r.reviewer===reviewer)),{lead_id,reviewer,verdict}];return;}
+  const {error}=await db.from('mentorship_lead_reviews').upsert({lead_id,reviewer,verdict});if(error)throw error;
+}
+// Sets the "Last updated" time on the sales page to now. It shows nothing there until this is first pressed.
+export async function markPlacesUpdated(cohortId:string) {
+  const places_updated_at=new Date().toISOString();
+  if(scheduleDemoBackend){(await import('./crmDemo')).demoWrites.placesUpdatedAt=places_updated_at;return;}
+  const {error}=await db.from('mentorship_admissions_settings').update({places_updated_at}).eq('cohort_id',cohortId);if(error)throw error;
+}
 export async function saveLaunchSettings(cohortId:string,settings:LaunchSettings) {
   if(!Number.isInteger(settings.capacity)||settings.capacity<1||settings.capacity>1000)throw new Error('Choose 1 to 1,000 seats.');
   const {error}=await db.from('mentorship_admissions_settings').upsert({cohort_id:cohortId,...settings});if(error)throw error;

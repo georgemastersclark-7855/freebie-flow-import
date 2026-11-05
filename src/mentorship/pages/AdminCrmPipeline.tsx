@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Clock3, Link2 } from 'lucide-react';
+import { useQueryClient } from '@tanstack/react-query';
+import { Check, ChevronRight, Clock3, Link2, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { crmRoot, leadStages, onboardingState, paymentLink, readableDate, type Lead } from '../crm';
 import { hasPaid } from '../crmAnalytics';
-import type { CrmWorkspace } from '../crmApi';
+import { markPlacesUpdated, saveLeadReview, type CrmWorkspace, type LeadReview } from '../crmApi';
 import { answerLinks, answerOf, applicationChannel, applicationsPerDay, closesDate, closesTime, deadline, latestApplications, namedLinks, pipelineStages, timeLeft, type ApplicationRecord, type PipelineKey } from '../crmPipeline';
 
 /** Asks before a step that changes someone's record, and says what will happen next. */
@@ -55,7 +56,23 @@ function TimeLeftCard({ data, days, now }: { data: CrmWorkspace; days: { key: st
   </div>;
 }
 
-export function CrmStats({ data, now }: { data: CrmWorkspace; now: number }) {
+/** Sets the "Last updated" time on the sales page. It shows no time until this is first pressed. */
+function PlacesTime({ data, cohortId }: { data: CrmWorkspace; cohortId: string }) {
+  const cache = useQueryClient(); const [asking, setAsking] = useState(false);
+  const shown = data.placesShownAt;
+  const press = async () => {
+    setAsking(false);
+    try { await markPlacesUpdated(cohortId); await cache.invalidateQueries({ queryKey: ['crm', cohortId] }); toast.success('Sales page time updated'); }
+    catch { toast.error('Could not update the sales page time. Please try again.'); }
+  };
+  return <div className="ca-places-time">
+    <span>{shown ? `Sales page says last updated ${new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date(shown))}` : 'Sales page shows no update time'}</span>
+    <button type="button" className="ca-text-link" onClick={() => setAsking(true)}>Update places</button>
+    {asking && <ConfirmStep title="Update places on the sales page?" steps={[shown ? '"Last updated" on the sales page moves to the time right now.' : 'The sales page starts showing "Last updated" with the time right now.', 'The number of places stays as it is. That only changes when a real sale comes in.', 'From now on, each real sale moves the time too.']} confirmLabel="Update places" cancelLabel="Not yet" onConfirm={() => void press()} onCancel={() => setAsking(false)}/>}
+  </div>;
+}
+
+export function CrmStats({ data, now, cohortId }: { data: CrmWorkspace; now: number; cohortId: string }) {
   const applications = [...latestApplications(data.applications).values()];
   const days = applicationsPerDay(applications, data.timezone, data.closesAt, now);
   const today = days.find(d => d.today)?.count ?? 0;
@@ -63,7 +80,7 @@ export function CrmStats({ data, now }: { data: CrmWorkspace; now: number }) {
   const tallest = Math.max(3, ...days.map(d => d.count));
   return <div className="ca-stats">
     <div className="ca-card"><small>Applications</small><strong>{applications.length}</strong><span>{today} today</span></div>
-    <div className="ca-card"><small>Places filled</small><strong>{filled} <em>of {data.capacity}</em></strong><span>{left > 0 ? `${left} left` : left === 0 ? 'Full' : `${-left} over`}</span></div>
+    <div className="ca-card"><small>Places filled</small><strong>{filled} <em>of {data.capacity}</em></strong><span>{left > 0 ? `${left} left` : left === 0 ? 'Full' : `${-left} over`}</span><PlacesTime data={data} cohortId={cohortId}/></div>
     <TimeLeftCard data={data} days={days} now={now}/>
     <div className="ca-card ca-chart"><small>Applications per day</small><div className="ca-bars" role="img" aria-label={days.map(d => `${d.label}: ${d.count}`).join(', ')}>{days.map(d => <div key={d.key} className={`ca-bar${d.future ? ' ca-bar-future' : ''}${d.today ? ' ca-bar-today' : ''}`}><b>{d.count || ''}</b><i style={{ height: d.count ? Math.round(d.count / tallest * 52) + 6 : 4 }}/>{d.label}</div>)}</div></div>
   </div>;
@@ -77,18 +94,38 @@ const Empty = ({ title, children }: { title: string; children: React.ReactNode }
 const Arrow = ({ name }: { name: string }) => <td className="ca-arrow"><span className="sr-only">Open {name}</span><ChevronRight size={17} aria-hidden="true"/></td>;
 const rowProps = (lead: Lead, openLead: (id: string) => void) => ({ tabIndex: 0, onClick: () => openLead(lead.id), onKeyDown: (e: React.KeyboardEvent) => { if (e.key === 'Enter') openLead(lead.id); } });
 
+const nextVerdict: Record<string, LeadReview['verdict']> = { none: 'yes', yes: 'no', no: null };
+
+/** One person's read on an applicant: blank, tick or cross. Only a signal between the reviewers, it sends nothing. */
+function ReviewMark({ lead, reviewer, verdict }: { lead: Lead; reviewer: string; verdict: LeadReview['verdict'] }) {
+  const cache = useQueryClient();
+  const show = (value: LeadReview['verdict']) => cache.setQueryData<CrmWorkspace>(['crm', lead.cohort_id], current => current && { ...current, reviews: [...current.reviews.filter(r => !(r.lead_id === lead.id && r.reviewer === reviewer)), { lead_id: lead.id, reviewer, verdict: value }] });
+  const change = async () => {
+    const next = nextVerdict[verdict ?? 'none'];
+    show(next);
+    try { await saveLeadReview(lead.id, reviewer, next); } catch { show(verdict); toast.error('Could not save that. Please try again.'); }
+  };
+  return <td className="ca-mark-cell" onClick={e => e.stopPropagation()} onKeyDown={e => e.stopPropagation()}>
+    <button type="button" className={`ca-mark${verdict ? ` ca-mark-${verdict}` : ''}`} aria-label={`${reviewer} on ${lead.full_name}: ${verdict === 'yes' ? 'good fit' : verdict === 'no' ? 'not a fit' : 'no answer yet'}. Change.`} title={verdict === 'yes' ? `${reviewer}: good fit` : verdict === 'no' ? `${reviewer}: not a fit` : `${reviewer}: no answer yet`} onClick={() => void change()}>
+      {verdict === 'yes' ? <Check size={15} strokeWidth={3} aria-hidden="true"/> : verdict === 'no' ? <X size={15} strokeWidth={3} aria-hidden="true"/> : null}
+    </button>
+  </td>;
+}
+
 export function ReviewList({ leads, data, now, openLead }: { leads: Lead[]; data: CrmWorkspace; now: number; openLead: (id: string) => void }) {
   if (!leads.length) return <Empty title="All caught up">New applications appear here the moment they come in.</Empty>;
   const latest = latestApplications(data.applications);
   const appliedAt = (l: Lead) => latest.get(l.id)?.submitted_at ?? l.created_at;
-  const { list_columns: columns, links_question_key: linksKey, links_label: linksLabel, reply_target_hours: replyHours } = data.settings;
-  return <div className="ca-panel"><table className="ca-table"><thead><tr><th>Applicant</th>{columns.map(c => <th key={c.key}>{c.label}</th>)}{linksKey && <th>{linksHeading(linksLabel)}</th>}<th>Reply due</th><th><span className="sr-only">Open</span></th></tr></thead><tbody>
+  const { list_columns: columns, links_question_key: linksKey, links_label: linksLabel, reply_target_hours: replyHours, reviewers = [] } = data.settings;
+  const verdictOf = (leadId: string, reviewer: string) => data.reviews.find(r => r.lead_id === leadId && r.reviewer === reviewer)?.verdict ?? null;
+  return <div className="ca-panel"><table className="ca-table"><thead><tr><th>Applicant</th>{columns.map(c => <th key={c.key}>{c.label}</th>)}{linksKey && <th>{linksHeading(linksLabel)}</th>}{reviewers.map(r => <th key={r} className="ca-mark-head">{r}</th>)}<th>Reply due</th><th><span className="sr-only">Open</span></th></tr></thead><tbody>
     {[...leads].sort((a, b) => appliedAt(a).localeCompare(appliedAt(b))).map(l => {
       const application = latest.get(l.id); const due = deadline(appliedAt(l), replyHours, now);
       const links = namedLinks(answerLinks(answerOf(application, linksKey)));
       return <tr key={l.id} {...rowProps(l, openLead)}><td><Person lead={l}/></td>
         {columns.map(c => { const answer = answerOf(application, c.key); return <td key={c.key}>{/^yes\b/i.test(answer) ? <Chip tone="green">Yes</Chip> : answer || '—'}</td>; })}
         {linksKey && <td>{links.length === 1 ? <a className="ca-link" href={links[0].url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>{links[0].name}</a> : links.length ? <span className="ca-link">{links.length} links</span> : <Chip tone="red">No link</Chip>}</td>}
+        {reviewers.map(r => <ReviewMark key={r} lead={l} reviewer={r} verdict={verdictOf(l.id, r)}/>)}
         <td><Chip tone={due.tone}>{due.label}</Chip></td><Arrow name={l.full_name}/></tr>;
     })}</tbody></table></div>;
 }

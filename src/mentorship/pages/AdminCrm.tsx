@@ -71,7 +71,7 @@ function ApplicationsHome({data,cohortId,onboarding,activeIds,openLead,onBooking
   const found=data.leads.filter(l=>[l.full_name,l.email,l.source].join(' ').toLowerCase().includes(term));
   const about=view==='closed'?'People who were closed, including anyone marked not a fit.':pipelineStages.find(s=>s.key===view)?.about;
   return <>
-    <CrmStats data={data} now={now}/>
+    <CrmStats data={data} now={now} cohortId={cohortId}/>
     <PipelineStrip current={term?'':view} cohortId={cohortId} counts={{interested:interested.length,review:review.length,offer:offer.length,paid:placesFilled(data),onboarding:toOnboard.length}}/>
     <div className="ca-listbar"><p>{term?`Searching everyone: ${found.length} ${found.length===1?'person':'people'}`:about}</p><div className="crm-inline">
       {closed.length>0&&view!=='closed'&&<Link className="ca-text-link" to={`${crmRoot}/leads?cohort=${cohortId}&view=closed`}>Closed ({closed.length})</Link>}
