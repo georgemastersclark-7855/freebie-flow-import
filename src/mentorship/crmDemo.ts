@@ -7,6 +7,7 @@ const cohortId = 'demo-cohort';
 export const demoWrites = {
   reviews: [{ lead_id: 'a2', reviewer: 'Rob', verdict: 'yes' }, { lead_id: 'a2', reviewer: 'George', verdict: 'yes' }, { lead_id: 'a1', reviewer: 'George', verdict: 'maybe' }, { lead_id: 'a6', reviewer: 'Rob', verdict: 'no' }, { lead_id: 'a6', reviewer: 'George', verdict: 'no' }] as LeadReview[],
   placesUpdatedAt: null as string | null,
+  leads: {} as Record<string, Lead>,
 };
 export const demoCohorts = [{ id: cohortId, internal_name: 'Cohort 2', display_name: 'Demo programme', status: 'draft', starts_at: null, current_week: 1, timezone: 'Europe/London' }];
 const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600_000).toISOString();
@@ -25,5 +26,5 @@ export function demoCrm(): CrmWorkspace {
   const settings = { ...defaultSettings, reviewers: ['Rob', 'George'], places_updated_at: demoWrites.placesUpdatedAt, capacity: 12, currency: 'USD', seat_price_minor: 249700, list_columns: [{ key: 'experience', label: 'Producing' }, { key: 'income', label: 'Making from music' }, { key: 'investment', label: 'Ready to invest' }], links_question_key: 'music', links_label: 'Their music' };
   const closes = new Date(Date.now() + 7.7 * 86_400_000); closes.setUTCHours(23, 59, 0, 0);
   const answerOrder = { experience: ['Less than 1 year', '1–3 years', '3–5 years', '5–10 years', '10+ years', 'Returning after a break'], income: ['$0', 'Under $1k/month', '$1–5k/month', '$5k+/month'], investment: ["Yes, I'm ready", 'I have questions first', 'Not right now'] };
-  return { reviews: demoWrites.reviews, placesShownAt: demoWrites.placesUpdatedAt, answerOrder, leads, students: [], staff: [], capacity: 12, settings, milestones: [], payments: [], intake: [], shopifyOrders: [], applications, closesAt: closes.toISOString(), timezone: 'Europe/London' };
+  return { reviews: demoWrites.reviews, placesShownAt: demoWrites.placesUpdatedAt, answerOrder, leads: leads.map(l => demoWrites.leads[l.id] ?? l), students: [], staff: [], capacity: 12, settings, milestones: [], payments: [], intake: [], shopifyOrders: [], applications, closesAt: closes.toISOString(), timezone: 'Europe/London' };
 }

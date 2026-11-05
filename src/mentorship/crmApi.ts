@@ -65,6 +65,7 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
 }
 export async function saveLead(input:LeadInput, previous?:Lead):Promise<Lead> {
   const values=normaliseLead(input);
+  if(scheduleDemoBackend){const {demoWrites}=await import('./crmDemo');const record={...previous,...values,updated_at:new Date().toISOString()} as Lead;demoWrites.leads[record.id]=record;return record;}
   const query=previous?db.from('mentorship_leads').update(values).eq('id',previous.id).eq('updated_at',previous.updated_at):db.from('mentorship_leads').insert(values);
   const {data,error}=await query.select().maybeSingle();
   if(error?.code==='23505')throw new Error('This email already has a record in this cohort. Search for it to continue.');

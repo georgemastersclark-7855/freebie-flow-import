@@ -104,7 +104,7 @@ const GRADES: Record<string, { letter: string; means: string; next: LeadReview['
 const GRADE_RANK = { yes: 0, maybe: 2, no: 3 };
 
 /** One person's grade on an applicant. Only a signal between the reviewers, it sends nothing. */
-function ReviewMark({ lead, reviewer, verdict }: { lead: Lead; reviewer: string; verdict: LeadReview['verdict'] }) {
+function GradeButton({ lead, reviewer, verdict }: { lead: Lead; reviewer: string; verdict: LeadReview['verdict'] }) {
   const cache = useQueryClient();
   const grade = GRADES[verdict ?? 'none'];
   const show = (value: LeadReview['verdict']) => cache.setQueryData<CrmWorkspace>(['crm', lead.cohort_id], current => current && { ...current, reviews: [...current.reviews.filter(r => !(r.lead_id === lead.id && r.reviewer === reviewer)), { lead_id: lead.id, reviewer, verdict: value }] });
@@ -112,13 +112,46 @@ function ReviewMark({ lead, reviewer, verdict }: { lead: Lead; reviewer: string;
     show(grade.next);
     try { await saveLeadReview(lead.id, reviewer, grade.next); } catch { show(verdict); toast.error('Could not save that. Please try again.'); }
   };
-  return <td className="ca-mark-cell" onClick={e => e.stopPropagation()} onKeyDown={e => e.stopPropagation()}>
-    <button type="button" className={`ca-mark${verdict ? ` ca-mark-${verdict}` : ''}`} aria-label={`${reviewer} on ${lead.full_name}: ${grade.means}. Change.`} title={`${reviewer}: ${grade.means}`} onClick={() => void change()}>{grade.letter}</button>
-  </td>;
+  return <button type="button" className={`ca-mark${verdict ? ` ca-mark-${verdict}` : ''}`} aria-label={`${reviewer} on ${lead.full_name}: ${grade.means}. Change.`} title={`${reviewer}: ${grade.means}`} onClick={() => void change()}>{grade.letter}</button>;
 }
+const ReviewMark = (props: { lead: Lead; reviewer: string; verdict: LeadReview['verdict'] }) => <td className="ca-mark-cell" onClick={e => e.stopPropagation()} onKeyDown={e => e.stopPropagation()}><GradeButton {...props}/></td>;
+const verdictOn = (data: CrmWorkspace, leadId: string, reviewer: string) => data.reviews.find(r => r.lead_id === leadId && r.reviewer === reviewer)?.verdict ?? null;
 
-/* A next action other than the default means we're waiting on them. Clearing it brings them back up the list. */
-const waitingOn = (lead: Lead) => { const action = lead.next_action.trim(); return action && action !== 'Review application' ? action : null; };
+/* A next step other than the default means we're waiting on them. Clearing it brings them back up the list. */
+export const waitingOn = (lead: Lead) => { const action = lead.next_action.trim(); return action && action !== 'Review application' ? action : null; };
+
+const STEP_PICKS = ['Waiting on their reply', 'Waiting on their music'];
+
+/** What happens next with this person, and each reviewer's grade. Saves straight away and sends nothing. */
+export function NextStep({ lead, data, save, onDirty }: { lead: Lead; data: CrmWorkspace; save: (nextStep: string) => Promise<void>; onDirty: (dirty: boolean) => void }) {
+  const [draft, setDraft] = useState(lead.next_action); const [busy, setBusy] = useState(false);
+  useEffect(() => setDraft(lead.next_action), [lead.next_action]);
+  const typed = draft.trim() !== lead.next_action.trim();
+  useEffect(() => onDirty(typed), [typed, onDirty]);
+  const applied = lead.stage === 'applied';
+  const set = async (value: string) => {
+    setBusy(true);
+    try { await save(value); toast.success('Next step saved.'); }
+    catch (error) { toast.error(error instanceof Error ? error.message : 'Could not save that. Please try again.'); }
+    finally { setBusy(false); }
+  };
+  const reviewers = data.settings.reviewers ?? [];
+  return <section className="ca-next-step">
+    <h3>Next step</h3>
+    <form className="ca-next-step-row" onSubmit={e => { e.preventDefault(); if (typed) void set(draft.trim()); }}>
+      <label className="ss-field"><span className="sr-only">Next step</span><input aria-label="Next step" maxLength={1000} placeholder="Type what happens next" value={draft} disabled={busy} onChange={e => setDraft(e.target.value)}/></label>
+      {typed && <button type="submit" className="ss-button ss-primary" disabled={busy}>Save</button>}
+    </form>
+    <div className="ca-next-step-picks">
+      {STEP_PICKS.map(pick => <button key={pick} type="button" className="ca-pick" aria-pressed={lead.next_action === pick} disabled={busy} onClick={() => void set(pick)}>{pick}</button>)}
+      {waitingOn(lead) && <button type="button" className="ca-pick ca-pick-back" disabled={busy} onClick={() => void set(applied ? 'Review application' : '')}>{applied ? 'Back to review' : 'Clear'}</button>}
+    </div>
+    {applied && reviewers.length > 0 && <div className="ca-grades">
+      {reviewers.map(r => <span key={r}>{r}<GradeButton lead={lead} reviewer={r} verdict={verdictOn(data, lead.id, r)}/></span>)}
+      <small>A offer now, B reserve, C only to fill a place</small>
+    </div>}
+  </section>;
+}
 
 type ListSort = { key: string; reverse: boolean };
 const BEST_FIRST: ListSort = { key: 'best', reverse: false };
@@ -130,11 +163,10 @@ const SortHead = ({ id, sort, onSort, className, children }: { id: string; sort:
 export function ReviewList({ leads, data, now, openLead }: { leads: Lead[]; data: CrmWorkspace; now: number; openLead: (id: string) => void }) {
   const [sort, setSort] = useState<ListSort>(BEST_FIRST);
   const onSort = (key: string) => setSort(current => current.key !== key ? { key, reverse: false } : current.reverse ? BEST_FIRST : { key, reverse: true });
-  if (!leads.length) return <Empty title="All caught up">New applications appear here the moment they come in.</Empty>;
   const latest = latestApplications(data.applications);
   const appliedAt = (l: Lead) => latest.get(l.id)?.submitted_at ?? l.created_at;
   const { list_columns: columns, links_question_key: linksKey, links_label: linksLabel, reply_target_hours: replyHours, reviewers = [] } = data.settings;
-  const verdictOf = (leadId: string, reviewer: string) => data.reviews.find(r => r.lead_id === leadId && r.reviewer === reviewer)?.verdict ?? null;
+  const verdictOf = (leadId: string, reviewer: string) => verdictOn(data, leadId, reviewer);
   /* As first, then anyone not graded yet, then Bs and Cs. Two As beat one. */
   const gradeScore = (leadId: string) => {
     const marks = reviewers.flatMap(r => { const verdict = verdictOf(leadId, r); return verdict ? [GRADE_RANK[verdict]] : []; });
@@ -152,8 +184,16 @@ export function ReviewList({ leads, data, now, openLead }: { leads: Lead[]; data
     return options?.includes(answer) ? String(options.indexOf(answer)).padStart(3, '0') : answer.toLowerCase();
   };
   const compare = (a: string | number, b: string | number) => typeof a === 'number' && typeof b === 'number' ? a - b : String(a).localeCompare(String(b));
-  return <div className="ca-panel"><table className="ca-table"><thead><tr><SortHead id="name" sort={sort} onSort={onSort}>Applicant</SortHead>{columns.map(c => <SortHead key={c.key} id={`answer:${c.key}`} sort={sort} onSort={onSort}>{c.label}</SortHead>)}{linksKey && <SortHead id="links" sort={sort} onSort={onSort}>{linksHeading(linksLabel)}</SortHead>}{reviewers.map(r => <SortHead key={r} id={`review:${r}`} sort={sort} onSort={onSort} className="ca-mark-head">{r}</SortHead>)}<SortHead id="due" sort={sort} onSort={onSort}>Reply due</SortHead><th><span className="sr-only">Open</span></th></tr></thead><tbody>
-    {[...leads].sort((a, b) => Number(!!waitingOn(a)) - Number(!!waitingOn(b)) || compare(sortValue(a), sortValue(b)) * (sort.reverse ? -1 : 1) || appliedAt(a).localeCompare(appliedAt(b))).map(l => {
+  const ideal = [...leads].sort((a, b) => Number(!!waitingOn(a)) - Number(!!waitingOn(b)) || compare(sortValue(a), sortValue(b)) * (sort.reverse ? -1 : 1) || appliedAt(a).localeCompare(appliedAt(b))).map(l => l.id);
+  /* Rows hold still while someone grades, so their next click lands on the same person. The order only changes when they sort or re-sort, or when someone joins, leaves or starts waiting. */
+  const orderKey = `${sort.key}|${sort.reverse}|${leads.map(l => `${l.id}:${!!waitingOn(l)}`).sort().join()}`;
+  const [held, setHeld] = useState({ key: orderKey, order: ideal });
+  if (held.key !== orderKey) setHeld({ key: orderKey, order: ideal });
+  const order = held.key === orderKey ? held.order : ideal;
+  const byId = new Map(leads.map(l => [l.id, l]));
+  if (!leads.length) return <Empty title="All caught up">New applications appear here the moment they come in.</Empty>;
+  return <div className="ca-panel">{order.join() !== ideal.join() && <button type="button" className="ca-resort" title="Put the list back in order with the latest grades" onClick={() => setHeld({ key: orderKey, order: ideal })}>Re-sort</button>}<table className="ca-table"><thead><tr><SortHead id="name" sort={sort} onSort={onSort}>Applicant</SortHead>{columns.map(c => <SortHead key={c.key} id={`answer:${c.key}`} sort={sort} onSort={onSort}>{c.label}</SortHead>)}{linksKey && <SortHead id="links" sort={sort} onSort={onSort}>{linksHeading(linksLabel)}</SortHead>}{reviewers.map(r => <SortHead key={r} id={`review:${r}`} sort={sort} onSort={onSort} className="ca-mark-head">{r}</SortHead>)}<SortHead id="due" sort={sort} onSort={onSort}>Reply due</SortHead><th><span className="sr-only">Open</span></th></tr></thead><tbody>
+    {order.flatMap(id => byId.get(id) ?? []).map(l => {
       const application = latest.get(l.id); const due = deadline(appliedAt(l), replyHours, now); const waiting = waitingOn(l);
       const links = namedLinks(answerLinks(answerOf(application, linksKey)));
       return <tr key={l.id} className={waiting ? 'ca-row-waiting' : undefined} {...rowProps(l, openLead)}><td><Person lead={l}/></td>

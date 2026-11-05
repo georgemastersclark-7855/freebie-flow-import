@@ -35,7 +35,7 @@ export function normaliseLead(input: LeadInput): LeadInput {
       if (url.protocol !== 'https:' || url.username || url.password) throw new Error('Use HTTPS links without login details.');
       if (key === 'email_thread_url' && url.hostname !== 'mail.google.com') throw new Error('Use the Gmail link to their email conversation.'); }
   }
-  if (result.due_on && !result.next_action) throw new Error('Add a next action for the follow-up date.');
+  if (result.due_on && !result.next_action) throw new Error('Add a next step for the follow-up date.');
   if (result.payment_status !== 'unconfirmed' && (!result.payment_reference.trim() || !result.payment_on)) throw new Error('Add the payment reference and date before confirming a payment or refund.');
   return result;
 }

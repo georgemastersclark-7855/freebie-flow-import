@@ -71,6 +71,22 @@
 .ca-row-waiting { background:#f4f5f1; }
 .ca-row-waiting>td:not(.ca-mark-cell):not(.ca-due-cell) { opacity:.5; }
 .ca-waiting { display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; vertical-align:middle; }
+.ca-resort { position:absolute; top:6px; right:12px; z-index:1; padding:3px 11px; border-radius:999px; background:#2d4934; color:#fff; font-size:12px; font-weight:600; cursor:pointer; }
+.ca-resort:hover { background:#202521; }
+.ca-next-step { margin:14px 0 6px; padding:14px 16px; border:1px solid #dfe3db; border-radius:12px; background:#fbfbf8; }
+.ca-next-step h3 { font-size:12px!important; font-weight:600; color:#8a938b; margin-bottom:7px; }
+.ca-next-step-row { display:flex; gap:8px; align-items:center; }
+.ca-next-step-row .ss-field { flex:1; }
+.ca-next-step-row input { font-size:13px!important; color:#202521!important; }
+.ca-next-step-picks { display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
+.ca-pick { padding:4px 11px; border:1px solid #cfd5ca; border-radius:999px; background:#fff; color:#2d4934; font-size:12px; font-weight:600; cursor:pointer; }
+.ca-pick:hover { border-color:#68716a; }
+.ca-pick[aria-pressed=true] { background:#2d4934; border-color:#2d4934; color:#fff; }
+.ca-pick:disabled { opacity:.6; cursor:default; }
+.ca-pick-back { border-style:dashed; color:#68716a; }
+.ca-grades { display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; margin-top:12px; padding-top:12px; border-top:1px solid #e9ece5; }
+.ca-grades>span { display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; color:#202521; }
+.ca-grades small { font-size:11.5px; color:#8a938b; }
 .ca-table th.ca-mark-head { text-align:center; padding-left:8px; padding-right:8px; }
 .ca-table td.ca-mark-cell { width:56px; text-align:center; padding-left:8px; padding-right:8px; cursor:default; }
 .ca-mark { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:7px; border:1.5px solid #cfd5ca; background:#fff; color:#2d4934; font-size:13px; font-weight:700; line-height:1; cursor:pointer; vertical-align:middle; }
