@@ -786,6 +786,57 @@ export type Database = {
           },
         ]
       }
+      mentorship_funnel_events: {
+        Row: {
+          campaign: string | null
+          cohort_slug: string
+          created_at: string
+          detail: string | null
+          device: string | null
+          duration_ms: number | null
+          event: string
+          id: number
+          in_app: boolean
+          is_test: boolean
+          question: string | null
+          source: string
+          step: number | null
+          visit_id: string
+        }
+        Insert: {
+          campaign?: string | null
+          cohort_slug: string
+          created_at?: string
+          detail?: string | null
+          device?: string | null
+          duration_ms?: number | null
+          event: string
+          id?: never
+          in_app?: boolean
+          is_test?: boolean
+          question?: string | null
+          source: string
+          step?: number | null
+          visit_id: string
+        }
+        Update: {
+          campaign?: string | null
+          cohort_slug?: string
+          created_at?: string
+          detail?: string | null
+          device?: string | null
+          duration_ms?: number | null
+          event?: string
+          id?: never
+          in_app?: boolean
+          is_test?: boolean
+          question?: string | null
+          source?: string
+          step?: number | null
+          visit_id?: string
+        }
+        Relationships: []
+      }
       mentorship_intake_connections: {
         Row: {
           account_label: string
@@ -2068,6 +2119,10 @@ export type Database = {
         Args: { p_form_id: string; p_revision: number }
         Returns: Json
       }
+      get_mentorship_funnel: {
+        Args: { p_cohort_id: string; p_since?: string; p_source?: string }
+        Returns: Json
+      }
       get_mentorship_places_left: { Args: { p_slug: string }; Returns: number }
       get_mentorship_places_updated_at: {
         Args: { p_slug: string }
@@ -2185,6 +2240,23 @@ export type Database = {
           video_link?: string
         }
         Returns: Json
+      }
+      record_mentorship_funnel_event: {
+        Args: {
+          p_campaign?: string
+          p_cohort_slug: string
+          p_detail?: string
+          p_device?: string
+          p_duration_ms?: number
+          p_event: string
+          p_in_app?: boolean
+          p_is_test?: boolean
+          p_question?: string
+          p_source: string
+          p_step?: number
+          p_visit_id: string
+        }
+        Returns: undefined
       }
       record_mentorship_payment: {
         Args: {

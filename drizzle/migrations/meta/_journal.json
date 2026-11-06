@@ -71,6 +71,13 @@
       "when": 1793855597899,
       "tag": "0009_mentorship_lead_reviews_verdict_check",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793924850604,
+      "tag": "0010_mentorship_funnel_events",
+      "breakpoints": true
     }
   ]
 }
