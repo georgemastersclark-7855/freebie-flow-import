@@ -7,7 +7,7 @@ const links = [
   {
     title: "Work With Me 1-1",
     subtitle: "Mentorship for serious producers ready to level up",
-    url: "https://audio.roblate.com/mentorship",
+    url: "https://audio.roblate.com/mentorship?utm_source=link-in-bio",
     thumbnail: "/assets/artist-sounds-identity.webp",
   },
   {

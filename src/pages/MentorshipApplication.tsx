@@ -5,6 +5,7 @@ import type { ApplicationFormConfig, ApplicationQuestion } from '../../supabase/
 import { MembershipBadge } from '@/mentorship/components/StudentAvatar';
 import { clearDraft, emptyAnswers, readAttribution, readDraft, saveDraft, type Answers, type ApplicationDraft } from '@/application/applicationDraft';
 import { usePlacesLeft } from '@/mentorship/placesLeft';
+import { track, watchPageErrors } from '@/mentorship/funnelTracking';
 import './mentorship-application.css';
 
 type Screen = 'welcome'|'question'|'review'|'success';
@@ -49,6 +50,7 @@ export default function MentorshipApplication() {
   const [form,setForm]=useState<PublicApplicationForm|null>(null);
   const [problem,setProblem]=useState('');
   const [retry,setRetry]=useState(0);
+  useEffect(()=>{track('form_view',{slug});return watchPageErrors();},[slug]);
   useEffect(()=>{
     const controller=new AbortController();
     setForm(null);setProblem('');
@@ -58,7 +60,7 @@ export default function MentorshipApplication() {
       const result=await response.json();
       if(!response.ok||!result.form)throw new Error(response.status===404||response.status===410?'This application form is not currently accepting applications.':'The application could not be loaded. Please try again.');
       setForm(result.form);
-    }).catch(error=>{if(error.name!=='AbortError')setProblem(error.message||'The application could not be loaded.');});
+    }).catch(error=>{if(error.name!=='AbortError'){track('form_error',{slug,detail:String(error.message||'The application could not be loaded.').slice(0,200)});setProblem(error.message||'The application could not be loaded.');}});
     return()=>controller.abort();
   },[slug,retry]);
   if(!form)return <div className="ma-loading"><Brand/><h1>{problem?'Application unavailable':'Loading your application…'}</h1>{problem&&<><p role="alert">{problem}</p><button className="ma-secondary" onClick={()=>setRetry(n=>n+1)}>Try again</button><a href="mailto:team@roblate.com">Contact the mentorship team</a></>}</div>;
@@ -67,6 +69,8 @@ export default function MentorshipApplication() {
 
 export function ApplicationExperience({form,preview=false}:{form:PublicApplicationForm;preview?:boolean}) {
   const fields=form.config.questions;
+  // The staff preview never counts.
+  const count: typeof track = preview ? () => {} : (event,extra) => track(event,{slug:form.slug,...extra});
   const placesLeft=usePlacesLeft(form.slug);
   const keys=fields.map(field=>field.key);
   const sections=[...new Set(fields.map(field=>field.section).filter(Boolean))];
@@ -88,6 +92,7 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
   const answerInput = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
   const honeypot=useRef<HTMLInputElement>(null);
   const sending=useRef(false);
+  const shownAt=useRef(0);
   const active=fields[Math.min(step,fields.length-1)];
   const section=sections.indexOf(active.section);
   const answered=keys.filter(key=>answers[key].trim()).length;
@@ -110,8 +115,14 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
     if(!preview)window.scrollTo({top:0,behavior:'instant'});
     if(screen==='question' && active.type!=='choice' && window.matchMedia('(min-width: 760px)').matches) answerInput.current?.focus({preventScroll:true});
   },[screen,step,active.type,preview]);
+  useEffect(()=>{
+    if(screen==='question'){shownAt.current=Date.now();count('question_view',{step:step+1,question:active.key});}
+    else if(screen==='review')count('review_view');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[screen,step]);
 
   const start=()=>{
+    count('form_start',{detail:hasDraft?'resumed':'new'});
     if(!id) setId(crypto.randomUUID());
     setScreen(step>=fields.length?'review':'question');
   };
@@ -121,7 +132,8 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
   };
   const next=()=>{
     const problem=fieldError(active,answers);
-    if(problem){setError(problem);answerInput.current?.focus();return;}
+    if(problem){count('question_error',{step:step+1,question:active.key,detail:problem});setError(problem);answerInput.current?.focus();return;}
+    if(!editing)count('question_done',{step:step+1,question:active.key,duration_ms:Math.min(Date.now()-shownAt.current,86400000)});
     if(editing){setEditing(false);go(fields.length);return;}
     go(step+1);
   };
@@ -154,10 +166,12 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
     if(sending.current)return;
     if(preview){setSubmittedEmail(answers.email?.trim()||'your email address');setScreen('success');return;}
     const invalid=fields.findIndex(field=>Boolean(fieldError(field,answers)));
-    if(invalid>=0){setEditing(true);go(invalid);setError(fieldError(fields[invalid],answers));return;}
+    if(invalid>=0){count('question_error',{step:invalid+1,question:fields[invalid].key,detail:fieldError(fields[invalid],answers)});setEditing(true);go(invalid);setError(fieldError(fields[invalid],answers));return;}
+    count('send_click');
     sending.current=true;setSubmitting(true);setError('');
     const controller=new AbortController();
     const timeout=window.setTimeout(()=>controller.abort(),25000);
+    let failureCounted=false;
     try {
       const response=await fetch(import.meta.env.VITE_SUPABASE_URL+'/functions/v1/submit-mentorship-application',{
         method:'POST',headers:{'Content-Type':'application/json','apikey':import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY},
@@ -166,15 +180,18 @@ export function ApplicationExperience({form,preview=false}:{form:PublicApplicati
       });
       const result=await response.json().catch(()=>null);
       if(!response.ok || result?.success!==true || result?.submission_id!==id){
+        failureCounted=true;count('send_fail',{detail:String(response.status)});
         if(response.status===429) throw new Error("You've made several attempts. Your answers are saved—please try again later, or email team@roblate.com.");
         if(response.status===410) throw new Error("Applications are currently closed. Email team@roblate.com if you'd like to ask about a place.");
         if(response.status===409) throw new Error("This application was already sent with different answers. Email team@roblate.com if you need to update it.");
         if(response.status===400) throw new Error("We couldn't accept one of your answers. Check your email and music links, then try again.");
         throw new Error("We couldn't confirm your application was saved. Your answers are still here. Please try again.");
       }
+      count('send_ok');
       setSubmittedEmail(answers.email.trim());clearDraft(form.id);setHasDraft(false);setScreen('success');
       setAnswers(emptyAnswers(keys));
     } catch(err) {
+      if(!failureCounted)count('send_fail',{detail:err instanceof Error&&err.name==='AbortError'?'Timed out':'No connection'});
       setError(err instanceof Error && err.name!=='AbortError'?err.message:"The connection took too long. Your answers are still here—please try again.");
     } finally {window.clearTimeout(timeout);sending.current=false;setSubmitting(false);}
   };

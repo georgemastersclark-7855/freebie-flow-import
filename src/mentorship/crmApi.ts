@@ -63,6 +63,15 @@ export async function loadCrm(cohortId: string): Promise<CrmWorkspace> {
   ]);
   return {reviews,placesShownAt,answerOrder,leads,staff,intake,settings,milestones,payments,shopifyOrders,applications,closesAt,timezone,capacity:settings.capacity,students:enrollments.map(e=>({...e,name:profiles.get(e.id)?.displayName||identities.find(p=>p.user_id===e.user_id)?.full_name||'Student',email:identities.find(p=>p.user_id===e.user_id)?.email||'',profile:profiles.get(e.id),call:calls.find(c=>c.enrollment_id===e.id),questionnaire:notes.find(n=>n.enrollment_id===e.id)?.questionnaire,focus:contexts.find(c=>c.enrollment_id===e.id)?.current_focus??'',openActions:actions.filter(a=>a.enrollment_id===e.id).length}))};
 }
+// Anonymous sales page and application form counts (see get_mentorship_funnel). Every count is a number of visits, except errors.
+export interface FunnelRow { key: string; visits: number; apply: number; form: number; started: number; sent: number; source?: string }
+export interface FunnelData { first_event: string|null; visits: number; steps: Record<string,number>; scroll: Record<string,number>; apply_clicks: Record<string,number>; video_plays: Record<string,number>; page_seconds: number; questions: { step: number|null; question: string; reached: number; answered: number; errors: number; median_ms: number }[]; question_errors: { step: number|null; question: string; detail: string; count: number }[]; send_failures: { detail: string; count: number }[]; page_errors: { event: string; detail: string; count: number }[]; sources: FunnelRow[]; campaigns: FunnelRow[]; devices: FunnelRow[]; in_app_visits: number }
+export async function loadFunnel(cohortId: string, since: string|null, source: string|null): Promise<FunnelData> {
+  if(scheduleDemoBackend)return (await import('./crmDemo')).demoFunnel(source);
+  const {data,error}=await db.rpc('get_mentorship_funnel',{p_cohort_id:cohortId,p_since:since,p_source:source});
+  if(error)throw new Error(['PGRST202','42883'].includes(error.code)?'Funnel counting has not been switched on yet.':error.message||'The funnel could not be loaded.');
+  return data as FunnelData;
+}
 export async function saveLead(input:LeadInput, previous?:Lead):Promise<Lead> {
   const values=normaliseLead(input);
   if(scheduleDemoBackend){const {demoWrites}=await import('./crmDemo');const record={...previous,...values,updated_at:new Date().toISOString()} as Lead;demoWrites.leads[record.id]=record;return record;}

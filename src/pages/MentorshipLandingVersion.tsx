@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { ArrowRight, AudioLines, Check, Disc3, Layers, MessageCircle, Repeat, Users, Video, X } from "lucide-react";
 import { usePlacesLeft, usePlacesUpdatedAt } from "@/mentorship/placesLeft";
+import { useSalesPageFunnel } from "@/mentorship/funnelTracking";
 
 /* Mentorship cohort 2 as a conventional landing page (mock-up for Rob).
    Same offer and same copy as MentorshipRobVersion.tsx, laid out like the Producer Blueprint sales pages.
@@ -445,6 +446,7 @@ const QuoteCard = ({ children, name, who }: { children: ReactNode; name: string;
 
 const MentorshipLandingVersion = () => {
   const seats = useSeats();
+  useSalesPageFunnel();
   const pricingRef = useRef<HTMLElement>(null);
   const [reachedPricing, setReachedPricing] = useState(false);
 

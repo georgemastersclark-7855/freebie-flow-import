@@ -133,6 +133,7 @@ export default function MentorshipPortal() {
           <Route element={<StaffOnly />}>
             <Route path="admin/crm" element={<Navigate to="/mentorship-portal/admin/crm/leads" replace />} />
             <Route path="admin/crm/overview" element={<AdminCrm />} />
+            <Route path="admin/crm/funnel" element={<AdminCrm />} />
             <Route path="admin/crm/leads" element={<AdminCrm />} />
             <Route path="admin/crm/onboarding" element={<AdminCrm />} />
             <Route path="admin" element={<AdminHome />} />

@@ -17,13 +17,14 @@ import { hasPaid } from '../crmAnalytics';
 import { deadline, latestApplications, pipelineStages } from '../crmPipeline';
 import { ApplicationAnswers, Chip, ConfirmStep, CrmStats, InterestedList, LeadLinks, NextStep, OfferList, PaidList, PeopleList, PipelineStrip, ReviewList, placesFilled, useNow, waitingOn } from './AdminCrmPipeline';
 import { LaunchOverview, LaunchTargetsPanel, LeadPayments } from './AdminCrmOverview';
+import { FunnelReport } from './AdminCrmFunnel';
 
 const errorText=(e:unknown)=>e instanceof Error?e.message:'Unable to save. Please try again.';
 function Badge({children,tone='gray'}:{children:React.ReactNode;tone?:string}) { return <span className={`crm-badge crm-${tone}`}>{children}</span>; }
 function useDirtyWarning(dirty:boolean) { useEffect(()=>{ if(!dirty)return; const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue='';}; window.addEventListener('beforeunload',warn);return()=>window.removeEventListener('beforeunload',warn); },[dirty]); }
 const studentLink=(s:CrmStudent)=>`${successRoot}/${s.cohort_id}/students/${s.id}?tab=Onboarding`;
 export function AdminCrm() {
-  const [params,setParams]=useSearchParams(); const location=useLocation(); const onboarding=location.pathname.endsWith('/onboarding'); const overview=location.pathname.endsWith('/overview');
+  const [params,setParams]=useSearchParams(); const location=useLocation(); const onboarding=location.pathname.endsWith('/onboarding'); const overview=location.pathname.endsWith('/overview'); const funnel=location.pathname.endsWith('/funnel');
   const cache=useQueryClient();
   const cohorts=useQuery({queryKey:['success-cohorts'],queryFn:loadSuccessCohorts});
   const chosen=params.get('cohort'); const cohortId=cohorts.data?.find(c=>c.id===chosen)?.id??[...(cohorts.data??[])].reverse().find(c=>!['archived','completed'].includes(c.status))?.id??cohorts.data?.[0]?.id??'';
@@ -32,19 +33,19 @@ export function AdminCrm() {
   const selected=query.data?.leads.find(l=>l.id===params.get('lead'));
   const openLead=(id:string)=>setParams(p=>{p.set('cohort',cohortId);p.set('lead',id);return p;});
   const closeLead=()=>{setNewLead(false);setParams(p=>{p.delete('lead');return p;},{replace:true});};
-  const refresh=async()=>{await cache.invalidateQueries({queryKey:['crm',cohortId]});};
+  const refresh=async()=>{await Promise.all([cache.invalidateQueries({queryKey:['crm',cohortId]}),cache.invalidateQueries({queryKey:['crm-funnel',cohortId]})]);};
   const data=query.data;
   const activeIds=new Set(data?.students.filter(s=>s.status==='active'&&!s.is_walkthrough).map(s=>s.id));
   return <section className="student-success crm-workspace">
-    <header className="ca-head"><h1>{overview?'Sales report':'Applications'}</h1><div className="crm-inline">
-      {overview?<><button className="ca-text-link" onClick={()=>setConnections(true)}>Connections</button><button className="ca-text-link" disabled={!data} onClick={()=>setSettingsOpen(true)}>Programme settings</button><Link className="ss-button" to={`${crmRoot}/leads?cohort=${cohortId}`}>Back to applications</Link></>:<Link className="ca-text-link" to={`${crmRoot}/overview?cohort=${cohortId}`}>Sales report</Link>}
+    <header className="ca-head"><h1>{overview?'Sales report':funnel?'Funnel':'Applications'}</h1><div className="crm-inline">
+      {overview?<><button className="ca-text-link" onClick={()=>setConnections(true)}>Connections</button><button className="ca-text-link" disabled={!data} onClick={()=>setSettingsOpen(true)}>Programme settings</button><Link className="ss-button" to={`${crmRoot}/leads?cohort=${cohortId}`}>Back to applications</Link></>:funnel?<Link className="ss-button" to={`${crmRoot}/leads?cohort=${cohortId}`}>Back to applications</Link>:<><Link className="ca-text-link" to={`${crmRoot}/overview?cohort=${cohortId}`}>Sales report</Link><Link className="ca-text-link" to={`${crmRoot}/funnel?cohort=${cohortId}`}>Funnel</Link></>}
       <button className="crm-icon-button" aria-label="Refresh" disabled={query.isFetching} onClick={()=>void refresh()}><RefreshCw size={15} className={query.isFetching?'crm-spin':''}/></button>
       <label className="ss-field"><span className="sr-only">Cohort</span><select aria-label="Cohort" value={cohortId} onChange={e=>setParams({cohort:e.target.value})}>{cohorts.data?.map(c=><option key={c.id} value={c.id}>{c.internal_name}</option>)}</select></label>
-      {!overview&&<button className="ss-button ss-primary" disabled={!data} onClick={()=>setNewLead(true)}><Plus size={16}/> Add person</button>}
+      {!overview&&!funnel&&<button className="ss-button ss-primary" disabled={!data} onClick={()=>setNewLead(true)}><Plus size={16}/> Add person</button>}
     </div></header>
     {cohorts.isError?<SuccessError error={cohorts.error} retry={()=>void cohorts.refetch()}/>:cohorts.isPending?<SuccessLoading/>:!cohortId?<div className="ss-empty">Create a cohort first.</div>:query.isPending?<SuccessLoading/>:query.isError?<SuccessError error={query.error} retry={()=>void refresh()}/>:data&&<>
       <ShopifyOrderAlerts orders={data.shopifyOrders} leads={data.leads} openLead={openLead} refresh={refresh}/>
-      {overview?<LaunchOverview data={data} editSettings={()=>setSettingsOpen(true)}/>:<ApplicationsHome key={cohortId} data={data} cohortId={cohortId} onboarding={onboarding} activeIds={activeIds} openLead={openLead} onBooking={setBooking}/>}
+      {overview?<LaunchOverview data={data} editSettings={()=>setSettingsOpen(true)}/>:funnel?<FunnelReport data={data} cohortId={cohortId}/>:<ApplicationsHome key={cohortId} data={data} cohortId={cohortId} onboarding={onboarding} activeIds={activeIds} openLead={openLead} onBooking={setBooking}/>}
     </>}
     {data&&(newLead||selected)&&<LeadPanel key={selected?.id??'new'} lead={selected} cohortId={cohortId} staff={data.staff} activeIds={activeIds} data={data} refresh={refresh} onClose={closeLead} onSaved={async()=>{await refresh();closeLead();}}/>}
     {booking&&data&&<BookingPanel key={booking.id} student={booking} staff={data.staff} close={()=>setBooking(null)} saved={async()=>{await refresh();setBooking(null);}}/>}
