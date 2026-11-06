@@ -5,7 +5,7 @@ import { useSalesPageFunnel } from "@/mentorship/funnelTracking";
 
 /* Mentorship cohort 2 as a conventional landing page (mock-up for Rob).
    Same offer and same copy as MentorshipRobVersion.tsx, laid out like the Producer Blueprint sales pages.
-   No tracking, no checkout, no Vidalytics. */
+   No checkout, no Vidalytics. Visits are counted anonymously (see funnelTracking.ts). */
 
 const robSignature = "/assets/mentorship-rob/web/rob-signature.webp";
 const webAsset = (name: string) => `/assets/mentorship-rob/web/${name}`;
